@@ -96,6 +96,9 @@ importers:
       ai:
         specifier: ^6.0.182
         version: 6.0.182(zod@4.4.3)
+      archiver:
+        specifier: ^8.0.0
+        version: 8.0.0
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -106,6 +109,9 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
+      '@types/archiver':
+        specifier: ^6.0.3
+        version: 6.0.4
       '@types/babel__traverse':
         specifier: ^7.20.6
         version: 7.28.0

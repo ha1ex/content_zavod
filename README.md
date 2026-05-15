@@ -179,6 +179,18 @@ pnpm -w run harness approvals status <slug>       # JSON одной записи
 pnpm -w run harness approvals check <slug...>     # CI: exit≠0 если хоть один не approved
 ```
 
+### Handoff ZIP (этап 6)
+
+`harness handoff <slug>` собирает self-contained пакет, который можно уронить в чужой Next.js + Tailwind v4 проект:
+
+```bash
+pnpm -w run harness handoff <slug>                            # → out/landing-<slug>.zip
+pnpm -w run harness handoff <slug> --require-approved         # gate: блокируем если approval != approved
+pnpm -w run harness handoff <slug> -o /path/to/landing.zip    # custom output
+```
+
+Содержимое zip'а: `page.tsx` (с переписанными импортами на `./components`), `components/` (только использованные), `primitives/` (Button, ButtonLink, cn), `illustrations/` (SVG из spec.illustrationSpecs), `tokens.css`, `styles.css`, `spec.json`, опц. `approval.json`, `README.md` и `package.json` snippet с минимумом deps.
+
 ## Куда что класть
 
 | Что | Куда |

@@ -26,6 +26,7 @@ import {
 } from './validators/index.js';
 import { listApprovals, readApproval } from './approvals/index.js';
 import type { ApprovalStatus } from './schemas/approval.js';
+import { buildHandoff } from './handoff/index.js';
 
 const ROOT = resolve(process.cwd());
 
@@ -353,8 +354,35 @@ program
   .command('handoff')
   .description('Собрать ZIP-пакет для передачи разработчикам')
   .argument('<slug>', 'slug черновика')
-  .action((slug: string) => {
-    console.log(chalk.yellow(`[harness] handoff ${slug} — будет добавлено на этапе 6`));
+  .option('--require-approved', 'отказать если approval.status != approved', false)
+  .option('-o, --out <path>', 'путь к ZIP (по умолчанию <root>/out/landing-<slug>.zip)')
+  .action(async (slug: string, opts: { requireApproved: boolean; out?: string }) => {
+    const root = await findRepoRoot(ROOT);
+
+    if (opts.requireApproved) {
+      const approval = await readApproval(root, slug);
+      if (approval.status !== 'approved') {
+        console.error(
+          chalk.red(
+            `[harness] handoff blocked: approval.status="${approval.status}" (требуется "approved"). ` +
+              `Открой /approve/${slug} в Next.js или сними флаг --require-approved.`,
+          ),
+        );
+        process.exit(1);
+      }
+      console.log(chalk.green(`[harness] ✓ approval check passed (${approval.reviewer ?? 'unknown'})`));
+    }
+
+    console.log(chalk.cyan(`[harness] handoff ${slug}…`));
+    const t0 = Date.now();
+    const manifest = await buildHandoff(slug, { root, outPath: opts.out });
+    const ms = Date.now() - t0;
+    const kb = (manifest.bytes / 1024).toFixed(1);
+    console.log(chalk.green(`[harness] ✓ ZIP → ${manifest.zipPath} (${kb} KB, ${manifest.files.length} files, ${ms}ms)`));
+    console.log(chalk.dim(`         components: ${manifest.components.join(', ') || '(none)'}`));
+    if (manifest.illustrations.length) {
+      console.log(chalk.dim(`         illustrations: ${manifest.illustrations.join(', ')}`));
+    }
   });
 
 program.parseAsync(process.argv).catch((err) => {

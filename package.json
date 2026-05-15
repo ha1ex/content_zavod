@@ -1,0 +1,34 @@
+{
+  "name": "buffalo-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LLM harness for generating SaaS landing pages with Storybook, design system, validators, and SVG hero illustrations.",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=20.18.0",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @buffalo/web dev",
+    "build": "pnpm -r build",
+    "start": "pnpm --filter @buffalo/web start",
+    "storybook": "pnpm --filter @buffalo/ui storybook",
+    "harness": "pnpm --filter @buffalo/harness cli",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.9.0",
+    "prettier": "^3.3.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "unrs-resolver",
+      "@tailwindcss/oxide"
+    ]
+  }
+}

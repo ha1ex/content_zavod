@@ -1,0 +1,41 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# build outputs
+.next
+.turbo
+dist
+build
+out
+storybook-static
+*.tsbuildinfo
+
+# generated landings (output of harness pipeline)
+generated/
+
+# env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# context (design system, attachments — внутренние материалы)
+.context/
+
+# OS / IDE
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# test / coverage
+coverage
+playwright-report
+test-results
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*

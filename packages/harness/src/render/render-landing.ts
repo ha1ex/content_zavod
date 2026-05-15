@@ -1,73 +1,54 @@
-import type { LandingSpec } from '../schemas/landing-spec.js';
+import type { LandingSpec, Section } from '../schemas/landing-spec.js';
 
 /**
- * Детерминированный renderer: LandingSpec → TSX-строка.
+ * Детерминированный TSX-string renderer для handoff (этап 6 ZIP).
  *
- * На этапе 1 это простой mapper component-name → JSX. Никакого LLM на этом
- * шаге — модель только генерит spec, а сборка TSX из spec'а — чистая функция,
- * чтобы результат был воспроизводим и проверяем.
- *
- * На этапе 6 (handoff) сгенерированный TSX пакуется в ZIP как самодостаточный
- * файл для разработчика.
+ * На этапе 1 это простой mapper component-name → JSX-литерал. Никакого LLM на
+ * этом шаге — модель только генерит spec, а сборка TSX из spec'а — чистая
+ * функция, чтобы результат был воспроизводим и проверяем.
  */
 
 const INDENT = '  ';
 
 function jsxString(value: string): string {
-  return `"${value.replace(/"/g, '\\"')}"`;
+  return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
 }
 
-function renderCta(value: { label: string; href: string }): string {
-  return `{ label: ${jsxString(value.label)}, href: ${jsxString(value.href)} }`;
-}
-
-function renderVisual(value: {
-  type: string;
-  assetId?: string;
-}): string {
-  return `{ type: ${jsxString(value.type)} }`;
-}
-
-function renderHeroSection(props: {
-  eyebrow?: string;
-  title: string;
-  subtitle: string;
-  primaryCta: { label: string; href: string };
-  secondaryCta?: { label: string; href: string } | null;
-  visual?: { type: string; assetId?: string } | null;
-}): string {
-  const parts: string[] = [];
-  if (props.eyebrow) parts.push(`${INDENT}eyebrow=${jsxString(props.eyebrow)}`);
-  parts.push(`${INDENT}title=${jsxString(props.title)}`);
-  parts.push(`${INDENT}subtitle=${jsxString(props.subtitle)}`);
-  parts.push(`${INDENT}primaryCta={${renderCta(props.primaryCta)}}`);
-  if (props.secondaryCta) {
-    parts.push(`${INDENT}secondaryCta={${renderCta(props.secondaryCta)}}`);
+function literal(value: unknown): string {
+  if (value === null) return 'null';
+  if (typeof value === 'string') return jsxString(value);
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  if (Array.isArray(value)) {
+    return `[${value.map(literal).join(', ')}]`;
   }
-  if (props.visual) {
-    parts.push(`${INDENT}visual={${renderVisual(props.visual)}}`);
+  if (value && typeof value === 'object') {
+    const entries = Object.entries(value)
+      .filter(([, v]) => v !== undefined)
+      .map(([k, v]) => `${JSON.stringify(k)}: ${literal(v)}`);
+    return `{ ${entries.join(', ')} }`;
   }
-  return `<HeroSection\n${parts.join('\n')}\n/>`;
+  return 'undefined';
 }
 
-const SECTION_RENDERERS: Record<string, (props: never) => string> = {
-  HeroSection: renderHeroSection as (props: never) => string,
-};
+function renderSection(section: Section): string {
+  const tagName = section.component;
+  const props = section.props as Record<string, unknown>;
+  const attrs = Object.entries(props)
+    .filter(([, v]) => v !== undefined)
+    .map(([k, v]) => {
+      if (typeof v === 'string') return `${INDENT}${k}=${jsxString(v)}`;
+      return `${INDENT}${k}={${literal(v)}}`;
+    });
+  return `<${tagName}\n${attrs.join('\n')}\n/>`;
+}
 
 export function renderLandingToTSX(spec: LandingSpec, slug: string): string {
   const usedComponents = new Set<string>();
   const sectionJSX: string[] = [];
 
   for (const section of spec.sections) {
-    const renderer = SECTION_RENDERERS[section.component];
-    if (!renderer) {
-      throw new Error(
-        `Unknown component "${section.component}" in section ${section.id}. ` +
-          `Зарегистрируйте его в packages/harness/src/render/render-landing.ts`,
-      );
-    }
     usedComponents.add(section.component);
-    sectionJSX.push(renderer(section.props as never));
+    sectionJSX.push(renderSection(section));
   }
 
   const imports = [...usedComponents].sort().join(', ');

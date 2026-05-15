@@ -2,8 +2,10 @@ import { z } from 'zod';
 
 /**
  * LandingSpec — строгий output контракт LLM-генерации.
- * Этап 0: skeleton с минимумом секций (hero + один секционный блок).
- * На этапе 1 наполним реальными компонентами из registry (TailGrids + custom).
+ *
+ * Sections — discriminated union по полю `component`. Каждый компонент имеет
+ * жёсткие props через zod, чтобы validator ловил расхождения и repair-loop мог
+ * исправлять только проблемные секции.
  */
 
 export const CtaSchema = z.object({
@@ -18,6 +20,7 @@ export const AssetRefSchema = z.object({
 });
 export type AssetRef = z.infer<typeof AssetRefSchema>;
 
+/* ─── HeroSection ─────────────────────────────────────────────────── */
 const HeroSectionSchema = z.object({
   id: z.literal('hero'),
   component: z.literal('HeroSection'),
@@ -31,10 +34,12 @@ const HeroSectionSchema = z.object({
   }),
 });
 
+/* ─── FeatureGrid ─────────────────────────────────────────────────── */
 const FeatureGridSchema = z.object({
   id: z.literal('features'),
   component: z.literal('FeatureGrid'),
   props: z.object({
+    eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(80),
     description: z.string().max(200).optional(),
     items: z
@@ -47,9 +52,56 @@ const FeatureGridSchema = z.object({
       )
       .min(2)
       .max(8),
+    columns: z.union([z.literal(2), z.literal(3), z.literal(4)]).default(3),
   }),
 });
 
+/* ─── PricingPlans ────────────────────────────────────────────────── */
+const PricingPlansSchema = z.object({
+  id: z.literal('pricing'),
+  component: z.literal('PricingPlans'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(80),
+    description: z.string().max(200).optional(),
+    plans: z
+      .array(
+        z.object({
+          name: z.string().min(2).max(40),
+          price: z.string().min(1).max(20),
+          pricePeriod: z.string().max(20).optional(),
+          description: z.string().max(120).optional(),
+          features: z.array(z.string().min(2).max(100)).min(1).max(10),
+          cta: CtaSchema,
+          highlighted: z.boolean().default(false),
+        }),
+      )
+      .min(2)
+      .max(4),
+  }),
+});
+
+/* ─── FAQAccordion ────────────────────────────────────────────────── */
+const FAQAccordionSchema = z.object({
+  id: z.literal('faq'),
+  component: z.literal('FAQAccordion'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(80),
+    description: z.string().max(200).optional(),
+    items: z
+      .array(
+        z.object({
+          question: z.string().min(4).max(140),
+          answer: z.string().min(10).max(600),
+        }),
+      )
+      .min(2)
+      .max(12),
+  }),
+});
+
+/* ─── FinalCta ────────────────────────────────────────────────────── */
 const FinalCtaSchema = z.object({
   id: z.literal('final_cta'),
   component: z.literal('FinalCta'),
@@ -57,19 +109,47 @@ const FinalCtaSchema = z.object({
     title: z.string().min(4).max(80),
     description: z.string().max(200).optional(),
     primaryCta: CtaSchema,
+    secondaryCta: CtaSchema.nullable().optional(),
   }),
 });
 
-// discriminated union — нам важно знать какой компонент за какой section'ом
+/* ─── LandingFooter ───────────────────────────────────────────────── */
+const LandingFooterSchema = z.object({
+  id: z.literal('footer'),
+  component: z.literal('LandingFooter'),
+  props: z.object({
+    brandName: z.string().min(1).max(60),
+    brandTagline: z.string().max(200).optional(),
+    columns: z
+      .array(
+        z.object({
+          title: z.string().min(2).max(40),
+          links: z
+            .array(z.object({ label: z.string().min(1).max(40), href: z.string().min(1) }))
+            .min(1)
+            .max(8),
+        }),
+      )
+      .min(1)
+      .max(5),
+    copyright: z.string().max(200).optional(),
+  }),
+});
+
+/* ─── Section union ───────────────────────────────────────────────── */
 export const SectionSchema = z.discriminatedUnion('component', [
   HeroSectionSchema,
   FeatureGridSchema,
+  PricingPlansSchema,
+  FAQAccordionSchema,
   FinalCtaSchema,
+  LandingFooterSchema,
 ]);
 export type Section = z.infer<typeof SectionSchema>;
 
+/* ─── LandingSpec ─────────────────────────────────────────────────── */
 export const LandingSpecSchema = z.object({
-  pageType: z.literal('saas_landing').or(z.literal('waitlist_landing')).or(z.literal('enterprise_landing')),
+  pageType: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing']),
   goal: z.string(),
   sections: z.array(SectionSchema).min(1),
   seo: z.object({

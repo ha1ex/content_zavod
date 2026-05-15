@@ -70,6 +70,25 @@ pnpm -w run harness generate landing --brief content/briefs/buffalo.json \
 pnpm -w run harness generate illustration --spec ... --strict   # упасть на финальных ошибках
 ```
 
+### Visual regression + Approve UI (этап 5)
+
+Playwright смотрит на сгенерированные лендинги в зафиксированном viewport (1440×900, desktop-chromium) и сравнивает с baseline'ами в `apps/web/tests/visual/__snapshots__/`.
+
+```bash
+pnpm --filter @buffalo/web test:visual            # прогон против baseline
+pnpm --filter @buffalo/web test:visual:update     # перебить baseline после намеренных правок
+```
+
+Approve-флоу для PM: `/approve/<slug>` показывает превью в iframe + форму со статусом (`pending` / `changes_requested` / `approved` / `rejected`), reviewer'ом и комментариями. Состояние пишется в `content/approvals/<slug>.json` через `POST /api/approve/<slug>`.
+
+CLI команды по approvals:
+
+```bash
+pnpm -w run harness approvals list                # все approval'ы со статусами
+pnpm -w run harness approvals status <slug>       # JSON одной записи
+pnpm -w run harness approvals check <slug...>     # CI: exit≠0 если хоть один не approved
+```
+
 ## Куда что класть
 
 - **API ключи** → `.env.local` (из `.env.example`)

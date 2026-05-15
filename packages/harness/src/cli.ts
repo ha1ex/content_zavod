@@ -24,6 +24,8 @@ import {
   validateLandingBrand,
   validateLandingBusiness,
 } from './validators/index.js';
+import { listApprovals, readApproval } from './approvals/index.js';
+import type { ApprovalStatus } from './schemas/approval.js';
 
 const ROOT = resolve(process.cwd());
 
@@ -291,6 +293,60 @@ program
         ),
       );
     }
+  });
+
+const approvals = program.command('approvals').description('Работа с approval-статусами лендингов');
+
+approvals
+  .command('list')
+  .description('Список всех approval-файлов со статусами')
+  .action(async () => {
+    const root = await findRepoRoot(ROOT);
+    const items = await listApprovals(root);
+    if (items.length === 0) {
+      console.log(chalk.yellow('[harness] нет approval-файлов в content/approvals/'));
+      return;
+    }
+    const STATUS_COLOR: Record<ApprovalStatus, (s: string) => string> = {
+      pending: chalk.dim,
+      changes_requested: chalk.yellow,
+      approved: chalk.green,
+      rejected: chalk.red,
+    };
+    for (const a of items) {
+      const tag = STATUS_COLOR[a.status](`[${a.status}]`);
+      const reviewer = a.reviewer ? ` · ${a.reviewer}` : '';
+      console.log(`${tag} ${a.slug}${reviewer} · ${a.updatedAt}`);
+    }
+  });
+
+approvals
+  .command('status')
+  .description('Подробный статус для конкретного slug')
+  .argument('<slug>', 'slug черновика')
+  .action(async (slug: string) => {
+    const root = await findRepoRoot(ROOT);
+    const a = await readApproval(root, slug);
+    console.log(JSON.stringify(a, null, 2));
+  });
+
+approvals
+  .command('check')
+  .description('CI-проверка: все ли указанные slug одобрены (exit≠0 если нет)')
+  .argument('<slugs...>', 'один или несколько slug')
+  .action(async (slugs: string[]) => {
+    const root = await findRepoRoot(ROOT);
+    let bad = 0;
+    for (const slug of slugs) {
+      const a = await readApproval(root, slug);
+      if (a.status === 'approved') {
+        console.log(chalk.green(`✓ ${slug} approved`));
+      } else {
+        console.log(chalk.red(`✗ ${slug} status=${a.status}`));
+        bad++;
+      }
+    }
+    if (bad > 0) process.exit(1);
   });
 
 program

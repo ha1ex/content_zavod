@@ -12,7 +12,8 @@
     "./registry": "./src/registry/index.ts",
     "./render": "./src/render/index.ts",
     "./render/render-spec-react": "./src/render/render-spec-react.tsx",
-    "./validators": "./src/validators/index.ts"
+    "./validators": "./src/validators/index.ts",
+    "./approvals": "./src/approvals/index.ts"
   },
   "bin": {
     "harness": "./bin/harness.mjs"

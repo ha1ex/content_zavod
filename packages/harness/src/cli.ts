@@ -6,8 +6,8 @@ import { dirname, resolve } from 'node:path';
 import { HARNESS_VERSION } from './index.js';
 import { BriefSchema, IllustrationSpecSchema, LandingSpecSchema } from './schemas/index.js';
 import {
-  generateIllustrationTSXWithLLM,
-  generateLandingSpecWithLLM,
+  generateIllustrationTSXWithRepair,
+  generateLandingSpecWithRepair,
   landingSpecFromBrief,
   pascalCase,
   renderIllustrationStory,
@@ -16,7 +16,14 @@ import {
 import { renderLandingToTSX } from './render/index.js';
 import { describeRegistry } from './registry/index.js';
 import { describeActiveProvider, hasLLMCredentials } from './providers/index.js';
-import { formatIllustrationErrors, validateIllustrationTSX } from './validators/index.js';
+import {
+  formatIllustrationErrors,
+  formatLandingBrandErrors,
+  formatLandingBusinessErrors,
+  validateIllustrationTSX,
+  validateLandingBrand,
+  validateLandingBusiness,
+} from './validators/index.js';
 
 const ROOT = resolve(process.cwd());
 
@@ -54,22 +61,35 @@ program
   .option('--no-llm', 'детерминированный fallback вместо LLM (для тестов/CI)')
   .option(
     '--strict',
-    'illustration: при ошибках валидатора падать (без --strict — печатает и пишет файл)',
+    'при ошибках валидатора падать (без --strict — печатает и пишет файл)',
     false,
+  )
+  .option(
+    '--max-repair-attempts <n>',
+    'сколько попыток LLM с фидбеком ошибок валидатора (включая первую)',
+    '2',
   )
   .action(
     async (
       kind: string,
-      opts: { brief?: string; spec?: string; slug: string; llm: boolean; strict: boolean },
+      opts: {
+        brief?: string;
+        spec?: string;
+        slug: string;
+        llm: boolean;
+        strict: boolean;
+        maxRepairAttempts: string;
+      },
     ) => {
       const root = await findRepoRoot(ROOT);
+      const maxAttempts = Math.max(1, Number.parseInt(opts.maxRepairAttempts, 10) || 1);
 
       if (kind === 'landing') {
-        await runGenerateLanding(root, opts);
+        await runGenerateLanding(root, { ...opts, maxAttempts });
         return;
       }
       if (kind === 'illustration') {
-        await runGenerateIllustration(root, opts);
+        await runGenerateIllustration(root, { ...opts, maxAttempts });
         return;
       }
       console.error(chalk.red(`[harness] kind=${kind} не поддерживается (landing | illustration)`));
@@ -79,7 +99,7 @@ program
 
 async function runGenerateLanding(
   root: string,
-  opts: { brief?: string; slug: string; llm: boolean },
+  opts: { brief?: string; slug: string; llm: boolean; strict: boolean; maxAttempts: number },
 ) {
   if (!opts.brief) {
     console.error(chalk.red('[harness] --brief обязателен для landing'));
@@ -99,15 +119,39 @@ async function runGenerateLanding(
   let spec;
   if (useLLM) {
     console.log(chalk.cyan(`[harness] provider: ${describeActiveProvider()}`));
-    console.log(chalk.dim(`[harness] generating with LLM…`));
-    const t0 = Date.now();
-    spec = await generateLandingSpecWithLLM(brief);
-    console.log(chalk.green(`[harness] ✓ LLM spec in ${Date.now() - t0}ms`));
+    console.log(chalk.dim(`[harness] LLM + repair-loop (max ${opts.maxAttempts} attempts)…`));
+    const repair = await generateLandingSpecWithRepair(brief, { maxAttempts: opts.maxAttempts });
+    if (repair.ok) {
+      console.log(chalk.green(`[harness] ✓ landing valid after ${repair.attempts.length} attempt(s)`));
+    } else {
+      console.log(chalk.red(`[harness] ✗ landing has ${repair.finalErrors.length} unresolved error(s) after ${repair.attempts.length} attempt(s):`));
+      const brandErrs = repair.finalErrors.filter((e) => e.kind === 'brand');
+      const bizErrs = repair.finalErrors.filter((e) => e.kind === 'business');
+      if (brandErrs.length) console.log(formatLandingBrandErrors({ ok: false, errors: brandErrs }));
+      if (bizErrs.length) console.log(formatLandingBusinessErrors({ ok: false, errors: bizErrs }));
+      if (opts.strict || !repair.result) {
+        console.error(chalk.red('[harness] aborting (--strict или нет кандидата).'));
+        process.exit(1);
+      }
+      console.log(chalk.yellow('[harness] пишу последнего кандидата (без --strict).'));
+    }
+    spec = repair.result;
   } else {
     const reason = !wantLLM ? '--no-llm' : 'no API key';
     console.log(chalk.yellow(`[harness] deterministic fallback (${reason})`));
     spec = landingSpecFromBrief(brief);
+    // и пост-валидация для отчёта
+    const brand = validateLandingBrand(spec);
+    const biz = validateLandingBusiness(spec, brief);
+    if (!brand.ok) console.log(formatLandingBrandErrors(brand));
+    if (!biz.ok) console.log(formatLandingBusinessErrors(biz));
   }
+
+  if (!spec) {
+    console.error(chalk.red('[harness] нет финального spec — выход.'));
+    process.exit(1);
+  }
+
   const specPath = resolve(root, 'content', 'landings', `${opts.slug}.json`);
   await mkdir(dirname(specPath), { recursive: true });
   await writeFile(specPath, JSON.stringify(spec, null, 2) + '\n', 'utf-8');
@@ -124,7 +168,7 @@ async function runGenerateLanding(
 
 async function runGenerateIllustration(
   root: string,
-  opts: { spec?: string; llm: boolean; strict: boolean },
+  opts: { spec?: string; llm: boolean; strict: boolean; maxAttempts: number },
 ) {
   if (!opts.spec) {
     console.error(chalk.red('[harness] --spec <path> обязателен для illustration'));
@@ -141,30 +185,43 @@ async function runGenerateIllustration(
   const useLLM = wantLLM && canLLM;
 
   let tsx: string;
+  let validatorPassed = true;
   if (useLLM) {
     console.log(chalk.cyan(`[harness] provider: ${describeActiveProvider()}`));
-    console.log(chalk.dim(`[harness] generating illustration with LLM…`));
-    const t0 = Date.now();
-    tsx = await generateIllustrationTSXWithLLM(spec);
-    console.log(chalk.green(`[harness] ✓ LLM tsx in ${Date.now() - t0}ms`));
+    console.log(chalk.dim(`[harness] LLM + repair-loop (max ${opts.maxAttempts} attempts)…`));
+    const repair = await generateIllustrationTSXWithRepair(spec, { maxAttempts: opts.maxAttempts });
+    if (repair.ok && repair.result) {
+      console.log(chalk.green(`[harness] ✓ AST clean after ${repair.attempts.length} attempt(s)`));
+      tsx = repair.result;
+    } else {
+      validatorPassed = false;
+      console.log(chalk.red(`[harness] ✗ AST: ${repair.finalErrors.length} unresolved error(s) after ${repair.attempts.length} attempt(s)`));
+      console.log(formatIllustrationErrors({ ok: false, errors: repair.finalErrors }));
+      if (opts.strict || !repair.result) {
+        console.error(chalk.red('[harness] aborting (--strict или нет кандидата). Файл не записан.'));
+        process.exit(1);
+      }
+      console.log(chalk.yellow('[harness] продолжаю запись последнего кандидата (без --strict).'));
+      tsx = repair.result;
+    }
   } else {
     const reason = !wantLLM ? '--no-llm' : 'no API key';
     console.log(chalk.yellow(`[harness] deterministic stub (${reason})`));
     tsx = renderIllustrationStub(spec);
-  }
-
-  const result = validateIllustrationTSX(tsx);
-  if (result.ok) {
-    console.log(chalk.green('[harness] ✓ AST validator passed'));
-  } else {
-    console.log(chalk.red(`[harness] ✗ AST validator: ${result.errors.length} error(s)`));
-    console.log(formatIllustrationErrors(result));
-    if (opts.strict) {
-      console.error(chalk.red('[harness] aborting (--strict). Файл не записан.'));
-      process.exit(1);
+    const result = validateIllustrationTSX(tsx);
+    if (result.ok) {
+      console.log(chalk.green('[harness] ✓ AST validator passed (stub)'));
+    } else {
+      validatorPassed = false;
+      console.log(chalk.red(`[harness] ✗ stub AST violations: ${result.errors.length}`));
+      console.log(formatIllustrationErrors(result));
+      if (opts.strict) {
+        console.error(chalk.red('[harness] aborting (--strict).'));
+        process.exit(1);
+      }
     }
-    console.log(chalk.yellow('[harness] продолжаю запись (без --strict); ошибки уйдут в repair-loop этапа 4'));
   }
+  void validatorPassed;
 
   const Name = pascalCase(spec.id);
   const outDir = resolve(root, 'packages', 'ui', 'src', 'illustrations');

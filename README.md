@@ -55,6 +55,21 @@ pnpm -w run harness generate illustration --spec ... --strict
 
 Выход кладётся в `packages/ui/src/illustrations/<PascalCaseId>.tsx`, story рядом, экспорт автоматически прописывается в `packages/ui/src/illustrations/index.ts`.
 
+### Validators + repair loop (этап 4)
+
+Поверх обоих пайплайнов крутится repair-loop: после каждой LLM-попытки прогоняем валидаторы, при ошибках собираем структурированный фидбек и просим модель исправить только эти места.
+
+- **landing** валидируется brand-voice денилистом (`hype-word` / `absolutist` / `empty-marketing`) и business-правилами (`hero-first`, `footer-last`, `single-hero`, `pricing-highlighted`, `href-shape`, `cta-aligned-with-brief`, …).
+- **illustration** валидируется AST-чек-листом этапа 3.
+
+Параметры CLI (общие для обоих `kind`):
+
+```bash
+pnpm -w run harness generate landing --brief content/briefs/buffalo.json \
+  --max-repair-attempts 3                       # дефолт 2; включает первый и repair-попытки
+pnpm -w run harness generate illustration --spec ... --strict   # упасть на финальных ошибках
+```
+
 ## Куда что класть
 
 - **API ключи** → `.env.local` (из `.env.example`)

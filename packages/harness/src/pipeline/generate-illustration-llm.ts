@@ -5,6 +5,11 @@ import {
   buildIllustrationSystemPrompt,
   buildIllustrationUserPrompt,
 } from '../prompts/system.js';
+import {
+  validateIllustrationTSX,
+  type IllustrationValidationError,
+} from '../validators/illustration-ast.js';
+import { runWithRepair, type RepairResult } from './repair.js';
 
 /**
  * Этап 3: LLM-генерация TSX SVG-иллюстрации по IllustrationSpec.
@@ -31,7 +36,7 @@ export function stripCodeFences(raw: string): string {
 
 export async function generateIllustrationTSXWithLLM(
   spec: IllustrationSpec,
-  options: IllustrationLLMOptions = {},
+  options: IllustrationLLMOptions & { feedback?: string } = {},
 ): Promise<string> {
   if (!hasLLMCredentials()) {
     throw new Error(
@@ -42,7 +47,10 @@ export async function generateIllustrationTSXWithLLM(
   }
 
   const system = await buildIllustrationSystemPrompt();
-  const prompt = buildIllustrationUserPrompt(spec);
+  const userBlock = buildIllustrationUserPrompt(spec);
+  const prompt = options.feedback
+    ? `${userBlock}\n\n## Previous attempt AST validator errors\n${options.feedback}\n\nFix ONLY these issues; keep composition, palette и devices. Re-emit полный TSX-файл.`
+    : userBlock;
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 120_000);
@@ -59,4 +67,34 @@ export async function generateIllustrationTSXWithLLM(
   } finally {
     clearTimeout(timeout);
   }
+}
+
+/**
+ * Этап 4: LLM-генерация TSX-иллюстрации с repair-loop'ом.
+ *
+ * AST-валидатор возвращает structured errors[{rule,message,loc}] — раннер
+ * собирает их в фидбек, модель чинит только конкретные нарушения.
+ */
+export async function generateIllustrationTSXWithRepair(
+  spec: IllustrationSpec,
+  options: IllustrationLLMOptions & {
+    maxAttempts?: number;
+    log?: (line: string) => void;
+  } = {},
+): Promise<RepairResult<string, IllustrationValidationError>> {
+  return runWithRepair<string, IllustrationValidationError>({
+    maxAttempts: options.maxAttempts,
+    log: options.log,
+    generate: (attempt, feedback) =>
+      generateIllustrationTSXWithLLM(spec, {
+        timeoutMs: options.timeoutMs,
+        maxRetries: options.maxRetries,
+        feedback,
+      }),
+    validate: (tsx) => validateIllustrationTSX(tsx),
+    buildRepairMessage: (errors) =>
+      errors
+        .map((e) => `- [${e.rule}]${e.loc ? ` (line ${e.loc.line})` : ''} ${e.message}`)
+        .join('\n'),
+  });
 }

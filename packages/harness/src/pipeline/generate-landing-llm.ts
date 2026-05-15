@@ -18,10 +18,27 @@ export interface LLMGenerationOptions {
   maxRetries?: number;
 }
 
+export interface LLMGenerationResult {
+  spec: LandingSpec;
+  sources: string[];
+}
+
 export async function generateLandingSpecWithLLM(
   brief: Brief,
   options: LLMGenerationOptions = {},
 ): Promise<LandingSpec> {
+  const { spec } = await generateLandingSpecWithLLMResult(brief, options);
+  return spec;
+}
+
+/**
+ * Расширенная версия `generateLandingSpecWithLLM`, возвращает `{ spec, sources }`.
+ * `sources` — список wiki-страниц, которые попали в системный промпт (для `meta.sources` и filing back).
+ */
+export async function generateLandingSpecWithLLMResult(
+  brief: Brief,
+  options: LLMGenerationOptions = {},
+): Promise<LLMGenerationResult> {
   if (!hasLLMCredentials()) {
     throw new Error(
       `No LLM credentials for provider "${resolveProvider()}". ` +
@@ -30,8 +47,10 @@ export async function generateLandingSpecWithLLM(
     );
   }
 
-  const system = await buildLandingSystemPrompt();
+  const { system, sources, archetype, tokenEstimate } = await buildLandingSystemPrompt({ brief });
   const prompt = buildBriefPrompt(JSON.stringify(brief, null, 2));
+  void archetype;
+  void tokenEstimate;
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 90_000);
@@ -45,7 +64,7 @@ export async function generateLandingSpecWithLLM(
       maxRetries: options.maxRetries ?? 2,
       abortSignal: controller.signal,
     });
-    return result.object;
+    return { spec: result.object, sources };
   } finally {
     clearTimeout(timeout);
   }

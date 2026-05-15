@@ -148,6 +148,18 @@ export const SectionSchema = z.discriminatedUnion('component', [
 export type Section = z.infer<typeof SectionSchema>;
 
 /* ─── LandingSpec ─────────────────────────────────────────────────── */
+export const LandingSpecMetaSchema = z
+  .object({
+    sources: z.array(z.string()).default([]),
+    generatedAt: z.string().optional(),
+    generator: z.string().optional(),
+    archetype: z.string().optional(),
+    tokenEstimate: z.number().optional(),
+    promptVersion: z.string().optional(),
+  })
+  .optional();
+export type LandingSpecMeta = z.infer<typeof LandingSpecMetaSchema>;
+
 export const LandingSpecSchema = z.object({
   pageType: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing']),
   goal: z.string(),
@@ -157,6 +169,7 @@ export const LandingSpecSchema = z.object({
     description: z.string().min(10).max(160),
   }),
   illustrationSpecs: z.array(z.string()).default([]).describe('ID связанных IllustrationSpec'),
+  meta: LandingSpecMetaSchema,
 });
 
 export type LandingSpec = z.infer<typeof LandingSpecSchema>;

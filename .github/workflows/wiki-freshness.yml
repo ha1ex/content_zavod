@@ -1,0 +1,127 @@
+name: wiki-freshness
+
+# Проверяет, что wiki/ и derived-артефакты синхронны с источниками:
+#   - design-system/kaiten-v01/tokens.json → packages/ui/src/tokens.css + wiki/design-system/*.md gen-blocks
+#   - packages/harness/src/registry/ → wiki/design-system/components/*.md
+#   - packages/harness/src/skills/, packages/harness/src/schemas/, packages/harness/src/wiki/ → wiki/index.md
+#
+# Модель аналогична .github/workflows/readme-freshness.yml (появляется после merge ha1ex/readme-marketing-rewrite).
+# Если нашли drift — оставляем комментарий на PR с инструкцией; opt-out через метку `wiki не нужно` в PR description.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'design-system/kaiten-v01/**'
+      - 'packages/ui/src/tokens.css'
+      - 'packages/harness/src/registry/**'
+      - 'packages/harness/src/schemas/**'
+      - 'packages/harness/src/skills/**'
+      - 'packages/harness/src/wiki/**'
+      - 'wiki/**'
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check opt-out
+        id: optout
+        run: |
+          if echo "${{ github.event.pull_request.body }}" | grep -qiE 'wiki не нужно:|wiki not needed:'; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Opt-out detected in PR body — skipping wiki freshness check."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup pnpm
+        if: steps.optout.outputs.skip == 'false'
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        if: steps.optout.outputs.skip == 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        if: steps.optout.outputs.skip == 'false'
+        run: pnpm install --frozen-lockfile
+
+      - name: harness wiki sync (re-derive tokens.css + wiki/design-system gen-blocks)
+        if: steps.optout.outputs.skip == 'false'
+        run: pnpm -w run harness -- wiki sync
+
+      - name: harness wiki index (re-derive wiki/index.md)
+        if: steps.optout.outputs.skip == 'false'
+        run: pnpm -w run harness -- wiki index
+
+      - name: Check for drift
+        if: steps.optout.outputs.skip == 'false'
+        id: drift
+        run: |
+          if git diff --exit-code -- packages/ui/src/tokens.css wiki/design-system/ wiki/index.md; then
+            echo "drift=false" >> $GITHUB_OUTPUT
+            echo "Wiki is fresh."
+          else
+            echo "drift=true" >> $GITHUB_OUTPUT
+            {
+              echo "drift_files<<EOF"
+              git diff --name-only -- packages/ui/src/tokens.css wiki/design-system/ wiki/index.md
+              echo "EOF"
+            } >> $GITHUB_OUTPUT
+          fi
+
+      - name: harness lint
+        if: steps.optout.outputs.skip == 'false'
+        run: pnpm -w run harness -- lint --json
+        continue-on-error: true
+
+      - name: Comment on PR (drift)
+        if: steps.optout.outputs.skip == 'false' && steps.drift.outputs.drift == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = `${{ steps.drift.outputs.drift_files }}`.split('\n').filter(Boolean);
+            const body = [
+              '## ⚠️ wiki freshness',
+              '',
+              'PR затронул источники wiki (`design-system/kaiten-v01/`, `packages/harness/src/{registry,schemas,skills,wiki}/`), но derived-артефакты не синхронизированы.',
+              '',
+              '**Что нужно сделать:**',
+              '',
+              '```bash',
+              'pnpm harness -- wiki sync     # tokens.json → tokens.css + wiki/design-system/*.md',
+              'pnpm harness -- wiki index    # wiki/index.md',
+              'pnpm harness -- lint          # проверка консистентности',
+              '```',
+              '',
+              'Затем закоммитьте изменения в этой PR.',
+              '',
+              '**Затронутые файлы (по diff после re-derive):**',
+              '',
+              files.map((f) => `- \`${f}\``).join('\n'),
+              '',
+              '_Opt-out: добавьте \`wiki не нужно: <причина>\` в описание PR._',
+            ].join('\n');
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+      - name: Fail if drift
+        if: steps.optout.outputs.skip == 'false' && steps.drift.outputs.drift == 'true'
+        run: exit 1

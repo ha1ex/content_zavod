@@ -5,9 +5,10 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { HARNESS_VERSION } from './index.js';
 import { BriefSchema, LandingSpecSchema } from './schemas/index.js';
-import { landingSpecFromBrief } from './pipeline/index.js';
+import { generateLandingSpecWithLLM, landingSpecFromBrief } from './pipeline/index.js';
 import { renderLandingToTSX } from './render/index.js';
 import { describeRegistry } from './registry/index.js';
+import { describeActiveProvider, hasLLMCredentials } from './providers/index.js';
 
 const ROOT = resolve(process.cwd());
 
@@ -41,7 +42,8 @@ program
   .argument('<kind>', 'тип артефакта: landing | illustration')
   .option('-b, --brief <path>', 'путь к brief.json (относительно репозитория)')
   .option('-s, --slug <slug>', 'slug черновика', 'draft')
-  .action(async (kind: string, opts: { brief?: string; slug: string }) => {
+  .option('--no-llm', 'детерминированный fallback вместо LLM (для тестов/CI)')
+  .action(async (kind: string, opts: { brief?: string; slug: string; llm: boolean }) => {
     if (kind !== 'landing') {
       console.error(chalk.red(`[harness] kind=${kind} не поддерживается (пока только landing)`));
       process.exit(1);
@@ -58,7 +60,22 @@ program
     const briefRaw = await readFile(briefPath, 'utf-8');
     const brief = BriefSchema.parse(JSON.parse(briefRaw));
 
-    const spec = landingSpecFromBrief(brief);
+    const wantLLM = opts.llm !== false;
+    const canLLM = hasLLMCredentials();
+    const useLLM = wantLLM && canLLM;
+
+    let spec;
+    if (useLLM) {
+      console.log(chalk.cyan(`[harness] provider: ${describeActiveProvider()}`));
+      console.log(chalk.dim(`[harness] generating with LLM…`));
+      const t0 = Date.now();
+      spec = await generateLandingSpecWithLLM(brief);
+      console.log(chalk.green(`[harness] ✓ LLM spec in ${Date.now() - t0}ms`));
+    } else {
+      const reason = !wantLLM ? '--no-llm' : 'no API key';
+      console.log(chalk.yellow(`[harness] deterministic fallback (${reason})`));
+      spec = landingSpecFromBrief(brief);
+    }
     const specPath = resolve(root, 'content', 'landings', `${opts.slug}.json`);
     await mkdir(dirname(specPath), { recursive: true });
     await writeFile(specPath, JSON.stringify(spec, null, 2) + '\n', 'utf-8');
@@ -95,6 +112,23 @@ program
   .description('Показать component registry (для system prompt LLM)')
   .action(() => {
     console.log(describeRegistry());
+  });
+
+program
+  .command('providers')
+  .description('Показать активный LLM-провайдер и наличие ключей')
+  .action(() => {
+    console.log(`[harness] ${describeActiveProvider()}`);
+    if (!hasLLMCredentials()) {
+      console.log(
+        chalk.yellow(
+          '\nLLM недоступен. Положите ключ в .env.local:\n' +
+            '  AI_GATEWAY_API_KEY=...   (рекомендуется)\n' +
+            '  ANTHROPIC_API_KEY=...    (direct fallback)\n' +
+            '  OPENAI_API_KEY=...       (direct fallback)\n',
+        ),
+      );
+    }
   });
 
 program

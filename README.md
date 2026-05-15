@@ -21,8 +21,8 @@ packages/ui/           компоненты-обёртки + Storybook (landing,
 packages/config/       shared eslint/tsconfig/tailwind
 content/landings/      сохранённые LandingSpec (input)
 generated/landings/    output build step (TSX + spec + manifest)
-.context/design-system/  ваши токены, brand-voice, TailGrids, эталоны
-.context/attachments/    методология harness + skill для SVG
+design-system/kaiten-v01/  источник истины дизайн-системы (HTML/PDF/PNG)
+.context/attachments/      рабочие материалы и черновики (gitignored)
 ```
 
 ## Команды
@@ -40,7 +40,7 @@ pnpm harness -- handoff <slug> # → out/landing-<slug>.zip
 ## Куда что класть
 
 - **API ключи** → `.env.local` (из `.env.example`)
-- **Дизайн-система** → `.context/design-system/` (см. README внутри)
+- **Дизайн-система** → `design-system/kaiten-v01/` (источник истины — см. README внутри)
 - **Brief** → `content/briefs/<name>.json` или через UI
 
 ## План реализации

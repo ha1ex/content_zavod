@@ -1,6 +1,6 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
-import { cn } from './cn.js';
-import type { ButtonSize, ButtonVariant } from './Button.js';
+import { cn } from './cn';
+import type { ButtonSize, ButtonVariant } from './Button';
 
 export interface ButtonLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   variant?: ButtonVariant;

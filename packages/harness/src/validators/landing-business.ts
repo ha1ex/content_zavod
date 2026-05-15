@@ -1,5 +1,5 @@
-import type { Brief } from '../schemas/brief.js';
-import type { LandingSpec, Section } from '../schemas/landing-spec.js';
+import type { Brief } from '../schemas/brief';
+import type { LandingSpec, Section } from '../schemas/landing-spec';
 
 /**
  * Business-rules валидатор для LandingSpec (этап 4).

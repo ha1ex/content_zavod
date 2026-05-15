@@ -1,5 +1,5 @@
-export { cn } from './cn.js';
-export { Button } from './Button.js';
-export { ButtonLink } from './ButtonLink.js';
-export type { ButtonProps, ButtonVariant, ButtonSize } from './Button.js';
-export type { ButtonLinkProps } from './ButtonLink.js';
+export { cn } from './cn';
+export { Button } from './Button';
+export { ButtonLink } from './ButtonLink';
+export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
+export type { ButtonLinkProps } from './ButtonLink';

@@ -1,4 +1,4 @@
-import type { IllustrationSpec } from '../schemas/illustration-spec.js';
+import type { IllustrationSpec } from '../schemas/illustration-spec';
 
 /**
  * Детерминированный TSX-stub иллюстрации, который заведомо проходит AST-валидатор
@@ -91,7 +91,7 @@ export default function ${Name}(props: SVGProps<SVGSVGElement>) {
 export function renderIllustrationStory(spec: IllustrationSpec): string {
   const Name = pascalCase(spec.id);
   return `import type { Meta, StoryObj } from '@storybook/react';
-import ${Name} from './${Name}.js';
+import ${Name} from './${Name}';
 
 const meta: Meta<typeof ${Name}> = {
   title: 'Illustrations/${Name}',

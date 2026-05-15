@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BuffaloHeroDashboard from './BuffaloHeroDashboard.js';
+import BuffaloHeroDashboard from './BuffaloHeroDashboard';
 
 const meta: Meta<typeof BuffaloHeroDashboard> = {
   title: 'Illustrations/BuffaloHeroDashboard',

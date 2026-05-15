@@ -1,4 +1,4 @@
-import type { LandingSpec } from '../schemas/landing-spec.js';
+import type { LandingSpec } from '../schemas/landing-spec';
 
 /**
  * Brand-voice валидатор для LandingSpec (этап 4).

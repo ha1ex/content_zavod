@@ -3,8 +3,8 @@
  * Каждая страница получает свой срез значений в виде markdown-таблицы.
  */
 
-import type { DesignTokens } from './tokens-types.js';
-import { resolveColorRef } from './tokens-types.js';
+import type { DesignTokens } from './tokens-types';
+import { resolveColorRef } from './tokens-types';
 
 export interface GenBlockSpec {
   page: string;

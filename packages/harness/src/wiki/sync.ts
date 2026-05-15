@@ -12,10 +12,10 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { loadTokens } from './load-tokens.js';
-import { tokensToCss } from './tokens-to-css.js';
-import { buildGenBlocks } from './tokens-to-md.js';
-import { replaceGenBlock } from './frontmatter.js';
+import { loadTokens } from './load-tokens';
+import { tokensToCss } from './tokens-to-css';
+import { buildGenBlocks } from './tokens-to-md';
+import { replaceGenBlock } from './frontmatter';
 
 export interface SyncResult {
   written: string[];

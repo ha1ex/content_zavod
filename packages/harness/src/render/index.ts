@@ -1,1 +1,1 @@
-export { renderLandingToTSX } from './render-landing.js';
+export { renderLandingToTSX } from './render-landing';

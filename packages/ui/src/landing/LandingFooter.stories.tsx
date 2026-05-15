@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { LandingFooter } from './LandingFooter.js';
+import { LandingFooter } from './LandingFooter';
 
 const meta: Meta<typeof LandingFooter> = {
   title: 'Landing/LandingFooter',

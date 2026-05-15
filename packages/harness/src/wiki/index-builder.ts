@@ -9,7 +9,7 @@
 
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
-import { parseFrontmatter } from './frontmatter.js';
+import { parseFrontmatter } from './frontmatter';
 
 interface WikiPage {
   relPath: string;

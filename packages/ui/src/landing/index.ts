@@ -1,17 +1,17 @@
-export { HeroSection } from './HeroSection.js';
-export type { HeroSectionProps, CtaProps, AssetRefProps } from './HeroSection.js';
+export { HeroSection } from './HeroSection';
+export type { HeroSectionProps, CtaProps, AssetRefProps } from './HeroSection';
 
-export { FeatureGrid } from './FeatureGrid.js';
-export type { FeatureGridProps, FeatureItemProps } from './FeatureGrid.js';
+export { FeatureGrid } from './FeatureGrid';
+export type { FeatureGridProps, FeatureItemProps } from './FeatureGrid';
 
-export { PricingPlans } from './PricingPlans.js';
-export type { PricingPlansProps, PricingPlanProps } from './PricingPlans.js';
+export { PricingPlans } from './PricingPlans';
+export type { PricingPlansProps, PricingPlanProps } from './PricingPlans';
 
-export { FAQAccordion } from './FAQAccordion.js';
-export type { FAQAccordionProps, FAQItemProps } from './FAQAccordion.js';
+export { FAQAccordion } from './FAQAccordion';
+export type { FAQAccordionProps, FAQItemProps } from './FAQAccordion';
 
-export { FinalCta } from './FinalCta.js';
-export type { FinalCtaProps } from './FinalCta.js';
+export { FinalCta } from './FinalCta';
+export type { FinalCtaProps } from './FinalCta';
 
-export { LandingFooter } from './LandingFooter.js';
-export type { LandingFooterProps, FooterColumnProps } from './LandingFooter.js';
+export { LandingFooter } from './LandingFooter';
+export type { LandingFooterProps, FooterColumnProps } from './LandingFooter';

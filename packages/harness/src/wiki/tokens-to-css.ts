@@ -3,8 +3,8 @@
  * Output идемпотентен — повторный запуск даёт байт-идентичный результат.
  */
 
-import type { DesignTokens } from './tokens-types.js';
-import { resolveColorRef } from './tokens-types.js';
+import type { DesignTokens } from './tokens-types';
+import { resolveColorRef } from './tokens-types';
 
 const HEADER = `/**
  * Kaiten V01 design system tokens

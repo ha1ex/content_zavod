@@ -14,7 +14,8 @@
     "./render/render-spec-react": "./src/render/render-spec-react.tsx",
     "./validators": "./src/validators/index.ts",
     "./approvals": "./src/approvals/index.ts",
-    "./handoff": "./src/handoff/index.ts"
+    "./handoff": "./src/handoff/index.ts",
+    "./agent": "./src/agent/index.ts"
   },
   "bin": {
     "harness": "./bin/harness.mjs"

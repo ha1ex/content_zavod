@@ -14,8 +14,8 @@
  * `wiki/lessons.md` после успешного repair.
  */
 
-import type { Lesson } from './lessons-loader.js';
-import { findRelevantLessons, formatLessonsForRepair, loadLessons } from './lessons-loader.js';
+import type { Lesson } from './lessons-loader';
+import { findRelevantLessons, formatLessonsForRepair, loadLessons } from './lessons-loader';
 
 export interface RepairContext {
   previousSpec: unknown;

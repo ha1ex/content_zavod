@@ -1,5 +1,5 @@
-import { ButtonLink } from '../primitives/ButtonLink.js';
-import { cn } from '../primitives/cn.js';
+import { ButtonLink } from '../primitives/ButtonLink';
+import { cn } from '../primitives/cn';
 
 export interface PricingPlanProps {
   name: string;

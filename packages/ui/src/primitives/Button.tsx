@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { cn } from './cn.js';
+import { cn } from './cn';
 
 export type ButtonVariant = 'fill' | 'outline';
 export type ButtonSize = 'sm' | 'md' | 'lg';

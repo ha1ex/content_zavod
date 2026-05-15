@@ -1,4 +1,4 @@
-import { cn } from '../primitives/cn.js';
+import { cn } from '../primitives/cn';
 
 export interface FooterColumnProps {
   title: string;

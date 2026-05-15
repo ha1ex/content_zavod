@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { describeRegistry } from '../registry/index.js';
-import { findRepoRoot, loadDesignSystem as loadDesignSystemPages } from '../wiki/load-design-system.js';
-import { selectContext } from '../wiki/select-context.js';
-import type { Brief } from '../schemas/brief.js';
-import type { IllustrationSpec } from '../schemas/illustration-spec.js';
+import { describeRegistry } from '../registry/index';
+import { findRepoRoot, loadDesignSystem as loadDesignSystemPages } from '../wiki/load-design-system';
+import { selectContext } from '../wiki/select-context';
+import type { Brief } from '../schemas/brief';
+import type { IllustrationSpec } from '../schemas/illustration-spec';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

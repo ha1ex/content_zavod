@@ -1,0 +1,270 @@
+{
+  "pageType": "saas_landing",
+  "goal": "book_demo",
+  "sections": [
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Buffalo AI harness",
+        "title": "Лендинг по брифу за минуту, а не за неделю",
+        "subtitle": "Маркетинг описывает продукт в JSON — Buffalo собирает TSX-страницу на ваших компонентах, прогоняет валидаторы и отдаёт готовый PR.",
+        "primaryCta": {
+          "label": "Получить демо",
+          "href": "/demo"
+        },
+        "secondaryCta": {
+          "label": "Как это работает",
+          "href": "#how-it-works"
+        },
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "buffalo-hero"
+        }
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Что внутри",
+        "title": "Контролируемый контур вокруг LLM",
+        "description": "Шесть слоёв, которые превращают модель в предсказуемого исполнителя на вашей дизайн-системе.",
+        "items": [
+          {
+            "icon": "FileText",
+            "title": "Бриф → JSON",
+            "description": "Маркетинг заполняет короткий JSON: продукт, аудитория, цель, тон, CTA. Дальше работает пайплайн."
+          },
+          {
+            "icon": "Layers",
+            "title": "Только ваши компоненты",
+            "description": "Модель видит закрытый component registry: 6 проверенных блоков с типизированными props."
+          },
+          {
+            "icon": "ShieldCheck",
+            "title": "Валидаторы на каждом шаге",
+            "description": "Brand voice, бизнес-правила и AST-проверки иллюстраций — repair-loop правит ошибки сам."
+          },
+          {
+            "icon": "FileCode",
+            "title": "TSX, который ревью как PR",
+            "description": "На выходе обычный React-код — типизация, lint, visual regression проходят как у людей."
+          },
+          {
+            "icon": "Workflow",
+            "title": "Storybook и preview",
+            "description": "Готовая страница открывается локально на :3000, каждый блок есть в Storybook."
+          },
+          {
+            "icon": "Package",
+            "title": "Handoff одной командой",
+            "description": "Архив с TSX, manifest и инструкцией для PR собирается одной CLI-командой."
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "pricing",
+      "component": "PricingPlans",
+      "props": {
+        "eyebrow": "Тарифы",
+        "title": "Старт с пилота, рост по мере нужды",
+        "description": "Платите за лендинги, а не за seats. Все тарифы включают валидаторы и handoff.",
+        "plans": [
+          {
+            "name": "Pilot",
+            "price": "0 ₽",
+            "pricePeriod": "/ месяц",
+            "description": "Знакомство на одной задаче.",
+            "features": [
+              "1 лендинг в месяц",
+              "Базовые валидаторы",
+              "Storybook preview",
+              "Поддержка по email"
+            ],
+            "cta": {
+              "label": "Начать пилот",
+              "href": "/demo"
+            },
+            "highlighted": false
+          },
+          {
+            "name": "Team",
+            "price": "₽ по запросу",
+            "pricePeriod": "/ месяц",
+            "description": "Для маркетинговой команды.",
+            "features": [
+              "До 10 лендингов в месяц",
+              "Brand-voice валидаторы",
+              "Repair-loop и visual regression",
+              "Handoff-ZIP для фронта",
+              "Slack-уведомления"
+            ],
+            "cta": {
+              "label": "Получить демо",
+              "href": "/demo"
+            },
+            "highlighted": true
+          },
+          {
+            "name": "Enterprise",
+            "price": "Договор",
+            "description": "Под выделенный контур и SLA.",
+            "features": [
+              "Без лимита лендингов",
+              "Собственный design-system layer",
+              "SSO и аудит-лог",
+              "Выделенный аккаунт-менеджер",
+              "Поддержка 24×5"
+            ],
+            "cta": {
+              "label": "Поговорить с командой",
+              "href": "/contact"
+            },
+            "highlighted": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "eyebrow": "FAQ",
+        "title": "Что обычно спрашивают",
+        "items": [
+          {
+            "question": "Мы получим обычный код или закрытую платформу?",
+            "answer": "Обычный TSX на ваших компонентах, который мержится как любой другой PR. Никакого vendor lock-in: handoff отдаёт self-contained архив с зависимостями и инструкцией."
+          },
+          {
+            "question": "Что мешает модели вставить лишний блок или придумать новый?",
+            "answer": "Component registry задаёт закрытый список разрешённых компонентов. На выходе строго типизированный JSON — лишнее просто не пройдёт zod-парсинг и валидаторы."
+          },
+          {
+            "question": "Как поддерживается фирменный стиль и тон?",
+            "answer": "Дизайн-система Kaiten V01 + brand-voice deny-list подмешиваются в system prompt. Валидатор отдельно сканирует копи на запрещённые слова и шаблоны."
+          },
+          {
+            "question": "Подходит ли это команде без LLM-инфраструктуры?",
+            "answer": "Да. Buffalo работает в agent-mode без API-ключей — он подготавливает контекст для уже подключённой к проекту LLM (Claude Code, Codex), и валидирует результат локально."
+          },
+          {
+            "question": "Что если результат нужно подправить вручную?",
+            "answer": "Правьте JSON-spec в content/landings и запустите apply ещё раз — TSX перегенерируется детерминированно. Никакой ручной правки сгенерированного кода."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Соберите первый лендинг сегодня",
+        "description": "20 минут на установку и интеграцию с вашим дизайн-системой — дальше один JSON и одна команда.",
+        "primaryCta": {
+          "label": "Получить демо",
+          "href": "/demo"
+        },
+        "secondaryCta": {
+          "label": "Прочитать документацию",
+          "href": "/docs"
+        }
+      }
+    },
+    {
+      "id": "footer",
+      "component": "LandingFooter",
+      "props": {
+        "brandName": "Buffalo",
+        "brandTagline": "Фабрика лендингов на вашей дизайн-системе.",
+        "columns": [
+          {
+            "title": "Продукт",
+            "links": [
+              {
+                "label": "Обзор",
+                "href": "/"
+              },
+              {
+                "label": "Тарифы",
+                "href": "#pricing"
+              },
+              {
+                "label": "FAQ",
+                "href": "#faq"
+              },
+              {
+                "label": "Документация",
+                "href": "/docs"
+              }
+            ]
+          },
+          {
+            "title": "Команда",
+            "links": [
+              {
+                "label": "О нас",
+                "href": "/about"
+              },
+              {
+                "label": "Контакты",
+                "href": "/contact"
+              },
+              {
+                "label": "Карьера",
+                "href": "/careers"
+              }
+            ]
+          },
+          {
+            "title": "Юридическое",
+            "links": [
+              {
+                "label": "Условия использования",
+                "href": "/legal/terms"
+              },
+              {
+                "label": "Политика конфиденциальности",
+                "href": "/legal/privacy"
+              }
+            ]
+          }
+        ],
+        "copyright": "© 2026 Buffalo. Все права защищены."
+      }
+    }
+  ],
+  "seo": {
+    "title": "Buffalo — лендинг по брифу за минуту",
+    "description": "Контролируемый LLM-контур, который собирает SaaS-лендинги на ваших компонентах: бриф → TSX, валидаторы и handoff одной командой."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md"
+    ],
+    "generatedAt": "2026-05-15T18:52:29.620Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "tokenEstimate": 15165
+  }
+}

@@ -19,10 +19,10 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { generateObject } from 'ai';
 import { z } from 'zod';
-import type { Brief } from '../schemas/brief.js';
-import { getModel, hasLLMCredentials } from '../providers/index.js';
-import { serializeFrontmatter } from './frontmatter.js';
-import { appendLog } from './log.js';
+import type { Brief } from '../schemas/brief';
+import { getModel, hasLLMCredentials } from '../providers/index';
+import { serializeFrontmatter } from './frontmatter';
+import { appendLog } from './log';
 
 const AudienceClassificationSchema = z.object({
   audiences: z

@@ -1,5 +1,5 @@
-import type { Brief } from '../schemas/brief.js';
-import { LandingSpecSchema, type LandingSpec } from '../schemas/landing-spec.js';
+import type { Brief } from '../schemas/brief';
+import { LandingSpecSchema, type LandingSpec } from '../schemas/landing-spec';
 
 /**
  * Этап 1: детерминированный fallback brief → LandingSpec.

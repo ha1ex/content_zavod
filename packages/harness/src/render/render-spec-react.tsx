@@ -6,7 +6,7 @@ import {
   FinalCta,
   LandingFooter,
 } from '@buffalo/ui/landing';
-import type { LandingSpec, Section } from '../schemas/landing-spec.js';
+import type { LandingSpec, Section } from '../schemas/landing-spec';
 
 /**
  * Прямой React-рендер LandingSpec в Next.js preview route.

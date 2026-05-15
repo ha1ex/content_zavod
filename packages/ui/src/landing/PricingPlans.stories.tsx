@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { PricingPlans } from './PricingPlans.js';
+import { PricingPlans } from './PricingPlans';
 
 const meta: Meta<typeof PricingPlans> = {
   title: 'Landing/PricingPlans',

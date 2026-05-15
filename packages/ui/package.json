@@ -10,7 +10,22 @@
     "./landing": "./src/landing/index.ts",
     "./primitives": "./src/primitives/index.ts",
     "./illustrations": "./src/illustrations/index.ts",
-    "./styles.css": "./src/styles.css"
+    "./styles.css": {
+      "style": "./src/styles.css",
+      "default": "./src/styles.css"
+    },
+    "./tokens.css": {
+      "style": "./src/tokens.css",
+      "default": "./src/tokens.css"
+    },
+    "./src/tokens.css": {
+      "style": "./src/tokens.css",
+      "default": "./src/tokens.css"
+    },
+    "./src/styles.css": {
+      "style": "./src/styles.css",
+      "default": "./src/styles.css"
+    }
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",

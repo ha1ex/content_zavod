@@ -10,10 +10,10 @@
 
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import { loadTokens } from './load-tokens.js';
-import { tokensToCss } from './tokens-to-css.js';
-import { buildGenBlocks } from './tokens-to-md.js';
-import { extractGenBlock, parseFrontmatter } from './frontmatter.js';
+import { loadTokens } from './load-tokens';
+import { tokensToCss } from './tokens-to-css';
+import { buildGenBlocks } from './tokens-to-md';
+import { extractGenBlock, parseFrontmatter } from './frontmatter';
 
 export type LintScope = 'all' | 'wiki' | 'registry' | 'prompts';
 

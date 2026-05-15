@@ -15,7 +15,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { Brief } from '../schemas/brief.js';
+import type { Brief } from '../schemas/brief';
 
 export interface SelectedContext {
   body: string;

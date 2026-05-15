@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FAQAccordion } from './FAQAccordion.js';
+import { FAQAccordion } from './FAQAccordion';
 
 const meta: Meta<typeof FAQAccordion> = {
   title: 'Landing/FAQAccordion',

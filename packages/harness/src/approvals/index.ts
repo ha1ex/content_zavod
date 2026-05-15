@@ -5,7 +5,7 @@ import {
   defaultApproval,
   type Approval,
   type ApprovalStatus,
-} from '../schemas/approval.js';
+} from '../schemas/approval';
 
 /**
  * Approval storage (этап 5) — простые JSON-файлы в content/approvals/.

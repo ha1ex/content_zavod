@@ -10,7 +10,7 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { serializeFrontmatter } from './frontmatter.js';
+import { serializeFrontmatter } from './frontmatter';
 
 export type WikiPageType = 'audience' | 'pattern' | 'landing' | 'archetype';
 

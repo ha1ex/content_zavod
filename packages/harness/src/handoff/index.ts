@@ -2,10 +2,10 @@ import archiver from 'archiver';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import type { LandingSpec } from '../schemas/landing-spec.js';
-import { LandingSpecSchema } from '../schemas/landing-spec.js';
-import { readApproval } from '../approvals/index.js';
-import { pascalCase } from '../pipeline/illustration-stub.js';
+import type { LandingSpec } from '../schemas/landing-spec';
+import { LandingSpecSchema } from '../schemas/landing-spec';
+import { readApproval } from '../approvals/index';
+import { pascalCase } from '../pipeline/illustration-stub';
 
 /**
  * Handoff packer (этап 6).
@@ -57,7 +57,7 @@ function rewritePageImports(tsx: string): string {
   // import { A, B } from '@buffalo/ui/landing'; → './components/index.js'
   return tsx.replace(
     /from\s+['"]@buffalo\/ui\/landing['"]/g,
-    `from './components/index.js'`,
+    `from './components/index'`,
   );
 }
 
@@ -132,12 +132,12 @@ function makePackageJsonSnippet(slug: string): string {
 
 function makeComponentsBarrel(componentFiles: string[]): string {
   return componentFiles
-    .map((name) => `export { ${name} } from './${name}.js';`)
+    .map((name) => `export { ${name} } from './${name}';`)
     .join('\n') + '\n';
 }
 
 function makeIllustrationsBarrel(names: string[]): string {
-  return names.map((n) => `export { default as ${n} } from './${n}.js';`).join('\n') + '\n';
+  return names.map((n) => `export { default as ${n} } from './${n}';`).join('\n') + '\n';
 }
 
 export async function buildHandoff(slug: string, opts: BuildOptions): Promise<HandoffManifest> {

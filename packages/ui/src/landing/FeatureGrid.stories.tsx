@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FeatureGrid } from './FeatureGrid.js';
+import { FeatureGrid } from './FeatureGrid';
 
 const meta: Meta<typeof FeatureGrid> = {
   title: 'Landing/FeatureGrid',

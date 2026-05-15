@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cn } from '../primitives/cn.js';
+import { cn } from '../primitives/cn';
 
 export interface FAQItemProps {
   question: string;

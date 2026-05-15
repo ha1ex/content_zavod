@@ -1,15 +1,15 @@
 import { generateText } from 'ai';
-import type { IllustrationSpec } from '../schemas/illustration-spec.js';
-import { getModel, hasLLMCredentials, resolveProvider } from '../providers/index.js';
+import type { IllustrationSpec } from '../schemas/illustration-spec';
+import { getModel, hasLLMCredentials, resolveProvider } from '../providers/index';
 import {
   buildIllustrationSystemPrompt,
   buildIllustrationUserPrompt,
-} from '../prompts/system.js';
+} from '../prompts/system';
 import {
   validateIllustrationTSX,
   type IllustrationValidationError,
-} from '../validators/illustration-ast.js';
-import { runWithRepair, type RepairResult } from './repair.js';
+} from '../validators/illustration-ast';
+import { runWithRepair, type RepairResult } from './repair';
 
 /**
  * Этап 3: LLM-генерация TSX SVG-иллюстрации по IllustrationSpec.

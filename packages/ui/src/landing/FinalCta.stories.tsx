@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FinalCta } from './FinalCta.js';
+import { FinalCta } from './FinalCta';
 
 const meta: Meta<typeof FinalCta> = {
   title: 'Landing/FinalCta',

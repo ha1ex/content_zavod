@@ -83,9 +83,15 @@ Buffalo — это управляемый контур вокруг LLM (Claude 
 
 ---
 
-## Быстрый старт для маркетолога
+## Быстрый старт (agent-mode, без API-ключей)
 
-> Один раз: `pnpm install` + скопировать `.env.example` → `.env.local` и вставить API-ключи.
+> Идея: Buffalo сам не вызывает внешнюю LLM. Он готовит prompt + JSON schema, а **хост-агент (Claude Code, Codex, ChatGPT с file access) сам и есть LLM**. Поэтому никаких `.env.local` и API-ключей не нужно.
+
+**Один раз:**
+
+```bash
+pnpm install
+```
 
 **1. Создать бриф** — скопируй `content/briefs/buffalo.json` и поправь поля под продукт:
 
@@ -93,6 +99,7 @@ Buffalo — это управляемый контур вокруг LLM (Claude 
 {
   "product": "...",
   "audience": ["..."],
+  "market": "B2B SaaS",
   "primaryGoal": "book_demo",
   "mainPain": "...",
   "mainPromise": "...",
@@ -103,26 +110,58 @@ Buffalo — это управляемый контур вокруг LLM (Claude 
 }
 ```
 
-**2. Сгенерировать лендинг:**
+**2. Подготовить prompt для агента (LLM-вызова нет):**
 
 ```bash
-pnpm -w run harness generate landing --brief content/briefs/<slug>.json --slug <slug>
+pnpm -w run harness agent prepare landing \
+  --brief content/briefs/<slug>.json \
+  --slug <slug> \
+  --out .context/agent/<slug>.prompt.md
 ```
 
-**3. Посмотреть в превью:**
+В `.context/agent/<slug>.prompt.md` лежит system prompt, user prompt, JSON Schema (LandingSpec), brief и точный путь, куда писать spec.
+
+**3. Сгенерировать spec через хост-агента.** Открой Claude Code (или Codex) в репозитории и скажи:
+
+> «Сгенерируй лендинг по `content/briefs/<slug>.json`, slug `<slug>`».
+
+Skill `buffalo-generate` (`.claude/skills/buffalo-generate/`) триггерится автоматически и проводит весь пайплайн. Агент сам прочитает prompt, напишет `content/landings/<slug>.json` и запустит apply.
+
+Если хочешь руками — прочитай `<slug>.prompt.md`, сгенерируй JSON по схеме, положи в `content/landings/<slug>.json`.
+
+**4. Прогнать валидаторы + отрендерить TSX:**
+
+```bash
+pnpm -w run harness agent apply landing \
+  --slug <slug> \
+  --brief content/briefs/<slug>.json
+```
+
+CLI:
+
+- парсит spec через zod;
+- прогоняет brand-voice + business-правила;
+- рендерит TSX в `generated/landings/<slug>/page.tsx`;
+- пишет meta + filing back в `wiki/landings/<slug>.md`.
+
+При ошибках — `--json` даёт structured output для repair-loop'a (агент правит spec в файле и снова запускает apply).
+
+**5. Посмотреть в превью:**
 
 ```bash
 pnpm dev
-# открыть http://localhost:3000/p/<slug>
+# → http://localhost:3000/landings/<slug>
 ```
 
-**4. Передать фронту** — собрать handoff-пакет:
+**6. Передать фронту** — собрать handoff-пакет:
 
 ```bash
 pnpm -w run harness handoff <slug>     # → out/landing-<slug>.zip
 ```
 
-В архиве: TSX-файлы, исходный спек, manifest и инструкция для PR.
+В архиве: TSX-файлы, исходный spec, manifest и инструкция для PR.
+
+> **Старый flow `harness generate landing` с внешним API-ключом** остаётся доступным как fallback (если у команды есть Vercel AI Gateway / Anthropic / OpenAI ключ). Раскомментируй соответствующие переменные в `.env.example` и положи их в `.env.local`.
 
 ---
 
@@ -163,10 +202,15 @@ pnpm install
 pnpm dev                                      # Next.js preview :3000
 pnpm storybook                                # Storybook :6006
 
-# Лендинги
+# Лендинги (agent-mode, без API-ключей — дефолт)
+pnpm -w run harness agent prepare landing --brief content/briefs/<slug>.json --slug <slug>
+# … хост-агент пишет content/landings/<slug>.json …
+pnpm -w run harness agent apply   landing --slug <slug> --brief content/briefs/<slug>.json
+pnpm -w run harness handoff       <slug>      # → out/landing-<slug>.zip
+
+# Старый flow с внешним API-ключом (опционально)
 pnpm -w run harness generate landing --brief content/briefs/<slug>.json --slug <slug>
 pnpm -w run harness validate <slug>
-pnpm -w run harness handoff  <slug>           # → out/landing-<slug>.zip
 
 # Иллюстрации (этап 3)
 pnpm -w run harness generate illustration --spec content/illustrations/<file>.json

@@ -1,3 +1,3 @@
-export * from './primitives/index.js';
-export * from './landing/index.js';
-export * from './illustrations/index.js';
+export * from './primitives/index';
+export * from './landing/index';
+export * from './illustrations/index';

@@ -3,8 +3,8 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { HARNESS_VERSION } from './index.js';
-import { BriefSchema, IllustrationSpecSchema, LandingSpecSchema } from './schemas/index.js';
+import { HARNESS_VERSION } from './index';
+import { BriefSchema, IllustrationSpecSchema, LandingSpecSchema } from './schemas/index';
 import {
   generateIllustrationTSXWithRepair,
   generateLandingSpecWithLLMResult,
@@ -13,10 +13,10 @@ import {
   pascalCase,
   renderIllustrationStory,
   renderIllustrationStub,
-} from './pipeline/index.js';
-import { renderLandingToTSX } from './render/index.js';
-import { describeRegistry, REGISTRY } from './registry/index.js';
-import { describeActiveProvider, hasLLMCredentials } from './providers/index.js';
+} from './pipeline/index';
+import { renderLandingToTSX } from './render/index';
+import { describeRegistry, REGISTRY } from './registry/index';
+import { describeActiveProvider, hasLLMCredentials } from './providers/index';
 import {
   formatIllustrationErrors,
   formatLandingBrandErrors,
@@ -24,11 +24,16 @@ import {
   validateIllustrationTSX,
   validateLandingBrand,
   validateLandingBusiness,
-} from './validators/index.js';
-import { listApprovals, readApproval } from './approvals/index.js';
-import type { ApprovalStatus } from './schemas/approval.js';
-import { buildHandoff } from './handoff/index.js';
-import { buildLandingSystemPromptWithMeta } from './prompts/system.js';
+} from './validators/index';
+import { listApprovals, readApproval } from './approvals/index';
+import type { ApprovalStatus } from './schemas/approval';
+import { buildHandoff } from './handoff/index';
+import { buildLandingSystemPromptWithMeta } from './prompts/system';
+import {
+  ingestLanding,
+  prepareLanding,
+  renderPrepareAsMarkdown,
+} from './agent/index';
 import {
   appendLog,
   appendReviewerNote,
@@ -44,7 +49,7 @@ import {
   type LintScope,
   type LogOp,
   type WikiPageType,
-} from './wiki/index.js';
+} from './wiki/index';
 
 const ROOT = resolve(process.cwd());
 
@@ -328,12 +333,147 @@ async function upsertIllustrationBarrel(outDir: string, Name: string) {
   } catch {
     body = '';
   }
-  const exportLine = `export { default as ${Name} } from './${Name}.js';`;
+  const exportLine = `export { default as ${Name} } from './${Name}';`;
   if (body.includes(exportLine)) return;
   const stripped = body.replace(/^\/\/ Этап 3:.*$/m, '').replace(/^export \{\};\s*$/m, '').trim();
   const next = `// Auto-maintained barrel for generated SVG illustrations.\n${stripped ? stripped + '\n' : ''}${exportLine}\n`;
   await writeFile(barrelPath, next, 'utf-8');
 }
+
+/* ─── Agent-mode commands — нет API-ключей, LLM = хост-агент ─────────── */
+
+const agent = program
+  .command('agent')
+  .description(
+    'Agent-mode (без API-ключей): prepare выдаёт prompt+schema хосту-агенту, apply валидирует написанный им spec.',
+  );
+
+agent
+  .command('prepare')
+  .description(
+    'Подготовить prompt + JSON-schema для хост-агента (Claude Code / Codex / ChatGPT). LLM-вызов не делается.',
+  )
+  .argument('<kind>', 'тип артефакта: landing')
+  .option('-b, --brief <path>', 'для landing: путь к brief.json')
+  .option('-s, --slug <slug>', 'slug черновика', 'draft')
+  .option('-o, --out <path>', 'путь к output-файлу (default: stdout)')
+  .option('--format <fmt>', 'json | md', 'md')
+  .action(
+    async (
+      kind: string,
+      opts: { brief?: string; slug: string; out?: string; format: string },
+    ) => {
+      const root = await findRepoRoot(ROOT);
+      if (kind !== 'landing') {
+        console.error(
+          chalk.red(`[harness] prepare: kind=${kind} не поддерживается (поддерживается: landing)`),
+        );
+        process.exit(1);
+      }
+      if (!opts.brief) {
+        console.error(chalk.red('[harness] prepare landing: --brief обязателен'));
+        process.exit(1);
+      }
+      const artifact = await prepareLanding({
+        root,
+        briefPath: opts.brief,
+        slug: opts.slug,
+      });
+      const format = (opts.format ?? 'md').toLowerCase();
+      const payload =
+        format === 'json'
+          ? JSON.stringify(artifact, null, 2)
+          : renderPrepareAsMarkdown(artifact);
+      if (opts.out) {
+        const outPath = resolve(root, opts.out);
+        await mkdir(dirname(outPath), { recursive: true });
+        await writeFile(outPath, payload, 'utf-8');
+        const rel = outPath.startsWith(root) ? outPath.slice(root.length + 1) : outPath;
+        console.error(chalk.green(`[harness] ✓ prepare → ${rel}`));
+        console.error(chalk.dim(`         next: write spec to ${artifact.outputPathRel}`));
+        console.error(chalk.dim(`               then run: ${artifact.nextCommand}`));
+      } else {
+        process.stdout.write(payload);
+        if (!payload.endsWith('\n')) process.stdout.write('\n');
+      }
+    },
+  );
+
+agent
+  .command('apply')
+  .description(
+    'Принять spec от хост-агента: валидация (brand+business) + рендер TSX + filing back. Без LLM.',
+  )
+  .argument('<kind>', 'тип артефакта: landing')
+  .option('-s, --slug <slug>', 'slug черновика')
+  .option('-b, --brief <path>', 'путь к brief.json для business-валидатора (рекомендуется)')
+  .option('--strict', 'падать на ошибках валидатора (не писать TSX)', false)
+  .option('--no-render', 'не рендерить TSX (только валидация)')
+  .option('--json', 'machine-readable JSON-вывод результата (для repair-loop агента)', false)
+  .action(
+    async (
+      kind: string,
+      opts: {
+        slug?: string;
+        brief?: string;
+        strict: boolean;
+        render: boolean;
+        json: boolean;
+      },
+    ) => {
+      const root = await findRepoRoot(ROOT);
+      if (kind !== 'landing') {
+        console.error(
+          chalk.red(`[harness] ingest: kind=${kind} не поддерживается (поддерживается: landing)`),
+        );
+        process.exit(1);
+      }
+      if (!opts.slug) {
+        console.error(chalk.red('[harness] ingest landing: --slug обязателен'));
+        process.exit(1);
+      }
+      const result = await ingestLanding({
+        root,
+        slug: opts.slug,
+        briefPath: opts.brief,
+        strict: opts.strict,
+        noRender: opts.render === false,
+      });
+
+      if (opts.json) {
+        console.log(JSON.stringify(result, null, 2));
+        process.exit(result.ok ? 0 : 1);
+      }
+
+      if (result.ok) {
+        console.log(
+          chalk.green(
+            `[harness] ✓ spec valid (${result.sectionsCount} sections, archetype=${result.archetype})`,
+          ),
+        );
+        console.log(chalk.green(`         spec  → ${result.specPathRel}`));
+        if (result.tsxPathRel) console.log(chalk.green(`         tsx   → ${result.tsxPathRel}`));
+        if (result.wikiPathRel) console.log(chalk.green(`         wiki  → ${result.wikiPathRel}`));
+        for (const w of result.warnings) console.log(chalk.yellow(`  ! ${w}`));
+        console.log(chalk.dim(`\n         preview: ${result.previewUrl}`));
+        process.exit(0);
+      }
+
+      console.log(chalk.red(`[harness] ✗ ingest landing/${result.slug} — ${result.errors.length} error(s):`));
+      for (const e of result.errors) {
+        const pathPart = e.path ? chalk.dim(` [${e.path}]`) : '';
+        const codePart = e.code ? chalk.dim(` (${e.code})`) : '';
+        console.log(`  ${chalk.red('✗')} ${e.kind}: ${e.message}${pathPart}${codePart}`);
+      }
+      for (const w of result.warnings) console.log(chalk.yellow(`  ! ${w}`));
+      console.log(
+        chalk.cyan(
+          `\nПравь ${result.specPathRel} и запусти команду снова. Используй --json для structured output.`,
+        ),
+      );
+      process.exit(1);
+    },
+  );
 
 program
   .command('validate')

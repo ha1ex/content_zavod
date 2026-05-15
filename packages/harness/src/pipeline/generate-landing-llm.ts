@@ -1,21 +1,21 @@
 import { generateObject } from 'ai';
-import type { Brief } from '../schemas/brief.js';
-import { LandingSpecSchema, type LandingSpec } from '../schemas/landing-spec.js';
-import { getModel, hasLLMCredentials, resolveProvider } from '../providers/index.js';
+import type { Brief } from '../schemas/brief';
+import { LandingSpecSchema, type LandingSpec } from '../schemas/landing-spec';
+import { getModel, hasLLMCredentials, resolveProvider } from '../providers/index';
 import {
   buildBriefPrompt,
   buildLandingSystemPrompt,
   buildLandingSystemPromptWithMeta,
-} from '../prompts/system.js';
+} from '../prompts/system';
 import {
   validateLandingBrand,
   type LandingBrandError,
-} from '../validators/landing-brand.js';
+} from '../validators/landing-brand';
 import {
   validateLandingBusiness,
   type LandingBusinessError,
-} from '../validators/landing-business.js';
-import { runWithRepair, type RepairResult } from './repair.js';
+} from '../validators/landing-business';
+import { runWithRepair, type RepairResult } from './repair';
 
 export type LandingValidationError =
   | ({ kind: 'brand' } & LandingBrandError)

@@ -1,4 +1,4 @@
-import type { LandingSpec, Section } from '../schemas/landing-spec.js';
+import type { LandingSpec, Section } from '../schemas/landing-spec';
 
 /**
  * Детерминированный TSX-string renderer для handoff (этап 6 ZIP).

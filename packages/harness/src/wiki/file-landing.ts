@@ -12,10 +12,10 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import type { Brief } from '../schemas/brief.js';
-import type { LandingSpec } from '../schemas/landing-spec.js';
-import { extractGenBlock, parseFrontmatter, replaceGenBlock, serializeFrontmatter } from './frontmatter.js';
-import type { FrontMatter } from './frontmatter.js';
+import type { Brief } from '../schemas/brief';
+import type { LandingSpec } from '../schemas/landing-spec';
+import { extractGenBlock, parseFrontmatter, replaceGenBlock, serializeFrontmatter } from './frontmatter';
+import type { FrontMatter } from './frontmatter';
 
 export type LandingStatus = 'draft' | 'approved' | 'shipped';
 

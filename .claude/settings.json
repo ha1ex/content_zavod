@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install:*)",
+      "Bash(pnpm dev)",
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm storybook)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm -w run harness:*)",
+      "Bash(pnpm --filter @buffalo/harness:*)",
+      "Bash(pnpm --filter @buffalo/web:*)",
+      "Bash(pnpm --filter @buffalo/ui:*)",
+      "Bash(unzip -l:*)",
+      "Bash(unzip -p:*)",
+      "Bash(ls out:*)",
+      "Bash(ls generated:*)",
+      "Bash(ls content:*)",
+      "Bash(cat content/briefs/*)",
+      "Bash(cat content/landings/*)",
+      "Bash(cat out/*)",
+      "Bash(node --version)",
+      "Bash(pnpm --version)"
+    ],
+    "deny": []
+  }
+}

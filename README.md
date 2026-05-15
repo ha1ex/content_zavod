@@ -40,13 +40,46 @@ Buffalo — это управляемый контур вокруг LLM (Claude 
 | Шаг | Что делает | Где живёт |
 |-----|------------|-----------|
 | **Brief** | Маркетинг описывает продукт, аудиторию, цель (`book_demo`/`signup`/…), tone, CTA | `content/briefs/<slug>.json` |
-| **Context** | Подмешиваем дизайн-систему Kaiten + skills (`conversion-landing`, `content-marketing`) | `design-system/`, `packages/harness/src/skills/` |
+| **Context** | Подмешиваем дизайн-систему Kaiten + **skills-плейбуки** (см. раздел ниже) | `design-system/`, `packages/harness/src/skills/` |
 | **Allowed components** | LLM видит только разрешённые блоки из нашего registry | `packages/harness/src/registry/` |
 | **LandingSpec** | Структурированный JSON-план лендинга (zod-схема, строго типизирован) | `packages/harness/src/schemas/` |
 | **TSX render** | Из спека собирается React-страница, иллюстрации генерируются отдельным шагом | `packages/harness/src/render/` |
 | **Validators** | AST-проверки, бренд-чеки, доступность; при провале — repair loop (до 3 итераций) | `packages/harness/src/validators/` |
 | **Preview** | Готовый лендинг открывается на `localhost:3000/p/<slug>` | `apps/web/` |
 | **Handoff** | `.zip` с TSX + спек + manifest для передачи фронту/в PR | `out/landing-<slug>.zip` |
+
+---
+
+## Skills — плейбуки внутри LLM
+
+Чтобы LLM не «галлюцинировал» и собирал лендинги по нашим правилам, рядом с ним лежит набор **skills** — markdown-документов с методологией. Skill подмешивается в system prompt на шаге **Context** и одновременно служит документом-памяткой для маркетинга и агентов, которые правят `LandingSpec` руками.
+
+**Это первая версия — skills будут постоянно дорабатываться.** Маркетинг может и должен править эти файлы: меняются правила копи, появляется новый page type, обновился чек-лист аудита — всё это редактируется напрямую в markdown без правок кода.
+
+### Текущие skills
+
+| Skill | Поверхность | Статус | Что внутри |
+|-------|-------------|--------|------------|
+| [`conversion-landing.md`](packages/harness/src/skills/conversion-landing.md) | лендинги | ✅ active | 8 типов SaaS-страниц, awareness levels (по Шугерману), правила hero / секций / копи / CTA / social proof, визуальная сетка, **100-балльный audit-чек-лист** |
+| [`content-marketing.md`](packages/harness/src/skills/content-marketing.md) | статьи | ⏳ planned | Playbook блог-поверхности: позиционирование, 5 направлений, пайплайн статьи, промпты для агентов |
+
+### Как маркетингу работать со skills
+
+| Хочу… | Что делать |
+|-------|-----------|
+| **Поменять правило копи** (например, запретить новое hype-слово) | Открыть `conversion-landing.md`, найти раздел про копирайтинг → дописать правило. Перегенерировать любой лендинг — правило применится |
+| **Добавить новый page type** (например, отдельный шаблон под integration-страницы) | Дописать раздел в `conversion-landing.md` § «Page types» + добавить примеры hero/секций |
+| **Ужесточить аудит-чек-лист** | Открыть § 17 (audit scorecard) → поднять веса или добавить пункты |
+| **Завести skill для новой поверхности** (email-цепочки, ads-copy, blog) | Создать новый файл `packages/harness/src/skills/<name>.md` по тому же шаблону + frontmatter (`name`, `description`) |
+
+### Что НЕ кладём в skills
+
+- **Контент конкретного бренда** → `content/briefs/<slug>.json`.
+- **TypeScript / схемы** → `packages/harness/src/schemas/`, `pipeline/`, `validators/`.
+- **Конфиги моделей / провайдеров** → `packages/harness/src/providers/`.
+- **Черновики и идеи** → `.context/` (gitignored).
+
+> Подробнее про устройство папки и связь skill ↔ schema → `packages/harness/src/skills/README.md`.
 
 ---
 

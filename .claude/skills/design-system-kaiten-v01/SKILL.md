@@ -7,6 +7,8 @@ description: Kaiten landing design system V01. Use when designing, reviewing, or
 
 Use this skill to keep Kaiten landing pages and UI components consistent with the studied Figma design system and landing prototype.
 
+Canonical source of truth: `design-system/kaiten-v01/` (HTML/PDF/PNG). This skill is a distilled extract — if anything conflicts, trust the source.
+
 ## Core Style
 
 Design calm B2B/SaaS interfaces: white surfaces, light-gray sections, real product UI screenshots, restrained typography, and violet as the single primary interaction color. Prefer product-led composition over decorative marketing layouts.

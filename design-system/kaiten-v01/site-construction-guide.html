@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Kaiten Design system - Руководство для создания сайта</title>
+  <style>
+    @page { size: 297mm 167.0625mm; margin: 0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, Roboto, Arial, system-ui, sans-serif; color: #2D2D2D; background: #fff; font-size: 9pt; line-height: 1.35; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 88pt; line-height: .9; letter-spacing: 0; color: #7D4CCF; font-weight: 800; }
+    h2 { font-size: 20pt; line-height: 1.14; margin-bottom: 16px; }
+    h3 { font-size: 12.5pt; margin: 0 0 8px; }
+    p, li { color: #6B7890; font-size: 10pt; }
+    a { color: #007AFF; text-decoration: none; font-weight: 700; }
+    code { font-family: Consolas, monospace; background: #F5F5F5; border-radius: 5px; padding: 1px 5px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 14px; overflow: hidden; border: 1px solid #E0E0E0; background: #fff; }
+    th, td { padding: 6px 8px; text-align: left; vertical-align: top; border-bottom: 1px solid #EEEEEE; }
+    td { font-size: 8.4pt; }
+    th { background: #F5F5F5; }
+    tr:last-child td { border-bottom: 0; }
+    table.compact th, table.compact td { padding: 3px 6px; font-size: 7.3pt; }
+    .page { position: relative; width: 297mm; height: 167.0625mm; overflow: hidden; break-after: page; padding: 10mm 18mm 8mm; background: #fff; }
+    .page:last-child { break-after: auto; }
+    .k-logo { display: flex; align-items: center; gap: 12px; color: #000; font-weight: 800; font-size: 17pt; }
+    .cover .k-logo { gap: 22px; font-size: 32pt; }
+    .cover .k-logo svg { width: 20mm; height: 20mm; }
+    .cover { padding: 18mm 20mm; background:
+      linear-gradient(105deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.96) 28%, rgba(239,248,255,.86) 50%, rgba(205,190,255,.88) 100%),
+      linear-gradient(0deg, rgba(255,255,255,.58) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.58) 1px, transparent 1px);
+      background-size: auto, 11mm 11mm, 11mm 11mm; }
+    .cover-content { height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .cover-title { margin-top: auto; margin-bottom: 16mm; }
+    .cover-subtitle { margin-top: 8mm; color: #2D2D2D; font-size: 28pt; font-weight: 800; }
+    .cover-meta { color:#757575; font-size: 10pt; }
+    .slide-header { display: flex; align-items: center; gap: 22px; margin-bottom: 6mm; }
+    .slide-header .k-logo svg { width: 9mm; height: 9mm; }
+    .slide-divider { width: 1px; height: 9mm; background: #BDBDBD; }
+    .slide-title { color: #2D2D2D; font-size: 15pt; }
+    .doc-layout { display: grid; grid-template-columns: 66mm 1fr; gap: 24px; align-items: stretch; height: 128mm; }
+    .doc-layout aside { padding: 12mm 0 0 4mm; }
+    .doc-layout aside p { max-width: 58mm; font-size: 11pt; }
+    .doc-layout main { border-radius: 18px; background: transparent; padding: 16px; overflow: hidden; }
+    .slide-foot { position: absolute; left: 18mm; bottom: 5mm; color: #9E9E9E; font-size: 6.5pt; }
+    .card { background: #fff; border: 1px solid #E0E0E0; border-radius: 14px; padding: 14px; }
+    .violet { background: #EFE9F9; border-color: #EFE9F9; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .swatch { display: inline-block; width: 22px; height: 22px; border: 1px solid #E0E0E0; border-radius: 7px; vertical-align: middle; }
+    .color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+    .color-card { display: grid; grid-template-columns: 40px 1fr; gap: 8px; align-items: center; min-height: 34px; padding: 5px 7px; border-radius: 10px; background: #fff; }
+    .color-card > span { width: 32px; height: 26px; border-radius: 7px; border: 1px solid rgba(0,0,0,.08); }
+    .color-card b { display: block; font-size: 7.6pt; }
+    .color-card small { margin-left: 8px; color: #757575; font-weight: 400; text-transform: uppercase; }
+    .color-card p { font-size: 7.1pt; }
+    .grid-panel { border-radius: 22px; background: transparent; padding: 14mm 18mm 10mm; height: 122mm; display: grid; grid-template-columns: 1.55fr .72fr .55fr; gap: 24px; align-items: center; }
+    .grid-device { text-align: center; color: #007AFF; }
+    .grid-device h3 { font-size: 19pt; color: #007AFF; font-weight: 500; }
+    .screen-label { margin: 12px 0 7px; font-size: 14pt; font-weight: 700; color: #007AFF; }
+    .diagram-screen { position: relative; margin: 0 auto; border: 1px solid #424242; background: #fff; height: 62mm; overflow: visible; }
+    .desktop-screen { width: 116mm; }
+    .tablet-screen { width: 48mm; }
+    .mobile-screen { width: 25mm; }
+    .diagram-grid { position: absolute; inset: 0; margin: 0 auto; height: 100%; display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: var(--gap); width: var(--grid-w); background: rgba(244,232,247,.78); }
+    .diagram-grid span:nth-child(odd) { background: rgba(244,232,247,.94); color: transparent; }
+    .diagram-grid span:nth-child(even) { background: rgba(197,225,250,.82); color: transparent; }
+    .grid-note { position: absolute; left: 50%; top: 26mm; transform: translateX(-50%); color: #007AFF; font-weight: 700; white-space: nowrap; }
+    .measure { position: absolute; color: #007AFF; font-weight: 700; font-size: 10pt; }
+    .control-pop { position:absolute; left:50%; top:34mm; transform:translateX(-50%); width:23mm; padding:4px; border-radius:6px; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.12); color:#757575; font-size:4.5pt; text-align:left; }
+    .control-pop b { display:block; color:#2D2D2D; margin-bottom:2px; font-size:4.7pt; }
+    .control-pop span { display:grid; grid-template-columns:1fr 1fr; gap:2px; border-top:1px solid #EEE; padding-top:2px; }
+    .space-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 12px; }
+    .space-item { display: grid; grid-template-columns: 38px 36px 1fr; align-items: center; gap: 8px; }
+    .space-item i { height: 8px; border-radius: 999px; background: #7D4CCF; }
+    .zone-board { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .zone-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .zone-surface { min-height: 28mm; border-radius: 14px; padding: 12px; font-size: 12pt; color: #2D2D2D; }
+    .gradient-wide { grid-column: 1 / -1; min-height: 24mm; border-radius: 14px; padding: 12px; display: flex; justify-content: space-between; align-items: end; }
+    .glow { grid-column: 1 / -1; min-height: 20mm; border-radius: 16px; background: radial-gradient(circle at 18% 70%, #DDF8FF 0%, transparent 32%), radial-gradient(circle at 76% 62%, #E8D8FF 0%, transparent 36%), #F8F8F8; }
+    .theme-row { display: grid; grid-template-columns: 90px 1fr 118px; gap: 16px; align-items: center; margin-bottom: 16px; }
+    .theme-pill { width: fit-content; padding: 7px 16px; border-radius: 999px; font-size: 14pt; color: #7D4CCF; background: #fff; }
+    .theme-pill.dark { color: #fff; background: #1B0F2D; }
+    .theme-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 62px; background: #fff; padding: 15px; }
+    .theme-preview.dark { background: #1B0F2D; color: #fff; }
+    .theme-preview p, .theme-mobile p { color: inherit; opacity: .72; font-size: 7.5pt; }
+    .theme-image { border-radius: 8px; background: linear-gradient(135deg, #C8D1CB, #F0B35A); min-height: 55px; }
+    .theme-mobile { padding: 12px; background: #fff; }
+    .theme-mobile.dark { background: #1B0F2D; color: #fff; }
+    .btn { display: inline-block; margin-top: 8px; padding: 5px 16px; border-radius: 4px; background: #7D4CCF; color: #fff; font-size: 7pt; }
+    .refs { display: grid; gap: 10px; }
+    .ref { padding: 11px 13px; border-radius: 14px; background: #fff; border: 1px solid #E0E0E0; }
+    .note { margin-top: 12px; padding: 11px; border-radius: 14px; background: #fff; color: #757575; }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="cover-content">
+      <div><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div></div>
+      <div class="cover-title"><h1>Design system</h1><p class="cover-subtitle">Руководство для создания сайта</p></div>
+      <div class="cover-meta">Kaiten Design system · обновлено: 15 мая 2026 г.</div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт / Модульные сетки и адаптация экранов</div></div>
+    <div class="grid-panel">
+      <div class="grid-device"><h3>Desktop</h3><div class="screen-label">1920</div><div class="diagram-screen desktop-screen"><div class="diagram-grid" style="--cols:12;--gap:7px;--grid-w:92mm"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div><div class="grid-note">Grid 12 column Center</div><div class="control-pop"><b>Columns</b><span><em>Count</em><strong>12</strong></span><span><em>Type</em><strong>Center</strong></span><span><em>Width</em><strong>72</strong></span><span><em>Gutter</em><strong>32</strong></span></div><div class="measure" style="left:20mm;top:36mm">72</div><div class="measure" style="left:27mm;top:36mm">32</div><div class="measure" style="left:50%;bottom:-12mm;transform:translateX(-50%)">1216 Fix center</div></div></div>
+      <div class="grid-device"><h3>Tablet</h3><div class="screen-label">768</div><div class="diagram-screen tablet-screen"><div class="diagram-grid" style="--cols:6;--gap:7px;--grid-w:43mm"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div><div class="grid-note">Grid 6 column Stretch</div><div class="control-pop"><b>Columns</b><span><em>Count</em><strong>6</strong></span><span><em>Type</em><strong>Stretch</strong></span><span><em>Margin</em><strong>24</strong></span><span><em>Gutter</em><strong>24</strong></span></div><div class="measure" style="left:5mm;top:38mm">24</div><div class="measure" style="left:15mm;top:38mm">~90</div><div class="measure" style="left:0;bottom:-7mm">24</div><div class="measure" style="right:0;bottom:-7mm">24</div></div></div>
+      <div class="grid-device"><h3>Mobile</h3><div class="screen-label">360</div><div class="diagram-screen mobile-screen"><div class="diagram-grid" style="--cols:4;--gap:5px;--grid-w:21mm"><span>1</span><span>2</span><span>3</span><span>4</span></div><div class="grid-note" style="font-size:5.8pt;line-height:1.05;white-space:normal;width:30mm">Grid 4 column<br/>Stretch</div><div class="control-pop" style="width:21mm;top:33mm"><b>Columns</b><span><em>Count</em><strong>4</strong></span><span><em>Type</em><strong>Stretch</strong></span><span><em>Margin</em><strong>16</strong></span><span><em>Gutter</em><strong>16</strong></span></div><div class="measure" style="left:0;bottom:-7mm">16</div><div class="measure" style="right:0;bottom:-7mm">16</div></div></div>
+    </div>
+    <div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div>
+  </section>
+
+  <section class="page">
+    <div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Айдентика / Цветовая палитра</div></div>
+    <div class="doc-layout"><aside><h2>Цветовая палитра</h2><p>Сиреневые и фиолетовые оттенки - основа визуальной идентичности Kaiten. Они используются как фоновые подложки, акцентные блоки и композиционные элементы интерфейса.</p></aside>
+    <main><h2>Основная цветовая палитра</h2><div class="color-grid">
+      <div class="color-card"><span style="background:#7D4CCF"></span><div><b>VIOLET 100</b><small>бренд / типографика</small><p>HEX: 7D4CCF · RGB: 125 76 207</p></div></div>
+      <div class="color-card"><span style="background:#B996E1"></span><div><b>VIOLET 48</b><p>HEX: B996E1 · RGB: 185 150 225</p></div></div>
+      <div class="color-card"><span style="background:#D8C8EF"></span><div><b>VIOLET 24</b><p>HEX: D8C8EF · RGB: 216 200 239</p></div></div>
+      <div class="color-card"><span style="background:#EFE9F9"></span><div><b>VIOLET 12</b><p>HEX: EFE9F9 · RGB: 239 233 249</p></div></div>
+      <div class="color-card"><span style="background:#F11F24"></span><div><b>LOGO RED</b><p>HEX: F11F24 · RGB: 241 31 36</p></div></div>
+      <div class="color-card"><span style="background:#78FFC7"></span><div><b>LOGO LIGHT GREEN</b><p>HEX: 78FFC7 · RGB: 120 255 199</p></div></div>
+    </div><p class="note"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8710-3988&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: основная палитра</a></p></main></div>
+    <div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div>
+  </section>
+
+  <section class="page">
+    <div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Айдентика / Цветовая палитра</div></div>
+    <div class="doc-layout"><aside><h2>Дополнительная палитра</h2><p>Акцентные цвета применяются для иллюстраций, графиков, диаграмм, статусов и отдельных UX-сценариев. Акцент не должен ломать структуру и читаемость.</p></aside>
+    <main><h2>Дополнительная палитра</h2><div class="color-grid">
+      <div class="color-card"><span style="background:#AB47BD"></span><div><b>PURPLE 100</b><p>HEX: AB47BD · RGB: 171 71 189</p></div></div> <div class="color-card"><span style="background:#F4E8F7"></span><div><b>PURPLE 12</b><p>HEX: F4E8F7 · RGB: 244 232 247</p></div></div>
+      <div class="color-card"><span style="background:#2196F3"></span><div><b>BLUE 100</b><p>HEX: 2196F3 · RGB: 33 150 243</p></div></div> <div class="color-card"><span style="background:#E4F2FD"></span><div><b>BLUE 12</b><p>HEX: E4F2FD · RGB: 228 242 253</p></div></div>
+      <div class="color-card"><span style="background:#4CAF51"></span><div><b>GREEN 100</b><p>HEX: 4CAF51 · RGB: 76 175 81</p></div></div> <div class="color-card"><span style="background:#E9F5EA"></span><div><b>GREEN 12</b><p>HEX: E9F5EA · RGB: 233 245 234</p></div></div>
+      <div class="color-card"><span style="background:#A5CA00"></span><div><b>LIME 100</b><p>HEX: A5CA00 · RGB: 165 202 0</p></div></div> <div class="color-card"><span style="background:#F4F8E0"></span><div><b>LIME 12</b><p>HEX: F4F8E0 · RGB: 244 248 224</p></div></div>
+      <div class="color-card"><span style="background:#FFA100"></span><div><b>ORANGE 100</b><p>HEX: FFA100 · RGB: 255 161 0</p></div></div> <div class="color-card"><span style="background:#FFF3E0"></span><div><b>ORANGE 12</b><p>HEX: FFF3E0 · RGB: 255 243 224</p></div></div>
+      <div class="color-card"><span style="background:#F44336"></span><div><b>RED 100</b><p>HEX: F44336 · RGB: 244 67 54</p></div></div> <div class="color-card"><span style="background:#FDE8E6"></span><div><b>RED 12</b><p>HEX: FDE8E6 · RGB: 253 232 230</p></div></div>
+    </div><p class="note"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8706-3623&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: дополнительная палитра</a></p></main></div>
+    <div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div>
+  </section>
+
+  <section class="page">
+    <div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Айдентика / Цветовая палитра</div></div>
+    <div class="doc-layout"><aside><h2>Нейтральная палитра</h2><p>Нейтральные цвета обеспечивают читаемость, иерархию, фоны секций, разделители, бордеры и спокойные состояния компонентов.</p></aside>
+    <main><h2>Нейтральная палитра</h2><div class="color-grid"><div class="color-card"><span style="background:#FFFFFF"></span><div><b>neutral-000</b><small>Фон страницы, карточки, белые секции</small><p>HEX: FFFFFF · RGB: 255 255 255</p></div></div><div class="color-card"><span style="background:#FAFAFA"></span><div><b>neutral-050</b><small>Очень легкие поверхности</small><p>HEX: FAFAFA · RGB: 250 250 250</p></div></div><div class="color-card"><span style="background:#F5F5F5"></span><div><b>neutral-100</b><small>Фон секций и большие серые панели</small><p>HEX: F5F5F5 · RGB: 245 245 245</p></div></div><div class="color-card"><span style="background:#EEEEEE"></span><div><b>neutral-200</b><small>Подложки и спокойные разделители</small><p>HEX: EEEEEE · RGB: 238 238 238</p></div></div><div class="color-card"><span style="background:#E0E0E0"></span><div><b>neutral-300</b><small>Stroke, divider, границы карточек</small><p>HEX: E0E0E0 · RGB: 224 224 224</p></div></div><div class="color-card"><span style="background:#BDBDBD"></span><div><b>neutral-400</b><small>Вторичные границы и disabled-border</small><p>HEX: BDBDBD · RGB: 189 189 189</p></div></div><div class="color-card"><span style="background:#9E9E9E"></span><div><b>neutral-500</b><small>Disabled text/icons</small><p>HEX: 9E9E9E · RGB: 158 158 158</p></div></div><div class="color-card"><span style="background:#757575"></span><div><b>neutral-600</b><small>Body text, caption, secondary text</small><p>HEX: 757575 · RGB: 117 117 117</p></div></div><div class="color-card"><span style="background:#616161"></span><div><b>neutral-700</b><small>Навигация и плотная вторичная иерархия</small><p>HEX: 616161 · RGB: 97 97 97</p></div></div><div class="color-card"><span style="background:#424242"></span><div><b>neutral-800</b><small>Subhead, strong secondary</small><p>HEX: 424242 · RGB: 66 66 66</p></div></div><div class="color-card"><span style="background:#2D2D2D"></span><div><b>neutral-900</b><small>Primary text, headings</small><p>HEX: 2D2D2D · RGB: 45 45 45</p></div></div><div class="color-card"><span style="background:#121212"></span><div><b>neutral-950</b><small>Темные CTA-секции</small><p>HEX: 121212 · RGB: 18 18 18</p></div></div></div><p class="note"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8710-5087&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: нейтральная палитра</a></p></main></div>
+    <div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div>
+  </section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Актуальные токены: нейтральные</h2><p>Нейтральные токены задают основной каркас страницы: фоны, текстовую иерархию, разделители, бордеры и темные CTA-секции.</p></aside><main>
+    <table class="compact"><thead><tr><th></th><th>Token</th><th>HEX</th><th>Usage</th></tr></thead><tbody><tr><td><span class="swatch" style="background:#FFFFFF"></span></td><td><code>neutral-000</code></td><td><b>#FFFFFF</b></td><td>Фон страницы, карточки, белые секции</td></tr><tr><td><span class="swatch" style="background:#FAFAFA"></span></td><td><code>neutral-050</code></td><td><b>#FAFAFA</b></td><td>Очень легкие поверхности</td></tr><tr><td><span class="swatch" style="background:#F5F5F5"></span></td><td><code>neutral-100</code></td><td><b>#F5F5F5</b></td><td>Фон секций и большие серые панели</td></tr><tr><td><span class="swatch" style="background:#EEEEEE"></span></td><td><code>neutral-200</code></td><td><b>#EEEEEE</b></td><td>Подложки и спокойные разделители</td></tr><tr><td><span class="swatch" style="background:#E0E0E0"></span></td><td><code>neutral-300</code></td><td><b>#E0E0E0</b></td><td>Stroke, divider, границы карточек</td></tr><tr><td><span class="swatch" style="background:#BDBDBD"></span></td><td><code>neutral-400</code></td><td><b>#BDBDBD</b></td><td>Вторичные границы и disabled-border</td></tr><tr><td><span class="swatch" style="background:#9E9E9E"></span></td><td><code>neutral-500</code></td><td><b>#9E9E9E</b></td><td>Disabled text/icons</td></tr><tr><td><span class="swatch" style="background:#757575"></span></td><td><code>neutral-600</code></td><td><b>#757575</b></td><td>Body text, caption, secondary text</td></tr><tr><td><span class="swatch" style="background:#616161"></span></td><td><code>neutral-700</code></td><td><b>#616161</b></td><td>Навигация и плотная вторичная иерархия</td></tr><tr><td><span class="swatch" style="background:#424242"></span></td><td><code>neutral-800</code></td><td><b>#424242</b></td><td>Subhead, strong secondary</td></tr><tr><td><span class="swatch" style="background:#2D2D2D"></span></td><td><code>neutral-900</code></td><td><b>#2D2D2D</b></td><td>Primary text, headings</td></tr><tr><td><span class="swatch" style="background:#121212"></span></td><td><code>neutral-950</code></td><td><b>#121212</b></td><td>Темные CTA-секции</td></tr></tbody></table>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Актуальные токены: акценты</h2><p>Акцентные токены применяются дозированно: для CTA, ссылок, active/focus-состояний, статусов, графиков, иллюстраций и мягких цветных подложек.</p></aside><main>
+    <table class="compact"><thead><tr><th></th><th>Token</th><th>HEX</th><th>Usage</th></tr></thead><tbody><tr><td><span class="swatch" style="background:#7D4CCF"></span></td><td><code>violet-100</code></td><td><b>#7D4CCF</b></td><td>Primary CTA, links, active, focus</td></tr><tr><td><span class="swatch" style="background:#EFE9F9"></span></td><td><code>violet-12</code></td><td><b>#EFE9F9</b></td><td>Soft brand surface</td></tr><tr><td><span class="swatch" style="background:#AB47BD"></span></td><td><code>purple-100</code></td><td><b>#AB47BD</b></td><td>Дополнительный акцент</td></tr><tr><td><span class="swatch" style="background:#F4E8F7"></span></td><td><code>purple-12</code></td><td><b>#F4E8F7</b></td><td>Soft purple surface</td></tr><tr><td><span class="swatch" style="background:#2196F3"></span></td><td><code>blue-100</code></td><td><b>#2196F3</b></td><td>Информационные акценты</td></tr><tr><td><span class="swatch" style="background:#E4F2FD"></span></td><td><code>blue-12</code></td><td><b>#E4F2FD</b></td><td>Soft info surface</td></tr><tr><td><span class="swatch" style="background:#4CAF51"></span></td><td><code>green-100</code></td><td><b>#4CAF51</b></td><td>Success / SLA ok</td></tr><tr><td><span class="swatch" style="background:#E9F5EA"></span></td><td><code>green-12</code></td><td><b>#E9F5EA</b></td><td>Soft success surface</td></tr><tr><td><span class="swatch" style="background:#A5CA00"></span></td><td><code>lime-100</code></td><td><b>#A5CA00</b></td><td>Графики и диаграммы</td></tr><tr><td><span class="swatch" style="background:#F4F8E0"></span></td><td><code>lime-12</code></td><td><b>#F4F8E0</b></td><td>Soft lime surface</td></tr><tr><td><span class="swatch" style="background:#FFA100"></span></td><td><code>orange-100</code></td><td><b>#FFA100</b></td><td>Warning / process accent</td></tr><tr><td><span class="swatch" style="background:#FFF3E0"></span></td><td><code>orange-12</code></td><td><b>#FFF3E0</b></td><td>Soft warning surface</td></tr><tr><td><span class="swatch" style="background:#F44336"></span></td><td><code>red-100</code></td><td><b>#F44336</b></td><td>Error / risk accent</td></tr><tr><td><span class="swatch" style="background:#FDE8E6"></span></td><td><code>red-12</code></td><td><b>#FDE8E6</b></td><td>Soft error surface</td></tr></tbody></table>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Типографика</h2><p>Основной шрифт для сайта - Inter, Roboto или системный sans-serif. В макетах использовать Regular, Medium и SemiBold. Типографическая шкала должна сохраняться на всех breakpoint.</p></aside><main>
+    <table><thead><tr><th>Token</th><th>Size</th><th>Line-height</th><th>Usage</th></tr></thead><tbody><tr><td><code>text-xs</code></td><td>12px</td><td>16px</td><td>Caption, labels, meta</td></tr><tr><td><code>text-sm</code></td><td>14px</td><td>20px</td><td>Nav, badges, compact UI</td></tr><tr><td><code>text-md</code></td><td>16px</td><td>24px</td><td>Body, buttons</td></tr><tr><td><code>text-lg</code></td><td>18px</td><td>28px</td><td>Lead text</td></tr><tr><td><code>text-xl</code></td><td>20px</td><td>28px</td><td>Card title</td></tr><tr><td><code>text-2xl</code></td><td>24px</td><td>32px</td><td>H3 / feature titles</td></tr><tr><td><code>text-3xl</code></td><td>30px</td><td>36px</td><td>Mobile hero, compact H2</td></tr><tr><td><code>text-4xl</code></td><td>36px</td><td>40px</td><td>Section heading</td></tr><tr><td><code>text-5xl</code></td><td>48px</td><td>52px</td><td>Desktop hero / CTA heading</td></tr><tr><td><code>text-6xl</code></td><td>60px</td><td>64px</td><td>Large desktop hero</td></tr></tbody></table>
+    <div class="two" style="margin-top:12px"><div class="card"><h3>Desktop</h3><p>Hero: text-5xl или text-6xl. Секционные заголовки: text-4xl. Body: text-md/text-lg.</p></div><div class="card"><h3>Mobile</h3><p>Hero: text-3xl. Заголовки секций: text-2xl/text-3xl. Body: text-md.</p></div></div>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Сетка и адаптив</h2><p>Сетка определяет, где стоит контент, как он переходит между desktop, tablet и mobile, и почему секции выглядят единообразно.</p></aside><main>
+    <div class="three">
+      <div class="card"><h3>Desktop</h3><p>Frame 1920. Container 1216. 12 columns. Column 72. Gutter 32. Outer margins 248.</p></div>
+      <div class="card"><h3>Tablet</h3><p>Frame 768. 6 columns. Column около 100. Gutter 24. Side margins 24.</p></div>
+      <div class="card"><h3>Mobile</h3><p>Frame 360. 4 columns. Column 70. Gutter 16. Side margins 16.</p></div>
+    </div>
+    <div class="refs" style="margin-top:14px">
+      <div class="ref"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1822&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: правила модульной сетки</a></div>
+      <div class="ref"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8468-5733&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: адаптивные секции</a></div>
+    </div>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт / Зонирование</div></div><div class="doc-layout"><aside><h2>Зонирование: фон и плашки</h2><p>Зонирование помогает отделять смысловые области лендинга: рабочие блоки, акцентные секции, градиентные баннеры и полноэкранные подложки.</p></aside><main>
+    <div class="zone-board">
+      <div class="zone-row">
+        <div class="zone-surface" style="background:#F5F5F5"><b>Фон 1</b><br/>Grey 100 Bg</div>
+        <div class="zone-surface" style="background:#fff;border:1px solid #D9D9D9"><b>Фон 2</b><br/>White Bg</div>
+      </div>
+      <div class="zone-row">
+        <div class="zone-surface" style="background:#EFE9F9"><b>Акцент 1</b><br/>Violet 12 Bg</div>
+        <div class="zone-surface" style="background:#E4F2FD"><b>Акцент 2</b><br/>Blue Bg 12</div>
+      </div>
+      <div class="gradient-wide" style="background:linear-gradient(100deg,#EFE9F9,#E4F2FD)"><span>Gradient Light</span><span>EFE9F9 → E4F2FD</span></div>
+      <div class="gradient-wide" style="background:linear-gradient(100deg,#E7DFF6,#D7ECFD)"><span>Gradient Medium</span><span>E7DFF6 → D7ECFD</span></div>
+      <div class="glow"></div>
+    </div>
+    <p class="note"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8921-8767&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: зонирование, фон и плашки</a></p>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Отступы и вертикальный ритм</h2><p>Spacing строится на шкале 4px и записывается как token / px: например, 12/48. Это помогает методично собирать лендинг без ручной подгонки.</p></aside><main>
+    <div class="space-list"><div class="space-item"><i style="width:12px"></i><code>0</code><span>0px</span></div><div class="space-item"><i style="width:12px"></i><code>0.5</code><span>2px</span></div><div class="space-item"><i style="width:12px"></i><code>1</code><span>4px</span></div><div class="space-item"><i style="width:12px"></i><code>1.5</code><span>6px</span></div><div class="space-item"><i style="width:12px"></i><code>2</code><span>8px</span></div><div class="space-item"><i style="width:14px"></i><code>2.5</code><span>10px</span></div><div class="space-item"><i style="width:16.799999999999997px"></i><code>3</code><span>12px</span></div><div class="space-item"><i style="width:19.599999999999998px"></i><code>3.5</code><span>14px</span></div><div class="space-item"><i style="width:22.4px"></i><code>4</code><span>16px</span></div><div class="space-item"><i style="width:28px"></i><code>5</code><span>20px</span></div><div class="space-item"><i style="width:33.599999999999994px"></i><code>6</code><span>24px</span></div><div class="space-item"><i style="width:39.199999999999996px"></i><code>7</code><span>28px</span></div><div class="space-item"><i style="width:44.8px"></i><code>8</code><span>32px</span></div><div class="space-item"><i style="width:50.4px"></i><code>9</code><span>36px</span></div><div class="space-item"><i style="width:56px"></i><code>10</code><span>40px</span></div><div class="space-item"><i style="width:61.599999999999994px"></i><code>11</code><span>44px</span></div><div class="space-item"><i style="width:67.19999999999999px"></i><code>12</code><span>48px</span></div><div class="space-item"><i style="width:78.39999999999999px"></i><code>14</code><span>56px</span></div><div class="space-item"><i style="width:89.6px"></i><code>16</code><span>64px</span></div><div class="space-item"><i style="width:112px"></i><code>20</code><span>80px</span></div><div class="space-item"><i style="width:134.39999999999998px"></i><code>24</code><span>96px</span></div></div>
+    <table style="margin-top:12px"><thead><tr><th>Правило</th><th>Desktop</th><th>Tablet / Mobile</th><th>Как применять</th></tr></thead><tbody>
+      <tr><td>Header height</td><td>80px</td><td>72px</td><td>Фиксированная высота верхнего меню.</td></tr>
+      <tr><td>Text stack</td><td>4/16</td><td>3/12</td><td>Близкие строки и элементы одной мысли.</td></tr>
+      <tr><td>Text → CTA</td><td>6/24</td><td>6/24</td><td>Расстояние от текста до кнопки.</td></tr>
+      <tr><td>Content → media</td><td>12/48 или 16/64</td><td>8/32 или 12/48</td><td>Воздух перед видео, product UI или крупной карточкой.</td></tr>
+      <tr><td>Grid step</td><td>32</td><td>24 / 16</td><td>Между равнозначными карточками.</td></tr>
+      <tr><td>Section Y</td><td>20/80 или 24/96</td><td>9/36 или 12/48</td><td>Вертикальный ритм между секциями.</td></tr>
+    </tbody></table>
+    <p class="note"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1699&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: отступы и вертикальный ритм</a></p>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>UI-кит: компоненты</h2><p>Компоненты должны переиспользоваться из мастер-файла, сохранять auto layout, состояния и адаптивное поведение. С нуля собирать только то, чего нет в библиотеке.</p></aside><main>
+    <div class="three">
+      <div class="card"><h3>Button / Fill</h3><p>Height: sm 40, md 44, lg 48. Radius 8. Fill #7D4CCF. Hover #6F43B8. Text white, Medium.</p></div>
+      <div class="card"><h3>Button / Outline</h3><p>White fill, neutral-300 stroke. Hover: violet-12 surface and violet border. Text #7D4CCF.</p></div>
+      <div class="card"><h3>Card</h3><p>Radius 16/24. Fill white or neutral-100. Stroke neutral-300. Padding 24/32/40 by density.</p></div>
+      <div class="card"><h3>FAQ</h3><p>Closed: neutral title/stroke plus icon. Open: violet title/stroke and visible answer body.</p></div>
+      <div class="card"><h3>Product UI preview</h3><p>Показывать доски, карточки, комментарии, аналитику, документы. Никаких абстрактных mockup-блоков.</p></div>
+      <div class="card"><h3>Header / Footer</h3><p>Header 80 desktop / 72 mobile. Desktop: logo, nav, actions. Mobile: logo + menu.</p></div>
+    </div>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page">
+    <div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт / Темы компонентов дизайн-системы</div></div>
+    <div class="doc-layout"><aside><h2>Темы компонентов дизайн-системы</h2><p><b>Light</b> - базовая тема рабочих интерфейсов. <b>Dark</b> - ситуативная тема для промо-блоков, премиум-проектов, вебинаров и контрастных CTA.</p><p style="margin-top:14px"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8453-3240&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: темы компонентов</a></p></aside>
+    <main>
+      <div class="theme-row"><div class="theme-pill">Light</div><div class="theme-preview"><div><h3>Заголовок</h3><p>Светлая тема для рабочих областей, форм, списков и навигации.</p><span class="btn">Кнопка главная</span></div><div class="theme-image"></div></div><div class="theme-mobile"><h3>Заголовок</h3><p>Компактная карточка.</p><span class="btn">Кнопка</span><div class="theme-image"></div></div></div>
+      <div class="theme-row"><div class="theme-pill dark">Dark</div><div class="theme-preview dark"><div><h3>Заголовок</h3><p>Темная тема для отдельных смысловых пространств и промо-секций.</p><span class="btn">Кнопка главная</span></div><div class="theme-image"></div></div><div class="theme-mobile dark"><h3>Заголовок</h3><p>Компактная карточка.</p><span class="btn">Кнопка</span><div class="theme-image"></div></div></div>
+    </main></div>
+    <div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div>
+  </section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Мастер-компоненты лендинга</h2><p>Мастер-компоненты для лендингов хранятся в файле Landing-DS. При создании нового сайта сначала брать готовые компоненты оттуда: header, hero, CTA, карточки, FAQ, footer, продуктовые блоки и адаптивные варианты.</p></aside><main>
+    <div class="two"><div class="card violet"><h3>Правило использования</h3><ul><li>Не пересобирать компоненты с нуля, если в Landing-DS есть подходящий мастер.</li><li>Сохранять auto layout, состояния и responsive-поведение.</li><li>Менять контент и композицию только в рамках токенов.</li><li>Если нужен новый вариант, сначала проверить существующие variants.</li></ul></div><div class="card"><h3>Источник компонентов</h3><p><a href="https://www.figma.com/design/6M8lLx2PgVTxwXMeRiOVH4/Landing-DS?node-id=1557-8303&t=4UKjcfcKR7Udd1D7-1">Открыть Figma: компоненты для сборки сайта</a></p><p><a href="https://www.figma.com/design/6M8lLx2PgVTxwXMeRiOVH4/Landing-DS?node-id=733-8813&t=4UKjcfcKR7Udd1D7-1">Открыть Figma: пример сверстанного лендинга</a></p></div></div>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>Структура лендинга</h2><p>Страница собирается из повторяемых секций. Важно сохранять смысловую роль каждого блока, а не только визуально копировать композицию.</p></aside><main>
+    <table><thead><tr><th>Секция</th><th>Роль</th><th>Компоненты</th><th>Поведение</th></tr></thead><tbody>
+      <tr><td>Header</td><td>Навигация</td><td>Logo, nav, actions</td><td>80 desktop / 72 mobile</td></tr>
+      <tr><td>Hero</td><td>Главное обещание</td><td>H1, lead, CTA, product visual</td><td>Первый экран должен показать продуктовый сигнал</td></tr>
+      <tr><td>Benefits</td><td>Ценность продукта</td><td>Cards, icons, short copy</td><td>2x2 / 3 cols → stack mobile</td></tr>
+      <tr><td>Workflow</td><td>Как работает</td><td>Steps, timeline, visual</td><td>Нумерация, badges, понятный flow</td></tr>
+      <tr><td>CTA</td><td>Конверсия</td><td>Headline, lead, primary button</td><td>Dark или violet-soft band</td></tr>
+      <tr><td>FAQ</td><td>Снятие возражений</td><td>Accordion rows</td><td>Open/closed states</td></tr>
+      <tr><td>Footer</td><td>Завершение</td><td>Logo, links, contacts</td><td>Не превращать в маркетинговый блок</td></tr>
+    </tbody></table>
+    <p class="note"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1538&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: правила секций лендинга</a></p>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+
+  <section class="page doc-page"><div class="slide-header"><div class="k-logo" aria-label="Kaiten">
+    <svg viewBox="0 0 104 104" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8261C0 91.8338 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8338 104 76.8261V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24"/>
+      <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7"/>
+      <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF"/>
+    </svg>
+    <span>Kaiten</span>
+  </div><div class="slide-divider"></div><div class="slide-title">Сайт /</div></div><div class="doc-layout"><aside><h2>QA перед передачей в верстку</h2><p>Перед финалом проверить, что лендинг не просто похож на Kaiten, а собран по токенам, сеткам, spacing и компонентам дизайн-системы.</p></aside><main>
+    <div class="two"><div class="card"><h3>Проверка дизайна</h3><ul><li>Desktop, tablet и mobile используют правильные сетки.</li><li>Все цвета взяты из палитры DS.</li><li>Violet используется как акцент, а не как заливка всего интерфейса.</li><li>Типографика следует шкале text-xs ... text-6xl.</li><li>Spacing кратен 4px и соответствует правилам вертикального ритма.</li></ul></div><div class="card"><h3>Проверка компонентов</h3><ul><li>Кнопки соответствуют размерам и состояниям.</li><li>Карточки имеют единый radius, padding и border.</li><li>FAQ open/closed states различимы.</li><li>Product UI preview объясняет сценарий.</li><li>На mobile нет текста, который требует зума.</li></ul></div></div>
+    <div class="refs" style="margin-top:14px"><div class="ref"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8324-3931&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: дополнительные правила сайта</a></div><div class="ref"><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8468-5733&t=EGB0UGDMqKBL3Tw5-4">Открыть Figma: адаптивные секции</a></div></div>
+  </main></div><div class="slide-foot"><span>Kaiten Design system - Руководство для создания сайта</span></div></section>
+</body>
+</html>

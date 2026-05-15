@@ -2,9 +2,10 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { describeRegistry } from '../registry/index.js';
-import { findRepoRoot, loadDesignSystem } from '../wiki/load-design-system.js';
+import { findRepoRoot, loadDesignSystem as loadDesignSystemPages } from '../wiki/load-design-system.js';
 import { selectContext } from '../wiki/select-context.js';
 import type { Brief } from '../schemas/brief.js';
+import type { IllustrationSpec } from '../schemas/illustration-spec.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,66 +19,108 @@ export interface BuildSystemPromptResult {
 
 export interface BuildSystemPromptOptions {
   /**
-   * Если передан — собираем контекст селективно по archetype/audience/goal.
-   * Если не передан — fallback на полный wiki/design-system/*.md (М2-режим).
+   * Если передан — собираем контекст селективно по archetype/audience/goal (stage-8 M4a).
+   * Если не передан — fallback на полный wiki/design-system/*.md.
    */
   brief?: Brief;
-  /** Force `--all`: грузим весь DS даже при наличии brief (для отладки и сравнения). */
+  /** Force full DS даже при наличии brief — для отладки и сравнения промптов. */
   fullContext?: boolean;
 }
 
+async function loadLegacyDesignSystem(): Promise<string> {
+  const dsPath = resolve(__dirname, 'design-system-kaiten.md');
+  return readFile(dsPath, 'utf-8').catch(() => '(design system not loaded)');
+}
+
+async function loadConversionLandingSkill(): Promise<string> {
+  const skillPath = resolve(__dirname, '../skills/conversion-landing.md');
+  return readFile(skillPath, 'utf-8').catch(() => '');
+}
+
+async function loadIllustrationSkill(): Promise<string> {
+  const path = resolve(__dirname, 'svg-illustration-skill.md');
+  return readFile(path, 'utf-8').catch(() => '(svg illustration skill not loaded)');
+}
+
 /**
- * Собирает system prompt для LLM-генерации LandingSpec.
+ * Внутренняя функция — собирает контент и список sources.
  *
- * Режимы:
- *   1. **Selective (M4a, default при brief).** Грузит только relevant pages из wiki/
- *      по archetype/audience/components. Экономия ~50-70% токенов.
- *   2. **Full (M2 fallback).** Грузит все wiki/design-system/*.md, без archetype-фильтра.
- *      Используется когда brief не передан или fullContext=true.
- *   3. **Legacy fallback.** Если wiki/design-system/ пуст — читает старый
- *      packages/harness/src/prompts/design-system-kaiten.md.
+ * Режимы (по убыванию приоритета):
+ *   1. Selective (stage-8 M4a). При наличии brief и без fullContext — селективная
+ *      сборка через selectContext (по archetype/audience/components).
+ *   2. Full wiki. wiki/design-system/*.md + опционально conversion-landing.md.
+ *   3. Legacy fallback. packages/harness/src/prompts/design-system-kaiten.md +
+ *      conversion-landing.md (при отсутствии wiki/).
+ */
+async function composeDesignSystemBlock(options: BuildSystemPromptOptions): Promise<{
+  body: string;
+  sources: string[];
+  archetype?: string;
+  tokenEstimate?: number;
+}> {
+  const repoRoot = await findRepoRoot(__dirname);
+
+  // 1. Селективный режим
+  if (options.brief && !options.fullContext) {
+    const selected = await selectContext(repoRoot, options.brief);
+    if (selected.body.trim()) {
+      return {
+        body: selected.body,
+        sources: selected.sources,
+        archetype: selected.archetype,
+        tokenEstimate: selected.tokenEstimate,
+      };
+    }
+  }
+
+  // 2. Full wiki + conversion-landing
+  const wikiDS = await loadDesignSystemPages(repoRoot);
+  if (wikiDS.body.trim()) {
+    const conversionLanding = await loadConversionLandingSkill();
+    const blocks: string[] = [wikiDS.body];
+    const sources = [...wikiDS.sources];
+    if (conversionLanding.trim()) {
+      blocks.push(conversionLanding);
+      sources.push('packages/harness/src/skills/conversion-landing.md');
+    }
+    return { body: blocks.join('\n\n---\n\n'), sources };
+  }
+
+  // 3. Legacy fallback
+  const legacyDS = await loadLegacyDesignSystem();
+  const conversionLanding = await loadConversionLandingSkill();
+  const blocks: string[] = [legacyDS];
+  const sources = ['packages/harness/src/prompts/design-system-kaiten.md (legacy)'];
+  if (conversionLanding.trim()) {
+    blocks.push(conversionLanding);
+    sources.push('packages/harness/src/skills/conversion-landing.md');
+  }
+  return { body: blocks.join('\n\n---\n\n'), sources };
+}
+
+/**
+ * Собирает system prompt для LLM-генерации LandingSpec (backwards-compatible API).
  *
- * Возвращает { system, sources, archetype?, tokenEstimate? } — sources используется
- * для `meta.sources` в LandingSpec и filing back (M4b).
+ * Возвращает только строку — для stage-4 repair-loop и любых других callers,
+ * которые не нуждаются в metadata (sources, archetype, tokenEstimate).
+ *
+ * Для filing back и token-tracking используй `buildLandingSystemPromptWithMeta`.
  */
 export async function buildLandingSystemPrompt(
   options: BuildSystemPromptOptions = {},
+): Promise<string> {
+  const { system } = await buildLandingSystemPromptWithMeta(options);
+  return system;
+}
+
+/**
+ * Расширенная версия `buildLandingSystemPrompt` (stage-8): возвращает system + sources.
+ * Используется в `generateLandingSpecWithLLMResult` для filing back в wiki/landings/<slug>.md.
+ */
+export async function buildLandingSystemPromptWithMeta(
+  options: BuildSystemPromptOptions = {},
 ): Promise<BuildSystemPromptResult> {
-  const repoRoot = await findRepoRoot(__dirname);
-
-  let dsBody = '';
-  let dsSources: string[] = [];
-  let archetype: string | undefined;
-  let tokenEstimate: number | undefined;
-
-  if (options.brief && !options.fullContext) {
-    // M4a: селективный контекст
-    const selected = await selectContext(repoRoot, options.brief);
-    dsBody = selected.body;
-    dsSources = selected.sources;
-    archetype = selected.archetype;
-    tokenEstimate = selected.tokenEstimate;
-  }
-
-  if (!dsBody.trim()) {
-    // M2 fallback: полный wiki/design-system/*.md
-    const loaded = await loadDesignSystem(repoRoot);
-    dsBody = loaded.body;
-    dsSources = loaded.sources;
-  }
-
-  if (!dsBody.trim()) {
-    // Legacy fallback на pre-M2 монолит
-    const fallbackPath = resolve(__dirname, 'design-system-kaiten.md');
-    const fallback = await readFile(fallbackPath, 'utf-8').catch(() => '');
-    if (fallback) {
-      dsBody = fallback;
-      dsSources = ['packages/harness/src/prompts/design-system-kaiten.md (legacy fallback)'];
-    } else {
-      dsBody = '(design system not loaded)';
-      dsSources = [];
-    }
-  }
+  const ds = await composeDesignSystemBlock(options);
 
   const system = `You are a senior product copywriter and UI architect operating inside a controlled harness for generating SaaS landing pages.
 
@@ -92,6 +135,7 @@ Your job is NOT to invent layouts or copy from scratch — you ASSEMBLE a landin
 - One primary CTA per page that matches the brief's goal.
 - Hero section must be the first section.
 - Match the brand voice from \`wiki/design-system/voice.md\` (see below). Banned hype words are listed there — never use them.
+- Follow the conversion-landing skill (if present below) for page-type structure, awareness-aware H1 formulas, Feature → Benefit Transformation, CTA hierarchy, social proof rules, and anti-patterns. The skill is your contract — sections, copy and order should match it for the chosen page type.
 
 ## Component registry (allowed components only)
 
@@ -99,15 +143,20 @@ Your job is NOT to invent layouts or copy from scratch — you ASSEMBLE a landin
 ${describeRegistry()}
 \`\`\`
 
-## Kaiten V01 design system + archetype rules
+## Kaiten V01 design system + archetype rules + conversion-landing skill
 
-${dsBody}
+${ds.body}
 
 ## Output
 
 Return ONE JSON object that strictly matches the LandingSpec schema provided by the runtime. No text before or after.`;
 
-  return { system, sources: dsSources, archetype, tokenEstimate };
+  return {
+    system,
+    sources: ds.sources,
+    archetype: ds.archetype,
+    tokenEstimate: ds.tokenEstimate,
+  };
 }
 
 export function buildBriefPrompt(briefJson: string): string {
@@ -118,4 +167,38 @@ ${briefJson}
 \`\`\`
 
 Generate the LandingSpec now.`;
+}
+
+/**
+ * Этап 3: system prompt для генерации TSX SVG-иллюстрации по IllustrationSpec.
+ * Skill-инструкция (правила, AST-чек-лист) + Kaiten DS для палитры и стиля.
+ */
+export async function buildIllustrationSystemPrompt(): Promise<string> {
+  const [skill, designSystem] = await Promise.all([
+    loadIllustrationSkill(),
+    loadLegacyDesignSystem(),
+  ]);
+
+  return `You are a senior frontend illustrator operating inside a deterministic build pipeline. You generate ONE TSX file containing a React SVG hero illustration matching a strict IllustrationSpec. Downstream, an AST validator checks your output — any rule violation fails the build and triggers repair.
+
+${skill}
+
+## Kaiten V01 design system (palette, neutrals, brand voice)
+
+${designSystem}
+
+## Output
+
+Return ONLY the TSX file content. No markdown fences, no commentary. Start with the AUTO-GENERATED comment line.`;
+}
+
+export function buildIllustrationUserPrompt(spec: IllustrationSpec): string {
+  return `IllustrationSpec to render:
+
+\`\`\`json
+${JSON.stringify(spec, null, 2)}
+\`\`\`
+
+Component id: \`${spec.id}\` → use PascalCase for the default-export function name.
+Generate the TSX now.`;
 }

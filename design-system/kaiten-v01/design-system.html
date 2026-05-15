@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)file:///C:/Users/mi/Documents/New%20project/Claud/kaiten_ds_pdf/kaiten-ds-site-rules-landscape.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Design System Kaiten V01 — горизонтальный гайд по верстке лендингов</title>
+  <style>
+    @page { size: A4 landscape; margin: 12mm 12mm 14mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #2D2D2D;
+      background: #fff;
+      font-family: Inter, Roboto, Arial, system-ui, sans-serif;
+      font-size: 9.2pt;
+      line-height: 1.42;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { max-width: 760px; font-size: 36pt; line-height: .98; letter-spacing: 0; }
+    h2 { font-size: 22pt; line-height: 1.08; margin-bottom: 10px; letter-spacing: 0; }
+    h3 { font-size: 12pt; line-height: 1.2; margin: 0 0 7px; }
+    p { color: #757575; }
+    code { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8pt; padding: 1px 5px; border-radius: 5px; background: #F5F5F5; color: #424242; }
+    a { color: #7D4CCF; text-decoration: none; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid #E0E0E0; border-radius: 14px; overflow: hidden; }
+    th, td { padding: 7px 9px; border-bottom: 1px solid #EEEEEE; vertical-align: top; text-align: left; }
+    th { background: #F5F5F5; color: #424242; font-weight: 700; }
+    tr:last-child td { border-bottom: 0; }
+    .page { page-break-after: always; min-height: 186mm; }
+    .page:last-child { page-break-after: auto; }
+    .cover {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      align-items: stretch;
+      min-height: 186mm;
+    }
+    .brand { display: flex; gap: 10px; align-items: center; font-weight: 700; margin-bottom: 34px; }
+    .mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: #7D4CCF; color: #fff; font-weight: 800; }
+    .eyebrow { display: inline-flex; margin-bottom: 16px; padding: 7px 12px; border-radius: 999px; background: #EFE9F9; color: #7D4CCF; font-weight: 700; }
+    .lead { max-width: 680px; margin-top: 18px; color: #616161; font-size: 13pt; line-height: 1.42; }
+    .cover-side { border-radius: 28px; background: #F5F5F5; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+    .side-card { border: 1px solid #E0E0E0; border-radius: 18px; background: #fff; padding: 16px; margin-bottom: 12px; }
+    .meta { color: #757575; font-size: 8.8pt; border-top: 1px solid #E0E0E0; padding-top: 12px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card { border: 1px solid #E0E0E0; border-radius: 18px; background: #fff; padding: 16px; break-inside: avoid; }
+    .soft { background: #F5F5F5; }
+    .violet { background: #EFE9F9; border-color: #EFE9F9; }
+    .row { display: flex; gap: 14px; align-items: stretch; }
+    .swatch { width: 22px; height: 22px; display: inline-block; border: 1px solid #E0E0E0; border-radius: 7px; vertical-align: middle; }
+    .token-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .token-strip { display: grid; grid-template-columns: repeat(12, 1fr); border: 1px solid #E0E0E0; border-radius: 16px; overflow: hidden; margin: 10px 0 14px; }
+    .token-strip div { height: 34px; }
+    .grid-spec { display: grid; grid-template-columns: 260px 1fr; gap: 16px; align-items: center; margin-top: 12px; }
+    .device-card { border-radius: 20px; background: #fff; border: 1px solid #E0E0E0; padding: 16px; }
+    .device-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .device-title b { font-size: 12pt; }
+    .device-title span { color: #757575; }
+    .grid-visual { position: relative; height: 92px; border-radius: 14px; background: #FAFAFA; border: 1px solid #E0E0E0; padding: 10px; overflow: hidden; }
+    .grid-container { height: 100%; margin: 0 auto; display: grid; gap: var(--gutter); grid-template-columns: repeat(var(--cols), 1fr); width: var(--container); max-width: 100%; }
+    .grid-col { display: grid; place-items: center; min-width: 0; border-radius: 6px; background: rgba(125, 76, 207, .16); color: #7D4CCF; font-size: 7pt; font-weight: 700; }
+    .margin-label { position: absolute; top: 6px; color: #9E9E9E; font-size: 7pt; }
+    .margin-left { left: 8px; }
+    .margin-right { right: 8px; }
+    .metric-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin-top: 10px; }
+    .metric { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid #EEEEEE; padding-bottom: 4px; }
+    .metric b { color: #2D2D2D; }
+    .metric span { color: #757575; }
+    .space-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px 12px; }
+    .space-item { display: grid; grid-template-columns: 42px 38px 1fr; align-items: center; gap: 8px; }
+    .space-bar { height: 8px; border-radius: 999px; background: #7D4CCF; }
+    .space-item span { color: #757575; }
+    .component { display: grid; grid-template-columns: 120px 1fr; gap: 5px 10px; }
+    .component b { color: #424242; }
+    .component span { color: #757575; }
+    .section-map { font-size: 8.8pt; }
+    .check { columns: 2; column-gap: 24px; margin: 0; padding: 0; }
+    .check li { list-style: none; break-inside: avoid; margin: 0 0 8px; padding-left: 16px; position: relative; color: #616161; }
+    .check li::before { content: ""; position: absolute; left: 0; top: 6px; width: 7px; height: 7px; border-radius: 999px; background: #7D4CCF; }
+    .refs { display: grid; gap: 8px; }
+    .ref { padding: 10px 12px; border: 1px solid #E0E0E0; border-radius: 14px; background: #fff; }
+    .footer-note { margin-top: 12px; padding: 12px; border-radius: 14px; background: #F5F5F5; color: #757575; font-size: 8.5pt; }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div>
+      <div class="brand"><span class="mark">K</span><span>Kaiten</span></div>
+      <div class="eyebrow">Design System Kaiten V01 · site layout guide</div>
+      <h1>Горизонтальный гайд по верстке лендингов</h1>
+      <p class="lead">Сетки, токены, типографика, spacing, компоненты и схемы секций для методичной сборки лендингов Kaiten. Формат рассчитан на передачу дизайнеру, разработчику или агенту, который верстает страницу по дизайн-системе.</p>
+    </div>
+    <aside class="cover-side">
+      <div>
+        <div class="side-card">
+          <h3>Главное правило</h3>
+          <p>Страница собирается из контейнеров, сеток, секций и повторяемых компонентов. Никаких случайных декоративных решений без продуктового смысла.</p>
+        </div>
+        <div class="side-card">
+          <h3>Primary accent</h3>
+          <p><code>#7D4CCF</code> использовать для CTA, ссылок, активных состояний, фокусных иконок и важных подсветок.</p>
+        </div>
+        <div class="side-card">
+          <h3>Canvas</h3>
+          <p>White / neutral sections, real UI-like previews, strong typography, clean B2B SaaS rhythm.</p>
+        </div>
+      </div>
+      <div class="meta">Источник: <code>design-system-kaiten-v01-skill.zip</code><br>Обновлено: 15 мая 2026 г.</div>
+    </aside>
+  </section>
+
+  <section class="page">
+    <h2>1. Responsive Layout Grids</h2>
+    <p style="margin-bottom:12px;">Основные сетки для верстки сайтов. Сначала выбираем breakpoint, затем контейнер, колонки, gutter и side margins. Все секции лендинга выравниваются по этой системе.</p>
+
+    <div class="device-card">
+      <div class="device-title"><b>Desktop</b><span>Frame 1920 · centered fixed container</span></div>
+      <div class="grid-spec">
+        <div>
+          <div class="metric-list">
+            <div class="metric"><b>Container</b><span>1216px</span></div>
+            <div class="metric"><b>Columns</b><span>12</span></div>
+            <div class="metric"><b>Column</b><span>72px</span></div>
+            <div class="metric"><b>Gutter</b><span>32px</span></div>
+            <div class="metric"><b>Margins</b><span>248px</span></div>
+            <div class="metric"><b>Section Y</b><span>80-96px</span></div>
+          </div>
+        </div>
+        <div class="grid-visual">
+          <span class="margin-label margin-left">248</span><span class="margin-label margin-right">248</span>
+          <div class="grid-container" style="--cols:12; --gutter:10px; --container:72%;">
+            <div class="grid-col">1</div><div class="grid-col">2</div><div class="grid-col">3</div><div class="grid-col">4</div><div class="grid-col">5</div><div class="grid-col">6</div><div class="grid-col">7</div><div class="grid-col">8</div><div class="grid-col">9</div><div class="grid-col">10</div><div class="grid-col">11</div><div class="grid-col">12</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:14px;">
+      <div class="device-card">
+        <div class="device-title"><b>Tablet</b><span>Frame 768 · stretch grid</span></div>
+        <div class="grid-visual" style="height:84px;">
+          <span class="margin-label margin-left">24</span><span class="margin-label margin-right">24</span>
+          <div class="grid-container" style="--cols:6; --gutter:12px; --container:92%;">
+            <div class="grid-col">1</div><div class="grid-col">2</div><div class="grid-col">3</div><div class="grid-col">4</div><div class="grid-col">5</div><div class="grid-col">6</div>
+          </div>
+        </div>
+        <div class="metric-list">
+          <div class="metric"><b>Columns</b><span>6</span></div>
+          <div class="metric"><b>Column</b><span>100px</span></div>
+          <div class="metric"><b>Gutter</b><span>24px</span></div>
+          <div class="metric"><b>Margins</b><span>24px</span></div>
+          <div class="metric"><b>Section Y</b><span>48-64px</span></div>
+          <div class="metric"><b>Grid step</b><span>24px</span></div>
+        </div>
+      </div>
+      <div class="device-card">
+        <div class="device-title"><b>Mobile</b><span>Frame 360 · stretch grid</span></div>
+        <div class="grid-visual" style="height:84px;">
+          <span class="margin-label margin-left">16</span><span class="margin-label margin-right">16</span>
+          <div class="grid-container" style="--cols:4; --gutter:16px; --container:91%;">
+            <div class="grid-col">1</div><div class="grid-col">2</div><div class="grid-col">3</div><div class="grid-col">4</div>
+          </div>
+        </div>
+        <div class="metric-list">
+          <div class="metric"><b>Columns</b><span>4</span></div>
+          <div class="metric"><b>Column</b><span>70px</span></div>
+          <div class="metric"><b>Gutter</b><span>16px</span></div>
+          <div class="metric"><b>Margins</b><span>16px</span></div>
+          <div class="metric"><b>Section Y</b><span>36-48px</span></div>
+          <div class="metric"><b>Grid step</b><span>16px</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">Правило адаптива: на desktop контент чаще раскладывается 6/6, 5/7, 4/4/4 или 3/3/3/3. На tablet сетка схлопывается в 6 колонок, на mobile — в 4 колонки и преимущественно вертикальный stack.</div>
+  </section>
+
+  <section class="page">
+    <h2>2. Color Tokens</h2>
+    <div class="token-strip"><div style="background:#FFFFFF"></div><div style="background:#FAFAFA"></div><div style="background:#F5F5F5"></div><div style="background:#EEEEEE"></div><div style="background:#E0E0E0"></div><div style="background:#BDBDBD"></div><div style="background:#9E9E9E"></div><div style="background:#757575"></div><div style="background:#616161"></div><div style="background:#424242"></div><div style="background:#2D2D2D"></div><div style="background:#121212"></div></div>
+    <div class="token-grid">
+      <table>
+        <thead><tr><th></th><th>Neutral</th><th>HEX</th><th>Usage</th></tr></thead>
+        <tbody>
+    <tr>
+      <td><span class="swatch" style="background:#FFFFFF"></span></td>
+      <td><code>neutral-000</code></td>
+      <td><b>#FFFFFF</b></td>
+      <td>Фон страницы, карточки, header/footer на белом</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#FAFAFA"></span></td>
+      <td><code>neutral-050</code></td>
+      <td><b>#FAFAFA</b></td>
+      <td>Очень лёгкие поверхности</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#F5F5F5"></span></td>
+      <td><code>neutral-100</code></td>
+      <td><b>#F5F5F5</b></td>
+      <td>Секции, вторичные фоновые блоки</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#EEEEEE"></span></td>
+      <td><code>neutral-200</code></td>
+      <td><b>#EEEEEE</b></td>
+      <td>Нейтральные подложки, hover-секции</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#E0E0E0"></span></td>
+      <td><code>neutral-300</code></td>
+      <td><b>#E0E0E0</b></td>
+      <td>Stroke, divider, границы карточек</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#BDBDBD"></span></td>
+      <td><code>neutral-400</code></td>
+      <td><b>#BDBDBD</b></td>
+      <td>Disabled border, вторичные divider</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#9E9E9E"></span></td>
+      <td><code>neutral-500</code></td>
+      <td><b>#9E9E9E</b></td>
+      <td>Disabled text/icons</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#757575"></span></td>
+      <td><code>neutral-600</code></td>
+      <td><b>#757575</b></td>
+      <td>Body text, caption, secondary text</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#616161"></span></td>
+      <td><code>neutral-700</code></td>
+      <td><b>#616161</b></td>
+      <td>Nav, плотная вторичная иерархия</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#424242"></span></td>
+      <td><code>neutral-800</code></td>
+      <td><b>#424242</b></td>
+      <td>Subhead, strong secondary</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#2D2D2D"></span></td>
+      <td><code>neutral-900</code></td>
+      <td><b>#2D2D2D</b></td>
+      <td>Primary text, headings</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#121212"></span></td>
+      <td><code>neutral-950</code></td>
+      <td><b>#121212</b></td>
+      <td>Темные CTA-секции</td>
+    </tr></tbody>
+      </table>
+      <table>
+        <thead><tr><th></th><th>Accent</th><th>HEX</th><th>Usage</th></tr></thead>
+        <tbody>
+    <tr>
+      <td><span class="swatch" style="background:#7D4CCF"></span></td>
+      <td><code>violet-100</code></td>
+      <td><b>#7D4CCF</b></td>
+      <td>Primary CTA, links, active, focus</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#EFE9F9"></span></td>
+      <td><code>violet-12</code></td>
+      <td><b>#EFE9F9</b></td>
+      <td>Soft brand surface</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#2196F3"></span></td>
+      <td><code>blue-100</code></td>
+      <td><b>#2196F3</b></td>
+      <td>Информационные акценты</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#E4F2FD"></span></td>
+      <td><code>blue-12</code></td>
+      <td><b>#E4F2FD</b></td>
+      <td>Soft info surface</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#4CAF51"></span></td>
+      <td><code>green-100</code></td>
+      <td><b>#4CAF51</b></td>
+      <td>Success / SLA ok</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#E9F5EA"></span></td>
+      <td><code>green-12</code></td>
+      <td><b>#E9F5EA</b></td>
+      <td>Soft success surface</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#FFA100"></span></td>
+      <td><code>orange-100</code></td>
+      <td><b>#FFA100</b></td>
+      <td>Warning / process accent</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#FFF3E0"></span></td>
+      <td><code>orange-12</code></td>
+      <td><b>#FFF3E0</b></td>
+      <td>Soft warning surface</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#F44336"></span></td>
+      <td><code>red-100</code></td>
+      <td><b>#F44336</b></td>
+      <td>Error / risk accent</td>
+    </tr>
+    <tr>
+      <td><span class="swatch" style="background:#FDE8E6"></span></td>
+      <td><code>red-12</code></td>
+      <td><b>#FDE8E6</b></td>
+      <td>Soft error surface</td>
+    </tr></tbody>
+      </table>
+    </div>
+    <div class="three" style="margin-top:14px;">
+      <div class="card violet"><h3>Semantic aliases</h3><p><code>text-primary</code> → neutral-900<br><code>text-secondary</code> → neutral-600<br><code>action-primary</code> → violet-100<br><code>surface-section</code> → neutral-100</p></div>
+      <div class="card"><h3>Color ratio</h3><p>80-90% white/neutral surfaces, 10-20% violet and semantic accents. Violet is a signal, not a background default.</p></div>
+      <div class="card"><h3>States</h3><p>Primary hover <code>#6F43B8</code>. Outline hover: soft violet surface + violet border. Disabled: neutral-100 + neutral-500.</p></div>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>3. Typography &amp; Spacing</h2>
+    <div class="two">
+      <div>
+        <h3>Typography scale</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Size</th><th>Line</th><th>Usage</th></tr></thead>
+          <tbody>
+    <tr><td><code>text-xs</code></td><td>12px</td><td>16px</td><td>Caption, labels, meta</td></tr>
+  
+    <tr><td><code>text-sm</code></td><td>14px</td><td>20px</td><td>Nav, badges, compact UI</td></tr>
+  
+    <tr><td><code>text-md</code></td><td>16px</td><td>24px</td><td>Body, buttons</td></tr>
+  
+    <tr><td><code>text-lg</code></td><td>18px</td><td>28px</td><td>Lead text</td></tr>
+  
+    <tr><td><code>text-xl</code></td><td>20px</td><td>28px</td><td>Card title</td></tr>
+  
+    <tr><td><code>text-2xl</code></td><td>24px</td><td>32px</td><td>H3 / feature titles</td></tr>
+  
+    <tr><td><code>text-3xl</code></td><td>30px</td><td>36px</td><td>Mobile hero, compact H2</td></tr>
+  
+    <tr><td><code>text-4xl</code></td><td>36px</td><td>40px</td><td>Section heading</td></tr>
+  
+    <tr><td><code>text-5xl</code></td><td>48px</td><td>52px</td><td>Desktop hero / CTA heading</td></tr>
+  
+    <tr><td><code>text-6xl</code></td><td>60px</td><td>64px</td><td>Large desktop hero</td></tr>
+  </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Spacing scale</h3>
+        <div class="card soft">
+          <div class="space-list">
+    <div class="space-item">
+      <div class="space-bar" style="width:8px"></div>
+      <code>0</code><span>0px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:8px"></div>
+      <code>0.5</code><span>2px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:8.4px"></div>
+      <code>1</code><span>4px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:12.600000000000001px"></div>
+      <code>1.5</code><span>6px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:16.8px"></div>
+      <code>2</code><span>8px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:21px"></div>
+      <code>2.5</code><span>10px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:25.200000000000003px"></div>
+      <code>3</code><span>12px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:29.400000000000002px"></div>
+      <code>3.5</code><span>14px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:33.6px"></div>
+      <code>4</code><span>16px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:42px"></div>
+      <code>5</code><span>20px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:50.400000000000006px"></div>
+      <code>6</code><span>24px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:58.800000000000004px"></div>
+      <code>7</code><span>28px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:67.2px"></div>
+      <code>8</code><span>32px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:75.60000000000001px"></div>
+      <code>9</code><span>36px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:84px"></div>
+      <code>10</code><span>40px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:92.4px"></div>
+      <code>11</code><span>44px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:100.80000000000001px"></div>
+      <code>12</code><span>48px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:117.60000000000001px"></div>
+      <code>14</code><span>56px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:134.4px"></div>
+      <code>16</code><span>64px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:168px"></div>
+      <code>20</code><span>80px</span>
+    </div>
+  
+    <div class="space-item">
+      <div class="space-bar" style="width:180px"></div>
+      <code>24</code><span>96px</span>
+    </div>
+  </div>
+        </div>
+        <div class="card" style="margin-top:12px;">
+          <h3>Landing rhythm</h3>
+          <p><b>Desktop:</b> header 80, section 80/96, card gap 32, text stack 16, text-to-CTA 24, hero content-to-media 48/64.</p>
+          <p><b>Mobile:</b> header 72, side padding 16, section 36/48, block gap 32, compact gap 12/16.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>4. Component Specs</h2>
+    <div class="three">
+      <div class="card component">
+        <b>Button / Fill</b><span>Primary conversion action</span>
+        <b>Height</b><span>sm 40 · md 44 · lg 48</span>
+        <b>Padding</b><span>sm 10/14 · md 10/16 · lg 12/20</span>
+        <b>Radius</b><span>8px</span>
+        <b>Fill</b><span><code>#7D4CCF</code>; hover <code>#6F43B8</code></span>
+        <b>Text</b><span>Roboto/Inter Medium, white</span>
+      </div>
+      <div class="card component">
+        <b>Button / Outline</b><span>Secondary action</span>
+        <b>Height</b><span>Match fill button</span>
+        <b>Fill</b><span>White; hover <code>#EFE9F9</code></span>
+        <b>Stroke</b><span><code>#E0E0E0</code>; hover violet 48%</span>
+        <b>Text</b><span>Violet, Medium</span>
+        <b>Use</b><span>Header, secondary CTA, utility</span>
+      </div>
+      <div class="card component">
+        <b>Card</b><span>Repeated content modules</span>
+        <b>Radius</b><span>16/24px for large modules</span>
+        <b>Fill</b><span>White or neutral-100</span>
+        <b>Stroke</b><span>neutral-300, 1px</span>
+        <b>Padding</b><span>24/32/40 by density</span>
+        <b>Gap</b><span>12/16/24 internal</span>
+      </div>
+      <div class="card component">
+        <b>FAQ row</b><span>Accordion</span>
+        <b>Closed</b><span>White, neutral stroke, plus icon</span>
+        <b>Open</b><span>White or violet-soft, violet stroke/title</span>
+        <b>Padding</b><span>24 desktop, 16/20 mobile</span>
+        <b>Title</b><span>text-xl/SemiBold desktop</span>
+        <b>Body</b><span>text-md/Regular, neutral-600</span>
+      </div>
+      <div class="card component">
+        <b>Product UI</b><span>Preview, not decoration</span>
+        <b>Show</b><span>Boards, cards, comments, analytics, docs</span>
+        <b>Style</b><span>Neutral UI + violet focus</span>
+        <b>Text</b><span>Readable, simplified</span>
+        <b>Frame</b><span>Large radius 24/32</span>
+        <b>Rule</b><span>No vague abstract mockups</span>
+      </div>
+      <div class="card component">
+        <b>Header/Footer</b><span>Page shell</span>
+        <b>Header</b><span>80 desktop / 72 mobile</span>
+        <b>Desktop</b><span>Logo, nav, action area</span>
+        <b>Mobile</b><span>Logo + hamburger</span>
+        <b>Footer</b><span>Neutral band, clear link groups</span>
+        <b>Grid</b><span>Always align to container</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>5. Section Map For Landing Assembly</h2>
+    <table class="section-map">
+      <thead><tr><th>Section</th><th>Size / rhythm</th><th>Components</th><th>Tokens / behavior</th></tr></thead>
+      <tbody><tr><td>Header</td><td>Desktop 80px / mobile 72px</td><td>Logo, nav, CTA; mobile: logo + menu</td><td>white, 1216/328 container</td></tr><tr><td>Hero</td><td>80-96px vertical padding desktop, 48px mobile</td><td>H1, lead, CTA, product UI visual</td><td>text-6xl/3xl, violet CTA</td></tr><tr><td>Social proof</td><td>32-48px from hero content</td><td>Logo row, quote card, case link</td><td>neutral cards</td></tr><tr><td>Benefits / features</td><td>2x2 cards desktop, stack mobile</td><td>Icon, title, body, optional CTA</td><td>card radius 16/24, gap 32</td></tr><tr><td>Workflow</td><td>3-step or timeline</td><td>Number badge, title, body, visual</td><td>violet-12 badges</td></tr><tr><td>Product detail</td><td>Text + UI preview</td><td>Cards, kanban, comments, analytics</td><td>neutral UI + violet focus</td></tr><tr><td>CTA block</td><td>Full-width dark or violet-soft band</td><td>Headline, short lead, primary CTA</td><td>neutral-900 or violet-12</td></tr><tr><td>FAQ</td><td>Accordion list</td><td>Open: violet stroke/title; closed: neutral</td><td>row radius 12, padding 24</td></tr><tr><td>Footer</td><td>56-80px desktop padding</td><td>Logo, links, legal, contacts</td><td>neutral-100 or white</td></tr></tbody>
+    </table>
+    <div class="two" style="margin-top:14px;">
+      <div class="card violet">
+        <h3>Desktop assembly</h3>
+        <p>1. Создать frame 1920. 2. В каждой секции поставить centered container 1216. 3. Разложить контент по 12 колонкам. 4. Держать section padding 80/96. 5. Проверить, что CTA и product visual попадают в первый экран.</p>
+      </div>
+      <div class="card">
+        <h3>Mobile assembly</h3>
+        <p>1. Frame 360. 2. Side padding 16. 3. Все группы переводить в vertical stack. 4. H1 text-3xl, body text-md. 5. Product visual не должен требовать зума, мелкий UI упрощается.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>6. Rules For Built Landing Pages</h2>
+    <p style="margin-bottom:12px;">Этот раздел описывает, как проверять уже сверстанный лендинг на соответствие Kaiten Design System V01 и референсам Landing-DS. Цель — чтобы страница была не просто похожа визуально, а методично собрана по сетке, токенам и компонентам.</p>
+    <div class="two">
+      <div class="card violet">
+        <h3>Layout rules</h3>
+        <ul class="check">
+          <li>Каждая секция имеет внешний full-width band: white, neutral-100, violet-soft или dark CTA.</li>
+          <li>Внутри секции всегда есть container: desktop 1216, tablet margin 24, mobile margin 16.</li>
+          <li>Header фиксирует ритм страницы: 80px desktop, 72px mobile.</li>
+          <li>Hero должен показывать продуктовый сигнал в первом viewport: UI-preview, board, dashboard, workflow.</li>
+          <li>Смена секций строится на чередовании белых и светло-серых блоков, без декоративных фоновых пятен.</li>
+          <li>Карточные сетки на desktop раскладываются 2x2, 3 columns или 4 columns; на mobile переходят в один vertical stack.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Token rules</h3>
+        <ul class="check">
+          <li>Все цвета берутся из палитры DS: neutral scale, violet-100, violet-12 и semantic soft accents.</li>
+          <li>Primary CTA всегда violet-100 с белым текстом; secondary CTA — outline или white/neutral surface.</li>
+          <li>Текстовая иерархия: H1 48/60 desktop, H2 36/42, body 16/18, caption 12/14.</li>
+          <li>Spacing кратен шкале 4px; основные секционные отступы 80/96 desktop и 36/48 mobile.</li>
+          <li>Radius: buttons 8px, cards 16/24px, badges full, FAQ rows 12px.</li>
+          <li>Не вводить новые shadows, gradients и декоративные цвета без системной причины.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="two" style="margin-top:14px;">
+      <div class="card">
+        <h3>Component rules</h3>
+        <ul class="check">
+          <li>Buttons не меняют размер между состояниями hover/focus/disabled.</li>
+          <li>FAQ имеет явные open/closed states: violet title/stroke в открытом состоянии, neutral в закрытом.</li>
+          <li>Product UI preview должен быть правдоподобным: колонки, карточки, комментарии, аналитика, документы.</li>
+          <li>Карточки содержат один смысловой фокус: icon/badge, title, body, optional link/CTA.</li>
+          <li>Footer не становится маркетинговой секцией; он завершает навигацию и поддержку доверия.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Responsive rules</h3>
+        <ul class="check">
+          <li>На tablet сложные 12-column layouts переводятся в 6-column: 1/1 или 2-column блоки.</li>
+          <li>На mobile все сложные горизонтальные композиции становятся stack с gap 24/32.</li>
+          <li>Product visual на mobile упрощается, чтобы текст и UI не требовали зума.</li>
+          <li>Длинные CTA labels переносятся или сокращаются, но кнопка сохраняет системный размер.</li>
+          <li>Ни один текстовый блок не должен перекрывать следующий контент или выпадать из карточки.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">Контрольный Figma-референс для правил сверстанных лендингов: <a href="https://www.figma.com/design/6M8lLx2PgVTxwXMeRiOVH4/Landing-DS?node-id=733-8813&amp;t=4UKjcfcKR7Udd1D7-1">Landing-DS / built landing rules 733:8813</a>. MCP не дал автоматически считать узел из-за лимита View seat, поэтому ссылка зафиксирована как внешний эталон для ручной сверки.</div>
+  </section>
+
+  <section class="page">
+    <h2>7. Figma References &amp; QA Checklist</h2>
+    <div class="two">
+      <div>
+        <h3>Основные Figma-гайды по секциям лендингов</h3>
+        <div class="refs">
+          <div class="ref"><b>Landing guide section 8321:1538</b><br><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1538&amp;t=EGB0UGDMqKBL3Tw5-4">https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1538&amp;t=EGB0UGDMqKBL3Tw5-4</a></div><div class="ref"><b>Landing guide section 8321:1822</b><br><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1822&amp;t=EGB0UGDMqKBL3Tw5-4">https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1822&amp;t=EGB0UGDMqKBL3Tw5-4</a></div><div class="ref"><b>Landing guide section 8321:1699</b><br><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1699&amp;t=EGB0UGDMqKBL3Tw5-4">https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8321-1699&amp;t=EGB0UGDMqKBL3Tw5-4</a></div><div class="ref"><b>Landing guide section 8468:5733</b><br><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8468-5733&amp;t=EGB0UGDMqKBL3Tw5-4">https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8468-5733&amp;t=EGB0UGDMqKBL3Tw5-4</a></div><div class="ref"><b>Landing guide section 8396:3745</b><br><a href="https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8396-3745&amp;t=EGB0UGDMqKBL3Tw5-4">https://www.figma.com/design/pMrFoaFMELMPoME23l9kx5/Kaiten-Design-system?node-id=8396-3745&amp;t=EGB0UGDMqKBL3Tw5-4</a></div>
+        </div>
+        <div class="footer-note">Эти ссылки использовать как визуальный ориентир для плотности, ритма секций, композиции карточек, CTA, FAQ и адаптива.</div>
+      </div>
+      <div>
+        <h3>Checklist before handoff</h3>
+        <ul class="check">
+          <li>Desktop, tablet и mobile используют правильную сетку.</li>
+          <li>Контент каждой секции выровнен по контейнеру.</li>
+          <li>Нет случайных цветов вне токенов.</li>
+          <li>Violet используется как акцент, а не заливка всего интерфейса.</li>
+          <li>Типографика следует шкале text-xs ... text-6xl.</li>
+          <li>Spacing кратен шкале 4px.</li>
+          <li>Кнопки соответствуют размерам и состояниям.</li>
+          <li>Карточки имеют единый radius, padding и border.</li>
+          <li>Product UI preview объясняет продуктовый сценарий.</li>
+          <li>FAQ open/closed states различимы.</li>
+          <li>На mobile нет текста, который требует зума.</li>
+          <li>Секции можно повторить в коде без ручной подгонки.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</body></html>

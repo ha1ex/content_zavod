@@ -9,7 +9,19 @@
 
 export interface ComponentEntry {
   name: string;
-  category: 'hero' | 'features' | 'pricing' | 'faq' | 'cta' | 'footer' | 'social_proof' | 'process' | 'banner';
+  category:
+    | 'hero'
+    | 'features'
+    | 'pricing'
+    | 'faq'
+    | 'cta'
+    | 'footer'
+    | 'social_proof'
+    | 'process'
+    | 'banner'
+    | 'media_copy'
+    | 'stats'
+    | 'promo';
   description: string;
   props: Record<string, string>;
   constraints: string[];
@@ -153,6 +165,58 @@ export const REGISTRY: ComponentEntry[] = [
       description: 'string (<=280) | undefined',
       primaryCta: '{ label; href }',
       secondaryCta: '{ label; href } | null | undefined',
+    },
+    constraints: ['must_have_primary_cta'],
+  },
+  {
+    name: 'MediaCopy',
+    specComponent: 'MediaCopy',
+    sectionId: 'media_copy',
+    category: 'media_copy',
+    description:
+      'Флагманский Kaiten-блок: текст с чек-листом по одну сторону и большой mock продуктового UI по другую. Используется 3-5 раз на странице (alternating).',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120)',
+      description: 'string (<=400) | undefined',
+      checklist: 'Array<{ icon?: lucide-name; text: 2..180 }> (<=8) | undefined',
+      mediaPosition: '"left" | "right" (default "right")',
+      mediaPlaceholder: 'string (label inside window-chrome)',
+      primaryCta: '{ label; href } | undefined',
+      secondaryCta: '{ label; href } | null | undefined',
+    },
+    constraints: ['alternate_media_position_when_repeated'],
+  },
+  {
+    name: 'StatStrip',
+    specComponent: 'StatStrip',
+    sectionId: 'stats',
+    category: 'stats',
+    description:
+      'Горизонтальная полоса 2-5 цифровых фактов (например: 235+ обращений, 500 сотрудников, 30 минут запуск). Используется как social-proof выше fold или итоги секции.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120) | undefined',
+      description: 'string (<=300) | undefined',
+      stats:
+        'Array<{ value: 1..20; label: 2..80; description?: <=160 }> (2..5)',
+    },
+    constraints: ['min_2_stats', 'max_5_stats'],
+  },
+  {
+    name: 'PromoBanner',
+    specComponent: 'PromoBanner',
+    sectionId: 'promo_banner',
+    category: 'promo',
+    description:
+      'Большая полноширинная акцентная секция (фиолетовый или мягкий фон) с центрированным заголовком и CTA. Заменяет CtaBanner когда нужен сильный визуальный акцент.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..140)',
+      description: 'string (<=300) | undefined',
+      primaryCta: '{ label; href }',
+      secondaryCta: '{ label; href } | null | undefined',
+      tone: '"violet" | "soft" (default "violet")',
     },
     constraints: ['must_have_primary_cta'],
   },

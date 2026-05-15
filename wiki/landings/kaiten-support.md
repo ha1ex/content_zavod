@@ -27,14 +27,16 @@ sources:
   - packages/harness/src/skills/conversion-landing.md
 sections:
   - hero
+  - stats
+  - media_copy
+  - media_copy
+  - media_copy
+  - promo_banner
+  - features
+  - process
   - social_proof
-  - features
-  - process
-  - cta_banner
-  - features
-  - process
   - faq
-  - final_cta
+  - promo_banner
   - footer
 generator: host-agent
 durationMs: 0
@@ -51,7 +53,7 @@ stale: false
 - **brief:** `content/briefs/kaiten-support.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `hero, social_proof, features, process, cta_banner, features, process, faq, final_cta, footer`
+- **sections used:** `hero, stats, media_copy, media_copy, media_copy, promo_banner, features, process, social_proof, faq, promo_banner, footer`
 - **token estimate:** `15165`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
@@ -81,32 +83,25 @@ stale: false
 <!-- gen:sections-summary -->
 ### hero (HeroSection)
 
-- **title:** "Служба поддержки без потерянных заявок и разбросанных чатов"
+- **title:** "Служба поддержки без потерянных заявок"
 - **subtitle:** "Принимайте обращения из почты, мессенджера и с портала на одной доске. Без регистрации для заказчиков, без хаоса для команды." _(125/200 chars)_
-- **primaryCta:** "Попробовать бесплатно" → `/signup`
-- **secondaryCta:** "Смотреть, как это работает"
+- **primaryCta:** "Попробовать сами бесплатно" → `/signup`
+- **secondaryCta:** "Хочу записаться на демо"
 - **visual:** `product_screenshot` (assetId: `kaiten-support-board`)
 
-### social_proof (SocialProof)
+### stats (StatStrip)
 
 
-### features (FeatureGrid)
-
-- **title:** "Всё, что нужно команде поддержки — в одном месте"
-- **columns:** 4 · **items:** 8
-  1. `Inbox` · "Заявки не теряются" — 128 chars
-  2. `MessageSquare` · "Общение в карточке" — 115 chars
-  3. `Network` · "Передача между отделами" — 101 chars
-  4. `Sparkles` · "Шаблонные ответы под рукой" — 105 chars
-  5. `BookOpen` · "База знаний рядом с работой" — 114 chars
-  6. `Send` · "Telegram-бот для клиентов" — 110 chars
-  7. `Timer` · "Контроль SLA" — 98 chars
-  8. `Star` · "Оценка сервиса" — 99 chars
-
-### process (ProcessSteps)
+### media_copy (MediaCopy)
 
 
-### cta_banner (CtaBanner)
+### media_copy (MediaCopy)
+
+
+### media_copy (MediaCopy)
+
+
+### promo_banner (PromoBanner)
 
 
 ### features (FeatureGrid)
@@ -114,11 +109,14 @@ stale: false
 - **title:** "Готовые отчёты о работе сервиса"
 - **columns:** 4 · **items:** 4
   1. `LayoutDashboard` · "Где сейчас все заявки" — 95 chars
-  2. `TrendingUp` · "Растёт ли нагрузка" — 91 chars
-  3. `Users` · "Кто перегружен" — 73 chars
+  2. `TrendingUp` · "Растёт ли нагрузка" — 71 chars
+  3. `Users` · "Кто перегружен" — 66 chars
   4. `AlarmClock` · "Укладываемся ли в SLA" — 64 chars
 
 ### process (ProcessSteps)
+
+
+### social_proof (SocialProof)
 
 
 ### faq (FAQAccordion)
@@ -134,10 +132,8 @@ stale: false
   7. "Можно ли передать заявку другому отделу?" — answer 169/600 chars
   8. "Сколько стоит и есть ли ограничения по заявкам?" — answer 155/600 chars
 
-### final_cta (FinalCta)
+### promo_banner (PromoBanner)
 
-- **title:** "Ни одна заявка больше не потеряется"
-- **primaryCta:** "Попробовать бесплатно" → `/signup`
 
 ### footer (LandingFooter)
 

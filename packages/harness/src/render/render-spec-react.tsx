@@ -8,6 +8,9 @@ import {
   SocialProof,
   ProcessSteps,
   CtaBanner,
+  MediaCopy,
+  StatStrip,
+  PromoBanner,
 } from '@buffalo/ui/landing';
 import type { LandingSpec, Section } from '../schemas/landing-spec';
 
@@ -37,6 +40,12 @@ function RenderSection({ section }: { section: Section }) {
       return <ProcessSteps {...section.props} />;
     case 'CtaBanner':
       return <CtaBanner {...section.props} />;
+    case 'MediaCopy':
+      return <MediaCopy {...section.props} />;
+    case 'StatStrip':
+      return <StatStrip {...section.props} />;
+    case 'PromoBanner':
+      return <PromoBanner {...section.props} />;
     default: {
       const _exhaustive: never = section;
       void _exhaustive;

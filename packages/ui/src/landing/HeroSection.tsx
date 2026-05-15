@@ -16,26 +16,43 @@ export interface AssetRefProps {
 export interface HeroSectionProps {
   eyebrow?: string;
   title: string;
+  /**
+   * Optional accent word/phrase that will be visually highlighted inside the title
+   * (Kaiten signature — фиолетовая pill вокруг ключевого слова).
+   */
+  accentWord?: string;
   subtitle: string;
   primaryCta: CtaProps;
   secondaryCta?: CtaProps | null;
   visual?: AssetRefProps | null;
+  /**
+   * 'side' (default) — mock справа, layout 50/50
+   * 'below' — большой mock под текстом, контент по центру (Kaiten home pattern)
+   */
+  visualPosition?: 'side' | 'below';
 }
 
 /**
- * Kaiten V01 hero: violet primary CTA, optional outline secondary CTA, decorative
- * product-mock on the right (xl+) — a stylised app window with a tinted gradient
- * surround. Layout rules from skill: Desktop title text-5xl/6xl SemiBold,
- * text-to-CTA gap 6/24, content-to-media 12/48.
+ * Kaiten V01 hero с двумя вариантами layout:
+ * - side: текст слева, продуктовый mock справа (B2B 50/50)
+ * - below: контент по центру, mock огромный под ним (как на kaiten.ru)
+ *
+ * Title поддерживает accentWord — кусочек заголовка оборачивается в pill
+ * с фиолетовым подсветом (Kaiten signature).
  */
 export function HeroSection({
   eyebrow,
   title,
+  accentWord,
   subtitle,
   primaryCta,
   secondaryCta,
   visual,
+  visualPosition = 'side',
 }: HeroSectionProps) {
+  const renderedTitle = accentWord ? highlightAccent(title, accentWord) : title;
+  const isBelow = visualPosition === 'below';
+
   return (
     <section
       className={cn(
@@ -46,71 +63,127 @@ export function HeroSection({
       <div
         aria-hidden
         className={cn(
-          'pointer-events-none absolute inset-x-0 -top-32 -z-10 mx-auto h-[640px] max-w-[1440px]',
-          'bg-[radial-gradient(60%_60%_at_70%_0%,rgba(125,76,207,0.18)_0%,rgba(125,76,207,0)_60%),radial-gradient(40%_40%_at_15%_30%,rgba(33,150,243,0.10)_0%,rgba(33,150,243,0)_60%)]',
+          'pointer-events-none absolute inset-x-0 -top-32 -z-10 mx-auto h-[720px] max-w-[1440px]',
+          'bg-[radial-gradient(60%_60%_at_70%_0%,rgba(125,76,207,0.22)_0%,rgba(125,76,207,0)_60%),radial-gradient(40%_40%_at_15%_30%,rgba(33,150,243,0.10)_0%,rgba(33,150,243,0)_60%)]',
         )}
       />
 
       <div
         className={cn(
           'mx-auto w-full max-w-(--container-kaiten)',
-          'px-4 pt-14 pb-12 md:px-6 lg:pt-20 lg:pb-20',
+          'px-4 pt-14 pb-12 md:px-6 lg:pt-20',
+          isBelow ? 'lg:pb-12' : 'lg:pb-20',
         )}
       >
-        <div className="flex flex-col gap-12 xl:flex-row xl:items-center xl:gap-16">
-          <div className="xl:max-w-2xl">
-            {eyebrow && (
-              <span
-                className={cn(
-                  'mb-5 inline-flex items-center rounded-full px-3 py-1',
-                  'border border-(--color-action-primary)/20',
-                  'bg-(--color-action-primary-soft) text-sm font-medium text-(--color-text-accent)',
-                )}
-              >
-                {eyebrow}
-              </span>
-            )}
-            <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl">
-              {title}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-(--color-text-secondary) sm:text-xl">
-              {subtitle}
-            </p>
-            <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:items-center">
-              <ButtonLink size="lg" href={primaryCta.href}>
-                {primaryCta.label}
-              </ButtonLink>
-              {secondaryCta && (
-                <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
-                  {secondaryCta.label}
+        {isBelow ? (
+          <div className="flex flex-col items-center gap-12">
+            <div className="max-w-3xl text-center">
+              {eyebrow && <EyebrowPill>{eyebrow}</EyebrowPill>}
+              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl">
+                {renderedTitle}
+              </h1>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-(--color-text-secondary) sm:text-xl">
+                {subtitle}
+              </p>
+              <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+                <ButtonLink size="lg" href={primaryCta.href}>
+                  {primaryCta.label}
                 </ButtonLink>
-              )}
+                {secondaryCta && (
+                  <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
+                    {secondaryCta.label}
+                  </ButtonLink>
+                )}
+              </div>
             </div>
+            {visual && (
+              <div className="w-full">
+                <HeroVisual src={visual.src} alt={visual.alt} large />
+              </div>
+            )}
           </div>
-
-          {visual && (
-            <div className="xl:flex-1">
-              <HeroVisual assetId={visual.assetId} src={visual.src} alt={visual.alt} />
+        ) : (
+          <div className="flex flex-col gap-12 xl:flex-row xl:items-center xl:gap-16">
+            <div className="xl:max-w-2xl">
+              {eyebrow && <EyebrowPill>{eyebrow}</EyebrowPill>}
+              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl">
+                {renderedTitle}
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-(--color-text-secondary) sm:text-xl">
+                {subtitle}
+              </p>
+              <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:items-center">
+                <ButtonLink size="lg" href={primaryCta.href}>
+                  {primaryCta.label}
+                </ButtonLink>
+                {secondaryCta && (
+                  <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
+                    {secondaryCta.label}
+                  </ButtonLink>
+                )}
+              </div>
             </div>
-          )}
-        </div>
+            {visual && (
+              <div className="xl:flex-1">
+                <HeroVisual src={visual.src} alt={visual.alt} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-interface HeroVisualProps {
-  assetId?: string;
-  src?: string;
-  alt?: string;
+/* ─── private ─── */
+
+function EyebrowPill({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className={cn(
+        'mb-5 inline-flex items-center rounded-full px-3 py-1',
+        'border border-(--color-action-primary)/20',
+        'bg-(--color-action-primary-soft) text-sm font-medium text-(--color-text-accent)',
+      )}
+    >
+      {children}
+    </span>
+  );
 }
 
 /**
- * If a real image src is provided, render it. Otherwise render a decorative
- * "browser-window" mock with a faux kanban board — looks like Kaiten without
- * needing actual screenshots in the spec.
+ * Splits the title around accentWord (case-insensitive, first match) and wraps
+ * the match in a styled pill. If no match is found, returns title unchanged.
  */
-function HeroVisual({ src, alt }: HeroVisualProps) {
+function highlightAccent(title: string, accent: string): React.ReactNode {
+  const idx = title.toLowerCase().indexOf(accent.toLowerCase());
+  if (idx === -1) return title;
+  const before = title.slice(0, idx);
+  const match = title.slice(idx, idx + accent.length);
+  const after = title.slice(idx + accent.length);
+  return (
+    <>
+      {before}
+      <span
+        className={cn(
+          'inline-block rounded-(--radius-2xl) bg-(--color-action-primary-soft)',
+          'px-3 pb-1 text-(--color-text-accent)',
+        )}
+      >
+        {match}
+      </span>
+      {after}
+    </>
+  );
+}
+
+interface HeroVisualProps {
+  src?: string;
+  alt?: string;
+  large?: boolean;
+}
+
+function HeroVisual({ src, alt, large = false }: HeroVisualProps) {
   if (src) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
@@ -140,18 +213,29 @@ function HeroVisual({ src, alt }: HeroVisualProps) {
       </div>
 
       {/* board */}
-      <div className="grid grid-cols-3 gap-3 p-5">
-        {(['Очередь', 'В работе', 'Готово'] as const).map((col, ci) => (
+      <div
+        className={cn(
+          'grid gap-3',
+          large ? 'grid-cols-4 p-6 md:p-8' : 'grid-cols-3 p-5',
+        )}
+      >
+        {(large
+          ? ['Очередь', 'В работе', 'Готовлю ответ', 'Готово']
+          : ['Очередь', 'В работе', 'Готово']
+        ).map((col, ci, arr) => (
           <div key={col} className="space-y-3">
             <div className="flex items-center justify-between text-xs font-medium text-(--color-text-secondary)">
               <span>{col}</span>
-              <span className="rounded-full bg-(--color-neutral-200) px-2 py-0.5">{3 - ci}</span>
+              <span className="rounded-full bg-(--color-neutral-200) px-2 py-0.5">
+                {arr.length - ci}
+              </span>
             </div>
-            {Array.from({ length: 3 - ci }).map((_, i) => (
+            {Array.from({ length: arr.length - ci }).map((_, i) => (
               <div
                 key={i}
                 className={cn(
-                  'rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3 shadow-sm',
+                  'rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) shadow-sm',
+                  large ? 'p-4' : 'p-3',
                 )}
               >
                 <div
@@ -161,7 +245,9 @@ function HeroVisual({ src, alt }: HeroVisualProps) {
                       ? 'bg-(--color-action-primary)'
                       : ci === 1
                         ? 'bg-(--color-orange-100)'
-                        : 'bg-(--color-green-100)',
+                        : ci === 2
+                          ? 'bg-(--color-blue-100)'
+                          : 'bg-(--color-green-100)',
                   )}
                 />
                 <div className="space-y-1.5">

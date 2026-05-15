@@ -26,11 +26,13 @@ const HeroSectionSchema = z.object({
   component: z.literal('HeroSection'),
   props: z.object({
     eyebrow: z.string().max(80).optional(),
-    title: z.string().min(4).max(80),
-    subtitle: z.string().min(10).max(200),
+    title: z.string().min(4).max(120),
+    accentWord: z.string().max(40).optional(),
+    subtitle: z.string().min(10).max(280),
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
     visual: AssetRefSchema.nullable().optional(),
+    visualPosition: z.enum(['side', 'below']).optional(),
   }),
 });
 
@@ -169,6 +171,65 @@ const CtaBannerSchema = z.object({
   }),
 });
 
+/* ─── MediaCopy (alternating text+screenshot) ─────────────────────── */
+const MediaCopySchema = z.object({
+  id: z.literal('media_copy'),
+  component: z.literal('MediaCopy'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(400).optional(),
+    checklist: z
+      .array(
+        z.object({
+          icon: z.string().optional(),
+          text: z.string().min(2).max(180),
+        }),
+      )
+      .max(8)
+      .optional(),
+    mediaPosition: z.enum(['left', 'right']).optional(),
+    mediaPlaceholder: z.string().max(80).optional(),
+    primaryCta: CtaSchema.optional(),
+    secondaryCta: CtaSchema.nullable().optional(),
+  }),
+});
+
+/* ─── StatStrip ───────────────────────────────────────────────────── */
+const StatStripSchema = z.object({
+  id: z.literal('stats'),
+  component: z.literal('StatStrip'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120).optional(),
+    description: z.string().max(300).optional(),
+    stats: z
+      .array(
+        z.object({
+          value: z.string().min(1).max(20),
+          label: z.string().min(2).max(80),
+          description: z.string().max(160).optional(),
+        }),
+      )
+      .min(2)
+      .max(5),
+  }),
+});
+
+/* ─── PromoBanner (full-bleed accent CTA) ─────────────────────────── */
+const PromoBannerSchema = z.object({
+  id: z.literal('promo_banner'),
+  component: z.literal('PromoBanner'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(140),
+    description: z.string().max(300).optional(),
+    primaryCta: CtaSchema,
+    secondaryCta: CtaSchema.nullable().optional(),
+    tone: z.enum(['violet', 'soft']).optional(),
+  }),
+});
+
 /* ─── LandingFooter ───────────────────────────────────────────────── */
 const LandingFooterSchema = z.object({
   id: z.literal('footer'),
@@ -203,6 +264,9 @@ export const SectionSchema = z.discriminatedUnion('component', [
   FAQAccordionSchema,
   FinalCtaSchema,
   LandingFooterSchema,
+  MediaCopySchema,
+  StatStripSchema,
+  PromoBannerSchema,
 ]);
 export type Section = z.infer<typeof SectionSchema>;
 

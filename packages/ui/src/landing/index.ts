@@ -24,3 +24,12 @@ export type { ProcessStepsProps, ProcessStepProps } from './ProcessSteps';
 
 export { CtaBanner } from './CtaBanner';
 export type { CtaBannerProps, CtaBannerCtaProps } from './CtaBanner';
+
+export { MediaCopy } from './MediaCopy';
+export type { MediaCopyProps, MediaCopyCheckItemProps, MediaCopyCtaProps } from './MediaCopy';
+
+export { StatStrip } from './StatStrip';
+export type { StatStripProps, StatItemProps } from './StatStrip';
+
+export { PromoBanner } from './PromoBanner';
+export type { PromoBannerProps, PromoBannerCtaProps } from './PromoBanner';

@@ -25,7 +25,40 @@ metadata:
 
 ---
 
-## 0. Когда какой шаблон-архетип
+## 0. Domain fit — обязательная проверка ДО выбора mock'а
+
+> **Самое важное правило.** Mock-компонент должен принадлежать **домену продукта**, для которого собирается лендинг. Совпадения по форме (board, chat, kpi) недостаточно — kanban-доска со story points (`pm-board`) семантически не равна kanban-воронке сделок CRM (`sales-funnel`), даже если оба «4 колонки с карточками». Reuse mock'а из чужого домена — самая частая и грубая ошибка, которая делает лендинг визуально неубедительным («показали PM, а продаём CRM»).
+>
+> Перед выбором `visual.variant` / `mediaVariant` / `mockVariant`:
+> 1. Определи домен продукта по брифу (`product` + `market`).
+> 2. Сверься с [`wiki/references/domain-mock-matrix.md`](../../../../wiki/references/domain-mock-matrix.md) — есть ли набор mock'ов под этот домен?
+> 3. Если есть — выбирай из них. Если нет — **создай новые mock'и под домен, прежде чем писать spec** (см. §3). Не подменяй чужими.
+
+### Domain → existing mocks (краткая таблица; полная — в [`domain-mock-matrix.md`](../../../../wiki/references/domain-mock-matrix.md))
+
+| Домен продукта | Подходящие mock'и | Reference-лендинг |
+|---|---|---|
+| **Project Management** (Jira-like, спринты, эпики, story points, команды разработки) | `pm-board`, `kb-internal`, `analytics-kpi`, `integrations-console` (1С/GitLab/AmoCRM), `modules-matrix` | [`kaiten-platform`](../../../../wiki/landings/kaiten-platform.md) |
+| **Service Desk / Поддержка** (входящие обращения, SLA, чат с клиентом, статьи КБ) | `support-board`, `request-card`, `kb-public`, `kb-internal` | [`kaiten-techsupport`](../../../../wiki/landings/kaiten-techsupport-reference.md) |
+| **CRM / Продажи** (воронка сделок, карточка клиента, omnichannel inbox, звонки, аналитика выручки, документы, мобильное) | `sales-funnel`, `crm-client-card`, `omnichannel-inbox`, `call-overlay`, `crm-analytics`, `doc-template`, `mobile-crm`, `booking-calendar` | [`crm`](../../../../wiki/landings/crm-reference.md) |
+| **HR / Recruiting** | _нужны новые_: `hiring-pipeline`, `candidate-card`, `onboarding-checklist`, `org-chart` | _создать reference при первом лендинге_ |
+| **Marketing automation** | _нужны новые_: `campaign-dashboard`, `email-sequence`, `ab-test-results`, `audience-segments` | _создать reference при первом лендинге_ |
+| **BPM / Workflow** | _нужны новые_: `process-flowchart`, `approval-chain`, `sla-tracker` | _создать reference при первом лендинге_ |
+| **Finance / Accounting** | _нужны новые_: `ledger-view`, `invoice-status`, `reconciliation-matrix` | _создать reference при первом лендинге_ |
+
+### Domain-mismatch examples (что делать НЕЛЬЗЯ)
+
+- ❌ CRM-лендинг + `visual.variant: 'pm-board'` — это PM-доска со story points и спринтами, в карточке нет компании/суммы/контакта. Правильно: `sales-funnel`.
+- ❌ CRM-лендинг + `mediaVariant: 'request-card'` (карточка тикета поддержки с чек-листом) для «карточки клиента». Правильно: `crm-client-card`.
+- ❌ CRM-лендинг + `mediaVariant: 'integrations-console'` (лента событий из 1С/GitLab/AmoCRM в Kaiten-домене) для «обращений из каналов». Правильно: `omnichannel-inbox`.
+- ❌ HR-лендинг + `visual.variant: 'pm-board'` — kanban спринтов ≠ kanban воронки найма. Создавай `hiring-pipeline`.
+- ❌ Marketing-лендинг + `mediaVariant: 'analytics-kpi'` (загрузка PM-команд) для «дашборда кампаний». Создавай `campaign-dashboard`.
+
+Если в брифе появился новый домен — это **сигнал к созданию набора новых mock'ов**, а не к подбору «похожего» из чужого домена. Лучше потратить полдня на 5-8 доменно-специфичных компонентов, чем выпустить лендинг, где визуал противоречит продукту.
+
+---
+
+## 0.1. Когда какой шаблон-архетип
 
 | Архетип | Когда уместен | Пример в репо |
 |---|---|---|
@@ -130,7 +163,7 @@ import { Icon } from '../../primitives/Icon';
 
 Капсула: `h-12 w-12` (feature-card), `h-11 w-11` (step-card), `h-5 w-5` (bullet), `h-9 w-9` (chat-avatar).
 
-### 1.6. Реалистичные русские тексты — обязательно
+### 1.6. Реалистичные русские тексты из домена продукта — обязательно
 
 Никаких:
 - `"Card 1"`, `"Item 1"`, `"Title"`, `"Description goes here"`, `"Lorem ipsum"`.
@@ -142,7 +175,7 @@ import { Icon } from '../../primitives/Icon';
 - Реальные имена клиентов / агентов: `Анна Петрова`, `Команда поддержки`.
 - Реальные KPI: `87% закрыто в SLA`, `18 зависли`, `6 перегружены`.
 
-Контент берётся из `brief.audience`, `brief.mainPain`, `brief.proofPoints`, `brief.mainPromise`. Если в брифе нет конкретики — спросить пользователя ДО создания mock'а.
+Контент берётся из `brief.audience`, `brief.mainPain`, `brief.proofPoints`, `brief.mainPromise` **и обязан принадлежать домену продукта** (см. §0). PM-лексика («спринт», «эпик», «story points», «MR merged») в CRM-моке — это сигнал, что взяли mock из чужого домена и просто переписали текст. Так нельзя: визуальная структура карточки тоже доменно-специфична (карточка PM-задачи ≠ карточка CRM-сделки), поэтому нужен новый компонент. Если в брифе нет конкретики — спросить пользователя ДО создания mock'а.
 
 ### 1.7. Одна семантическая ось цвета на mock
 
@@ -293,6 +326,11 @@ shadow-[0_30px_80px_-30px_rgba(125,76,207,0.30)]
 ---
 
 ## 5. Anti-patterns (то, что блокирует review)
+
+> **Самый частый блокер:** cross-domain reuse — выбор готового mock'а из чужого домена «потому что форма похожа». См. §0 для матрицы доменов и примеров.
+
+- ❌ **Cross-domain reuse**: `pm-board` в CRM-лендинге; `crm-client-card` в Service Desk; `analytics-kpi` (загрузка команд) для маркетингового дашборда; `integrations-console` (Kaiten-домен 1С/GitLab) для CRM-каналов. Если домена нет в [`domain-mock-matrix.md`](../../../../wiki/references/domain-mock-matrix.md) — создавай новый набор, не подменяй чужими.
+- ❌ **Domain-mismatched lexica**: спринты/эпики/story points в карточках CRM-сделок; «MR merged» в HR-pipeline; «Pull request reviewed» в маркетинговой кампании. Это сигнал, что mock взяли из чужого домена и просто переписали текст.
 
 - Пустые `<div className="h-20 bg-neutral-200" />` как «placeholder».
 - Lorem ipsum или абстрактные `«Card 1 · Description · Tag»`.

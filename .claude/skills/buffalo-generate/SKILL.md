@@ -25,7 +25,58 @@ Use this skill whenever the user wants to assemble a Kaiten-style SaaS landing f
 
 ## End-to-end flow
 
-### 0. Pick a layout from the library — ОБЯЗАТЕЛЬНО
+### 0. Domain audit — ОБЯЗАТЕЛЬНО (первый шаг, не пропускать)
+
+**Зачем.** Mock-компоненты в `packages/ui/src/landing/mocks/` доменно-специфичны:
+`pm-board` показывает спринты и story points, `request-card` — карточку тикета
+поддержки с чек-листом, `crm-client-card` — карточку CRM-сделки с компанией и
+суммой. Reuse mock'а из чужого домена («pm-board для CRM, форма-то похожа»)
+делает лендинг визуально неубедительным и противоречащим продукту. Это самый
+частый блокер ревью.
+
+**Что сделать:**
+
+1. Открой [`wiki/references/domain-mock-matrix.md`](../../../wiki/references/domain-mock-matrix.md).
+2. Определи домен продукта по `brief.product` + `brief.market`. Это может быть:
+   - **Project Management** (Jira-like, спринты, эпики).
+   - **Service Desk / Поддержка** (обращения, SLA, чат).
+   - **CRM / Продажи** (воронка, клиенты, омниканальность, выручка).
+   - **HR / Recruiting** (кандидаты, оффер, онбординг).
+   - **Marketing automation** (кампании, A/B, email-цепочки).
+   - **BPM / Workflow** (процесс, согласования, SLA).
+   - **Finance / Accounting** (проводки, счета, сверка).
+   - **E-commerce / Retail** (заказы, остатки, маркетплейсы).
+   - Любой другой — фикси домен явно.
+3. Проверь по матрице: есть ли набор mock'ов под этот домен?
+   - **Если есть** (PM, Support, CRM сейчас) — переходи к шагу 1 (layout).
+     В шаге 3a будешь выбирать variants из этого набора.
+   - **Если нет** (HR, Marketing, BPM, Finance, E-commerce и др.) —
+     **STOP. Не пиши spec, не пытайся подобрать «похожие» mock'и из чужого
+     домена.** Опиши пользователю что нужно создать 5-8 доменно-специфичных
+     mock'ов перед генерацией. Получи согласие и реализуй mock'и по
+     [`section-mock-skill.md`](../../../packages/harness/src/prompts/section-mock-skill.md).
+     После реализации — обнови `wiki/references/domain-mock-matrix.md`,
+     заведи `wiki/landings/<domain>-reference.md` по образцу
+     [`crm-reference.md`](../../../wiki/landings/crm-reference.md), потом
+     возвращайся к шагу 1.
+4. Запиши выбранный домен (и подходящий набор mock'ов) в свою TODO/scratchpad,
+   чтобы на шаге 3a не переключиться на чужие.
+
+**Признаки cross-domain reuse, который надо ловить ДО написания spec'а:**
+
+- Hero бренда CRM с `visual.variant: 'pm-board'` или `'support-board'`.
+- MediaCopy «карточка клиента» с `mediaVariant: 'request-card'` (это тикет
+  поддержки, не клиент CRM).
+- MediaCopy «омниканальные обращения» с `mediaVariant: 'integrations-console'`
+  (это лента 1С/GitLab из Kaiten-домена, не inbox CRM).
+- HR-лендинг с `pm-board` (kanban спринтов вместо kanban найма).
+- Любая «семантически близкая» подмена под предлогом «форма похожа».
+
+Все эти выборы — блокер ревью. См. примеры и анти-паттерны в
+[`section-mock-skill.md §0`](../../../packages/harness/src/prompts/section-mock-skill.md#0-domain-fit--обязательная-проверка-до-выбора-mocка)
+и [`domain-mock-matrix.md`](../../../wiki/references/domain-mock-matrix.md).
+
+### 0a. Pick a layout from the library — ОБЯЗАТЕЛЬНО
 
 **Это первый шаг. Не пропускать.** Раньше у нас был один `pageArchetype: saas` с фиксированным порядком секций — это привело к проблеме «все лендинги одинаковые». Library of 5 layouts в [`wiki/layouts/`](../../../wiki/layouts/) покрывает основные сценарии.
 
@@ -87,40 +138,70 @@ Write the JSON to `content/landings/<slug>.json` (the `outputPath` from prepare)
 
 ### 3a. Mock authoring stage — ОБЯЗАТЕЛЬНО для каждой визуальной секции
 
-**Архитектура:** mock'и — отдельные TSX-компоненты в [`packages/ui/src/landing/mocks/`](../../../packages/ui/src/landing/mocks/), с захардкоженными доменными данными. Spec выбирает mock через enum-поле — например, `HeroSection.visual.variant: 'pm-board'` (рендерит `<PmBoardMock />`), `MediaCopy.mediaVariant: 'analytics-kpi'` и т.д.
+**Архитектура:** mock'и — отдельные TSX-компоненты в [`packages/ui/src/landing/mocks/`](../../../packages/ui/src/landing/mocks/), с захардкоженными доменными данными. Spec выбирает mock через enum-поле — например, `HeroSection.visual.variant: 'sales-funnel'` (рендерит `<SalesFunnelMock />`), `MediaCopy.mediaVariant: 'crm-analytics'` и т.д.
 
-**Эталон визуального качества** — `wiki/landings/kaiten-techsupport-reference.md`. Правила реализации mock'а — `packages/harness/src/prompts/section-mock-skill.md` (грузится в системный промпт).
+**Domain-fit (повторно — потому что это самый частый блокер):** mock должен быть из домена продукта, заданного на шаге 0. Не подменяй mock'и из чужого домена под предлогом «форма похожа». Если на шаге 0 ты выяснил, что домена нет в матрице — ты уже должен был остановиться и создать набор; если всё-таки начал писать spec и обнаружил недостающий mock в процессе — останавливайся и создавай. Полная матрица доменов: [`wiki/references/domain-mock-matrix.md`](../../../wiki/references/domain-mock-matrix.md). Reference-наборы по доменам: PM — [`kaiten-platform.md`](../../../wiki/landings/kaiten-platform.md), Support — [`kaiten-techsupport-reference.md`](../../../wiki/landings/kaiten-techsupport-reference.md), CRM — [`crm-reference.md`](../../../wiki/landings/crm-reference.md).
 
-**КРИТИЧЕСКОЕ ПРАВИЛО:** `mediaVariant: 'default'` и `visual.variant: 'generic'` — это generic three-bar placeholder. Если ты ставишь его «потому что не нашёл подходящий» — ты создаёшь ту самую проблему, ради которой существует эта библиотека. Валидатор `landing-visual-diversity` теперь блокирует:
-- ❌ Больше 1 MediaCopy с `default` на лендинг (исключение — нарративный `story-led-unaware` layout).
-- ⚠️ Hero `generic` без обоснования.
-- ❌ Одинаковый `mediaVariant` в 2+ MediaCopy подряд (нужно чередовать).
+**Эталон визуального качества** — внутренние reference-документы по домену (выше). Правила реализации mock'а — [`packages/harness/src/prompts/section-mock-skill.md`](../../../packages/harness/src/prompts/section-mock-skill.md) (грузится в системный промпт). Внешние эталоны для вдохновения — [`wiki/references/external-mock-references.md`](../../../wiki/references/external-mock-references.md).
 
-**Существующие mock-компоненты** (`packages/ui/src/landing/mocks/`):
+**КРИТИЧЕСКИЕ ПРАВИЛА:**
 
-| Mock | Variant slug | Что иллюстрирует | Для каких сценариев |
-|---|---|---|---|
-| `SupportBoardMock` | `support-board` | Канбан-доска заявок поддержки | Лендинги модуля поддержки, обращения, SLA |
-| `RequestCardMock` | `request-card` | Карточка заявки с чатом + чек-листом | «контекст в одной карточке», переписка |
-| `KnowledgeBaseMock` | `kb-public` / `kb-internal` | Превью статьи КБ или внутреннего регламента | База знаний, документы, статьи |
-| `PmBoardMock` | `pm-board` | Канбан PM-команды с эпиками, story points, спринтами | PM-ядро платформы, Kanban/Scrum/Gantt |
-| `AnalyticsKpiMock` | `analytics-kpi` | Дашборд руководителя с 2×2 KPI + загрузка команд | Аналитика, отчёты, метрики команд |
-| `IntegrationsConsoleMock` | `integrations-console` | Лента событий из 1С/AmoCRM/Telegram/GitLab | Интеграции, API, корпоративные системы |
-| `ModulesMatrixMock` | `modules-matrix` | Bento-grid модулей платформы (PM, KB, поддержка, BPM, BI, AI) | Модульность платформы, выбор тарифа |
+- ❌ Cross-domain reuse: `pm-board` для CRM, `request-card` для CRM-клиента, `integrations-console` для CRM-каналов и т.п. — блокер ревью. См. §0 «Domain audit».
+- ❌ `mediaVariant: 'default'` и `visual.variant: 'generic'` — это generic three-bar placeholder. Если ты ставишь его «потому что не нашёл подходящий» — ты создаёшь ту самую проблему, ради которой существует эта библиотека. Валидатор `landing-visual-diversity` блокирует:
+  - Больше 1 MediaCopy с `default` на лендинг (исключение — нарративный `story-led-unaware` layout).
+  - Одинаковый `mediaVariant` в 2+ MediaCopy подряд (нужно чередовать).
+  - Hero `generic` без обоснования — warning, но фикси.
+
+**Существующие mock-компоненты** (`packages/ui/src/landing/mocks/`), сгруппированные по доменам. Полный реестр и правила покрытия — [`wiki/references/domain-mock-matrix.md`](../../../wiki/references/domain-mock-matrix.md).
+
+**Project Management (PM, спринты, эпики, story points):**
+
+| Mock | Variant slug | Что иллюстрирует |
+|---|---|---|
+| `PmBoardMock` | `pm-board` | Канбан PM-команды с эпиками, story points, спринтами |
+| `AnalyticsKpiMock` | `analytics-kpi` | Дашборд руководителя с 2×2 KPI + загрузка команд |
+| `IntegrationsConsoleMock` | `integrations-console` | Лента событий из 1С/AmoCRM/Telegram/GitLab |
+| `ModulesMatrixMock` | `modules-matrix` | Bento-grid модулей платформы (PM, KB, поддержка, BPM, BI, AI) |
+| `KnowledgeBaseMock` | `kb-internal` | Внутренний регламент команды |
+
+**Service Desk / Поддержка:**
+
+| Mock | Variant slug | Что иллюстрирует |
+|---|---|---|
+| `SupportBoardMock` | `support-board` | Канбан-доска заявок поддержки (Очередь / В работе / Готовлю ответ / Готово) |
+| `RequestCardMock` | `request-card` | Карточка тикета поддержки с чатом клиент/агент + чек-листом действий |
+| `KnowledgeBaseMock` | `kb-public` | Публичная статья базы знаний для клиентов |
+
+**CRM / Продажи:**
+
+| Mock | Variant slug | Что иллюстрирует |
+|---|---|---|
+| `SalesFunnelMock` | `sales-funnel` | Воронка сделок: Лид → Квалификация → Договор → Оплата, в карточке компания, сумма ₽, контакт, дата шага |
+| `CrmClientCardMock` | `crm-client-card` | Карточка клиента CRM: табы Профиль/Сделки/История/Документы/Задачи, активная сделка, таймлайн событий |
+| `OmnichannelInboxMock` | `omnichannel-inbox` | Единый inbox обращений из звонков/Telegram/чата/почты/WhatsApp с цвет-кодом канала |
+| `CallOverlayMock` | `call-overlay` | Окно входящего звонка поверх карточки клиента: таймер, скрипт продаж, заметка |
+| `CrmAnalyticsMock` | `crm-analytics` | Дашборд CRM: выручка, конверсия в оплату, CPL, длина сделки, воронка, источники лидов |
+| `DocTemplateMock` | `doc-template` | Счёт с автоподстановкой полей клиента и статусом Сформирован → Просмотрен → Оплачен |
+| `BookingCalendarMock` | `booking-calendar` | Онлайн-запись: сетка специалисты × часы, выбранный слот, подтверждение |
+| `MobileCrmMock` | `mobile-crm` | Мобильное приложение CRM: KPI дня, активные сделки, нижняя таб-навигация, FAB |
+
+**Других доменов в библиотеке пока нет** (HR, Marketing, BPM, Finance, E-commerce). Если бриф ведёт в новый домен — реализуй набор перед написанием spec'а (см. §0 «Domain audit»).
 
 **Алгоритм (для каждой секции отдельно):**
 
-1. Открой layout-плейбук — там для каждой секции есть колонка «Mock-рекомендация» с конкретным slug-ом. Это default-выбор.
-2. Если рекомендация подходит по смыслу контента — используй её.
-3. Если контент брифа сильно отличается (например, в лендинге не PM, а DevOps) — выбери другой существующий variant из таблицы выше.
-4. Если ни один не подходит по смыслу — НЕ ставь `default`. Останови spec, опиши пользователю что нужен новый mock, создай его по [`section-mock-skill.md`](../../../packages/harness/src/prompts/section-mock-skill.md):
+1. Проверь домен (шаг 0): определил ли ты домен продукта? Какой набор mock'ов используем?
+2. Открой layout-плейбук — там для каждой секции есть колонка «Mock-рекомендация» с конкретным slug-ом. Это default-выбор **внутри домена**.
+3. Если рекомендация подходит по смыслу контента **и совпадает с доменом** — используй её.
+4. Если контент брифа сильно отличается от того, что показывает mock — выбери другой existing variant **из того же домена** (см. таблицу выше). НЕ берись за чужой домен (например, `pm-board` в CRM-лендинге, `request-card` в HR-лендинге).
+5. Если ни один из mock'ов **в домене** не подходит — НЕ ставь `default`, НЕ берись за чужой домен. Останови spec, опиши пользователю что нужен новый mock, создай его по [`section-mock-skill.md`](../../../packages/harness/src/prompts/section-mock-skill.md):
    - `<Name>Mock.tsx` в `packages/ui/src/landing/mocks/`
    - Хардкод доменных данных из брифа
    - Прогон через чек-лист §4
-   - Расширить enum в `landing-spec.ts` (AssetRefSchema.variant или MediaCopy.mediaVariant)
-   - Подключить case в HeroVisual / MediaCopy
+   - Расширить enum в `landing-spec.ts` (`AssetRefSchema.variant`, `MediaCopy.mediaVariant`, `MockVariantSchema`)
+   - Подключить case в `HeroSection` HeroVisual / `MediaCopy` dispatcher / общий `MockVisual`
    - Обновить registry description
-5. После создания нового mock'а — возвращайся к spec и используй его.
+   - Добавить строку в `wiki/references/domain-mock-matrix.md` для своего домена
+6. После создания нового mock'а — возвращайся к spec и используй его.
 
 **Это допустимо.** Лучше потратить 30 минут на новый mock-компонент, чем оставить лендинг с тремя `default` placeholder'ами.
 
@@ -249,6 +330,7 @@ Self-contained ZIP for the frontend team.
 - If the spec already exists, you can skip prepare and start from apply (e.g. for re-validation after manual edits).
 - **Never skip mock authoring** на SaaS-лендингах. Лендинг без mock'ов в Hero и body-секциях выглядит «голым» — это блокер ревью (см. memory `visual-review-required`). Минимум: Hero с `visual.variant: '<specific>'` (НЕ `generic`) + 2-4 body-секции с уникальными mock'ами (НЕ `default`).
 - **Never skip layout selection.** Если в брифе нет `pageLayout` — выбери его перед написанием spec, опираясь на `wiki/layouts/index.md`. Запиши в `spec.meta.layout`.
+- **Never skip Domain audit (§0).** Reuse mock'ов из чужого домена («pm-board для CRM», «request-card для HR») — самый частый блокер ревью. См. [`domain-mock-matrix.md`](../../../wiki/references/domain-mock-matrix.md).
 - **Never use `mediaVariant: 'default'` twice на одном лендинге.** Валидатор завалит. Создай новый mock-компонент или подбери другой variant из реестра.
 
 ## Anti-patterns
@@ -261,4 +343,5 @@ Self-contained ZIP for the frontend team.
 - Two or more эмодзи в одном mock-компоненте. Zero or one.
 - A landing where every body section has the same layout (text+mock, text+mock, …). Apply zigzag: alternating sections with mocks left/right (`MediaCopy.reverse: true` в каждой второй).
 - Reuse того же mock-компонента в двух разных сценариях через `variant` без визуального обоснования. Если сценарии визуально разные — это два разных компонента.
+- **Cross-domain reuse mock'а** (`pm-board` для CRM, `request-card` для HR, `analytics-kpi` команд для marketing-кампании). Самый частый блокер ревью. См. §0 и [`domain-mock-matrix.md`](../../../wiki/references/domain-mock-matrix.md).
 - Props на content в mock-компоненте (`tickets: Ticket[]`, `messages: Message[]`). Контент — хардкод; для разветвления — только `variant: 'a' | 'b'`.

@@ -63,10 +63,16 @@ export function HeroSection({
         'bg-(--color-surface-page) text-(--color-text-primary)',
       )}
     >
+      {/*
+        Full-bleed decorative gradient — must span the entire positioned ancestor.
+        Никаких `max-w-*` / `mx-auto` на background-слое: на широких мониторах
+        (>1440px) такой слой обрезается полосами по бокам. Капать ширину можно
+        только у контентного контейнера ниже.
+      */}
       <div
         aria-hidden
         className={cn(
-          'pointer-events-none absolute inset-x-0 -top-32 -z-10 mx-auto h-[720px] max-w-[1440px]',
+          'pointer-events-none absolute inset-x-0 -top-32 -z-10 h-[720px]',
           'bg-[radial-gradient(60%_60%_at_70%_0%,rgba(125,76,207,0.22)_0%,rgba(125,76,207,0)_60%),radial-gradient(40%_40%_at_15%_30%,rgba(33,150,243,0.10)_0%,rgba(33,150,243,0)_60%)]',
         )}
       />

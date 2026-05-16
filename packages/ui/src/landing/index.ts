@@ -39,3 +39,21 @@ export type { BenefitsStripProps } from './BenefitsStrip';
 
 export { MetricsSplit } from './MetricsSplit';
 export type { MetricsSplitProps, MetricCellProps } from './MetricsSplit';
+
+export { TabbedFeatureSection } from './TabbedFeatureSection';
+export type {
+  TabbedFeatureSectionProps,
+  TabbedFeatureTabProps,
+} from './TabbedFeatureSection';
+
+export { ScenarioWalkthroughSection } from './ScenarioWalkthroughSection';
+export type {
+  ScenarioWalkthroughSectionProps,
+  ScenarioStepProps,
+} from './ScenarioWalkthroughSection';
+
+export { IndustryPickerSection } from './IndustryPickerSection';
+export type {
+  IndustryPickerSectionProps,
+  IndustryProps,
+} from './IndustryPickerSection';

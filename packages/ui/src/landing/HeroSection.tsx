@@ -2,9 +2,17 @@ import { ButtonLink } from '../primitives/ButtonLink';
 import { cn } from '../primitives/cn';
 import {
   AnalyticsKpiMock,
+  BookingCalendarMock,
+  CallOverlayMock,
+  CrmAnalyticsMock,
+  CrmClientCardMock,
+  DocTemplateMock,
   IntegrationsConsoleMock,
+  MobileCrmMock,
   ModulesMatrixMock,
+  OmnichannelInboxMock,
   PmBoardMock,
+  SalesFunnelMock,
   SupportBoardMock,
 } from './mocks';
 
@@ -25,6 +33,14 @@ export interface AssetRefProps {
     | 'analytics-kpi'
     | 'integrations-console'
     | 'modules-matrix'
+    | 'sales-funnel'
+    | 'crm-client-card'
+    | 'omnichannel-inbox'
+    | 'call-overlay'
+    | 'booking-calendar'
+    | 'crm-analytics'
+    | 'doc-template'
+    | 'mobile-crm'
     | 'generic';
 }
 
@@ -220,6 +236,30 @@ function HeroVisual({ src, alt, variant, large = false }: HeroVisualProps) {
   }
   if (variant === 'modules-matrix') {
     return <ModulesMatrixMock />;
+  }
+  if (variant === 'sales-funnel') {
+    return <SalesFunnelMock />;
+  }
+  if (variant === 'crm-client-card') {
+    return <CrmClientCardMock />;
+  }
+  if (variant === 'omnichannel-inbox') {
+    return <OmnichannelInboxMock />;
+  }
+  if (variant === 'call-overlay') {
+    return <CallOverlayMock />;
+  }
+  if (variant === 'booking-calendar') {
+    return <BookingCalendarMock />;
+  }
+  if (variant === 'crm-analytics') {
+    return <CrmAnalyticsMock />;
+  }
+  if (variant === 'doc-template') {
+    return <DocTemplateMock />;
+  }
+  if (variant === 'mobile-crm') {
+    return <MobileCrmMock />;
   }
   if (src) {
     return (

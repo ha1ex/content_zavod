@@ -13,6 +13,9 @@ import {
   PromoBanner,
   BenefitsStrip,
   MetricsSplit,
+  TabbedFeatureSection,
+  ScenarioWalkthroughSection,
+  IndustryPickerSection,
 } from '@buffalo/ui/landing';
 import type { LandingSpec, Section } from '../schemas/landing-spec';
 
@@ -52,6 +55,12 @@ function RenderSection({ section }: { section: Section }) {
       return <BenefitsStrip {...section.props} />;
     case 'MetricsSplit':
       return <MetricsSplit {...section.props} />;
+    case 'TabbedFeatureSection':
+      return <TabbedFeatureSection {...section.props} />;
+    case 'ScenarioWalkthroughSection':
+      return <ScenarioWalkthroughSection {...section.props} />;
+    case 'IndustryPickerSection':
+      return <IndustryPickerSection {...section.props} />;
     default: {
       const _exhaustive: never = section;
       void _exhaustive;

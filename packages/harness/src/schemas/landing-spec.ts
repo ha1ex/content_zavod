@@ -26,6 +26,14 @@ export const AssetRefSchema = z.object({
       'analytics-kpi',
       'integrations-console',
       'modules-matrix',
+      'sales-funnel',
+      'crm-client-card',
+      'omnichannel-inbox',
+      'call-overlay',
+      'booking-calendar',
+      'crm-analytics',
+      'doc-template',
+      'mobile-crm',
       'generic',
     ])
     .optional(),
@@ -213,6 +221,14 @@ const MediaCopySchema = z.object({
         'analytics-kpi',
         'integrations-console',
         'modules-matrix',
+        'sales-funnel',
+        'crm-client-card',
+        'omnichannel-inbox',
+        'call-overlay',
+        'booking-calendar',
+        'crm-analytics',
+        'doc-template',
+        'mobile-crm',
       ])
       .optional(),
     primaryCta: CtaSchema.optional(),
@@ -294,6 +310,124 @@ const PromoBannerSchema = z.object({
   }),
 });
 
+/* ─── Shared MockVariant enum (для секций с inline mock-визуалами) ── */
+export const MockVariantSchema = z.enum([
+  'support-board',
+  'request-card',
+  'kb-public',
+  'kb-internal',
+  'pm-board',
+  'analytics-kpi',
+  'integrations-console',
+  'modules-matrix',
+  'sales-funnel',
+  'crm-client-card',
+  'omnichannel-inbox',
+  'call-overlay',
+  'booking-calendar',
+  'crm-analytics',
+  'doc-template',
+  'mobile-crm',
+]);
+export type MockVariant = z.infer<typeof MockVariantSchema>;
+
+/* ─── TabbedFeatureSection ────────────────────────────────────────── */
+const TabbedFeatureSectionSchema = z.object({
+  id: z.literal('tabbed_feature'),
+  component: z.literal('TabbedFeatureSection'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    tabs: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(40),
+          label: z.string().min(2).max(40),
+          icon: z.string().optional(),
+          eyebrow: z.string().max(80).optional(),
+          title: z.string().min(4).max(120),
+          description: z.string().max(400).optional(),
+          checklist: z
+            .array(
+              z.object({
+                icon: z.string().optional(),
+                text: z.string().min(2).max(180),
+              }),
+            )
+            .max(6)
+            .optional(),
+          primaryCta: CtaSchema.optional(),
+          mockVariant: MockVariantSchema,
+        }),
+      )
+      .min(2)
+      .max(5),
+  }),
+});
+
+/* ─── ScenarioWalkthroughSection ──────────────────────────────────── */
+const ScenarioWalkthroughSectionSchema = z.object({
+  id: z.literal('scenario_walkthrough'),
+  component: z.literal('ScenarioWalkthroughSection'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(400).optional(),
+    protagonist: z.string().max(80).optional(),
+    steps: z
+      .array(
+        z.object({
+          time: z.string().min(1).max(40),
+          title: z.string().min(4).max(120),
+          description: z.string().min(10).max(400),
+          icon: z.string().optional(),
+          mockVariant: MockVariantSchema,
+        }),
+      )
+      .min(3)
+      .max(6),
+  }),
+});
+
+/* ─── IndustryPickerSection ───────────────────────────────────────── */
+const IndustryPickerSectionSchema = z.object({
+  id: z.literal('industry_picker'),
+  component: z.literal('IndustryPickerSection'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    industries: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(40),
+          icon: z.string().min(1).max(40),
+          name: z.string().min(2).max(60),
+          summary: z.string().min(4).max(160),
+          scenario: z.string().min(10).max(400),
+          keyFeatures: z
+            .array(
+              z.object({
+                icon: z.string().optional(),
+                text: z.string().min(2).max(120),
+              }),
+            )
+            .min(2)
+            .max(6),
+          metric: z
+            .object({
+              value: z.string().min(1).max(20),
+              label: z.string().min(2).max(60),
+            })
+            .optional(),
+        }),
+      )
+      .min(3)
+      .max(8),
+  }),
+});
+
 /* ─── LandingFooter ───────────────────────────────────────────────── */
 const LandingFooterSchema = z.object({
   id: z.literal('footer'),
@@ -333,6 +467,9 @@ export const SectionSchema = z.discriminatedUnion('component', [
   PromoBannerSchema,
   BenefitsStripSchema,
   MetricsSplitSchema,
+  TabbedFeatureSectionSchema,
+  ScenarioWalkthroughSectionSchema,
+  IndustryPickerSectionSchema,
 ]);
 export type Section = z.infer<typeof SectionSchema>;
 

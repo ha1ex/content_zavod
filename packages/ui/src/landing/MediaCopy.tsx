@@ -3,11 +3,19 @@ import { Icon } from '../primitives/Icon';
 import { cn } from '../primitives/cn';
 import {
   AnalyticsKpiMock,
+  BookingCalendarMock,
+  CallOverlayMock,
+  CrmAnalyticsMock,
+  CrmClientCardMock,
+  DocTemplateMock,
   IntegrationsConsoleMock,
   KnowledgeBaseMock,
+  MobileCrmMock,
   ModulesMatrixMock,
+  OmnichannelInboxMock,
   PmBoardMock,
   RequestCardMock,
+  SalesFunnelMock,
   SupportBoardMock,
 } from './mocks';
 
@@ -30,7 +38,15 @@ export type MediaCopyVariant =
   | 'pm-board'
   | 'analytics-kpi'
   | 'integrations-console'
-  | 'modules-matrix';
+  | 'modules-matrix'
+  | 'sales-funnel'
+  | 'crm-client-card'
+  | 'omnichannel-inbox'
+  | 'call-overlay'
+  | 'booking-calendar'
+  | 'crm-analytics'
+  | 'doc-template'
+  | 'mobile-crm';
 
 export interface MediaCopyProps {
   eyebrow?: string;
@@ -152,6 +168,22 @@ function MediaCopyVisual({
       return <IntegrationsConsoleMock />;
     case 'modules-matrix':
       return <ModulesMatrixMock />;
+    case 'sales-funnel':
+      return <SalesFunnelMock />;
+    case 'crm-client-card':
+      return <CrmClientCardMock />;
+    case 'omnichannel-inbox':
+      return <OmnichannelInboxMock />;
+    case 'call-overlay':
+      return <CallOverlayMock />;
+    case 'booking-calendar':
+      return <BookingCalendarMock />;
+    case 'crm-analytics':
+      return <CrmAnalyticsMock />;
+    case 'doc-template':
+      return <DocTemplateMock />;
+    case 'mobile-crm':
+      return <MobileCrmMock />;
     default:
       return <ProductMock label={placeholder} />;
   }

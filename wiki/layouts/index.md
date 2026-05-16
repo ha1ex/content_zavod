@@ -47,6 +47,7 @@ stale: false
 | [`comparison-vs-competitor`](./comparison-vs-competitor.md) | Vs-страница «миграция с X» (Jira, Notion, Asana, Trello) | ИТ-руководитель, выбирающий PM-инструмент | product-aware (сравнивает) | Medium (1 board side-by-side + 2 поддержки) |
 | [`story-led-unaware`](./story-led-unaware.md) | Cold-аудитория / unaware top-funnel, когда нужно сначала эмпатия, потом продукт | Топ-менеджер, не идентифицирующий проблему как «PM-проблему» | unaware → problem-aware | Low (1 крупный mock, остальное — нарратив) |
 | [`depersonalized-product-tour`](./depersonalized-product-tour.md) | Обезличенный SMB SaaS (CRM, white-label, материнский landing). Длинный product tour без брендов и без Pricing на странице | Владелец SMB, РОП, маркетолог, операционный директор | problem-aware → solution-aware | High (6+ MediaCopy с разными mock-вариантами) |
+| [`crm-product-tour`](./crm-product-tour.md) | Обезличенный CRM (или CRM-подобный multi-feature SaaS для SMB) с интерактивным ритмом: tabs по ролям + day-in-the-life сценарий + industry picker. Заменяет MediaCopy×N интерактивными секциями | Владелец SMB, РОП, маркетолог, руководитель сервиса | problem-aware → solution-aware | High (8+ CRM-specific mock'ов в 3 интерактивных секциях + 1-3 MediaCopy) |
 
 ## Жёсткие правила выбора
 

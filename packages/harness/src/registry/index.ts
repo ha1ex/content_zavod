@@ -21,7 +21,10 @@ export interface ComponentEntry {
     | 'banner'
     | 'media_copy'
     | 'stats'
-    | 'promo';
+    | 'promo'
+    | 'tabbed_feature'
+    | 'scenario_walkthrough'
+    | 'industry_picker';
   description: string;
   props: Record<string, string>;
   constraints: string[];
@@ -210,6 +213,55 @@ export const REGISTRY: ComponentEntry[] = [
         'Array<{ value: 1..20; label: 2..80; description?: <=160 }> (2..5)',
     },
     constraints: ['min_2_stats', 'max_5_stats'],
+  },
+  {
+    name: 'TabbedFeatureSection',
+    specComponent: 'TabbedFeatureSection',
+    sectionId: 'tabbed_feature',
+    category: 'tabbed_feature',
+    description:
+      'Секция с горизонтальными табами по сегментам (например: Продажи / Сервис / Маркетинг или роли менеджер / руководитель / маркетолог). Под выбранным табом — пара mock + текст с чек-листом и опц. CTA. Заменяет вертикальный простыни из 3-5 MediaCopy одной интерактивной секцией. Каждый таб обязан указывать mockVariant из общего реестра mock\'ов.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120)',
+      description: 'string (<=280) | undefined',
+      tabs:
+        'Array<{ id: 1..40; label: 2..40; icon?: lucide-name; eyebrow?: <=80; title: 4..120; description?: <=400; checklist?: Array<{icon?, text: 2..180}> (<=6); primaryCta?: {label,href}; mockVariant: MockVariant }> (2..5)',
+    },
+    constraints: ['min_2_tabs', 'max_5_tabs', 'each_tab_has_unique_mockvariant_preferred'],
+  },
+  {
+    name: 'ScenarioWalkthroughSection',
+    specComponent: 'ScenarioWalkthroughSection',
+    sectionId: 'scenario_walkthrough',
+    category: 'scenario_walkthrough',
+    description:
+      'Нарративная секция «День из жизни» (например, «День менеджера продаж»). Вертикальный таймлайн из 3-6 шагов с alternating layout (mock слева, текст справа — и наоборот). У каждого шага: время суток, заголовок действия, описание, и mock интерфейса в этот момент. Дает живое представление о продукте без сухого MediaCopy×N.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120)',
+      description: 'string (<=400) | undefined',
+      protagonist: 'string (<=80) | undefined — кто герой сценария (роль)',
+      steps:
+        'Array<{ time: 1..40; title: 4..120; description: 10..400; icon?: lucide-name; mockVariant: MockVariant }> (3..6)',
+    },
+    constraints: ['min_3_steps', 'max_6_steps', 'steps_in_chronological_order'],
+  },
+  {
+    name: 'IndustryPickerSection',
+    specComponent: 'IndustryPickerSection',
+    sectionId: 'industry_picker',
+    category: 'industry_picker',
+    description:
+      'Интерактивный picker отраслей: слева список отраслей с иконкой и кратким описанием, справа раскрывается сценарий выбранной отрасли с ключевыми функциями и опц. метрикой. Заменяет вторую FeatureGrid когда «карточки индустрий» выглядят как монотонная сетка из 12 одинаковых блоков. Дает реальный отраслевой сценарий вместо однострочников.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120)',
+      description: 'string (<=280) | undefined',
+      industries:
+        'Array<{ id: 1..40; icon: lucide-name; name: 2..60; summary: 4..160; scenario: 10..400; keyFeatures: Array<{icon?, text: 2..120}> (2..6); metric?: {value: 1..20, label: 2..60} }> (3..8)',
+    },
+    constraints: ['min_3_industries', 'max_8_industries', 'each_industry_has_unique_id'],
   },
   {
     name: 'PromoBanner',

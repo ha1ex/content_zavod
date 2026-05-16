@@ -28,22 +28,20 @@ sources:
   - packages/harness/src/prompts/section-mock-skill.md
   - wiki/layouts/depersonalized-product-tour.md
   - wiki/layouts/index.md
+  - wiki/layouts/crm-product-tour.md
 sections:
   - hero
   - benefits_strip
-  - media_copy
-  - media_copy
-  - media_copy
+  - tabbed_feature
   - cta_banner
+  - scenario_walkthrough
   - media_copy
-  - media_copy
-  - cta_banner
   - media_copy
   - media_copy
   - features
-  - features
+  - industry_picker
   - process
-  - promo_banner
+  - stats
   - faq
   - final_cta
   - footer
@@ -62,7 +60,7 @@ stale: false
 - **brief:** `content/briefs/crm.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `hero, benefits_strip, media_copy, media_copy, media_copy, cta_banner, media_copy, media_copy, cta_banner, media_copy, media_copy, features, features, process, promo_banner, faq, final_cta, footer`
+- **sections used:** `hero, benefits_strip, tabbed_feature, cta_banner, scenario_walkthrough, media_copy, media_copy, media_copy, features, industry_picker, process, stats, faq, final_cta, footer`
 - **token estimate:** `15165`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
@@ -86,7 +84,7 @@ stale: false
 - `wiki/archetypes/saas_landing.md`
 - `packages/harness/src/skills/conversion-landing.md`
 - `packages/harness/src/prompts/section-mock-skill.md`
-- `wiki/layouts/depersonalized-product-tour.md`
+- `wiki/layouts/crm-product-tour.md`
 - `wiki/layouts/index.md`
 <!-- /gen:spec-meta -->
 
@@ -95,8 +93,8 @@ stale: false
 <!-- gen:sections-summary -->
 ### hero (HeroSection)
 
-- **title:** "CRM-система для управления продажами, клиентами и бизнес-процессами"
-- **subtitle:** "Ведите клиентов от первого обращения до повторной продажи, автоматизируйте работу менеджеров и контролируйте эффективность команды в едином интерфейсе." _(151/200 chars)_
+- **title:** "Воронка продаж, клиенты и коммуникации в одной системе"
+- **subtitle:** "Ведите сделки от первого обращения до повторной продажи, собирайте обращения из всех каналов и контролируйте работу менеджеров на каждом этапе." _(143/200 chars)_
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 - **secondaryCta:** "Получить демо"
 - **visual:** `product_screenshot` (assetId: `crm-sales-funnel`)
@@ -104,25 +102,16 @@ stale: false
 ### benefits_strip (BenefitsStrip)
 
 
-### media_copy (MediaCopy)
-
-
-### media_copy (MediaCopy)
-
-
-### media_copy (MediaCopy)
+### tabbed_feature (TabbedFeatureSection)
 
 
 ### cta_banner (CtaBanner)
 
 
-### media_copy (MediaCopy)
+### scenario_walkthrough (ScenarioWalkthroughSection)
 
 
 ### media_copy (MediaCopy)
-
-
-### cta_banner (CtaBanner)
 
 
 ### media_copy (MediaCopy)
@@ -133,34 +122,24 @@ stale: false
 
 ### features (FeatureGrid)
 
-- **title:** "CRM, в которой есть инструменты для управления продажами"
+- **title:** "Набор инструментов для управления продажами и клиентами"
 - **columns:** 4 · **items:** 8
-  1. `Users` · "Клиентская база" — 69 chars
+  1. `Users` · "Клиентская база" — 64 chars
   2. `GitBranch` · "Воронка продаж" — 70 chars
   3. `MessageSquare` · "Каналы коммуникаций" — 61 chars
   4. `Zap` · "Автоматизация" — 62 chars
   5. `Mail` · "Маркетинг" — 56 chars
   6. `FileText` · "Документы" — 61 chars
-  7. `BarChart3` · "Аналитика и отчёты" — 53 chars
-  8. `Smartphone` · "Мобильное приложение" — 61 chars
+  7. `BarChart3` · "Аналитика" — 53 chars
+  8. `Plug` · "Интеграции" — 66 chars
 
-### features (FeatureGrid)
+### industry_picker (IndustryPickerSection)
 
-- **title:** "Подходит для разных сфер бизнеса"
-- **columns:** 4 · **items:** 8
-  1. `Building2` · "B2B-продажи" — 97 chars
-  2. `Briefcase` · "Услуги и сервис" — 90 chars
-  3. `GraduationCap` · "Образование" — 78 chars
-  4. `Home` · "Недвижимость" — 81 chars
-  5. `Stethoscope` · "Медицина и запись" — 82 chars
-  6. `ShoppingCart` · "Розница и e-commerce" — 84 chars
-  7. `Truck` · "Опт и логистика" — 76 chars
-  8. `HardHat` · "Производство и стройка" — 81 chars
 
 ### process (ProcessSteps)
 
 
-### promo_banner (PromoBanner)
+### stats (StatStrip)
 
 
 ### faq (FAQAccordion)
@@ -176,7 +155,7 @@ stale: false
   7. "Можно ли настроить CRM под свой процесс продаж?" — answer 129/600 chars
   8. "Есть ли мобильная версия?" — answer 134/600 chars
   9. "Что даёт аналитика в CRM?" — answer 164/600 chars
-  10. "Можно ли автоматизировать рутинные действия?" — answer 144/600 chars
+  10. "Можно ли автоматизировать рутинные действия?" — answer 148/600 chars
 
 ### final_cta (FinalCta)
 

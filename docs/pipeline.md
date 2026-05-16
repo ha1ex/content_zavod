@@ -10,24 +10,95 @@
 
 ---
 
-## 0. TL;DR — пайплайн одной строкой
+## 0. TL;DR — auto-routing pipeline
+
+**Единый entry point для нового brief:**
+
+```bash
+pnpm -w run harness agent build landing --slug X --brief content/briefs/X.json
+```
+
+`agent build` сам анализирует brief через `routePipeline()` и выбирает один из
+трёх исходов:
 
 ```
-brief.json → (context + skills + registry) → LandingSpec(JSON) → validators → repair-loop
-           → render TSX → preview (Next.js) → visual regression → approve → handoff ZIP
+                       brief.json
+                            │
+                            ▼
+              ┌─────────────────────────┐
+              │ routePipeline(brief)    │
+              │ • resolveDomainFromBrief│
+              │ • score phased signals  │
+              └────────────┬────────────┘
+                           │
+        ┌──────────────────┼─────────────────────┐
+        ▼                  ▼                     ▼
+   🛑 manual-          ⚡️ legacy              🔀 phased
+   creation-           (score<0.5)            (score≥0.5)
+   required
+        │                  │                     │
+        │                  ▼                     ▼
+   STOP +          prepare + write       orchestrator
+   список mock'ов   spec + apply         P0..P8 + per-phase
+   к созданию      (быстрый flow)        repair-loop
 ```
 
-- **Скилы** = `.md`-плейбуки, которые подмешиваются в system prompt и одновременно
-  работают как rulebook для людей. Главный по качеству — `conversion-landing.md`
-  (8 типов SaaS-страниц, awareness-levels, hero, секции, копи, CTA, 100-балльный
-  audit-чек-лист).
-- **Качество не на доверии модели**, а на трёх контурах: (1) Zod-схема `LandingSpec`,
-  (2) brand-voice deny-list, (3) business-rules валидатор. При нарушении срабатывает
-  repair-loop — до 3 итераций.
-- **LLM физически не может вставить «левый» блок** — генерируется JSON по фиксированному
-  registry из 6 компонентов; TSX рендерится детерминированно.
-- **Agent-mode по умолчанию**: harness не зовёт внешний LLM, LLM = хост-агент (Claude
-  Code/Codex). Старый flow с API-ключом сохранён как fallback.
+### Routing signals (deterministic, weighted)
+
+| Сигнал | Weight | Условие |
+|---|---|---|
+| `audience-not-resolved` | 0.30 | `brief.resolvedSegments` пустой |
+| `no-page-layout` | 0.25 | `brief.pageLayout` не задан |
+| `brief-too-short` | 0.20 | product+pain+promise < 200 chars |
+| `complex-primary-goal` | 0.15 | waitlist / contact_sales / download |
+| `multiple-personas` | 0.10 | `audience.length` ≥ 3 |
+| `no-proof-points` | 0.10 | `proofPoints` пустой |
+
+**Threshold 0.5** — выше → phased, ниже → legacy. Логика в
+[`packages/harness/src/pipeline/route-pipeline.ts`](../packages/harness/src/pipeline/route-pipeline.ts).
+
+### Legacy flow (быстрый)
+
+```
+brief.json → (context + skills + registry + domain-fit filter)
+          → LandingSpec(JSON) → 8 validators → repair-loop
+          → render TSX → preview → visual regression → approve → handoff ZIP
+```
+
+### Phased flow (9 фаз с per-phase gates)
+
+```
+P0 Brief Normalize       (deterministic) ─ резолв домена через domain-visual
+P1 Audience Intent        (LLM)           ─ сегменты, awareness, DM, stories
+P2 Layout Selection       (LLM + layout-awareness-fit validator)
+P3 Library Coverage Audit (deterministic, hard gate domain-missing)
+P4 Section Architect      (LLM + section-plan-intent + section-plan-mock-choice)
+P5 Mock Allocation        (LLM + mock-semantic-fit validator)
+P6 Copy Generation        (LLM, заполняет копи в готовую структуру)
+P7 SEO + CTA Polish       (LLM + audience-score gate)
+P8 Illustration Allocation (allocate-illustrations + IllustrationSpec generation)
+→ Cross-Landing Diversity Audit → diversity-report.md
+→ Render TSX → generated/landings/<slug>/page.tsx
+```
+
+Каждая phase идемпотентна (rerun пропускает уже сделанные artefacts). При
+validation failure — `<name>.repair.md` с конкретными ошибками + previous
+output + counter attempts (max 3, потом эскалация). Все artefacts пишутся в
+`.context/pipeline/<slug>/`.
+
+### Уровни защиты качества
+
+- **Скилы** = `.md`-плейбуки в system prompt + rulebook для людей
+  (`conversion-landing.md`, `section-mock-skill.md`, `svg-illustration-skill.md`).
+- **Качество не на доверии модели**, а на 8 контурах + 4 P-validators (см. §
+  Качество ниже). При нарушении — repair-loop (3 attempts) с конкретным фидбеком.
+- **LLM физически не может** вставить левый блок (registry), variant из чужого
+  домена (`illustration-domain-match`), или дубликат existing лендинга
+  (`cross-landing-diversity`).
+- **8 покрытых доменов / 27 mocks / 22 components / 10 layouts** — фиксированная
+  библиотека с auto-extension при `manual-creation-required`.
+- **Agent-mode по умолчанию**: harness не зовёт внешний LLM, LLM = хост-агент
+  (Claude Code/Codex). Старый flow с API-ключом сохранён как fallback.
 
 ---
 

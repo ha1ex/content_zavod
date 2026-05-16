@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-16T07:43:08.986Z",
+  "updatedAt": "2026-05-16T07:47:28.531Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -145,6 +145,78 @@
       "sectionIdx": 1,
       "domain": "hr",
       "recordedAt": "2026-05-16T07:43:08.986Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "docs-tree",
+      "landingSlug": "knowledge-base",
+      "sectionId": "hero",
+      "sectionIdx": 0,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.526Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "permissions-panel",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 2,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.527Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "doc-editor-rich",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.528Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "kb-internal",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.529Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "share-link-card",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.529Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "kb-public",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 7,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.530Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "template-gallery",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 9,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.530Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "mobile-doc-reader",
+      "landingSlug": "knowledge-base",
+      "sectionId": "media_copy",
+      "sectionIdx": 10,
+      "domain": "docs",
+      "recordedAt": "2026-05-16T07:47:28.531Z"
     }
   ]
 }

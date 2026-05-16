@@ -1,20 +1,6 @@
 import { ButtonLink } from '../primitives/ButtonLink';
 import { cn } from '../primitives/cn';
-import {
-  AnalyticsKpiMock,
-  BookingCalendarMock,
-  CallOverlayMock,
-  CrmAnalyticsMock,
-  CrmClientCardMock,
-  DocTemplateMock,
-  IntegrationsConsoleMock,
-  MobileCrmMock,
-  ModulesMatrixMock,
-  OmnichannelInboxMock,
-  PmBoardMock,
-  SalesFunnelMock,
-  SupportBoardMock,
-} from './mocks';
+import { MockVisual, type MockVariant } from './mocks';
 
 export interface CtaProps {
   label: string;
@@ -27,39 +13,7 @@ export interface AssetRefProps {
   src?: string;
   alt?: string;
   /** Built-in detailed mocks (see ./mocks). When set, ignores src. */
-  variant?:
-    | 'support-board'
-    | 'pm-board'
-    | 'analytics-kpi'
-    | 'integrations-console'
-    | 'modules-matrix'
-    | 'sales-funnel'
-    | 'crm-client-card'
-    | 'omnichannel-inbox'
-    | 'call-overlay'
-    | 'booking-calendar'
-    | 'crm-analytics'
-    | 'doc-template'
-    | 'mobile-crm'
-    | 'hiring-pipeline'
-    | 'candidate-card'
-    | 'onboarding-checklist'
-    | 'org-chart'
-    | 'performance-review'
-    | 'campaign-dashboard'
-    | 'email-sequence'
-    | 'ab-test-results'
-    | 'audience-segments'
-    | 'process-flowchart'
-    | 'approval-chain'
-    | 'sla-tracker'
-    | 'ledger-view'
-    | 'invoice-status'
-    | 'reconciliation-matrix'
-    | 'order-queue'
-    | 'inventory-grid'
-    | 'marketplace-connector'
-    | 'generic';
+  variant?: MockVariant | 'generic';
   /**
    * Reference to an auto-generated unique SVG illustration (P8 phase).
    * When set, renderer uses it instead of variant. Currently passed through
@@ -246,44 +200,9 @@ interface HeroVisualProps {
 }
 
 function HeroVisual({ src, alt, variant, large = false }: HeroVisualProps) {
-  if (variant === 'support-board') {
-    return <SupportBoardMock />;
-  }
-  if (variant === 'pm-board') {
-    return <PmBoardMock />;
-  }
-  if (variant === 'analytics-kpi') {
-    return <AnalyticsKpiMock />;
-  }
-  if (variant === 'integrations-console') {
-    return <IntegrationsConsoleMock />;
-  }
-  if (variant === 'modules-matrix') {
-    return <ModulesMatrixMock />;
-  }
-  if (variant === 'sales-funnel') {
-    return <SalesFunnelMock />;
-  }
-  if (variant === 'crm-client-card') {
-    return <CrmClientCardMock />;
-  }
-  if (variant === 'omnichannel-inbox') {
-    return <OmnichannelInboxMock />;
-  }
-  if (variant === 'call-overlay') {
-    return <CallOverlayMock />;
-  }
-  if (variant === 'booking-calendar') {
-    return <BookingCalendarMock />;
-  }
-  if (variant === 'crm-analytics') {
-    return <CrmAnalyticsMock />;
-  }
-  if (variant === 'doc-template') {
-    return <DocTemplateMock />;
-  }
-  if (variant === 'mobile-crm') {
-    return <MobileCrmMock />;
+  if (variant && variant !== 'generic') {
+    const rendered = <MockVisual variant={variant} />;
+    if (rendered) return rendered;
   }
   if (src) {
     return (

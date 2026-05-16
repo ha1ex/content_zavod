@@ -9,7 +9,9 @@ import {
   CandidateCardMock,
   CrmAnalyticsMock,
   CrmClientCardMock,
+  DocEditorRichMock,
   DocTemplateMock,
+  DocsTreeMock,
   EmailSequenceMock,
   HiringPipelineMock,
   IntegrationsConsoleMock,
@@ -19,19 +21,23 @@ import {
   LedgerViewMock,
   MarketplaceConnectorMock,
   MobileCrmMock,
+  MobileDocReaderMock,
   ModulesMatrixMock,
   OmnichannelInboxMock,
   OnboardingChecklistMock,
   OrderQueueMock,
   OrgChartMock,
   PerformanceReviewMock,
+  PermissionsPanelMock,
   PmBoardMock,
   ProcessFlowchartMock,
   ReconciliationMatrixMock,
   RequestCardMock,
   SalesFunnelMock,
+  ShareLinkCardMock,
   SlaTrackerMock,
   SupportBoardMock,
+  TemplateGalleryMock,
 } from '.';
 
 /**
@@ -82,7 +88,14 @@ export type MockVariant =
   // E-commerce
   | 'order-queue'
   | 'inventory-grid'
-  | 'marketplace-connector';
+  | 'marketplace-connector'
+  // Docs / Knowledge base
+  | 'docs-tree'
+  | 'permissions-panel'
+  | 'share-link-card'
+  | 'doc-editor-rich'
+  | 'template-gallery'
+  | 'mobile-doc-reader';
 
 export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
   switch (variant) {
@@ -154,6 +167,18 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <InventoryGridMock />;
     case 'marketplace-connector':
       return <MarketplaceConnectorMock />;
+    case 'docs-tree':
+      return <DocsTreeMock />;
+    case 'permissions-panel':
+      return <PermissionsPanelMock />;
+    case 'share-link-card':
+      return <ShareLinkCardMock />;
+    case 'doc-editor-rich':
+      return <DocEditorRichMock />;
+    case 'template-gallery':
+      return <TemplateGalleryMock />;
+    case 'mobile-doc-reader':
+      return <MobileDocReaderMock />;
     default:
       return null;
   }

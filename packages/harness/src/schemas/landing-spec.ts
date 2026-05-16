@@ -52,6 +52,12 @@ export const AssetRefSchema = z.object({
       'order-queue',
       'inventory-grid',
       'marketplace-connector',
+      'docs-tree',
+      'permissions-panel',
+      'share-link-card',
+      'doc-editor-rich',
+      'template-gallery',
+      'mobile-doc-reader',
       'generic',
     ])
     .optional(),
@@ -271,6 +277,12 @@ const MediaCopySchema = z.object({
         'order-queue',
         'inventory-grid',
         'marketplace-connector',
+        'docs-tree',
+        'permissions-panel',
+        'share-link-card',
+        'doc-editor-rich',
+        'template-gallery',
+        'mobile-doc-reader',
       ])
       .optional(),
     /**
@@ -505,6 +517,12 @@ export const MockVariantSchema = z.enum([
   'order-queue',
   'inventory-grid',
   'marketplace-connector',
+  'docs-tree',
+  'permissions-panel',
+  'share-link-card',
+  'doc-editor-rich',
+  'template-gallery',
+  'mobile-doc-reader',
 ]);
 export type MockVariant = z.infer<typeof MockVariantSchema>;
 
@@ -666,7 +684,7 @@ export const LandingSpecMetaSchema = z
     tokenEstimate: z.number().optional(),
     promptVersion: z.string().optional(),
     domain: z
-      .enum(['pm', 'support', 'crm', 'hr', 'marketing', 'bpm', 'finance', 'ecommerce', 'unknown'])
+      .enum(['pm', 'support', 'crm', 'hr', 'marketing', 'bpm', 'finance', 'ecommerce', 'docs', 'unknown'])
       .optional()
       .describe(
         'Резолвленный домен продукта (из brief.product/market/audience). Используется ' +

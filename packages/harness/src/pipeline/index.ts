@@ -32,3 +32,12 @@ export {
   type PhasedRunReport,
 } from './orchestrator';
 export type { PhaseId, PhaseStatus, PhaseResult, PhaseContext } from './phases/types';
+
+export {
+  allocateIllustrations,
+  applyAllocationsToSpec,
+  type AllocateIllustrationsResult,
+  type AllocateIllustrationsOptions,
+  type AllocationDecision,
+  type AllocationDecisionKind,
+} from './allocate-illustrations';

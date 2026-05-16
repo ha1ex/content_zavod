@@ -1,0 +1,135 @@
+import { cn } from '../primitives/cn';
+import { Icon } from '../primitives/Icon';
+
+export interface ComparisonRowProps {
+  label: string;
+  /** Значения по колонкам — string или boolean (✓/✗). */
+  values: Array<string | boolean>;
+}
+
+export interface ComparisonColumnProps {
+  name: string;
+  badge?: string;
+  highlighted?: boolean;
+}
+
+export interface ComparisonTableProps {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  columns: ComparisonColumnProps[];
+  rows: ComparisonRowProps[];
+}
+
+/**
+ * Параллельная таблица сравнения «у них / у нас» для vs-страниц и
+ * migration-from-competitor layout. Заменяет generic FeatureGrid для случаев,
+ * когда нужна явная side-by-side компарация.
+ */
+export function ComparisonTable({
+  eyebrow,
+  title,
+  description,
+  columns,
+  rows,
+}: ComparisonTableProps) {
+  return (
+    <section
+      className={cn(
+        'mx-auto w-full max-w-(--container-kaiten)',
+        'px-4 py-16 md:px-6 lg:py-20',
+      )}
+    >
+      <div className="mb-10 max-w-2xl">
+        {eyebrow && (
+          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+            {eyebrow}
+          </p>
+        )}
+        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+        {description && (
+          <p className="mt-4 text-lg text-(--color-text-secondary)">{description}</p>
+        )}
+      </div>
+
+      <div
+        className={cn(
+          'overflow-x-auto rounded-(--radius-2xl) border border-(--color-border-default)',
+          'bg-(--color-surface-card)',
+        )}
+      >
+        <table className="w-full min-w-[640px] text-left text-sm">
+          <thead>
+            <tr className="border-b border-(--color-border-default) bg-(--color-surface-section)">
+              <th className="px-5 py-4 text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)">
+                Возможность
+              </th>
+              {columns.map((c, i) => (
+                <th
+                  key={i}
+                  className={cn(
+                    'px-5 py-4 text-sm font-semibold',
+                    c.highlighted
+                      ? 'bg-(--color-action-primary-soft) text-(--color-text-accent)'
+                      : 'text-(--color-text-primary)',
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    <span>{c.name}</span>
+                    {c.badge && (
+                      <span className="rounded-full bg-(--color-action-primary)/15 px-2 py-0.5 text-[10px] font-medium text-(--color-text-accent)">
+                        {c.badge}
+                      </span>
+                    )}
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, ri) => (
+              <tr
+                key={ri}
+                className={cn(
+                  ri !== rows.length - 1 && 'border-b border-(--color-border-default)',
+                )}
+              >
+                <td className="px-5 py-4 font-medium text-(--color-text-primary)">{row.label}</td>
+                {row.values.map((v, ci) => (
+                  <td
+                    key={ci}
+                    className={cn(
+                      'px-5 py-4 text-sm',
+                      columns[ci]?.highlighted &&
+                        'bg-(--color-action-primary-soft)/40 text-(--color-text-primary)',
+                    )}
+                  >
+                    {typeof v === 'boolean' ? (
+                      v ? (
+                        <span
+                          aria-label="есть"
+                          className="inline-flex items-center text-(--color-action-primary)"
+                        >
+                          <Icon name="Check" className="h-5 w-5" />
+                        </span>
+                      ) : (
+                        <span
+                          aria-label="нет"
+                          className="inline-flex items-center text-(--color-text-secondary)"
+                        >
+                          <Icon name="Minus" className="h-5 w-5" />
+                        </span>
+                      )
+                    ) : (
+                      v
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}

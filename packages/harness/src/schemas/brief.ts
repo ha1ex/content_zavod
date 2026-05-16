@@ -30,6 +30,9 @@ export const BriefSchema = z.object({
       'story-led-unaware',
       'depersonalized-product-tour',
       'crm-product-tour',
+      'migration-from-competitor',
+      'product-launch',
+      'case-study-deep-dive',
     ])
     .optional()
     .describe(

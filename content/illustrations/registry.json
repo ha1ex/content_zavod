@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-16T06:48:50.667Z",
+  "updatedAt": "2026-05-16T07:02:32.844Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -109,6 +109,24 @@
       "sectionIdx": 7,
       "domain": "crm",
       "recordedAt": "2026-05-16T06:48:50.667Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "hiring-pipeline",
+      "landingSlug": "test-hr",
+      "sectionId": "hero",
+      "sectionIdx": 0,
+      "domain": "hr",
+      "recordedAt": "2026-05-16T07:02:32.843Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "candidate-card",
+      "landingSlug": "test-hr",
+      "sectionId": "media_copy",
+      "sectionIdx": 1,
+      "domain": "hr",
+      "recordedAt": "2026-05-16T07:02:32.844Z"
     }
   ]
 }

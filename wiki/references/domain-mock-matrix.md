@@ -115,55 +115,52 @@ points, ревью, MR, deployment, дорожная карта.
 
 **Reference:** [`wiki/landings/crm-reference.md`](../landings/crm-reference.md).
 
-### Домены, которые ждут своего набора mock'ов
-
-При первом лендинге в каждом из этих доменов — создавать набор mock'ов
-**перед написанием spec**, потом заводить reference-файл. Никаких подмен.
-
-#### HR / Recruiting / People Operations
+### HR / Recruiting / People Operations
 
 Аудитория: HR BP, рекрутёры, head of people. Лексика: кандидат, вакансия,
 оффер, онбординг, перформанс-ревью, 1-on-1.
 
-Нужные mock'и:
-- `HiringPipelineMock` (`hiring-pipeline`) — канбан найма: Заявка → Скрининг →
-  Интервью → Тестовое → Оффер → Принят, в карточке кандидат с фото, грейдом,
-  ожидаемой ЗП, текущим этапом и интервьюером.
-- `CandidateCardMock` (`candidate-card`) — карточка кандидата с табами
-  (Профиль / Резюме / Интервью / Тестовое / Оффер), оценками интервьюеров.
-- `OnboardingChecklistMock` (`onboarding-checklist`) — чек-лист онбординга
-  по дням первой недели, с владельцами задач и статусами.
-- `OrgChartMock` (`org-chart`) — фрагмент оргструктуры с открытыми вакансиями.
-- `PerformanceReviewMock` (`performance-review`) — карточка ревью с целями,
-  оценками peers и manager, обратной связью.
+| Mock | Variant slug | Что показывает |
+|---|---|---|
+| `HiringPipelineMock` | `hiring-pipeline` | Канбан найма: 6 стадий, карточки кандидатов с грейдом, ожидаемой ЗП, интервьюером |
+| `CandidateCardMock` | `candidate-card` | Карточка кандидата с табами, оценками 3 интервьюеров, статусом готовности к офферу |
+| `OnboardingChecklistMock` | `onboarding-checklist` | Чек-лист онбординга по 5 дням первой недели с владельцами задач и статусами |
+| `OrgChartMock` | `org-chart` | Фрагмент оргструктуры с CTO → 3 Lead'а → команда с open vacancies |
+| `PerformanceReviewMock` | `performance-review` | Performance review: цели с прогресс-баром, 360° обратная связь, финальный рейтинг |
 
-#### Marketing Automation
+**Reference:** [`wiki/landings/hr-reference.md`](../landings/hr-reference.md).
+
+### Marketing Automation
 
 Аудитория: маркетологи, head of growth, продактовые маркетологи. Лексика:
 кампания, A/B-тест, конверсия, LTV/CAC, email-цепочка, сегмент аудитории.
 
-Нужные mock'и:
-- `CampaignDashboardMock` (`campaign-dashboard`) — дашборд кампании с CTR,
-  CPC, конверсией по каналам, графиком расходов.
-- `EmailSequenceMock` (`email-sequence`) — flow email-цепочки с триггерами,
-  задержками, ветвлениями open/click.
-- `AbTestResultsMock` (`ab-test-results`) — результаты A/B: вариант A vs B,
-  стат-значимость, lift по метрике.
-- `AudienceSegmentsMock` (`audience-segments`) — список сегментов с правилами
-  включения и размером каждого.
+| Mock | Variant slug | Что показывает |
+|---|---|---|
+| `CampaignDashboardMock` | `campaign-dashboard` | 2×2 KPI (CTR, CPL, конверсия, расход) + 4 канала с распределением бюджета |
+| `EmailSequenceMock` | `email-sequence` | Flow цепочки из 5 писем с триггерами, темами, open/click rate |
+| `AbTestResultsMock` | `ab-test-results` | Результаты A/B: Variant A vs B с метриками, lift, p-value |
+| `AudienceSegmentsMock` | `audience-segments` | Сегменты аудитории: правила формирования, размер, рост за неделю |
 
-#### BPM / Workflow Automation
+**Reference:** [`wiki/landings/marketing-reference.md`](../landings/marketing-reference.md).
+
+### BPM / Workflow Automation
 
 Аудитория: ops-директора, бизнес-аналитики. Лексика: процесс, шаг, согласование,
 SLA, эскалация, BPMN, узкое место.
 
-Нужные mock'и:
-- `ProcessFlowchartMock` (`process-flowchart`) — визуальная схема процесса с
-  шагами, ветвлениями и SLA на каждом шаге.
-- `ApprovalChainMock` (`approval-chain`) — цепочка согласований с подписантами,
-  статусом каждого, временем ожидания.
-- `SlaTrackerMock` (`sla-tracker`) — таблица процессов с временем выполнения
-  vs SLA, цвет-код красный/зелёный.
+| Mock | Variant slug | Что показывает |
+|---|---|---|
+| `ProcessFlowchartMock` | `process-flowchart` | Схема процесса: 6 шагов с ответственными, SLA, статусами (done/current/bottleneck/pending) |
+| `ApprovalChainMock` | `approval-chain` | Цепочка согласований: 4 подписанта со статусами, временами ожидания, эскалацией |
+| `SlaTrackerMock` | `sla-tracker` | Таблица процессов с % в SLA / % просрочки, цвет-код зон |
+
+**Reference:** [`wiki/landings/bpm-reference.md`](../landings/bpm-reference.md).
+
+### Домены, которые ждут своего набора mock'ов
+
+При первом лендинге в каждом из этих доменов — создавать набор mock'ов
+**перед написанием spec**, потом заводить reference-файл. Никаких подмен.
 
 #### Finance / Accounting
 

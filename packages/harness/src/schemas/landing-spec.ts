@@ -34,9 +34,27 @@ export const AssetRefSchema = z.object({
       'crm-analytics',
       'doc-template',
       'mobile-crm',
+      'hiring-pipeline',
+      'candidate-card',
+      'onboarding-checklist',
+      'org-chart',
+      'performance-review',
+      'campaign-dashboard',
+      'email-sequence',
+      'ab-test-results',
+      'audience-segments',
+      'process-flowchart',
+      'approval-chain',
+      'sla-tracker',
       'generic',
     ])
     .optional(),
+  /**
+   * Опциональная ссылка на уникальную SVG-иллюстрацию (генерируется в P8
+   * illustration allocation). Когда задана — рендерер использует её вместо
+   * variant из enum. См. wiki/pipeline/phase-gates.md (P8).
+   */
+  illustrationId: z.string().optional(),
 });
 export type AssetRef = z.infer<typeof AssetRefSchema>;
 
@@ -229,8 +247,25 @@ const MediaCopySchema = z.object({
         'crm-analytics',
         'doc-template',
         'mobile-crm',
+        'hiring-pipeline',
+        'candidate-card',
+        'onboarding-checklist',
+        'org-chart',
+        'performance-review',
+        'campaign-dashboard',
+        'email-sequence',
+        'ab-test-results',
+        'audience-segments',
+        'process-flowchart',
+        'approval-chain',
+        'sla-tracker',
       ])
       .optional(),
+    /**
+     * Опциональная ссылка на уникальную SVG-иллюстрацию (генерируется в P8).
+     * Когда задана — рендерер использует её вместо mediaVariant.
+     */
+    customIllustrationId: z.string().optional(),
     primaryCta: CtaSchema.optional(),
     secondaryCta: CtaSchema.nullable().optional(),
   }),
@@ -310,6 +345,118 @@ const PromoBannerSchema = z.object({
   }),
 });
 
+/* ─── ComparisonTable (vs-страницы, migration) ────────────────────── */
+const ComparisonTableSchema = z.object({
+  id: z.literal('comparison_table'),
+  component: z.literal('ComparisonTable'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(400).optional(),
+    columns: z
+      .array(
+        z.object({
+          name: z.string().min(1).max(60),
+          badge: z.string().max(40).optional(),
+          highlighted: z.boolean().default(false),
+        }),
+      )
+      .min(2)
+      .max(4),
+    rows: z
+      .array(
+        z.object({
+          label: z.string().min(2).max(120),
+          values: z.array(z.union([z.string().max(80), z.boolean()])).min(2).max(4),
+        }),
+      )
+      .min(3)
+      .max(20),
+  }),
+});
+
+/* ─── TimelineRoadmap (migration plan, product launch, case study) ── */
+const TimelineRoadmapSchema = z.object({
+  id: z.literal('timeline_roadmap'),
+  component: z.literal('TimelineRoadmap'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(400).optional(),
+    milestones: z
+      .array(
+        z.object({
+          period: z.string().min(1).max(40),
+          title: z.string().min(2).max(120),
+          description: z.string().max(280).optional(),
+          status: z.enum(['done', 'in-progress', 'planned']).optional(),
+          bullets: z.array(z.string().min(2).max(160)).max(6).optional(),
+        }),
+      )
+      .min(2)
+      .max(8),
+    orientation: z.enum(['horizontal', 'vertical']).default('vertical'),
+  }),
+});
+
+/* ─── BentoGrid (feature overview с visual hierarchy) ─────────────── */
+const BentoGridSchema = z.object({
+  id: z.literal('bento_grid'),
+  component: z.literal('BentoGrid'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(400).optional(),
+    cells: z
+      .array(
+        z.object({
+          icon: z.string().describe('lucide-icon name').optional(),
+          title: z.string().min(2).max(80),
+          description: z.string().min(10).max(280),
+          size: z.enum(['small', 'wide', 'tall', 'large']).default('small'),
+          accent: z.boolean().default(false),
+        }),
+      )
+      .min(3)
+      .max(9),
+  }),
+});
+
+/* ─── LogoCloud (trust signal) ────────────────────────────────────── */
+const LogoCloudSchema = z.object({
+  id: z.literal('logo_cloud'),
+  component: z.literal('LogoCloud'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120).optional(),
+    description: z.string().max(280).optional(),
+    items: z
+      .array(
+        z.object({
+          brand: z.string().min(1).max(60),
+          brandInitial: z.string().max(4).optional(),
+        }),
+      )
+      .min(4)
+      .max(20),
+  }),
+});
+
+/* ─── TestimonialQuote (case-study deep-dive, story-led) ──────────── */
+const TestimonialQuoteSchema = z.object({
+  id: z.literal('testimonial_quote'),
+  component: z.literal('TestimonialQuote'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    quote: z.string().min(20).max(600),
+    authorName: z.string().min(2).max(80),
+    authorRole: z.string().max(120).optional(),
+    brandName: z.string().max(60).optional(),
+    brandInitial: z.string().max(4).optional(),
+    metric: z.string().max(120).optional(),
+  }),
+});
+
 /* ─── Shared MockVariant enum (для секций с inline mock-визуалами) ── */
 export const MockVariantSchema = z.enum([
   'support-board',
@@ -328,6 +475,18 @@ export const MockVariantSchema = z.enum([
   'crm-analytics',
   'doc-template',
   'mobile-crm',
+  'hiring-pipeline',
+  'candidate-card',
+  'onboarding-checklist',
+  'org-chart',
+  'performance-review',
+  'campaign-dashboard',
+  'email-sequence',
+  'ab-test-results',
+  'audience-segments',
+  'process-flowchart',
+  'approval-chain',
+  'sla-tracker',
 ]);
 export type MockVariant = z.infer<typeof MockVariantSchema>;
 
@@ -470,6 +629,11 @@ export const SectionSchema = z.discriminatedUnion('component', [
   TabbedFeatureSectionSchema,
   ScenarioWalkthroughSectionSchema,
   IndustryPickerSectionSchema,
+  ComparisonTableSchema,
+  TimelineRoadmapSchema,
+  BentoGridSchema,
+  LogoCloudSchema,
+  TestimonialQuoteSchema,
 ]);
 export type Section = z.infer<typeof SectionSchema>;
 
@@ -490,6 +654,22 @@ export const LandingSpecMetaSchema = z
         'Резолвленный домен продукта (из brief.product/market/audience). Используется ' +
           'illustration-domain-match валидатором для блокировки cross-domain reuse. ' +
           'Если не задан явно — резолвится из brief при ingest. См. wiki/references/domain-mock-matrix.md.',
+      ),
+    illustrationAllocations: z
+      .array(
+        z.object({
+          sectionIdx: z.number().int().nonnegative(),
+          sectionId: z.string(),
+          intent: z.string(),
+          decision: z.enum(['reuse-mock', 'generate-svg', 'no-op']),
+          variant: z.string().optional(),
+          illustrationId: z.string().optional(),
+        }),
+      )
+      .optional()
+      .describe(
+        'Решения phase P8 illustration allocation. Заполняется orchestrator\'ом. ' +
+          'Используется для трассировки: какая секция получила какой mock/SVG.',
       ),
   })
   .optional();

@@ -57,3 +57,22 @@ export type {
   IndustryPickerSectionProps,
   IndustryProps,
 } from './IndustryPickerSection';
+
+export { ComparisonTable } from './ComparisonTable';
+export type {
+  ComparisonTableProps,
+  ComparisonRowProps,
+  ComparisonColumnProps,
+} from './ComparisonTable';
+
+export { TimelineRoadmap } from './TimelineRoadmap';
+export type { TimelineRoadmapProps, TimelineMilestoneProps } from './TimelineRoadmap';
+
+export { BentoGrid } from './BentoGrid';
+export type { BentoGridProps, BentoCellProps } from './BentoGrid';
+
+export { LogoCloud } from './LogoCloud';
+export type { LogoCloudProps, LogoCloudItemProps } from './LogoCloud';
+
+export { TestimonialQuote } from './TestimonialQuote';
+export type { TestimonialQuoteProps } from './TestimonialQuote';

@@ -1,35 +1,51 @@
 import {
+  AbTestResultsMock,
   AnalyticsKpiMock,
+  ApprovalChainMock,
+  AudienceSegmentsMock,
   BookingCalendarMock,
   CallOverlayMock,
+  CampaignDashboardMock,
+  CandidateCardMock,
   CrmAnalyticsMock,
   CrmClientCardMock,
   DocTemplateMock,
+  EmailSequenceMock,
+  HiringPipelineMock,
   IntegrationsConsoleMock,
   KnowledgeBaseMock,
   MobileCrmMock,
   ModulesMatrixMock,
   OmnichannelInboxMock,
+  OnboardingChecklistMock,
+  OrgChartMock,
+  PerformanceReviewMock,
   PmBoardMock,
+  ProcessFlowchartMock,
   RequestCardMock,
   SalesFunnelMock,
+  SlaTrackerMock,
   SupportBoardMock,
 } from '.';
 
 /**
  * Полный набор slug'ов mock-вариантов. Источник истины для
- * `HeroSection.visual.variant`, `MediaCopy.mediaVariant` и новых секций
- * (`TabbedFeatureSection.tabs[].mockVariant`, `ScenarioWalkthroughSection.steps[].mockVariant`).
+ * `HeroSection.visual.variant`, `MediaCopy.mediaVariant` и интерактивных
+ * секций (`TabbedFeatureSection.tabs[].mockVariant`,
+ * `ScenarioWalkthroughSection.steps[].mockVariant`).
  */
 export type MockVariant =
-  | 'support-board'
-  | 'request-card'
-  | 'kb-public'
-  | 'kb-internal'
+  // PM
   | 'pm-board'
   | 'analytics-kpi'
   | 'integrations-console'
   | 'modules-matrix'
+  // Support
+  | 'support-board'
+  | 'request-card'
+  | 'kb-public'
+  | 'kb-internal'
+  // CRM
   | 'sales-funnel'
   | 'crm-client-card'
   | 'omnichannel-inbox'
@@ -37,13 +53,23 @@ export type MockVariant =
   | 'booking-calendar'
   | 'crm-analytics'
   | 'doc-template'
-  | 'mobile-crm';
+  | 'mobile-crm'
+  // HR
+  | 'hiring-pipeline'
+  | 'candidate-card'
+  | 'onboarding-checklist'
+  | 'org-chart'
+  | 'performance-review'
+  // Marketing
+  | 'campaign-dashboard'
+  | 'email-sequence'
+  | 'ab-test-results'
+  | 'audience-segments'
+  // BPM
+  | 'process-flowchart'
+  | 'approval-chain'
+  | 'sla-tracker';
 
-/**
- * Единый dispatcher: slug → React-компонент mock'а. Используй всюду, где
- * нужно отрисовать mock внутри секции. Если slug не известен — возвращает null,
- * чтобы caller сам обработал fallback.
- */
 export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
   switch (variant) {
     case 'support-board':
@@ -78,6 +104,30 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <DocTemplateMock />;
     case 'mobile-crm':
       return <MobileCrmMock />;
+    case 'hiring-pipeline':
+      return <HiringPipelineMock />;
+    case 'candidate-card':
+      return <CandidateCardMock />;
+    case 'onboarding-checklist':
+      return <OnboardingChecklistMock />;
+    case 'org-chart':
+      return <OrgChartMock />;
+    case 'performance-review':
+      return <PerformanceReviewMock />;
+    case 'campaign-dashboard':
+      return <CampaignDashboardMock />;
+    case 'email-sequence':
+      return <EmailSequenceMock />;
+    case 'ab-test-results':
+      return <AbTestResultsMock />;
+    case 'audience-segments':
+      return <AudienceSegmentsMock />;
+    case 'process-flowchart':
+      return <ProcessFlowchartMock />;
+    case 'approval-chain':
+      return <ApprovalChainMock />;
+    case 'sla-tracker':
+      return <SlaTrackerMock />;
     default:
       return null;
   }

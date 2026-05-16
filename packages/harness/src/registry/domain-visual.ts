@@ -255,32 +255,39 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
       'hrm',
       'перформанс ревью',
     ],
-    mocks: [],
-    missingMocks: [
+    mocks: [
       {
         variant: 'hiring-pipeline',
+        sections: ['hero', 'media', 'tab', 'scenario'],
         description:
-          'Канбан найма: Заявка → Скрининг → Интервью → Тестовое → Оффер → Принят, в карточке кандидат с фото, грейдом, ожидаемой ЗП, этапом, интервьюером',
+          'Канбан найма: 6 стадий, карточки кандидатов с грейдом, ожидаемой ЗП, интервьюером',
       },
       {
         variant: 'candidate-card',
+        sections: ['media', 'tab', 'scenario'],
         description:
-          'Карточка кандидата с табами (Профиль / Резюме / Интервью / Тестовое / Оффер), оценками интервьюеров',
+          'Карточка кандидата с табами, оценками 3 интервьюеров, статусом готовности к офферу',
       },
       {
         variant: 'onboarding-checklist',
-        description: 'Чек-лист онбординга по дням первой недели с владельцами задач и статусами',
+        sections: ['media', 'tab', 'scenario'],
+        description:
+          'Чек-лист онбординга по 5 дням первой недели с владельцами задач (HR / IT / тимлид) и статусами',
       },
       {
         variant: 'org-chart',
-        description: 'Фрагмент оргструктуры с открытыми вакансиями',
+        sections: ['media', 'tab'],
+        description: 'Фрагмент оргструктуры: CTO → 3 Lead\'а → команда с open vacancies',
       },
       {
         variant: 'performance-review',
+        sections: ['media', 'scenario'],
         description:
-          'Карточка ревью с целями, оценками peers и manager, обратной связью',
+          'Карточка performance review: цели с прогрессом, 360° обратная связь, финальный рейтинг',
       },
     ],
+    missingMocks: [],
+    referenceDoc: 'wiki/landings/hr-reference.md',
   },
   {
     domain: 'marketing',
@@ -299,27 +306,34 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
       'growth marketing',
       'performance marketing',
     ],
-    mocks: [],
-    missingMocks: [
+    mocks: [
       {
         variant: 'campaign-dashboard',
+        sections: ['hero', 'media', 'tab'],
         description:
-          'Дашборд кампании с CTR, CPC, конверсией по каналам, графиком расходов',
+          'Дашборд кампании: 2×2 KPI (CTR, CPL, конверсия, расход) + 4 канала с распределением бюджета',
       },
       {
         variant: 'email-sequence',
+        sections: ['media', 'tab', 'scenario'],
         description:
-          'Flow email-цепочки с триггерами, задержками, ветвлениями open/click',
+          'Flow email-цепочки: 5 писем с триггерами, темами, open/click rate, активным шагом',
       },
       {
         variant: 'ab-test-results',
-        description: 'Результаты A/B: вариант A vs B, стат-значимость, lift по метрике',
+        sections: ['media', 'tab', 'scenario'],
+        description:
+          'Результаты A/B: Variant A vs B с метриками, lift +40%, стат-значимость p-value 0.012',
       },
       {
         variant: 'audience-segments',
-        description: 'Список сегментов с правилами включения и размером каждого',
+        sections: ['media', 'tab'],
+        description:
+          'Список сегментов аудитории: правила формирования, размер, рост за неделю',
       },
     ],
+    missingMocks: [],
+    referenceDoc: 'wiki/landings/marketing-reference.md',
   },
   {
     domain: 'bpm',
@@ -335,23 +349,28 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
       'эскалаци',
       'бизнес-процесс',
     ],
-    mocks: [],
-    missingMocks: [
+    mocks: [
       {
         variant: 'process-flowchart',
+        sections: ['hero', 'media', 'tab'],
         description:
-          'Визуальная схема процесса с шагами, ветвлениями и SLA на каждом шаге',
+          'Схема бизнес-процесса: 6 шагов с ответственными, SLA, статусами (done/current/bottleneck/pending)',
       },
       {
         variant: 'approval-chain',
+        sections: ['media', 'scenario'],
         description:
-          'Цепочка согласований с подписантами, статусом каждого, временем ожидания',
+          'Цепочка согласований: 4 подписанта со статусами, временами ожидания, эскалацией',
       },
       {
         variant: 'sla-tracker',
-        description: 'Таблица процессов с временем выполнения vs SLA, цвет-код красный/зелёный',
+        sections: ['media', 'tab'],
+        description:
+          'SLA-трекер: 6 процессов с % в SLA / % просрочки, цвет-код зон (зелёный/оранжевый/красный)',
       },
     ],
+    missingMocks: [],
+    referenceDoc: 'wiki/landings/bpm-reference.md',
   },
   {
     domain: 'finance',

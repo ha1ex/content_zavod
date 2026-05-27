@@ -3,6 +3,32 @@
 import { useState, useTransition, useRef } from 'react';
 import Link from 'next/link';
 
+interface ExtractedBrief {
+  product?: string;
+  audience?: string[];
+  market?: string;
+  primaryGoal?: PrimaryGoal;
+  mainPain?: string;
+  mainPromise?: string;
+  proofPoints?: string[];
+  tone?: string;
+  cta?: string;
+  pageArchetype?: PageArchetype;
+  pageLayout?: PageLayout | null;
+}
+
+interface ExtractResponse {
+  brief: ExtractedBrief;
+  source: 'llm' | 'heuristic' | 'heuristic-fallback' | 'direct-json';
+  provider?: string;
+  filename?: string;
+  warning?: string;
+  error?: string;
+}
+
+type ImportTab = 'file' | 'text';
+type ImportStatus = 'idle' | 'extracting' | 'success' | 'error';
+
 interface BriefFormState {
   slug: string;
   product: string;
@@ -84,6 +110,104 @@ export function BriefForm() {
   const [error, setError] = useState<string | null>(null);
   const [_pending, startTransition] = useTransition();
   const logRef = useRef<HTMLPreElement>(null);
+
+  // Import state
+  const [importTab, setImportTab] = useState<ImportTab>('file');
+  const [pastedText, setPastedText] = useState<string>('');
+  const [importStatus, setImportStatus] = useState<ImportStatus>('idle');
+  const [importMessage, setImportMessage] = useState<string | null>(null);
+  const [importSource, setImportSource] = useState<ExtractResponse['source'] | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function applyExtracted(brief: ExtractedBrief, fallbackSlug?: string) {
+    setForm((prev) => {
+      const next: BriefFormState = { ...prev };
+      const slugFromFile = fallbackSlug
+        ? fallbackSlug
+            .toLowerCase()
+            .replace(/\.[a-z0-9]+$/i, '')
+            .replace(/[^a-z0-9-]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .slice(0, 64)
+        : '';
+      if (!next.slug && slugFromFile) next.slug = slugFromFile;
+      if (brief.product) next.product = brief.product;
+      if (Array.isArray(brief.audience) && brief.audience.length)
+        next.audience = brief.audience.join(', ');
+      if (brief.market) next.market = brief.market;
+      if (brief.primaryGoal) next.primaryGoal = brief.primaryGoal;
+      if (brief.mainPain) next.mainPain = brief.mainPain;
+      if (brief.mainPromise) next.mainPromise = brief.mainPromise;
+      if (Array.isArray(brief.proofPoints) && brief.proofPoints.length)
+        next.proofPoints = brief.proofPoints.join('\n');
+      if (brief.tone) next.tone = brief.tone;
+      if (brief.cta) next.cta = brief.cta;
+      if (brief.pageArchetype) next.pageArchetype = brief.pageArchetype;
+      if (brief.pageLayout) next.pageLayout = brief.pageLayout;
+      return next;
+    });
+  }
+
+  async function extractFromFile(file: File) {
+    setImportStatus('extracting');
+    setImportMessage(null);
+    setImportSource(null);
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const res = await fetch('/api/extract-brief', { method: 'POST', body: formData });
+      const body = (await res.json()) as ExtractResponse;
+      if (!res.ok || !body.brief) {
+        setImportStatus('error');
+        setImportMessage(body.error ?? `Не удалось распознать (${res.status})`);
+        return;
+      }
+      applyExtracted(body.brief, body.filename ?? file.name);
+      setImportStatus('success');
+      setImportSource(body.source);
+      setImportMessage(
+        body.warning ??
+          `Распознано через ${body.source}${body.provider ? ` (${body.provider})` : ''}. Поля заполнены — проверьте и при необходимости поправьте.`,
+      );
+    } catch (err) {
+      setImportStatus('error');
+      setImportMessage((err as Error).message);
+    }
+  }
+
+  async function extractFromText() {
+    if (pastedText.trim().length < 20) {
+      setImportStatus('error');
+      setImportMessage('Текст слишком короткий — минимум 20 символов.');
+      return;
+    }
+    setImportStatus('extracting');
+    setImportMessage(null);
+    setImportSource(null);
+    try {
+      const res = await fetch('/api/extract-brief', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ text: pastedText }),
+      });
+      const body = (await res.json()) as ExtractResponse;
+      if (!res.ok || !body.brief) {
+        setImportStatus('error');
+        setImportMessage(body.error ?? `Не удалось распознать (${res.status})`);
+        return;
+      }
+      applyExtracted(body.brief);
+      setImportStatus('success');
+      setImportSource(body.source);
+      setImportMessage(
+        body.warning ??
+          `Распознано через ${body.source}${body.provider ? ` (${body.provider})` : ''}. Поля заполнены — проверьте.`,
+      );
+    } catch (err) {
+      setImportStatus('error');
+      setImportMessage((err as Error).message);
+    }
+  }
 
   function appendLog(line: string) {
     setLog((prev) => prev + line);
@@ -203,6 +327,107 @@ export function BriefForm() {
 
   return (
     <>
+      <section className="mb-6 rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-5">
+        <header className="mb-4 flex items-baseline justify-between gap-3">
+          <div>
+            <h2 className="text-base font-semibold">Импорт brief</h2>
+            <p className="text-xs text-(--color-text-secondary)">
+              Загрузите готовый файл или вставьте текст — система извлечёт поля и
+              предзаполнит форму ниже.
+            </p>
+          </div>
+          {importSource && importStatus === 'success' && (
+            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-medium text-emerald-800">
+              {importSource}
+            </span>
+          )}
+        </header>
+
+        <div className="mb-4 flex gap-2 text-sm">
+          {(['file', 'text'] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setImportTab(tab)}
+              className={`rounded-(--radius-lg) px-3 py-1.5 text-sm transition ${
+                importTab === tab
+                  ? 'bg-(--color-action-primary) text-white'
+                  : 'border border-(--color-border-default) text-(--color-text-secondary) hover:bg-(--color-surface-section)'
+              }`}
+            >
+              {tab === 'file' ? '📁 Файл' : '📝 Текст'}
+            </button>
+          ))}
+        </div>
+
+        {importTab === 'file' && (
+          <div className="space-y-3">
+            <label
+              className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-(--radius-xl) border-2 border-dashed border-(--color-border-default) bg-(--color-surface-section) px-4 py-8 text-center transition hover:border-(--color-action-primary) hover:bg-(--color-action-primary-soft)"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={async (e) => {
+                e.preventDefault();
+                const file = e.dataTransfer.files[0];
+                if (file) await extractFromFile(file);
+              }}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json,.md,.txt,.docx"
+                className="sr-only"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (file) await extractFromFile(file);
+                }}
+              />
+              <span className="text-sm font-medium">
+                Перетащите файл сюда или нажмите для выбора
+              </span>
+              <span className="text-xs text-(--color-text-secondary)">
+                .json (готовый Brief) · .md · .txt · .docx
+              </span>
+            </label>
+          </div>
+        )}
+
+        {importTab === 'text' && (
+          <div className="space-y-3">
+            <textarea
+              value={pastedText}
+              onChange={(e) => setPastedText(e.target.value)}
+              rows={8}
+              placeholder="Вставьте текст брифа, концепцию продукта или описание из Notion/Google Docs. От 20 символов."
+              className={inputCls}
+            />
+            <button
+              type="button"
+              onClick={extractFromText}
+              disabled={importStatus === 'extracting' || pastedText.trim().length < 20}
+              className="rounded-(--radius-lg) bg-(--color-action-primary) px-4 py-2 text-sm font-medium text-white disabled:opacity-60"
+            >
+              {importStatus === 'extracting' ? 'Распознаю…' : 'Распознать → заполнить форму'}
+            </button>
+          </div>
+        )}
+
+        {importStatus === 'extracting' && (
+          <p className="mt-3 text-sm text-amber-700">
+            Извлекаю поля… (если есть API-ключ — через LLM, иначе эвристика).
+          </p>
+        )}
+        {importStatus === 'success' && importMessage && (
+          <p className="mt-3 rounded-(--radius-lg) bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+            ✓ {importMessage}
+          </p>
+        )}
+        {importStatus === 'error' && importMessage && (
+          <p className="mt-3 rounded-(--radius-lg) bg-rose-50 px-3 py-2 text-sm text-rose-700">
+            ✗ {importMessage}
+          </p>
+        )}
+      </section>
+
       <form
         className="space-y-5 rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-6"
         onSubmit={(e) => {

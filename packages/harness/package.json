@@ -16,7 +16,8 @@
     "./approvals": "./src/approvals/index.ts",
     "./handoff": "./src/handoff/index.ts",
     "./agent": "./src/agent/index.ts",
-    "./puck": "./src/puck/index.ts"
+    "./puck": "./src/puck/index.ts",
+    "./providers": "./src/providers/index.ts"
   },
   "bin": {
     "harness": "./bin/harness.mjs"

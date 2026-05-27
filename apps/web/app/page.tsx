@@ -50,25 +50,23 @@ export default async function DashboardPage() {
           </div>
         </Link>
 
-        <a
-          href="http://localhost:6006"
-          target="_blank"
-          rel="noreferrer"
+        <Link
+          href="/catalog"
           className="group rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-6 transition hover:border-(--color-action-primary)/50"
         >
           <div className="flex items-start justify-between gap-3">
             <div>
               <h2 className="text-lg font-semibold">Каталог блоков</h2>
               <p className="mt-1 text-sm text-(--color-text-secondary)">
-                Storybook · 22 секции и 39 моков. Запусти{' '}
-                <code>pnpm --filter @buffalo/ui storybook</code>.
+                22 секции + 39 моков с живыми примерами. Всё прямо в браузере, без запуска
+                Storybook.
               </p>
             </div>
             <span aria-hidden className="text-2xl">
-              ↗
+              →
             </span>
           </div>
-        </a>
+        </Link>
       </section>
 
       <section>

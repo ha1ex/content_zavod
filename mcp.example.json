@@ -1,0 +1,13 @@
+{
+  "$comment": "Пример конфига MCP для Claude Desktop / VS Code Copilot / Codex CLI. Положите в соответствующий location клиента и замените /absolute/path/to/calgary на ваш реальный путь.",
+  "mcpServers": {
+    "buffalo": {
+      "command": "pnpm",
+      "args": ["--filter", "@buffalo/mcp-server", "dev"],
+      "cwd": "/absolute/path/to/calgary",
+      "env": {
+        "BUFFALO_REPO_ROOT": "/absolute/path/to/calgary"
+      }
+    }
+  }
+}

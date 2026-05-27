@@ -25,12 +25,17 @@ import {
   ModulesMatrixMock,
   OmnichannelInboxMock,
   OnboardingChecklistMock,
+  OrderFlowMock,
   OrderQueueMock,
   OrgChartMock,
   PerformanceReviewMock,
   PermissionsPanelMock,
   PmBoardMock,
   ProcessFlowchartMock,
+  ProductionBoardMock,
+  ProductionDepartmentsMock,
+  ProductionGanttMock,
+  ProductionTaskCardMock,
   ReconciliationMatrixMock,
   RequestCardMock,
   SalesFunnelMock,
@@ -95,7 +100,13 @@ export type MockVariant =
   | 'share-link-card'
   | 'doc-editor-rich'
   | 'template-gallery'
-  | 'mobile-doc-reader';
+  | 'mobile-doc-reader'
+  // Manufacturing / Производство
+  | 'production-board'
+  | 'order-flow'
+  | 'production-gantt'
+  | 'production-task-card'
+  | 'production-departments';
 
 export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
   switch (variant) {
@@ -179,6 +190,16 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <TemplateGalleryMock />;
     case 'mobile-doc-reader':
       return <MobileDocReaderMock />;
+    case 'production-board':
+      return <ProductionBoardMock />;
+    case 'order-flow':
+      return <OrderFlowMock />;
+    case 'production-gantt':
+      return <ProductionGanttMock />;
+    case 'production-task-card':
+      return <ProductionTaskCardMock />;
+    case 'production-departments':
+      return <ProductionDepartmentsMock />;
     default:
       return null;
   }

@@ -85,6 +85,7 @@ const DOMAIN_PALETTES: Record<Domain, { accent: string; glowDark: string; glowLi
   finance: { accent: '#7d4ccf', glowDark: '#10B981', glowLight: '#FED7AA' },
   ecommerce: { accent: '#7d4ccf', glowDark: '#3B82F6', glowLight: '#FBCFE8' },
   docs: { accent: '#7d4ccf', glowDark: '#3B82F6', glowLight: '#FED7AA' },
+  manufacturing: { accent: '#7d4ccf', glowDark: '#10B981', glowLight: '#FED7AA' },
   unknown: { accent: '#7d4ccf', glowDark: '#10B981', glowLight: '#FED7AA' },
 };
 

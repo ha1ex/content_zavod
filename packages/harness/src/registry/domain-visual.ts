@@ -28,6 +28,7 @@ export type Domain =
   | 'finance'
   | 'ecommerce'
   | 'docs'
+  | 'manufacturing'
   | 'unknown';
 
 export interface DomainMockEntry {
@@ -544,6 +545,73 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
     ],
     missingMocks: [],
     referenceDoc: 'wiki/landings/docs-reference.md',
+  },
+  {
+    domain: 'manufacturing',
+    displayName: 'Manufacturing / Производство',
+    description:
+      'Производственные заказы, маршрут заявка → закупка → производство → ОТК → отгрузка, ' +
+      'спецификации и чертежи внутри карточки, загрузка цеха и участков, ОТК, диаграмма Ганта',
+    aliases: [
+      'manufacturing',
+      'production',
+      'производств',
+      'цех',
+      'отк',
+      'снабжен',
+      'технолог',
+      'мастер',
+      'кладовщик',
+      'участок',
+      'заказ на поставку',
+      'спецификаци',
+      'чертёж',
+      'чертеж',
+      'техкарт',
+      'диаграмма ганта',
+      'ресурсное планирование',
+      'согласование отк',
+      'мелкосерийное производство',
+      'машиностроени',
+      'металлообработка',
+      'приборостроение',
+      'контрактное производство',
+      'завод',
+    ],
+    mocks: [
+      {
+        variant: 'production-board',
+        sections: ['hero', 'media', 'tab', 'scenario'],
+        description:
+          'Канбан производственного потока: Очередь → В работе → Согласование ОТК → Правки ОТК → Готово, карточки заказов с участками, номерами и компаниями',
+      },
+      {
+        variant: 'order-flow',
+        sections: ['media', 'tab', 'scenario'],
+        description:
+          'Доска «Заказы на поставку» + «Проект Омега» с одинаковыми стадиями: внешние заявки и внутренний производственный цикл бок о бок',
+      },
+      {
+        variant: 'production-gantt',
+        sections: ['hero', 'media', 'tab', 'scenario'],
+        description:
+          'Диаграмма Ганта по фазам Инициация → Планирование → Реализация, с ресурсным планированием и пересечениями этапов',
+      },
+      {
+        variant: 'production-task-card',
+        sections: ['media', 'scenario'],
+        description:
+          'Карточка производственной задачи с цехом, номером заказа, чек-листом действий, спецификацией и фото материалов',
+      },
+      {
+        variant: 'production-departments',
+        sections: ['media', 'tab'],
+        description:
+          'Mockup ноутбука «Вся компания в одной системе» с плавающими лейблами 6 департаментов (бухгалтерия, проектирование, логистика, коммерческий отдел, производство, оценка рисков)',
+      },
+    ],
+    missingMocks: [],
+    referenceDoc: 'wiki/landings/manufacturing-reference.md',
   },
 ];
 

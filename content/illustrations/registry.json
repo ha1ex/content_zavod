@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-16T07:47:28.531Z",
+  "updatedAt": "2026-05-27T15:59:25.300Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -217,6 +217,51 @@
       "sectionIdx": 10,
       "domain": "docs",
       "recordedAt": "2026-05-16T07:47:28.531Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "production-board",
+      "landingSlug": "kaiten-manufacturing",
+      "sectionId": "hero",
+      "sectionIdx": 0,
+      "domain": "manufacturing",
+      "recordedAt": "2026-05-27T15:59:25.298Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "order-flow",
+      "landingSlug": "kaiten-manufacturing",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "manufacturing",
+      "recordedAt": "2026-05-27T15:59:25.299Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "production-gantt",
+      "landingSlug": "kaiten-manufacturing",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "manufacturing",
+      "recordedAt": "2026-05-27T15:59:25.299Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "production-task-card",
+      "landingSlug": "kaiten-manufacturing",
+      "sectionId": "media_copy",
+      "sectionIdx": 5,
+      "domain": "manufacturing",
+      "recordedAt": "2026-05-27T15:59:25.300Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "production-departments",
+      "landingSlug": "kaiten-manufacturing",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "manufacturing",
+      "recordedAt": "2026-05-27T15:59:25.300Z"
     }
   ]
 }

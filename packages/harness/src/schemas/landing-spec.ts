@@ -58,6 +58,11 @@ export const AssetRefSchema = z.object({
       'doc-editor-rich',
       'template-gallery',
       'mobile-doc-reader',
+      'production-board',
+      'order-flow',
+      'production-gantt',
+      'production-task-card',
+      'production-departments',
       'generic',
     ])
     .optional(),
@@ -283,6 +288,11 @@ const MediaCopySchema = z.object({
         'doc-editor-rich',
         'template-gallery',
         'mobile-doc-reader',
+        'production-board',
+        'order-flow',
+        'production-gantt',
+        'production-task-card',
+        'production-departments',
       ])
       .optional(),
     /**
@@ -523,6 +533,11 @@ export const MockVariantSchema = z.enum([
   'doc-editor-rich',
   'template-gallery',
   'mobile-doc-reader',
+  'production-board',
+  'order-flow',
+  'production-gantt',
+  'production-task-card',
+  'production-departments',
 ]);
 export type MockVariant = z.infer<typeof MockVariantSchema>;
 
@@ -684,7 +699,19 @@ export const LandingSpecMetaSchema = z
     tokenEstimate: z.number().optional(),
     promptVersion: z.string().optional(),
     domain: z
-      .enum(['pm', 'support', 'crm', 'hr', 'marketing', 'bpm', 'finance', 'ecommerce', 'docs', 'unknown'])
+      .enum([
+        'pm',
+        'support',
+        'crm',
+        'hr',
+        'marketing',
+        'bpm',
+        'finance',
+        'ecommerce',
+        'docs',
+        'manufacturing',
+        'unknown',
+      ])
       .optional()
       .describe(
         'Резолвленный домен продукта (из brief.product/market/audience). Используется ' +

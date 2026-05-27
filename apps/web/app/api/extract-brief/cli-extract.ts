@@ -248,7 +248,9 @@ export async function extractBriefViaCli(
   if (preferred && installed[preferred] && !isCurrentlyFailing(preferred)) {
     order.push(preferred);
   }
-  for (const p of ['claude', 'codex', 'agy'] as const) {
+  // agy в default chain не включён — у пользователя не авторизован OAuth Google.
+  // Если нужно — пользователь явно выбирает preferredCli='agy'.
+  for (const p of ['claude', 'codex'] as const) {
     if (p === preferred) continue;
     if (installed[p] && !isCurrentlyFailing(p)) order.push(p);
   }

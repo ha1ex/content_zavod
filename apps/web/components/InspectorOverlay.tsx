@@ -5,15 +5,12 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 /**
  * InspectorOverlay — «hover → copy context» для preview лендинга.
  *
- * Адаптация публичной фичи (см. .context/attachments/oOwAQU/) под Buffalo:
- * - hover на элемент с `data-comp` подсвечивает его зелёной обводкой;
- * - клик копирует в буфер обмена готовый prompt-сниппет для claude/codex
- *   (путь до секции в LandingSpec + текущее значение если есть + команда apply);
+ * - hover на элемент с `data-comp` подсвечивает зелёной обводкой;
+ * - клик копирует в буфер обмена prompt-сниппет для chat claude/codex;
  * - Esc выключает inspector;
- * - toggle в правом нижнем углу включает/выключает (default off).
+ * - toggle в правом нижнем углу включает/выключает (default OFF).
  *
- * Рассчитан на `/landings/[slug]` (read-only preview). В `/edit/[slug]` Puck
- * сам перехватывает клики — там Inspector конфликтует, использовать не нужно.
+ * Поддерживает fallback copy через document.execCommand если clipboard API заблокирован.
  */
 
 interface Props {
@@ -25,16 +22,6 @@ interface HoverState {
   rect: DOMRect;
   path: string;
   text: string | null;
-}
-
-function readDataPath(el: Element): { comp: string; key?: string } | null {
-  const tagged = el.closest<HTMLElement>('[data-comp]');
-  if (!tagged) return null;
-  if (tagged.closest('[data-inspector]')) return null;
-  const comp = tagged.dataset.comp;
-  if (!comp) return null;
-  const key = tagged.dataset.compKey;
-  return { comp, key };
 }
 
 function buildPath(el: Element): string | null {
@@ -57,12 +44,12 @@ function buildCopyPayload(slug: string, path: string, text: string | null): stri
     `Путь: ${path}`,
     `Файл: content/landings/${slug}.json`,
   ];
-  if (text) lines.push('', `Текущий текст: """${text.trim().slice(0, 240)}"""`);
+  if (text) lines.push('', `Текущий текст: """${text.trim().slice(0, 400)}"""`);
   lines.push(
     '',
     'Что сделать:',
     `1. Открой content/landings/${slug}.json`,
-    `2. Найди секцию по пути выше (sections[N] по component из пути)`,
+    `2. Найди секцию по пути выше (sections[N] по component из пути; key вида "2:hero" даёт индекс N=2)`,
     `3. Поправь нужное поле`,
     `4. Запусти: pnpm -w run harness agent apply landing --slug ${slug} --brief content/briefs/${slug}.json`,
     `5. Открой http://localhost:3000/landings/${slug} проверить результат`,
@@ -70,11 +57,53 @@ function buildCopyPayload(slug: string, path: string, text: string | null): stri
   return lines.join('\n');
 }
 
+async function copyToClipboard(text: string): Promise<{ ok: boolean; via: string }> {
+  // 1. Modern API (требует HTTPS или localhost + focus)
+  if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return { ok: true, via: 'clipboard-api' };
+    } catch {
+      // fall through to fallback
+    }
+  }
+  // 2. Legacy execCommand fallback
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return { ok, via: 'execCommand' };
+  } catch {
+    return { ok: false, via: 'none' };
+  }
+}
+
 export function InspectorOverlay({ slug, children }: Props) {
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState<HoverState | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [fallbackText, setFallbackText] = useState<string | null>(null);
+  const [taggedCount, setTaggedCount] = useState<number>(0);
   const rafRef = useRef<number | null>(null);
+
+  // Подсчёт data-comp при включении (для пользователя — видеть «работает ли вообще»)
+  useEffect(() => {
+    if (!active) return;
+    const count = document.querySelectorAll('[data-comp]').length;
+    setTaggedCount(count);
+    // eslint-disable-next-line no-console
+    console.info(
+      `[Inspector] активен. Найдено элементов с data-comp: ${count}. Hover на блок → подсветка. Клик → copy.`,
+    );
+  }, [active]);
 
   useEffect(() => {
     if (!active) {
@@ -101,7 +130,7 @@ export function InspectorOverlay({ slug, children }: Props) {
           return;
         }
         const rect = tagged.getBoundingClientRect();
-        const text = tagged.innerText?.trim().slice(0, 200) || null;
+        const text = tagged.innerText?.trim().slice(0, 400) || null;
         setHover({ rect, path, text });
       });
     }
@@ -117,16 +146,19 @@ export function InspectorOverlay({ slug, children }: Props) {
       e.stopPropagation();
       const text = tagged.innerText?.trim() || null;
       const payload = buildCopyPayload(slug, path, text);
-      navigator.clipboard
-        .writeText(payload)
-        .then(() => {
-          setToast(`✓ Скопировано: ${path}`);
-          setTimeout(() => setToast(null), 2400);
-        })
-        .catch(() => {
-          setToast('✗ Не удалось скопировать (нет доступа к clipboard)');
-          setTimeout(() => setToast(null), 2400);
-        });
+      // eslint-disable-next-line no-console
+      console.info('[Inspector] click → копирую путь:', path);
+
+      void copyToClipboard(payload).then((res) => {
+        if (res.ok) {
+          setToast(`✓ Скопировано через ${res.via}: ${path}`);
+          setTimeout(() => setToast(null), 3000);
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn('[Inspector] clipboard заблокирован, открываю модал для ручного копирования');
+          setFallbackText(payload);
+        }
+      });
     }
 
     function onScroll() {
@@ -134,7 +166,13 @@ export function InspectorOverlay({ slug, children }: Props) {
     }
 
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setActive(false);
+      if (e.key === 'Escape') {
+        if (fallbackText) {
+          setFallbackText(null);
+        } else {
+          setActive(false);
+        }
+      }
     }
 
     document.addEventListener('mousemove', onMouseMove);
@@ -150,7 +188,7 @@ export function InspectorOverlay({ slug, children }: Props) {
       window.removeEventListener('keydown', onKey);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, [active, slug]);
+  }, [active, slug, fallbackText]);
 
   return (
     <>
@@ -162,14 +200,15 @@ export function InspectorOverlay({ slug, children }: Props) {
             data-inspector="outline"
             style={{
               position: 'fixed',
-              left: hover.rect.left - 2,
-              top: hover.rect.top - 2,
-              width: hover.rect.width + 4,
-              height: hover.rect.height + 4,
-              border: '2px solid #10b981',
-              borderRadius: 6,
+              left: hover.rect.left - 3,
+              top: hover.rect.top - 3,
+              width: hover.rect.width + 6,
+              height: hover.rect.height + 6,
+              border: '3px solid #10b981',
+              borderRadius: 8,
+              boxShadow: '0 0 0 4px rgba(16,185,129,0.15)',
               pointerEvents: 'none',
-              zIndex: 110,
+              zIndex: 9990,
             }}
           />
           <div
@@ -177,19 +216,21 @@ export function InspectorOverlay({ slug, children }: Props) {
             style={{
               position: 'fixed',
               left: hover.rect.left,
-              top: Math.max(8, hover.rect.top - 28),
+              top: Math.max(8, hover.rect.top - 32),
               background: '#10b981',
               color: 'white',
-              fontSize: 11,
+              fontSize: 12,
+              fontWeight: 600,
               fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-              padding: '3px 8px',
-              borderRadius: 4,
+              padding: '4px 10px',
+              borderRadius: 6,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
               pointerEvents: 'none',
               maxWidth: '70vw',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-              zIndex: 111,
+              zIndex: 9991,
             }}
           >
             {hover.path}
@@ -205,13 +246,14 @@ export function InspectorOverlay({ slug, children }: Props) {
             top: 24,
             left: '50%',
             transform: 'translateX(-50%)',
-            background: '#0f172a',
+            background: '#10b981',
             color: 'white',
-            fontSize: 13,
-            padding: '10px 16px',
+            fontSize: 14,
+            fontWeight: 500,
+            padding: '12px 20px',
             borderRadius: 8,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
-            zIndex: 130,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+            zIndex: 9999,
           }}
         >
           {toast}
@@ -222,37 +264,42 @@ export function InspectorOverlay({ slug, children }: Props) {
         data-inspector="toggle"
         type="button"
         onClick={() => setActive((v) => !v)}
-        title={active ? 'Inspector ON — клик по блоку копирует промпт для claude/codex. Esc — выкл.' : 'Включить Inspector: hover на блок → подсветка → клик копирует контекст для чата'}
+        title={
+          active
+            ? 'Inspector ON — клик по блоку копирует промпт. Esc — выкл.'
+            : 'Включить Inspector: hover на блок → подсветка → клик копирует контекст для CLI'
+        }
         style={{
           position: 'fixed',
           bottom: 16,
           right: 16,
           background: active ? '#10b981' : '#1e293b',
           color: 'white',
-          fontSize: 13,
-          fontWeight: 500,
-          padding: '10px 14px',
+          fontSize: 14,
+          fontWeight: 600,
+          padding: '12px 18px',
           borderRadius: 999,
-          boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
-          zIndex: 120,
+          boxShadow: '0 6px 16px rgba(0,0,0,0.3)',
+          zIndex: 9998,
           border: 'none',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 10,
         }}
       >
         <span
           aria-hidden
           style={{
             display: 'inline-block',
-            width: 8,
-            height: 8,
+            width: 10,
+            height: 10,
             borderRadius: '50%',
             background: active ? '#a7f3d0' : '#94a3b8',
+            boxShadow: active ? '0 0 8px #a7f3d0' : 'none',
           }}
         />
-        Inspector {active ? 'ON' : 'OFF'}
+        Inspector {active ? `ON · ${taggedCount} блоков` : 'OFF'}
       </button>
 
       {active && (
@@ -260,20 +307,84 @@ export function InspectorOverlay({ slug, children }: Props) {
           data-inspector="hint"
           style={{
             position: 'fixed',
-            bottom: 64,
+            bottom: 72,
             right: 16,
             background: '#0f172a',
             color: 'white',
-            fontSize: 11,
-            padding: '8px 12px',
+            fontSize: 12,
+            padding: '10px 14px',
             borderRadius: 8,
-            maxWidth: 280,
+            maxWidth: 320,
             lineHeight: 1.4,
-            zIndex: 120,
+            zIndex: 9998,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
           }}
         >
-          Hover на блок → подсветка зелёным. Клик копирует контекст: путь, текущий текст и команду
-          apply — вставь в claude/codex и попроси поправить. Esc — выкл.
+          Hover на любой из {taggedCount} блоков → зелёная подсветка. Клик копирует
+          контекст в буфер для chat claude/codex. Esc — выкл.
+        </div>
+      )}
+
+      {fallbackText && (
+        <div
+          data-inspector="fallback-modal"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(15,23,42,0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 24,
+            zIndex: 10000,
+          }}
+        >
+          <div
+            style={{
+              background: 'white',
+              borderRadius: 12,
+              padding: 20,
+              maxWidth: 720,
+              width: '100%',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
+              <strong style={{ fontSize: 15 }}>Скопируй текст вручную</strong>
+              <button
+                type="button"
+                onClick={() => setFallbackText(null)}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  fontSize: 18,
+                  cursor: 'pointer',
+                  color: '#64748b',
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            <p style={{ fontSize: 12, color: '#64748b', marginBottom: 10 }}>
+              Браузер заблокировал автоматическое копирование. Выдели Cmd+A → скопируй Cmd+C →
+              вставь в чат claude/codex.
+            </p>
+            <textarea
+              readOnly
+              value={fallbackText}
+              autoFocus
+              onFocus={(e) => e.currentTarget.select()}
+              style={{
+                width: '100%',
+                minHeight: 240,
+                fontSize: 12,
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                padding: 12,
+                border: '1px solid #cbd5e1',
+                borderRadius: 6,
+              }}
+            />
+          </div>
         </div>
       )}
     </>

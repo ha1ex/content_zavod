@@ -1,8 +1,8 @@
-import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { z } from 'zod';
 import { BriefSchema } from '@buffalo/harness/schemas';
+import { generateLandingViaCli, type GenProgress } from './cli-generate';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -45,10 +45,7 @@ export async function POST(req: Request): Promise<Response> {
   const parsed = BodySchema.safeParse(body);
   if (!parsed.success) {
     return new Response(
-      JSON.stringify({
-        error: 'invalid brief',
-        issues: parsed.error.flatten(),
-      }),
+      JSON.stringify({ error: 'invalid brief', issues: parsed.error.flatten() }),
       { status: 400, headers: { 'content-type': 'application/json' } },
     );
   }
@@ -62,73 +59,59 @@ export async function POST(req: Request): Promise<Response> {
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
-    start(controller) {
+    async start(controller) {
       function send(data: string, event?: string) {
-        controller.enqueue(encoder.encode(sseEncode(data, event)));
+        try {
+          controller.enqueue(encoder.encode(sseEncode(data, event)));
+        } catch {
+          // controller closed (client disconnected)
+        }
       }
 
       send(`brief сохранён: content/briefs/${slug}.json`, 'progress');
-      send(`запускаю: harness agent build landing --slug ${slug}`, 'progress');
+      send('начинаю generation pipeline через локальный claude CLI (без API ключа)', 'progress');
 
-      const child = spawn(
-        'pnpm',
-        [
-          '-w',
-          'run',
-          'harness',
-          'agent',
-          'build',
-          'landing',
-          '--slug',
-          slug,
-          '--brief',
-          `content/briefs/${slug}.json`,
-        ],
-        {
-          cwd: root,
-          env: { ...process.env, FORCE_COLOR: '0', NO_COLOR: '1' },
-        },
-      );
-
-      const flush = (chunk: Buffer) => {
-        const text = chunk.toString('utf-8');
-        for (const line of text.split(/\r?\n/)) {
-          if (line.length === 0) continue;
-          send(line);
-        }
+      const onProgress = (p: GenProgress) => {
+        const text = p.detail ? `${p.message}\n${p.detail}` : p.message;
+        send(text, 'progress');
       };
 
-      child.stdout.on('data', flush);
-      child.stderr.on('data', flush);
-
-      child.on('error', (err) => {
-        send(`spawn error: ${err.message}`, 'error');
+      let result;
+      try {
+        result = await generateLandingViaCli(root, slug, brief, onProgress);
+      } catch (err) {
+        send(
+          `Неожиданная ошибка: ${(err as Error).message}\nПроверь что claude установлен и авторизован: запусти "claude -p ping" в терминале.`,
+          'error',
+        );
         controller.close();
-      });
+        return;
+      }
 
-      child.on('exit', (code) => {
-        if (code === 0) {
-          send(
-            `готово. preview: /landings/${slug} · approve: /approve/${slug}`,
-            'done',
-          );
-        } else {
-          send(
-            `pipeline exited with code ${code}. Если ошибка про API-ключ — установите ANTHROPIC_API_KEY/OPENAI_API_KEY в .env.local либо завершите agent-mode через assistant (harness agent prepare).`,
-            'error',
-          );
+      if (!result.ok) {
+        send(result.error ?? 'Неизвестная ошибка генерации', 'error');
+        if (result.editUrl) {
+          send(`Можно открыть в редакторе и поправить: ${result.editUrl}`, 'progress');
         }
         controller.close();
-      });
+        return;
+      }
 
-      req.signal.addEventListener('abort', () => {
-        try {
-          child.kill('SIGTERM');
-        } catch {
-          // child already exited
-        }
-        controller.close();
-      });
+      send(
+        [
+          `Готово! ${result.sectionsCount} секций сгенерировано.`,
+          `Preview: ${result.previewUrl}`,
+          `Редактор: ${result.editUrl}`,
+          `Approve: ${result.approveUrl}`,
+        ].join('\n'),
+        'done',
+      );
+      controller.close();
+    },
+
+    cancel() {
+      // client disconnected — пока что не убиваем child process,
+      // потому что он живёт в generateLandingViaCli через свой timeout.
     },
   });
 

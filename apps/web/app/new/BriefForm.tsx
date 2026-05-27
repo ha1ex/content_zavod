@@ -385,21 +385,15 @@ export function BriefForm() {
               active={providers.cli.codex}
               failing={providers.failing?.codex}
             />
-            <ProviderBadge
-              label="Gemini (agy)"
-              active={providers.cli.agy}
-              failing={providers.failing?.agy}
-            />
             <ProviderBadge label="API key" active={providers.apiKey} />
             {!providers.cli.claude &&
               !providers.cli.codex &&
-              !providers.cli.agy &&
               !providers.apiKey && (
                 <span className="text-(--color-text-secondary)">
                   · ни одного — будет эвристика, поля минимально
                 </span>
               )}
-            {(providers.cli.claude || providers.cli.codex || providers.cli.agy) && (
+            {(providers.cli.claude || providers.cli.codex) && (
               <label className="ml-auto flex items-center gap-2">
                 <span className="text-(--color-text-secondary)">приоритет:</span>
                 <select
@@ -407,10 +401,9 @@ export function BriefForm() {
                   onChange={(e) => setPreferredCli(e.target.value as CliProvider | '')}
                   className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page) px-2 py-1 text-xs"
                 >
-                  <option value="">авто (claude → codex → agy)</option>
+                  <option value="">авто (claude → codex)</option>
                   {providers.cli.claude && <option value="claude">claude</option>}
                   {providers.cli.codex && <option value="codex">codex</option>}
-                  {providers.cli.agy && <option value="agy">agy (gemini)</option>}
                 </select>
               </label>
             )}

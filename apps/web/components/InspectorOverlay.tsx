@@ -156,33 +156,78 @@ function buildCopyPayload(
   return lines.join('\n');
 }
 
-async function copyToClipboard(text: string): Promise<{ ok: boolean; via: string }> {
-  // 1. Modern API (требует HTTPS или localhost + focus)
+/**
+ * Копирование в буфер. Стратегия:
+ *  1. **Синхронный execCommand** (textarea + select + copy) — основной путь.
+ *     Работает в Chrome/Safari/Conductor user-gesture контексте сразу,
+ *     не теряет позицию когда обработчик клика выходит за пределы tick.
+ *  2. `navigator.clipboard.writeText` — fallback, асинхронный.
+ *     Известный баг: Chrome иногда тихо resolves без актуальной записи.
+ *
+ * Принимает callback success/fail вместо Promise — чтобы вся последовательность
+ * (copy → setToast) укладывалась в один синхронный user-gesture tick.
+ */
+function copySync(text: string): { ok: boolean; via: string } {
+  // Пытаемся execCommand первым — синхронно, гарантированно в user-gesture.
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.setAttribute('data-inspector', 'copy-buffer');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.width = '1px';
+    ta.style.height = '1px';
+    ta.style.padding = '0';
+    ta.style.border = 'none';
+    ta.style.outline = 'none';
+    ta.style.boxShadow = 'none';
+    ta.style.background = 'transparent';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+
+    // Сохранить и восстановить selection (если пользователь что-то выделил)
+    const prevSelection = document.getSelection();
+    const prevRange =
+      prevSelection && prevSelection.rangeCount > 0
+        ? prevSelection.getRangeAt(0).cloneRange()
+        : null;
+
+    ta.focus({ preventScroll: true });
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+
+    let ok = false;
+    try {
+      ok = document.execCommand('copy');
+    } catch {
+      ok = false;
+    }
+    document.body.removeChild(ta);
+
+    if (prevRange && prevSelection) {
+      prevSelection.removeAllRanges();
+      prevSelection.addRange(prevRange);
+    }
+
+    if (ok) return { ok: true, via: 'execCommand' };
+  } catch {
+    // continue to async fallback
+  }
+  return { ok: false, via: 'none' };
+}
+
+async function copyAsyncFallback(text: string): Promise<{ ok: boolean; via: string }> {
   if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
     try {
       await navigator.clipboard.writeText(text);
       return { ok: true, via: 'clipboard-api' };
     } catch {
-      // fall through to fallback
+      return { ok: false, via: 'none' };
     }
   }
-  // 2. Legacy execCommand fallback
-  try {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.setAttribute('readonly', '');
-    ta.style.position = 'fixed';
-    ta.style.top = '0';
-    ta.style.left = '0';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    const ok = document.execCommand('copy');
-    document.body.removeChild(ta);
-    return { ok, via: 'execCommand' };
-  } catch {
-    return { ok: false, via: 'none' };
-  }
+  return { ok: false, via: 'none' };
 }
 
 export function InspectorOverlay({ slug, children }: Props) {
@@ -246,15 +291,27 @@ export function InspectorOverlay({ slug, children }: Props) {
       const text = tagged.innerText?.trim() || null;
       const payload = buildCopyPayload(slug, built.path, text, built.sectionIndex);
       // eslint-disable-next-line no-console
-      console.info('[Inspector] click → копирую путь:', built.path);
+      console.info('[Inspector] click → копирую', { path: built.path, bytes: payload.length });
 
-      void copyToClipboard(payload).then((res) => {
+      // 1) Синхронный execCommand — в том же tick'е что и user-gesture (click).
+      //    Это самый надёжный путь для Chrome / Conductor / Safari.
+      const syncResult = copySync(payload);
+      if (syncResult.ok) {
+        setToast(`✓ Скопировано: ${built.path}`);
+        setTimeout(() => setToast(null), 3000);
+        return;
+      }
+
+      // 2) Async fallback на navigator.clipboard (требует HTTPS/localhost).
+      void copyAsyncFallback(payload).then((res) => {
         if (res.ok) {
-          setToast(`✓ Скопировано через ${res.via}: ${built.path}`);
+          setToast(`✓ Скопировано (async): ${built.path}`);
           setTimeout(() => setToast(null), 3000);
         } else {
           // eslint-disable-next-line no-console
-          console.warn('[Inspector] clipboard заблокирован, открываю модал для ручного копирования');
+          console.warn(
+            '[Inspector] clipboard заблокирован (sync+async), открываю модал для ручного копирования',
+          );
           setFallbackText(payload);
         }
       });

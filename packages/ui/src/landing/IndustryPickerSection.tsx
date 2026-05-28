@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Icon } from '../primitives/Icon';
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 
 export interface IndustryProps {
@@ -34,7 +35,11 @@ export function IndustryPickerSection({
   industries,
 }: IndustryPickerSectionProps) {
   const [activeId, setActiveId] = useState(industries[0]?.id ?? '');
-  const active = industries.find((i) => i.id === activeId) ?? industries[0];
+  const activeIndex = Math.max(
+    0,
+    industries.findIndex((i) => i.id === activeId),
+  );
+  const active = industries[activeIndex] ?? industries[0];
   if (!active) return null;
 
   return (
@@ -46,23 +51,36 @@ export function IndustryPickerSection({
     >
       <div className="mb-10 max-w-2xl">
         {eyebrow && (
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+          <p
+            data-comp="industry_picker.eyebrow"
+            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+          >
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+        <h2
+          data-comp="industry_picker.title"
+          className="text-3xl font-semibold leading-tight md:text-4xl"
+        >
+          {title}
+        </h2>
         {description && (
-          <p className="mt-4 text-lg text-(--color-text-secondary)">{description}</p>
+          <p
+            data-comp="industry_picker.description"
+            className="mt-4 text-lg text-(--color-text-secondary)"
+          >
+            {description}
+          </p>
         )}
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-10">
         {/* picker list */}
         <ul className="space-y-1.5" role="tablist">
-          {industries.map((ind) => {
+          {industries.map((ind, idx) => {
             const isActive = ind.id === activeId;
             return (
-              <li key={ind.id}>
+              <Inspect as="li" key={ind.id} name={`industry_picker.industries[${idx}]`}>
                 <button
                   type="button"
                   role="tab"
@@ -87,6 +105,7 @@ export function IndustryPickerSection({
                   </span>
                   <div className="min-w-0 flex-1">
                     <div
+                      data-comp={`industry_picker.industries[${idx}].name`}
                       className={cn(
                         'text-sm font-semibold',
                         isActive ? 'text-(--color-text-accent)' : 'text-(--color-text-primary)',
@@ -94,7 +113,10 @@ export function IndustryPickerSection({
                     >
                       {ind.name}
                     </div>
-                    <div className="mt-0.5 truncate text-xs text-(--color-text-secondary)">
+                    <div
+                      data-comp={`industry_picker.industries[${idx}].summary`}
+                      className="mt-0.5 truncate text-xs text-(--color-text-secondary)"
+                    >
                       {ind.summary}
                     </div>
                   </div>
@@ -107,7 +129,7 @@ export function IndustryPickerSection({
                     strokeWidth={2}
                   />
                 </button>
-              </li>
+              </Inspect>
             );
           })}
         </ul>
@@ -129,22 +151,38 @@ export function IndustryPickerSection({
               <Icon name={active.icon} className="h-6 w-6" strokeWidth={2} />
             </span>
             <div className="min-w-0 flex-1">
-              <h3 className="text-2xl font-semibold leading-tight text-(--color-text-primary) md:text-3xl">
+              <h3
+                data-comp={`industry_picker.industries[${activeIndex}].name`}
+                className="text-2xl font-semibold leading-tight text-(--color-text-primary) md:text-3xl"
+              >
                 {active.name}
               </h3>
-              <p className="mt-2 text-base leading-relaxed text-(--color-text-secondary)">
+              <p
+                data-comp={`industry_picker.industries[${activeIndex}].scenario`}
+                className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+              >
                 {active.scenario}
               </p>
             </div>
             {active.metric && (
-              <div className="rounded-(--radius-xl) bg-(--color-surface-section) px-3 py-2 text-right">
-                <div className="text-xl font-bold text-(--color-text-accent)">
+              <Inspect
+                as="div"
+                name={`industry_picker.industries[${activeIndex}].metric`}
+                className="rounded-(--radius-xl) bg-(--color-surface-section) px-3 py-2 text-right"
+              >
+                <div
+                  data-comp={`industry_picker.industries[${activeIndex}].metric.value`}
+                  className="text-xl font-bold text-(--color-text-accent)"
+                >
                   {active.metric.value}
                 </div>
-                <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+                <div
+                  data-comp={`industry_picker.industries[${activeIndex}].metric.label`}
+                  className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)"
+                >
                   {active.metric.label}
                 </div>
-              </div>
+              </Inspect>
             )}
           </div>
 
@@ -154,8 +192,10 @@ export function IndustryPickerSection({
             </div>
             <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {active.keyFeatures.map((f, i) => (
-                <li
+                <Inspect
+                  as="li"
                   key={i}
+                  name={`industry_picker.industries[${activeIndex}].keyFeatures[${i}]`}
                   className={cn(
                     'flex items-start gap-2.5 rounded-(--radius-lg) border border-(--color-border-default)',
                     'bg-(--color-surface-page) px-3 py-2',
@@ -169,8 +209,13 @@ export function IndustryPickerSection({
                   >
                     <Icon name={f.icon ?? 'Check'} className="h-3 w-3" strokeWidth={2.5} />
                   </span>
-                  <span className="text-sm leading-snug text-(--color-text-primary)">{f.text}</span>
-                </li>
+                  <span
+                    data-comp={`industry_picker.industries[${activeIndex}].keyFeatures[${i}].text`}
+                    className="text-sm leading-snug text-(--color-text-primary)"
+                  >
+                    {f.text}
+                  </span>
+                </Inspect>
               ))}
             </ul>
           </div>

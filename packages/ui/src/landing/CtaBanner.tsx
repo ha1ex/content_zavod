@@ -1,4 +1,5 @@
 import { ButtonLink } from '../primitives/ButtonLink';
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 
 export interface CtaBannerCtaProps {
@@ -34,21 +35,33 @@ export function CtaBanner({ title, description, primaryCta, secondaryCta }: CtaB
         )}
       >
         <div className="max-w-2xl">
-          <h3 className="text-2xl font-semibold leading-tight md:text-3xl">{title}</h3>
+          <h3
+            data-comp="cta_banner.title"
+            className="text-2xl font-semibold leading-tight md:text-3xl"
+          >
+            {title}
+          </h3>
           {description && (
-            <p className="mt-3 text-base leading-relaxed text-(--color-text-secondary)">
+            <p
+              data-comp="cta_banner.description"
+              className="mt-3 text-base leading-relaxed text-(--color-text-secondary)"
+            >
               {description}
             </p>
           )}
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink size="lg" href={primaryCta.href}>
-            {primaryCta.label}
-          </ButtonLink>
-          {secondaryCta && (
-            <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
-              {secondaryCta.label}
+          <Inspect name="cta_banner.primaryCta">
+            <ButtonLink size="lg" href={primaryCta.href}>
+              {primaryCta.label}
             </ButtonLink>
+          </Inspect>
+          {secondaryCta && (
+            <Inspect name="cta_banner.secondaryCta">
+              <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
+                {secondaryCta.label}
+              </ButtonLink>
+            </Inspect>
           )}
         </div>
       </div>

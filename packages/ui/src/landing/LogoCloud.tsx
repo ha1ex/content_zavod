@@ -1,3 +1,4 @@
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 
 export interface LogoCloudItemProps {
@@ -28,15 +29,28 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
       {(eyebrow || title || description) && (
         <div className="mb-8 max-w-2xl">
           {eyebrow && (
-            <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+            <p
+              data-comp="logo_cloud.eyebrow"
+              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            >
               {eyebrow}
             </p>
           )}
           {title && (
-            <h2 className="text-2xl font-semibold leading-tight md:text-3xl">{title}</h2>
+            <h2
+              data-comp="logo_cloud.title"
+              className="text-2xl font-semibold leading-tight md:text-3xl"
+            >
+              {title}
+            </h2>
           )}
           {description && (
-            <p className="mt-3 text-base text-(--color-text-secondary)">{description}</p>
+            <p
+              data-comp="logo_cloud.description"
+              className="mt-3 text-base text-(--color-text-secondary)"
+            >
+              {description}
+            </p>
           )}
         </div>
       )}
@@ -49,8 +63,10 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
       >
         <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {items.map((item, i) => (
-            <div
+            <Inspect
+              as="div"
               key={i}
+              name={`logo_cloud.items[${i}]`}
               className="flex items-center justify-center gap-3 opacity-70 transition hover:opacity-100"
             >
               <span
@@ -63,10 +79,13 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
               >
                 {item.brandInitial ?? item.brand.charAt(0).toUpperCase()}
               </span>
-              <span className="text-sm font-medium text-(--color-text-secondary)">
+              <span
+                data-comp={`logo_cloud.items[${i}].brand`}
+                className="text-sm font-medium text-(--color-text-secondary)"
+              >
                 {item.brand}
               </span>
-            </div>
+            </Inspect>
           ))}
         </div>
       </div>

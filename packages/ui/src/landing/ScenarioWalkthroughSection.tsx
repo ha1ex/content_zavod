@@ -1,4 +1,5 @@
 import { Icon } from '../primitives/Icon';
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { MockVisual, type MockVariant } from './mocks';
 
@@ -42,13 +43,24 @@ export function ScenarioWalkthroughSection({
     >
       <div className="mb-14 max-w-3xl">
         {eyebrow && (
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+          <p
+            data-comp="scenario_walkthrough.eyebrow"
+            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+          >
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+        <h2
+          data-comp="scenario_walkthrough.title"
+          className="text-3xl font-semibold leading-tight md:text-4xl"
+        >
+          {title}
+        </h2>
         {description && (
-          <p className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)">
+          <p
+            data-comp="scenario_walkthrough.description"
+            className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)"
+          >
             {description}
           </p>
         )}
@@ -61,7 +73,7 @@ export function ScenarioWalkthroughSection({
             )}
           >
             <Icon name="UserRound" className="h-4 w-4 text-(--color-text-accent)" strokeWidth={2} />
-            <span>{protagonist}</span>
+            <span data-comp="scenario_walkthrough.protagonist">{protagonist}</span>
           </div>
         )}
       </div>
@@ -78,8 +90,10 @@ export function ScenarioWalkthroughSection({
         {steps.map((s, i) => {
           const reverse = i % 2 === 1;
           return (
-            <li
+            <Inspect
+              as="li"
               key={i}
+              name={`scenario_walkthrough.steps[${i}]`}
               className={cn(
                 'relative grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center lg:gap-16',
               )}
@@ -103,17 +117,29 @@ export function ScenarioWalkthroughSection({
                   )}
                 >
                   {s.icon && <Icon name={s.icon} className="h-3.5 w-3.5 text-(--color-text-accent)" strokeWidth={2} />}
-                  <span>{s.time}</span>
+                  <span data-comp={`scenario_walkthrough.steps[${i}].time`}>{s.time}</span>
                 </div>
-                <h3 className="mt-4 text-2xl font-semibold leading-tight md:text-3xl">{s.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-(--color-text-secondary) md:text-lg">
+                <h3
+                  data-comp={`scenario_walkthrough.steps[${i}].title`}
+                  className="mt-4 text-2xl font-semibold leading-tight md:text-3xl"
+                >
+                  {s.title}
+                </h3>
+                <p
+                  data-comp={`scenario_walkthrough.steps[${i}].description`}
+                  className="mt-3 text-base leading-relaxed text-(--color-text-secondary) md:text-lg"
+                >
                   {s.description}
                 </p>
               </div>
-              <div className={cn(reverse ? 'lg:order-1 lg:pr-10' : 'lg:pl-10')}>
+              <Inspect
+                as="div"
+                name={`scenario_walkthrough.steps[${i}].mockVariant`}
+                className={cn(reverse ? 'lg:order-1 lg:pr-10' : 'lg:pl-10')}
+              >
                 <MockVisual variant={s.mockVariant} />
-              </div>
-            </li>
+              </Inspect>
+            </Inspect>
           );
         })}
       </ol>

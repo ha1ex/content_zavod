@@ -1,3 +1,4 @@
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 
 export interface StatItemProps {
@@ -28,15 +29,22 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
       {(eyebrow || title || description) && (
         <div className="mb-10 max-w-2xl">
           {eyebrow && (
-            <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+            <p
+              data-comp="stats.eyebrow"
+              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            >
               {eyebrow}
             </p>
           )}
           {title && (
-            <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+            <h2 data-comp="stats.title" className="text-3xl font-semibold leading-tight md:text-4xl">
+              {title}
+            </h2>
           )}
           {description && (
-            <p className="mt-4 text-lg text-(--color-text-secondary)">{description}</p>
+            <p data-comp="stats.description" className="mt-4 text-lg text-(--color-text-secondary)">
+              {description}
+            </p>
           )}
         </div>
       )}
@@ -49,25 +57,36 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
         )}
       >
         {stats.map((stat, i) => (
-          <div
+          <Inspect
+            as="div"
             key={i}
+            name={`stats.stats[${i}]`}
             className={cn(
               'rounded-(--radius-2xl) border border-(--color-border-default)',
               'bg-(--color-surface-card) p-6 md:p-7',
             )}
           >
-            <div className="text-3xl font-semibold text-(--color-text-accent) md:text-4xl">
+            <div
+              data-comp={`stats.stats[${i}].value`}
+              className="text-3xl font-semibold text-(--color-text-accent) md:text-4xl"
+            >
               {stat.value}
             </div>
-            <div className="mt-2 text-base font-medium text-(--color-text-primary)">
+            <div
+              data-comp={`stats.stats[${i}].label`}
+              className="mt-2 text-base font-medium text-(--color-text-primary)"
+            >
               {stat.label}
             </div>
             {stat.description && (
-              <p className="mt-1.5 text-sm leading-relaxed text-(--color-text-secondary)">
+              <p
+                data-comp={`stats.stats[${i}].description`}
+                className="mt-1.5 text-sm leading-relaxed text-(--color-text-secondary)"
+              >
                 {stat.description}
               </p>
             )}
-          </div>
+          </Inspect>
         ))}
       </div>
     </section>

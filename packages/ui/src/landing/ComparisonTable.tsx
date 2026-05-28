@@ -42,13 +42,26 @@ export function ComparisonTable({
     >
       <div className="mb-10 max-w-2xl">
         {eyebrow && (
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+          <p
+            data-comp="comparison_table.eyebrow"
+            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+          >
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+        <h2
+          data-comp="comparison_table.title"
+          className="text-3xl font-semibold leading-tight md:text-4xl"
+        >
+          {title}
+        </h2>
         {description && (
-          <p className="mt-4 text-lg text-(--color-text-secondary)">{description}</p>
+          <p
+            data-comp="comparison_table.description"
+            className="mt-4 text-lg text-(--color-text-secondary)"
+          >
+            {description}
+          </p>
         )}
       </div>
 
@@ -67,6 +80,7 @@ export function ComparisonTable({
               {columns.map((c, i) => (
                 <th
                   key={i}
+                  data-comp={`comparison_table.columns[${i}]`}
                   className={cn(
                     'px-5 py-4 text-sm font-semibold',
                     c.highlighted
@@ -75,9 +89,12 @@ export function ComparisonTable({
                   )}
                 >
                   <div className="flex items-center gap-2">
-                    <span>{c.name}</span>
+                    <span data-comp={`comparison_table.columns[${i}].name`}>{c.name}</span>
                     {c.badge && (
-                      <span className="rounded-full bg-(--color-action-primary)/15 px-2 py-0.5 text-[10px] font-medium text-(--color-text-accent)">
+                      <span
+                        data-comp={`comparison_table.columns[${i}].badge`}
+                        className="rounded-full bg-(--color-action-primary)/15 px-2 py-0.5 text-[10px] font-medium text-(--color-text-accent)"
+                      >
                         {c.badge}
                       </span>
                     )}
@@ -90,14 +107,21 @@ export function ComparisonTable({
             {rows.map((row, ri) => (
               <tr
                 key={ri}
+                data-comp={`comparison_table.rows[${ri}]`}
                 className={cn(
                   ri !== rows.length - 1 && 'border-b border-(--color-border-default)',
                 )}
               >
-                <td className="px-5 py-4 font-medium text-(--color-text-primary)">{row.label}</td>
+                <td
+                  data-comp={`comparison_table.rows[${ri}].label`}
+                  className="px-5 py-4 font-medium text-(--color-text-primary)"
+                >
+                  {row.label}
+                </td>
                 {row.values.map((v, ci) => (
                   <td
                     key={ci}
+                    data-comp={`comparison_table.rows[${ri}].values[${ci}]`}
                     className={cn(
                       'px-5 py-4 text-sm',
                       columns[ci]?.highlighted &&

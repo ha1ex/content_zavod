@@ -1,3 +1,4 @@
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 
 export interface MetricCellProps {
@@ -41,13 +42,24 @@ export function MetricsSplit({
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             {eyebrow && (
-              <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+              <p
+                data-comp="metrics_split.eyebrow"
+                className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              >
                 {eyebrow}
               </p>
             )}
-            <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+            <h2
+              data-comp="metrics_split.title"
+              className="text-3xl font-semibold leading-tight md:text-4xl"
+            >
+              {title}
+            </h2>
             {description && (
-              <p className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)">
+              <p
+                data-comp="metrics_split.description"
+                className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)"
+              >
                 {description}
               </p>
             )}
@@ -55,15 +67,20 @@ export function MetricsSplit({
 
           <div className="grid grid-cols-2 gap-4 md:gap-5">
             {metrics.map((m, i) => (
-              <div
+              <Inspect
+                as="div"
                 key={i}
+                name={`metrics_split.metrics[${i}]`}
                 className={cn(
                   'rounded-(--radius-2xl) border border-(--color-border-default)',
                   'bg-(--color-surface-card) p-6 md:p-7',
                 )}
               >
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-semibold text-(--color-text-primary) md:text-4xl">
+                  <span
+                    data-comp={`metrics_split.metrics[${i}].value`}
+                    className="text-3xl font-semibold text-(--color-text-primary) md:text-4xl"
+                  >
                     {m.value}
                   </span>
                   {m.trend === 'up' && (
@@ -73,8 +90,13 @@ export function MetricsSplit({
                     <span className="text-(--color-red-100)" aria-hidden>▼</span>
                   )}
                 </div>
-                <div className="mt-1.5 text-sm text-(--color-text-secondary)">{m.label}</div>
-              </div>
+                <div
+                  data-comp={`metrics_split.metrics[${i}].label`}
+                  className="mt-1.5 text-sm text-(--color-text-secondary)"
+                >
+                  {m.label}
+                </div>
+              </Inspect>
             ))}
           </div>
         </div>
@@ -82,18 +104,28 @@ export function MetricsSplit({
         {bullets && bullets.length > 0 && (
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {bullets.map((b, i) => (
-              <article
+              <Inspect
+                as="article"
                 key={i}
+                name={`metrics_split.bullets[${i}]`}
                 className={cn(
                   'rounded-(--radius-2xl) border border-(--color-border-default)',
                   'bg-(--color-surface-card) p-6',
                 )}
               >
-                <h3 className="text-lg font-semibold leading-snug">{b.title}</h3>
-                <p className="mt-2 text-base leading-relaxed text-(--color-text-secondary)">
+                <h3
+                  data-comp={`metrics_split.bullets[${i}].title`}
+                  className="text-lg font-semibold leading-snug"
+                >
+                  {b.title}
+                </h3>
+                <p
+                  data-comp={`metrics_split.bullets[${i}].description`}
+                  className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+                >
                   {b.description}
                 </p>
-              </article>
+              </Inspect>
             ))}
           </div>
         )}

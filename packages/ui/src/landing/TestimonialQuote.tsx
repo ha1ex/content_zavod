@@ -45,7 +45,10 @@ export function TestimonialQuote({
 
         <div className="relative max-w-3xl">
           {eyebrow && (
-            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+            <p
+              data-comp="testimonial_quote.eyebrow"
+              className="mb-4 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            >
               {eyebrow}
             </p>
           )}
@@ -56,12 +59,20 @@ export function TestimonialQuote({
             aria-hidden
           />
 
-          <blockquote className="text-2xl font-medium leading-snug text-(--color-text-primary) md:text-3xl">
+          <blockquote
+            data-comp="testimonial_quote.quote"
+            className="text-2xl font-medium leading-snug text-(--color-text-primary) md:text-3xl"
+          >
             «{quote}»
           </blockquote>
 
           {metric && (
-            <p className="mt-6 text-lg font-semibold text-(--color-text-accent)">{metric}</p>
+            <p
+              data-comp="testimonial_quote.metric"
+              className="mt-6 text-lg font-semibold text-(--color-text-accent)"
+            >
+              {metric}
+            </p>
           )}
 
           <div className="mt-8 flex items-center gap-4">
@@ -75,10 +86,21 @@ export function TestimonialQuote({
               {brandInitial ?? (brandName ?? authorName).charAt(0).toUpperCase()}
             </span>
             <div>
-              <p className="text-base font-semibold text-(--color-text-primary)">{authorName}</p>
+              <p
+                data-comp="testimonial_quote.authorName"
+                className="text-base font-semibold text-(--color-text-primary)"
+              >
+                {authorName}
+              </p>
               {(authorRole || brandName) && (
                 <p className="text-sm text-(--color-text-secondary)">
-                  {[authorRole, brandName].filter(Boolean).join(' · ')}
+                  {authorRole && (
+                    <span data-comp="testimonial_quote.authorRole">{authorRole}</span>
+                  )}
+                  {authorRole && brandName && ' · '}
+                  {brandName && (
+                    <span data-comp="testimonial_quote.brandName">{brandName}</span>
+                  )}
                 </p>
               )}
             </div>

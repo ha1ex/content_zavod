@@ -21,6 +21,7 @@ export function BenefitsStrip({ items }: BenefitsStripProps) {
         {items.map((item, i) => (
           <span
             key={i}
+            data-comp={`benefits_strip.items[${i}]`}
             className="flex items-center gap-3 text-sm font-medium text-(--color-text-secondary)"
           >
             {item}

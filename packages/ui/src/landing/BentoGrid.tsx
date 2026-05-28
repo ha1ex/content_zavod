@@ -1,3 +1,4 @@
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { Icon } from '../primitives/Icon';
 
@@ -39,20 +40,35 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
     >
       <div className="mb-10 max-w-2xl">
         {eyebrow && (
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+          <p
+            data-comp="bento_grid.eyebrow"
+            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+          >
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+        <h2
+          data-comp="bento_grid.title"
+          className="text-3xl font-semibold leading-tight md:text-4xl"
+        >
+          {title}
+        </h2>
         {description && (
-          <p className="mt-4 text-lg text-(--color-text-secondary)">{description}</p>
+          <p
+            data-comp="bento_grid.description"
+            className="mt-4 text-lg text-(--color-text-secondary)"
+          >
+            {description}
+          </p>
         )}
       </div>
 
       <div className="grid auto-rows-[180px] grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
         {cells.map((c, i) => (
-          <div
+          <Inspect
+            as="div"
             key={i}
+            name={`bento_grid.cells[${i}]`}
             className={cn(
               'flex flex-col rounded-(--radius-2xl) border p-6',
               SIZE_CLASS[c.size ?? 'small'],
@@ -75,6 +91,7 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
               </span>
             )}
             <h3
+              data-comp={`bento_grid.cells[${i}].title`}
               className={cn(
                 'text-lg font-semibold',
                 c.accent ? 'text-(--color-text-accent)' : 'text-(--color-text-primary)',
@@ -82,8 +99,13 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
             >
               {c.title}
             </h3>
-            <p className="mt-2 text-sm text-(--color-text-secondary)">{c.description}</p>
-          </div>
+            <p
+              data-comp={`bento_grid.cells[${i}].description`}
+              className="mt-2 text-sm text-(--color-text-secondary)"
+            >
+              {c.description}
+            </p>
+          </Inspect>
         ))}
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { Icon } from '../primitives/Icon';
 
@@ -28,13 +29,20 @@ export function ProcessSteps({ eyebrow, title, description, steps }: ProcessStep
     >
       <div className="mb-12 max-w-2xl">
         {eyebrow && (
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)">
+          <p
+            data-comp="process.eyebrow"
+            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+          >
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+        <h2 data-comp="process.title" className="text-3xl font-semibold leading-tight md:text-4xl">
+          {title}
+        </h2>
         {description && (
-          <p className="mt-4 text-lg text-(--color-text-secondary)">{description}</p>
+          <p data-comp="process.description" className="mt-4 text-lg text-(--color-text-secondary)">
+            {description}
+          </p>
         )}
       </div>
 
@@ -47,8 +55,10 @@ export function ProcessSteps({ eyebrow, title, description, steps }: ProcessStep
         )}
       >
         {steps.map((step, i) => (
-          <div
+          <Inspect
+            as="div"
             key={i}
+            name={`process.steps[${i}]`}
             className={cn(
               'relative overflow-hidden rounded-(--radius-2xl)',
               'border border-(--color-border-default) bg-(--color-surface-card) p-6',
@@ -71,11 +81,19 @@ export function ProcessSteps({ eyebrow, title, description, steps }: ProcessStep
                 <Icon name={step.icon} className="h-5 w-5 text-(--color-text-secondary)" />
               )}
             </div>
-            <h3 className="text-lg font-semibold leading-snug">{step.title}</h3>
-            <p className="mt-2 text-base leading-relaxed text-(--color-text-secondary)">
+            <h3
+              data-comp={`process.steps[${i}].title`}
+              className="text-lg font-semibold leading-snug"
+            >
+              {step.title}
+            </h3>
+            <p
+              data-comp={`process.steps[${i}].description`}
+              className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+            >
               {step.description}
             </p>
-          </div>
+          </Inspect>
         ))}
       </div>
     </section>

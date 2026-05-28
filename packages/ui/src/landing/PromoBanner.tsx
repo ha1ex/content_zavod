@@ -1,4 +1,5 @@
 import { ButtonLink } from '../primitives/ButtonLink';
+import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 
 export interface PromoBannerCtaProps {
@@ -57,6 +58,7 @@ export function PromoBanner({
         <div className="relative mx-auto max-w-3xl text-center">
           {eyebrow && (
             <p
+              data-comp="promo_banner.eyebrow"
               className={cn(
                 'mb-3 text-sm font-medium uppercase tracking-wide',
                 isViolet ? 'text-white/80' : 'text-(--color-text-accent)',
@@ -65,11 +67,15 @@ export function PromoBanner({
               {eyebrow}
             </p>
           )}
-          <h2 className="text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl">
+          <h2
+            data-comp="promo_banner.title"
+            className="text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl"
+          >
             {title}
           </h2>
           {description && (
             <p
+              data-comp="promo_banner.description"
               className={cn(
                 'mx-auto mt-4 max-w-2xl text-lg leading-relaxed',
                 isViolet ? 'text-white/85' : 'text-(--color-text-secondary)',
@@ -80,21 +86,25 @@ export function PromoBanner({
           )}
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink
-              size="lg"
-              variant={isViolet ? 'invert' : 'fill'}
-              href={primaryCta.href}
-            >
-              {primaryCta.label}
-            </ButtonLink>
-            {secondaryCta && (
+            <Inspect name="promo_banner.primaryCta">
               <ButtonLink
                 size="lg"
-                variant={isViolet ? 'ghost-on-violet' : 'outline'}
-                href={secondaryCta.href}
+                variant={isViolet ? 'invert' : 'fill'}
+                href={primaryCta.href}
               >
-                {secondaryCta.label}
+                {primaryCta.label}
               </ButtonLink>
+            </Inspect>
+            {secondaryCta && (
+              <Inspect name="promo_banner.secondaryCta">
+                <ButtonLink
+                  size="lg"
+                  variant={isViolet ? 'ghost-on-violet' : 'outline'}
+                  href={secondaryCta.href}
+                >
+                  {secondaryCta.label}
+                </ButtonLink>
+              </Inspect>
             )}
           </div>
         </div>

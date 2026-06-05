@@ -5,29 +5,38 @@ import {
   defaultApproval,
   type Approval,
   type ApprovalStatus,
+  type ApprovalSurface,
 } from '../schemas/approval';
 
 /**
  * Approval storage (этап 5) — простые JSON-файлы в content/approvals/.
  * Используется и Next.js API route'ами, и CLI.
+ *
+ * Поверхности: landing → <slug>.json, intake → <slug>.intake.json. Все существующие
+ * вызовы без surface работают как раньше (landing / <slug>.json).
  */
 
 export function approvalDir(repoRoot: string): string {
   return resolve(repoRoot, 'content', 'approvals');
 }
 
-export function approvalPath(repoRoot: string, slug: string): string {
-  return resolve(approvalDir(repoRoot), `${slug}.json`);
+export function approvalPath(repoRoot: string, slug: string, surface: ApprovalSurface = 'landing'): string {
+  const suffix = surface === 'intake' ? '.intake.json' : '.json';
+  return resolve(approvalDir(repoRoot), `${slug}${suffix}`);
 }
 
-export async function readApproval(repoRoot: string, slug: string): Promise<Approval> {
-  const path = approvalPath(repoRoot, slug);
+export async function readApproval(
+  repoRoot: string,
+  slug: string,
+  surface: ApprovalSurface = 'landing',
+): Promise<Approval> {
+  const path = approvalPath(repoRoot, slug, surface);
   try {
     const raw = await readFile(path, 'utf-8');
     return ApprovalSchema.parse(JSON.parse(raw));
   } catch (err) {
     if (err && typeof err === 'object' && 'code' in err && (err as { code: string }).code === 'ENOENT') {
-      return defaultApproval(slug);
+      return defaultApproval(slug, surface);
     }
     throw err;
   }
@@ -36,17 +45,19 @@ export async function readApproval(repoRoot: string, slug: string): Promise<Appr
 export async function writeApproval(
   repoRoot: string,
   slug: string,
-  patch: { status: ApprovalStatus; reviewer?: string; comments?: string },
+  patch: { status: ApprovalStatus; reviewer?: string; comments?: string; surface?: ApprovalSurface },
 ): Promise<Approval> {
+  const surface: ApprovalSurface = patch.surface ?? 'landing';
   const next: Approval = {
     slug,
     status: patch.status,
+    surface,
     reviewer: patch.reviewer,
     comments: patch.comments,
     updatedAt: new Date().toISOString(),
   };
   const validated = ApprovalSchema.parse(next);
-  const path = approvalPath(repoRoot, slug);
+  const path = approvalPath(repoRoot, slug, surface);
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, JSON.stringify(validated, null, 2) + '\n', 'utf-8');
   return validated;
@@ -63,6 +74,8 @@ export async function listApprovals(repoRoot: string): Promise<Approval[]> {
   const results: Approval[] = [];
   for (const f of files) {
     if (!f.endsWith('.json')) continue;
+    // landing-only список (handoff/CLI). intake-approvals лежат в <slug>.intake.json.
+    if (f.endsWith('.intake.json')) continue;
     const slug = f.replace(/\.json$/, '');
     try {
       results.push(await readApproval(repoRoot, slug));

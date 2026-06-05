@@ -25,6 +25,8 @@ export interface IngestIntakeResult {
   warnings: string[];
   needsConfirmation: string[];
   nextCommand?: string;
+  /** URL страницы ревью ТЗ (web-приложение). */
+  reviewUrl?: string;
 }
 
 /**
@@ -103,6 +105,7 @@ export async function ingestIntake(opts: { root: string; slug: string }): Promis
     warnings,
     needsConfirmation,
     nextCommand: `pnpm -w run harness agent build landing --slug ${opts.slug} --brief content/briefs/${opts.slug}.json`,
+    reviewUrl: `http://localhost:3000/intake/${opts.slug}`,
   };
 }
 

@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import type { Approval, ApprovalStatus } from '@kaiten/harness/schemas';
+import type { Approval, ApprovalStatus, ApprovalSurface } from '@kaiten/harness/schemas';
 
 interface Props {
   slug: string;
   initial: Approval;
+  /** landing → /api/approve, intake → /api/intake-approve. По умолчанию landing. */
+  surface?: ApprovalSurface;
 }
 
 const STATUSES: { value: ApprovalStatus; label: string; tone: string }[] = [
@@ -15,7 +17,9 @@ const STATUSES: { value: ApprovalStatus; label: string; tone: string }[] = [
   { value: 'rejected', label: 'Reject', tone: 'bg-rose-100 text-rose-800' },
 ];
 
-export function ApprovalForm({ slug, initial }: Props) {
+export function ApprovalForm({ slug, initial, surface = 'landing' }: Props) {
+  const endpoint = surface === 'intake' ? 'intake-approve' : 'approve';
+  const savedPath = `content/approvals/${slug}${surface === 'intake' ? '.intake' : ''}.json`;
   const [status, setStatus] = useState<ApprovalStatus>(initial.status);
   const [reviewer, setReviewer] = useState<string>(initial.reviewer ?? '');
   const [comments, setComments] = useState<string>(initial.comments ?? '');
@@ -28,7 +32,7 @@ export function ApprovalForm({ slug, initial }: Props) {
     setError(null);
     setSaved(false);
     startTransition(async () => {
-      const res = await fetch(`/api/approve/${slug}`, {
+      const res = await fetch(`/api/${endpoint}/${slug}`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -112,7 +116,7 @@ export function ApprovalForm({ slug, initial }: Props) {
 
       {saved && (
         <p className="text-xs text-(--color-text-secondary)">
-          Сохранено: <code>content/approvals/{slug}.json</code> · {new Date(updatedAt).toLocaleString()}
+          Сохранено: <code>{savedPath}</code> · {new Date(updatedAt).toLocaleString()}
         </p>
       )}
       {error && <p className="text-xs text-rose-700">{error}</p>}

@@ -581,7 +581,8 @@ agent
       console.log(chalk.green(`         ТЗ    → ${result.tzPathRel}`));
       for (const w of result.warnings) console.log(chalk.yellow(`  ! ${w}`));
       for (const n of result.needsConfirmation) console.log(chalk.cyan(`  ? needs confirmation: ${n}`));
-      console.log(chalk.dim(`\n         next: ${result.nextCommand}`));
+      if (result.reviewUrl) console.log(chalk.dim(`\n         ревью ТЗ: ${result.reviewUrl}  (pnpm dev)`));
+      console.log(chalk.dim(`         next: ${result.nextCommand}`));
       process.exit(0);
     }
     console.log(chalk.red(`[harness] ✗ intake ${result.slug} — ${result.errors.length} error(s):`));
@@ -689,6 +690,7 @@ agent
   .option('--route-only', 'только показать routing decision, не запускать pipeline', false)
   .option('--force-phased', 'override routing → принудительно phased pipeline', false)
   .option('--force-legacy', 'override routing → принудительно legacy pipeline', false)
+  .option('--require-intake-approved', 'не запускать сборку, пока ТЗ (intake) не approved на /intake/<slug>', false)
   .action(
     async (
       kind: string,
@@ -698,6 +700,7 @@ agent
         routeOnly: boolean;
         forcePhased: boolean;
         forceLegacy: boolean;
+        requireIntakeApproved: boolean;
       },
     ) => {
       const root = await findRepoRoot(ROOT);
@@ -708,6 +711,21 @@ agent
       if (!opts.slug || !opts.brief) {
         console.error(chalk.red('[harness] agent build landing: --slug и --brief обязательны'));
         process.exit(1);
+      }
+
+      // Опциональный гейт: не собирать, пока ТЗ (intake) не согласовано (mirror handoff --require-approved).
+      if (opts.requireIntakeApproved) {
+        const intakeApproval = await readApproval(root, opts.slug, 'intake');
+        if (intakeApproval.status !== 'approved') {
+          console.error(
+            chalk.red(
+              `[harness] agent build: ТЗ (intake) не approved (статус: ${intakeApproval.status}). ` +
+                `Согласуй на /intake/${opts.slug} или убери --require-intake-approved.`,
+            ),
+          );
+          process.exit(1);
+        }
+        console.log(chalk.green('[harness] ✓ intake approved — продолжаю сборку'));
       }
 
       // Загрузка brief.

@@ -9,19 +9,25 @@ import { z } from 'zod';
 export const ApprovalStatusSchema = z.enum(['pending', 'approved', 'rejected', 'changes_requested']);
 export type ApprovalStatus = z.infer<typeof ApprovalStatusSchema>;
 
+/** Поверхность ревью: landing (готовый лендинг) или intake (ТЗ перед сборкой). */
+export const ApprovalSurfaceSchema = z.enum(['landing', 'intake']);
+export type ApprovalSurface = z.infer<typeof ApprovalSurfaceSchema>;
+
 export const ApprovalSchema = z.object({
   slug: z.string().min(1),
   status: ApprovalStatusSchema,
+  surface: ApprovalSurfaceSchema.default('landing'),
   reviewer: z.string().max(120).optional(),
   comments: z.string().max(4000).optional(),
   updatedAt: z.string().describe('ISO timestamp'),
 });
 export type Approval = z.infer<typeof ApprovalSchema>;
 
-export function defaultApproval(slug: string): Approval {
+export function defaultApproval(slug: string, surface: ApprovalSurface = 'landing'): Approval {
   return {
     slug,
     status: 'pending',
+    surface,
     updatedAt: new Date().toISOString(),
   };
 }

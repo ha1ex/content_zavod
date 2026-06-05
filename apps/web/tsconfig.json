@@ -4,10 +4,10 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./app/*"],
-      "@buffalo/harness": ["../../packages/harness/src"],
-      "@buffalo/harness/*": ["../../packages/harness/src/*"],
-      "@buffalo/ui": ["../../packages/ui/src"],
-      "@buffalo/ui/*": ["../../packages/ui/src/*"]
+      "@kaiten/harness": ["../../packages/harness/src"],
+      "@kaiten/harness/*": ["../../packages/harness/src/*"],
+      "@kaiten/ui": ["../../packages/ui/src"],
+      "@kaiten/ui/*": ["../../packages/ui/src/*"]
     },
     "allowJs": true,
     "noEmit": true

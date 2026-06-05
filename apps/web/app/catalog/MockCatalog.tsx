@@ -1,4 +1,4 @@
-import { MockVisual, type MockVariant } from '@buffalo/ui/landing/mocks';
+import { MockVisual, type MockVariant } from '@kaiten/ui/landing/mocks';
 
 const DOMAIN_GROUPS: Array<{ domain: string; variants: MockVariant[] }> = [
   {

@@ -12,7 +12,7 @@ type Story = StoryObj<typeof LandingFooter>;
 
 export const Default: Story = {
   args: {
-    brandName: 'Buffalo',
+    brandName: 'Контент-завод Кайтен',
     brandTagline: 'AI harness для генерации лендингов в вашей дизайн-системе.',
     columns: [
       {

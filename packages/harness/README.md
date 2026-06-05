@@ -1,4 +1,4 @@
-# @buffalo/harness
+# @kaiten/harness
 
 LLM harness — ядро системы. Содержит schemas, registry, prompts, skills, pipeline, validators, CLI.
 
@@ -16,7 +16,7 @@ pnpm harness -- validate <slug>
 pnpm harness -- handoff <slug>
 
 # или напрямую внутри пакета
-pnpm --filter @buffalo/harness cli -- --help
+pnpm --filter @kaiten/harness cli -- --help
 ```
 
 ## Структура src/

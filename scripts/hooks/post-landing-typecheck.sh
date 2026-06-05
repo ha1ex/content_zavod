@@ -28,13 +28,13 @@ REL="${REL#./}"
 PACKAGE=""
 case "$REL" in
   packages/ui/src/*.tsx|packages/ui/src/**/*.tsx|packages/ui/src/*.ts|packages/ui/src/**/*.ts)
-    PACKAGE="@buffalo/ui" ;;
+    PACKAGE="@kaiten/ui" ;;
   apps/web/app/*.tsx|apps/web/app/**/*.tsx|apps/web/app/*.ts|apps/web/app/**/*.ts)
-    PACKAGE="@buffalo/web" ;;
+    PACKAGE="@kaiten/web" ;;
   packages/harness/src/*.ts|packages/harness/src/**/*.ts)
-    PACKAGE="@buffalo/harness" ;;
+    PACKAGE="@kaiten/harness" ;;
   generated/landings/*.tsx|generated/landings/**/*.tsx)
-    PACKAGE="@buffalo/web" ;;
+    PACKAGE="@kaiten/web" ;;
   *)
     exit 0 ;;
 esac

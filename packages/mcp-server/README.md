@@ -1,6 +1,6 @@
-# `@buffalo/mcp-server`
+# `@kaiten/mcp-server`
 
-MCP-сервер обёртка вокруг Buffalo harness. Подключите его к Claude Desktop / VS Code Copilot / любому MCP-совместимому клиенту и работайте с лендингами через чат, без CLI.
+MCP-сервер обёртка вокруг Контент-завод Кайтен. Подключите его к Claude Desktop / VS Code Copilot / любому MCP-совместимому клиенту и работайте с лендингами через чат, без CLI.
 
 ## Что внутри
 
@@ -16,7 +16,7 @@ MCP-сервер обёртка вокруг Buffalo harness. Подключит
 ## Запуск из коробки (smoke-тест)
 
 ```bash
-pnpm --filter @buffalo/mcp-server dev
+pnpm --filter @kaiten/mcp-server dev
 ```
 
 Откроется stdio-сервер. Можете слать JSON-RPC вручную (для отладки) или сразу подключить к клиенту.
@@ -28,12 +28,12 @@ pnpm --filter @buffalo/mcp-server dev
 ```json
 {
   "mcpServers": {
-    "buffalo": {
+    "kaiten": {
       "command": "pnpm",
-      "args": ["--filter", "@buffalo/mcp-server", "dev"],
+      "args": ["--filter", "@kaiten/mcp-server", "dev"],
       "cwd": "/absolute/path/to/calgary",
       "env": {
-        "BUFFALO_REPO_ROOT": "/absolute/path/to/calgary",
+        "KAITEN_REPO_ROOT": "/absolute/path/to/calgary",
         "ANTHROPIC_API_KEY": "sk-ant-..."
       }
     }
@@ -41,9 +41,9 @@ pnpm --filter @buffalo/mcp-server dev
 }
 ```
 
-Перезапустите Claude Desktop. Должны появиться 4 buffalo-tools в шторке инструментов.
+Перезапустите Claude Desktop. Должны появиться 4 kaiten-tools в шторке инструментов.
 
-`BUFFALO_REPO_ROOT` — обязателен, если cwd MCP-процесса отличается от корня репо (так бывает у Claude Desktop). `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` — нужны только для `build_landing` через LLM (не для list/read/validate).
+`KAITEN_REPO_ROOT` — обязателен, если cwd MCP-процесса отличается от корня репо (так бывает у Claude Desktop). `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` — нужны только для `build_landing` через LLM (не для list/read/validate).
 
 ## Подключение к VS Code Copilot
 
@@ -52,11 +52,11 @@ pnpm --filter @buffalo/mcp-server dev
 ```json
 {
   "servers": {
-    "buffalo": {
+    "kaiten": {
       "command": "pnpm",
-      "args": ["--filter", "@buffalo/mcp-server", "dev"],
+      "args": ["--filter", "@kaiten/mcp-server", "dev"],
       "cwd": "${workspaceFolder}",
-      "env": { "BUFFALO_REPO_ROOT": "${workspaceFolder}" }
+      "env": { "KAITEN_REPO_ROOT": "${workspaceFolder}" }
     }
   }
 }
@@ -69,13 +69,13 @@ VS Code 1.96+ с Copilot Chat подхватит.
 Codex CLI поддерживает MCP через `~/.codex/config.toml`:
 
 ```toml
-[mcp_servers.buffalo]
+[mcp_servers.kaiten]
 command = "pnpm"
-args = ["--filter", "@buffalo/mcp-server", "dev"]
+args = ["--filter", "@kaiten/mcp-server", "dev"]
 cwd = "/absolute/path/to/calgary"
 
-[mcp_servers.buffalo.env]
-BUFFALO_REPO_ROOT = "/absolute/path/to/calgary"
+[mcp_servers.kaiten.env]
+KAITEN_REPO_ROOT = "/absolute/path/to/calgary"
 ```
 
 ## Примеры использования
@@ -97,7 +97,7 @@ BUFFALO_REPO_ROOT = "/absolute/path/to/calgary"
 ## Build для production-использования
 
 ```bash
-pnpm --filter @buffalo/mcp-server build
+pnpm --filter @kaiten/mcp-server build
 node packages/mcp-server/dist/index.js
 ```
 
@@ -106,10 +106,10 @@ node packages/mcp-server/dist/index.js
 ```json
 {
   "mcpServers": {
-    "buffalo": {
+    "kaiten": {
       "command": "node",
       "args": ["/absolute/path/to/calgary/packages/mcp-server/dist/index.js"],
-      "env": { "BUFFALO_REPO_ROOT": "/absolute/path/to/calgary" }
+      "env": { "KAITEN_REPO_ROOT": "/absolute/path/to/calgary" }
     }
   }
 }

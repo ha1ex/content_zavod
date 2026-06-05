@@ -30,7 +30,7 @@ Section [hero|media_copy|...] uses variant 'pm-board' which is not allowed for d
 Suggested alternatives: ['sales-funnel', 'crm-client-card', ...]
 ```
 
-**Что делать:** в `content/landings/<slug>.json` найти эту секцию, поменять `variant` / `mediaVariant` / `mockVariant` на один из suggested. После — `harness agent apply`. См. визуальный каталог: `pnpm --filter @buffalo/ui storybook` → `Mocks/_Catalog`.
+**Что делать:** в `content/landings/<slug>.json` найти эту секцию, поменять `variant` / `mediaVariant` / `mockVariant` на один из suggested. После — `harness agent apply`. См. визуальный каталог: `pnpm --filter @kaiten/ui storybook` → `Mocks/_Catalog`.
 
 ---
 
@@ -148,7 +148,7 @@ pnpm dev
 ## 11. Storybook не открывается
 
 ```bash
-pnpm --filter @buffalo/ui storybook
+pnpm --filter @kaiten/ui storybook
 ```
 
 Открыть `http://localhost:6006`. Если не открывается:

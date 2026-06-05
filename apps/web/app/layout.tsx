@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Buffalo — LLM harness for landings',
+  title: 'Контент-завод Кайтен — LLM harness for landings',
   description: 'Управляемый контур вокруг LLM для генерации SaaS-лендингов',
 };
 

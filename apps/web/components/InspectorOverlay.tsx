@@ -26,7 +26,7 @@ interface HoverState {
 
 /**
  * Маппинг sectionId (literal из LandingSpecSchema) → имя компонента
- * в @buffalo/ui/landing. Нужно для catalog-mode копирования (путь до .tsx-файла).
+ * в @kaiten/ui/landing. Нужно для catalog-mode копирования (путь до .tsx-файла).
  */
 const SECTION_TO_COMPONENT: Record<string, string> = {
   hero: 'HeroSection',

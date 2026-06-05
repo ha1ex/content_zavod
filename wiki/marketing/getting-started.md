@@ -1,4 +1,4 @@
-# Маркетинг — начало работы с Buffalo
+# Маркетинг — начало работы с Контент-завод Кайтен
 
 > Этот документ — пошаговая инструкция для маркетинговой команды. **Не требует знания кода.** Всё, что нужно — терминал, любой ассистент (Claude Code / Codex CLI / Cursor / Gemini) и понимание собственного продукта.
 
@@ -108,7 +108,7 @@ pnpm -w run harness handoff <slug> --require-approved
 ### Визуальный каталог всех блоков
 
 ```bash
-pnpm --filter @buffalo/ui storybook
+pnpm --filter @kaiten/ui storybook
 ```
 
 Откроется `http://localhost:6006`. Слева:

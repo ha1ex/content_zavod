@@ -60,11 +60,11 @@ stale: false
 
 | Slug | Назначение |
 |---|---|
-| [`test-buffalo.md`](./test-buffalo.md) | Канонический smoke-тест pipeline (BuffaloHeroDashboard) |
+| [`test-kaiten.md`](./test-kaiten.md) | Канонический smoke-тест pipeline (KaitenHeroDashboard) |
 
 ## Воркфлоу для нового лендинга
 
-1. **Domain audit** (см. [`.claude/skills/buffalo-generate/SKILL.md`](../../.claude/skills/buffalo-generate/SKILL.md)
+1. **Domain audit** (см. [`.claude/skills/kaiten-generate/SKILL.md`](../../.claude/skills/kaiten-generate/SKILL.md)
    шаг 0):
    - Определи домен по `brief.product` + `brief.market`.
    - Сверь с [`domain-mock-matrix.md`](../references/domain-mock-matrix.md).

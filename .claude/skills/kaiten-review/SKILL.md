@@ -1,9 +1,9 @@
 ---
-name: buffalo-review
-description: Review a generated Buffalo landing before handoff — run all validators, check visual regression, walk the /approve page, and prepare a structured comment list for the team. Use when the user wants to QA a landing, check what's wrong, or block/approve a draft.
+name: kaiten-review
+description: Review a generated Контент-завод Кайтен landing before handoff — run all validators, check visual regression, walk the /approve page, and prepare a structured comment list for the team. Use when the user wants to QA a landing, check what's wrong, or block/approve a draft.
 ---
 
-# Buffalo — Review a generated landing
+# Контент-завод Кайтен — Review a generated landing
 
 Use this skill any time the user wants to QA, audit, accept, or block a generated landing before it goes to frontend. Trigger phrases:
 
@@ -11,7 +11,7 @@ Use this skill any time the user wants to QA, audit, accept, or block a generate
 - "review landing [slug]"
 - "что не так с [slug]"
 - "approve [slug]?" / "ready to ship [slug]?"
-- "buffalo review [slug]"
+- "kaiten review [slug]"
 - "audit [slug]"
 
 ## What this skill does (in order)
@@ -77,7 +77,7 @@ Wait — `--no-llm` overwrites the file with the stub. Don't do that on a real a
 ### 5. Visual regression
 
 ```bash
-pnpm --filter @buffalo/web test:visual
+pnpm --filter @kaiten/web test:visual
 ```
 
 If it fails, decide whether the diff is intentional (regen will need `--update-snapshots`) or a regression (block the approval).

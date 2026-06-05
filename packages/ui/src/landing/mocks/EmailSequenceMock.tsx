@@ -11,7 +11,7 @@ interface Step {
 }
 
 const STEPS: Step[] = [
-  { day: 'Day 0', subject: 'Welcome · добро пожаловать в Buffalo', trigger: 'Регистрация', openRate: '72%', clickRate: '38%' },
+  { day: 'Day 0', subject: 'Welcome · добро пожаловать в Контент-завод Кайтен', trigger: 'Регистрация', openRate: '72%', clickRate: '38%' },
   { day: 'Day 1', subject: 'Setup tour · что попробовать первым', trigger: 'Welcome opened', openRate: '54%', clickRate: '26%' },
   { day: 'Day 3', subject: 'Tips · 5 неочевидных приёмов', trigger: 'Active 3+ дня', openRate: '47%', clickRate: '22%', active: true },
   { day: 'Day 7', subject: 'Case study · как Северный ветер вырос ×3', trigger: 'Active 7+ дней', openRate: '41%', clickRate: '18%' },

@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { LandingSpecSchema } from '@buffalo/harness/schemas';
+import { LandingSpecSchema } from '@kaiten/harness/schemas';
 import { resolveRepoRoot } from '../repo.js';
 
 export function registerReadLandingTool(server: McpServer) {

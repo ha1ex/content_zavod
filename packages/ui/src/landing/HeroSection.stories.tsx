@@ -16,7 +16,7 @@ export const Default: Story = {
     eyebrow: 'AI harness for product teams',
     title: 'Превратите бриф в готовый лендинг за минуту',
     subtitle:
-      'Buffalo собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл, который разработчик может коммитить как есть.',
+      'Контент-завод Кайтен собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл, который разработчик может коммитить как есть.',
     primaryCta: { label: 'Получить демо', href: '/demo' },
     secondaryCta: { label: 'Как это работает', href: '#how-it-works' },
     visual: { type: 'product_screenshot' },

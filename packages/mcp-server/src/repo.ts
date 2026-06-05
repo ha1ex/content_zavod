@@ -3,8 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 /**
- * Резолвит путь к корню Buffalo monorepo. Стратегия:
- * 1. Если задана BUFFALO_REPO_ROOT — используем её.
+ * Резолвит путь к корню Контент-завод Кайтен monorepo. Стратегия:
+ * 1. Если задана KAITEN_REPO_ROOT — используем её.
  * 2. Идём вверх от текущего файла, ищем pnpm-workspace.yaml.
  * 3. Идём вверх от cwd, ищем pnpm-workspace.yaml.
  *
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
  * (Claude Desktop / VS Code) с произвольным cwd.
  */
 export async function resolveRepoRoot(): Promise<string> {
-  const fromEnv = process.env.BUFFALO_REPO_ROOT;
+  const fromEnv = process.env.KAITEN_REPO_ROOT;
   if (fromEnv) return resolve(fromEnv);
 
   const here = dirname(fileURLToPath(import.meta.url));
@@ -23,7 +23,7 @@ export async function resolveRepoRoot(): Promise<string> {
   if (fromCwd) return fromCwd;
 
   throw new Error(
-    'Не удалось найти Buffalo repo root. Задайте BUFFALO_REPO_ROOT в env для MCP-сервера.',
+    'Не удалось найти Контент-завод Кайтен repo root. Задайте KAITEN_REPO_ROOT в env для MCP-сервера.',
   );
 }
 

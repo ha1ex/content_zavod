@@ -16,7 +16,7 @@ import {
  * Проблема, которую он закрывает: ассистент мог выбрать pm-board для CRM-лендинга
  * под предлогом «канбан-доска — это универсально». Это самая частая и грубая
  * ошибка визуального качества. Документационный слой (wiki/references/domain-mock-matrix.md,
- * §0 Domain fit в section-mock-skill, шаг 0 Domain audit в buffalo-generate)
+ * §0 Domain fit в section-mock-skill, шаг 0 Domain audit в kaiten-generate)
  * правило вводит, но эта проверка — страховка на уровне кода: если ассистент
  * проигнорирует skill, ingest откажется писать TSX.
  *

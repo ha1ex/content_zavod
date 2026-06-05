@@ -2,8 +2,8 @@ import { resolve } from 'node:path';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { readFile } from 'node:fs/promises';
-import { LandingSpecSchema } from '@buffalo/harness/schemas';
-import { readApproval } from '@buffalo/harness/approvals';
+import { LandingSpecSchema } from '@kaiten/harness/schemas';
+import { readApproval } from '@kaiten/harness/approvals';
 import { ApprovalForm } from './ApprovalForm';
 
 interface PageProps {

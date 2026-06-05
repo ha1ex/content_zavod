@@ -54,9 +54,9 @@ async function readUtf8(p: string): Promise<string> {
 }
 
 function rewritePageImports(tsx: string): string {
-  // import { A, B } from '@buffalo/ui/landing'; → './components/index.js'
+  // import { A, B } from '@kaiten/ui/landing'; → './components/index.js'
   return tsx.replace(
-    /from\s+['"]@buffalo\/ui\/landing['"]/g,
+    /from\s+['"]@kaiten\/ui\/landing['"]/g,
     `from './components/index'`,
   );
 }
@@ -64,7 +64,7 @@ function rewritePageImports(tsx: string): string {
 function makeReadme(spec: LandingSpec, slug: string, components: string[], illustrations: string[]): string {
   return `# Landing handoff — ${slug}
 
-Сгенерировано Buffalo harness'ом. Готово к интеграции в Next.js + Tailwind v4 проект.
+Сгенерировано Контент-заводом Кайтен. Готово к интеграции в Next.js + Tailwind v4 проект.
 
 ## Что внутри
 
@@ -102,7 +102,7 @@ function makeReadme(spec: LandingSpec, slug: string, components: string[], illus
 
 ## Источник истины
 
-LLM-генерация через @buffalo/harness; rebuild — \`pnpm -w run harness generate landing --brief ... --slug ${slug}\`.
+LLM-генерация через @kaiten/harness; rebuild — \`pnpm -w run harness generate landing --brief ... --slug ${slug}\`.
 `;
 }
 

@@ -8,7 +8,7 @@
       "props": {
         "eyebrow": "AI harness для продуктовых команд",
         "title": "Превратите бриф в готовый лендинг за минуту",
-        "subtitle": "Buffalo собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл, который разработчик может коммитить как есть.",
+        "subtitle": "Контент-завод Кайтен собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл, который разработчик может коммитить как есть.",
         "primaryCta": { "label": "Получить демо", "href": "/demo" },
         "secondaryCta": { "label": "Как это работает", "href": "#how-it-works" },
         "visual": { "type": "product_screenshot", "assetId": "harness-dashboard-v1" }
@@ -18,7 +18,7 @@
       "id": "features",
       "component": "FeatureGrid",
       "props": {
-        "eyebrow": "Почему Buffalo",
+        "eyebrow": "Почему Контент-завод Кайтен",
         "title": "Лендинги, которые остаются в вашем бренде",
         "description": "Никаких выдуманных компонентов и hype-копирайта. Только то, что есть в вашей дизайн-системе.",
         "columns": 3,
@@ -70,7 +70,7 @@
         "title": "Частые вопросы",
         "items": [
           { "question": "Это просто обёртка над ChatGPT?", "answer": "Нет. Это контур вокруг LLM с registry, валидаторами, repair-loop и handoff. Модель работает внутри жёстких рамок вашей дизайн-системы." },
-          { "question": "Что если в registry нет нужного компонента?", "answer": "Добавьте его в @buffalo/ui — модель сразу его увидит через registry. Никаких изменений в промпте не нужно." },
+          { "question": "Что если в registry нет нужного компонента?", "answer": "Добавьте его в @kaiten/ui — модель сразу его увидит через registry. Никаких изменений в промпте не нужно." },
           { "question": "Я могу использовать свой провайдер LLM?", "answer": "Да, провайдер переключается через env-переменную AI_PROVIDER (anthropic / openai). По умолчанию идём через Vercel AI Gateway если есть OIDC-токен." }
         ]
       }
@@ -88,7 +88,7 @@
       "id": "footer",
       "component": "LandingFooter",
       "props": {
-        "brandName": "Buffalo",
+        "brandName": "Контент-завод Кайтен",
         "brandTagline": "AI harness для генерации лендингов в вашей дизайн-системе.",
         "columns": [
           {
@@ -111,7 +111,7 @@
     }
   ],
   "seo": {
-    "title": "Buffalo — AI harness для SaaS-лендингов",
+    "title": "Контент-завод Кайтен — AI harness для SaaS-лендингов",
     "description": "Превращайте брифы в готовые TSX-лендинги, собранные из вашей дизайн-системы. Со встроенными валидаторами и repair loop."
   },
   "illustrationSpecs": []

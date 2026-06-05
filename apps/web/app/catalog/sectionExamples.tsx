@@ -21,7 +21,7 @@ import {
   TabbedFeatureSection,
   TestimonialQuote,
   TimelineRoadmap,
-} from '@buffalo/ui/landing';
+} from '@kaiten/ui/landing';
 
 interface SectionExample {
   name: string;
@@ -37,10 +37,10 @@ export const SECTION_EXAMPLES: SectionExample[] = [
     description: 'Главный hero-блок с заголовком, описанием, CTA и mock-визуалом.',
     element: (
       <HeroSection
-        eyebrow="Buffalo · фабрика лендингов"
+        eyebrow="Контент-завод Кайтен · сборка лендингов"
         title="Превратите бриф в готовый лендинг за минуту"
         accentWord="минуту"
-        subtitle="Buffalo собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл."
+        subtitle="Контент-завод Кайтен собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл."
         primaryCta={{ label: 'Получить демо', href: '/demo' }}
         secondaryCta={{ label: 'Как это работает', href: '#how' }}
         visual={{ type: 'product_screenshot', assetId: 'pm', variant: 'pm-board' }}
@@ -54,7 +54,7 @@ export const SECTION_EXAMPLES: SectionExample[] = [
     description: 'Grid карточек 2-8 штук с иконкой, заголовком и описанием.',
     element: (
       <FeatureGrid
-        eyebrow="Почему Buffalo"
+        eyebrow="Почему Контент-завод Кайтен"
         title="Лендинги, которые остаются в вашем бренде"
         description="Никаких выдуманных компонентов и hype-копирайта."
         columns={3}
@@ -91,7 +91,7 @@ export const SECTION_EXAMPLES: SectionExample[] = [
         eyebrow="FAQ"
         title="Частые вопросы"
         items={[
-          { question: 'Что такое Buffalo?', answer: 'LLM-харнесс для сборки SaaS-лендингов на ваших компонентах.' },
+          { question: 'Что такое Контент-завод Кайтен?', answer: 'LLM-харнесс для сборки SaaS-лендингов на ваших компонентах.' },
           { question: 'Нужен ли API-ключ?', answer: 'Нет, в agent-mode хост-агент сам генерирует spec.' },
           { question: 'Какие домены поддерживаются?', answer: 'PM, Support, CRM, HR, Marketing, BPM, Finance, E-commerce, Docs.' },
         ]}
@@ -117,13 +117,13 @@ export const SECTION_EXAMPLES: SectionExample[] = [
     description: 'Подвал: бренд + tagline + колонки ссылок + copyright.',
     element: (
       <LandingFooter
-        brandName="Buffalo"
+        brandName="Контент-завод Кайтен"
         brandTagline="LLM-харнесс для сборки лендингов."
         columns={[
           { title: 'Продукт', links: [{ label: 'Возможности', href: '#features' }, { label: 'FAQ', href: '#faq' }] },
           { title: 'Компания', links: [{ label: 'О продукте', href: '/about' }, { label: 'Контакты', href: '/contact' }] },
         ]}
-        copyright="© Buffalo. LLM-харнесс."
+        copyright="© Контент-завод Кайтен. LLM-харнесс."
       />
     ),
   },

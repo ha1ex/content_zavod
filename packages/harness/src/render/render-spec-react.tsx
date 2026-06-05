@@ -21,7 +21,7 @@ import {
   BentoGrid,
   LogoCloud,
   TestimonialQuote,
-} from '@buffalo/ui/landing';
+} from '@kaiten/ui/landing';
 import type { LandingSpec, Section } from '../schemas/landing-spec';
 
 /**

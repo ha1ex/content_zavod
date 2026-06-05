@@ -307,7 +307,7 @@ function buildPhasePrompt(opts: {
   const fence = '```';
   const parts: string[] = [];
 
-  parts.push(`# Buffalo phased pipeline — ${opts.phase} ${opts.title}`);
+  parts.push(`# Контент-завод Кайтен phased pipeline — ${opts.phase} ${opts.title}`);
   parts.push('');
   parts.push(`> **Host-agent mode.** Этот prompt был эмитирован orchestrator'ом фазы ${opts.phase}.`);
   parts.push('> Прочитай context и task, напиши JSON по schema в указанный файл,');
@@ -356,7 +356,7 @@ function buildRepairPrompt(opts: {
   const fence = '```';
   const parts: string[] = [];
 
-  parts.push(`# Buffalo phased pipeline — REPAIR ${opts.phase} ${opts.title}`);
+  parts.push(`# Контент-завод Кайтен phased pipeline — REPAIR ${opts.phase} ${opts.title}`);
   parts.push('');
   parts.push(
     `> **Repair attempt ${opts.attemptNumber}/${opts.maxAttempts}** — твой предыдущий output не прошёл ${opts.failureKind} валидацию.`,

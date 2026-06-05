@@ -21,7 +21,7 @@ stale: false
 
 # SaaS landing — archetype
 
-`pageType: saas_landing` в LandingSpec. Самый частый тип для Buffalo.
+`pageType: saas_landing` в LandingSpec. Самый частый тип для Контент-завод Кайтен.
 
 ## Целевые goals
 

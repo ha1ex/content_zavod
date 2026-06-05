@@ -20,10 +20,10 @@ importers:
 
   apps/web:
     dependencies:
-      '@buffalo/harness':
+      '@kaiten/harness':
         specifier: workspace:*
         version: link:../../packages/harness
-      '@buffalo/ui':
+      '@kaiten/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@measured/puck':
@@ -96,7 +96,7 @@ importers:
       '@babel/types':
         specifier: ^7.26.0
         version: 7.29.0
-      '@buffalo/ui':
+      '@kaiten/ui':
         specifier: workspace:*
         version: link:../ui
       '@measured/puck':
@@ -142,7 +142,7 @@ importers:
 
   packages/mcp-server:
     dependencies:
-      '@buffalo/harness':
+      '@kaiten/harness':
         specifier: workspace:*
         version: link:../harness
       '@modelcontextprotocol/sdk':

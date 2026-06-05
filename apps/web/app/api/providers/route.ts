@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { hasLLMCredentials } from '@buffalo/harness/providers';
+import { hasLLMCredentials } from '@kaiten/harness/providers';
 import { detectAvailableCli, getFailureSnapshot } from '../extract-brief/cli-extract';
 
 export const runtime = 'nodejs';

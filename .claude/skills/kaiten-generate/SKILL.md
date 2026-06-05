@@ -1,11 +1,11 @@
 ---
-name: buffalo-generate
-description: Run the Buffalo LLM harness end-to-end in agent-mode (no API keys — the host LLM is YOU). Turn a marketing brief into a Kaiten landing: prepare prompt → generate LandingSpec → ingest (validate + render TSX) → preview. Use when the user wants to generate, regenerate, or iterate on a landing for a brief; or when they reference Buffalo harness, a slug, a brief.json, or `pnpm -w run harness agent`.
+name: kaiten-generate
+description: Run the Контент-завод Кайтен LLM harness end-to-end in agent-mode (no API keys — the host LLM is YOU). Turn a marketing brief into a Kaiten landing: prepare prompt → generate LandingSpec → ingest (validate + render TSX) → preview. Use when the user wants to generate, regenerate, or iterate on a landing for a brief; or when they reference Контент-завод Кайтен, a slug, a brief.json, or `pnpm -w run harness agent`.
 ---
 
-# Buffalo — Generate landing in agent-mode
+# Контент-завод Кайтен — Generate landing in agent-mode
 
-Use this skill whenever the user wants to assemble a Kaiten-style SaaS landing from a brief — phrases like "buffalo", "harness", "сгенерируй лендинг", "новый лендинг для X", or just hand you a brief JSON.
+Use this skill whenever the user wants to assemble a Kaiten-style SaaS landing from a brief — phrases like "kaiten", "harness", "сгенерируй лендинг", "новый лендинг для X", or just hand you a brief JSON.
 
 **Key idea (agent-mode):** the harness is API-key-free. It does NOT call any external LLM. You — the host agent — are the LLM. The CLI emits a prompt + JSON schema for you, you write the spec, the CLI validates & renders TSX.
 
@@ -13,13 +13,13 @@ Use this skill whenever the user wants to assemble a Kaiten-style SaaS landing f
 
 - "сгенерируй лендинг по [brief]"
 - "новый лендинг для [продукт]"
-- "buffalo generate [slug]"
+- "kaiten generate [slug]"
 - "regenerate landing [slug]"
 - "harness landing [slug]"
 
 ## Preconditions
 
-- Repo is the Buffalo harness monorepo (`pnpm-workspace.yaml` at root).
+- Repo is the Контент-завод Кайтен monorepo (`pnpm-workspace.yaml` at root).
 - `pnpm install` has been run once.
 - **No API keys required.** Agent-mode works in any host (Claude Code, Codex, ChatGPT with file access).
 
@@ -140,7 +140,7 @@ pnpm -w run harness agent build landing --slug <slug> --brief content/briefs/<sl
 Open `content/briefs/<slug>.json`. If it does not exist:
 
 - Ask the user for: product, audience, market, primary goal (`book_demo` / `signup` / `waitlist` / `contact_sales` / `try_free` / `download`), main pain, main promise, 3 proof points, tone (default: "clear, practical, confident, no hype"), CTA label, `pageArchetype` (`saas` / `waitlist` / `enterprise`), **`pageLayout`** (slug из шага 0).
-- Write the brief to `content/briefs/<slug>.json` matching `BriefSchema` from `@buffalo/harness/schemas`.
+- Write the brief to `content/briefs/<slug>.json` matching `BriefSchema` from `@kaiten/harness/schemas`.
 
 **Audience pre-resolve (optional but speeds up the gate):** если знаешь явно — какие сегменты из [`wiki/audiences/kaiten-scoring.md`](../../../wiki/audiences/kaiten-scoring.md) подходят к брифу — добавь `resolvedSegments: ["IT", ...]`. Если не уверен — оставь пустым, audience-score gate сам сделает lexical-match. Если match провалится — на шаге 4½ сделаешь audience research и впишешь.
 

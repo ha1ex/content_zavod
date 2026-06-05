@@ -1,4 +1,4 @@
-# @buffalo/harness — skills
+# @kaiten/harness — skills
 
 База знаний harness: markdown-документы с frontmatter, которые
 подмешиваются в system prompt LLM и используются как rulebook

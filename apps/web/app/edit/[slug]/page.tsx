@@ -2,8 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { LandingSpecSchema } from '@buffalo/harness/schemas';
-import { specToPuckData } from '@buffalo/harness/puck';
+import { LandingSpecSchema } from '@kaiten/harness/schemas';
+import { specToPuckData } from '@kaiten/harness/puck';
 import { EditorClient } from './EditorClient';
 
 interface PageProps {
@@ -46,7 +46,7 @@ export default async function EditPage({ params }: PageProps) {
       <header className="flex flex-shrink-0 items-center justify-between border-b border-(--color-border-default) bg-(--color-surface-page) px-6 py-3">
         <div>
           <p className="text-xs uppercase tracking-wide text-(--color-text-secondary)">
-            Buffalo · редактор
+            Контент-завод Кайтен · редактор
           </p>
           <h1 className="text-base font-semibold">Editing: {slug}</h1>
         </div>

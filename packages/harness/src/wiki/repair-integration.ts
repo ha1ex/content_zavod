@@ -7,7 +7,7 @@
  * Пока — этот файл предоставляет **готовый билдер repair-message'а**, который
  * другая ветка просто подключит:
  *
- *   import { buildRepairMessageWithLessons } from '@buffalo/harness/wiki';
+ *   import { buildRepairMessageWithLessons } from '@kaiten/harness/wiki';
  *   runWithRepair({ buildRepairMessage: buildRepairMessageWithLessons, ... });
  *
  * Также экспортирует `extractLessonFromIncident` — для пост-фактум обогащения

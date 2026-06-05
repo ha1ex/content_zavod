@@ -132,7 +132,7 @@ function buildDomainContext(brief: Brief): DomainContext {
 
 export function renderPrepareAsMarkdown(a: PrepareLandingArtifact): string {
   const fence = '```';
-  return `# Buffalo agent prompt — landing/${a.slug}
+  return `# Контент-завод Кайтен agent prompt — landing/${a.slug}
 
 > **Host-agent mode** — нет API-ключей, всё генерирует LLM хоста (Claude Code, Codex, ChatGPT-with-files, …).
 

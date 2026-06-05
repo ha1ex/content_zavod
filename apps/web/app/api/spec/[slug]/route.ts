@@ -1,8 +1,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { NextResponse } from 'next/server';
-import { LandingSpecSchema } from '@buffalo/harness/schemas';
-import { puckDataToSections, puckRootToSeo, type PuckData } from '@buffalo/harness/puck';
+import { LandingSpecSchema } from '@kaiten/harness/schemas';
+import { puckDataToSections, puckRootToSeo, type PuckData } from '@kaiten/harness/puck';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { z } from 'zod';
-import { BriefSchema } from '@buffalo/harness/schemas';
+import { BriefSchema } from '@kaiten/harness/schemas';
 import { generateLandingViaCli, type GenProgress } from './cli-generate';
 
 export const runtime = 'nodejs';

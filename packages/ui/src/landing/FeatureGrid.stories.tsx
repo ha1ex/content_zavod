@@ -12,7 +12,7 @@ type Story = StoryObj<typeof FeatureGrid>;
 
 export const Three: Story = {
   args: {
-    eyebrow: 'Почему Buffalo',
+    eyebrow: 'Почему Контент-завод Кайтен',
     title: 'Лендинги, которые остаются в вашем бренде',
     description: 'Никаких выдуманных компонентов и hype-копирайта.',
     columns: 3,

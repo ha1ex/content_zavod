@@ -4,7 +4,7 @@ import type { LandingSpec } from '../schemas/landing-spec';
  * Brand-voice валидатор для LandingSpec (этап 4).
  *
  * Сканирует все текстовые поля на hype-лексику и общие маркетинговые штампы,
- * которые противоречат tone-of-voice Buffalo/Kaiten ("clear, practical,
+ * которые противоречат tone-of-voice Контент-завод Кайтен/Kaiten ("clear, practical,
  * confident, no hype"). Список вынесен сюда, чтобы был кросс-проверяемым
  * вместе с system prompt (где даны те же правила) — двойной контур.
  */

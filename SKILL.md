@@ -1,6 +1,6 @@
 ---
 name: kaiten-build-landing
-description: Сгенерировать Kaiten-стайл лендинг по brief через Buffalo harness в любом ассистенте (Claude Code, Codex CLI, Cursor, Gemini CLI). Не требует API-ключей — host LLM сам генерирует LandingSpec. Триггеры — «сгенерируй лендинг», «новый лендинг для X», «buffalo build <slug>», «harness landing». Версия для маркетинговой команды — пошагово, без CLI-магии.
+description: Сгенерировать Kaiten-стайл лендинг по brief через Контент-завод Кайтен в любом ассистенте (Claude Code, Codex CLI, Cursor, Gemini CLI). Не требует API-ключей — host LLM сам генерирует LandingSpec. Триггеры — «сгенерируй лендинг», «новый лендинг для X», «kaiten build <slug>», «harness landing». Версия для маркетинговой команды — пошагово, без CLI-магии.
 ---
 
 # Kaiten Build Landing — кросс-инструментальный playbook для маркетинга
@@ -22,7 +22,7 @@ description: Сгенерировать Kaiten-стайл лендинг по br
 ## Когда вызывать (триггеры)
 
 - «Сгенерируй лендинг по [brief]» / «новый лендинг для [продукт]».
-- «Buffalo build <slug>» / «harness landing <slug>».
+- «Контент-завод Кайтен build <slug>» / «harness landing <slug>».
 - Пользователь дал JSON brief'а или ссылку на `content/briefs/<slug>.json`.
 - Просьба переделать существующий лендинг (regenerate).
 
@@ -143,6 +143,6 @@ pnpm -w run harness handoff <slug> --require-approved
 - [`AGENTS.md`](AGENTS.md) — конвенции репо.
 - [`README.md`](README.md) — полная техническая документация.
 - [`docs/pipeline.md`](docs/pipeline.md) — все 9 фаз pipeline'а.
-- [`.claude/skills/buffalo-generate/SKILL.md`](.claude/skills/buffalo-generate/SKILL.md) — детальный engineer-flow.
+- [`.claude/skills/kaiten-generate/SKILL.md`](.claude/skills/kaiten-generate/SKILL.md) — детальный engineer-flow.
 - [`wiki/marketing/`](wiki/marketing/) — маркетинговые playbook'и.
-- Storybook: `pnpm --filter @buffalo/ui storybook` → визуальный каталог всех блоков.
+- Storybook: `pnpm --filter @kaiten/ui storybook` → визуальный каталог всех блоков.

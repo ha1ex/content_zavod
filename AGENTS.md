@@ -12,13 +12,13 @@ athens — LLM-harness для генерации SaaS-лендингов. Pipeli
 | **Доработать готовый лендинг** | [`wiki/marketing/edit-recipes.md`](wiki/marketing/edit-recipes.md) |
 | **Что-то пошло не так** | [`wiki/marketing/troubleshooting.md`](wiki/marketing/troubleshooting.md) |
 | **Поля brief.json расшифровка** | [`wiki/marketing/brief-fields.md`](wiki/marketing/brief-fields.md) |
-| **Визуальный каталог всех 22 секций + 39 моков** | `pnpm --filter @buffalo/ui storybook` → `http://localhost:6006` |
-| Генерация лендинга от и до (engineer-flow) | [`.claude/skills/buffalo-generate/SKILL.md`](.claude/skills/buffalo-generate/SKILL.md) |
-| Ревью существующего лендинга | [`.claude/skills/buffalo-review/SKILL.md`](.claude/skills/buffalo-review/SKILL.md) |
+| **Визуальный каталог всех 22 секций + 39 моков** | `pnpm --filter @kaiten/ui storybook` → `http://localhost:6006` |
+| Генерация лендинга от и до (engineer-flow) | [`.claude/skills/kaiten-generate/SKILL.md`](.claude/skills/kaiten-generate/SKILL.md) |
+| Ревью существующего лендинга | [`.claude/skills/kaiten-review/SKILL.md`](.claude/skills/kaiten-review/SKILL.md) |
 | Дизайн-система Kaiten (цвета, типографика, сетка) | [`.claude/skills/design-system-kaiten-v01/SKILL.md`](.claude/skills/design-system-kaiten-v01/SKILL.md) |
 | Conversion-копи / правила секций лендинга | [`packages/harness/src/skills/conversion-landing.md`](packages/harness/src/skills/conversion-landing.md) |
 | Конвенции wiki (где что лежит, что immutable) | [`wiki/AGENTS.md`](wiki/AGENTS.md) |
-| Маркетинговый обзор: что такое buffalo, как работает | [`README.md`](README.md) |
+| Маркетинговый обзор: что такое Контент-завод Кайтен, как работает | [`README.md`](README.md) |
 | План инструмента для маркетинга (M1→M4) | [`.claude/plans/system-instruction-you-are-working-fancy-twilight.md`](/.claude/plans/system-instruction-you-are-working-fancy-twilight.md) |
 | План миграции к Karpathy-Wiki паттерну | [`.context/plans/karpathy-llm-wiki-athens-harness.md`](.context/plans/karpathy-llm-wiki-athens-harness.md) |
 
@@ -33,7 +33,7 @@ content/landings/               Generated specs (regeneratable; пишется h
 generated/landings/             TSX output (regeneratable; пишется harness generate)
 design-system/kaiten-v01/       SSoT дизайн-системы (HTML/PDF/PNG от дизайн-команды) [после merge]
 wiki/                           LLM-maintained knowledge: audiences, patterns, lessons, landings, design-system derived
-.claude/skills/                 Project-level Claude Code skills (design-system, buffalo-generate, buffalo-review)
+.claude/skills/                 Project-level Claude Code skills (design-system, kaiten-generate, kaiten-review)
 .context/                       Workspace context (gitignored для большинства файлов; .context/plans/ — exception)
 out/                            Handoff ZIP packages (gitignored)
 ```

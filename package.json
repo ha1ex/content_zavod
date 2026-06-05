@@ -1,5 +1,5 @@
 {
-  "name": "buffalo-harness",
+  "name": "kaiten-content-factory",
   "version": "0.1.0",
   "private": true,
   "description": "LLM harness for generating SaaS landing pages with Storybook, design system, validators, and SVG hero illustrations.",
@@ -9,11 +9,11 @@
     "pnpm": ">=10"
   },
   "scripts": {
-    "dev": "pnpm --filter @buffalo/web dev",
+    "dev": "pnpm --filter @kaiten/web dev",
     "build": "pnpm -r build",
-    "start": "pnpm --filter @buffalo/web start",
-    "storybook": "pnpm --filter @buffalo/ui storybook",
-    "harness": "pnpm --filter @buffalo/harness cli",
+    "start": "pnpm --filter @kaiten/web start",
+    "storybook": "pnpm --filter @kaiten/ui storybook",
+    "harness": "pnpm --filter @kaiten/harness cli",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test"

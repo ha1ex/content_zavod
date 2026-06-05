@@ -10,7 +10,7 @@ import {
   THEME_PRESETS,
   getThemeById,
   type PuckData,
-} from '@buffalo/harness/puck';
+} from '@kaiten/harness/puck';
 import {
   BenefitsStrip,
   BentoGrid,
@@ -34,7 +34,7 @@ import {
   TabbedFeatureSection,
   TestimonialQuote,
   TimelineRoadmap,
-} from '@buffalo/ui/landing';
+} from '@kaiten/ui/landing';
 
 interface Props {
   slug: string;

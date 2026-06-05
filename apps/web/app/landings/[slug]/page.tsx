@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { LandingSpecSchema } from '@buffalo/harness/schemas';
-import { RenderLanding } from '@buffalo/harness/render/render-spec-react';
+import { LandingSpecSchema } from '@kaiten/harness/schemas';
+import { RenderLanding } from '@kaiten/harness/render/render-spec-react';
 import { InspectorOverlay } from '../../../components/InspectorOverlay';
 
 interface PageProps {

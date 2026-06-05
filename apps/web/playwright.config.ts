@@ -6,7 +6,7 @@ import { defineConfig, devices } from '@playwright/test';
  * Прогоняем сгенерированные лендинги в одинаковом desktop-viewport, делаем
  * полностраничные скриншоты и сравниваем с baseline'ом в
  * tests/visual/__snapshots__/<slug>-*.png. Любая правка спека → ребейзлайн
- * через `pnpm --filter @buffalo/web test:visual -- --update-snapshots`.
+ * через `pnpm --filter @kaiten/web test:visual -- --update-snapshots`.
  */
 export default defineConfig({
   testDir: './tests/visual',

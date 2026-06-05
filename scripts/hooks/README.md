@@ -1,4 +1,4 @@
-# Buffalo Claude Code hooks
+# Контент-завод Кайтен Claude Code hooks
 
 Детерминированные шаги, которые Claude Code дёргает автоматически. Источник
 правды: [`.claude/settings.json`](../../.claude/settings.json), официальный

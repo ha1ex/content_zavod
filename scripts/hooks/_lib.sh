@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Общая библиотека для hook-скриптов Buffalo.
+# Общая библиотека для hook-скриптов Контент-завод Кайтен.
 # Источник правды: docs/pipeline.md, wiki/lessons.md.
 
 set -euo pipefail

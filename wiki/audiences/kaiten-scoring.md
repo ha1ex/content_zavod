@@ -14,9 +14,9 @@ data: wiki/audiences/kaiten-scoring.json
 
 ## Зачем
 
-Buffalo-harness перед тем, как отдать лендинг на превью, проверяет: **закрывает ли он приоритетные User Stories для приоритетных портретов ЛПР приоритетных сегментов?** Если score < 70 или падает must-pass правило — лендинг возвращается на ещё одну итерацию доработки.
+Контент-завод Кайтен-harness перед тем, как отдать лендинг на превью, проверяет: **закрывает ли он приоритетные User Stories для приоритетных портретов ЛПР приоритетных сегментов?** Если score < 70 или падает must-pass правило — лендинг возвращается на ещё одну итерацию доработки.
 
-Реализация: `packages/harness/src/validators/landing-audience.ts` + интеграция в `agent/ingest-landing.ts`. Документация флоу — `.claude/skills/buffalo-generate/SKILL.md` (шаг 4½).
+Реализация: `packages/harness/src/validators/landing-audience.ts` + интеграция в `agent/ingest-landing.ts`. Документация флоу — `.claude/skills/kaiten-generate/SKILL.md` (шаг 4½).
 
 ## Формула
 

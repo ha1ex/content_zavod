@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart: грузим "горячий" Buffalo-контекст в системное напоминание.
+# SessionStart: грузим "горячий" Контент-завод Кайтен-контекст в системное напоминание.
 # Цель — заменить дефолтный 47-КБ Vercel-knowledge-graph чем-то по делу.
 
 set -euo pipefail
@@ -19,7 +19,7 @@ fi
 
 CTX=""
 
-CTX+="# Buffalo session context (auto-loaded by SessionStart hook)\n\n"
+CTX+="# Контент-завод Кайтен session context (auto-loaded by SessionStart hook)\n\n"
 
 # --- Последние коммиты ---
 if git rev-parse --git-dir >/dev/null 2>&1; then

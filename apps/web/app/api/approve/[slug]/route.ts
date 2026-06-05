@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { ApprovalStatusSchema } from '@buffalo/harness/schemas';
-import { readApproval, writeApproval } from '@buffalo/harness/approvals';
+import { ApprovalStatusSchema } from '@kaiten/harness/schemas';
+import { readApproval, writeApproval } from '@kaiten/harness/approvals';
 
 const PatchBodySchema = z.object({
   status: ApprovalStatusSchema,

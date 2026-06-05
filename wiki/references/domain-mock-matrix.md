@@ -11,7 +11,7 @@ sources:
   - wiki/landings/crm-reference.md
 related:
   - packages/harness/src/prompts/section-mock-skill.md
-  - .claude/skills/buffalo-generate/SKILL.md
+  - .claude/skills/kaiten-generate/SKILL.md
   - wiki/references/external-mock-references.md
 tags:
   - mock
@@ -254,7 +254,7 @@ SLA, эскалация, BPMN, узкое место.
 - [`packages/harness/src/prompts/section-mock-skill.md`](../../packages/harness/src/prompts/section-mock-skill.md)
   — детальные правила композиции каждого mock-компонента (структура файла,
   токены, lucide-иконки, типографика).
-- [`.claude/skills/buffalo-generate/SKILL.md`](../../.claude/skills/buffalo-generate/SKILL.md)
+- [`.claude/skills/kaiten-generate/SKILL.md`](../../.claude/skills/kaiten-generate/SKILL.md)
   — workflow генерации лендинга. Шаг 0.5 «Domain audit» обязателен.
 - [`wiki/references/external-mock-references.md`](./external-mock-references.md)
   — внешние эталоны mock'ов (Linear, Notion, Vercel, Stripe, Intercom) для

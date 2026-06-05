@@ -1,5 +1,5 @@
 {
-  "name": "@buffalo/harness",
+  "name": "@kaiten/harness",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -33,7 +33,7 @@
     "@babel/parser": "^7.26.0",
     "@babel/traverse": "^7.26.0",
     "@babel/types": "^7.26.0",
-    "@buffalo/ui": "workspace:*",
+    "@kaiten/ui": "workspace:*",
     "@measured/puck": "^0.20.2",
     "ai": "^6.0.182",
     "archiver": "^7.0.1",

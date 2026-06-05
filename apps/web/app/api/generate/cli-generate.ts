@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
-import { prepareLanding, ingestLanding } from '@buffalo/harness/agent';
-import type { Brief } from '@buffalo/harness/schemas';
+import { prepareLanding, ingestLanding } from '@kaiten/harness/agent';
+import type { Brief } from '@kaiten/harness/schemas';
 
 export type GenStage = 'prepare' | 'llm' | 'parse' | 'apply' | 'done' | 'error';
 

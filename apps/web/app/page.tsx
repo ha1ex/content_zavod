@@ -23,7 +23,7 @@ export default async function DashboardPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
       <header className="mb-8">
-        <p className="text-xs uppercase tracking-wide text-(--color-text-secondary)">Buffalo</p>
+        <p className="text-xs uppercase tracking-wide text-(--color-text-secondary)">Контент-завод Кайтен</p>
         <h1 className="text-3xl font-semibold tracking-tight">LLM harness для лендингов</h1>
         <p className="mt-2 text-base text-(--color-text-secondary)">
           Маркетинг создаёт brief → harness собирает Kaiten-стайл лендинг → команда фронта мержит TSX.

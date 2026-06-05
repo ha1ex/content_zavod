@@ -30,8 +30,8 @@
 - [packages/harness/src/registry/domain-visual.ts](../packages/harness/src/registry/domain-visual.ts) — TypeScript-зеркало `domain-mock-matrix.md` для machine-validation: `resolveDomainFromBrief`, `isVariantValidForDomain`, `getAllowedVariants`.
 - [packages/harness/src/registry/global-illustration-usage.ts](../packages/harness/src/registry/global-illustration-usage.ts) + `content/illustrations/registry.json` — cross-landing tracking использования mock-вариантов (для `cross-landing-diversity` validator).
 - [packages/harness/src/pipeline/orchestrator.ts](../packages/harness/src/pipeline/orchestrator.ts) — **phased pipeline** (P0..P8 фазы с per-phase artefacts + idempotent rerun). См. [`wiki/pipeline/phase-gates.md`](pipeline/phase-gates.md).
-- [.claude/skills/buffalo-generate/SKILL.md](../.claude/skills/buffalo-generate/SKILL.md) — workflow генерации лендинга (включает шаг 3a Mock authoring).
-- [.claude/skills/buffalo-review/SKILL.md](../.claude/skills/buffalo-review/SKILL.md) — workflow review лендинга. _Появится после merge ветки со stage-7._
+- [.claude/skills/kaiten-generate/SKILL.md](../.claude/skills/kaiten-generate/SKILL.md) — workflow генерации лендинга (включает шаг 3a Mock authoring).
+- [.claude/skills/kaiten-review/SKILL.md](../.claude/skills/kaiten-review/SKILL.md) — workflow review лендинга. _Появится после merge ветки со stage-7._
 - [.claude/skills/design-system-kaiten-v01/SKILL.md](../.claude/skills/design-system-kaiten-v01/SKILL.md) — Claude Code skill для DS.
 
 ## Статус реализации

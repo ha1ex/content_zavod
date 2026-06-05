@@ -1,6 +1,6 @@
 /**
  * Smoke-tests для validateLandingAudience.
- * Запуск: pnpm --filter @buffalo/harness exec tsx src/validators/landing-audience.test.ts
+ * Запуск: pnpm --filter @kaiten/harness exec tsx src/validators/landing-audience.test.ts
  * (без отдельного test runner — используем node:assert/strict).
  */
 

@@ -5,7 +5,7 @@ import { registerTools } from './tools/index.js';
 
 async function main() {
   const server = new McpServer({
-    name: 'buffalo',
+    name: 'kaiten',
     version: '0.1.0',
   });
 
@@ -18,6 +18,6 @@ async function main() {
 
 main().catch((err) => {
   // eslint-disable-next-line no-console
-  console.error('[buffalo-mcp] fatal:', err);
+  console.error('[kaiten-mcp] fatal:', err);
   process.exit(1);
 });

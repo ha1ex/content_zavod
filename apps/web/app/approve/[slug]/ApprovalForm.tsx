@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import type { Approval, ApprovalStatus } from '@buffalo/harness/schemas';
+import type { Approval, ApprovalStatus } from '@kaiten/harness/schemas';
 
 interface Props {
   slug: string;
@@ -86,7 +86,7 @@ export function ApprovalForm({ slug, initial }: Props) {
           type="text"
           value={reviewer}
           onChange={(e) => setReviewer(e.target.value)}
-          placeholder="e.g. alex@buffalo"
+          placeholder="e.g. alex@kaiten"
           className="rounded-(--radius-lg) border border-(--color-border-default) px-3 py-2"
         />
       </label>

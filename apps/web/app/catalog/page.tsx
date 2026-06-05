@@ -4,7 +4,7 @@ import { MockCatalog } from './MockCatalog';
 import { InspectorOverlay } from '../../components/InspectorOverlay';
 
 export const metadata = {
-  title: 'Каталог блоков · Buffalo',
+  title: 'Каталог блоков · Контент-завод Кайтен',
 };
 
 export default function CatalogPage() {
@@ -22,7 +22,7 @@ function CatalogContent() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-wide text-(--color-text-secondary)">
-              Buffalo · каталог
+              Контент-завод Кайтен · каталог
             </p>
             <h1 className="text-xl font-semibold">22 секции + 39 моков</h1>
           </div>

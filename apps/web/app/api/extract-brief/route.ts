@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
 import { generateObject } from 'ai';
 import { z } from 'zod';
-import { BriefSchema } from '@buffalo/harness/schemas';
-import { getModel, hasLLMCredentials, describeActiveProvider } from '@buffalo/harness/providers';
+import { BriefSchema } from '@kaiten/harness/schemas';
+import { getModel, hasLLMCredentials, describeActiveProvider } from '@kaiten/harness/providers';
 import { extractBriefViaCli, type CliProvider } from './cli-extract';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 800;
 
-const SYSTEM_PROMPT = `Ты — ассистент маркетингового харнесса Buffalo. Из произвольного текста (брифа, концепции, описания продукта) извлеки структурированный Brief в формате BriefSchema.
+const SYSTEM_PROMPT = `Ты — ассистент маркетингового харнесса Контент-завод Кайтен. Из произвольного текста (брифа, концепции, описания продукта) извлеки структурированный Brief в формате BriefSchema.
 
 ПРАВИЛА:
 - product: краткое описание (одна фраза) что это за продукт. Без hype.

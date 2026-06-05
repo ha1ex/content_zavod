@@ -1,6 +1,6 @@
 ---
 name: content-marketing
-description: Playbook контент-маркетинга для будущей блог-поверхности Buffalo harness. Покрывает позицию бренда, направления контента, пайплайн статьи (backlog → research → outline → draft → style → fact-check → CMS → publish), промпты для AI-агентов на каждом шаге и чек-лист перед публикацией. Используется параллельно с conversion-landing skill, когда генератор расширится с лендингов на блог.
+description: Playbook контент-маркетинга для будущей блог-поверхности Контент-завод Кайтен. Покрывает позицию бренда, направления контента, пайплайн статьи (backlog → research → outline → draft → style → fact-check → CMS → publish), промпты для AI-агентов на каждом шаге и чек-лист перед публикацией. Используется параллельно с conversion-landing skill, когда генератор расширится с лендингов на блог.
 metadata:
   type: skill
   surface: harness
@@ -11,7 +11,7 @@ metadata:
     - design-system-kaiten-v01
 ---
 
-# Buffalo — Content Marketing Skill
+# Контент-завод Кайтен — Content Marketing Skill
 
 > **Главная метрика:** активация в продукте. Органический трафик важен, но
 > статья считается полезной только если ведёт к конкретному действию

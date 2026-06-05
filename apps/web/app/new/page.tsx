@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { CopyButton } from './CopyButton';
 
 export const metadata = {
-  title: 'Как создать лендинг · Buffalo',
+  title: 'Как создать лендинг · Контент-завод Кайтен',
 };
 
-const CLAUDE_PROMPT = `Сгенери лендинг через Buffalo harness. Slug = my-landing-slug.
+const CLAUDE_PROMPT = `Сгенери лендинг через Контент-завод Кайтен. Slug = my-landing-slug.
 
 ТЗ:
 <вставь сюда текст ТЗ или путь к файлу>
@@ -94,7 +94,7 @@ export default function NewLandingPage() {
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-wide text-(--color-text-secondary)">
-              Buffalo · как создать лендинг
+              Контент-завод Кайтен · как создать лендинг
             </p>
             <h1 className="mt-1 text-2xl font-semibold tracking-tight">
               Через чат claude / codex в терминале
@@ -120,7 +120,7 @@ export default function NewLandingPage() {
               💡
             </span>
             <p className="text-sm leading-relaxed text-(--color-text-primary)">
-              Buffalo генерирует лендинги через локальные LLM-CLI (<strong>claude code</strong>,{' '}
+              Контент-завод Кайтен генерирует лендинги через локальные LLM-CLI (<strong>claude code</strong>,{' '}
               <strong>codex</strong>) — без API ключей.
               <br />
               Чат в терминале — это <strong>командная панель</strong>, браузер — визуализатор с

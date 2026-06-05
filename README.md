@@ -1,8 +1,8 @@
-# Buffalo — фабрика лендингов на LLM
+# Контент-завод Кайтен — сборка лендингов на LLM
 
 > Превращаем маркетинговый бриф в готовый Kaiten-лендинг за минуту, а не за неделю.
 
-Buffalo — это управляемый контур вокруг LLM (Claude / GPT / любой хост-агент), который
+Контент-завод Кайтен — это управляемый контур вокруг LLM (Claude / GPT / любой хост-агент), который
 собирает SaaS-лендинги **строго на наших компонентах**, в фирменном стиле Kaiten, с
 автоматической проверкой бренда, доступности, бизнес-правил **и domain-fit на трёх
 уровнях**. На выходе — обычный TSX, который проходит ревью и мержится как любой PR.
@@ -38,7 +38,7 @@ Buffalo — это управляемый контур вокруг LLM (Claude 
 **Проблема.** Каждый новый лендинг отнимает у фронтенд-команды дни. Часто получается
 не в фирменном стиле и собирается «из чего попало», а не из дизайн-системы.
 
-**Что даёт Buffalo:**
+**Что даёт Контент-завод Кайтен:**
 
 - 🟢 **Бриф → лендинг за ~1 минуту.** Заполнили JSON (или форму) — получили работающую страницу в превью.
 - 🟢 **Только наши компоненты.** LLM физически не может вставить «левый» блок — registry компонентов жёстко ограничен.
@@ -231,8 +231,8 @@ Healthcare, Education, Legal и др. → `routePipeline` вернёт
 
 | Skill | Где | Что внутри |
 |---|---|---|
-| [`buffalo-generate`](.claude/skills/buffalo-generate/SKILL.md) | Claude Code skill | E2E workflow: **Domain audit → agent build → routing → execute** |
-| [`buffalo-review`](.claude/skills/buffalo-review/SKILL.md) | Claude Code skill | QA-цикл: validators chain + visual regression + /approve |
+| [`kaiten-generate`](.claude/skills/kaiten-generate/SKILL.md) | Claude Code skill | E2E workflow: **Domain audit → agent build → routing → execute** |
+| [`kaiten-review`](.claude/skills/kaiten-review/SKILL.md) | Claude Code skill | QA-цикл: validators chain + visual regression + /approve |
 | [`design-system-kaiten-v01`](.claude/skills/design-system-kaiten-v01/SKILL.md) | Claude Code skill | Выжимка DS: цвета, типографика, сетка |
 | [`conversion-landing.md`](packages/harness/src/skills/conversion-landing.md) | system prompt | 8 page types, awareness levels, hero/CTA правила, 100-балльный audit |
 | [`section-mock-skill.md`](packages/harness/src/prompts/section-mock-skill.md) | system prompt | Правила mock-компонентов: §0 Domain fit, DS-tokens, lucide, density |
@@ -242,7 +242,7 @@ Healthcare, Education, Legal и др. → `routePipeline` вернёт
 
 ## Быстрый старт (agent-mode, без API-ключей)
 
-> Идея: Buffalo сам не вызывает внешнюю LLM. Он готовит prompt + JSON Schema, а
+> Идея: Контент-завод Кайтен сам не вызывает внешнюю LLM. Он готовит prompt + JSON Schema, а
 > **хост-агент (Claude Code, Codex, ChatGPT с file access) сам и есть LLM**. Поэтому
 > никаких `.env.local` и API-ключей не нужно.
 
@@ -252,7 +252,7 @@ Healthcare, Education, Legal и др. → `routePipeline` вернёт
 pnpm install
 ```
 
-**1. Создать бриф** — скопируй `content/briefs/buffalo.json` и поправь поля:
+**1. Создать бриф** — скопируй `content/briefs/kaiten-factory.json` и поправь поля:
 
 ```json
 {
@@ -290,7 +290,7 @@ pnpm -w run harness agent build landing --slug <slug> --brief content/briefs/<sl
 
 **3. Host-agent (Claude Code / Codex) пишет artifact'ы.**
 
-Skill [`buffalo-generate`](.claude/skills/buffalo-generate/SKILL.md) триггерится
+Skill [`kaiten-generate`](.claude/skills/kaiten-generate/SKILL.md) триггерится
 автоматически. Скажи:
 
 > «Сгенерируй лендинг по `content/briefs/<slug>.json`, slug `<slug>`».
@@ -315,7 +315,7 @@ pnpm -w run harness diversity audit --slug <slug> --brief content/briefs/<slug>.
 **6. Visual regression:**
 
 ```bash
-pnpm --filter @buffalo/web test:visual
+pnpm --filter @kaiten/web test:visual
 ```
 
 **7. Approve.** Открой `http://localhost:3000/approve/<slug>` — форма с превью
@@ -395,8 +395,8 @@ pnpm -w run harness generate illustration --spec ... --no-llm                   
 pnpm -w run harness generate illustration --spec ... --strict                       # упасть при провале AST
 
 # === VISUAL REGRESSION ===
-pnpm --filter @buffalo/web test:visual                                              # прогон против baseline
-pnpm --filter @buffalo/web test:visual:update                                       # перебить baseline
+pnpm --filter @kaiten/web test:visual                                              # прогон против baseline
+pnpm --filter @kaiten/web test:visual:update                                       # перебить baseline
 ```
 
 ---
@@ -459,7 +459,7 @@ wiki/                           LLM-maintained знание
   ├── layouts/                  10 layout playbooks
   └── pipeline/
       └── phase-gates.md        🆕 Таблица hard/soft gates per phase
-.claude/skills/                 Project-level Claude Code skills (buffalo-generate, buffalo-review, …)
+.claude/skills/                 Project-level Claude Code skills (kaiten-generate, kaiten-review, …)
 .context/                       Workspace context (gitignored)
   └── pipeline/<slug>/          🆕 Phased pipeline artefacts (route-decision, p0..p8, repair, diversity)
 out/                            Handoff ZIP пакеты (gitignored)

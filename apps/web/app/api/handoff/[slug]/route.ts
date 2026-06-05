@@ -1,4 +1,4 @@
-import { buildHandoff } from '@buffalo/harness/handoff';
+import { buildHandoff } from '@kaiten/harness/handoff';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 

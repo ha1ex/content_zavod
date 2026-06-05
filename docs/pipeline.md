@@ -1,4 +1,4 @@
-# Buffalo — пайплайн генерации лендинга
+# Контент-завод Кайтен — пайплайн генерации лендинга
 
 > Документ для команды. Системно и последовательно описывает, **как** из маркетингового
 > брифа получается готовый к разработке Kaiten-лендинг: какие шаги, что на каждом
@@ -118,7 +118,7 @@ content/approvals/              Approval-статусы (pending/approved/…)
 content/illustrations/          Specs SVG-иллюстраций
 generated/landings/<slug>/      Output: page.tsx (regeneratable)
 .claude/skills/                 Project-level Claude Code skills
-                                (buffalo-generate, buffalo-review, design-system-kaiten-v01)
+                                (kaiten-generate, kaiten-review, design-system-kaiten-v01)
 out/                            Handoff ZIP-пакеты (gitignored)
 ```
 
@@ -314,8 +314,8 @@ Playbook блог-поверхности (статус ⏳ planned). Будет 
 
 | Skill | Когда триггерится | Что делает |
 |-------|-------------------|------------|
-| `buffalo-generate/SKILL.md` | «сгенерируй лендинг», «buffalo generate <slug>», «новый лендинг для X» | Проводит весь E2E в agent-mode: prepare prompt → ты-LLM пишешь spec → apply (валидаторы + TSX) → preview → handoff |
-| `buffalo-review/SKILL.md` | «проверь лендинг <slug>», «что не так с <slug>», «approve?» | QA-цикл: zod-валидация, brand+business rules, иллюстрации, visual regression, /approve, summary report |
+| `kaiten-generate/SKILL.md` | «сгенерируй лендинг», «kaiten generate <slug>», «новый лендинг для X» | Проводит весь E2E в agent-mode: prepare prompt → ты-LLM пишешь spec → apply (валидаторы + TSX) → preview → handoff |
+| `kaiten-review/SKILL.md` | «проверь лендинг <slug>», «что не так с <slug>», «approve?» | QA-цикл: zod-валидация, brand+business rules, иллюстрации, visual regression, /approve, summary report |
 | `design-system-kaiten-v01/SKILL.md` | Любой UI-вопрос в стиле Kaiten | Выжимка из `design-system/kaiten-v01/`: цвета, типографика, сетка, состояния компонент |
 
 Скиллы — декларативные, они **ссылаются на CLI и валидаторы**, никакого магического
@@ -487,7 +487,7 @@ $ pnpm -w run harness agent apply landing \
 fallback: он сам зовёт LLM (Vercel AI Gateway → Anthropic → OpenAI), сам прогоняет
 repair-loop. Используется, когда есть Gateway-ключ; иначе — agent-mode.
 
-**Skill `buffalo-generate`** в Claude Code автоматизирует все 4 шага: триггерится на
+**Skill `kaiten-generate`** в Claude Code автоматизирует все 4 шага: триггерится на
 фразу «сгенерируй лендинг по <brief>», сам зовёт `prepare` → пишет спек → `apply` →
 repair → preview.
 
@@ -518,8 +518,8 @@ design-system/ обязательны.
 Сравнение с baseline в `apps/web/tests/visual/__snapshots__/`.
 
 ```bash
-pnpm --filter @buffalo/web test:visual          # прогон против baseline
-pnpm --filter @buffalo/web test:visual:update   # перебить baseline (намеренные правки)
+pnpm --filter @kaiten/web test:visual          # прогон против baseline
+pnpm --filter @kaiten/web test:visual:update   # перебить baseline (намеренные правки)
 ```
 
 В CI этот шаг — gate перед approve. Diff означает либо регресс (блок), либо
@@ -544,7 +544,7 @@ pnpm -w run harness approvals check <slug...>     # CI: exit≠0 если хот
 pnpm -w run harness approve <slug> --baseline-ref <ref>   # CLI-approve + filing back
 ```
 
-Skill `buffalo-review` проходит этот цикл сам: читает spec/brief/approval, прогоняет
+Skill `kaiten-review` проходит этот цикл сам: читает spec/brief/approval, прогоняет
 все валидаторы, иллюстрации, visual regression, выдаёт **structured report**
 (decision recommendation, hard blockers, soft suggestions, visual diff status, next
 action). Approval он сам **никогда не выставляет** — только рекомендует.
@@ -597,7 +597,7 @@ landing-<slug>/
 | **Дизайн-токены** | `design-system/kaiten-v01/tokens.json` → `tokens.css` | Цвета, шрифты, отступы, радиусы — нельзя hardcode'нуть в UI |
 | **Иллюстрации** | `validators/illustration-ast.ts` | SVG-правила (viewBox, no raster, a11y) |
 | **Визуал** | `apps/web/tests/visual/landing.spec.ts` (Playwright) | Регресс в любом пикселе |
-| **Финальный score** | skill `conversion-landing.md` §17 (100-point) | Аудит уровня «всё ли в порядке как у конверсионного лендинга» — для buffalo-review |
+| **Финальный score** | skill `conversion-landing.md` §17 (100-point) | Аудит уровня «всё ли в порядке как у конверсионного лендинга» — для kaiten-review |
 | **Approve gate** | `content/approvals/<slug>.json` + `--require-approved` | Не уходит handoff, пока продукт/маркетинг не подписали |
 | **Wiki / log** | `wiki/landings/<slug>.md`, `wiki/log.md`, `wiki/lessons.md` | Память между лендингами, traceability sources |
 
@@ -624,7 +624,7 @@ pnpm -w run harness agent prepare landing \
   --out .context/agent/<slug>.prompt.md
 
 # 4. Хост-агент (Claude Code) пишет content/landings/<slug>.json
-#    Или: в Claude Code → «сгенерируй лендинг для <slug>» → buffalo-generate всё сам
+#    Или: в Claude Code → «сгенерируй лендинг для <slug>» → kaiten-generate всё сам
 
 # 5. Apply: zod + brand + business + render TSX + filing back
 pnpm -w run harness agent apply landing \
@@ -636,10 +636,10 @@ pnpm dev
 # → http://localhost:3000/landings/<slug>
 
 # 7. Visual regression
-pnpm --filter @buffalo/web test:visual
+pnpm --filter @kaiten/web test:visual
 
 # 8. QA-цикл — Claude Code skill
-#    «проверь лендинг <slug>» → buffalo-review проходит весь чек-лист
+#    «проверь лендинг <slug>» → kaiten-review проходит весь чек-лист
 
 # 9. Approve
 # UI: http://localhost:3000/approve/<slug>
@@ -691,8 +691,8 @@ pnpm -w run harness handoff <slug> --require-approved
 | Renderer TSX | `packages/harness/src/render/render-landing.ts` |
 | Handoff ZIP | `packages/harness/src/handoff/index.ts` |
 | Конверсионный skill | `packages/harness/src/skills/conversion-landing.md` |
-| Claude-skill «генерация» | `.claude/skills/buffalo-generate/SKILL.md` |
-| Claude-skill «ревью» | `.claude/skills/buffalo-review/SKILL.md` |
+| Claude-skill «генерация» | `.claude/skills/kaiten-generate/SKILL.md` |
+| Claude-skill «ревью» | `.claude/skills/kaiten-review/SKILL.md` |
 | Дизайн-система SSoT | `design-system/kaiten-v01/` |
 | Visual regression | `apps/web/tests/visual/landing.spec.ts` |
 | CLI entry | `packages/harness/src/cli.ts` |

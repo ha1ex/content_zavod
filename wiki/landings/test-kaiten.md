@@ -1,10 +1,10 @@
 ---
-slug: test-buffalo
+slug: test-kaiten
 type: landing
 created: 2026-05-15
 updated: 2026-05-15
 status: draft
-brief: content/briefs/buffalo.json
+brief: content/briefs/kaiten-factory.json
 archetype: saas_landing
 goal: book_demo
 sources:
@@ -43,8 +43,8 @@ stale: false
 # Landing summary
 
 <!-- gen:spec-meta -->
-- **slug:** `test-buffalo`
-- **brief:** `content/briefs/buffalo.json`
+- **slug:** `test-kaiten`
+- **brief:** `content/briefs/kaiten-factory.json`
 - **archetype:** `saas_landing`
 - **goal:** `book_demo` (brief.cta = "Получить демо")
 - **sections used:** `hero, features, pricing, faq, final_cta, footer`
@@ -78,10 +78,10 @@ stale: false
 ### hero (HeroSection)
 
 - **title:** "Лендинг по брифу за минуту, а не за неделю"
-- **subtitle:** "Маркетинг описывает продукт в JSON — Buffalo собирает TSX-страницу на ваших компонентах, прогоняет валидаторы и отдаёт готовый PR." _(130/200 chars)_
+- **subtitle:** "Маркетинг описывает продукт в JSON — Контент-завод Кайтен собирает TSX-страницу на ваших компонентах, прогоняет валидаторы и отдаёт готовый PR." _(130/200 chars)_
 - **primaryCta:** "Получить демо" → `/demo`
 - **secondaryCta:** "Как это работает"
-- **visual:** `product_screenshot` (assetId: `buffalo-hero`)
+- **visual:** `product_screenshot` (assetId: `kaiten-hero`)
 
 ### features (FeatureGrid)
 
@@ -119,7 +119,7 @@ stale: false
 
 ### footer (LandingFooter)
 
-- **brand:** "Buffalo"
+- **brand:** "Контент-завод Кайтен"
 - **columns:** 3
 <!-- /gen:sections-summary -->
 

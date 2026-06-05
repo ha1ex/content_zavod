@@ -1,5 +1,5 @@
 {
-  "name": "@buffalo/web",
+  "name": "@kaiten/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
     "test:visual:update": "playwright test --update-snapshots"
   },
   "dependencies": {
-    "@buffalo/harness": "workspace:*",
-    "@buffalo/ui": "workspace:*",
+    "@kaiten/harness": "workspace:*",
+    "@kaiten/ui": "workspace:*",
     "@measured/puck": "^0.20.2",
     "archiver": "^7.0.1",
     "mammoth": "^1.12.0",

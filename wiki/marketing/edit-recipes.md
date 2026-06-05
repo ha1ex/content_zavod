@@ -82,7 +82,7 @@ CTA лежит в нескольких местах:
 Открыть Storybook визуальный каталог:
 
 ```bash
-pnpm --filter @buffalo/ui storybook
+pnpm --filter @kaiten/ui storybook
 # → http://localhost:6006 → Mocks/_Catalog/AllVariants
 ```
 

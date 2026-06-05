@@ -33,6 +33,28 @@
 
 ---
 
+## 🏭 Что нового (Контент-фабрика, июнь 2026)
+
+Методология **Kaiten Content Factory** (редполитика + метод написания ТЗ лендингов)
+интегрирована как источник истины + новый верхний этап пайплайна:
+
+- 🆕 **Этап «фабрика ТЗ» (intake)** — команда приносит **сырые данные** (свободный
+  запрос + папка материалов), агент готовит человекочитаемое **ТЗ**
+  (`content/briefs/<slug>.tz.md`) и согласованный машинный **brief**, который уходит в
+  обычный pipeline. Поток: `agent intake` → `agent intake-apply` → `agent build`.
+  Skill [`kaiten-intake`](.claude/skills/kaiten-intake/SKILL.md).
+- 🆕 **Брендовый канон Kaiten** как источник истины, грузится в КАЖДЫЙ system-prompt:
+  [`wiki/brand/redpolitika.md`](wiki/brand/redpolitika.md),
+  [`wiki/references/kaiten-product-facts.md`](wiki/references/kaiten-product-facts.md),
+  [`wiki/references/anglicism-dictionary.md`](wiki/references/anglicism-dictionary.md).
+- 🆕 **Валидатор языка** (`landing-language`, §10 англицизмы по словарю — soft по
+  умолчанию) + **brief-quality** (домен резолвится / тонкие поля / лозунги /
+  needs_confirmation).
+- 🆕 **Веб-ревью ТЗ** `/intake/<slug>` + approval-поверхность intake +
+  `agent build --require-intake-approved`.
+
+---
+
 ## Зачем это маркетингу
 
 **Проблема.** Каждый новый лендинг отнимает у фронтенд-команды дни. Часто получается
@@ -50,6 +72,21 @@
 ---
 
 ## Как это работает (auto-routing pipeline)
+
+### 🏭 Этап 0 — фабрика ТЗ (intake), если brief'а ещё нет
+
+Если на входе **сырые данные**, а не готовый `brief.json` — сначала прогони фабрику ТЗ
+(методология Content Factory §18 + брендовый канон):
+
+```bash
+pnpm -w run harness agent intake landing --slug <slug> --request inputs/<slug>/request.md --inputs inputs/<slug>
+# … хост-агент пишет .context/intake/<slug>/intake.json { tz, brief } …
+pnpm -w run harness agent intake-apply landing --slug <slug>   # brief-quality (hard gate) → публикует brief + ТЗ.md
+```
+
+На выходе — `content/briefs/<slug>.json` (контракт пайплайна) и
+`content/briefs/<slug>.tz.md` (человекочитаемое ТЗ для ревью на `/intake/<slug>`).
+Дальше — обычный `agent build` (опционально с `--require-intake-approved`).
 
 ### 🚀 Единый entry point — `harness agent build`
 
@@ -204,7 +241,9 @@ Healthcare, Education, Legal и др. → `routePipeline` вернёт
 |---|---|---|
 | **Структура** | `schemas/landing-spec.ts` (Zod) | Несуществующие компоненты, неверные props, длины строк |
 | **Registry** | `registry/index.ts` | LLM видит только разрешённые компоненты (22 секционных) |
-| **Brand voice** | `validators/landing-brand.ts` | Hype-слова, абсолютизмы, штампы |
+| **Brand voice** | `validators/landing-brand.ts` | Hype-слова, абсолютизмы, штампы (+ русские лозунги §9) |
+| 🆕 **Language (англицизмы)** | `validators/landing-language.ts` | §10 англицизмы по словарю (soft по умолчанию, strict опц.); канбан/скрам кириллицей |
+| 🆕 **Brief-quality** | `validators/brief-quality.ts` | Домен резолвится, тонкие поля, лозунги, needs_confirmation (hard gate на intake) |
 | **Business rules** | `validators/landing-business.ts` | Hero first, footer last, single hero, href shape, CTA aligned |
 | **Visual diversity** | `validators/landing-visual-diversity.ts` | `default` mediaVariant >1, повторы variant'ов подряд |
 | **Layout conformance** | `validators/landing-layout-conformance.ts` | Порядок секций vs `wiki/layouts/<slug>.md` |
@@ -231,6 +270,7 @@ Healthcare, Education, Legal и др. → `routePipeline` вернёт
 
 | Skill | Где | Что внутри |
 |---|---|---|
+| 🆕 [`kaiten-intake`](.claude/skills/kaiten-intake/SKILL.md) | Claude Code skill | Фабрика ТЗ: сырьё → ТЗ + brief → пайплайн (`agent intake` → `intake-apply` → `build`) |
 | [`kaiten-generate`](.claude/skills/kaiten-generate/SKILL.md) | Claude Code skill | E2E workflow: **Domain audit → agent build → routing → execute** |
 | [`kaiten-review`](.claude/skills/kaiten-review/SKILL.md) | Claude Code skill | QA-цикл: validators chain + visual regression + /approve |
 | [`design-system-kaiten-v01`](.claude/skills/design-system-kaiten-v01/SKILL.md) | Claude Code skill | Выжимка DS: цвета, типографика, сетка |
@@ -341,9 +381,16 @@ pnpm install
 pnpm dev                                      # Next.js preview :3000
 pnpm storybook                                # Storybook :6006
 
+# === ФАБРИКА ТЗ (intake): сырьё → ТЗ + brief ===
+pnpm -w run harness agent intake landing --slug X --request inputs/X/request.md --inputs inputs/X
+# … хост-агент пишет .context/intake/X/intake.json { tz, brief } …
+pnpm -w run harness agent intake-apply landing --slug X     # brief-quality gate → content/briefs/X.json + X.tz.md
+# ревью ТЗ: http://localhost:3000/intake/X
+
 # === AUTO-ROUTING (рекомендуемый default) ===
 pnpm -w run harness agent build landing --slug X --brief content/briefs/X.json
 pnpm -w run harness agent build landing --slug X --brief Y.json --route-only        # только decision
+pnpm -w run harness agent build landing --slug X --brief Y.json --require-intake-approved  # gate: ТЗ approved на /intake/X
 pnpm -w run harness agent build landing --slug X --brief Y.json --force-phased      # override → phased
 pnpm -w run harness agent build landing --slug X --brief Y.json --force-legacy      # override → legacy
 
@@ -404,7 +451,7 @@ pnpm --filter @kaiten/web test:visual:update                                    
 ## Структура репозитория
 
 ```
-apps/web/                       Next.js 16 preview + API (generate, validate, handoff, approve)
+apps/web/                       Next.js 16 preview + API (generate, validate, handoff, approve, intake-ревью ТЗ)
 packages/harness/               Ядро: schemas, registry, prompts, skills, pipeline, CLI, validators
   └── src/pipeline/             Pipeline:
       ├── route-pipeline.ts     🆕 Auto-routing (legacy / phased / manual-creation)
@@ -423,7 +470,10 @@ packages/harness/               Ядро: schemas, registry, prompts, skills, pi
       ├── section-plan-mock-choice.ts   🆕 P4 gate: rationale для placeholder
       ├── mock-semantic-fit.ts          🆕 P5 gate: variant ∈ allowed для домена
       ├── layout-awareness-fit.ts       🆕 P2 gate: awareness compatible
+      ├── landing-language.ts           🆕 §10 англицизмы (словарь anglicism-dictionary.json)
+      ├── brief-quality.ts              🆕 Качество брифа (домен/поля/лозунги/needs_confirmation)
       └── landing-*.ts          Brand, business, visual-diversity, layout-conformance, audience
+  └── src/agent/                🆕 prepare/ingest-intake + render-tz-markdown (фабрика ТЗ) + prepare/ingest-landing
   └── src/schemas/
       ├── landing-spec.ts       LandingSpec + 22 section schemas + 33 mock variants enum
       ├── brief.ts              + 10 pageLayout slugs
@@ -432,11 +482,12 @@ packages/harness/               Ядро: schemas, registry, prompts, skills, pi
       ├── coverage-report.ts            🆕 P3 output
       ├── section-plan.ts               🆕 P4 output
       ├── mock-allocation.ts            🆕 P5 output
-      └── diversity-report.ts           🆕 Final cross-landing audit
+      ├── diversity-report.ts           🆕 Final cross-landing audit
+      └── intake-tz.ts                  🆕 ТЗ-схема (§18) для фабрики ТЗ
 packages/ui/                    27 mocks + 22 components + primitives + tokens.css
   └── src/landing/mocks/        PM(5) + Support(4) + CRM(8) + HR(5) + Marketing(4) + BPM(3) + Finance(3) + Ecommerce(3) + MockVisual dispatcher
   └── src/landing/              14 базовых + 3 интерактивных + 5 structural (Comparison/Timeline/Bento/Logo/Testimonial)
-content/briefs/                 Брифы маркетинга (immutable)
+content/briefs/                 Брифы маркетинга (+ <slug>.tz.md — ТЗ от фабрики ТЗ)
 content/landings/               Сохранённые LandingSpec (regeneratable)
 content/approvals/              Approval-статусы
 content/illustrations/
@@ -445,8 +496,12 @@ content/illustrations/
 generated/landings/             Output TSX (regeneratable, руками не править)
 design-system/kaiten-v01/       SSoT дизайн-системы
 wiki/                           LLM-maintained знание
+  ├── brand/
+  │   └── redpolitika.md        🆕 Редполитика Kaiten — источник истины по тону/языку
   ├── references/
   │   ├── domain-mock-matrix.md     🆕 Источник правды по domain → mocks (rule-document)
+  │   ├── kaiten-product-facts.md   🆕 Продуктовые факты/тарифы (источник истины)
+  │   ├── anglicism-dictionary.{json,md}  🆕 Словарь §10 (читает landing-language)
   │   └── external-mock-references.md   Внешние эталоны (Linear, Stripe, Notion, …)
   ├── landings/
   │   ├── index.md              🆕 Каталог 8 domain references + production landings

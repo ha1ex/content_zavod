@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контент-завод Кайтен — программа обучения команды</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet:#7D4CCF; --violet-hover:#6F43B8; --violet-soft:#EFE9F9;
+    --ink:#2D2D2D; --ink-2:#616161; --muted:#757575;
+    --line:#E0E0E0; --line-soft:#EEEEEE; --soft:#F5F5F5; --soft-2:#FAFAFA; --white:#fff;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    color:var(--ink); background:var(--white);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3,p{margin:0;}
+  code{
+    font-family:"SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    font-size:.82em; padding:2px 7px; border-radius:7px;
+    background:var(--soft); color:#424242; white-space:nowrap;
+  }
+  a{color:var(--violet); text-decoration:none;}
+
+  /* ---------- deck mechanics ---------- */
+  .deck{height:100vh; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-behavior:smooth;}
+  .deck::-webkit-scrollbar{width:0;}
+  .slide{
+    position:relative; min-height:100vh; scroll-snap-align:start;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:clamp(28px,7vw,120px); padding-top:96px; padding-bottom:84px;
+  }
+  .wrap{width:100%; max-width:1080px; margin:0 auto;}
+
+  /* ---------- chrome ---------- */
+  .progress{position:fixed; top:0; left:0; height:3px; width:0; background:var(--violet); z-index:40; transition:width .35s ease;}
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:30;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(20px,5vw,56px); pointer-events:none;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:15px;}
+  .mark{width:30px; height:30px; display:grid; place-items:center; border-radius:8px; background:var(--violet); color:#fff; font-weight:800;}
+  .brand small{color:var(--muted); font-weight:500;}
+  .counter{font-variant-numeric:tabular-nums; color:var(--muted); font-weight:600; font-size:13px;}
+  .dots{position:fixed; right:clamp(14px,2.4vw,30px); top:50%; transform:translateY(-50%); z-index:30; display:flex; flex-direction:column; gap:11px;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--line); border:none; padding:0; cursor:pointer; transition:all .25s ease;}
+  .dot.active{background:var(--violet); transform:scale(1.35);}
+  .hint{position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:30; color:#9E9E9E; font-size:12px; letter-spacing:.02em;}
+
+  /* ---------- type ---------- */
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; margin-bottom:22px; padding:8px 14px; border-radius:999px; background:var(--violet-soft); color:var(--violet); font-weight:700; font-size:13px; letter-spacing:.01em;}
+  h1{font-size:clamp(38px,6.4vw,76px); line-height:1.02; letter-spacing:-.02em; font-weight:800;}
+  h2{font-size:clamp(28px,4.4vw,52px); line-height:1.06; letter-spacing:-.02em; font-weight:800;}
+  h3{font-size:18px; line-height:1.25; font-weight:700; margin-bottom:8px;}
+  .lead{margin-top:24px; max-width:760px; color:var(--ink-2); font-size:clamp(17px,2vw,23px); line-height:1.5;}
+  .kicker{color:var(--muted); font-weight:600; font-size:15px; margin-bottom:14px;}
+  .small{font-size:14px; color:var(--muted); line-height:1.5;}
+
+  /* ---------- building blocks ---------- */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px;}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px;}
+  .card{border:1px solid var(--line); border-radius:20px; background:var(--white); padding:26px;}
+  .card.soft{background:var(--soft); border-color:var(--soft);}
+  .card.violet{background:var(--violet-soft); border-color:var(--violet-soft);}
+  .card .n{display:inline-grid; place-items:center; width:34px; height:34px; border-radius:9px; background:var(--violet); color:#fff; font-weight:800; margin-bottom:16px;}
+  .card p{color:var(--ink-2); font-size:15px; line-height:1.55;}
+
+  .flow{display:flex; align-items:stretch; gap:12px; margin-top:44px; flex-wrap:wrap;}
+  .step{flex:1 1 0; min-width:150px; border:1px solid var(--line); border-radius:18px; padding:20px 18px; background:var(--white);}
+  .step b{display:block; font-size:16px; margin-bottom:6px;}
+  .step span{color:var(--muted); font-size:13.5px; line-height:1.45;}
+  .arrow{display:grid; place-items:center; color:var(--violet); font-size:24px; font-weight:700;}
+  @media(max-width:760px){ .arrow{transform:rotate(90deg);} }
+
+  .callout{margin-top:34px; border-left:3px solid var(--violet); background:var(--soft); border-radius:0 14px 14px 0; padding:18px 22px; color:var(--ink-2); font-size:16px; line-height:1.5;}
+  .callout b{color:var(--ink);}
+
+  .timeline{display:flex; align-items:center; gap:8px; margin-top:46px; flex-wrap:wrap;}
+  .tl{padding:12px 16px; border-radius:12px; font-weight:700; font-size:14px; border:1px solid var(--line); background:#fff; white-space:nowrap;}
+  .tl.hw{background:var(--soft); color:var(--muted); font-weight:600;}
+  .tl.ws{background:var(--violet); color:#fff; border-color:var(--violet);}
+  .tl-sep{color:var(--line); font-weight:700;}
+
+  .check{list-style:none; margin:34px 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:14px 34px;}
+  @media(max-width:760px){ .check{grid-template-columns:1fr;} }
+  .check li{position:relative; padding-left:34px; color:var(--ink-2); font-size:16.5px; line-height:1.45;}
+  .check li::before{content:"✓"; position:absolute; left:0; top:-1px; width:22px; height:22px; display:grid; place-items:center; border-radius:50%; background:var(--violet-soft); color:var(--violet); font-size:12px; font-weight:800;}
+
+  .blocks{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px;}
+  @media(max-width:760px){ .blocks{grid-template-columns:1fr;} }
+  .block{border:1px solid var(--line); border-radius:18px; padding:24px; background:#fff;}
+  .block .tag{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--violet); margin-bottom:10px;}
+  .block ul{margin:10px 0 0; padding-left:18px; color:var(--ink-2); font-size:15px; line-height:1.6;}
+  .block li{margin-bottom:5px;}
+
+  .outcome{margin-top:26px; display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px; background:var(--violet-soft); color:var(--violet); font-weight:700; font-size:15px;}
+
+  .steps{counter-reset:s; margin-top:38px; display:grid; gap:14px;}
+  .stp{display:grid; grid-template-columns:44px 1fr; gap:18px; align-items:start; border:1px solid var(--line); border-radius:16px; padding:18px 22px; background:#fff;}
+  .stp::before{counter-increment:s; content:counter(s); display:grid; place-items:center; width:44px; height:44px; border-radius:11px; background:var(--soft); color:var(--violet); font-weight:800; font-size:18px;}
+  .stp b{font-size:16.5px;}
+  .stp p{color:var(--muted); font-size:14px; margin-top:4px; line-height:1.45;}
+  .stp code{font-size:13px;}
+
+  .grad{background:linear-gradient(135deg,#7D4CCF 0%,#6F43B8 100%); color:#fff;}
+  .grad .eyebrow{background:rgba(255,255,255,.16); color:#fff;}
+  .grad h1,.grad h2{color:#fff;}
+  .grad .lead{color:rgba(255,255,255,.86);}
+  .grad .mark{background:#fff; color:var(--violet);}
+
+  .pill-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
+  .pill{padding:8px 14px; border-radius:999px; background:var(--soft); color:var(--ink-2); font-size:14px; font-weight:600;}
+
+  /* narrow screens: let tall slides flow & scroll instead of clipping */
+  @media(max-width:760px){
+    .deck{scroll-snap-type:y proximity;}
+    .slide{justify-content:flex-start; min-height:100vh; height:auto; padding-top:84px; padding-bottom:72px;}
+    .hint{display:none;}
+    h1{font-size:34px;} h2{font-size:28px;}
+    .grid-3,.grid-2{grid-template-columns:1fr;}
+  }
+
+  /* dark-background slides: keep chrome readable */
+  body.on-dark .brand{color:#fff;}
+  body.on-dark .brand small{color:rgba(255,255,255,.72);}
+  body.on-dark .counter{color:rgba(255,255,255,.8);}
+  body.on-dark .dot{background:rgba(255,255,255,.4);}
+  body.on-dark .dot.active{background:#fff;}
+  body.on-dark .hint{color:rgba(255,255,255,.72);}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="topbar">
+  <div class="brand"><span class="mark">K</span><span>Kaiten</span><small>· программа обучения</small></div>
+  <div class="counter" id="counter">01 / 15</div>
+</div>
+<div class="dots" id="dots"></div>
+<div class="hint">→ / Space — листать · ↑↓ — назад/вперёд</div>
+
+<main class="deck" id="deck">
+
+  <!-- 1 · Cover -->
+  <section class="slide grad">
+    <div class="wrap">
+      <div class="eyebrow">Программа обучения · 3 интенсива + домашки</div>
+      <h1>Контент-завод Кайтен:<br>от нуля до лендинга</h1>
+      <p class="lead">Как нетехническая команда — писатели, редакторы, маркетологи, дизайнеры — сама делает лендинги. Разговаривая с агентом по-русски. Без знания кода.</p>
+    </div>
+  </section>
+
+  <!-- 2 · Outcomes -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Цель программы</div>
+      <h2>Что вы сможете сами</h2>
+      <div class="grid-3">
+        <div class="card"><span class="n">1</span><h3>Генерить лендинги</h3><p>От брифа до готовой страницы — диктуя задачу агенту простым текстом. Агент пишет код, вы держите смысл.</p></div>
+        <div class="card"><span class="n">2</span><h3>Дорабатывать репозиторий</h3><p>Править брифы, обновлять контент, добавлять уроки в общую базу знаний — без разработчика.</p></div>
+        <div class="card"><span class="n">3</span><h3>Передавать разработке</h3><p>Отдавать готовый, проверенный лендинг разработчикам одним действием — handoff.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · How the factory works -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Большая картина</div>
+      <h2>Как устроен завод</h2>
+      <div class="flow">
+        <div class="step"><b>Сырьё</b><span>Идея, материалы, факты о продукте — в свободной форме</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>ТЗ · intake</b><span>Агент собирает из сырья согласованное ТЗ и бриф</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>Лендинг · generate</b><span>Агент собирает страницу из проверенных блоков</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>Ревью</b><span>Смотрите в браузере, правите, одобряете</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>Передача · handoff</b><span>Готовое уходит разработчикам</span></div>
+      </div>
+      <div class="callout"><b>Главное:</b> код страницы пишет агент. Ваша работа — качественный бриф, честное ревью и решение «годится / правим». Никакого TypeScript руками.</div>
+    </div>
+  </section>
+
+  <!-- 4 · Program map -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Маршрут</div>
+      <h2>Карта программы</h2>
+      <div class="timeline">
+        <span class="tl hw">ДЗ&nbsp;0</span><span class="tl-sep">→</span>
+        <span class="tl ws">Воркшоп&nbsp;1</span><span class="tl-sep">→</span>
+        <span class="tl hw">ДЗ&nbsp;1</span><span class="tl-sep">→</span>
+        <span class="tl ws">Воркшоп&nbsp;2</span><span class="tl-sep">→</span>
+        <span class="tl hw">ДЗ&nbsp;2</span><span class="tl-sep">→</span>
+        <span class="tl ws">Воркшоп&nbsp;3</span><span class="tl-sep">→</span>
+        <span class="tl hw">Выпуск</span>
+      </div>
+      <div class="grid-3">
+        <div class="card soft"><h3>Воркшоп 1</h3><p>Карта местности + первый лендинг руками. Снимаем страх, видим, как всё работает.</p></div>
+        <div class="card soft"><h3>Воркшоп 2</h3><p>Фабрика ТЗ + генерация своего лендинга. Делаем ядро: intake → generate → ревью.</p></div>
+        <div class="card soft"><h3>Воркшоп 3</h3><p>Доработка, передача разработке и самостоятельность. Отгружаем и владеем.</p></div>
+      </div>
+      <p class="small" style="margin-top:22px;">Перед каждым воркшопом — короткая домашка. Её можно закидывать команде заранее: каждая с чек-листом и критерием «сдано».</p>
+    </div>
+  </section>
+
+  <!-- 5 · HW0 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Домашка 0 · перед стартом · self-paced</div>
+      <h2>Выравнивание базы</h2>
+      <p class="lead">Чтобы на первом воркшопе все были на одной странице — буквально. Делается дома, по шагам.</p>
+      <ul class="check">
+        <li>Получить доступ к GitHub-репозиторию</li>
+        <li>Установить Claude Code</li>
+        <li>Склонировать репо через Conductor или GitHub Desktop</li>
+        <li>Выполнить <code>pnpm install</code></li>
+        <li>Запустить <code>pnpm dev</code> и открыть <code>localhost:3000</code></li>
+        <li>Прочитать редполитику <code>wiki/brand/redpolitika.md</code></li>
+      </ul>
+      <div class="outcome">Сдано = скриншот работающего localhost:3000</div>
+    </div>
+  </section>
+
+  <!-- 6 · Workshop 1 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Воркшоп 1 · ~2 часа · интенсив</div>
+      <h2>Карта местности + первый лендинг руками</h2>
+      <div class="blocks">
+        <div class="block">
+          <span class="tag">Блок A · понятия без страха</span>
+          <ul>
+            <li>Что такое репо / git / GitHub — на пальцах (как Google Docs с историей версий)</li>
+            <li>Что такое Claude Code и зачем «говорить агенту по-русски»</li>
+            <li>Большая картина завода: бриф → intake → лендинг → ревью → передача</li>
+            <li>Тур по веб-интерфейсу</li>
+          </ul>
+        </div>
+        <div class="block">
+          <span class="tag">Блок B · руками</span>
+          <ul>
+            <li>Запустить <code>pnpm dev</code>, посмотреть каталог блоков <code>pnpm storybook</code></li>
+            <li>Запустить <code>/kaiten-generate</code> на готовом брифе</li>
+            <li>Увидеть авто-выбор пайплайна, открыть превью</li>
+            <li>Все делают один и тот же демо-лендинг — для уверенности</li>
+          </ul>
+        </div>
+      </div>
+      <div class="outcome">Итог: каждый своими руками собрал первый лендинг</div>
+    </div>
+  </section>
+
+  <!-- 7 · HW1 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Домашка 1 · перед воркшопом 2</div>
+      <h2>Соберите сырьё для своего лендинга</h2>
+      <ul class="check">
+        <li>Выбрать реальный продукт / возможность для лендинга</li>
+        <li>Создать папку <code>inputs/&lt;slug&gt;/</code> с файлом <code>request.md</code></li>
+        <li>Сложить туда материалы: факты, боли аудитории, доказательства</li>
+        <li>Прочитать <code>wiki/marketing/brief-fields.md</code> — что класть в бриф</li>
+        <li>Пролистать <code>wiki/references/domain-mock-matrix.md</code> — какие блоки есть в вашем домене</li>
+      </ul>
+      <div class="outcome">Сдано = готовая папка inputs/&lt;slug&gt;/ с материалами</div>
+    </div>
+  </section>
+
+  <!-- 8 · Workshop 2 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Воркшоп 2 · ~2.5 часа · интенсив</div>
+      <h2>Фабрика ТЗ + генерация своего лендинга</h2>
+      <div class="blocks">
+        <div class="block">
+          <span class="tag">Блок A · фабрика ТЗ</span>
+          <ul>
+            <li><code>/kaiten-intake</code> на своём сырье</li>
+            <li>Ревью ТЗ на странице <code>/intake/&lt;slug&gt;</code></li>
+            <li>Редполитика на практике: язык, без лозунгов, боли как улучшение</li>
+            <li>Одобрить ТЗ</li>
+          </ul>
+        </div>
+        <div class="block">
+          <span class="tag">Блок B · генерация + ревью</span>
+          <ul>
+            <li><code>/kaiten-generate</code> от своего брифа</li>
+            <li>Читать подсказки проверок, чинить по кругу</li>
+            <li>Превью <code>/landings/&lt;slug&gt;</code>, визуальное ревью</li>
+            <li>Страница одобрения <code>/approve/&lt;slug&gt;</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>Почему агент иногда «не пускает»:</b> блок-картинка должна быть из домена продукта, язык — по редполитике, аудитория — покрыта. Это встроенный редактор, который держит планку.</div>
+    </div>
+  </section>
+
+  <!-- 9 · HW2 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Домашка 2 · перед воркшопом 3</div>
+      <h2>Доведите свой лендинг до одобрения</h2>
+      <ul class="check">
+        <li>Пройти весь круг: intake → generate → превью</li>
+        <li>Починить все замечания проверок</li>
+        <li>Одобрить на <code>/approve/&lt;slug&gt;</code></li>
+        <li>Выписать блокеры и вопросы, которые возникли</li>
+      </ul>
+      <div class="outcome">Сдано = лендинг в статусе approved + список вопросов</div>
+    </div>
+  </section>
+
+  <!-- 10 · Workshop 3 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Воркшоп 3 · ~2 часа · интенсив</div>
+      <h2>Доработка, передача и самостоятельность</h2>
+      <div class="grid-3">
+        <div class="card"><span class="n">A</span><h3>Итерации</h3><p>Запросить правки, перегенерить, цикл управляемого улучшения лендинга.</p></div>
+        <div class="card"><span class="n">B</span><h3>Передача</h3><p>approve → <code>handoff</code> → как готовое доходит до разработчиков. git — через Conductor / GitHub Desktop, без терминала.</p></div>
+        <div class="card"><span class="n">C</span><h3>Владение</h3><p>Самим править брифы, добавлять уроки в wiki, подтягивать свежее, базовая гигиена веток.</p></div>
+      </div>
+      <div class="outcome">Итог: команда работает с репозиторием самостоятельно</div>
+    </div>
+  </section>
+
+  <!-- 11 · HW3 / graduation -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Выпускная работа · после воркшопа 3</div>
+      <h2>Полный цикл соло</h2>
+      <p class="lead">От сырья до передачи разработке — без подсказок. Это и есть критерий, что человек готов работать самостоятельно.</p>
+      <div class="timeline">
+        <span class="tl">сырьё</span><span class="tl-sep">→</span>
+        <span class="tl">ТЗ</span><span class="tl-sep">→</span>
+        <span class="tl">лендинг</span><span class="tl-sep">→</span>
+        <span class="tl">ревью</span><span class="tl-sep">→</span>
+        <span class="tl">approve</span><span class="tl-sep">→</span>
+        <span class="tl ws">handoff</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · Daily flow cheatsheet -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Шпаргалка</div>
+      <h2>Ежедневный поток</h2>
+      <div class="steps">
+        <div class="stp"><div><b>ТЗ из сырья</b><p><code>/kaiten-intake</code> → ревью на <code>/intake/&lt;slug&gt;</code> → одобрить</p></div></div>
+        <div class="stp"><div><b>Сгенерить лендинг</b><p><code>/kaiten-generate</code> — агент сам выберет, как собирать</p></div></div>
+        <div class="stp"><div><b>Посмотреть</b><p><code>pnpm dev</code> → <code>localhost:3000/landings/&lt;slug&gt;</code></p></div></div>
+        <div class="stp"><div><b>Одобрить</b><p>Страница <code>/approve/&lt;slug&gt;</code> — «годится / правим»</p></div></div>
+        <div class="stp"><div><b>Передать</b><p><code>handoff &lt;slug&gt; --require-approved</code> — пакет для разработки</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · Quality rules -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Почему агент иногда блокирует</div>
+      <h2>Правила качества</h2>
+      <div class="grid-2">
+        <div class="card violet">
+          <h3>Язык — редполитика</h3>
+          <p>Англицизмы по-русски (страница, а не «лендинг»). Без лозунгов и штампов («революционный», «в 10 раз»). Боли — как управляемое улучшение, не обвинение.</p>
+        </div>
+        <div class="card violet">
+          <h3>Смысл — гейты</h3>
+          <p>Картинка-блок строго из домена продукта. Аудитория должна быть покрыта по сценариям. Структура — по проверенному макету.</p>
+        </div>
+      </div>
+      <div class="callout">Это не ошибки и не баги. Это встроенный редактор, который не даёт выпустить слабую страницу. Подсказку всегда видно — и всегда понятно, что починить.</div>
+    </div>
+  </section>
+
+  <!-- 14 · What's next -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Куда дальше</div>
+      <h2>После лендингов</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Статьи — будущий трек</h3>
+          <p>Сейчас завод делает только лендинги. Сервис для статей — отдельная задача: нужна доработка кодом (своя схема, блоки и проверки). Запускаем после того, как команда уверенно делает лендинги.</p>
+        </div>
+        <div class="card">
+          <h3>Где брать помощь</h3>
+          <p>Старт — <code>wiki/marketing/getting-started.md</code>. Если что-то сломалось — <code>wiki/marketing/troubleshooting.md</code>. Рецепты правок — <code>wiki/marketing/edit-recipes.md</code>.</p>
+        </div>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Основной инструмент — Claude Code</span>
+        <span class="pill">git — через Conductor / GitHub Desktop</span>
+        <span class="pill">Без API-ключей</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · Finale -->
+  <section class="slide grad">
+    <div class="wrap">
+      <div class="eyebrow">3 интенсива — и команда автономна</div>
+      <h1>Поехали.</h1>
+      <p class="lead">Снимаем страх, делаем первый лендинг, доводим до передачи. Дальше — сами.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  const counter=document.getElementById('counter');
+  const bar=document.getElementById('progress');
+  const dotsBox=document.getElementById('dots');
+  let current=0, lock=false, lockTimer=null;
+
+  slides.forEach((_,i)=>{
+    const b=document.createElement('button');
+    b.className='dot'+(i===0?' active':'');
+    b.setAttribute('aria-label','Слайд '+(i+1));
+    b.addEventListener('click',()=>go(i));
+    dotsBox.appendChild(b);
+  });
+  const dots=[...dotsBox.children];
+
+  function go(i){
+    current=Math.max(0,Math.min(slides.length-1,i));
+    // keyboard nav is authoritative: lock IO updates during the smooth scroll
+    lock=true;
+    clearTimeout(lockTimer);
+    lockTimer=setTimeout(()=>{ lock=false; },700);
+    slides[current].scrollIntoView({behavior:'smooth'});
+    update();
+  }
+  function update(){
+    const total=slides.length;
+    counter.textContent=String(current+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+    bar.style.width=((current+1)/total*100)+'%';
+    dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+    document.body.classList.toggle('on-dark',slides[current].classList.contains('grad'));
+  }
+
+  const io=new IntersectionObserver(entries=>{
+    if(lock) return; // ignore intermediate slides while a keyboard jump is animating
+    entries.forEach(en=>{
+      if(en.isIntersecting){ current=slides.indexOf(en.target); update(); }
+    });
+  },{root:deck,threshold:0.55});
+  slides.forEach(s=>io.observe(s));
+
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' ','Spacebar'].includes(e.key)){ e.preventDefault(); go(current+1); }
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(current-1); }
+    else if(e.key==='Home'){ e.preventDefault(); go(0); }
+    else if(e.key==='End'){ e.preventDefault(); go(slides.length-1); }
+  });
+
+  update();
+</script>
+</body>
+</html>

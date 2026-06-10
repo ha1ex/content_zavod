@@ -35,6 +35,16 @@ export interface PhaseDoc {
   title: string;
   summary: string;
   gate?: string;
+  /** Кто выполняет фазу: детерминированный код или ассистент (LLM). */
+  executor?: 'code' | 'llm';
+  /** Какие артефакты фаза читает. */
+  inputs?: string[];
+  /** Какие артефакты фаза пишет. */
+  outputs?: string[];
+  /** Что происходит внутри фазы, по шагам. */
+  details?: string[];
+  /** На что фаза опирается: файлы знаний, схемы, валидаторы. */
+  sources?: RepoLink[];
 }
 
 export interface PipelineDoc {

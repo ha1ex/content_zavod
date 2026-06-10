@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import type {
   PhaseDoc,
   RepoLink,
@@ -7,6 +8,7 @@ import type {
   StageRule,
   StageStep,
 } from '../_content/types';
+import { isViewablePath } from '../_content/file-allowlist';
 import { CopyButton } from '../../new/CopyButton';
 
 /** Белая карточка-секция страницы этапа. */
@@ -36,13 +38,39 @@ export function SeverityBadge({ severity }: { severity: RuleSeverity }) {
   );
 }
 
-/** Путь в репозитории как текстовый чип (файлы не сервятся вебом — это не ссылка). */
+/**
+ * Путь в репозитории. Если файл/каталог есть в белом списке просмотрщика —
+ * чип кликабелен и открывает содержимое на /pipeline/source/<путь>.
+ * Пути с плейсхолдером <slug> остаются текстом.
+ */
 export function FileChip({ path, note }: RepoLink) {
+  const viewable = isViewablePath(path);
+  const cleanPath = path.endsWith('/') ? path.slice(0, -1) : path;
+  const chip = (
+    <code
+      className={`rounded px-1.5 py-0.5 font-mono text-[11px] ${
+        viewable
+          ? 'bg-(--color-action-primary-soft) text-(--color-text-accent) group-hover:underline'
+          : 'bg-(--color-surface-section) text-(--color-text-primary)'
+      }`}
+    >
+      {path}
+      {viewable && <span aria-hidden> ↗</span>}
+    </code>
+  );
   return (
     <span className="inline-flex flex-wrap items-baseline gap-x-1.5">
-      <code className="rounded bg-(--color-surface-section) px-1.5 py-0.5 font-mono text-[11px] text-(--color-text-primary)">
-        {path}
-      </code>
+      {viewable ? (
+        <Link
+          href={`/pipeline/source/${cleanPath}`}
+          className="group"
+          title="Открыть содержимое (только чтение)"
+        >
+          {chip}
+        </Link>
+      ) : (
+        chip
+      )}
       {note && <span className="text-xs text-(--color-text-secondary)">— {note}</span>}
     </span>
   );
@@ -69,11 +97,7 @@ export function RuleList({ rules }: { rules: StageRule[] }) {
         <li key={i} className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
           <SeverityBadge severity={rule.severity} />
           <span className="text-(--color-text-primary)">{rule.text}</span>
-          {rule.source && (
-            <code className="rounded bg-(--color-surface-section) px-1.5 py-0.5 font-mono text-[10px] text-(--color-text-secondary)">
-              {rule.source}
-            </code>
-          )}
+          {rule.source && <FileChip path={rule.source} />}
         </li>
       ))}
     </ul>
@@ -145,27 +169,102 @@ export function InOutGrid({ inputs, outputs }: { inputs?: string[]; outputs?: st
   );
 }
 
-/** Карточки фаз P0–P8 поэтапного конвейера. */
+function PhaseIoList({ label, items }: { label: string; items?: string[] }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div>
+      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+        {label}
+      </p>
+      <ul className="list-disc space-y-1 pl-5 text-(--color-text-primary)">
+        {items.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/**
+ * Раскрывающиеся карточки фаз P0–P8: в свёрнутом виде — суть и гейт,
+ * в раскрытом — что внутри, вход/выход и материалы, на которые фаза опирается.
+ */
 export function PhaseList({ phases }: { phases: PhaseDoc[] }) {
   return (
     <ul className="space-y-2.5">
       {phases.map((phase) => (
-        <li
-          key={phase.id}
-          className="rounded-(--radius-lg) border border-(--color-border-default) p-3"
-        >
-          <div className="flex items-baseline gap-2">
-            <span className="rounded-full bg-(--color-action-primary-soft) px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-(--color-text-accent)">
-              {phase.id}
-            </span>
-            <span className="font-medium text-(--color-text-primary)">{phase.title}</span>
-          </div>
-          <p className="mt-1 text-(--color-text-secondary)">{phase.summary}</p>
-          {phase.gate && (
-            <p className="mt-1 text-xs text-(--color-text-secondary)">
-              <span className="font-semibold uppercase tracking-wide">гейт:</span> {phase.gate}
-            </p>
-          )}
+        <li key={phase.id}>
+          <details className="group rounded-(--radius-lg) border border-(--color-border-default) open:border-(--color-action-primary)/40">
+            <summary className="cursor-pointer list-none p-3 [&::-webkit-details-marker]:hidden">
+              <div className="flex items-baseline gap-2">
+                <span className="rounded-full bg-(--color-action-primary-soft) px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-(--color-text-accent)">
+                  {phase.id}
+                </span>
+                <span className="font-medium text-(--color-text-primary)">{phase.title}</span>
+                {phase.executor && (
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                      phase.executor === 'code'
+                        ? 'bg-(--color-surface-section) text-(--color-text-secondary)'
+                        : 'bg-(--color-action-primary-soft) text-(--color-text-accent)'
+                    }`}
+                    title={
+                      phase.executor === 'code'
+                        ? 'Выполняет детерминированный код, без LLM'
+                        : 'Выполняет ассистент (LLM) по заданию конвейера'
+                    }
+                  >
+                    {phase.executor === 'code' ? 'код' : 'ассистент'}
+                  </span>
+                )}
+                <span
+                  aria-hidden
+                  className="ml-auto shrink-0 text-xs text-(--color-text-secondary) transition group-open:rotate-90"
+                >
+                  ▸
+                </span>
+              </div>
+              <p className="mt-1 text-(--color-text-secondary)">{phase.summary}</p>
+              {phase.gate && (
+                <p className="mt-1 text-xs text-(--color-text-secondary)">
+                  <span className="font-semibold uppercase tracking-wide">гейт:</span> {phase.gate}
+                </p>
+              )}
+            </summary>
+
+            <div className="space-y-4 border-t border-(--color-border-default) p-3 pt-3 text-sm">
+              {phase.details && phase.details.length > 0 && (
+                <div>
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+                    Что внутри
+                  </p>
+                  <ul className="list-disc space-y-1 pl-5 text-(--color-text-primary)">
+                    {phase.details.map((detail, i) => (
+                      <li key={i}>{detail}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <PhaseIoList label="Читает" items={phase.inputs} />
+                <PhaseIoList label="Пишет" items={phase.outputs} />
+              </div>
+              {phase.sources && phase.sources.length > 0 && (
+                <div>
+                  <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+                    На что опирается
+                  </p>
+                  <ul className="space-y-1.5">
+                    {phase.sources.map((source) => (
+                      <li key={source.path}>
+                        <FileChip {...source} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </details>
         </li>
       ))}
     </ul>

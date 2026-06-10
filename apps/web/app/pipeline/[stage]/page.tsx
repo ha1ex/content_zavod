@@ -80,6 +80,10 @@ export default async function StagePage({ params }: PageProps) {
 
       {doc.phases && doc.phases.length > 0 && (
         <DocSection title="Фазы P0–P8">
+          <p className="text-xs text-(--color-text-secondary)">
+            Раскройте фазу — внутри подробности: что происходит, что фаза читает и пишет, на какие
+            материалы опирается. Фиолетовые пути открываются для чтения.
+          </p>
           <PhaseList phases={doc.phases} />
         </DocSection>
       )}
@@ -101,7 +105,11 @@ export default async function StagePage({ params }: PageProps) {
       )}
 
       {(doc.artifacts || doc.links) && (
-        <DocSection title="Артефакты и файлы">
+        <DocSection title="Артефакты и материалы">
+          <p className="text-xs text-(--color-text-secondary)">
+            Фиолетовые пути кликабельны — открывается содержимое файла (только чтение). Серые —
+            шаблоны с подстановкой slug или артефакты конкретных прогонов.
+          </p>
           {doc.artifacts && doc.artifacts.length > 0 && (
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-(--color-text-secondary)">
@@ -119,7 +127,7 @@ export default async function StagePage({ params }: PageProps) {
           {doc.links && doc.links.length > 0 && (
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-(--color-text-secondary)">
-                Документы и код
+                На что опирается
               </p>
               <ul className="space-y-1.5">
                 {doc.links.map((link) => (

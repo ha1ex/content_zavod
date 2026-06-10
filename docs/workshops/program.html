@@ -116,6 +116,23 @@
   .prompt li span{color:var(--violet-deep); font-weight:600;}
   .prompt .ex{margin-top:20px; border-left:3px solid var(--violet); padding:14px 18px; color:var(--ink-2); background:#fff; border-radius:0 12px 12px 0; font-size:15px; line-height:1.55;}
 
+  /* ---------- pipeline docs UI mock ---------- */
+  .docs-ui{display:grid; grid-template-columns:300px 1fr; gap:18px; margin-top:24px; align-items:start;}
+  .toc{border:1px solid var(--line); border-radius:18px; background:#fff; padding:16px 20px;}
+  .toc .grp{font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin:12px 0 6px;}
+  .toc .grp:first-child{margin-top:0;}
+  .toc .it{display:flex; align-items:center; gap:10px; padding:3.5px 0; font-size:13.5px; color:var(--ink-2);}
+  .toc .it .no{flex:0 0 26px; display:grid; place-items:center; height:22px; border-radius:7px; background:var(--soft); color:var(--violet); font-weight:700; font-size:11.5px;}
+  .toc .it.on{color:var(--violet-deep); font-weight:700;}
+  .toc .it.on .no{background:var(--violet-soft);}
+  .docs-page{border:1px solid var(--line); border-radius:18px; background:var(--soft-2); padding:22px 24px;}
+  .docs-page h3{font-size:17px; margin-bottom:4px;}
+  .docs-page .sub{color:var(--muted); font-size:13.5px; margin-bottom:14px;}
+  .docs-page .sec{border:1px solid var(--line); border-radius:12px; background:#fff; padding:12px 16px; margin-top:10px; font-size:14px; color:var(--ink-2);}
+  .docs-page .sec b{color:var(--ink); font-size:14.5px;}
+  .badge-hard{display:inline-block; padding:2px 8px; border-radius:6px; background:var(--amber-soft); color:var(--amber); font-size:11.5px; font-weight:700; margin-left:6px;}
+  .badge-soft{display:inline-block; padding:2px 8px; border-radius:6px; background:var(--violet-soft); color:var(--violet); font-size:11.5px; font-weight:700; margin-left:6px;}
+
   .links{margin-top:30px; display:grid; gap:12px;}
   .lnk{display:flex; align-items:center; gap:14px; border:1px solid var(--line); border-radius:14px; padding:15px 20px; background:#fff;}
   .lnk b{font-size:15.5px; min-width:170px;}
@@ -132,6 +149,7 @@
     .chain .carr{transform:rotate(90deg); padding:2px 0; flex-basis:30px;}
     .maprow{grid-template-columns:1fr; gap:6px;}
     .maprow .marr{transform:rotate(90deg);}
+    .docs-ui{grid-template-columns:1fr;}
   }
 
   /* ---------- dark slides ---------- */
@@ -153,7 +171,7 @@
 <div class="progress" id="progress"></div>
 <div class="topbar">
   <div class="brand"><span class="mark">K</span><span>Kaiten</span><small>· воркшоп</small></div>
-  <div class="counter" id="counter">01 / 13</div>
+  <div class="counter" id="counter">01 / 14</div>
 </div>
 <div class="dots" id="dots"></div>
 <div class="hint">→ / Space — листать · ↑↓ — назад/вперёд</div>
@@ -279,6 +297,44 @@
         <div class="node io"><b>Лендинг</b><span>готовая страница</span></div>
       </div>
       <div class="phrases" style="margin-top:26px;"><div class="phrase">«Проведи экскурсию по конвейеру — что происходит на каждом шаге и где лежат его правила»</div></div>
+    </div>
+  </section>
+
+  <!-- 6b · Справочник конвейера -->
+  <section class="slide" style="padding-top:76px; padding-bottom:56px;">
+    <div class="wrap">
+      <div class="kicker">Изучить конвейер подробно</div>
+      <h2 style="font-size:clamp(24px,3.4vw,40px);">Живой справочник конвейера — у вас на компьютере</h2>
+      <p class="lead" style="font-size:16px; margin-top:14px;">В проект встроен справочник для маркетинга: каждый этап конвейера расписан — что делает, что на входе и выходе, какие правила (и какие из них жёсткие). Когда непонятно, как что-то устроено, — открываете и читаете.</p>
+      <div class="docs-ui">
+        <div class="toc">
+          <div class="grp">Этапы конвейера</div>
+          <div class="it"><span class="no">1</span>Фабрика ТЗ (intake)</div>
+          <div class="it"><span class="no">2</span>Маршрутизация (auto-routing)</div>
+          <div class="it"><span class="no">3a</span>Быстрый конвейер (legacy)</div>
+          <div class="it on"><span class="no">3b</span>Поэтапный конвейер (P0–P8)</div>
+          <div class="it"><span class="no">4</span>Иллюстрации (SVG)</div>
+          <div class="it"><span class="no">5</span>Визуальное ревью</div>
+          <div class="it"><span class="no">6</span>Согласование (approval)</div>
+          <div class="it"><span class="no">7</span>Передача в разработку</div>
+          <div class="grp">Правила и база знаний</div>
+          <div class="it"><span class="no">•</span>Брендовый канон</div>
+          <div class="it"><span class="no">•</span>Валидаторы качества</div>
+          <div class="it"><span class="no">•</span>База знаний (wiki)</div>
+        </div>
+        <div class="docs-page">
+          <h3>Каждый этап расписан одинаково</h3>
+          <div class="sub">страница этапа в справочнике</div>
+          <div class="sec"><b>Назначение</b> — зачем этап нужен, человеческим языком</div>
+          <div class="sec"><b>Вход → Выход</b> — что этап берёт и что отдаёт дальше</div>
+          <div class="sec"><b>Как работает</b> — шаги по порядку</div>
+          <div class="sec"><b>Правила</b> — что проверяется<span class="badge-hard">HARD — блокирует</span><span class="badge-soft">SOFT — предупреждает</span></div>
+        </div>
+      </div>
+      <div class="phrases" style="margin-top:16px;">
+        <div class="phrase">«Подними справочник конвейера и открой его в браузере»</div>
+      </div>
+      <p class="note" style="margin-top:6px;">Агент запустит проект и откроет страницу «Как устроен конвейер» (localhost:3000/pipeline). Дальше — просто читаете, как документацию.</p>
     </div>
   </section>
 

@@ -18,7 +18,23 @@ stale: false
 ## Tokens
 
 <!-- gen:tokens -->
-_Блок генерируется при первом запуске `harness wiki sync`._
+### Containers
+
+| Key | Width |
+|---|---|
+| `kaiten` | 1216px |
+
+### Desktop (1920px artboard)
+
+- Container: **1216px** · 12 columns · column **72px** · gutter **32px** · outer margin **248px**
+
+### Tablet (768px artboard)
+
+- 6 columns · column **100px** · gutter **24px** · side margin **24px**
+
+### Mobile (360px artboard)
+
+- 4 columns · column **70px** · gutter **16px** · side margin **16px**
 <!-- /gen:tokens -->
 
 ## Usage rules

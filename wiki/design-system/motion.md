@@ -19,7 +19,19 @@ Restrained UI motion. Источник — `design-system/kaiten-v01/tokens.json
 ## Tokens
 
 <!-- gen:tokens -->
-_Блок генерируется при первом запуске `harness wiki sync`._
+### Durations
+
+| Token | Value | CSS var |
+|---|---|---|
+| `fast` | `120ms` | `--duration-fast` |
+| `base` | `180ms` | `--duration-base` |
+| `slow` | `240ms` | `--duration-slow` |
+
+### Easings
+
+| Token | Value | CSS var |
+|---|---|---|
+| `ui` | `cubic-bezier(0.2, 0, 0.2, 1)` | `--ease-ui` |
 <!-- /gen:tokens -->
 
 ## Usage rules

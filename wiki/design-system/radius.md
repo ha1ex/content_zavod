@@ -18,7 +18,18 @@ stale: false
 ## Tokens
 
 <!-- gen:tokens -->
-_Блок генерируется при первом запуске `harness wiki sync`._
+| Token | Value | CSS var |
+|---|---|---|
+| `radius.none` | 0px | `--radius-none` |
+| `radius.sm` | 2px | `--radius-sm` |
+| `radius.base` | 4px | `--radius-base` |
+| `radius.md` | 6px | `--radius-md` |
+| `radius.lg` | 8px | `--radius-lg` |
+| `radius.xl` | 12px | `--radius-xl` |
+| `radius.2xl` | 16px | `--radius-2xl` |
+| `radius.3xl` | 24px | `--radius-3xl` |
+| `radius.4xl` | 32px | `--radius-4xl` |
+| `radius.full` | 9999px (full) | `--radius-full` |
 <!-- /gen:tokens -->
 
 ## Usage rules

@@ -1,7 +1,9 @@
 /**
  * Kaiten V01 design system tokens
- * Источник истины: design-system/kaiten-v01/ (HTML/PDF/PNG в репо)
- * Выжимка для LLM: packages/harness/src/prompts/design-system-kaiten.md
+ *
+ * AUTO-GENERATED — do not edit by hand.
+ * Source: design-system/kaiten-v01/tokens.json
+ * Regenerate: pnpm harness -- wiki sync
  *
  * Core style: calm B2B/SaaS interfaces, white/light-gray surfaces, real product
  * UI screenshots, restrained typography, violet (#7d4ccf) as single primary
@@ -10,8 +12,6 @@
 
 @theme {
   /* ─── Neutral scale ───────────────────────────────────────────────── */
-  --color-neutral-000: #ffffff;
-  --color-neutral-050: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #eeeeee;
   --color-neutral-300: #e0e0e0;
@@ -22,6 +22,8 @@
   --color-neutral-800: #424242;
   --color-neutral-900: #2d2d2d;
   --color-neutral-950: #121212;
+  --color-neutral-000: #ffffff;
+  --color-neutral-050: #fafafa;
 
   /* ─── Accent colors (100 = brand, 12 = soft tint) ─────────────────── */
   --color-violet-100: #7d4ccf;
@@ -78,13 +80,9 @@
 
   /* ─── Spacing (4px scale) ─────────────────────────────────────────── */
   --spacing-0: 0px;
-  --spacing-0_5: 2px;
   --spacing-1: 4px;
-  --spacing-1_5: 6px;
   --spacing-2: 8px;
-  --spacing-2_5: 10px;
   --spacing-3: 12px;
-  --spacing-3_5: 14px;
   --spacing-4: 16px;
   --spacing-5: 20px;
   --spacing-6: 24px;
@@ -98,6 +96,10 @@
   --spacing-16: 64px;
   --spacing-20: 80px;
   --spacing-24: 96px;
+  --spacing-0_5: 2px;
+  --spacing-1_5: 6px;
+  --spacing-2_5: 10px;
+  --spacing-3_5: 14px;
 
   /* ─── Radius ──────────────────────────────────────────────────────── */
   --radius-none: 0px;

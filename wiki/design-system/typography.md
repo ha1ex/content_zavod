@@ -21,7 +21,30 @@ stale: false
 ## Tokens
 
 <!-- gen:tokens -->
-_Блок генерируется при первом запуске `harness wiki sync`._
+### Font families
+
+| Family | Stack |
+|---|---|
+| `sans` | `"Inter", system-ui, -apple-system, "Segoe UI", sans-serif` |
+
+### Type scale
+
+| Token | Size | Line height | CSS var |
+|---|---|---|---|
+| `xs` | 12px | 16px | `--text-xs` |
+| `sm` | 14px | 20px | `--text-sm` |
+| `md` | 16px | 24px | `--text-md` |
+| `lg` | 18px | 28px | `--text-lg` |
+| `xl` | 20px | 28px | `--text-xl` |
+| `2xl` | 24px | 32px | `--text-2xl` |
+| `3xl` | 30px | 36px | `--text-3xl` |
+| `4xl` | 36px | 40px | `--text-4xl` |
+| `5xl` | 48px | 52px | `--text-5xl` |
+| `6xl` | 60px | 64px | `--text-6xl` |
+
+### Weights
+
+`Regular`, `Medium`, `SemiBold`
 <!-- /gen:tokens -->
 
 ## Usage rules

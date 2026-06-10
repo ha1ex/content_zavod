@@ -19,7 +19,40 @@ stale: false
 ## Tokens
 
 <!-- gen:tokens -->
-_Блок генерируется при первом запуске `harness wiki sync`._
+### Base
+- Radius: **8px**
+- Letter spacing: **-0.2px**
+- Font family override: **Roboto**
+- Font weight: **Medium**
+### Sizes
+| Size | Height | Padding (y/x) | Icon gap | Icon size | Label scale |
+|---|---|---|---|---|---|
+| `sm` | 40px | 10px / 14px | 6px | 20px | `text-sm` |
+| `md` | 44px | 10px / 16px | 4px | 24px | `text-md` |
+| `lg` | 48px | 12px / 20px | 4px | 24px | `text-md` |
+### Fill variant
+| Property | Value |
+|---|---|
+| `bg` | `#7d4ccf` |
+| `bgHover` | `#6f43b8` |
+| `bgDisabled` | `#f5f5f5` |
+| `text` | `#ffffff` |
+| `textDisabled` | `#9e9e9e` |
+### Outline variant
+| Property | Value |
+|---|---|
+| `bg` | `#ffffff` |
+| `bgHover` | `#efe9f9` |
+| `border` | `#e0e0e0` |
+| `borderHover` | `rgba(125, 76, 207, 0.48)` |
+| `text` | `#7d4ccf` |
+| `textHover` | `#6f43b8` |
+| `textDisabled` | `#e0e0e0` |
+### Focus rings
+| Token | Value |
+|---|---|
+| `brand` | `0 0 0 4px rgba(55, 88, 249, 0.2)` |
+| `default` | `0 0 0 4px rgba(152, 162, 179, 0.14)` |
 <!-- /gen:tokens -->
 
 ## Variants

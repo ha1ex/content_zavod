@@ -20,7 +20,29 @@ stale: false
 ## Tokens
 
 <!-- gen:tokens -->
-_Блок генерируется при первом запуске `harness wiki sync`._
+| Token | Px | CSS var |
+|---|---|---|
+| `spacing.0` | 0px | `--spacing-0` |
+| `spacing.1` | 4px | `--spacing-1` |
+| `spacing.2` | 8px | `--spacing-2` |
+| `spacing.3` | 12px | `--spacing-3` |
+| `spacing.4` | 16px | `--spacing-4` |
+| `spacing.5` | 20px | `--spacing-5` |
+| `spacing.6` | 24px | `--spacing-6` |
+| `spacing.7` | 28px | `--spacing-7` |
+| `spacing.8` | 32px | `--spacing-8` |
+| `spacing.9` | 36px | `--spacing-9` |
+| `spacing.10` | 40px | `--spacing-10` |
+| `spacing.11` | 44px | `--spacing-11` |
+| `spacing.12` | 48px | `--spacing-12` |
+| `spacing.14` | 56px | `--spacing-14` |
+| `spacing.16` | 64px | `--spacing-16` |
+| `spacing.20` | 80px | `--spacing-20` |
+| `spacing.24` | 96px | `--spacing-24` |
+| `spacing.0_5` | 2px | `--spacing-0_5` |
+| `spacing.1_5` | 6px | `--spacing-1_5` |
+| `spacing.2_5` | 10px | `--spacing-2_5` |
+| `spacing.3_5` | 14px | `--spacing-3_5` |
 <!-- /gen:tokens -->
 
 Читайте `12/48` как `token / pixels` (то есть `spacing-12 = 48px`).

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Контент-завод Кайтен — программа обучения команды</title>
+<title>Контент-завод Кайтен — воркшоп: от идеи до продукта в интернете</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,7 +12,6 @@
     --violet:#7D4CCF; --violet-deep:#5B32A8; --violet-hover:#6F43B8; --violet-soft:#EFE9F9;
     --ink:#2D2D2D; --ink-2:#616161; --muted:#757575;
     --amber:#B54708; --amber-soft:#FEF0E6; --amber-line:#F79009;
-    --green:#1B7A3D;
     --line:#E0E0E0; --line-soft:#EEEEEE; --soft:#F5F5F5; --soft-2:#FAFAFA; --white:#fff;
   }
   *{box-sizing:border-box;}
@@ -57,7 +56,7 @@
   .kicker{color:var(--muted); font-weight:600; font-size:15px; margin-bottom:14px;}
   .small{font-size:14px; color:var(--muted); line-height:1.5;}
 
-  /* ============ SEQUENTIAL SCHEMES (главный визуальный язык) ============ */
+  /* ============ SEQUENTIAL SCHEMES ============ */
   .chain{display:flex; align-items:stretch; gap:0; margin-top:38px;}
   .chain .node{
     flex:1 1 0; min-width:0; position:relative;
@@ -73,12 +72,10 @@
   .chain .carr{flex:0 0 34px; display:grid; place-items:center; color:var(--violet); font-size:21px; font-weight:800;}
   .chain.tight .carr{flex-basis:28px;}
 
-  /* loop arrow under a chain */
   .loopback{display:flex; align-items:center; gap:10px; margin-top:14px; color:var(--violet-deep); font-weight:600; font-size:14px;}
   .loopback .lb-line{flex:1; height:0; border-top:2px dashed #C9B6EC; position:relative;}
   .loopback .lb-line::before{content:"◀"; position:absolute; left:-2px; top:-9px; color:#C9B6EC; font-size:12px;}
 
-  /* mapping rows: брак → шаг → правило (читается слева направо) */
   .maprow{display:grid; grid-template-columns:1.2fr 34px .8fr 34px 1fr; align-items:center; gap:0; margin-top:14px;}
   .maprow:first-of-type{margin-top:34px;}
   .maprow .cell{border:1px solid var(--line); border-radius:14px; background:#fff; padding:14px 16px; font-size:14.5px; line-height:1.4; min-width:0;}
@@ -87,19 +84,6 @@
   .maprow .cell.step{background:var(--soft); border-color:var(--soft); font-weight:700; text-align:center;}
   .maprow .cell.rule{background:var(--violet-soft); border-color:var(--violet-soft); color:var(--violet-deep); font-weight:600;}
   .maprow .marr{display:grid; place-items:center; color:var(--violet); font-size:18px; font-weight:800;}
-
-  /* program stages */
-  .stages{display:flex; align-items:stretch; gap:0; margin-top:38px;}
-  .stage{flex:1 1 0; min-width:0; border:1px solid var(--line); border-radius:18px; background:#fff; padding:22px;}
-  .stage .when{display:inline-block; padding:5px 11px; border-radius:999px; background:var(--soft); color:var(--muted); font-size:12.5px; font-weight:700; margin-bottom:12px;}
-  .stage h3{font-size:17px;}
-  .stage ul{margin:10px 0 0; padding-left:18px; color:var(--ink-2); font-size:14.5px; line-height:1.55;}
-  .stage li{margin-bottom:4px;}
-  .stage.final{background:var(--violet); border-color:var(--violet);}
-  .stage.final .when{background:rgba(255,255,255,.18); color:#fff;}
-  .stage.final h3{color:#fff;}
-  .stage.final ul{color:rgba(255,255,255,.88);}
-  .sarr{flex:0 0 36px; display:grid; place-items:center; color:var(--violet); font-size:22px; font-weight:800;}
 
   /* ---------- cards / misc ---------- */
   .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px;}
@@ -137,15 +121,15 @@
   .lnk b{font-size:15.5px; min-width:170px;}
   .lnk span{color:var(--muted); font-size:14px;}
 
-  /* ---------- responsive: schemes go vertical ---------- */
+  /* ---------- responsive ---------- */
   @media(max-width:860px){
     .deck{scroll-snap-type:y proximity;}
     .slide{justify-content:flex-start; min-height:100vh; height:auto; padding-top:84px; padding-bottom:72px;}
     .hint{display:none;}
     h1{font-size:34px;} h2{font-size:26px;}
     .grid-3,.grid-2{grid-template-columns:1fr;}
-    .chain,.stages{flex-direction:column;}
-    .chain .carr,.sarr{transform:rotate(90deg); padding:2px 0; flex-basis:30px;}
+    .chain{flex-direction:column;}
+    .chain .carr{transform:rotate(90deg); padding:2px 0; flex-basis:30px;}
     .maprow{grid-template-columns:1fr; gap:6px;}
     .maprow .marr{transform:rotate(90deg);}
   }
@@ -168,8 +152,8 @@
 
 <div class="progress" id="progress"></div>
 <div class="topbar">
-  <div class="brand"><span class="mark">K</span><span>Kaiten</span><small>· программа обучения</small></div>
-  <div class="counter" id="counter">01 / 15</div>
+  <div class="brand"><span class="mark">K</span><span>Kaiten</span><small>· воркшоп</small></div>
+  <div class="counter" id="counter">01 / 13</div>
 </div>
 <div class="dots" id="dots"></div>
 <div class="hint">→ / Space — листать · ↑↓ — назад/вперёд</div>
@@ -179,16 +163,16 @@
   <!-- 1 · Cover -->
   <section class="slide grad">
     <div class="wrap">
-      <div class="eyebrow">Программа обучения · 3 интенсива + домашки</div>
-      <h1>Вы сможете создавать<br>программные продукты</h1>
-      <p class="lead">Не только лендинги. Программа учит главному навыку: с помощью нейронок самим делать себе приложения и инструменты — и публиковать их в интернете. По-русски, без кода руками.</p>
+      <div class="eyebrow">Воркшоп · ~3 часа · практика</div>
+      <h1>От идеи до продукта<br>в интернете</h1>
+      <p class="lead">За один воркшоп пройдём весь путь: нейронка пишет код → GitHub хранит → Vercel публикует. Вы уйдёте с лендингом, который живёт в интернете по ссылке. По-русски, без кода руками.</p>
     </div>
   </section>
 
-  <!-- 2 · Цель программы -->
+  <!-- 2 · Цель -->
   <section class="slide">
     <div class="wrap">
-      <div class="kicker">Цель программы</div>
+      <div class="kicker">Зачем это всё</div>
       <h2>Сами придумали — сами сделали — сами опубликовали</h2>
       <div class="chain">
         <div class="node io"><b>Идея</b><span>задача или инструмент, который вам нужен</span></div>
@@ -210,7 +194,7 @@
     </div>
   </section>
 
-  <!-- 3 · Как вы работаете -->
+  <!-- 3 · По-русски -->
   <section class="slide">
     <div class="wrap">
       <div class="kicker">Главное правило работы</div>
@@ -225,10 +209,30 @@
     </div>
   </section>
 
-  <!-- 4 · GitHub -->
+  <!-- 4 · План на сегодня -->
   <section class="slide">
     <div class="wrap">
-      <div class="kicker">Без страха</div>
+      <div class="kicker">План на сегодня</div>
+      <h2>Весь путь за один воркшоп</h2>
+      <div class="chain">
+        <div class="node"><span class="stepno">1</span><b>Подключаем GitHub</b><span>аккаунт, доступ, копируем проект себе</span></div>
+        <div class="carr">→</div>
+        <div class="node"><span class="stepno">2</span><b>Первое изменение</b><span>меняем словами, сохраняем в main, проверяем</span></div>
+        <div class="carr">→</div>
+        <div class="node"><span class="stepno">3</span><b>Собираем лендинг</b><span>конвейер: от ТЗ до страницы</span></div>
+        <div class="carr">→</div>
+        <div class="node"><span class="stepno">4</span><b>Чиним «не очень»</b><span>брак → шаг → правило</span></div>
+        <div class="carr">→</div>
+        <div class="node io"><span class="stepno">5</span><b>Деплоим на Vercel</b><span>лендинг — в интернете по ссылке</span></div>
+      </div>
+      <div class="callout"><b>К концу воркшопа</b> у каждого: проект на GitHub, собранный лендинг и публичная ссылка на него. Дальше — неделя практики и воркшоп-разбор.</div>
+    </div>
+  </section>
+
+  <!-- 5 · GitHub -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Шаг 1–2 · основа</div>
       <h2>GitHub — это Word с версиями</h2>
       <div class="grid-2">
         <div class="card soft">
@@ -253,10 +257,10 @@
     </div>
   </section>
 
-  <!-- 5 · Репозиторий = конвейер -->
+  <!-- 6 · Конвейер -->
   <section class="slide">
     <div class="wrap">
-      <div class="kicker">Что лежит в репозитории</div>
+      <div class="kicker">Шаг 3 · как собирается лендинг</div>
       <h2>Конвейер: запрос на входе — лендинг на выходе</h2>
       <p class="lead" style="font-size:17px;">Репозиторий — это последовательный пайплайн. Всё, что между входом и выходом, — шаги, которые выполняются строго по порядку. У каждого шага — свои правила, и они лежат тут же, в репозитории.</p>
       <div class="chain">
@@ -278,10 +282,10 @@
     </div>
   </section>
 
-  <!-- 6 · Брак = диагноз -->
+  <!-- 7 · Диагноз -->
   <section class="slide">
     <div class="wrap">
-      <div class="kicker">Зачем знать шаги конвейера</div>
+      <div class="kicker">Шаг 4 · чиним «не очень»</div>
       <h2>Плохой результат — это диагноз, а не приговор</h2>
       <p class="lead" style="font-size:17px;">Каждый вид брака указывает на конкретный шаг конвейера. Вы не переделываете лендинг руками — вы чините правило того шага, который ошибся. Один раз починили — все следующие лендинги собираются правильно.</p>
       <div class="maprow">
@@ -309,110 +313,7 @@
     </div>
   </section>
 
-  <!-- 7 · Карта программы: стадии -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="kicker">Карта программы</div>
-      <h2>Три стадии — от инструментов к своим продуктам</h2>
-      <div class="stages">
-        <div class="stage">
-          <span class="when">Воркшоп 1 + неделя</span>
-          <h3>Стадия 1 · Инструменты</h3>
-          <ul>
-            <li>пользуемся нейронкой для кодинга</li>
-            <li>подключили GitHub, вносим изменения</li>
-            <li>проверяем результат после изменений</li>
-          </ul>
-        </div>
-        <div class="sarr">→</div>
-        <div class="stage">
-          <span class="when">Воркшоп 2 + неделя</span>
-          <h3>Стадия 2 · Конвейер</h3>
-          <ul>
-            <li>делаем лендинги потоком</li>
-            <li>находим брак и чиним правила шагов</li>
-            <li>у каждого этапа — свой ответственный</li>
-          </ul>
-        </div>
-        <div class="sarr">→</div>
-        <div class="stage">
-          <span class="when">Воркшоп 3</span>
-          <h3>Стадия 3 · Продакшен</h3>
-          <ul>
-            <li>деплоим на Vercel — продукт в интернете</li>
-            <li>вносим правки — прод обновляется</li>
-            <li>путь к своим мини-продуктам</li>
-          </ul>
-        </div>
-        <div class="sarr">→</div>
-        <div class="stage final">
-          <span class="when">Итог</span>
-          <h3>Самостоятельность</h3>
-          <ul>
-            <li>свои небольшие программные продукты для рабочих задач</li>
-            <li>понимание базовых принципов: нейронки, кодинг, GitHub, деплой</li>
-          </ul>
-        </div>
-      </div>
-      <p class="small" style="margin-top:22px;">Перед каждым воркшопом — домашка. Между воркшопами — неделя практики на реальных задачах.</p>
-    </div>
-  </section>
-
-  <!-- 8 · Воркшоп 1 -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Воркшоп 1 · ~2 часа</div>
-      <h2>Основы: нейронка + GitHub</h2>
-      <div class="steps">
-        <div class="stp"><div><b>Подключаем GitHub и копируем проект себе</b><p>Аккаунт → доступ → клонирование через Conductor / Claude Code. У каждого на экране — работающий проект.</p></div></div>
-        <div class="stp"><div><b>Вносим первое изменение и сохраняем</b><p class="q">«Поменяй заголовок на этом лендинге и сохрани в main»</p></div></div>
-        <div class="stp"><div><b>Разбираем: что такое ветки и почему нам хватает main</b><p>История версий страхует. Смотрим, как откатить изменение, если что-то пошло не так.</p></div></div>
-        <div class="stp"><div><b>Учимся проверять результат после изменения</b><p class="q">«Покажи в браузере, как теперь выглядит» + смотрим историю изменений на GitHub</p></div></div>
-        <div class="stp"><div><b>Ведущий показывает: как агент собирает лендинг целиком</b><p>Демо конвейера от запроса до страницы — чтобы домашка была понятна.</p></div></div>
-      </div>
-      <div class="outcome">Итог: каждый умеет менять проект и проверять результат</div>
-    </div>
-  </section>
-
-  <!-- 9 · Домашка после В1: цикл -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Домашка · неделя после воркшопа 1</div>
-      <h2>2 ТЗ → 2 лендинга → улучшение конвейера</h2>
-      <p class="lead" style="font-size:17px;">Каждый берёт два ТЗ и делает два лендинга. Главное в домашке — не лендинги, а цикл улучшения: найти проблемные места и починить их в правилах.</p>
-      <div class="chain">
-        <div class="node"><span class="stepno">1</span><b>Сделал лендинг</b><span>«собери лендинг по этому ТЗ»</span></div>
-        <div class="carr">→</div>
-        <div class="node"><span class="stepno">2</span><b>Нашёл, что не нравится</b><span>картинка, текст, структура</span></div>
-        <div class="carr">→</div>
-        <div class="node"><span class="stepno">3</span><b>Предложил решение</b><span>какое правило какого шага поменять</span></div>
-        <div class="carr">→</div>
-        <div class="node"><span class="stepno">4</span><b>Внёс в репозиторий</b><span>«поменяй правило и сохрани в main»</span></div>
-        <div class="carr">→</div>
-        <div class="node"><span class="stepno">5</span><b>Перегенерил</b><span>стало лучше?</span></div>
-      </div>
-      <div class="loopback"><span class="lb-line"></span><span>если не стало — ещё одна итерация</span></div>
-      <div class="outcome">Принести на воркшоп 2: два лендинга + список «что чинил и что поменял в правилах»</div>
-    </div>
-  </section>
-
-  <!-- 10 · Воркшоп 2 -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Воркшоп 2 · ~2.5 часа</div>
-      <h2>Разбор полётов + ответственные за этапы</h2>
-      <div class="steps">
-        <div class="stp"><div><b>Смотрим лендинги недели</b><p>Каждый показывает свои два лендинга: что получилось, что нет.</p></div></div>
-        <div class="stp"><div><b>Разбираем ошибки и находки</b><p>Типовые проблемы → к какому шагу конвейера относятся → как чинили.</p></div></div>
-        <div class="stp"><div><b>Разбираем апдейты репозитория</b><p>Кто что поменял в правилах за неделю, что сработало, что конфликтует. Учимся не превращать общий проект в хаос.</p></div></div>
-        <div class="stp"><div><b>Назначаем ответственных за этапы конвейера</b><p>Разбор задачи / Макеты / Блоки / Тексты / Проверки — у каждого этапа свой владелец правил.</p></div></div>
-        <div class="stp"><div><b>Каждый изучает состав репозитория</b><p class="q">«Проведи экскурсию по моему этапу — где лежат его правила и как они работают»</p></div></div>
-      </div>
-      <div class="outcome">Итог: поток лендингов без хаоса — у каждого правила есть хозяин</div>
-    </div>
-  </section>
-
-  <!-- 11 · Универсальный промпт -->
+  <!-- 8 · Универсальный промпт -->
   <section class="slide">
     <div class="wrap">
       <div class="kicker">Шпаргалка</div>
@@ -432,53 +333,69 @@
     </div>
   </section>
 
-  <!-- 12 · Воркшоп 3: деплой -->
+  <!-- 9 · Деплой -->
   <section class="slide">
     <div class="wrap">
-      <div class="eyebrow">Воркшоп 3 · ~2 часа</div>
-      <h2>Продакшен: публикуем на Vercel</h2>
+      <div class="kicker">Шаг 5 · публикуем</div>
+      <h2>Продакшен: деплоим на Vercel</h2>
       <div class="chain tight">
         <div class="node"><b>Проект на GitHub</b><span>репозиторий с готовым лендингом</span></div>
         <div class="carr">→</div>
         <div class="node"><b>Подключаем Vercel</b><span>один раз: Vercel смотрит на репозиторий</span></div>
         <div class="carr">→</div>
-        <div class="node"><b>Деплой</b><span>продукт доступен в интернете по ссылке</span></div>
+        <div class="node io"><b>Деплой</b><span>продукт доступен в интернете по ссылке</span></div>
         <div class="carr">→</div>
-        <div class="node"><b>Правка → сохранили в main</b><span>сайт обновился сам</span></div>
+        <div class="node"><b>Правка → main</b><span>сайт обновился сам</span></div>
       </div>
-      <div class="steps" style="margin-top:28px;">
-        <div class="stp"><div><b>Публикуем лендинг недели в продакшен</b><p class="q">«Задеплой этот проект на Vercel и дай ссылку»</p></div></div>
-        <div class="stp"><div><b>Вносим правку и видим автообновление</b><p>Меняем текст → сохраняем в main → через минуту прод обновился. Так работает связка GitHub + Vercel.</p></div></div>
-        <div class="stp"><div><b>Обсуждаем свои мини-продукты</b><p>У каждого — идея инструмента для своей работы. Теперь весь путь знаком: идея → агент → GitHub → Vercel.</p></div></div>
+      <div class="phrases" style="margin-top:28px;">
+        <div class="phrase">«Задеплой этот проект на Vercel и дай ссылку»</div>
+        <div class="phrase">«Поменяй заголовок и сохрани в main» — и через минуту прод обновился</div>
       </div>
-      <div class="outcome">Итог: ваш продукт живёт в интернете и обновляется сам</div>
+      <div class="callout"><b>Это и есть продакшен:</b> ваш продукт живёт в интернете, обновляется сам после каждого сохранения в main, и им можно поделиться ссылкой.</div>
     </div>
   </section>
 
-  <!-- 13 · Ежедневный поток -->
+  <!-- 10 · Домашка -->
   <section class="slide">
     <div class="wrap">
-      <div class="kicker">Ежедневный поток</div>
-      <h2>Что вы говорите агенту</h2>
+      <div class="eyebrow">Домашка · неделя после воркшопа</div>
+      <h2>2 ТЗ → 2 лендинга → улучшение → деплой</h2>
+      <p class="lead" style="font-size:17px;">Каждый берёт два ТЗ и делает два лендинга. Главное — не лендинги, а цикл улучшения: найти проблемные места, починить их в правилах и задеплоить результат.</p>
       <div class="chain">
-        <div class="node"><span class="stepno">1</span><b>«Собери ТЗ из моих материалов»</b></div>
+        <div class="node"><span class="stepno">1</span><b>Сделал лендинг</b><span>«собери лендинг по этому ТЗ»</span></div>
         <div class="carr">→</div>
-        <div class="node"><span class="stepno">2</span><b>«Собери лендинг по этому ТЗ»</b></div>
+        <div class="node"><span class="stepno">2</span><b>Нашёл, что не нравится</b><span>картинка, текст, структура</span></div>
         <div class="carr">→</div>
-        <div class="node"><span class="stepno">3</span><b>«Открой в браузере»</b></div>
+        <div class="node"><span class="stepno">3</span><b>Предложил решение</b><span>какое правило какого шага поменять</span></div>
         <div class="carr">→</div>
-        <div class="node"><span class="stepno">4</span><b>«Здесь не так — поправь и покажи»</b></div>
+        <div class="node"><span class="stepno">4</span><b>Внёс и перегенерил</b><span>стало лучше? если нет — ещё раз</span></div>
         <div class="carr">→</div>
-        <div class="node"><span class="stepno">5</span><b>«Сохрани в main и задеплой»</b></div>
+        <div class="node io"><span class="stepno">5</span><b>Задеплоил</b><span>лендинг в интернете по ссылке</span></div>
       </div>
-      <div class="callout">Ни одной команды руками. Только русские фразы — остальное агент делает сам.</div>
+      <div class="loopback"><span class="lb-line"></span><span>если не стало лучше — ещё одна итерация</span></div>
+      <div class="outcome">Принести на разбор: 2 ссылки на лендинги + список «что чинил и что поменял в правилах»</div>
     </div>
   </section>
 
-  <!-- 14 · Ссылки -->
+  <!-- 11 · Следующий воркшоп -->
   <section class="slide">
     <div class="wrap">
-      <div class="kicker">Куда дальше и где помощь</div>
+      <div class="kicker">Что дальше</div>
+      <h2>Следующий воркшоп — разбор ваших результатов</h2>
+      <p class="lead">Через неделю встречаемся снова — это будет полностью прикладной воркшоп. Никакой теории: разбираем только то, что реально у вас произошло.</p>
+      <div class="grid-3">
+        <div class="card"><div class="tag">разберём</div><h3>Ваши лендинги и деплои</h3><p>Каждый показывает свои ссылки: что получилось, что нет, как прошёл первый деплой на Vercel.</p></div>
+        <div class="card"><div class="tag">разберём</div><h3>Ошибки и находки</h3><p>Типовые проблемы недели: к какому шагу конвейера относятся, как чинили, что поменяли в правилах.</p></div>
+        <div class="card"><div class="tag">решим</div><h3>Как работать дальше</h3><p>Кто отвечает за какие правила, как не превращать общий проект в хаос, путь к своим мини-продуктам.</p></div>
+      </div>
+      <div class="callout"><b>Приходите с материалом:</b> две ссылки на задеплоенные лендинги + список «что чинил». Чем больше реальных граблей принесёте — тем полезнее разбор.</div>
+    </div>
+  </section>
+
+  <!-- 12 · Ссылки -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker">Где помощь</div>
       <h2>Если застряли — спросите агента</h2>
       <p class="lead">Не нужно искать файлы и пути. Любой вопрос — в чат: «почему не пускает?», «что значит эта ошибка?», «покажи, где правило про иллюстрации».</p>
       <div class="links">
@@ -491,12 +408,12 @@
     </div>
   </section>
 
-  <!-- 15 · Finale -->
+  <!-- 13 · Finale -->
   <section class="slide grad">
     <div class="wrap">
-      <div class="eyebrow">3 интенсива — и команда автономна</div>
+      <div class="eyebrow">Один воркшоп — весь путь</div>
       <h1>Поехали.</h1>
-      <p class="lead">Инструменты → конвейер → продакшен. В конце пути каждый делает себе программные продукты — обычными словами.</p>
+      <p class="lead">Сегодня: GitHub → лендинг → деплой. Через неделю — разбор того, что у вас получилось. Всё — обычными словами.</p>
     </div>
   </section>
 

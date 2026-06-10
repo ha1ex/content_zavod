@@ -68,6 +68,23 @@ export default async function DashboardPage() {
             </span>
           </div>
         </Link>
+
+        <Link
+          href="/pipeline"
+          className="group rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-6 transition hover:border-(--color-action-primary)/50"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold">Как устроен конвейер</h2>
+              <p className="mt-1 text-sm text-(--color-text-secondary)">
+                Справочник по всем этапам: что на входе и выходе, правила и гейты, команды.
+              </p>
+            </div>
+            <span aria-hidden className="text-2xl">
+              →
+            </span>
+          </div>
+        </Link>
       </section>
 
       <section>

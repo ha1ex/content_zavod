@@ -14,6 +14,7 @@
     "start": "pnpm --filter @kaiten/web start",
     "storybook": "pnpm --filter @kaiten/ui storybook",
     "harness": "pnpm --filter @kaiten/harness cli",
+    "pipeline:docs": "node scripts/pipeline-docs.mjs",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test"

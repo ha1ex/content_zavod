@@ -43,5 +43,8 @@ export { ProductionGanttMock } from './ProductionGanttMock';
 export { ProductionTaskCardMock } from './ProductionTaskCardMock';
 export { ProductionDepartmentsMock } from './ProductionDepartmentsMock';
 export { PmBoard1Mock } from './PmBoard1Mock';
+export { LaptopKanbanMock } from './GadgetLaptopKanbanMock';
+export { TabletKanbanMock } from './GadgetTabletKanbanMock';
+export { LaptopDocEditorMock } from './GadgetLaptopDocEditorMock';
 export { MockVisual } from './MockVisual';
 export type { MockVariant } from './MockVisual';

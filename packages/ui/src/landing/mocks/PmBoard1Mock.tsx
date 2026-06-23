@@ -1,325 +1,417 @@
-import { Icon } from '../../primitives/Icon';
-import { cn } from '../../primitives/cn';
-
-/** Серый скелетон-бар (имитация строки текста на карточке). */
-function Bar({ className }: { className?: string }) {
-  return <div className={cn('h-1.5 rounded-full bg-(--color-neutral-200)', className)} />;
+const STYLE = `
+.pmb1{
+  --color-neutral-200:#eeeeee;
+  --color-action-primary:#7d4ccf;
+  --color-action-primary-soft:#efe9f9;
+  --color-orange-100:#ffa100;
+  --color-green-100:#4caf51;
+  --color-red-100:#f44336;
+  --color-blue-100:#2196f3;
+  --color-red-12:#fde8e6;
+  --color-green-12:#e9f5ea;
+  --color-blue-12:#e4f2fd;
+  --color-border-default:#dbe1e0;
+  --color-surface-card:#ffffff;
+  --color-surface-section:#f7f7f8;
+  --color-surface-page:#ffffff;
+  --color-text-primary:#2d2d2d;
+  --color-text-secondary:#757575;
+  --color-text-accent:#7d4ccf;
+  --skel:#d6d6d9;
+  --radius-2xl:16px; --radius-xl:12px; --radius-lg:8px; --radius-md:6px;
+  font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--color-text-primary);
 }
+.pmb1 *{box-sizing:border-box;}
+.pmb1 .frame{position:relative; width:1216px; height:780px; overflow:hidden; background:#ffffff; zoom:0.5;}
+.pmb1 .window{position:absolute; left:8px; top:130px; width:1200px; height:800px; display:flex; overflow:hidden; border-radius:var(--radius-2xl); border:1px solid var(--color-border-default); background:var(--color-surface-card); box-shadow:0 30px 80px -30px rgba(0,0,0,0.10);}
+.pmb1 .sidebar{width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:14px; border-right:1px solid var(--color-border-default); background:#f5f5f5; padding:18px 16px;}
+.pmb1 .brand{display:flex; align-items:center; gap:8px;}
+.pmb1 .brand-name{font-size:18px; font-weight:600; color:var(--color-text-primary); letter-spacing:.2px;}
+.pmb1 .search-row{display:flex; align-items:center; gap:8px;}
+.pmb1 .search{flex:1; display:flex; align-items:center; gap:8px; height:36px; border-radius:var(--radius-lg); border:1px solid var(--color-border-default); background:var(--color-surface-card); padding:0 10px;}
+.pmb1 .plus{width:36px; height:36px; flex-shrink:0; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-lg); border:1px solid var(--color-border-default); background:var(--color-surface-card);}
+.pmb1 .nav{display:flex; flex-direction:column; gap:6px;}
+.pmb1 .nav-item{display:flex; align-items:center; gap:8px; border-radius:var(--radius-lg); padding:0 10px; height:34px;}
+.pmb1 .nav-item.active{background:var(--color-action-primary-soft);}
+.pmb1 .nav-item.sub{padding-left:34px;}
+.pmb1 .navbar{height:8px; border-radius:9999px; background:var(--skel);}
+.pmb1 .navbar.active{background:var(--color-action-primary);}
+.pmb1 .chev{flex-shrink:0; color:#9e9e9e;}
+.pmb1 .ico{display:inline-block; flex-shrink:0;}
+.pmb1 .t-sec{color:var(--color-text-secondary);}
+.pmb1 .t-acc{color:var(--color-text-accent);}
+.pmb1 .main{position:relative; min-width:0; flex:1; display:flex; flex-direction:column;}
+.pmb1 .toolbar{display:flex; align-items:center; justify-content:space-between; flex-shrink:0; border-bottom:1px solid var(--color-border-default); background:var(--color-surface-section); padding:12px 16px;}
+.pmb1 .tool-pill{display:inline-flex; align-items:center; gap:8px; border-radius:var(--radius-lg); background:var(--color-action-primary-soft); padding:6px 12px;}
+.pmb1 .tool-right{display:flex; align-items:center; gap:8px;}
+.pmb1 .sq{height:28px; width:28px; border-radius:var(--radius-lg); background:var(--color-neutral-200);}
+.pmb1 .board{position:relative; padding:32px 20px; display:flex; flex-direction:column; gap:20px; background:#f3f3f3;}
+.pmb1 .lane-divider{height:1px; background:#e8e8e8;}
+.pmb1 .lane-head{margin-bottom:12px; display:flex; align-items:center; gap:8px; font-size:18px; font-weight:600; color:var(--color-text-secondary);}
+.pmb1 .cols{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+.pmb1 .board::before, .pmb1 .board::after{content:''; position:absolute; top:0; bottom:0; width:2px; background:#e8e8e8; pointer-events:none;}
+.pmb1 .board::before{left:calc(33.3333% + 1.7px);}
+.pmb1 .board::after{left:calc(66.6667% - 3.7px);}
+.pmb1 .col{display:flex; flex-direction:column;}
+.pmb1 .colhead{margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+.pmb1 .colhead .name{font-size:18px; font-weight:600; color:var(--color-text-primary);}
+.pmb1 .count{margin-left:auto; display:inline-flex; height:22px; min-width:22px; align-items:center; justify-content:center; border-radius:6px; padding:0 7px; font-size:13px; font-weight:600; background:#e6e6e6; color:#616161;}
+.pmb1 .spacer-head{margin-bottom:12px; height:24px;}
+.pmb1 .card{position:relative; overflow:hidden; border-radius:var(--radius-lg); border:1px solid var(--color-border-default); background:var(--color-surface-card); padding:14px;}
+.pmb1 .card.col{display:flex; flex-direction:column;}
+.pmb1 .cover-card{padding:0;}
+.pmb1 .card-cover{width:100%; height:138px;}
+.pmb1 .card-cover.gray-c{background:#ececec;}
+.pmb1 .card-cover.violet-c{background:color-mix(in srgb, var(--color-action-primary-soft) 75%, #fff); border-bottom:1px solid rgba(125,76,207,0.18);}
+.pmb1 .card-body{padding:14px;}
+.pmb1 .h155{height:155px;}
+.pmb1 .accent{height:6px; width:56px; border-radius:9999px; margin-bottom:10px;}
+.pmb1 .a-violet{background:var(--color-action-primary);}
+.pmb1 .a-orange{background:var(--color-orange-100);}
+.pmb1 .a-yellow{background:#f5c542;}
+.pmb1 .a-green{background:var(--color-green-100);}
+.pmb1 .cbar{height:9px; border-radius:9999px; background:var(--skel);}
+.pmb1 .blue-bar{height:9px; border-radius:9999px; background:var(--color-blue-12);}
+.pmb1 .mt6{margin-top:6px;}
+.pmb1 .mtauto{margin-top:auto;}
+.pmb1 .red-head{margin:-14px -14px 12px; padding:12px 14px; background:var(--color-red-12); display:flex; align-items:center; gap:8px;}
+.pmb1 .red-bar{height:7px; width:70px; border-radius:9999px; background:var(--color-red-100);}
+.pmb1 .between{margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:12px;}
+.pmb1 .pill-fire{display:inline-flex; align-items:center; gap:5px; border-radius:9999px; background:var(--color-red-12); padding:4px 9px;}
+.pmb1 .pill-fire .red-bar{width:42px; height:6px;}
+.pmb1 .usr-circle{display:inline-flex; align-items:center; justify-content:center; height:28px; width:28px; border-radius:9999px;}
+.pmb1 .usr-circle .ico{width:26px; height:26px;}
+.pmb1 .rail{width:52px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:16px; padding:14px 0; border-left:1px solid var(--color-border-default); background:#f5f5f5;}
+.pmb1 .rail .ava{height:38px; width:38px;}
+.pmb1 .rail-sq{height:28px; width:28px; border-radius:var(--radius-lg); background:var(--color-neutral-200); flex-shrink:0;}
+.pmb1 .ava{border-radius:9999px; display:inline-block; flex-shrink:0;}
+.pmb1 .floating{position:absolute; left:413px; top:85px; width:415px; border-radius:var(--radius-xl); border:1px solid var(--color-border-default); background:var(--color-surface-card); padding:24px; box-shadow:0 24px 60px -20px rgba(125,76,207,0.45);}
+.pmb1 .floating .accent{margin-bottom:18px;}
+.pmb1 .floating .title{font-size:23px; font-weight:600; line-height:1.22; color:var(--color-text-primary);}
+.pmb1 .floating .ava{height:56px; width:56px;}
+.pmb1 .badge-urgent{display:inline-flex; align-items:center; gap:6px; border-radius:9999px; background:var(--color-red-12); padding:7px 14px; font-size:14px; font-weight:600; color:var(--color-red-100);}
+.pmb1 .fl-tags{display:flex; gap:8px; margin-top:14px;}
+.pmb1 .tag{display:inline-flex; align-items:center; height:24px; padding:0 10px; border-radius:9999px; font-size:12px; font-weight:500; line-height:1;}
+.pmb1 .tag-violet{background:var(--color-action-primary-soft); color:#6a3fb5;}
+.pmb1 .tag-blue{background:var(--color-blue-12); color:#1976d2;}
+.pmb1 .tag-peach{background:#fbe2d0; color:#3a2b22;}
+.pmb1 .fl-assignee{display:flex; align-items:center; gap:12px; margin-top:16px;}
+.pmb1 .fl-name{font-size:15px; font-weight:600; color:var(--color-text-primary); line-height:1.2;}
+.pmb1 .fl-footer{display:flex; align-items:center; gap:18px; margin-top:16px;}
+.pmb1 .fl-meta{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; color:var(--color-text-secondary);}
+.pmb1 .fl-meta .ico{width:16px; height:16px;}
+`;
 
-/** Цветной короткий акцент сверху карточки. */
-const ACCENT: Record<string, string> = {
-  violet: 'bg-(--color-action-primary)',
-  orange: 'bg-(--color-orange-100)',
-  yellow: 'bg-amber-300',
-  green: 'bg-(--color-green-100)',
-  red: 'bg-(--color-red-100)',
-  blue: 'bg-(--color-blue-100)',
-};
+const NAV_WIDTHS = ['55%', '45%', '52%', '48%', '50%', '50%'];
 
-/** Фирменный логотип Kaiten (знак + чёрный wordmark). */
-function KaitenLogo({ className }: { className?: string }) {
+/** Иконка-сетка (LayoutGrid). `accent` — фиолетовая через t-acc + currentColor. */
+function GridIco({ size = 18, fill = '#9e9e9e', accent = false }: { size?: number; fill?: string; accent?: boolean }) {
+  const f = accent ? 'currentColor' : fill;
   return (
-    <svg viewBox="0 0 269 80" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden>
-      <path
-        d="M59.0856 0H20.9144C9.36367 0 0 9.35857 0 20.903V59.097C0 70.6414 9.36367 80 20.9144 80H59.0856C70.6363 80 80 70.6414 80 59.097V20.903C80 9.35857 70.6363 0 59.0856 0Z"
-        fill="#F11F24"
-      />
-      <path
-        d="M31.8576 8.72032L8.72032 31.8576C4.27271 36.3052 4.27271 43.5162 8.72032 47.9638L31.8576 71.101C36.3052 75.5486 43.5162 75.5486 47.9638 71.101L71.101 47.9638C75.5486 43.5162 75.5486 36.3052 71.101 31.8576L47.9638 8.72032C43.5162 4.27271 36.3052 4.27271 31.8576 8.72032Z"
-        fill="#78FFC7"
-      />
-      <path
-        d="M39.7808 59.559C50.7054 59.559 59.5615 50.7034 59.5615 39.7795C59.5615 28.8556 50.7054 20 39.7808 20C28.8562 20 20 28.8556 20 39.7795C20 50.7034 28.8562 59.559 39.7808 59.559Z"
-        fill="#7D4CCF"
-      />
-      <path
-        d="M187.261 31.8525H193.694V34.7574H187.261V45.5476C187.261 46.599 187.372 47.4982 187.593 48.2452C187.842 48.9646 188.161 49.5597 188.548 50.03C188.963 50.4726 189.433 50.8048 189.959 51.0261C190.484 51.2475 191.038 51.3582 191.619 51.3582C192.449 51.3582 193.251 51.2331 194.026 50.9841C194.8 50.7074 195.451 50.417 195.977 50.1127L197.221 52.8102C196.391 53.2252 195.437 53.571 194.358 53.8477C193.306 54.1243 192.255 54.263 191.204 54.2631C188.078 54.2631 185.671 53.4881 183.983 51.9388C182.295 50.3895 181.451 48.2591 181.451 45.5476V34.7574H177.508V31.8525H181.451V25.2118H187.261V31.8525Z"
-        fill="black"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M211.069 31.0216C212.729 31.0217 214.292 31.2703 215.759 31.7683C217.225 32.2663 218.497 33.0003 219.576 33.9686C220.655 34.9093 221.514 36.0572 222.15 37.4129C222.786 38.7685 223.104 40.304 223.104 42.0192V44.9249H205.383C205.715 47.2212 206.504 48.8673 207.749 49.8633C209.021 50.8593 210.612 51.3574 212.521 51.3574C213.877 51.3574 215.136 51.1224 216.298 50.652C217.488 50.1817 218.65 49.5175 219.784 48.6599L221.444 51.1501C220.918 51.6204 220.296 52.0489 219.576 52.4361C218.885 52.8234 218.124 53.1556 217.294 53.4322C216.492 53.6812 215.648 53.8753 214.763 54.0137C213.877 54.1797 212.992 54.2623 212.106 54.2623C210.142 54.2623 208.344 53.9999 206.711 53.4743C205.107 52.9763 203.737 52.2431 202.602 51.2748C201.468 50.2787 200.582 49.0612 199.946 47.6224C199.337 46.1837 199.033 44.5234 199.033 42.642C199.033 40.7884 199.324 39.1422 199.905 37.7036C200.513 36.2372 201.343 35.0196 202.395 34.0512C203.474 33.0552 204.747 32.3084 206.213 31.8104C207.68 31.2847 209.298 31.0216 211.069 31.0216ZM211.069 33.7192C210.267 33.7192 209.519 33.8716 208.827 34.1759C208.136 34.4803 207.527 34.9641 207.001 35.628C206.503 36.292 206.088 37.1502 205.756 38.2016C205.452 39.2529 205.286 40.5254 205.258 42.0192H216.879C216.879 40.5806 216.713 39.3355 216.381 38.2843C216.049 37.233 215.606 36.3754 215.053 35.7114C214.527 35.0197 213.904 34.5216 213.185 34.2172C212.494 33.8853 211.788 33.7192 211.069 33.7192Z"
-        fill="black"
-      />
-      <path d="M172.774 53.433H166.964V32.2671H172.774V53.433Z" fill="black" />
-      <path
-        d="M239.869 31.8525C243.826 31.8525 246.745 32.572 248.626 34.0107C250.535 35.4217 251.49 37.5385 251.49 40.3606V53.433H245.679V40.3606C245.679 38.3685 245.181 36.9432 244.185 36.0855C243.189 35.2003 241.75 34.7574 239.869 34.7574H234.474V53.433H228.664V31.8525H239.869Z"
-        fill="black"
-      />
-      <path
-        d="M112.265 37.4542H119.113L128.658 24.381H135.298L124.923 38.6989L135.921 53.4322H129.073L119.527 40.5664H112.265V53.4322H106.247V24.381H112.265V37.4542Z"
-        fill="black"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M149.385 31.0216C151.155 31.0216 152.719 31.2294 154.075 31.6444C155.43 32.0594 156.579 32.6538 157.52 33.4285C158.46 34.2032 159.165 35.1304 159.636 36.2094C160.134 37.2608 160.383 38.4367 160.383 39.7371V53.4322H148.762C144.999 53.4322 142.219 52.8651 140.421 51.7308C138.65 50.5964 137.764 48.8813 137.764 46.585C137.764 44.2886 138.65 42.5729 140.421 41.4385C142.219 40.3042 144.999 39.7371 148.762 39.7371H154.573C154.573 37.7452 154.047 36.2788 152.996 35.338C151.972 34.3974 150.63 33.9266 148.97 33.9265C147.725 33.9265 146.507 34.1206 145.318 34.508C144.128 34.8676 143.063 35.3657 142.122 36.0021L140.669 33.5119C141.278 33.0968 141.942 32.7367 142.661 32.4324C143.222 32.2041 143.79 32.0072 144.366 31.8412L145.523 31.5302C146.099 31.385 146.666 31.2706 147.227 31.1876C148.001 31.077 148.721 31.0216 149.385 31.0216ZM148.762 42.642C145.58 42.6421 143.99 43.9567 143.99 46.585C143.99 49.2132 145.581 50.5272 148.762 50.5273H154.573V42.642H148.762Z"
-        fill="black"
-      />
-      <path
-        d="M169.869 23.5517C170.782 23.5518 171.529 23.8702 172.11 24.5065C172.691 25.1151 172.982 25.8347 172.982 26.6647C172.981 27.4946 172.691 28.2279 172.11 28.8642C171.557 29.4727 170.81 29.7768 169.869 29.7769C168.929 29.7769 168.167 29.4728 167.586 28.8642C167.033 28.2279 166.756 27.4946 166.756 26.6647C166.756 25.8347 167.033 25.1151 167.586 24.5065C168.167 23.8701 168.929 23.5517 169.869 23.5517Z"
-        fill="black"
-      />
+    <svg className={accent ? 'ico t-acc' : 'ico'} width={size} height={size} viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7.5" height="7.5" rx="1.4" fill={f} />
+      <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.4" fill={f} />
+      <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.4" fill={f} />
+      <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.4" fill={f} />
     </svg>
   );
 }
 
-/** Аватар-«фото» — мягкий градиентный кружок. */
-function Avatar({ className }: { className?: string }) {
+/** Иконка-«сетка» строки дерева с шевроном слева. */
+function TreeRow({ width }: { width: string }) {
   return (
-    <span
-      className={cn(
-        'inline-block shrink-0 rounded-full bg-gradient-to-br from-pink-200 via-violet-200 to-violet-300',
-        className,
-      )}
-    />
-  );
-}
-
-/** Заголовок колонки со счётчиком. */
-function ColHead({
-  name,
-  count,
-  tone = 'amber',
-  check,
-}: {
-  name: string;
-  count: number;
-  tone?: 'amber' | 'green';
-  check?: boolean;
-}) {
-  return (
-    <div className="mb-2 flex items-center gap-1.5">
-      {check && <Icon name="Check" className="h-3 w-3 text-(--color-green-100)" strokeWidth={3} />}
-      <span className="text-[12px] font-semibold text-(--color-text-primary)">{name}</span>
-      <span
-        className={cn(
-          'inline-flex h-4 min-w-4 items-center justify-center rounded-md px-1 text-[9px] font-semibold',
-          tone === 'green' ? 'bg-(--color-green-12) text-green-700' : 'bg-amber-100 text-amber-700',
-        )}
-      >
-        {count}
-      </span>
+    <div className="nav-item">
+      <svg className="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+      <GridIco />
+      <div className="navbar" style={{ width }} />
     </div>
   );
 }
 
+/** Заголовок колонки со счётчиком. */
+function ColHead({ name, done }: { name: string; done?: boolean }) {
+  return (
+    <div className="colhead">
+      {done && (
+        <svg className="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-100)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      )}
+      <span className="name">{name}</span>
+      <span className="count">1</span>
+    </div>
+  );
+}
+
+/** Иконка-аватар заглушки пользователя в кружке. */
+function UsrCircle() {
+  return (
+    <span className="usr-circle">
+      <svg className="ico">
+        <use href="#usr" />
+      </svg>
+    </span>
+  );
+}
+
+/** Иконка грипа свимлейна. */
+function LaneGrip() {
+  return (
+    <svg className="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" />
+      <circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />
+    </svg>
+  );
+}
+
 /**
- * Mock приложения Kaiten в маркетинговом стиле (вариант `pm-board-1`): левый
- * сайдбар (лого, поиск, дерево досок-скелетоны с активным пунктом), борд со
- * свимлейнами «Цели» и «Текущие задачи», карточки-скелетоны с цветными
- * акцентами и аватарами, всплывающая карточка «Новая задача … · Срочно»,
- * аватар пользователя справа. Тон: «вся работа команды в одном окне».
- * Точная реплика эталона image 1370.svg; дорабатывается точечно.
+ * Mock приложения Kaiten в маркетинговом стиле (вариант `pm-board-1`): сайдбар
+ * с круглым логотипом, поиском и деревом досок; борд со свимлейнами «Цели» и
+ * «Текущие задачи», карточками-обложками и сплошными линиями-разделителями;
+ * правый рейл и всплывающая карточка «Новая задача … · Срочно» с метками и
+ * ответственным. Self-contained: scoped `<style>` + inline SVG. Палитра — V01.
  */
 export function PmBoard1Mock() {
   return (
-    <div aria-hidden className="relative">
-      {/* окно — клипится по скруглению; всплывающая карточка вынесена наружу и выходит за край */}
-      <div
-        className={cn(
-          'overflow-hidden rounded-(--radius-3xl)',
-          'border border-(--color-border-default) bg-(--color-surface-card)',
-          'shadow-[0_30px_80px_-30px_rgba(125,76,207,0.30)]',
-        )}
-      >
-      {/* window chrome — верхняя панель окна (mac) */}
-      <div className="flex items-center gap-1.5 border-b border-(--color-border-default) bg-(--color-surface-section) px-3 py-2.5">
-        <span className="h-2 w-2 rounded-full bg-red-300" />
-        <span className="h-2 w-2 rounded-full bg-yellow-300" />
-        <span className="h-2 w-2 rounded-full bg-green-300" />
-      </div>
-      <div className="flex">
-        {/* ─── sidebar ─────────────────────────────── */}
-        <div className="hidden w-[28%] shrink-0 flex-col gap-3 border-r border-(--color-border-default) bg-(--color-surface-page) p-3 sm:flex">
-          {/* logo */}
-          <KaitenLogo className="h-5 w-auto" />
+    <div className="pmb1" aria-hidden>
+      <style dangerouslySetInnerHTML={{ __html: STYLE }} />
 
-          {/* search */}
-          <div className="flex items-center gap-1.5 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) px-2 py-1.5">
-            <Icon name="Search" className="h-3 w-3 text-(--color-text-secondary)" strokeWidth={2} />
-            <Bar className="w-2/3" />
-          </div>
+      {/* общие SVG-символы: фото-аватар и иконки пользователя */}
+      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+        <symbol id="ava" viewBox="0 0 40 40">
+          <clipPath id="avaClip"><circle cx="20" cy="20" r="20" /></clipPath>
+          <g clipPath="url(#avaClip)">
+            <rect width="40" height="40" fill="#9fb277" />
+            <ellipse cx="20" cy="41" rx="15" ry="11" fill="#c9a7d6" />
+            <path d="M9 19c0-7 4.5-12 11-12s11 5 11 12c0 3-.5 6-1.5 8.5-1-6-4-8.5-9.5-8.5s-8.5 2.5-9.5 8.5C9.5 25 9 22 9 19z" fill="#e3b96f" />
+            <ellipse cx="20" cy="21" rx="8" ry="9" fill="#f2caa4" />
+            <path d="M11.5 16c1.5-5 5-7.5 8.5-7.5s7 2.5 8.5 7.5c-2.5-3.5-5.3-5-8.5-5s-6 1.5-8.5 5z" fill="#e3b96f" />
+            <g fill="#ffffff" fillOpacity="0.3" stroke="#3c3733" strokeWidth="1.2">
+              <rect x="12.4" y="18.2" width="6" height="5" rx="2.2" />
+              <rect x="21.6" y="18.2" width="6" height="5" rx="2.2" />
+            </g>
+            <path d="M18.4 20.6h3.2" stroke="#3c3733" strokeWidth="1.2" />
+            <path d="M17 26q3 2 6 0" stroke="#c07f64" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+          </g>
+        </symbol>
+        <symbol id="avaicon" viewBox="0 0 26 26">
+          <path d="M13 0C20.176 0 26 5.824 26 13C26 20.176 20.176 26 13 26C5.824 26 0 20.176 0 13C0 5.824 5.824 0 13 0ZM13 2.6C7.267 2.6 2.6 7.267 2.6 13C2.6 15.3659 3.40561 17.5371 4.73154 19.2791C6.59054 17.0171 11.102 16.25 13 16.25C14.898 16.25 19.4095 17.0171 21.2685 19.2791C22.5944 17.5371 23.4 15.3659 23.4 13C23.4 7.267 18.733 2.6 13 2.6ZM13 5.2C15.522 5.2 17.55 7.228 17.55 9.75C17.55 12.272 15.522 14.3 13 14.3C10.478 14.3 8.45 12.272 8.45 9.75C8.45 7.228 10.478 5.2 13 5.2Z" fill="#b4a2e0" />
+        </symbol>
+        <symbol id="usr" viewBox="0 0 26 26">
+          <path d="M13 0C20.176 0 26 5.824 26 13C26 20.176 20.176 26 13 26C5.824 26 0 20.176 0 13C0 5.824 5.824 0 13 0ZM13 2.6C7.267 2.6 2.6 7.267 2.6 13C2.6 15.3659 3.40561 17.5371 4.73154 19.2791C6.59054 17.0171 11.102 16.25 13 16.25C14.898 16.25 19.4095 17.0171 21.2685 19.2791C22.5944 17.5371 23.4 15.3659 23.4 13C23.4 7.267 18.733 2.6 13 2.6ZM13 5.2C15.522 5.2 17.55 7.228 17.55 9.75C17.55 12.272 15.522 14.3 13 14.3C10.478 14.3 8.45 12.272 8.45 9.75C8.45 7.228 10.478 5.2 13 5.2Z" fill="#bdbdbd" />
+        </symbol>
+      </svg>
 
-          {/* nav */}
-          <div className="flex flex-col gap-1">
-            {[
-              { icon: 'Folder', w: 'w-3/4', active: false },
-              { icon: 'Star', w: 'w-1/2', active: false },
-              { icon: 'LayoutGrid', w: 'w-4/5', active: true },
-              { icon: 'Folder', w: 'w-2/3', active: false },
-            ].map((r, i) => (
-              <div
-                key={i}
-                className={cn(
-                  'flex items-center gap-1.5 rounded-(--radius-lg) px-1.5 py-1.5',
-                  r.active && 'bg-(--color-action-primary-soft)',
-                )}
-              >
-                <Icon
-                  name={r.icon}
-                  className={cn(
-                    'h-3 w-3',
-                    r.active ? 'text-(--color-text-accent)' : 'text-(--color-text-secondary)',
-                  )}
-                  strokeWidth={2}
-                />
-                <div
-                  className={cn(
-                    'h-1.5 rounded-full',
-                    r.w,
-                    r.active ? 'bg-(--color-action-primary)' : 'bg-(--color-neutral-200)',
-                  )}
-                />
+      <div className="frame">
+        <div className="window">
+          {/* ── sidebar ── */}
+          <div className="sidebar">
+            <div className="brand">
+              <svg width="26" height="26" viewBox="0 0 104 104" fill="none" aria-hidden="true">
+                <g clipPath="url(#clip0_8356_19837)">
+                  <path d="M76.8113 0H27.1887C12.1728 0 0 12.1661 0 27.1738V76.8262C0 91.8339 12.1728 104 27.1887 104H76.8113C91.8272 104 104 91.8339 104 76.8262V27.1738C104 12.1661 91.8272 0 76.8113 0Z" fill="#F11F24" />
+                  <path d="M41.4148 11.3364L11.3364 41.4148C5.55453 47.1967 5.55453 56.571 11.3364 62.3529L41.4148 92.4313C47.1967 98.2132 56.571 98.2132 62.3529 92.4313L92.4313 62.3529C98.2132 56.571 98.2132 47.1967 92.4313 41.4148L62.3529 11.3364C56.571 5.55453 47.1967 5.55453 41.4148 11.3364Z" fill="#78FFC7" />
+                  <path d="M51.715 77.4267C65.917 77.4267 77.43 65.9144 77.43 51.7133C77.43 37.5123 65.917 26 51.715 26C37.513 26 26 37.5123 26 51.7133C26 65.9144 37.513 77.4267 51.715 77.4267Z" fill="#7D4CCF" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_8356_19837"><rect width="104" height="104" rx="52" fill="white" /></clipPath>
+                </defs>
+              </svg>
+              <span className="brand-name">Kaiten</span>
+            </div>
+
+            {/* search + plus */}
+            <div className="search-row">
+              <div className="search">
+                <svg className="ico t-sec" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
               </div>
-            ))}
+              <div className="plus">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+              </div>
+            </div>
 
-            {/* board tree */}
-            <div className="mt-1 flex flex-col gap-1.5 pl-1">
-              {['w-4/5', 'w-2/3', 'w-3/4', 'w-1/2', 'w-3/5', 'w-4/5', 'w-2/3'].map((w, i) => (
-                <div key={i} className="flex items-center gap-1.5">
-                  <Icon name="ChevronRight" className="h-2.5 w-2.5 text-(--color-text-secondary)" strokeWidth={2} />
-                  <Icon name="LayoutGrid" className="h-2.5 w-2.5 text-(--color-text-secondary)" strokeWidth={2} />
-                  <Bar className={w} />
-                </div>
+            {/* nav */}
+            <div className="nav">
+              <div className="nav-item">
+                <svg className="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+                <svg className="ico" width="18" height="18" viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z" fill="#9e9e9e" /></svg>
+                <div className="navbar" style={{ width: '64%' }} />
+              </div>
+              <div className="nav-item">
+                <span style={{ width: '14px' }} />
+                <svg className="ico" width="18" height="18" viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.5 6 .8-4.4 4.1 1.1 5.9L12 16.7 6.7 19.5l1.1-5.9L3.4 9.5l6-.8z" fill="#9e9e9e" /></svg>
+                <div className="navbar" style={{ width: '38%' }} />
+              </div>
+              <div className="nav-item active">
+                <span style={{ width: '14px' }} />
+                <GridIco accent />
+                <div className="navbar active" style={{ width: '55%' }} />
+              </div>
+              <div className="nav-item">
+                <svg className="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                <svg className="ico" width="18" height="18" viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z" fill="#9e9e9e" /></svg>
+                <div className="navbar" style={{ width: '34%' }} />
+              </div>
+              <div className="nav-item sub">
+                <GridIco fill="#bdbdbd" />
+                <div className="navbar" style={{ width: '46%' }} />
+              </div>
+              <div className="nav-item sub">
+                <GridIco fill="#bdbdbd" />
+                <div className="navbar" style={{ width: '33%' }} />
+              </div>
+
+              <div style={{ height: '6px' }} />
+
+              {/* board tree rows */}
+              {NAV_WIDTHS.map((w, i) => (
+                <TreeRow key={i} width={w} />
               ))}
             </div>
           </div>
+
+          {/* ── main board ── */}
+          <div className="main">
+            <div className="toolbar">
+              <span className="tool-pill">
+                <GridIco size={16} accent />
+                <div style={{ height: '8px', width: '56px', borderRadius: '9999px', background: 'var(--color-action-primary)' }} />
+              </span>
+              <div className="tool-right">
+                <span className="sq" /><span className="sq" /><span className="sq" /><span className="sq" /><span className="sq" />
+              </div>
+            </div>
+
+            <div className="board">
+              {/* swimlane: Цели */}
+              <div>
+                <div className="lane-head"><LaneGrip />Цели</div>
+                <div className="cols">
+                  {/* Очередь */}
+                  <div>
+                    <ColHead name="Очередь" />
+                    <div className="card cover-card col">
+                      <div className="card-cover gray-c" />
+                      <div className="card-body">
+                        <div className="accent a-violet" />
+                        <div className="cbar" style={{ width: '80%' }} />
+                        <div className="cbar mt6" style={{ width: '60%' }} />
+                      </div>
+                    </div>
+                  </div>
+                  {/* middle */}
+                  <div>
+                    <div className="spacer-head" />
+                    <div className="card cover-card col">
+                      <div className="card-cover violet-c" />
+                      <div className="card-body">
+                        <div className="accent a-orange" />
+                        <div className="cbar" style={{ width: '72%' }} />
+                        <div className="cbar mt6" style={{ width: '50%' }} />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Готово */}
+                  <div>
+                    <ColHead name="Готово" done />
+                    <div className="card col h155">
+                      <div className="accent a-yellow" />
+                      <div className="cbar" style={{ width: '100%' }} />
+                      <div className="cbar mt6" style={{ width: '84%' }} />
+                      <div className="blue-bar mt6" style={{ width: '100%' }} />
+                      <UsrCircle />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lane-divider" />
+
+              {/* swimlane: Текущие задачи */}
+              <div>
+                <div className="lane-head"><LaneGrip />Текущие задачи</div>
+                <div className="cols">
+                  {/* Очередь */}
+                  <div className="col">
+                    <ColHead name="Очередь" />
+                    <div className="card col h155">
+                      <div className="red-head">
+                        <span style={{ fontSize: '16px', lineHeight: 1 }}>✋</span>
+                        <div className="red-bar" />
+                      </div>
+                      <div className="accent a-green" style={{ width: '40px' }} />
+                      <div className="cbar" style={{ width: '72%' }} />
+                      <div className="cbar mt6" style={{ width: '50%' }} />
+                      <UsrCircle />
+                    </div>
+                  </div>
+                  {/* В работе */}
+                  <div className="col">
+                    <ColHead name="В работе" />
+                    <div className="card col h155">
+                      <div className="accent a-orange" />
+                      <div className="cbar" style={{ width: '100%' }} />
+                      <div className="cbar mt6" style={{ width: '66%' }} />
+                      <UsrCircle />
+                    </div>
+                  </div>
+                  {/* Готово */}
+                  <div className="col">
+                    <ColHead name="Готово" done />
+                    <div className="card col h155">
+                      <div className="accent a-orange" />
+                      <div className="cbar" style={{ width: '100%' }} />
+                      <div className="cbar mt6" style={{ width: '74%' }} />
+                      <div className="between">
+                        <UsrCircle />
+                        <span className="pill-fire">
+                          <span style={{ fontSize: '12px', lineHeight: 1 }}>🔥</span>
+                          <span className="red-bar" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── right rail ── */}
+          <div className="rail">
+            <svg className="ava"><use href="#avaicon" /></svg>
+            <span className="rail-sq" /><span className="rail-sq" /><span className="rail-sq" /><span className="rail-sq" />
+            <span className="rail-sq" /><span className="rail-sq" /><span className="rail-sq" />
+          </div>
         </div>
 
-        {/* ─── main board ──────────────────────────── */}
-        <div className="relative min-w-0 flex-1">
-          {/* toolbar */}
-          <div className="flex items-center justify-between border-b border-(--color-border-default) bg-(--color-surface-section) px-3 py-2">
-            <span className="inline-flex items-center gap-1.5 rounded-(--radius-lg) bg-(--color-action-primary-soft) px-2 py-1">
-              <Icon name="LayoutGrid" className="h-3 w-3 text-(--color-text-accent)" strokeWidth={2} />
-              <div className="h-1.5 w-10 rounded-full bg-(--color-action-primary)" />
+        {/* ── floating card ── */}
+        <div className="floating">
+          <div className="accent a-violet" />
+          <div className="title">Новая задача: Презентация<br />для акционеров</div>
+          <div className="fl-tags">
+            <span className="tag tag-peach">ООО Альфа</span>
+            <span className="tag tag-violet">Презентация</span>
+            <span className="tag tag-blue">Финансы</span>
+          </div>
+          <div className="fl-footer">
+            <span className="fl-meta">
+              <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+              3
             </span>
-            <div className="flex items-center gap-1.5">
-              {[0, 1, 2, 3].map((i) => (
-                <span key={i} className="h-5 w-5 rounded-(--radius-md) bg-(--color-neutral-200)" />
-              ))}
-              <Avatar className="h-6 w-6 border border-(--color-surface-card)" />
-            </div>
+            <span className="fl-meta">
+              <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
+              1
+            </span>
           </div>
-
-          <div className="space-y-3 p-3">
-            {/* swimlane: Цели */}
+          <div className="fl-assignee">
+            <svg className="ava" style={{ height: '40px', width: '40px' }}><use href="#avaicon" /></svg>
             <div>
-              <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-(--color-text-secondary)">
-                <Icon name="GripVertical" className="h-3 w-3" strokeWidth={2} />
-                Цели
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {/* Очередь */}
-                <div>
-                  <ColHead name="Очередь" count={1} />
-                  <div className="flex flex-col gap-2">
-                    <div className="flex h-20 items-start justify-start rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2">
-                      <Avatar className="h-8 w-8" />
-                    </div>
-                    <div className="relative overflow-hidden rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2">
-                      <div className={cn('mb-1.5 h-1 w-7 rounded-full', ACCENT.violet)} />
-                      <Bar className="w-full" />
-                      <Bar className="mt-1 w-2/3" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* middle */}
-                <div>
-                  <div className="mb-2 h-4" />
-                  <div className="flex flex-col gap-2">
-                    <div className="h-20 rounded-(--radius-lg) border border-(--color-action-primary)/30 bg-(--color-action-primary-soft)/60" />
-                    <div className="relative overflow-hidden rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2">
-                      <div className={cn('mb-1.5 h-1 w-7 rounded-full', ACCENT.orange)} />
-                      <Bar className="w-3/4" />
-                      <Bar className="mt-1 w-1/2" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Готово */}
-                <div>
-                  <ColHead name="Готово" count={1} tone="green" check />
-                  <div className="relative flex h-20 flex-col overflow-hidden rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2">
-                    <div className={cn('mb-1.5 h-1 w-7 rounded-full', ACCENT.yellow)} />
-                    <Bar className="w-full" />
-                    <Bar className="mt-1 w-5/6" />
-                    <div className="mt-1 h-1.5 w-2/3 rounded-full bg-(--color-blue-12)" />
-                    <span className="mt-auto inline-block h-4 w-4 rounded-full border border-(--color-border-default)" />
-                  </div>
-                </div>
-              </div>
+              <div className="fl-name">Алексей Смирнов</div>
             </div>
-
-            {/* swimlane: Текущие задачи */}
-            <div>
-              <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-(--color-text-secondary)">
-                <Icon name="GripVertical" className="h-3 w-3" strokeWidth={2} />
-                Текущие задачи
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {/* Очередь */}
-                <div className="flex flex-col">
-                  <ColHead name="Очередь" count={1} />
-                  <div className="relative flex-1 overflow-hidden rounded-(--radius-lg) border border-(--color-red-100)/30 bg-(--color-red-12) p-2">
-                    <div className="mb-1 flex items-center gap-1">
-                      <span className="text-[12px] leading-none">✋</span>
-                      <div className={cn('h-1 w-10 rounded-full', ACCENT.red)} />
-                    </div>
-                    <div className={cn('mb-1.5 h-1 w-6 rounded-full', ACCENT.green)} />
-                    <Bar className="w-3/4" />
-                    <Bar className="mt-1 w-1/2" />
-                  </div>
-                </div>
-
-                {/* В работе */}
-                <div className="flex flex-col">
-                  <ColHead name="В работе" count={1} />
-                  <div className="relative flex-1 overflow-hidden rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2">
-                    <div className={cn('mb-1.5 h-1 w-7 rounded-full', ACCENT.orange)} />
-                    <Bar className="w-full" />
-                    <Bar className="mt-1 w-2/3" />
-                  </div>
-                </div>
-
-                {/* Готово */}
-                <div className="flex flex-col">
-                  <ColHead name="Готово" count={1} tone="green" check />
-                  <div className="relative flex flex-1 flex-col overflow-hidden rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2">
-                    <div className={cn('mb-1.5 h-1 w-7 rounded-full', ACCENT.orange)} />
-                    <Bar className="w-full" />
-                    <Bar className="mt-1 w-3/4" />
-                    <div className="mt-auto flex items-center justify-between pt-2">
-                      <span className="inline-block h-4 w-4 rounded-full border border-(--color-border-default)" />
-                      <span className="inline-flex items-center gap-1 rounded-full bg-(--color-red-12) px-1.5 py-0.5">
-                        <span className="text-[9px] leading-none">🔥</span>
-                        <span className="h-1 w-6 rounded-full bg-(--color-red-100)" />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <span className="badge-urgent" style={{ marginLeft: 'auto' }}>🔥 Срочно</span>
           </div>
-
-        </div>
-      </div>
-      </div>
-
-      {/* floating card — вынесена за пределы окна, выходит за верхний край */}
-      <div className="absolute left-[48%] top-[-34px] w-[44%] rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-card) p-3 shadow-[0_24px_60px_-20px_rgba(125,76,207,0.45)]">
-        <div className={cn('mb-2 h-1 w-8 rounded-full', ACCENT.violet)} />
-        <div className="text-[13px] font-semibold leading-tight text-(--color-text-primary)">
-          Новая задача: Презентация для акционеров
-        </div>
-        <div className="mt-2.5 flex items-center justify-between">
-          <Avatar className="h-7 w-7" />
-          <span className="inline-flex items-center gap-1 rounded-full bg-(--color-red-12) px-2 py-1 text-[10px] font-semibold text-(--color-red-100)">
-            🔥 Срочно
-          </span>
         </div>
       </div>
     </div>

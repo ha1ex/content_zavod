@@ -14,6 +14,7 @@ import {
   BenefitsStrip,
   MetricsSplit,
   TabbedFeatureSection,
+  AccordionFeatureSection,
   ScenarioWalkthroughSection,
   IndustryPickerSection,
   ComparisonTable,
@@ -68,6 +69,8 @@ function RenderSection({ section }: { section: Section }) {
       return <MetricsSplit {...section.props} />;
     case 'TabbedFeatureSection':
       return <TabbedFeatureSection {...section.props} />;
+    case 'AccordionFeatureSection':
+      return <AccordionFeatureSection {...section.props} />;
     case 'ScenarioWalkthroughSection':
       return <ScenarioWalkthroughSection {...section.props} />;
     case 'IndustryPickerSection':

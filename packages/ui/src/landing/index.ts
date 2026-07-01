@@ -48,6 +48,11 @@ export type {
   TabbedFeatureSectionProps,
   TabbedFeatureTabProps,
 } from './TabbedFeatureSection';
+export { AccordionFeatureSection } from './AccordionFeatureSection';
+export type {
+  AccordionFeatureSectionProps,
+  AccordionFeatureItemProps,
+} from './AccordionFeatureSection';
 
 export { ScenarioWalkthroughSection } from './ScenarioWalkthroughSection';
 export type {

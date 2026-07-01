@@ -45,8 +45,8 @@ const PF_CARDS: PCard[][] = [
   [{ title: 'Объект 4', tags: [['DM', 'violet'], ['Yes', 'green'], ['Ежедневно в 00:05', 'orange']], date: '21.08.2024-31.08.2024', av: 2 }],
   [{ title: 'Объект 7', tags: [['Фундамент', 'orange']], av: 1 }, { title: 'Проект 9', tags: [['Монтаж', 'blue']], av: 2 }],
 ];
-const LEFT_BARS = [['Проект 1', '4 карточки'], ['Проект 2', '4 карточки'], ['Проект 3', '4 карточки']];
-const RIGHT_BARS = [['Проект 1 - Задачи', '6 карточек'], ['Проект 2 - Задачи', '8 карточек'], ['Проект 3 - Задачи', '4 карточки']];
+const LEFT_BARS: [string, string][] = [['Проект 1', '4 карточки'], ['Проект 2', '4 карточки'], ['Проект 3', '4 карточки']];
+const RIGHT_BARS: [string, string][] = [['Проект 1 - Задачи', '6 карточек'], ['Проект 2 - Задачи', '8 карточек'], ['Проект 3 - Задачи', '4 карточки']];
 
 function CountBadge({ n, tone }: { n: number | string; tone?: Tone }) { const t = tone ? TONE[tone] : ['#ededf0', '#6b6b70']; return <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-md px-1.5 text-[12px] font-semibold" style={{ background: t[0], color: t[1] }}>{n}</span>; }
 function CollapsedBar({ title, count }: { title: string; count: string }) {
@@ -106,7 +106,7 @@ export function ModulePortfolioMock() {
           {LEFT_BARS.map((b, i) => (
             <Fragment key={i}>
               <CollapsedBar title={b[0]} count={b[1]} />
-              <CollapsedBar title={RIGHT_BARS[i][0]} count={RIGHT_BARS[i][1]} />
+              <CollapsedBar title={RIGHT_BARS[i]![0]} count={RIGHT_BARS[i]![1]} />
             </Fragment>
           ))}
         </div>

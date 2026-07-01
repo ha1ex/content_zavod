@@ -145,10 +145,16 @@ export async function validateLandingLayoutConformance(
 
   // Проверяем, что все required секции присутствуют в нужном порядке (с допуском
   // на лишние между ними).
-  // Эквивалентность компонентов: официальный подвал LandingFooterMock
-  // удовлетворяет требование LandingFooter из layout-плейбука.
+  // Эквивалентность компонентов:
+  // - официальный подвал LandingFooterMock удовлетворяет требование LandingFooter;
+  // - интерактивные фиче-секции (TabbedFeatureSection / AccordionFeatureSection)
+  //   удовлетворяют требование MediaCopy — это их прямое назначение: свернуть
+  //   простынь из 3-5 MediaCopy в одну секцию.
+  const INTERACTIVE_MEDIA = new Set(['TabbedFeatureSection', 'AccordionFeatureSection']);
   const componentMatches = (actual: string, required: string) =>
-    actual === required || (required === 'LandingFooter' && actual === 'LandingFooterMock');
+    actual === required ||
+    (required === 'LandingFooter' && actual === 'LandingFooterMock') ||
+    (required === 'MediaCopy' && INTERACTIVE_MEDIA.has(actual));
 
   let cursor = 0;
   for (const req of requiredOnly) {
@@ -167,7 +173,11 @@ export async function validateLandingLayoutConformance(
       // Cursor не двигаем — следующие required будут искаться с того же места.
       continue;
     }
-    cursor = found + 1;
+    // Одна интерактивная фиче-секция закрывает несколько подряд идущих требований
+    // MediaCopy — не двигаем cursor за неё, чтобы следующий MediaCopy-req тоже сматчился.
+    const matched = spec.sections[found]!;
+    const coversMultiple = req.componentName === 'MediaCopy' && INTERACTIVE_MEDIA.has(matched.component);
+    cursor = coversMultiple ? found : found + 1;
   }
 
   return {

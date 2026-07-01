@@ -23,6 +23,7 @@ export interface ComponentEntry {
     | 'stats'
     | 'promo'
     | 'tabbed_feature'
+    | 'accordion_feature'
     | 'scenario_walkthrough'
     | 'industry_picker';
   description: string;
@@ -229,6 +230,30 @@ export const REGISTRY: ComponentEntry[] = [
         'Array<{ id: 1..40; label: 2..40; icon?: lucide-name; eyebrow?: <=80; title: 4..120; description?: <=400; checklist?: Array<{icon?, text: 2..180}> (<=6); primaryCta?: {label,href}; mockVariant: MockVariant }> (2..5)',
     },
     constraints: ['min_2_tabs', 'max_5_tabs', 'each_tab_has_unique_mockvariant_preferred'],
+  },
+  {
+    name: 'AccordionFeatureSection',
+    specComponent: 'AccordionFeatureSection',
+    sectionId: 'accordion_feature',
+    category: 'accordion_feature',
+    description:
+      'OPT-IN БЛОК: используй ТОЛЬКО если тип блока явно прописан в ТЗ. При генерации из brief или свободного запроса — НЕ использовать (разворачивай фичи через MediaCopy/TabbedFeatureSection). Секция «заголовок + аккордеон фич слева + синхронный mock справа + опц. CTA»: один пункт всегда раскрыт, при клике раскрывается его описание, а mock справа меняется под активный пункт. Вертикальная альтернатива TabbedFeatureSection: удобно, когда 3-5 фич и у каждой свой интерфейсный mock. Каждый пункт обязан указывать mockVariant из общего реестра mock\'ов.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120)',
+      description: 'string (<=280) | undefined',
+      items:
+        'Array<{ id: 1..40; title: 4..90; description: 10..400; icon?: lucide-name; mockVariant: MockVariant }> (2..5)',
+      primaryCta: '{label,href} | undefined',
+      secondaryCta: '{label,href} | undefined',
+      mediaPosition: "'left' | 'right' | undefined (default 'right')",
+    },
+    constraints: [
+      'opt_in_only_if_specified_in_tz',
+      'min_2_items',
+      'max_5_items',
+      'each_item_has_unique_mockvariant_preferred',
+    ],
   },
   {
     name: 'ScenarioWalkthroughSection',

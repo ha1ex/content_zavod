@@ -36,10 +36,7 @@ sections:
   - hero
   - benefits_strip
   - social_proof
-  - media_copy
-  - media_copy
-  - media_copy
-  - media_copy
+  - accordion_feature
   - features
   - media_copy
   - features
@@ -52,7 +49,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 42957
+tokenEstimate: 46193
 tags:
   - landing
   - saas_landing
@@ -65,8 +62,8 @@ stale: false
 - **brief:** `content/briefs/kaiten-finance.json`
 - **archetype:** `enterprise_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать Кайтен")
-- **sections used:** `site_header, hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, media_copy, features, media_copy, features, process, features, promo_banner, pricing, faq, final_cta, kaiten_footer`
-- **token estimate:** `42957`
+- **sections used:** `site_header, hero, benefits_strip, social_proof, accordion_feature, features, media_copy, features, process, features, promo_banner, pricing, faq, final_cta, kaiten_footer`
+- **token estimate:** `46193`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -116,16 +113,7 @@ stale: false
 ### social_proof (SocialProof)
 
 
-### media_copy (MediaCopy)
-
-
-### media_copy (MediaCopy)
-
-
-### media_copy (MediaCopy)
-
-
-### media_copy (MediaCopy)
+### accordion_feature (AccordionFeatureSection)
 
 
 ### features (FeatureGrid)
@@ -203,7 +191,7 @@ stale: false
 - **Score:** 85.34 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** Финансы, IT
 - **CTA types detected:** Trial, Demo, Unknown
-- **Generated:** 2026-07-01T06:42:23.954Z
+- **Generated:** 2026-07-01T08:22:15.932Z
 
 ## Breakdown
 

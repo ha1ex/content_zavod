@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-01T07:26:27.186Z",
+  "updatedAt": "2026-07-01T08:22:15.948Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -262,6 +262,24 @@
       "sectionIdx": 8,
       "domain": "crm",
       "recordedAt": "2026-07-01T07:26:27.186Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "portfolio-board",
+      "landingSlug": "kaiten-finance",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-07-01T08:22:15.948Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "kb-internal",
+      "landingSlug": "kaiten-finance",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-07-01T08:22:15.948Z"
     }
   ]
 }

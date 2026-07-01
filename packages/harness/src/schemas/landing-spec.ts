@@ -594,6 +594,32 @@ const TabbedFeatureSectionSchema = z.object({
   }),
 });
 
+/* ─── AccordionFeatureSection ─────────────────────────────────────── */
+const AccordionFeatureSectionSchema = z.object({
+  id: z.literal('accordion_feature'),
+  component: z.literal('AccordionFeatureSection'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    items: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(40),
+          title: z.string().min(4).max(90),
+          description: z.string().min(10).max(400),
+          icon: z.string().optional(),
+          mockVariant: MockVariantSchema,
+        }),
+      )
+      .min(2)
+      .max(5),
+    primaryCta: CtaSchema.optional(),
+    secondaryCta: CtaSchema.optional(),
+    mediaPosition: z.enum(['left', 'right']).optional(),
+  }),
+});
+
 /* ─── ScenarioWalkthroughSection ──────────────────────────────────── */
 const ScenarioWalkthroughSectionSchema = z.object({
   id: z.literal('scenario_walkthrough'),
@@ -708,6 +734,7 @@ export const SectionSchema = z.discriminatedUnion('component', [
   BenefitsStripSchema,
   MetricsSplitSchema,
   TabbedFeatureSectionSchema,
+  AccordionFeatureSectionSchema,
   ScenarioWalkthroughSectionSchema,
   IndustryPickerSectionSchema,
   ComparisonTableSchema,

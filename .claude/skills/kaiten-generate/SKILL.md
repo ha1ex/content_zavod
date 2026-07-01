@@ -154,8 +154,8 @@ status `awaiting-host-agent` и пишет prompt в
 
 You are the LLM. From the brief + system prompt + layout playbook, write ONE JSON object matching `LandingSpec`. Constraints to remember:
 
-- `sections[0].id === "hero"` and uses `HeroSection`.
-- `sections[last].id === "footer"` and uses `LandingFooter` (if present).
+- **Chrome (шапка/подвал) авторить НЕ нужно.** `agent apply` сам подставит статичную шапку kaiten.ru (`SiteHeader`) первой секцией и статичный подвал kaiten.ru (`LandingFooterMock`) — последней (нормализация `factory-chrome`). Любые `SiteHeader` / `LandingFooter` / `LandingFooterMock`, написанные вручную, отбрасываются; состав ссылок в подвале не сочиняется. **Начинай spec с `HeroSection`, заканчивай последним контентным блоком** — без header/footer.
+- Твоя первая секция — `HeroSection` (после инъекции она станет второй, сразу за `SiteHeader`). Правило `hero-first` = «Hero сразу за шапкой».
 - Exactly one `HeroSection`. At most one `FinalCta`. At most one `highlighted: true` plan.
 - All `href` values start with `http(s)://`, `/`, or `#`.
 - Primary CTA copy aligns with the brief's `cta` (or `primaryGoal`).
@@ -163,7 +163,7 @@ You are the LLM. From the brief + system prompt + layout playbook, write ONE JSO
 - Title/subtitle/description length limits per the schema (e.g. title 4..80, subtitle 10..200).
 - Follow `wiki/layouts/<slug>.md` table — порядок секций обязателен. Layout-conformance валидатор провалит spec, если порядок required секций нарушен.
 - **Set `spec.meta.layout`** to the chosen layout slug (так apply сохранит его в досье и в дальнейших проверках).
-- Доступные components (актуальный список см. `pnpm -w run harness registry`): `HeroSection`, `FeatureGrid`, `PricingPlans`, `FAQAccordion`, `FinalCta`, `LandingFooter`, `SocialProof`, `ProcessSteps`, `CtaBanner`, `MediaCopy`, `StatStrip`, `PromoBanner`, `BenefitsStrip`, `MetricsSplit`.
+- Доступные components для тела страницы (актуальный список см. `pnpm -w run harness registry`): `HeroSection`, `FeatureGrid`, `PricingPlans`, `FAQAccordion`, `FinalCta`, `SocialProof`, `ProcessSteps`, `CtaBanner`, `MediaCopy`, `StatStrip`, `PromoBanner`, `BenefitsStrip`, `MetricsSplit`. Chrome (`SiteHeader`, `LandingFooterMock`) в тело не добавляй — он инъектируется автоматически.
 
 Write the JSON to `content/landings/<slug>.json` (это требование фазы P6; копия артефакта — в `.context/pipeline/<slug>/`).
 

@@ -170,6 +170,22 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
 
   const spec: LandingSpec = parseResult.data;
 
+  // ── Контент-завод chrome (правило factory-chrome) ───────────────────
+  // Каждая страница фабрики получает статичную шапку kaiten.ru (SiteHeader)
+  // первой секцией и статичный подвал kaiten.ru (LandingFooterMock) — последней.
+  // Любые header/footer, написанные host-агентом (в т.ч. кастомный LandingFooter
+  // с придуманными ссылками), отбрасываются: состав подвала не сочиняется,
+  // ставится «как есть». После шапки всегда идёт Hero.
+  {
+    const CHROME = new Set(['SiteHeader', 'LandingFooter', 'LandingFooterMock']);
+    const body = spec.sections.filter((s) => !CHROME.has(s.component));
+    spec.sections = [
+      { id: 'site_header', component: 'SiteHeader', props: {} },
+      ...body,
+      { id: 'kaiten_footer', component: 'LandingFooterMock', props: {} },
+    ] as LandingSpec['sections'];
+  }
+
   let brief: Brief | undefined;
   if (opts.briefPath) {
     const briefAbs = resolve(opts.root, opts.briefPath);

@@ -48,6 +48,8 @@ import {
   MeetListMock,
   CTAmainMock,
   PmBoard1Mock,
+  ModulePortfolioMock,
+  ApprovalBoardMock,
 } from '.';
 
 /**
@@ -116,7 +118,10 @@ export type MockVariant =
   | 'vks-artifact-flow'
   | 'meeting-room'
   | 'meet-list'
-  | 'pm-board-1';
+  | 'pm-board-1'
+  // Финансы / портфель
+  | 'portfolio-board'
+  | 'approval-board';
 
 export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
   switch (variant) {
@@ -218,6 +223,10 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <MeetListMock />;
     case 'pm-board-1':
       return <PmBoard1Mock />;
+    case 'portfolio-board':
+      return <ModulePortfolioMock />;
+    case 'approval-board':
+      return <ApprovalBoardMock />;
     default:
       return null;
   }

@@ -71,21 +71,27 @@ export function validateLandingBusiness(spec: LandingSpec, brief?: Brief): Landi
     return { ok: false, errors: [{ rule: 'hero-first', message: 'Пустой sections — нужен минимум hero.' }] };
   }
 
-  // hero-first
-  if (sections[0]!.component !== 'HeroSection') {
+  // hero-first (допускается опциональная секция SiteHeader перед hero)
+  const heroFirst =
+    sections[0]!.component === 'HeroSection' ||
+    (sections[0]!.component === 'SiteHeader' && sections[1]?.component === 'HeroSection');
+  if (!heroFirst) {
     errors.push({
       rule: 'hero-first',
-      message: `Первая секция — ${sections[0]!.component}, ожидается HeroSection.`,
+      message: `Первая секция — ${sections[0]!.component}, ожидается HeroSection (допустим SiteHeader перед hero).`,
       where: 'sections[0]',
     });
   }
 
-  // footer-last (только если footer присутствует)
+  // footer-last (только если footer присутствует; LandingFooter или LandingFooterMock)
   const counts = countByComponent(sections);
-  if (counts.get('LandingFooter') && sections[sections.length - 1]!.component !== 'LandingFooter') {
+  const FOOTER_COMPONENTS = ['LandingFooter', 'LandingFooterMock'];
+  const hasFooter = FOOTER_COMPONENTS.some((c) => counts.get(c));
+  const lastIsFooter = FOOTER_COMPONENTS.includes(sections[sections.length - 1]!.component);
+  if (hasFooter && !lastIsFooter) {
     errors.push({
       rule: 'footer-last',
-      message: 'LandingFooter должен быть последней секцией.',
+      message: 'Подвал (LandingFooter / LandingFooterMock) должен быть последней секцией.',
       where: `sections[${sections.length - 1}]`,
     });
   }

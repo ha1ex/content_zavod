@@ -3,6 +3,11 @@
   "goal": "try_free",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
@@ -383,99 +388,9 @@
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "Кайтен",
-        "brandTagline": "Российская платформа для команд: задачи, поддержка, документы и база знаний.",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              {
-                "label": "Служба поддержки",
-                "href": "/support"
-              },
-              {
-                "label": "Задачи команды",
-                "href": "/tasks"
-              },
-              {
-                "label": "Документы",
-                "href": "/docs"
-              },
-              {
-                "label": "База знаний",
-                "href": "/knowledge"
-              }
-            ]
-          },
-          {
-            "title": "Решения",
-            "links": [
-              {
-                "label": "Техподдержка",
-                "href": "/solutions/support"
-              },
-              {
-                "label": "HR-служба",
-                "href": "/solutions/hr"
-              },
-              {
-                "label": "Юридический отдел",
-                "href": "/solutions/legal"
-              },
-              {
-                "label": "Разработка",
-                "href": "/solutions/dev"
-              }
-            ]
-          },
-          {
-            "title": "Ресурсы",
-            "links": [
-              {
-                "label": "Кейсы клиентов",
-                "href": "/cases"
-              },
-              {
-                "label": "Справочный центр",
-                "href": "/help"
-              },
-              {
-                "label": "Блог",
-                "href": "/blog"
-              },
-              {
-                "label": "Шаблоны досок",
-                "href": "/templates"
-              }
-            ]
-          },
-          {
-            "title": "Компания",
-            "links": [
-              {
-                "label": "О сервисе",
-                "href": "/about"
-              },
-              {
-                "label": "Контакты",
-                "href": "/contact"
-              },
-              {
-                "label": "Карьера",
-                "href": "/careers"
-              },
-              {
-                "label": "Условия использования",
-                "href": "/legal/terms"
-              }
-            ]
-          }
-        ],
-        "copyright": "© 2026 Кайтен. Российская служба для команд."
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
@@ -485,6 +400,9 @@
   "illustrationSpecs": [],
   "meta": {
     "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
       "wiki/design-system/voice.md",
       "wiki/design-system/colors.md",
       "wiki/design-system/typography.md",
@@ -501,11 +419,14 @@
       "wiki/design-system/components/footer.md",
       "wiki/design-system/components/button.md",
       "wiki/archetypes/saas_landing.md",
-      "packages/harness/src/skills/conversion-landing.md"
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-05-15T19:43:57.266Z",
+    "generatedAt": "2026-07-01T06:53:01.179Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
-    "tokenEstimate": 15165
+    "tokenEstimate": 42893,
+    "domain": "support"
   }
 }

@@ -3,15 +3,29 @@
   "goal": "book_demo",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
         "eyebrow": "AI harness для продуктовых команд",
         "title": "Превратите бриф в готовый лендинг за минуту",
         "subtitle": "Контент-завод Кайтен собирает страницу из ваших компонентов, проверяет тон и отдаёт TSX-файл, который разработчик может коммитить как есть.",
-        "primaryCta": { "label": "Получить демо", "href": "/demo" },
-        "secondaryCta": { "label": "Как это работает", "href": "#how-it-works" },
-        "visual": { "type": "product_screenshot", "assetId": "harness-dashboard-v1" }
+        "primaryCta": {
+          "label": "Получить демо",
+          "href": "/demo"
+        },
+        "secondaryCta": {
+          "label": "Как это работает",
+          "href": "#how-it-works"
+        },
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "harness-dashboard-v1"
+        }
       }
     },
     {
@@ -21,12 +35,24 @@
         "eyebrow": "Почему Контент-завод Кайтен",
         "title": "Лендинги, которые остаются в вашем бренде",
         "description": "Никаких выдуманных компонентов и hype-копирайта. Только то, что есть в вашей дизайн-системе.",
-        "columns": 3,
         "items": [
-          { "icon": "Sparkles", "title": "На ваших компонентах", "description": "Модель собирает страницу из утверждённого Storybook-каталога, ничего не выдумывает." },
-          { "icon": "Shield", "title": "Tone of voice", "description": "Brand-валидатор отлавливает запрещённые слова и неподтверждённые обещания до публикации." },
-          { "icon": "Zap", "title": "Repair-loop", "description": "Если что-то не сошлось — модель исправляет именно проблемные секции, а не переписывает всё заново." }
-        ]
+          {
+            "icon": "Sparkles",
+            "title": "На ваших компонентах",
+            "description": "Модель собирает страницу из утверждённого Storybook-каталога, ничего не выдумывает."
+          },
+          {
+            "icon": "Shield",
+            "title": "Tone of voice",
+            "description": "Brand-валидатор отлавливает запрещённые слова и неподтверждённые обещания до публикации."
+          },
+          {
+            "icon": "Zap",
+            "title": "Repair-loop",
+            "description": "Если что-то не сошлось — модель исправляет именно проблемные секции, а не переписывает всё заново."
+          }
+        ],
+        "columns": 3
       }
     },
     {
@@ -41,24 +67,51 @@
             "price": "$0",
             "pricePeriod": "месяц",
             "description": "Для команд, которые хотят попробовать",
-            "features": ["До 3 черновиков в месяц", "Базовый registry", "Manual handoff в ZIP"],
-            "cta": { "label": "Начать бесплатно", "href": "/signup" }
+            "features": [
+              "До 3 черновиков в месяц",
+              "Базовый registry",
+              "Manual handoff в ZIP"
+            ],
+            "cta": {
+              "label": "Начать бесплатно",
+              "href": "/signup"
+            },
+            "highlighted": false
           },
           {
             "name": "Team",
             "price": "$49",
             "pricePeriod": "месяц",
             "description": "Для продуктовой команды",
-            "features": ["Безлимитные черновики", "Кастомный registry", "Approve UI", "SVG hero generator", "Priority repair-loop"],
-            "cta": { "label": "Получить демо", "href": "/demo" },
+            "features": [
+              "Безлимитные черновики",
+              "Кастомный registry",
+              "Approve UI",
+              "SVG hero generator",
+              "Priority repair-loop"
+            ],
+            "cta": {
+              "label": "Получить демо",
+              "href": "/demo"
+            },
             "highlighted": true
           },
           {
             "name": "Enterprise",
             "price": "По запросу",
             "description": "Для платформенных команд",
-            "features": ["Self-host", "SSO", "Audit log", "Custom validators", "SLA"],
-            "cta": { "label": "Связаться", "href": "/contact" }
+            "features": [
+              "Self-host",
+              "SSO",
+              "Audit log",
+              "Custom validators",
+              "SLA"
+            ],
+            "cta": {
+              "label": "Связаться",
+              "href": "/contact"
+            },
+            "highlighted": false
           }
         ]
       }
@@ -69,9 +122,18 @@
       "props": {
         "title": "Частые вопросы",
         "items": [
-          { "question": "Это просто обёртка над ChatGPT?", "answer": "Нет. Это контур вокруг LLM с registry, валидаторами, repair-loop и handoff. Модель работает внутри жёстких рамок вашей дизайн-системы." },
-          { "question": "Что если в registry нет нужного компонента?", "answer": "Добавьте его в @kaiten/ui — модель сразу его увидит через registry. Никаких изменений в промпте не нужно." },
-          { "question": "Я могу использовать свой провайдер LLM?", "answer": "Да, провайдер переключается через env-переменную AI_PROVIDER (anthropic / openai). По умолчанию идём через Vercel AI Gateway если есть OIDC-токен." }
+          {
+            "question": "Это просто обёртка над ChatGPT?",
+            "answer": "Нет. Это контур вокруг LLM с registry, валидаторами, repair-loop и handoff. Модель работает внутри жёстких рамок вашей дизайн-системы."
+          },
+          {
+            "question": "Что если в registry нет нужного компонента?",
+            "answer": "Добавьте его в @kaiten/ui — модель сразу его увидит через registry. Никаких изменений в промпте не нужно."
+          },
+          {
+            "question": "Я могу использовать свой провайдер LLM?",
+            "answer": "Да, провайдер переключается через env-переменную AI_PROVIDER (anthropic / openai). По умолчанию идём через Vercel AI Gateway если есть OIDC-токен."
+          }
         ]
       }
     },
@@ -81,38 +143,27 @@
       "props": {
         "title": "Сэкономьте неделю на следующем лендинге",
         "description": "Бриф → готовый TSX за минуту. Получите доступ к закрытой beta.",
-        "primaryCta": { "label": "Записаться в beta", "href": "/beta" }
+        "primaryCta": {
+          "label": "Записаться в beta",
+          "href": "/beta"
+        }
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "Контент-завод Кайтен",
-        "brandTagline": "AI harness для генерации лендингов в вашей дизайн-системе.",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              { "label": "Возможности", "href": "/features" },
-              { "label": "Pricing", "href": "/pricing" },
-              { "label": "Changelog", "href": "/changelog" }
-            ]
-          },
-          {
-            "title": "Команда",
-            "links": [
-              { "label": "О нас", "href": "/about" },
-              { "label": "Контакты", "href": "/contact" }
-            ]
-          }
-        ]
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
     "title": "Контент-завод Кайтен — AI harness для SaaS-лендингов",
     "description": "Превращайте брифы в готовые TSX-лендинги, собранные из вашей дизайн-системы. Со встроенными валидаторами и repair loop."
   },
-  "illustrationSpecs": []
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [],
+    "generatedAt": "2026-07-01T06:54:41.964Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing"
+  }
 }

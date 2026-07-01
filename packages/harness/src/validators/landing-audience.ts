@@ -364,7 +364,8 @@ function checkMustPass(
 
   // IT
   if (resolved.includes('IT')) {
-    const heroCta = (spec.sections[0]?.props as { primaryCta?: { label?: string; href?: string } })?.primaryCta;
+    const heroSection = spec.sections.find((s) => s.component === 'HeroSection');
+    const heroCta = (heroSection?.props as { primaryCta?: { label?: string; href?: string } })?.primaryCta;
     const heroCtaType = heroCta?.label && heroCta?.href ? classifyCta(heroCta.label, heroCta.href) : 'Unknown';
     const hasCompare = coveredIds.has('compare') || coveredIds.has('migrate-jira');
     if (!hasCompare && heroCtaType !== 'Trial') {

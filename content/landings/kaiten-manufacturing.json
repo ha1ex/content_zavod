@@ -3,6 +3,11 @@
   "goal": "try_free",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
@@ -391,99 +396,9 @@
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "Кайтен",
-        "brandTagline": "Российская платформа управления работой команды: задачи, документы, поддержка и процессы в одной системе.",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              {
-                "label": "Производство",
-                "href": "/manufacturing"
-              },
-              {
-                "label": "Задачи команды",
-                "href": "/tasks"
-              },
-              {
-                "label": "Диаграмма Ганта",
-                "href": "/gantt"
-              },
-              {
-                "label": "База знаний",
-                "href": "/knowledge"
-              }
-            ]
-          },
-          {
-            "title": "Решения",
-            "links": [
-              {
-                "label": "Машиностроение",
-                "href": "/solutions/machinery"
-              },
-              {
-                "label": "Металлообработка",
-                "href": "/solutions/metalworking"
-              },
-              {
-                "label": "Приборостроение",
-                "href": "/solutions/devices"
-              },
-              {
-                "label": "Контрактное производство",
-                "href": "/solutions/contract"
-              }
-            ]
-          },
-          {
-            "title": "Ресурсы",
-            "links": [
-              {
-                "label": "Кейсы клиентов",
-                "href": "/cases"
-              },
-              {
-                "label": "Шаблоны процессов",
-                "href": "/templates"
-              },
-              {
-                "label": "Справочный центр",
-                "href": "/help"
-              },
-              {
-                "label": "Блог",
-                "href": "/blog"
-              }
-            ]
-          },
-          {
-            "title": "Компания",
-            "links": [
-              {
-                "label": "О сервисе",
-                "href": "/about"
-              },
-              {
-                "label": "Контакты",
-                "href": "/contact"
-              },
-              {
-                "label": "Карьера",
-                "href": "/careers"
-              },
-              {
-                "label": "Условия использования",
-                "href": "/legal/terms"
-              }
-            ]
-          }
-        ],
-        "copyright": "© 2026 Кайтен. Российская служба для производственных команд."
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
@@ -493,6 +408,9 @@
   "illustrationSpecs": [],
   "meta": {
     "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
       "wiki/design-system/voice.md",
       "wiki/design-system/colors.md",
       "wiki/design-system/typography.md",
@@ -514,11 +432,11 @@
       "wiki/layouts/single-module-deep-dive.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-05-27T15:59:25.297Z",
+    "generatedAt": "2026-07-01T06:52:59.496Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "single-module-deep-dive",
-    "tokenEstimate": 15165,
+    "tokenEstimate": 42893,
     "domain": "manufacturing"
   }
 }

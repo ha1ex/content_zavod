@@ -2,7 +2,7 @@
 slug: kaiten-manufacturing
 type: landing
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-07-01
 status: draft
 brief: content/briefs/kaiten-manufacturing.json
 archetype: saas_landing
@@ -28,7 +28,11 @@ sources:
   - packages/harness/src/prompts/section-mock-skill.md
   - wiki/layouts/single-module-deep-dive.md
   - wiki/layouts/index.md
+  - wiki/brand/redpolitika.md
+  - wiki/references/kaiten-product-facts.md
+  - wiki/references/anglicism-dictionary.md
 sections:
+  - site_header
   - hero
   - benefits_strip
   - social_proof
@@ -42,10 +46,10 @@ sections:
   - features
   - faq
   - final_cta
-  - footer
+  - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 15165
+tokenEstimate: 42893
 tags:
   - landing
   - saas_landing
@@ -58,12 +62,15 @@ stale: false
 - **brief:** `content/briefs/kaiten-manufacturing.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать Кайтен бесплатно")
-- **sections used:** `hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, media_copy, promo_banner, metrics_split, process, features, faq, final_cta, footer`
-- **token estimate:** `15165`
+- **sections used:** `site_header, hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, media_copy, promo_banner, metrics_split, process, features, faq, final_cta, kaiten_footer`
+- **token estimate:** `42893`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
 **Sources (использованы в системном промпте):**
+- `wiki/brand/redpolitika.md`
+- `wiki/references/kaiten-product-facts.md`
+- `wiki/references/anglicism-dictionary.md`
 - `wiki/design-system/voice.md`
 - `wiki/design-system/colors.md`
 - `wiki/design-system/typography.md`
@@ -89,6 +96,9 @@ stale: false
 ## Sections
 
 <!-- gen:sections-summary -->
+### site_header (SiteHeader)
+
+
 ### hero (HeroSection)
 
 - **title:** "Производство под контролем без планёрок и ручного контроля"
@@ -151,10 +161,7 @@ stale: false
 - **title:** "Управляйте производством без хаоса и ручного контроля"
 - **primaryCta:** "Попробовать Кайтен бесплатно" → `/signup`
 
-### footer (LandingFooter)
-
-- **brand:** "Кайтен"
-- **columns:** 4
+### kaiten_footer (LandingFooterMock)
 <!-- /gen:sections-summary -->
 
 ## Audience score
@@ -165,7 +172,7 @@ stale: false
 - **Score:** 84.65 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo, PDF, Unknown
-- **Generated:** 2026-05-27T15:59:25.291Z
+- **Generated:** 2026-07-01T06:52:59.490Z
 
 ## Breakdown
 

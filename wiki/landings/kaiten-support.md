@@ -2,7 +2,7 @@
 slug: kaiten-support
 type: landing
 created: 2026-05-15
-updated: 2026-05-16
+updated: 2026-07-01
 status: draft
 brief: content/briefs/kaiten-support.json
 archetype: saas_landing
@@ -25,7 +25,13 @@ sources:
   - wiki/design-system/components/button.md
   - wiki/archetypes/saas_landing.md
   - packages/harness/src/skills/conversion-landing.md
+  - wiki/brand/redpolitika.md
+  - wiki/references/kaiten-product-facts.md
+  - wiki/references/anglicism-dictionary.md
+  - packages/harness/src/prompts/section-mock-skill.md
+  - wiki/layouts/index.md
 sections:
+  - site_header
   - hero
   - benefits_strip
   - social_proof
@@ -39,10 +45,10 @@ sections:
   - features
   - faq
   - promo_banner
-  - footer
+  - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 15165
+tokenEstimate: 42893
 tags:
   - landing
   - saas_landing
@@ -55,12 +61,15 @@ stale: false
 - **brief:** `content/briefs/kaiten-support.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, media_copy, promo_banner, metrics_split, process, features, faq, promo_banner, footer`
-- **token estimate:** `15165`
+- **sections used:** `site_header, hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, media_copy, promo_banner, metrics_split, process, features, faq, promo_banner, kaiten_footer`
+- **token estimate:** `42893`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
 **Sources (использованы в системном промпте):**
+- `wiki/brand/redpolitika.md`
+- `wiki/references/kaiten-product-facts.md`
+- `wiki/references/anglicism-dictionary.md`
 - `wiki/design-system/voice.md`
 - `wiki/design-system/colors.md`
 - `wiki/design-system/typography.md`
@@ -78,11 +87,16 @@ stale: false
 - `wiki/design-system/components/button.md`
 - `wiki/archetypes/saas_landing.md`
 - `packages/harness/src/skills/conversion-landing.md`
+- `packages/harness/src/prompts/section-mock-skill.md`
+- `wiki/layouts/index.md`
 <!-- /gen:spec-meta -->
 
 ## Sections
 
 <!-- gen:sections-summary -->
+### site_header (SiteHeader)
+
+
 ### hero (HeroSection)
 
 - **title:** "Служба поддержки без потерянных заявок и разбросанных чатов"
@@ -146,10 +160,7 @@ stale: false
 ### promo_banner (PromoBanner)
 
 
-### footer (LandingFooter)
-
-- **brand:** "Кайтен"
-- **columns:** 4
+### kaiten_footer (LandingFooterMock)
 <!-- /gen:sections-summary -->
 
 ## Lessons (LLM-extract)
@@ -170,7 +181,7 @@ _(заполняется через `harness ingest feedback <slug> "<note>"`)_
 - **Score:** 79.89 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo, Unknown
-- **Generated:** 2026-05-16T04:32:14.442Z
+- **Generated:** 2026-07-01T06:53:01.174Z
 
 ## Breakdown
 

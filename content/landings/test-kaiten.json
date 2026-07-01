@@ -3,6 +3,11 @@
   "goal": "book_demo",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
@@ -175,66 +180,9 @@
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "Контент-завод Кайтен",
-        "brandTagline": "Фабрика лендингов на вашей дизайн-системе.",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              {
-                "label": "Обзор",
-                "href": "/"
-              },
-              {
-                "label": "Тарифы",
-                "href": "#pricing"
-              },
-              {
-                "label": "FAQ",
-                "href": "#faq"
-              },
-              {
-                "label": "Документация",
-                "href": "/docs"
-              }
-            ]
-          },
-          {
-            "title": "Команда",
-            "links": [
-              {
-                "label": "О нас",
-                "href": "/about"
-              },
-              {
-                "label": "Контакты",
-                "href": "/contact"
-              },
-              {
-                "label": "Карьера",
-                "href": "/careers"
-              }
-            ]
-          },
-          {
-            "title": "Юридическое",
-            "links": [
-              {
-                "label": "Условия использования",
-                "href": "/legal/terms"
-              },
-              {
-                "label": "Политика конфиденциальности",
-                "href": "/legal/privacy"
-              }
-            ]
-          }
-        ],
-        "copyright": "© 2026 Контент-завод Кайтен. Все права защищены."
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
@@ -243,28 +191,9 @@
   },
   "illustrationSpecs": [],
   "meta": {
-    "sources": [
-      "wiki/design-system/voice.md",
-      "wiki/design-system/colors.md",
-      "wiki/design-system/typography.md",
-      "wiki/design-system/spacing.md",
-      "wiki/design-system/radius.md",
-      "wiki/design-system/motion.md",
-      "wiki/design-system/grid.md",
-      "wiki/design-system/components/hero.md",
-      "wiki/design-system/components/feature-grid.md",
-      "wiki/design-system/components/pricing.md",
-      "wiki/design-system/components/faq.md",
-      "wiki/design-system/components/accordion.md",
-      "wiki/design-system/components/final-cta.md",
-      "wiki/design-system/components/footer.md",
-      "wiki/design-system/components/button.md",
-      "wiki/archetypes/saas_landing.md",
-      "packages/harness/src/skills/conversion-landing.md"
-    ],
-    "generatedAt": "2026-05-15T18:52:29.620Z",
+    "sources": [],
+    "generatedAt": "2026-07-01T06:54:42.947Z",
     "generator": "host-agent",
-    "archetype": "saas_landing",
-    "tokenEstimate": 15165
+    "archetype": "saas_landing"
   }
 }

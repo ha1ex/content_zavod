@@ -3,6 +3,11 @@
   "goal": "try_free",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
@@ -486,82 +491,9 @@
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "База знаний",
-        "brandTagline": "Документы, инструкции и регламенты команды в едином пространстве",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              {
-                "label": "Возможности",
-                "href": "#features"
-              },
-              {
-                "label": "Шаблоны",
-                "href": "#templates"
-              },
-              {
-                "label": "Сценарии",
-                "href": "#scenarios"
-              },
-              {
-                "label": "Безопасность",
-                "href": "#security"
-              }
-            ]
-          },
-          {
-            "title": "Решения",
-            "links": [
-              {
-                "label": "Для HR и онбординга",
-                "href": "#hr"
-              },
-              {
-                "label": "Для продукта",
-                "href": "#product"
-              },
-              {
-                "label": "Для разработчиков",
-                "href": "#dev"
-              },
-              {
-                "label": "Для маркетинга",
-                "href": "#marketing"
-              },
-              {
-                "label": "Для поддержки",
-                "href": "#support"
-              }
-            ]
-          },
-          {
-            "title": "Помощь",
-            "links": [
-              {
-                "label": "Документация",
-                "href": "#docs"
-              },
-              {
-                "label": "Перенос из других сервисов",
-                "href": "#import"
-              },
-              {
-                "label": "Частые вопросы",
-                "href": "#faq"
-              },
-              {
-                "label": "Связаться с нами",
-                "href": "#contact"
-              }
-            ]
-          }
-        ],
-        "copyright": "© 2026. Все права защищены."
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
@@ -571,6 +503,9 @@
   "illustrationSpecs": [],
   "meta": {
     "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
       "wiki/design-system/voice.md",
       "wiki/design-system/colors.md",
       "wiki/design-system/typography.md",
@@ -592,11 +527,11 @@
       "wiki/layouts/depersonalized-product-tour.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-05-16T07:47:28.524Z",
+    "generatedAt": "2026-07-01T06:53:02.046Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "depersonalized-product-tour",
-    "tokenEstimate": 15165,
+    "tokenEstimate": 42893,
     "domain": "docs"
   }
 }

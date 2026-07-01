@@ -2,7 +2,7 @@
 slug: kaiten-platform
 type: landing
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-07-01
 status: draft
 brief: content/briefs/kaiten-platform.json
 archetype: saas_landing
@@ -28,7 +28,11 @@ sources:
   - packages/harness/src/prompts/section-mock-skill.md
   - wiki/layouts/index.md
   - wiki/layouts/enterprise-modular-saas.md
+  - wiki/brand/redpolitika.md
+  - wiki/references/kaiten-product-facts.md
+  - wiki/references/anglicism-dictionary.md
 sections:
+  - site_header
   - hero
   - benefits_strip
   - social_proof
@@ -44,10 +48,10 @@ sections:
   - pricing
   - faq
   - final_cta
-  - footer
+  - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 15165
+tokenEstimate: 42893
 tags:
   - landing
   - saas_landing
@@ -60,12 +64,15 @@ stale: false
 - **brief:** `content/briefs/kaiten-platform.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, stats, features, media_copy, media_copy, process, promo_banner, pricing, faq, final_cta, footer`
-- **token estimate:** `15165`
+- **sections used:** `site_header, hero, benefits_strip, social_proof, media_copy, media_copy, media_copy, stats, features, media_copy, media_copy, process, promo_banner, pricing, faq, final_cta, kaiten_footer`
+- **token estimate:** `42893`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
 **Sources (использованы в системном промпте):**
+- `wiki/brand/redpolitika.md`
+- `wiki/references/kaiten-product-facts.md`
+- `wiki/references/anglicism-dictionary.md`
 - `wiki/design-system/voice.md`
 - `wiki/design-system/colors.md`
 - `wiki/design-system/typography.md`
@@ -91,6 +98,9 @@ stale: false
 ## Sections
 
 <!-- gen:sections-summary -->
+### site_header (SiteHeader)
+
+
 ### hero (HeroSection)
 
 - **title:** "Задачи, документы и процессы в одной системе"
@@ -168,10 +178,7 @@ stale: false
 - **title:** "Соберите работу команды в одной системе"
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 
-### footer (LandingFooter)
-
-- **brand:** "Кайтен"
-- **columns:** 4
+### kaiten_footer (LandingFooterMock)
 <!-- /gen:sections-summary -->
 
 ## Lessons (LLM-extract)
@@ -192,7 +199,7 @@ _(заполняется через `harness ingest feedback <slug> "<note>"`)_
 - **Score:** 87.06 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo, Unknown, PDF
-- **Generated:** 2026-05-16T05:33:14.581Z
+- **Generated:** 2026-07-01T06:53:00.348Z
 
 ## Breakdown
 

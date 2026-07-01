@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Icon } from '../../primitives/Icon';
 import { cn } from '../../primitives/cn';
 
@@ -9,13 +10,10 @@ const TONE: Record<Tone, [string, string]> = {
 const AVPAL = ['#c98a8a', '#8a9bc9', '#8ac9a0', '#c9b78a', '#b88ac9', '#7d9ac9'];
 
 type PCard = { title: string; tags?: [string, Tone][]; date?: string; checks?: [string, string, number][]; av: number; bar?: boolean };
-type MCard = { title: string; tag?: [string, Tone]; av: number; due?: [string, 'red' | 'green']; urgent?: boolean };
-type Col = { t: string; n: number; tone: Tone; cards: MCard[] };
 
 function Tag({ v }: { v: [string, Tone] }) { const t = TONE[v[1]]; return <span className="inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-[12.5px] font-medium" style={{ background: t[0], color: t[1] }}>{v[0]}</span>; }
 function DatePill({ children }: { children: React.ReactNode }) { return <span className="inline-flex items-center rounded-full bg-[#d9f0ec] px-2.5 py-0.5 text-[12.5px] font-medium text-[#0e7a66]">{children}</span>; }
 function Avatars({ n }: { n: number }) { return <div className="flex -space-x-1.5">{Array.from({ length: n }).map((_, i) => <span key={i} className="inline-flex h-6 w-6 rounded-full border-2 border-white" style={{ background: AVPAL[i % AVPAL.length] }} />)}</div>; }
-function Due({ v }: { v: [string, 'red' | 'green'] }) { const red = v[1] === 'red'; return <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[12px] font-medium" style={{ background: red ? '#fde8e6' : '#e9f5ea', color: red ? '#d23b3b' : '#2e7d32' }}><Icon name="Calendar" className="h-3.5 w-3.5" strokeWidth={2} />{v[0]}</span>; }
 function Check({ c }: { c: [string, string, number] }) {
   return (
     <div className="relative overflow-hidden rounded">
@@ -39,20 +37,6 @@ function PortfolioCard({ d }: { d: PCard }) {
     </div>
   );
 }
-function MiniCard({ d }: { d: MCard }) {
-  return (
-    <div className="space-y-2.5 rounded-(--radius-lg) border border-(--color-border-default) bg-white p-3 shadow-[0_1px_2px_rgba(45,45,45,0.05)]">
-      <div className="text-[13.5px] leading-snug text-(--color-text-primary)">{d.title}</div>
-      {d.tag && <div><Tag v={d.tag} /></div>}
-      <div className="flex items-center justify-between">
-        <Avatars n={d.av} />
-        {d.due && <Due v={d.due} />}
-        {d.urgent && <span className="inline-flex items-center gap-1 rounded-full bg-[#fde8e6] px-2.5 py-1 text-[12px] font-medium text-[#d23b3b]">🔥 Срочно</span>}
-      </div>
-    </div>
-  );
-}
-
 const PF_COLS: [string, number, Tone][] = [['Оценка формы договора', 2, 'blue'], ['Согласование', 2, 'blue'], ['Заключение контракта', 1, 'yellow'], ['Ожидание аванса', 1, 'orange'], ['Производство/проектирование', 2, 'orange']];
 const PF_CARDS: PCard[][] = [
   [{ title: 'Проект 5', tags: [['Котельная', 'teal'], ['ООО Альфа', 'violet']], date: '01.01.2024-26.10.2024', checks: [['Чек-лист Ожидает аванса', '0/1', 0]], av: 2, bar: true }],
@@ -64,45 +48,7 @@ const PF_CARDS: PCard[][] = [
 const LEFT_BARS = [['Проект 1', '4 карточки'], ['Проект 2', '4 карточки'], ['Проект 3', '4 карточки']];
 const RIGHT_BARS = [['Проект 1 - Задачи', '6 карточек'], ['Проект 2 - Задачи', '8 карточек'], ['Проект 3 - Задачи', '4 карточки']];
 
-const PISMA: Col[] = [
-  { t: 'Очередь', n: 2, tone: 'teal', cards: [
-    { title: 'Письмо входящее 1 от 11.03.24 ООО Ромашка', av: 1 },
-    { title: 'Письмо входящее 2 от 06.06.24 ООО Василек о согласовании проекта', tag: ['Проект 1', 'pink'], av: 1, due: ['16 мая', 'red'] },
-  ] },
-  { t: 'В работе', n: 2, tone: 'orange', cards: [
-    { title: 'Служебная записка от 01.07.24 от Ивановой И.И.', tag: ['Проект 2', 'yellow'], av: 2, due: ['01.08.2024', 'red'] },
-    { title: 'Письмо вх.4 от 20.06.24 ООО Подсолнух доп. соглашение', tag: ['Проект 3', 'yellow'], av: 1 },
-  ] },
-  { t: 'Готово', n: 2, tone: 'green', cards: [
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['ООО Альфа', 'pink'], av: 2, urgent: true },
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['Проект N', 'pink'], av: 2, due: ['01.08.2024', 'green'] },
-  ] },
-];
-const DOCS: Col[] = [
-  { t: 'Очередь', n: 1, tone: 'teal', cards: [{ title: 'Договор от 11.03.24 ООО Ромашка', av: 1 }] },
-  { t: 'В работе', n: 2, tone: 'orange', cards: [
-    { title: 'Служебная записка от 01.07.24 от Ивановой И.И.', tag: ['Проект 2', 'yellow'], av: 2, due: ['01.08.2024', 'red'] },
-    { title: 'Письмо вх.4 от 20.06.24 ООО Подсолнух доп. соглашение', tag: ['Проект 3', 'yellow'], av: 1 },
-  ] },
-  { t: 'Готово', n: 2, tone: 'green', cards: [
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['ООО Альфа', 'pink'], av: 2, urgent: true },
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['Проект N', 'pink'], av: 2, due: ['01.08.2024', 'green'] },
-  ] },
-];
-
 function CountBadge({ n, tone }: { n: number | string; tone?: Tone }) { const t = tone ? TONE[tone] : ['#ededf0', '#6b6b70']; return <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-md px-1.5 text-[12px] font-semibold" style={{ background: t[0], color: t[1] }}>{n}</span>; }
-function ColBoard({ cols }: { cols: Col[] }) {
-  return (
-    <div className="flex">
-      {cols.map((col, i) => (
-        <div key={col.t} className={cn('flex w-[200px] shrink-0 flex-col px-3', i > 0 && 'border-l border-(--color-border-default)')}>
-          <div className="mb-2 flex items-center gap-2 px-1"><span className="text-[14px] font-medium text-(--color-text-primary)">{col.t}</span><span className="ml-auto"><CountBadge n={col.n} tone={col.tone} /></span></div>
-          <div className="space-y-3">{col.cards.map((c, i) => <MiniCard key={i} d={c} />)}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
 function CollapsedBar({ title, count }: { title: string; count: string }) {
   return (
     <div className="flex items-center gap-2 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section) px-4 py-3">
@@ -158,23 +104,17 @@ export function ModulePortfolioMock() {
         {/* collapsed board bars */}
         <div className="grid grid-cols-2 gap-x-6 gap-y-3">
           {LEFT_BARS.map((b, i) => (
-            <React.Fragment key={i}>
+            <Fragment key={i}>
               <CollapsedBar title={b[0]} count={b[1]} />
               <CollapsedBar title={RIGHT_BARS[i][0]} count={RIGHT_BARS[i][1]} />
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
 
-        {/* Письма + Документы */}
-        <div className="grid grid-cols-2 gap-6">
-          <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section)">
-            <div className="flex items-center gap-2 px-4 py-3"><Icon name="GripVertical" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} /><span className="text-[15px] font-semibold text-(--color-text-primary)">Письма</span></div>
-            <div className="px-3 pb-3"><ColBoard cols={PISMA} /></div>
-          </div>
-          <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section)">
-            <div className="flex items-center gap-2 px-4 py-3"><Icon name="GripVertical" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} /><span className="text-[15px] font-semibold text-(--color-text-primary)">Документы</span></div>
-            <div className="px-3 pb-3"><ColBoard cols={DOCS} /></div>
-          </div>
+        {/* Письма + Документы — свёрнуты, как доски проектов */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+          <CollapsedBar title="Письма" count="6 карточек" />
+          <CollapsedBar title="Документы" count="5 карточек" />
         </div>
       </div>
     </div>

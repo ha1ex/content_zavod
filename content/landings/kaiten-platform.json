@@ -3,6 +3,11 @@
   "goal": "try_free",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
@@ -490,115 +495,9 @@
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "Кайтен",
-        "brandTagline": "Российская платформа для команд: задачи, документы, поддержка и процессы в одной системе.",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              {
-                "label": "Задачи и проекты",
-                "href": "/tasks"
-              },
-              {
-                "label": "База знаний",
-                "href": "/knowledge"
-              },
-              {
-                "label": "Служба поддержки",
-                "href": "/support"
-              },
-              {
-                "label": "Бизнес-процессы",
-                "href": "/bpm"
-              },
-              {
-                "label": "Аналитика",
-                "href": "/analytics"
-              }
-            ]
-          },
-          {
-            "title": "Решения",
-            "links": [
-              {
-                "label": "Разработка",
-                "href": "/solutions/dev"
-              },
-              {
-                "label": "Маркетинг и продажи",
-                "href": "/solutions/marketing"
-              },
-              {
-                "label": "Поддержка клиентов",
-                "href": "/solutions/support"
-              },
-              {
-                "label": "Госсектор",
-                "href": "/solutions/government"
-              },
-              {
-                "label": "Enterprise",
-                "href": "/enterprise"
-              }
-            ]
-          },
-          {
-            "title": "Ресурсы",
-            "links": [
-              {
-                "label": "Кейсы клиентов",
-                "href": "/cases"
-              },
-              {
-                "label": "Академия Кайтена",
-                "href": "/academy"
-              },
-              {
-                "label": "Шаблоны процессов",
-                "href": "/templates"
-              },
-              {
-                "label": "Блог",
-                "href": "/blog"
-              },
-              {
-                "label": "Документация",
-                "href": "/docs"
-              }
-            ]
-          },
-          {
-            "title": "Компания",
-            "links": [
-              {
-                "label": "О сервисе",
-                "href": "/about"
-              },
-              {
-                "label": "Контакты",
-                "href": "/contact"
-              },
-              {
-                "label": "Партнёрам",
-                "href": "/partners"
-              },
-              {
-                "label": "Безопасность",
-                "href": "/security"
-              },
-              {
-                "label": "Условия использования",
-                "href": "/legal/terms"
-              }
-            ]
-          }
-        ],
-        "copyright": "© 2026 ООО «КАЙТЕН СОФТВЕР». Российская платформа для управления работой команд."
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
@@ -608,6 +507,9 @@
   "illustrationSpecs": [],
   "meta": {
     "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
       "wiki/design-system/voice.md",
       "wiki/design-system/colors.md",
       "wiki/design-system/typography.md",
@@ -629,10 +531,11 @@
       "wiki/layouts/enterprise-modular-saas.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-05-16T05:33:14.587Z",
+    "generatedAt": "2026-07-01T06:53:00.355Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "enterprise-modular-saas",
-    "tokenEstimate": 15165
+    "tokenEstimate": 42893,
+    "domain": "pm"
   }
 }

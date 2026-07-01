@@ -2,7 +2,7 @@
 slug: knowledge-base
 type: landing
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-07-01
 status: draft
 brief: content/briefs/knowledge-base.json
 archetype: saas_landing
@@ -28,7 +28,11 @@ sources:
   - packages/harness/src/prompts/section-mock-skill.md
   - wiki/layouts/depersonalized-product-tour.md
   - wiki/layouts/index.md
+  - wiki/brand/redpolitika.md
+  - wiki/references/kaiten-product-facts.md
+  - wiki/references/anglicism-dictionary.md
 sections:
+  - site_header
   - hero
   - benefits_strip
   - media_copy
@@ -45,10 +49,10 @@ sections:
   - process
   - faq
   - final_cta
-  - footer
+  - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 15165
+tokenEstimate: 42893
 tags:
   - landing
   - saas_landing
@@ -61,12 +65,15 @@ stale: false
 - **brief:** `content/briefs/knowledge-base.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Создать первый документ")
-- **sections used:** `hero, benefits_strip, media_copy, media_copy, media_copy, cta_banner, media_copy, media_copy, cta_banner, media_copy, media_copy, features, features, process, faq, final_cta, footer`
-- **token estimate:** `15165`
+- **sections used:** `site_header, hero, benefits_strip, media_copy, media_copy, media_copy, cta_banner, media_copy, media_copy, cta_banner, media_copy, media_copy, features, features, process, faq, final_cta, kaiten_footer`
+- **token estimate:** `42893`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
 **Sources (использованы в системном промпте):**
+- `wiki/brand/redpolitika.md`
+- `wiki/references/kaiten-product-facts.md`
+- `wiki/references/anglicism-dictionary.md`
 - `wiki/design-system/voice.md`
 - `wiki/design-system/colors.md`
 - `wiki/design-system/typography.md`
@@ -92,6 +99,9 @@ stale: false
 ## Sections
 
 <!-- gen:sections-summary -->
+### site_header (SiteHeader)
+
+
 ### hero (HeroSection)
 
 - **title:** "Документы и база знаний для командной работы"
@@ -178,10 +188,7 @@ stale: false
 - **title:** "Создайте первую базу знаний для команды"
 - **primaryCta:** "Создать первый документ" → `#signup`
 
-### footer (LandingFooter)
-
-- **brand:** "База знаний"
-- **columns:** 3
+### kaiten_footer (LandingFooterMock)
 <!-- /gen:sections-summary -->
 
 ## Audience score
@@ -192,7 +199,7 @@ stale: false
 - **Score:** 83.91 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo, Unknown
-- **Generated:** 2026-05-16T07:47:28.519Z
+- **Generated:** 2026-07-01T06:53:02.038Z
 
 ## Breakdown
 

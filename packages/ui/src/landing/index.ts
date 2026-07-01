@@ -87,3 +87,6 @@ export type { LogoCloudProps, LogoCloudItemProps } from './LogoCloud';
 
 export { TestimonialQuote } from './TestimonialQuote';
 export type { TestimonialQuoteProps } from './TestimonialQuote';
+
+export { ReviewSlider } from './Review';
+export type { Review, ReviewSliderProps } from './Review';

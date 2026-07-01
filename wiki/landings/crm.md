@@ -2,7 +2,7 @@
 slug: crm
 type: landing
 created: 2026-05-16
-updated: 2026-06-25
+updated: 2026-07-01
 status: draft
 brief: content/briefs/crm.json
 archetype: saas_landing
@@ -33,6 +33,7 @@ sources:
   - wiki/references/kaiten-product-facts.md
   - wiki/references/anglicism-dictionary.md
 sections:
+  - site_header
   - hero
   - benefits_strip
   - tabbed_feature
@@ -47,10 +48,10 @@ sections:
   - stats
   - faq
   - final_cta
-  - footer
+  - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 42893
+tokenEstimate: 46129
 tags:
   - landing
   - saas_landing
@@ -63,8 +64,8 @@ stale: false
 - **brief:** `content/briefs/crm.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `hero, benefits_strip, tabbed_feature, cta_banner, scenario_walkthrough, media_copy, media_copy, media_copy, features, industry_picker, process, stats, faq, final_cta, footer`
-- **token estimate:** `42893`
+- **sections used:** `site_header, hero, benefits_strip, tabbed_feature, cta_banner, scenario_walkthrough, media_copy, media_copy, media_copy, features, industry_picker, process, stats, faq, final_cta, kaiten_footer`
+- **token estimate:** `46129`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -97,6 +98,9 @@ stale: false
 ## Sections
 
 <!-- gen:sections-summary -->
+### site_header (SiteHeader)
+
+
 ### hero (HeroSection)
 
 - **title:** "Воронка продаж, клиенты и коммуникации в одной системе"
@@ -168,10 +172,7 @@ stale: false
 - **title:** "Начните управлять продажами в CRM"
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 
-### footer (LandingFooter)
-
-- **brand:** "CRM-платформа"
-- **columns:** 4
+### kaiten_footer (LandingFooterMock)
 <!-- /gen:sections-summary -->
 
 ## Audience score
@@ -182,7 +183,7 @@ stale: false
 - **Score:** 78.49 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-06-24T21:59:44.695Z
+- **Generated:** 2026-07-01T07:26:27.162Z
 
 ## Breakdown
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-24T21:59:44.713Z",
+  "updatedAt": "2026-07-01T07:26:27.186Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -160,108 +160,108 @@
       "variant": "sales-funnel",
       "landingSlug": "crm",
       "sectionId": "hero",
-      "sectionIdx": 0,
+      "sectionIdx": 1,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.707Z"
+      "recordedAt": "2026-07-01T07:26:27.178Z"
     },
     {
       "kind": "mock-use",
       "variant": "crm-client-card",
       "landingSlug": "crm",
       "sectionId": "tabbed_feature",
-      "sectionIdx": 2,
+      "sectionIdx": 3,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.708Z"
+      "recordedAt": "2026-07-01T07:26:27.179Z"
     },
     {
       "kind": "mock-use",
       "variant": "omnichannel-inbox",
       "landingSlug": "crm",
       "sectionId": "tabbed_feature",
-      "sectionIdx": 2,
+      "sectionIdx": 3,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.709Z"
+      "recordedAt": "2026-07-01T07:26:27.179Z"
     },
     {
       "kind": "mock-use",
       "variant": "crm-analytics",
       "landingSlug": "crm",
       "sectionId": "tabbed_feature",
-      "sectionIdx": 2,
+      "sectionIdx": 3,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.709Z"
+      "recordedAt": "2026-07-01T07:26:27.180Z"
     },
     {
       "kind": "mock-use",
       "variant": "omnichannel-inbox",
       "landingSlug": "crm",
       "sectionId": "scenario_walkthrough",
-      "sectionIdx": 4,
+      "sectionIdx": 5,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.710Z"
+      "recordedAt": "2026-07-01T07:26:27.181Z"
     },
     {
       "kind": "mock-use",
       "variant": "call-overlay",
       "landingSlug": "crm",
       "sectionId": "scenario_walkthrough",
-      "sectionIdx": 4,
+      "sectionIdx": 5,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.710Z"
+      "recordedAt": "2026-07-01T07:26:27.181Z"
     },
     {
       "kind": "mock-use",
       "variant": "crm-client-card",
       "landingSlug": "crm",
       "sectionId": "scenario_walkthrough",
-      "sectionIdx": 4,
+      "sectionIdx": 5,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.711Z"
+      "recordedAt": "2026-07-01T07:26:27.182Z"
     },
     {
       "kind": "mock-use",
       "variant": "doc-template",
       "landingSlug": "crm",
       "sectionId": "scenario_walkthrough",
-      "sectionIdx": 4,
+      "sectionIdx": 5,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.711Z"
+      "recordedAt": "2026-07-01T07:26:27.183Z"
     },
     {
       "kind": "mock-use",
       "variant": "crm-analytics",
       "landingSlug": "crm",
       "sectionId": "scenario_walkthrough",
-      "sectionIdx": 4,
+      "sectionIdx": 5,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.712Z"
+      "recordedAt": "2026-07-01T07:26:27.183Z"
     },
     {
       "kind": "mock-use",
       "variant": "sales-funnel",
       "landingSlug": "crm",
       "sectionId": "media_copy",
-      "sectionIdx": 5,
+      "sectionIdx": 6,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.712Z"
+      "recordedAt": "2026-07-01T07:26:27.184Z"
     },
     {
       "kind": "mock-use",
       "variant": "mobile-crm",
       "landingSlug": "crm",
       "sectionId": "media_copy",
-      "sectionIdx": 6,
+      "sectionIdx": 7,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.713Z"
+      "recordedAt": "2026-07-01T07:26:27.185Z"
     },
     {
       "kind": "mock-use",
       "variant": "booking-calendar",
       "landingSlug": "crm",
       "sectionId": "media_copy",
-      "sectionIdx": 7,
+      "sectionIdx": 8,
       "domain": "crm",
-      "recordedAt": "2026-06-24T21:59:44.713Z"
+      "recordedAt": "2026-07-01T07:26:27.186Z"
     }
   ]
 }

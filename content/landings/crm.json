@@ -3,6 +3,11 @@
   "goal": "try_free",
   "sections": [
     {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
       "id": "hero",
       "component": "HeroSection",
       "props": {
@@ -717,99 +722,9 @@
       }
     },
     {
-      "id": "footer",
-      "component": "LandingFooter",
-      "props": {
-        "brandName": "CRM-платформа",
-        "brandTagline": "Управление продажами, клиентами и бизнес-процессами в едином интерфейсе.",
-        "columns": [
-          {
-            "title": "Продукт",
-            "links": [
-              {
-                "label": "Возможности",
-                "href": "#features"
-              },
-              {
-                "label": "Для бизнесов",
-                "href": "#industries"
-              },
-              {
-                "label": "Внедрение",
-                "href": "#process"
-              },
-              {
-                "label": "FAQ",
-                "href": "#faq"
-              }
-            ]
-          },
-          {
-            "title": "Решения",
-            "links": [
-              {
-                "label": "Продажи",
-                "href": "/solutions/sales"
-              },
-              {
-                "label": "Сервис",
-                "href": "/solutions/service"
-              },
-              {
-                "label": "Маркетинг",
-                "href": "/solutions/marketing"
-              },
-              {
-                "label": "Аналитика",
-                "href": "/solutions/analytics"
-              }
-            ]
-          },
-          {
-            "title": "Компания",
-            "links": [
-              {
-                "label": "О продукте",
-                "href": "/about"
-              },
-              {
-                "label": "Кейсы",
-                "href": "/cases"
-              },
-              {
-                "label": "Партнёры",
-                "href": "/partners"
-              },
-              {
-                "label": "Блог",
-                "href": "/blog"
-              }
-            ]
-          },
-          {
-            "title": "Поддержка",
-            "links": [
-              {
-                "label": "Документация",
-                "href": "/docs"
-              },
-              {
-                "label": "Контакты",
-                "href": "/contact"
-              },
-              {
-                "label": "Запросить демо",
-                "href": "/demo"
-              },
-              {
-                "label": "Войти",
-                "href": "/login"
-              }
-            ]
-          }
-        ],
-        "copyright": "© CRM-платформа. Управление продажами и клиентами."
-      }
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
     }
   ],
   "seo": {
@@ -843,11 +758,11 @@
       "wiki/layouts/crm-product-tour.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-06-24T21:59:44.705Z",
+    "generatedAt": "2026-07-01T07:26:27.176Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "crm-product-tour",
-    "tokenEstimate": 42893,
+    "tokenEstimate": 46129,
     "domain": "crm"
   }
 }

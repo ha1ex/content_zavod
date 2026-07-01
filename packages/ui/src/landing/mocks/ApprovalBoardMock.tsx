@@ -96,7 +96,7 @@ export function ApprovalBoardMock() {
   return (
     <div
       aria-hidden
-      className="w-full max-w-[760px] overflow-hidden rounded-2xl border border-(--color-orange-100)/40 bg-[#fffdf7] p-3 shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]"
+      className="w-full max-w-[760px] overflow-hidden rounded-2xl border border-(--color-border-default) bg-(--color-surface-page) p-3 shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]"
     >
       <div className="overflow-hidden rounded-xl border border-(--color-border-default) bg-(--color-surface-page)">
         {/* header */}

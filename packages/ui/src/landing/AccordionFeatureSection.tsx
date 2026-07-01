@@ -78,7 +78,7 @@ const STYLES = `
 /* Медиа-область — квадрат 592×592 с переключаемыми панелями */
 .afs .acc-media{position:relative;justify-self:center;align-self:center;width:100%;max-width:592px;aspect-ratio:1/1;
   background:linear-gradient(180deg,#ece0ff,#cdecff);border-radius:16px;overflow:hidden;display:grid;place-items:stretch}
-.afs .acc-panel{grid-area:1/1;width:100%;height:100%;display:flex;align-items:stretch;justify-content:center;
+.afs .acc-panel{grid-area:1/1;width:100%;height:100%;display:flex;align-items:center;justify-content:center;
   opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .28s ease,transform .28s ease}
 .afs .acc-panel.on{opacity:1;visibility:visible;transform:none}
 .afs .acc-panel img{width:100%;height:100%;object-fit:cover;display:block}

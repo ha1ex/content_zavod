@@ -165,6 +165,42 @@ Use a 4px-based spacing scale:
 
 Read labels like `12/48` as `token / pixels`: `space-12 = 48px`.
 
+### Vertical spacing — outer vs inner (ОБЯЗАТЕЛЬНО)
+
+Вертикальные отступы блоков задаются по адаптиву. **Внешние** — по высоте между блоками (в т.ч. начало и конец блока, вертикальный отступ секции до/после контента). **Внутренние** — вертикальные отступы внутри блока (между его внутренними элементами/группами).
+
+| Breakpoint | Внешние (outer) | Внутренние (inner) |
+|---|---|---|
+| Desktop | **96px** (`space-24`) | **48px** (`space-12`) |
+| Tablet | **64px** (`space-16`) | **32px** (`space-8`) |
+| Mobile | **48px** (`space-12`) | **24px** (`space-6`) |
+
+- **Outer** — вертикальный `padding`/зазор на границах блока: сверху первого и снизу последнего блока, вертикальный ритм секций. По умолчанию именно эти значения для «начала и конца блока».
+- **Inner** — вертикальные отступы между элементами внутри блока (заголовок → подзаголовок → контент → CTA как крупные группы).
+- Реализация mobile-first: база — mobile (48/24), затем переопределяем на tablet (64/32) и desktop (96/48).
+
+```css
+.block {                 /* mobile */
+  padding-block: 48px;   /* outer */
+  row-gap: 24px;         /* inner */
+}
+@media (min-width: 768px) {   /* tablet */
+  .block { padding-block: 64px; row-gap: 32px; }
+}
+@media (min-width: 1024px) {  /* desktop */
+  .block { padding-block: 96px; row-gap: 48px; }
+}
+```
+
+```html
+<!-- утилитами (mobile → tablet → desktop) -->
+<section class="py-12 md:py-16 lg:py-24">   <!-- outer 48/64/96 -->
+  <div class="flex flex-col gap-6 md:gap-8 lg:gap-12"> <!-- inner 24/32/48 -->
+    …
+  </div>
+</section>
+```
+
 Desktop rules:
 
 - Header height: `80px`.

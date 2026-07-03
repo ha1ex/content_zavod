@@ -90,3 +90,15 @@ export type { TestimonialQuoteProps } from './TestimonialQuote';
 
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';
+
+export { HeroScreenInterface } from './HeroScreenInterface';
+export type {
+  HeroScreenInterfaceProps,
+  HsiLane,
+  HsiCard,
+  HsiColumnHeader,
+  HsiTag,
+  HsiCta,
+  HsiAnimatedCard,
+  TagVariant,
+} from './HeroScreenInterface';

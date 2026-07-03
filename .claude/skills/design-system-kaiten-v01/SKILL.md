@@ -369,6 +369,29 @@ Use:
 
 Use `lg/xl` for buttons and accordion rows, `2xl/3xl` for cards and large sections, and `full` for pills, badges, round buttons, and avatars.
 
+### Block radius — по адаптиву (ОБЯЗАТЕЛЬНО)
+
+Скругление углов блоков (карточки, секции-контейнеры, медиа-рамки, мокап-обёртки) задаётся по брейкпоинту:
+
+| Breakpoint | Radius блока |
+|---|---|
+| Desktop | **16px** (`radius-2xl`) |
+| Tablet | **12px** (`radius-xl`) |
+| Mobile | **8px** (`radius-lg`) |
+
+- Правило распространяется на скругление именно **блоков** (карточки, контейнеры, медиа/мокап-рамки). Кнопки (`8px`), пилюли/бейджи (`full`) и мелкие атомы этим правилом не затрагиваются — у них радиус фиксированный.
+- Реализация mobile-first: база — mobile (`8px`), переопределяем на tablet (`12px`) и desktop (`16px`).
+
+```css
+.block {                 /* mobile */ border-radius: 8px; }
+@media (min-width: 768px)  { .block { border-radius: 12px; } }  /* tablet */
+@media (min-width: 1024px) { .block { border-radius: 16px; } }  /* desktop */
+```
+
+```html
+<div class="rounded-lg md:rounded-xl lg:rounded-2xl">…</div> <!-- 8 → 12 → 16 -->
+```
+
 ## Components
 
 Structure work around landing sections and reusable organisms:

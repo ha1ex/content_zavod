@@ -377,19 +377,18 @@ Use `lg/xl` for buttons and accordion rows, `2xl/3xl` for cards and large sectio
 |---|---|
 | Desktop | **16px** (`radius-2xl`) |
 | Tablet | **12px** (`radius-xl`) |
-| Mobile | **8px** (`radius-lg`) |
+| Mobile | **12px** (`radius-xl`) |
 
 - Правило распространяется на скругление именно **блоков** (карточки, контейнеры, медиа/мокап-рамки). Кнопки (`8px`), пилюли/бейджи (`full`) и мелкие атомы этим правилом не затрагиваются — у них радиус фиксированный.
-- Реализация mobile-first: база — mobile (`8px`), переопределяем на tablet (`12px`) и desktop (`16px`).
+- Реализация mobile-first: база — mobile/tablet (`12px`), переопределяем на desktop (`16px`).
 
 ```css
-.block {                 /* mobile */ border-radius: 8px; }
-@media (min-width: 768px)  { .block { border-radius: 12px; } }  /* tablet */
+.block {                 /* mobile + tablet */ border-radius: 12px; }
 @media (min-width: 1024px) { .block { border-radius: 16px; } }  /* desktop */
 ```
 
 ```html
-<div class="rounded-lg md:rounded-xl lg:rounded-2xl">…</div> <!-- 8 → 12 → 16 -->
+<div class="rounded-xl lg:rounded-2xl">…</div> <!-- 12 → 16 -->
 ```
 
 ## Components

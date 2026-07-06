@@ -91,6 +91,8 @@ export type { TestimonialQuoteProps } from './TestimonialQuote';
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';
 
+export { TemplateGalleryMock } from './TemplateGalleryMock';
+
 export { HeroScreenInterface } from './HeroScreenInterface';
 export type {
   HeroScreenInterfaceProps,

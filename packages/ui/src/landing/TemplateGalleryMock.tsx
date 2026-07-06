@@ -1,5 +1,5 @@
-import { Icon } from '../../primitives/Icon';
-import { cn } from '../../primitives/cn';
+import { Icon } from '../primitives/Icon';
+import { cn } from '../primitives/cn';
 
 interface Tpl {
   icon: string;

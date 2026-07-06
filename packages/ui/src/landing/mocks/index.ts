@@ -37,7 +37,7 @@ export { DocsTreeMock } from './DocsTreeMock';
 export { PermissionsPanelMock } from './PermissionsPanelMock';
 export { ShareLinkCardMock } from './ShareLinkCardMock';
 export { DocEditorRichMock } from './DocEditorRichMock';
-export { TemplateGalleryMock } from './TemplateGalleryMock';
+export { TemplateGalleryMock } from '../TemplateGalleryMock';
 export { MobileDocReaderMock } from './GadgetMobileDocReaderMock';
 export { ProductionBoardMock } from './ProductionBoardMock';
 export { OrderFlowMock } from './OrderFlowMock';

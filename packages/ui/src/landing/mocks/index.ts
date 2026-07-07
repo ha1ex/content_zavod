@@ -83,3 +83,5 @@ export { RetailDocMiniMock } from './RetailDocMiniMock';
 export { RetailReportMiniMock } from './RetailReportMiniMock';
 export { GanttChartMock } from './ModuleGanttChartMock';
 export { FitContain } from './FitContain';
+
+export { FeatureGridMock } from './FeatureGridMock';

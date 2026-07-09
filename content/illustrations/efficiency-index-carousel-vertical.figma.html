@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Индекс деловой эффективности — 6 фреймов 1080×1350 для Figma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --violet: #7d4ccf;
+    --violet-deep: #6f43b8;
+    --violet-tint: #efe9f9;
+    --violet-line: #d8c8ef;
+    --green: #3aa050;
+    --green-tint: #e9f5ea;
+    --green-line: #c9e6cd;
+    --blue: #2186d9;
+    --blue-tint: #e4f2fd;
+    --blue-line: #c3e0f8;
+    --orange: #e88f00;
+    --orange-tint: #fff3e0;
+    --orange-line: #f6ddb0;
+    --red: #e2443a;
+    --red-tint: #fde8e6;
+    --text: #211a2e;
+    --text-2: #6c6c78;
+    --text-3: #9a9aa6;
+    --card-line: #ececf0;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    background: #ffffff;
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 0; margin: 0;
+  }
+  main { width: 1080px; margin: 0; }
+  figure { margin: 0 0 40px; }
+
+  /* ---- exportable frame: fixed 1080 x 1350 (4:5) ---- */
+  .frame {
+    position: relative;
+    width: 1080px; height: 1350px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  .glow { position: absolute; pointer-events: none; z-index: 0;
+    background: radial-gradient(closest-side, rgba(125,76,207,0.13), rgba(125,76,207,0)); }
+  .glow.tr { top: -280px; right: -240px; width: 760px; height: 760px; }
+  .glow.bl { bottom: -320px; left: -260px; width: 840px; height: 840px; }
+  .glow.green { background: radial-gradient(closest-side, rgba(58,160,80,0.12), rgba(58,160,80,0)); }
+  .glow.blue { background: radial-gradient(closest-side, rgba(33,134,217,0.12), rgba(33,134,217,0)); }
+  .glow.orange { background: radial-gradient(closest-side, rgba(232,143,0,0.12), rgba(232,143,0,0)); }
+  .inner { position: relative; z-index: 1; height: 100%; padding: 74px 68px; display: flex; flex-direction: column; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 14px;
+    font-weight: 800; font-size: 19px; letter-spacing: 2.6px; color: var(--text-2); }
+  .eyebrow .n { display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 18px; border-radius: 12px; color: #fff; font-size: 18px; letter-spacing: 1.4px; }
+  h2.title { margin: 26px 0 0; font-size: 76px; line-height: 1.02; font-weight: 900; letter-spacing: -2.4px; }
+  .lead { margin: 22px 0 0; font-size: 29px; line-height: 1.36; color: var(--text-2); font-weight: 500; max-width: 900px; }
+  .lead b { color: var(--text); font-weight: 700; }
+
+  .notebox { margin-top: 40px; font-size: 26px; line-height: 1.4; color: var(--text-2); font-weight: 500;
+    padding: 26px 30px 26px 32px; border-radius: 0 20px 20px 0; }
+  .notebox b { color: var(--text); font-weight: 800; }
+
+  /* ---- footer ---- */
+  .foot { margin-top: auto; padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+  .foot .logo { height: 40px; width: auto; display: block; }
+  .foot .site { font-size: 20px; font-weight: 700; color: var(--text-3); letter-spacing: -0.2px; }
+  .foot .src { font-size: 18px; font-weight: 600; color: var(--text-3); }
+  .foot.on-dark .site, .foot.on-dark .src { color: rgba(255,255,255,.6); }
+
+  /* =====================================================================
+     CARD 1 — COVER (dark)
+     ===================================================================== */
+  .c1 .frame { background: radial-gradient(120% 90% at 18% 2%, #3a2263 0%, #241640 55%, #1a1030 100%); }
+  .c1 .kick { display: inline-flex; align-items: center; gap: 16px; color: #cbb6f2; font-weight: 800;
+    font-size: 19px; letter-spacing: 2.8px; }
+  .c1 .kick .k-logo { width: 44px; height: 44px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(150deg,#8a5cd8,#6f43b8); flex: 0 0 auto; }
+  .c1 .kick .k-logo svg { width: 26px; height: 26px; }
+  .c1 h1.big { margin: 54px 0 0; color: #fff; font-size: 96px; font-weight: 900; line-height: 1.0; letter-spacing: -3.2px; }
+  .c1 h1.big em { font-style: normal;
+    background: linear-gradient(180deg,#c9a6f7,#9a6bec); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .c1 .sub { margin: 36px 0 0; color: #d6cbea; font-size: 30px; font-weight: 500; line-height: 1.38; max-width: 880px; }
+  .c1 .sub b { color: #fff; font-weight: 700; }
+  .c1 .row { display: flex; gap: 22px; margin-top: 72px; }
+  .c1 .stat { flex: 1; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px; padding: 36px 32px; }
+  .c1 .stat .v { font-size: 60px; font-weight: 900; letter-spacing: -2px; line-height: 1; white-space: nowrap;
+    background: linear-gradient(180deg,#e7d6ff,#b78bf0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .c1 .stat .l { margin-top: 14px; font-size: 22px; font-weight: 600; color: #cdbfe6; line-height: 1.3; }
+  .c1 .dims { margin-top: 56px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .c1 .dim { display: inline-flex; align-items: center; gap: 12px; font-size: 23px; font-weight: 700; color: #e4daf5;
+    border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); border-radius: 999px; padding: 14px 26px; }
+  .c1 .dim i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+
+  /* =====================================================================
+     CARD 2 — ПРОПУСКНАЯ СПОСОБНОСТЬ (before / after)
+     ===================================================================== */
+  .c2 .eyebrow .n { background: var(--violet); }
+  .c2 .eyebrow { color: var(--violet-deep); }
+  .c2 .compare { margin-top: 64px; flex: 1; display: flex; align-items: center; gap: 26px; }
+  .c2 .cmp { flex: 1; border-radius: 28px; padding: 52px 44px; position: relative; }
+  .c2 .cmp .m { font-size: 21px; font-weight: 800; letter-spacing: 2.4px; }
+  .c2 .cmp .v { margin-top: 22px; font-size: 138px; font-weight: 900; letter-spacing: -6px; line-height: 1; }
+  .c2 .cmp .c { margin-top: 18px; font-size: 24px; font-weight: 600; line-height: 1.32; }
+  .c2 .cmp.jan { background: #f6f5f9; border: 1px solid #e9e7ef; }
+  .c2 .cmp.jan .m { color: var(--text-3); }
+  .c2 .cmp.jan .v { color: #b3aec2; }
+  .c2 .cmp.jan .c { color: var(--text-2); }
+  .c2 .cmp.jun { background: linear-gradient(160deg,#8a5cd8,#6f43b8); color: #fff; box-shadow: 0 34px 70px -46px rgba(125,76,207,.85); }
+  .c2 .cmp.jun .m { color: #dcc9fb; }
+  .c2 .cmp.jun .c { color: #e9defc; }
+  .c2 .cmp.jun .badge { position: absolute; top: -26px; right: 34px; background: #fff; color: var(--violet-deep);
+    font-size: 30px; font-weight: 900; letter-spacing: -0.6px; border-radius: 999px; padding: 12px 26px;
+    box-shadow: 0 18px 40px -22px rgba(33,22,58,.55); }
+  .c2 .arrow { flex: 0 0 auto; color: var(--violet); }
+  .c2 .arrow svg { width: 56px; height: 56px; display: block; }
+  .c2 .notebox { background: var(--violet-tint); border-left: 7px solid var(--violet); }
+
+  /* =====================================================================
+     CARD 3 — БАЛАНС ПОТОКА (month bars)
+     ===================================================================== */
+  .c3 .eyebrow .n { background: var(--green); }
+  .c3 .eyebrow { color: var(--green); }
+  .c3 .bars { margin-top: 58px; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+  .c3 .bar { display: grid; grid-template-columns: 128px 1fr 128px; align-items: center; gap: 22px; }
+  .c3 .bar .bl { font-size: 25px; font-weight: 700; color: var(--text-2); }
+  .c3 .bar .track { height: 52px; border-radius: 14px; background: #f2f4f2; overflow: hidden; }
+  .c3 .bar .fill { display: block; height: 100%; border-radius: 14px; background: #a5d4ae; }
+  .c3 .bar .bv { font-size: 28px; font-weight: 800; letter-spacing: -0.6px; color: var(--text-2); text-align: right;
+    font-variant-numeric: tabular-nums; }
+  .c3 .bar.hot .bl { color: var(--green); font-weight: 800; }
+  .c3 .bar.hot .fill { background: linear-gradient(90deg,#4caf51,#3aa050); }
+  .c3 .bar.hot .bv { color: var(--green); font-weight: 900; font-size: 32px; }
+  .c3 .callout { margin-top: 44px; display: inline-flex; align-items: center; gap: 20px; align-self: flex-start;
+    background: var(--green-tint); border: 1px solid var(--green-line); border-radius: 20px; padding: 22px 30px; }
+  .c3 .callout .cn { font-size: 44px; font-weight: 900; color: var(--green); letter-spacing: -1px; white-space: nowrap; }
+  .c3 .callout .ct { font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.3; }
+
+  /* =====================================================================
+     CARD 4 — СКОРОСТЬ (big number + function bars)
+     ===================================================================== */
+  .c4 .eyebrow .n { background: var(--blue); }
+  .c4 .eyebrow { color: var(--blue); }
+  .c4 .huge { margin-top: 46px; display: flex; align-items: baseline; gap: 26px; }
+  .c4 .huge .num { font-size: 168px; font-weight: 900; line-height: 0.95; letter-spacing: -7px; color: var(--blue); }
+  .c4 .huge .num small { font-size: 64px; letter-spacing: -2px; font-weight: 800; }
+  .c4 .huge .cap { font-size: 28px; font-weight: 600; color: var(--text-2); line-height: 1.3; max-width: 400px; }
+  .c4 .huge .cap b { color: var(--text); }
+  .c4 .fbars { margin-top: 54px; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 19px; }
+  .c4 .fbar { display: grid; grid-template-columns: 320px 1fr 96px; align-items: center; gap: 22px; }
+  .c4 .fbar .bl { font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .c4 .fbar .track { height: 44px; border-radius: 12px; background: #f1f5f9; overflow: hidden; }
+  .c4 .fbar .fill { display: block; height: 100%; border-radius: 12px; background: linear-gradient(90deg,#54a9e8,#2186d9); }
+  .c4 .fbar .bv { font-size: 26px; font-weight: 900; color: var(--blue); text-align: right; font-variant-numeric: tabular-nums; }
+  .c4 .fbar.slow .fill { background: #bcd7ec; }
+  .c4 .fbar.slow .bv { color: #7ba6c6; }
+  .c4 .fnote { font-size: 21px; font-weight: 600; color: var(--text-3); margin-top: 6px; }
+  .c4 .notebox { background: var(--blue-tint); border-left: 7px solid var(--blue); margin-top: 34px; }
+
+  /* =====================================================================
+     CARD 5 — ДИСЦИПЛИНА СРОКОВ (split duo)
+     ===================================================================== */
+  .c5 .eyebrow .n { background: var(--orange); }
+  .c5 .eyebrow { color: var(--orange); }
+  .c5 .huge { margin-top: 50px; }
+  .c5 .huge .num { font-size: 190px; font-weight: 900; line-height: 0.92; letter-spacing: -8px; color: var(--orange); }
+  .c5 .huge .num small { font-size: 84px; letter-spacing: -3px; }
+  .c5 .huge .cap { margin-top: 28px; font-size: 31px; font-weight: 700; line-height: 1.28; max-width: 860px; letter-spacing: -0.5px; }
+  .c5 .huge .cap b { color: var(--orange); }
+  .c5 .duo { margin-top: 58px; flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-content: center; }
+  .c5 .cell { border-radius: 26px; padding: 40px 38px; }
+  .c5 .cell .t { font-size: 21px; font-weight: 800; letter-spacing: 1.8px; }
+  .c5 .cell .vals { margin-top: 24px; display: flex; align-items: baseline; gap: 16px; }
+  .c5 .cell .from { font-size: 44px; font-weight: 800; color: var(--text-3); letter-spacing: -1px; }
+  .c5 .cell .to { font-size: 66px; font-weight: 900; letter-spacing: -2px; }
+  .c5 .cell .arr { font-size: 40px; font-weight: 700; color: var(--text-3); }
+  .c5 .cell .d { margin-top: 16px; font-size: 23px; font-weight: 600; color: var(--text-2); line-height: 1.32; }
+  .c5 .cell.up { background: var(--green-tint); border: 1px solid var(--green-line); }
+  .c5 .cell.up .t { color: var(--green); }
+  .c5 .cell.up .to { color: var(--green); }
+  .c5 .cell.down { background: var(--red-tint); border: 1px solid #f6c8c3; }
+  .c5 .cell.down .t { color: var(--red); }
+  .c5 .cell.down .to { color: var(--red); }
+  .c5 .notebox { background: var(--orange-tint); border-left: 7px solid var(--orange); margin-top: 0; }
+
+  /* =====================================================================
+     CARD 6 — ИНДЕКС (dark closing, line chart)
+     ===================================================================== */
+  .c6 .frame { background: radial-gradient(120% 100% at 80% 100%, #35205c 0%, #241640 52%, #180e2c 100%); }
+  .c6 .kick { display: inline-flex; align-items: center; gap: 12px; color: #cbb6f2; font-weight: 800;
+    font-size: 19px; letter-spacing: 2.8px; }
+  .c6 .huge { margin-top: 34px; display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap; }
+  .c6 .huge .num { font-size: 176px; font-weight: 900; line-height: 0.95; letter-spacing: -7px;
+    background: linear-gradient(180deg,#e7d6ff,#a978f0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .c6 .huge .cap { font-size: 26px; font-weight: 600; color: #cdbfe6; line-height: 1.35; max-width: 330px; }
+  .c6 .chart { margin-top: 40px; }
+  .c6 .chart svg { display: block; width: 100%; height: auto; }
+  .c6 .p { margin: 40px 0 0; color: #d6cbea; font-size: 29px; font-weight: 500; line-height: 1.4; max-width: 920px; }
+  .c6 .p b { color: #fff; font-weight: 700; }
+  .c6 .metrics { display: flex; gap: 22px; margin-top: 52px; }
+  .c6 .metrics .m { flex: 1; border: 1px solid rgba(255,255,255,.13); background: rgba(255,255,255,.045);
+    border-radius: 20px; padding: 26px 24px; }
+  .c6 .metrics .m .mv { font-size: 46px; font-weight: 900; letter-spacing: -1.4px; line-height: 1; }
+  .c6 .metrics .m .mv.plus { color: #7de29a; }
+  .c6 .metrics .m .mv.minus { color: #ffb37d; }
+  .c6 .metrics .m .ml { margin-top: 12px; font-size: 20px; font-weight: 600; color: #cdbfe6; line-height: 1.28; }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ============================ CARD 1 — COVER ============================ -->
+  <figure class="c1">
+    <div class="frame">
+      <div class="inner">
+        <div class="kick">
+          <span class="k-logo">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V11" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M9.5 19V5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".65"/><path d="M15 19v-8" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M20.5 19V8" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".65"/></svg>
+          </span>
+          ИССЛЕДОВАНИЕ KAITEN · ЯНВАРЬ–ИЮНЬ 2026
+        </div>
+        <h1 class="big">Как российский бизнес работает <em>на самом деле</em></h1>
+        <div class="sub">Индекс деловой эффективности сводит в одно число то, как компании ставят, ведут и закрывают задачи.</div>
+
+        <div class="row">
+          <div class="stat"><div class="v">3 210</div><div class="l">компаний в выборке</div></div>
+          <div class="stat"><div class="v">5,3 млн</div><div class="l">реальных задач за полугодие</div></div>
+          <div class="stat"><div class="v">205 878</div><div class="l">активных досок</div></div>
+        </div>
+
+        <div class="dims">
+          <span class="dim"><i style="background:#b78bf0"></i>Пропускная способность</span>
+          <span class="dim"><i style="background:#7de29a"></i>Баланс потока</span>
+          <span class="dim"><i style="background:#7cc4f8"></i>Скорость исполнения</span>
+          <span class="dim"><i style="background:#ffb37d"></i>Дисциплина сроков</span>
+        </div>
+
+        <div class="foot on-dark">
+          <svg class="logo" viewBox="0 0 285 86" role="img" aria-label="Kaiten"><path d="M62.7256 0.535828H22.2028C9.94052 0.535828 0 10.4709 0 22.7265V63.2735C0 75.5291 9.94052 85.4642 22.2028 85.4642H62.7256C74.9878 85.4642 84.9284 75.5291 84.9284 63.2735V22.7265C84.9284 10.4709 74.9878 0.535828 62.7256 0.535828Z" fill="#F11F24"/><path d="M33.8201 9.79336L9.25753 34.356C4.53593 39.0776 4.53593 46.7328 9.25753 51.4544L33.8201 76.017C38.5417 80.7386 46.197 80.7386 50.9186 76.017L75.4812 51.4544C80.2028 46.7328 80.2028 39.0776 75.4812 34.356L50.9186 9.79336C46.197 5.07176 38.5417 5.07176 33.8201 9.79336Z" fill="#78FFC7"/><path d="M42.2314 63.7639C53.8291 63.7639 63.2308 54.3628 63.2308 42.7659C63.2308 31.169 53.8291 21.7679 42.2314 21.7679C30.6338 21.7679 21.2321 31.169 21.2321 42.7659C21.2321 54.3628 30.6338 63.7639 42.2314 63.7639Z" fill="#7D4CCF"/><path d="M198.797 34.3505H205.626V37.4344H198.797V48.8894C198.797 50.0055 198.915 50.9601 199.15 51.7531C199.414 52.5168 199.752 53.1486 200.163 53.6479C200.604 54.1178 201.103 54.4705 201.661 54.7054C202.219 54.9404 202.807 55.0579 203.423 55.0579C204.305 55.0579 205.156 54.9251 205.979 54.6607C206.801 54.367 207.492 54.0588 208.05 53.7357L209.371 56.5994C208.49 57.04 207.476 57.407 206.331 57.7007C205.215 57.9944 204.099 58.1417 202.983 58.1417C199.664 58.1417 197.109 57.3191 195.317 55.6743C193.525 54.0295 192.629 51.7679 192.629 48.8894V37.4344H188.444V34.3505H192.629V27.3008H198.797V34.3505Z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M224.072 33.4685C225.834 33.4686 227.494 33.7326 229.05 34.2612C230.607 34.7899 231.958 35.5691 233.103 36.597C234.249 37.5957 235.16 38.8143 235.835 40.2535C236.511 41.6926 236.848 43.3227 236.848 45.1436V48.2283H218.036C218.388 50.6661 219.225 52.4135 220.547 53.4709C221.898 54.5283 223.587 55.0571 225.613 55.0571C227.053 55.0571 228.389 54.8076 229.623 54.3083C230.886 53.8089 232.12 53.1039 233.324 52.1933L235.086 54.837C234.528 55.3362 233.867 55.7911 233.103 56.2023C232.369 56.6134 231.561 56.966 230.68 57.2597C229.829 57.5241 228.933 57.7301 227.993 57.877C227.053 58.0532 226.113 58.1409 225.173 58.1409C223.088 58.1409 221.178 57.8624 219.446 57.3044C217.742 56.7757 216.288 55.9974 215.083 54.9694C213.879 53.912 212.939 52.6194 212.263 51.092C211.617 49.5647 211.295 47.8021 211.295 45.8047C211.295 43.8369 211.603 42.0894 212.22 40.5621C212.866 39.0054 213.747 37.7128 214.863 36.6848C216.009 35.6274 217.36 34.8346 218.917 34.3059C220.474 33.7478 222.192 33.4685 224.072 33.4685ZM224.072 36.3323C223.22 36.3323 222.426 36.4941 221.692 36.8172C220.958 37.1402 220.311 37.6538 219.753 38.3587C219.225 39.0636 218.784 39.9747 218.432 41.0908C218.109 42.2069 217.933 43.5578 217.903 45.1436H230.239C230.239 43.6164 230.063 42.2946 229.711 41.1786C229.358 40.0625 228.888 39.1521 228.301 38.4472C227.743 37.7129 227.082 37.1841 226.318 36.861C225.584 36.5086 224.835 36.3323 224.072 36.3323Z" fill="#fff"/><path d="M183.418 57.2605H177.249V34.7908H183.418V57.2605Z" fill="#fff"/><path d="M254.646 34.3505C258.846 34.3506 261.945 35.1144 263.943 36.6417C265.969 38.1397 266.983 40.3869 266.983 43.3828V57.2605H260.814V43.3828C260.814 41.268 260.285 39.7549 259.228 38.8443C258.17 37.9046 256.643 37.4344 254.646 37.4344H248.919V57.2605H242.75V34.3505H254.646Z" fill="#fff"/><path d="M119.181 40.2973H126.451L136.583 26.4188H143.633L132.618 41.6188L144.294 57.2597H137.024L126.891 43.6013H119.181V57.2597H112.792V26.4188H119.181V40.2973Z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M158.588 33.4685C160.467 33.4685 162.127 33.6891 163.566 34.1296C165.005 34.5702 166.225 35.2012 167.223 36.0237C168.222 36.8461 168.971 37.8304 169.47 38.9759C169.999 40.0921 170.263 41.3404 170.263 42.7209V57.2597H157.926C153.932 57.2597 150.98 56.6577 149.071 55.4534C147.191 54.2492 146.251 52.4285 146.251 49.9907C146.251 47.5528 147.191 45.7314 149.071 44.5272C150.98 43.323 153.932 42.7209 157.926 42.7209H164.095C164.095 40.6063 163.537 39.0495 162.421 38.0508C161.334 37.0522 159.91 36.5524 158.147 36.5524C156.826 36.5524 155.533 36.7584 154.27 37.1696C153.007 37.5515 151.876 38.0803 150.878 38.7558L149.335 36.1122C149.981 35.6716 150.686 35.2893 151.45 34.9662C152.045 34.7239 152.648 34.5148 153.26 34.3386L154.488 34.0084C155.099 33.8543 155.702 33.7329 156.296 33.6448C157.119 33.5273 157.883 33.4685 158.588 33.4685ZM157.926 45.8047C154.549 45.8048 152.86 47.2004 152.86 49.9907C152.86 52.7808 154.549 54.1758 157.926 54.1759H164.095V45.8047H157.926Z" fill="#fff"/><path d="M180.334 25.5384C181.303 25.5385 182.096 25.8765 182.713 26.552C183.33 27.1981 183.638 27.9621 183.638 28.8432C183.638 29.7242 183.33 30.5027 182.713 31.1782C182.126 31.8242 181.332 32.147 180.334 32.1471C179.335 32.1471 178.527 31.8242 177.91 31.1782C177.323 30.5027 177.029 29.7242 177.029 28.8432C177.029 27.962 177.323 27.1982 177.91 26.552C178.527 25.8764 179.335 25.5384 180.334 25.5384Z" fill="#fff"/></svg>
+          <span class="site">kaiten.ru</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- ============================ CARD 2 — ПРОПУСКНАЯ СПОСОБНОСТЬ ============================ -->
+  <figure class="c2">
+    <div class="frame">
+      <div class="glow tr"></div>
+      <div class="inner">
+        <div class="eyebrow"><span class="n">ИЗМЕРЕНИЕ 1 ИЗ 4</span> ВЕС В ИНДЕКСЕ 30%</div>
+        <h2 class="title">Пропускная способность</h2>
+        <div class="lead">Сколько задач одна компания доводит до <b>«готово»</b> за месяц.</div>
+
+        <div class="compare">
+          <div class="cmp jan">
+            <div class="m">ЯНВАРЬ</div>
+            <div class="v">186</div>
+            <div class="c">закрытых задач на компанию</div>
+          </div>
+          <div class="arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><polyline points="13 4 21 12 13 20"/></svg>
+          </div>
+          <div class="cmp jun">
+            <div class="badge">+44%</div>
+            <div class="m">ИЮНЬ</div>
+            <div class="v">268</div>
+            <div class="c">закрытых задач на компанию</div>
+          </div>
+        </div>
+
+        <div class="notebox">Во II квартале бизнес закрыл на <b>20% больше задач</b>, чем в первом. Очереди начали разбираться.</div>
+
+        <div class="foot">
+          <svg class="logo" viewBox="0 0 285 86" role="img" aria-label="Kaiten"><path d="M62.7256 0.535828H22.2028C9.94052 0.535828 0 10.4709 0 22.7265V63.2735C0 75.5291 9.94052 85.4642 22.2028 85.4642H62.7256C74.9878 85.4642 84.9284 75.5291 84.9284 63.2735V22.7265C84.9284 10.4709 74.9878 0.535828 62.7256 0.535828Z" fill="#F11F24"/><path d="M33.8201 9.79336L9.25753 34.356C4.53593 39.0776 4.53593 46.7328 9.25753 51.4544L33.8201 76.017C38.5417 80.7386 46.197 80.7386 50.9186 76.017L75.4812 51.4544C80.2028 46.7328 80.2028 39.0776 75.4812 34.356L50.9186 9.79336C46.197 5.07176 38.5417 5.07176 33.8201 9.79336Z" fill="#78FFC7"/><path d="M42.2314 63.7639C53.8291 63.7639 63.2308 54.3628 63.2308 42.7659C63.2308 31.169 53.8291 21.7679 42.2314 21.7679C30.6338 21.7679 21.2321 31.169 21.2321 42.7659C21.2321 54.3628 30.6338 63.7639 42.2314 63.7639Z" fill="#7D4CCF"/><path d="M198.797 34.3505H205.626V37.4344H198.797V48.8894C198.797 50.0055 198.915 50.9601 199.15 51.7531C199.414 52.5168 199.752 53.1486 200.163 53.6479C200.604 54.1178 201.103 54.4705 201.661 54.7054C202.219 54.9404 202.807 55.0579 203.423 55.0579C204.305 55.0579 205.156 54.9251 205.979 54.6607C206.801 54.367 207.492 54.0588 208.05 53.7357L209.371 56.5994C208.49 57.04 207.476 57.407 206.331 57.7007C205.215 57.9944 204.099 58.1417 202.983 58.1417C199.664 58.1417 197.109 57.3191 195.317 55.6743C193.525 54.0295 192.629 51.7679 192.629 48.8894V37.4344H188.444V34.3505H192.629V27.3008H198.797V34.3505Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M224.072 33.4685C225.834 33.4686 227.494 33.7326 229.05 34.2612C230.607 34.7899 231.958 35.5691 233.103 36.597C234.249 37.5957 235.16 38.8143 235.835 40.2535C236.511 41.6926 236.848 43.3227 236.848 45.1436V48.2283H218.036C218.388 50.6661 219.225 52.4135 220.547 53.4709C221.898 54.5283 223.587 55.0571 225.613 55.0571C227.053 55.0571 228.389 54.8076 229.623 54.3083C230.886 53.8089 232.12 53.1039 233.324 52.1933L235.086 54.837C234.528 55.3362 233.867 55.7911 233.103 56.2023C232.369 56.6134 231.561 56.966 230.68 57.2597C229.829 57.5241 228.933 57.7301 227.993 57.877C227.053 58.0532 226.113 58.1409 225.173 58.1409C223.088 58.1409 221.178 57.8624 219.446 57.3044C217.742 56.7757 216.288 55.9974 215.083 54.9694C213.879 53.912 212.939 52.6194 212.263 51.092C211.617 49.5647 211.295 47.8021 211.295 45.8047C211.295 43.8369 211.603 42.0894 212.22 40.5621C212.866 39.0054 213.747 37.7128 214.863 36.6848C216.009 35.6274 217.36 34.8346 218.917 34.3059C220.474 33.7478 222.192 33.4685 224.072 33.4685ZM224.072 36.3323C223.22 36.3323 222.426 36.4941 221.692 36.8172C220.958 37.1402 220.311 37.6538 219.753 38.3587C219.225 39.0636 218.784 39.9747 218.432 41.0908C218.109 42.2069 217.933 43.5578 217.903 45.1436H230.239C230.239 43.6164 230.063 42.2946 229.711 41.1786C229.358 40.0625 228.888 39.1521 228.301 38.4472C227.743 37.7129 227.082 37.1841 226.318 36.861C225.584 36.5086 224.835 36.3323 224.072 36.3323Z" fill="black"/><path d="M183.418 57.2605H177.249V34.7908H183.418V57.2605Z" fill="black"/><path d="M254.646 34.3505C258.846 34.3506 261.945 35.1144 263.943 36.6417C265.969 38.1397 266.983 40.3869 266.983 43.3828V57.2605H260.814V43.3828C260.814 41.268 260.285 39.7549 259.228 38.8443C258.17 37.9046 256.643 37.4344 254.646 37.4344H248.919V57.2605H242.75V34.3505H254.646Z" fill="black"/><path d="M119.181 40.2973H126.451L136.583 26.4188H143.633L132.618 41.6188L144.294 57.2597H137.024L126.891 43.6013H119.181V57.2597H112.792V26.4188H119.181V40.2973Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M158.588 33.4685C160.467 33.4685 162.127 33.6891 163.566 34.1296C165.005 34.5702 166.225 35.2012 167.223 36.0237C168.222 36.8461 168.971 37.8304 169.47 38.9759C169.999 40.0921 170.263 41.3404 170.263 42.7209V57.2597H157.926C153.932 57.2597 150.98 56.6577 149.071 55.4534C147.191 54.2492 146.251 52.4285 146.251 49.9907C146.251 47.5528 147.191 45.7314 149.071 44.5272C150.98 43.323 153.932 42.7209 157.926 42.7209H164.095C164.095 40.6063 163.537 39.0495 162.421 38.0508C161.334 37.0522 159.91 36.5524 158.147 36.5524C156.826 36.5524 155.533 36.7584 154.27 37.1696C153.007 37.5515 151.876 38.0803 150.878 38.7558L149.335 36.1122C149.981 35.6716 150.686 35.2893 151.45 34.9662C152.045 34.7239 152.648 34.5148 153.26 34.3386L154.488 34.0084C155.099 33.8543 155.702 33.7329 156.296 33.6448C157.119 33.5273 157.883 33.4685 158.588 33.4685ZM157.926 45.8047C154.549 45.8048 152.86 47.2004 152.86 49.9907C152.86 52.7808 154.549 54.1758 157.926 54.1759H164.095V45.8047H157.926Z" fill="black"/><path d="M180.334 25.5384C181.303 25.5385 182.096 25.8765 182.713 26.552C183.33 27.1981 183.638 27.9621 183.638 28.8432C183.638 29.7242 183.33 30.5027 182.713 31.1782C182.126 31.8242 181.332 32.147 180.334 32.1471C179.335 32.1471 178.527 31.8242 177.91 31.1782C177.323 30.5027 177.029 29.7242 177.029 28.8432C177.029 27.962 177.323 27.1982 177.91 26.552C178.527 25.8764 179.335 25.5384 180.334 25.5384Z" fill="black"/></svg>
+          <span class="src">Индекс деловой эффективности · H1 2026</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- ============================ CARD 3 — БАЛАНС ПОТОКА ============================ -->
+  <figure class="c3">
+    <div class="frame">
+      <div class="glow bl green"></div>
+      <div class="inner">
+        <div class="eyebrow"><span class="n">ИЗМЕРЕНИЕ 2 ИЗ 4</span> ВЕС В ИНДЕКСЕ 25%</div>
+        <h2 class="title">Баланс потока</h2>
+        <div class="lead">Какую долю созданных задач бизнес доводит до конца. Рост <b>шесть месяцев подряд</b>.</div>
+
+        <div class="bars">
+          <div class="bar"><span class="bl">январь</span><span class="track"><span class="fill" style="width:79.2%"></span></span><span class="bv">55,3%</span></div>
+          <div class="bar"><span class="bl">февраль</span><span class="track"><span class="fill" style="width:91.1%"></span></span><span class="bv">63,6%</span></div>
+          <div class="bar"><span class="bl">март</span><span class="track"><span class="fill" style="width:92%"></span></span><span class="bv">64,2%</span></div>
+          <div class="bar"><span class="bl">апрель</span><span class="track"><span class="fill" style="width:95.6%"></span></span><span class="bv">66,7%</span></div>
+          <div class="bar"><span class="bl">май</span><span class="track"><span class="fill" style="width:96.1%"></span></span><span class="bv">67,1%</span></div>
+          <div class="bar hot"><span class="bl">июнь</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="bv">69,8%</span></div>
+        </div>
+
+        <div class="callout">
+          <span class="cn">+14,5 п.п.</span>
+          <span class="ct">за полгода. В январе до «готово» доходило чуть больше половины задач, в июне уже <b>7 из 10</b></span>
+        </div>
+
+        <div class="foot">
+          <svg class="logo" viewBox="0 0 285 86" role="img" aria-label="Kaiten"><path d="M62.7256 0.535828H22.2028C9.94052 0.535828 0 10.4709 0 22.7265V63.2735C0 75.5291 9.94052 85.4642 22.2028 85.4642H62.7256C74.9878 85.4642 84.9284 75.5291 84.9284 63.2735V22.7265C84.9284 10.4709 74.9878 0.535828 62.7256 0.535828Z" fill="#F11F24"/><path d="M33.8201 9.79336L9.25753 34.356C4.53593 39.0776 4.53593 46.7328 9.25753 51.4544L33.8201 76.017C38.5417 80.7386 46.197 80.7386 50.9186 76.017L75.4812 51.4544C80.2028 46.7328 80.2028 39.0776 75.4812 34.356L50.9186 9.79336C46.197 5.07176 38.5417 5.07176 33.8201 9.79336Z" fill="#78FFC7"/><path d="M42.2314 63.7639C53.8291 63.7639 63.2308 54.3628 63.2308 42.7659C63.2308 31.169 53.8291 21.7679 42.2314 21.7679C30.6338 21.7679 21.2321 31.169 21.2321 42.7659C21.2321 54.3628 30.6338 63.7639 42.2314 63.7639Z" fill="#7D4CCF"/><path d="M198.797 34.3505H205.626V37.4344H198.797V48.8894C198.797 50.0055 198.915 50.9601 199.15 51.7531C199.414 52.5168 199.752 53.1486 200.163 53.6479C200.604 54.1178 201.103 54.4705 201.661 54.7054C202.219 54.9404 202.807 55.0579 203.423 55.0579C204.305 55.0579 205.156 54.9251 205.979 54.6607C206.801 54.367 207.492 54.0588 208.05 53.7357L209.371 56.5994C208.49 57.04 207.476 57.407 206.331 57.7007C205.215 57.9944 204.099 58.1417 202.983 58.1417C199.664 58.1417 197.109 57.3191 195.317 55.6743C193.525 54.0295 192.629 51.7679 192.629 48.8894V37.4344H188.444V34.3505H192.629V27.3008H198.797V34.3505Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M224.072 33.4685C225.834 33.4686 227.494 33.7326 229.05 34.2612C230.607 34.7899 231.958 35.5691 233.103 36.597C234.249 37.5957 235.16 38.8143 235.835 40.2535C236.511 41.6926 236.848 43.3227 236.848 45.1436V48.2283H218.036C218.388 50.6661 219.225 52.4135 220.547 53.4709C221.898 54.5283 223.587 55.0571 225.613 55.0571C227.053 55.0571 228.389 54.8076 229.623 54.3083C230.886 53.8089 232.12 53.1039 233.324 52.1933L235.086 54.837C234.528 55.3362 233.867 55.7911 233.103 56.2023C232.369 56.6134 231.561 56.966 230.68 57.2597C229.829 57.5241 228.933 57.7301 227.993 57.877C227.053 58.0532 226.113 58.1409 225.173 58.1409C223.088 58.1409 221.178 57.8624 219.446 57.3044C217.742 56.7757 216.288 55.9974 215.083 54.9694C213.879 53.912 212.939 52.6194 212.263 51.092C211.617 49.5647 211.295 47.8021 211.295 45.8047C211.295 43.8369 211.603 42.0894 212.22 40.5621C212.866 39.0054 213.747 37.7128 214.863 36.6848C216.009 35.6274 217.36 34.8346 218.917 34.3059C220.474 33.7478 222.192 33.4685 224.072 33.4685ZM224.072 36.3323C223.22 36.3323 222.426 36.4941 221.692 36.8172C220.958 37.1402 220.311 37.6538 219.753 38.3587C219.225 39.0636 218.784 39.9747 218.432 41.0908C218.109 42.2069 217.933 43.5578 217.903 45.1436H230.239C230.239 43.6164 230.063 42.2946 229.711 41.1786C229.358 40.0625 228.888 39.1521 228.301 38.4472C227.743 37.7129 227.082 37.1841 226.318 36.861C225.584 36.5086 224.835 36.3323 224.072 36.3323Z" fill="black"/><path d="M183.418 57.2605H177.249V34.7908H183.418V57.2605Z" fill="black"/><path d="M254.646 34.3505C258.846 34.3506 261.945 35.1144 263.943 36.6417C265.969 38.1397 266.983 40.3869 266.983 43.3828V57.2605H260.814V43.3828C260.814 41.268 260.285 39.7549 259.228 38.8443C258.17 37.9046 256.643 37.4344 254.646 37.4344H248.919V57.2605H242.75V34.3505H254.646Z" fill="black"/><path d="M119.181 40.2973H126.451L136.583 26.4188H143.633L132.618 41.6188L144.294 57.2597H137.024L126.891 43.6013H119.181V57.2597H112.792V26.4188H119.181V40.2973Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M158.588 33.4685C160.467 33.4685 162.127 33.6891 163.566 34.1296C165.005 34.5702 166.225 35.2012 167.223 36.0237C168.222 36.8461 168.971 37.8304 169.47 38.9759C169.999 40.0921 170.263 41.3404 170.263 42.7209V57.2597H157.926C153.932 57.2597 150.98 56.6577 149.071 55.4534C147.191 54.2492 146.251 52.4285 146.251 49.9907C146.251 47.5528 147.191 45.7314 149.071 44.5272C150.98 43.323 153.932 42.7209 157.926 42.7209H164.095C164.095 40.6063 163.537 39.0495 162.421 38.0508C161.334 37.0522 159.91 36.5524 158.147 36.5524C156.826 36.5524 155.533 36.7584 154.27 37.1696C153.007 37.5515 151.876 38.0803 150.878 38.7558L149.335 36.1122C149.981 35.6716 150.686 35.2893 151.45 34.9662C152.045 34.7239 152.648 34.5148 153.26 34.3386L154.488 34.0084C155.099 33.8543 155.702 33.7329 156.296 33.6448C157.119 33.5273 157.883 33.4685 158.588 33.4685ZM157.926 45.8047C154.549 45.8048 152.86 47.2004 152.86 49.9907C152.86 52.7808 154.549 54.1758 157.926 54.1759H164.095V45.8047H157.926Z" fill="black"/><path d="M180.334 25.5384C181.303 25.5385 182.096 25.8765 182.713 26.552C183.33 27.1981 183.638 27.9621 183.638 28.8432C183.638 29.7242 183.33 30.5027 182.713 31.1782C182.126 31.8242 181.332 32.147 180.334 32.1471C179.335 32.1471 178.527 31.8242 177.91 31.1782C177.323 30.5027 177.029 29.7242 177.029 28.8432C177.029 27.962 177.323 27.1982 177.91 26.552C178.527 25.8764 179.335 25.5384 180.334 25.5384Z" fill="black"/></svg>
+          <span class="src">Индекс деловой эффективности · H1 2026</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- ============================ CARD 4 — СКОРОСТЬ ИСПОЛНЕНИЯ ============================ -->
+  <figure class="c4">
+    <div class="frame">
+      <div class="glow tr blue"></div>
+      <div class="inner">
+        <div class="eyebrow"><span class="n">ИЗМЕРЕНИЕ 3 ИЗ 4</span> ВЕС В ИНДЕКСЕ 25%</div>
+        <h2 class="title">Скорость исполнения</h2>
+
+        <div class="huge">
+          <div class="num">30<small> дней</small></div>
+          <div class="cap">столько средняя задача проводит <b>в работе</b> до статуса «готово»</div>
+        </div>
+
+        <div class="fbars">
+          <div class="fnote">Цикл сильно зависит от жанра работы</div>
+          <div class="fbar"><span class="bl">Поддержка</span><span class="track"><span class="fill" style="width:40%"></span></span><span class="bv">13,0</span></div>
+          <div class="fbar"><span class="bl">Маркетинг</span><span class="track"><span class="fill" style="width:53.7%"></span></span><span class="bv">17,5</span></div>
+          <div class="fbar"><span class="bl">IT и разработка</span><span class="track"><span class="fill" style="width:67.5%"></span></span><span class="bv">22,0</span></div>
+          <div class="fbar slow"><span class="bl">Бэк-офис и финансы</span><span class="track"><span class="fill" style="width:92.3%"></span></span><span class="bv">30,1</span></div>
+          <div class="fbar slow"><span class="bl">Продукт и аналитика</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="bv">32,6</span></div>
+          <div class="fnote">дней в работе, среднее по закрытым задачам функции</div>
+        </div>
+
+        <div class="notebox">За полугодие цикл подрос на <b>7%</b>. Задач стало заметно больше, и система немного замедлилась.</div>
+
+        <div class="foot">
+          <svg class="logo" viewBox="0 0 285 86" role="img" aria-label="Kaiten"><path d="M62.7256 0.535828H22.2028C9.94052 0.535828 0 10.4709 0 22.7265V63.2735C0 75.5291 9.94052 85.4642 22.2028 85.4642H62.7256C74.9878 85.4642 84.9284 75.5291 84.9284 63.2735V22.7265C84.9284 10.4709 74.9878 0.535828 62.7256 0.535828Z" fill="#F11F24"/><path d="M33.8201 9.79336L9.25753 34.356C4.53593 39.0776 4.53593 46.7328 9.25753 51.4544L33.8201 76.017C38.5417 80.7386 46.197 80.7386 50.9186 76.017L75.4812 51.4544C80.2028 46.7328 80.2028 39.0776 75.4812 34.356L50.9186 9.79336C46.197 5.07176 38.5417 5.07176 33.8201 9.79336Z" fill="#78FFC7"/><path d="M42.2314 63.7639C53.8291 63.7639 63.2308 54.3628 63.2308 42.7659C63.2308 31.169 53.8291 21.7679 42.2314 21.7679C30.6338 21.7679 21.2321 31.169 21.2321 42.7659C21.2321 54.3628 30.6338 63.7639 42.2314 63.7639Z" fill="#7D4CCF"/><path d="M198.797 34.3505H205.626V37.4344H198.797V48.8894C198.797 50.0055 198.915 50.9601 199.15 51.7531C199.414 52.5168 199.752 53.1486 200.163 53.6479C200.604 54.1178 201.103 54.4705 201.661 54.7054C202.219 54.9404 202.807 55.0579 203.423 55.0579C204.305 55.0579 205.156 54.9251 205.979 54.6607C206.801 54.367 207.492 54.0588 208.05 53.7357L209.371 56.5994C208.49 57.04 207.476 57.407 206.331 57.7007C205.215 57.9944 204.099 58.1417 202.983 58.1417C199.664 58.1417 197.109 57.3191 195.317 55.6743C193.525 54.0295 192.629 51.7679 192.629 48.8894V37.4344H188.444V34.3505H192.629V27.3008H198.797V34.3505Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M224.072 33.4685C225.834 33.4686 227.494 33.7326 229.05 34.2612C230.607 34.7899 231.958 35.5691 233.103 36.597C234.249 37.5957 235.16 38.8143 235.835 40.2535C236.511 41.6926 236.848 43.3227 236.848 45.1436V48.2283H218.036C218.388 50.6661 219.225 52.4135 220.547 53.4709C221.898 54.5283 223.587 55.0571 225.613 55.0571C227.053 55.0571 228.389 54.8076 229.623 54.3083C230.886 53.8089 232.12 53.1039 233.324 52.1933L235.086 54.837C234.528 55.3362 233.867 55.7911 233.103 56.2023C232.369 56.6134 231.561 56.966 230.68 57.2597C229.829 57.5241 228.933 57.7301 227.993 57.877C227.053 58.0532 226.113 58.1409 225.173 58.1409C223.088 58.1409 221.178 57.8624 219.446 57.3044C217.742 56.7757 216.288 55.9974 215.083 54.9694C213.879 53.912 212.939 52.6194 212.263 51.092C211.617 49.5647 211.295 47.8021 211.295 45.8047C211.295 43.8369 211.603 42.0894 212.22 40.5621C212.866 39.0054 213.747 37.7128 214.863 36.6848C216.009 35.6274 217.36 34.8346 218.917 34.3059C220.474 33.7478 222.192 33.4685 224.072 33.4685ZM224.072 36.3323C223.22 36.3323 222.426 36.4941 221.692 36.8172C220.958 37.1402 220.311 37.6538 219.753 38.3587C219.225 39.0636 218.784 39.9747 218.432 41.0908C218.109 42.2069 217.933 43.5578 217.903 45.1436H230.239C230.239 43.6164 230.063 42.2946 229.711 41.1786C229.358 40.0625 228.888 39.1521 228.301 38.4472C227.743 37.7129 227.082 37.1841 226.318 36.861C225.584 36.5086 224.835 36.3323 224.072 36.3323Z" fill="black"/><path d="M183.418 57.2605H177.249V34.7908H183.418V57.2605Z" fill="black"/><path d="M254.646 34.3505C258.846 34.3506 261.945 35.1144 263.943 36.6417C265.969 38.1397 266.983 40.3869 266.983 43.3828V57.2605H260.814V43.3828C260.814 41.268 260.285 39.7549 259.228 38.8443C258.17 37.9046 256.643 37.4344 254.646 37.4344H248.919V57.2605H242.75V34.3505H254.646Z" fill="black"/><path d="M119.181 40.2973H126.451L136.583 26.4188H143.633L132.618 41.6188L144.294 57.2597H137.024L126.891 43.6013H119.181V57.2597H112.792V26.4188H119.181V40.2973Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M158.588 33.4685C160.467 33.4685 162.127 33.6891 163.566 34.1296C165.005 34.5702 166.225 35.2012 167.223 36.0237C168.222 36.8461 168.971 37.8304 169.47 38.9759C169.999 40.0921 170.263 41.3404 170.263 42.7209V57.2597H157.926C153.932 57.2597 150.98 56.6577 149.071 55.4534C147.191 54.2492 146.251 52.4285 146.251 49.9907C146.251 47.5528 147.191 45.7314 149.071 44.5272C150.98 43.323 153.932 42.7209 157.926 42.7209H164.095C164.095 40.6063 163.537 39.0495 162.421 38.0508C161.334 37.0522 159.91 36.5524 158.147 36.5524C156.826 36.5524 155.533 36.7584 154.27 37.1696C153.007 37.5515 151.876 38.0803 150.878 38.7558L149.335 36.1122C149.981 35.6716 150.686 35.2893 151.45 34.9662C152.045 34.7239 152.648 34.5148 153.26 34.3386L154.488 34.0084C155.099 33.8543 155.702 33.7329 156.296 33.6448C157.119 33.5273 157.883 33.4685 158.588 33.4685ZM157.926 45.8047C154.549 45.8048 152.86 47.2004 152.86 49.9907C152.86 52.7808 154.549 54.1758 157.926 54.1759H164.095V45.8047H157.926Z" fill="black"/><path d="M180.334 25.5384C181.303 25.5385 182.096 25.8765 182.713 26.552C183.33 27.1981 183.638 27.9621 183.638 28.8432C183.638 29.7242 183.33 30.5027 182.713 31.1782C182.126 31.8242 181.332 32.147 180.334 32.1471C179.335 32.1471 178.527 31.8242 177.91 31.1782C177.323 30.5027 177.029 29.7242 177.029 28.8432C177.029 27.962 177.323 27.1982 177.91 26.552C178.527 25.8764 179.335 25.5384 180.334 25.5384Z" fill="black"/></svg>
+          <span class="src">Индекс деловой эффективности · H1 2026</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- ============================ CARD 5 — ДИСЦИПЛИНА СРОКОВ ============================ -->
+  <figure class="c5">
+    <div class="frame">
+      <div class="glow bl orange"></div>
+      <div class="inner">
+        <div class="eyebrow"><span class="n">ИЗМЕРЕНИЕ 4 ИЗ 4</span> ВЕС В ИНДЕКСЕ 20%</div>
+        <h2 class="title">Дисциплина сроков</h2>
+
+        <div class="huge">
+          <div class="num">25,3<small>%</small></div>
+          <div class="cap">задач с дедлайном закрыты позже срока. <b>Каждая четвёртая</b></div>
+        </div>
+
+        <div class="duo">
+          <div class="cell up">
+            <div class="t">ДЕДЛАЙНЫ СТАВЯТ ЧАЩЕ</div>
+            <div class="vals"><span class="from">24,8%</span><span class="arr">→</span><span class="to">29,0%</span></div>
+            <div class="d">доля задач со сроком выросла, культура планирования крепнет</div>
+          </div>
+          <div class="cell down">
+            <div class="t">ПОПАДАЮТ В СРОК РЕЖЕ</div>
+            <div class="vals"><span class="from">77,3%</span><span class="arr">→</span><span class="to">73,9%</span></div>
+            <div class="d">доля задач, закрытых без просрочки, за полугодие снизилась</div>
+          </div>
+        </div>
+
+        <div class="notebox">Единственное измерение индекса, которое ушло в минус. Бизнес наращивает скорость быстрее, чем точность планирования.</div>
+
+        <div class="foot">
+          <svg class="logo" viewBox="0 0 285 86" role="img" aria-label="Kaiten"><path d="M62.7256 0.535828H22.2028C9.94052 0.535828 0 10.4709 0 22.7265V63.2735C0 75.5291 9.94052 85.4642 22.2028 85.4642H62.7256C74.9878 85.4642 84.9284 75.5291 84.9284 63.2735V22.7265C84.9284 10.4709 74.9878 0.535828 62.7256 0.535828Z" fill="#F11F24"/><path d="M33.8201 9.79336L9.25753 34.356C4.53593 39.0776 4.53593 46.7328 9.25753 51.4544L33.8201 76.017C38.5417 80.7386 46.197 80.7386 50.9186 76.017L75.4812 51.4544C80.2028 46.7328 80.2028 39.0776 75.4812 34.356L50.9186 9.79336C46.197 5.07176 38.5417 5.07176 33.8201 9.79336Z" fill="#78FFC7"/><path d="M42.2314 63.7639C53.8291 63.7639 63.2308 54.3628 63.2308 42.7659C63.2308 31.169 53.8291 21.7679 42.2314 21.7679C30.6338 21.7679 21.2321 31.169 21.2321 42.7659C21.2321 54.3628 30.6338 63.7639 42.2314 63.7639Z" fill="#7D4CCF"/><path d="M198.797 34.3505H205.626V37.4344H198.797V48.8894C198.797 50.0055 198.915 50.9601 199.15 51.7531C199.414 52.5168 199.752 53.1486 200.163 53.6479C200.604 54.1178 201.103 54.4705 201.661 54.7054C202.219 54.9404 202.807 55.0579 203.423 55.0579C204.305 55.0579 205.156 54.9251 205.979 54.6607C206.801 54.367 207.492 54.0588 208.05 53.7357L209.371 56.5994C208.49 57.04 207.476 57.407 206.331 57.7007C205.215 57.9944 204.099 58.1417 202.983 58.1417C199.664 58.1417 197.109 57.3191 195.317 55.6743C193.525 54.0295 192.629 51.7679 192.629 48.8894V37.4344H188.444V34.3505H192.629V27.3008H198.797V34.3505Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M224.072 33.4685C225.834 33.4686 227.494 33.7326 229.05 34.2612C230.607 34.7899 231.958 35.5691 233.103 36.597C234.249 37.5957 235.16 38.8143 235.835 40.2535C236.511 41.6926 236.848 43.3227 236.848 45.1436V48.2283H218.036C218.388 50.6661 219.225 52.4135 220.547 53.4709C221.898 54.5283 223.587 55.0571 225.613 55.0571C227.053 55.0571 228.389 54.8076 229.623 54.3083C230.886 53.8089 232.12 53.1039 233.324 52.1933L235.086 54.837C234.528 55.3362 233.867 55.7911 233.103 56.2023C232.369 56.6134 231.561 56.966 230.68 57.2597C229.829 57.5241 228.933 57.7301 227.993 57.877C227.053 58.0532 226.113 58.1409 225.173 58.1409C223.088 58.1409 221.178 57.8624 219.446 57.3044C217.742 56.7757 216.288 55.9974 215.083 54.9694C213.879 53.912 212.939 52.6194 212.263 51.092C211.617 49.5647 211.295 47.8021 211.295 45.8047C211.295 43.8369 211.603 42.0894 212.22 40.5621C212.866 39.0054 213.747 37.7128 214.863 36.6848C216.009 35.6274 217.36 34.8346 218.917 34.3059C220.474 33.7478 222.192 33.4685 224.072 33.4685ZM224.072 36.3323C223.22 36.3323 222.426 36.4941 221.692 36.8172C220.958 37.1402 220.311 37.6538 219.753 38.3587C219.225 39.0636 218.784 39.9747 218.432 41.0908C218.109 42.2069 217.933 43.5578 217.903 45.1436H230.239C230.239 43.6164 230.063 42.2946 229.711 41.1786C229.358 40.0625 228.888 39.1521 228.301 38.4472C227.743 37.7129 227.082 37.1841 226.318 36.861C225.584 36.5086 224.835 36.3323 224.072 36.3323Z" fill="black"/><path d="M183.418 57.2605H177.249V34.7908H183.418V57.2605Z" fill="black"/><path d="M254.646 34.3505C258.846 34.3506 261.945 35.1144 263.943 36.6417C265.969 38.1397 266.983 40.3869 266.983 43.3828V57.2605H260.814V43.3828C260.814 41.268 260.285 39.7549 259.228 38.8443C258.17 37.9046 256.643 37.4344 254.646 37.4344H248.919V57.2605H242.75V34.3505H254.646Z" fill="black"/><path d="M119.181 40.2973H126.451L136.583 26.4188H143.633L132.618 41.6188L144.294 57.2597H137.024L126.891 43.6013H119.181V57.2597H112.792V26.4188H119.181V40.2973Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M158.588 33.4685C160.467 33.4685 162.127 33.6891 163.566 34.1296C165.005 34.5702 166.225 35.2012 167.223 36.0237C168.222 36.8461 168.971 37.8304 169.47 38.9759C169.999 40.0921 170.263 41.3404 170.263 42.7209V57.2597H157.926C153.932 57.2597 150.98 56.6577 149.071 55.4534C147.191 54.2492 146.251 52.4285 146.251 49.9907C146.251 47.5528 147.191 45.7314 149.071 44.5272C150.98 43.323 153.932 42.7209 157.926 42.7209H164.095C164.095 40.6063 163.537 39.0495 162.421 38.0508C161.334 37.0522 159.91 36.5524 158.147 36.5524C156.826 36.5524 155.533 36.7584 154.27 37.1696C153.007 37.5515 151.876 38.0803 150.878 38.7558L149.335 36.1122C149.981 35.6716 150.686 35.2893 151.45 34.9662C152.045 34.7239 152.648 34.5148 153.26 34.3386L154.488 34.0084C155.099 33.8543 155.702 33.7329 156.296 33.6448C157.119 33.5273 157.883 33.4685 158.588 33.4685ZM157.926 45.8047C154.549 45.8048 152.86 47.2004 152.86 49.9907C152.86 52.7808 154.549 54.1758 157.926 54.1759H164.095V45.8047H157.926Z" fill="black"/><path d="M180.334 25.5384C181.303 25.5385 182.096 25.8765 182.713 26.552C183.33 27.1981 183.638 27.9621 183.638 28.8432C183.638 29.7242 183.33 30.5027 182.713 31.1782C182.126 31.8242 181.332 32.147 180.334 32.1471C179.335 32.1471 178.527 31.8242 177.91 31.1782C177.323 30.5027 177.029 29.7242 177.029 28.8432C177.029 27.962 177.323 27.1982 177.91 26.552C178.527 25.8764 179.335 25.5384 180.334 25.5384Z" fill="black"/></svg>
+          <span class="src">Индекс деловой эффективности · H1 2026</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- ============================ CARD 6 — ОБЩИЙ ИНДЕКС ============================ -->
+  <figure class="c6">
+    <div class="frame">
+      <div class="inner">
+        <div class="kick">ГЛАВНОЕ ЧИСЛО ПОЛУГОДИЯ</div>
+
+        <div class="huge">
+          <div class="num">117,1</div>
+          <div class="cap">пункта в июне. Январь 2026 принят за 100</div>
+        </div>
+
+        <div class="chart">
+          <svg viewBox="0 0 944 380" role="img" aria-label="Индекс эффективности по месяцам, от 100 в январе до 117,1 в июне">
+            <line x1="50" y1="62.5" x2="904" y2="62.5" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="50" y1="174.8" x2="904" y2="174.8" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="50" y1="287.1" x2="904" y2="287.1" stroke="rgba(255,255,255,.28)" stroke-width="1" stroke-dasharray="5 6"/>
+            <text x="42" y="66" text-anchor="end" fill="rgba(255,255,255,.4)" font-size="17" font-weight="600" font-family="Inter,system-ui,sans-serif">120</text>
+            <text x="42" y="179" text-anchor="end" fill="rgba(255,255,255,.4)" font-size="17" font-weight="600" font-family="Inter,system-ui,sans-serif">110</text>
+            <text x="42" y="291" text-anchor="end" fill="rgba(255,255,255,.4)" font-size="17" font-weight="600" font-family="Inter,system-ui,sans-serif">100</text>
+            <path d="M50 287.1 L220.8 255.6 L391.6 101.8 L562.4 137.7 L733.2 229.8 L904 95 L904 332 L50 332 Z" fill="rgba(201,166,247,.10)"/>
+            <path d="M50 287.1 L220.8 255.6 L391.6 101.8 L562.4 137.7 L733.2 229.8 L904 95" fill="none" stroke="#c9a6f7" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="50" cy="287.1" r="7" fill="#e7d6ff" stroke="#241640" stroke-width="3"/>
+            <circle cx="220.8" cy="255.6" r="7" fill="#e7d6ff" stroke="#241640" stroke-width="3"/>
+            <circle cx="391.6" cy="101.8" r="7" fill="#e7d6ff" stroke="#241640" stroke-width="3"/>
+            <circle cx="562.4" cy="137.7" r="7" fill="#e7d6ff" stroke="#241640" stroke-width="3"/>
+            <circle cx="733.2" cy="229.8" r="7" fill="#e7d6ff" stroke="#241640" stroke-width="3"/>
+            <circle cx="904" cy="95" r="10" fill="#e7d6ff" stroke="#241640" stroke-width="3"/>
+            <text x="50" y="268" text-anchor="start" fill="rgba(255,255,255,.55)" font-size="19" font-weight="700" font-family="Inter,system-ui,sans-serif">100</text>
+            <text x="391.6" y="83" text-anchor="middle" fill="rgba(255,255,255,.55)" font-size="19" font-weight="700" font-family="Inter,system-ui,sans-serif">116,5</text>
+            <text x="733.2" y="264" text-anchor="middle" fill="rgba(255,255,255,.55)" font-size="19" font-weight="700" font-family="Inter,system-ui,sans-serif">105,1</text>
+            <text x="898" y="68" text-anchor="end" fill="#ffffff" font-size="27" font-weight="800" font-family="Inter,system-ui,sans-serif">117,1</text>
+            <text x="50" y="372" text-anchor="start" fill="rgba(255,255,255,.45)" font-size="18" font-weight="600" font-family="Inter,system-ui,sans-serif">янв</text>
+            <text x="220.8" y="372" text-anchor="middle" fill="rgba(255,255,255,.45)" font-size="18" font-weight="600" font-family="Inter,system-ui,sans-serif">фев</text>
+            <text x="391.6" y="372" text-anchor="middle" fill="rgba(255,255,255,.45)" font-size="18" font-weight="600" font-family="Inter,system-ui,sans-serif">мар</text>
+            <text x="562.4" y="372" text-anchor="middle" fill="rgba(255,255,255,.45)" font-size="18" font-weight="600" font-family="Inter,system-ui,sans-serif">апр</text>
+            <text x="733.2" y="372" text-anchor="middle" fill="rgba(255,255,255,.45)" font-size="18" font-weight="600" font-family="Inter,system-ui,sans-serif">май</text>
+            <text x="904" y="372" text-anchor="end" fill="rgba(255,255,255,.45)" font-size="18" font-weight="600" font-family="Inter,system-ui,sans-serif">июн</text>
+          </svg>
+        </div>
+
+        <div class="p">Российский бизнес закончил полугодие <b>на 17% эффективнее</b>, чем начал. Закрывает больше задач на компанию, быстрее доводит начатое и удерживает баланс с входящим потоком.</div>
+
+        <div class="metrics">
+          <div class="m"><div class="mv plus">+44%</div><div class="ml">пропускная способность</div></div>
+          <div class="m"><div class="mv plus">+26%</div><div class="ml">баланс потока</div></div>
+          <div class="m"><div class="mv minus">−7%</div><div class="ml">скорость исполнения</div></div>
+          <div class="m"><div class="mv minus">−4%</div><div class="ml">дисциплина сроков</div></div>
+        </div>
+
+        <div class="foot on-dark">
+          <svg class="logo" viewBox="0 0 285 86" role="img" aria-label="Kaiten"><path d="M62.7256 0.535828H22.2028C9.94052 0.535828 0 10.4709 0 22.7265V63.2735C0 75.5291 9.94052 85.4642 22.2028 85.4642H62.7256C74.9878 85.4642 84.9284 75.5291 84.9284 63.2735V22.7265C84.9284 10.4709 74.9878 0.535828 62.7256 0.535828Z" fill="#F11F24"/><path d="M33.8201 9.79336L9.25753 34.356C4.53593 39.0776 4.53593 46.7328 9.25753 51.4544L33.8201 76.017C38.5417 80.7386 46.197 80.7386 50.9186 76.017L75.4812 51.4544C80.2028 46.7328 80.2028 39.0776 75.4812 34.356L50.9186 9.79336C46.197 5.07176 38.5417 5.07176 33.8201 9.79336Z" fill="#78FFC7"/><path d="M42.2314 63.7639C53.8291 63.7639 63.2308 54.3628 63.2308 42.7659C63.2308 31.169 53.8291 21.7679 42.2314 21.7679C30.6338 21.7679 21.2321 31.169 21.2321 42.7659C21.2321 54.3628 30.6338 63.7639 42.2314 63.7639Z" fill="#7D4CCF"/><path d="M198.797 34.3505H205.626V37.4344H198.797V48.8894C198.797 50.0055 198.915 50.9601 199.15 51.7531C199.414 52.5168 199.752 53.1486 200.163 53.6479C200.604 54.1178 201.103 54.4705 201.661 54.7054C202.219 54.9404 202.807 55.0579 203.423 55.0579C204.305 55.0579 205.156 54.9251 205.979 54.6607C206.801 54.367 207.492 54.0588 208.05 53.7357L209.371 56.5994C208.49 57.04 207.476 57.407 206.331 57.7007C205.215 57.9944 204.099 58.1417 202.983 58.1417C199.664 58.1417 197.109 57.3191 195.317 55.6743C193.525 54.0295 192.629 51.7679 192.629 48.8894V37.4344H188.444V34.3505H192.629V27.3008H198.797V34.3505Z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M224.072 33.4685C225.834 33.4686 227.494 33.7326 229.05 34.2612C230.607 34.7899 231.958 35.5691 233.103 36.597C234.249 37.5957 235.16 38.8143 235.835 40.2535C236.511 41.6926 236.848 43.3227 236.848 45.1436V48.2283H218.036C218.388 50.6661 219.225 52.4135 220.547 53.4709C221.898 54.5283 223.587 55.0571 225.613 55.0571C227.053 55.0571 228.389 54.8076 229.623 54.3083C230.886 53.8089 232.12 53.1039 233.324 52.1933L235.086 54.837C234.528 55.3362 233.867 55.7911 233.103 56.2023C232.369 56.6134 231.561 56.966 230.68 57.2597C229.829 57.5241 228.933 57.7301 227.993 57.877C227.053 58.0532 226.113 58.1409 225.173 58.1409C223.088 58.1409 221.178 57.8624 219.446 57.3044C217.742 56.7757 216.288 55.9974 215.083 54.9694C213.879 53.912 212.939 52.6194 212.263 51.092C211.617 49.5647 211.295 47.8021 211.295 45.8047C211.295 43.8369 211.603 42.0894 212.22 40.5621C212.866 39.0054 213.747 37.7128 214.863 36.6848C216.009 35.6274 217.36 34.8346 218.917 34.3059C220.474 33.7478 222.192 33.4685 224.072 33.4685ZM224.072 36.3323C223.22 36.3323 222.426 36.4941 221.692 36.8172C220.958 37.1402 220.311 37.6538 219.753 38.3587C219.225 39.0636 218.784 39.9747 218.432 41.0908C218.109 42.2069 217.933 43.5578 217.903 45.1436H230.239C230.239 43.6164 230.063 42.2946 229.711 41.1786C229.358 40.0625 228.888 39.1521 228.301 38.4472C227.743 37.7129 227.082 37.1841 226.318 36.861C225.584 36.5086 224.835 36.3323 224.072 36.3323Z" fill="#fff"/><path d="M183.418 57.2605H177.249V34.7908H183.418V57.2605Z" fill="#fff"/><path d="M254.646 34.3505C258.846 34.3506 261.945 35.1144 263.943 36.6417C265.969 38.1397 266.983 40.3869 266.983 43.3828V57.2605H260.814V43.3828C260.814 41.268 260.285 39.7549 259.228 38.8443C258.17 37.9046 256.643 37.4344 254.646 37.4344H248.919V57.2605H242.75V34.3505H254.646Z" fill="#fff"/><path d="M119.181 40.2973H126.451L136.583 26.4188H143.633L132.618 41.6188L144.294 57.2597H137.024L126.891 43.6013H119.181V57.2597H112.792V26.4188H119.181V40.2973Z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M158.588 33.4685C160.467 33.4685 162.127 33.6891 163.566 34.1296C165.005 34.5702 166.225 35.2012 167.223 36.0237C168.222 36.8461 168.971 37.8304 169.47 38.9759C169.999 40.0921 170.263 41.3404 170.263 42.7209V57.2597H157.926C153.932 57.2597 150.98 56.6577 149.071 55.4534C147.191 54.2492 146.251 52.4285 146.251 49.9907C146.251 47.5528 147.191 45.7314 149.071 44.5272C150.98 43.323 153.932 42.7209 157.926 42.7209H164.095C164.095 40.6063 163.537 39.0495 162.421 38.0508C161.334 37.0522 159.91 36.5524 158.147 36.5524C156.826 36.5524 155.533 36.7584 154.27 37.1696C153.007 37.5515 151.876 38.0803 150.878 38.7558L149.335 36.1122C149.981 35.6716 150.686 35.2893 151.45 34.9662C152.045 34.7239 152.648 34.5148 153.26 34.3386L154.488 34.0084C155.099 33.8543 155.702 33.7329 156.296 33.6448C157.119 33.5273 157.883 33.4685 158.588 33.4685ZM157.926 45.8047C154.549 45.8048 152.86 47.2004 152.86 49.9907C152.86 52.7808 154.549 54.1758 157.926 54.1759H164.095V45.8047H157.926Z" fill="#fff"/><path d="M180.334 25.5384C181.303 25.5385 182.096 25.8765 182.713 26.552C183.33 27.1981 183.638 27.9621 183.638 28.8432C183.638 29.7242 183.33 30.5027 182.713 31.1782C182.126 31.8242 181.332 32.147 180.334 32.1471C179.335 32.1471 178.527 31.8242 177.91 31.1782C177.323 30.5027 177.029 29.7242 177.029 28.8432C177.029 27.962 177.323 27.1982 177.91 26.552C178.527 25.8764 179.335 25.5384 180.334 25.5384Z" fill="#fff"/></svg>
+          <span class="site">kaiten.ru</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+</main>
+</body>
+</html>

@@ -479,6 +479,7 @@ Carousel:
 - Previous button: white circular button with neutral border.
 - Next button: filled violet circular button.
 - Counter: neutral text with current index emphasis.
+- **Отступ стрелок-листалки по вертикали (ОБЯЗАТЕЛЬНО):** когда в интерфейсе есть стрелки для листания контента вбок (карусель/слайдер/таб-скроллер), вертикальный отступ сверху и снизу от блока стрелок равен **внутреннему** отступу (inner): **desktop 48px · tablet 32px · mobile 24px**. Т.е. блок со стрелками отбивается от соседнего контента сверху и снизу на inner-значение (`space-12 / space-8 / space-6`), mobile-first: `my-6 md:my-8 lg:my-12`.
 
 Header:
 

@@ -16,7 +16,11 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
  *  - крайние состояния кнопок (disabled в начале/конце), пересчёт на resize.
  *
  * Адаптив: desktop — карточки 384px; ≤768px — 318px с «выглядыванием»
- * следующей карточки справа и левым отступом 16px; заголовок влево на мобилке.
+ * следующей карточки справа; заголовок влево на мобилке.
+ * Карусель full-bleed (≤1279px): лента листается до самых краёв экрана, контент
+ * не режется слева. Концевое поле после последней карточки — планшет 24px, мобилка 16px.
+ * Hover-подсветка кнопки «Читать кейс» — только на устройствах с мышью (@media hover:hover),
+ * чтобы на тач не «залипала» при тапе по карточке.
  * Self-contained: scoped `<style>` под `.revx-mock`, палитра V01.
  */
 
@@ -59,46 +63,62 @@ const STYLE = `
   --brand-100:#7d4ccf; --brand-hover:#6a3cbf; --brand-48:rgba(125,76,207,.48); --brand-12:#efe9f9;
   --border-default:#dbe1e0; --text-title:#2d2d2d; --text-secondary:#757575; --surface-section:#f7f7f8;
   font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
-  background:var(--surface-section); padding:48px 0;
+  background:var(--surface-section); padding:96px 0;
 }
 .revx-mock *{box-sizing:border-box;}
 .revx-mock .revx__in{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--sp-4); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
 .revx-mock .revx__head{display:flex; flex-direction:column; gap:var(--sp-4); align-items:center; text-align:center; width:100%;}
 .revx-mock .revx__head h2{font-size:36px; line-height:40px; font-weight:var(--fw-semi); color:var(--text-title); margin:0;}
-.revx-mock .revx__head p{font-size:16px; line-height:24px; color:var(--text-title); max-width:680px; margin:0;}
+.revx-mock .revx__head p{font-size:16px; line-height:24px; color:var(--text-title); margin:0;}
 .revx-mock .revx__wrap{width:100%; overflow:hidden; position:relative;}
-.revx-mock .revx__track{display:flex; gap:var(--sp-8); align-items:stretch; width:max-content; transition:transform .35s ease;}
-.revx-mock .otz{flex-shrink:0; width:384px; height:460px; background:#fff; border-radius:var(--radius-2xl); padding:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6);}
+.revx-mock .revx__track{display:flex; gap:var(--sp-8); align-items:stretch; width:max-content; transition:transform .24s cubic-bezier(.2,0,.2,1);}
+.revx-mock .otz{flex-shrink:0; width:384px; height:420px; background:#fff; border-radius:var(--radius-2xl); padding:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6);}
 .revx-mock .otz__top{display:flex; flex-direction:column; gap:var(--sp-5); flex:1; min-height:0;}
-.revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4);}
+.revx-mock .otz__hd{display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4);}
 .revx-mock .otz__co{font-size:18px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title);}
-.revx-mock .otz__co img{height:60px; width:auto; max-width:180px; object-fit:contain; display:block;}
+.revx-mock .otz__co img{height:48px; width:auto; max-width:180px; object-fit:contain; display:block;}
+.revx-mock .otz__logo-mix{display:flex; align-items:center; gap:10px;}
+.revx-mock .otz__logo-emoji{font-size:40px; line-height:1; flex-shrink:0;}
+.revx-mock .otz__logo-text{font-size:16px; line-height:20px; font-weight:var(--fw-semi); max-width:150px;}
 .revx-mock .otz__q{flex-shrink:0; width:79px; height:60px; color:#f3f4f6;}
-.revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-secondary); flex:1; display:flex; align-items:center;}
-.revx-mock .otz__author{display:flex; gap:var(--sp-4); align-items:center;}
+.revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-secondary); flex:1; display:flex; align-items:flex-start;}
+.revx-mock .otz__author{display:flex; gap:var(--sp-4); align-items:center; min-height:72px;}
 .revx-mock .otz__av{position:relative; overflow:hidden; width:56px; height:56px; border-radius:9999px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:var(--fw-semi); color:#fff; background:#c4b5e0;}
 .revx-mock .otz__av img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
 .revx-mock .otz__who{display:flex; flex-direction:column; min-width:0;}
 .revx-mock .otz__name{font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--text-title);}
 .revx-mock .otz__role{font-size:16px; line-height:24px; color:var(--text-secondary);}
 .revx-mock .otz__btn{align-self:flex-start; display:inline-flex; align-items:center; border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:10px var(--sp-4); font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--brand-100); background:#fff; text-decoration:none; cursor:pointer; transition:background .18s, border-color .18s, color .18s;}
-.revx-mock .otz__btn:hover{border-color:var(--brand-48); background:var(--brand-12); color:var(--brand-hover);}
+/* hover-подсветка только на устройствах с мышью — на тач не «залипает» при тапе по карточке */
+@media(hover:hover){ .revx-mock .otz__btn:hover{border-color:var(--brand-48); background:var(--brand-12); color:var(--brand-hover);} }
 .revx-mock .revx__nav{display:flex; gap:14px; align-items:center;}
-.revx-mock .revx__navbtn{width:48px; height:48px; border-radius:9999px; border:1px solid var(--border-default); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s, box-shadow .18s;}
+.revx-mock .revx__navbtn{width:40px; height:40px; border-radius:9999px; border:1px solid var(--border-default); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s, box-shadow .18s;}
 .revx-mock .revx__navbtn:hover:not(:disabled){background:var(--brand-12); border-color:var(--brand-48); color:var(--brand-hover);}
 .revx-mock .revx__navbtn:focus-visible{outline:none; box-shadow:0 0 0 4px rgba(152,162,179,.14);}
 .revx-mock .revx__navbtn:disabled{background:#fff; border-color:var(--border-default); color:var(--border-default); cursor:default;}
-.revx-mock .revx__navbtn svg{width:24px; height:24px;}
+.revx-mock .revx__navbtn svg{width:20px; height:20px;}
+.revx-mock .revx__counter{min-width:48px; text-align:center; font-size:16px; line-height:24px; color:var(--text-title); font-variant-numeric:tabular-nums;}
+.revx-mock .revx__counter b{color:var(--brand-100); font-weight:var(--fw-med);}
 @media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + 64px); padding:0 32px;} }
-@media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8);} }
+@media(min-width:768px) and (max-width:1279px){ .revx-mock{padding:64px 0 32px;} .revx-mock .revx__in{gap:var(--sp-8);} .revx-mock .revx__track{gap:var(--sp-6);} }
+/* планшет/мобилка: лента отзывов во всю ширину экрана (full-bleed), карточки доходят до краёв.
+   padding-inline задаёт как левый отступ первой карточки, так и концевое поле после последней:
+   мобилка — 16px (базово), планшет — 24px справа (оверрайд ниже). */
+@media(max-width:1279px){
+  .revx-mock .revx__wrap{margin-inline:calc(-1 * var(--sp-4)); width:calc(100% + 2 * var(--sp-4)); padding-inline:var(--sp-4);}
+}
+@media(min-width:769px) and (max-width:1279px){
+  .revx-mock .revx__wrap{padding-right:var(--sp-6);}
+}
 @media(max-width:768px){
-  .revx-mock .revx__in{gap:var(--sp-8); padding:0 0 0 var(--sp-4);}
+  .revx-mock{padding:48px 0 24px;}
+  .revx-mock .revx__in{gap:var(--sp-6); padding:0 var(--sp-4);}
   .revx-mock .revx__head{align-items:flex-start; text-align:left; margin-inline:0;}
   .revx-mock .revx__head h2{font-size:24px; line-height:32px;}
   .revx-mock .revx__track{gap:var(--sp-3);}
-  .revx-mock .otz{width:318px; max-width:calc(100vw - 64px); height:auto;}
+  .revx-mock .otz{width:318px; max-width:none; height:auto;}
   .revx-mock .otz__co{font-size:16px; line-height:24px;}
-  .revx-mock .otz__co img{height:50px; max-width:150px;}
+  .revx-mock .otz__co img{height:38px; max-width:150px;}
 }
 `;
 
@@ -118,7 +138,18 @@ function QuoteMark() {
 function renderLogo(logo: ReactNode) {
   if (typeof logo === 'string') {
     const isImg = /^https?:\/\//.test(logo) || logo.includes('/') || /\.(png|jpe?g|svg|webp|gif)$/i.test(logo);
-    return isImg ? <img src={logo} alt="" onError={(e) => e.currentTarget.remove()} /> : logo;
+    if (isImg) return <img src={logo} alt="" onError={(e) => e.currentTarget.remove()} />;
+    // «эмодзи + текст»: эмодзи крупно, подпись сбоку (узкая — переносится на 2 строки)
+    const mix = logo.match(/^(\p{Extended_Pictographic}️?)\s+(.+)$/u);
+    if (mix) {
+      return (
+        <span className="otz__logo-mix">
+          <span className="otz__logo-emoji">{mix[1]}</span>
+          <span className="otz__logo-text">{mix[2]}</span>
+        </span>
+      );
+    }
+    return logo;
   }
   return logo;
 }
@@ -137,7 +168,7 @@ const PLACEHOLDER_REVIEWS: Review[] = Array.from({ length: 4 }, (_, i) => ({
 
 const GAP = 32;
 
-export function ReviewSlider({ title = 'Заголовок секции отзывов', subtitle, reviews }: ReviewSliderProps) {
+export function ReviewSlider({ title = '', subtitle, reviews }: ReviewSliderProps) {
   const data = reviews && reviews.length ? reviews : PLACEHOLDER_REVIEWS;
 
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -158,25 +189,22 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
     return first.getBoundingClientRect().width + GAP;
   }, []);
 
-  const maxIdx = useCallback(() => {
+  const apply = useCallback(() => {
     const wrap = wrapRef.current;
     const track = trackRef.current;
-    if (!wrap || !track) return 0;
+    if (!wrap || !track) return;
     const s = step();
-    if (!s) return 0;
-    const vis = Math.max(1, Math.floor((wrap.clientWidth + GAP) / s));
-    return Math.max(0, track.children.length - vis);
-  }, [step]);
-
-  const apply = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const m = maxIdx();
+    if (!s) return;
+    const cs = getComputedStyle(wrap);
+    const visible = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    // максимальный сдвиг — последняя карточка прижата к правому краю, без зарезания
+    const maxT = Math.max(0, track.scrollWidth - visible);
+    const m = Math.ceil(maxT / s);
     const clamped = Math.min(idx, m);
     if (clamped !== idx) setIdx(clamped);
-    track.style.transform = `translateX(-${clamped * step()}px)`;
+    track.style.transform = `translateX(-${Math.min(clamped * s, maxT)}px)`;
     setMaxI(m);
-  }, [idx, maxIdx, step]);
+  }, [idx, step]);
 
   useEffect(() => {
     apply();
@@ -192,10 +220,12 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
     <section className="revx-mock" aria-label="Отзывы клиентов">
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="revx__in">
-        <div className="revx__head">
-          <h2>{title}</h2>
-          {subtitle ? <p>{subtitle}</p> : null}
-        </div>
+        {title || subtitle ? (
+          <div className="revx__head">
+            {title ? <h2>{title}</h2> : null}
+            {subtitle ? <p>{subtitle}</p> : null}
+          </div>
+        ) : null}
 
         <div className="revx__wrap" ref={wrapRef}>
           <div className="revx__track" ref={trackRef}>
@@ -210,9 +240,15 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
                 </div>
 
                 <div className="otz__author">
-                  <span className="otz__av" style={r.avatarBg ? { background: r.avatarBg } : undefined}>
-                    {r.avatar ? <img src={r.avatar} alt={r.name} onError={(e) => e.currentTarget.remove()} /> : null}
-                    {r.avatarInitial ?? r.name.charAt(0)}
+                  <span
+                    className="otz__av"
+                    style={r.avatar ? { background: 'transparent' } : r.avatarBg ? { background: r.avatarBg } : undefined}
+                  >
+                    {r.avatar ? (
+                      <img src={r.avatar} alt={r.name} onError={(e) => e.currentTarget.remove()} />
+                    ) : (
+                      r.avatarInitial ?? r.name.charAt(0)
+                    )}
                   </span>
                   <span className="otz__who">
                     <span className="otz__name">{r.name}</span>
@@ -228,8 +264,8 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
           </div>
         </div>
 
-        {/* Листалки нужны только когда отзывов больше 3 (иначе всё видно сразу). */}
-        {data.length > 3 ? (
+        {/* Листалки показываются, когда карточки не помещаются по ширине (планшет/мобилка). */}
+        {maxI > 0 ? (
           <div className="revx__nav" role="group" aria-label="Листать отзывы">
             <button
               type="button"
@@ -240,12 +276,13 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
             </button>
+            <span className="revx__counter"><b>{Math.min(idx + 1, data.length)}</b> / {data.length}</span>
             <button
               type="button"
               className="revx__navbtn"
               aria-label="Следующий отзыв"
               disabled={idx >= maxI}
-              onClick={() => { if (idx < maxIdx()) setIdx(idx + 1); }}
+              onClick={() => { if (idx < maxI) setIdx(idx + 1); }}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
             </button>

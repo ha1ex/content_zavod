@@ -1,233 +1,251 @@
-// ComparisonTableMock.tsx — адаптивная таблица «Сравнение функций» лендинга Kaiten.
-// Правила взяты из Figma Landing-DS (node 2780:38484): три брейкпоинта
-// desktop / tablet / mobile, токены DS V01.
-// Self-contained: scoped <style> (.kct), единственная зависимость — React.
-//   • Шрифт Roboto; заголовок 36→24, SemiBold #2d2d2d.
-//   • Колонка «Кайтен» — сплошная плашка #efe9f9 со скруглением сверху.
-//   • Секции-аккордеоны: раскрыта #7d4ccf + шеврон вверх, свёрнута #2d2d2d + вниз.
-//   • Ячейки: есть = зелёная галка #22c55e, нет = красное тире #ef4444.
-// Контент prop-driven (см. SECTIONS) — легко заменить под нужное сравнение.
+// ComparisonTableMock.tsx — переиспользуемая адаптивная таблица «Кайтен vs конкурент».
+// Эталон стиля выверен на лендинге «Сравнение Кайтен с Trello» (июль 2026) и
+// соответствует DS-спеке wiki/design-system/components/comparison-table.md.
+//
+// КОНТЕНТ НЕ ЗАШИТ — заголовок, название конкурента, разделы/строки и сноска
+// приходят пропсами; один шаблон заполняется любой аналогичной структурой.
+//
+// Раскрытие: десктоп (≥1280) — раскрыты ВСЕ разделы; планшет/мобила — только первый.
+//
+// Ключевые решения стиля (не менять без причины):
+//   • Grid: minmax(0,1fr) + 25% + 25% — колонки продуктов занимают ½ ширины.
+//   • Фоновые панели во всю высоту: Кайтен #EFE9F9, конкурент #F5F5F5,
+//     скругление 24px сверху (8px на мобиле). В шапке Кайтена — логотип.
+//   • Заголовок таблицы живёт В ШАПКЕ (левая ячейка), 30px → 24px (планшет/мобила);
+//     на мобиле занимает всю ширину, панели опускаются под него (--kct-bg-top).
+//   • Заголовок раздела: шеврон 24px СЛЕВА + зазор 12px; раскрыт — лиловый
+//     #7D4CCF без нижней линии; свёрнут — #2D2D2D с линией. Границы разделов
+//     #BDBDBD (одна линия на границе: top есть только у первого раздела).
+//   • Строки: текст выровнен по заголовку раздела (padding-left 36px);
+//     разделители #D1D5DB, в колонке Кайтена rgba(125,76,207,.28);
+//     последняя строка раздела замыкается контрастной #BDBDBD.
+//   • Иконки: ✓ зелёная #4CAF51 в белом круге 24px (20 на мобиле);
+//     «нет» — красный минус #EF4444 10×1.5px (не жирный).
+//   • Мобила: заголовки разделов 14px, строки 12px, ячейки min-height 40px.
+//   • Сноска обязательна — третичный #9E9E9E.
 
 import * as React from "react";
 
-const styles = `
-.kct {
-  --brand:#7d4ccf; --brand-12:#efe9f9;
-  --ink:#2d2d2d; --muted:#5f5f5f; --tertiary:#9e9e9e;
-  --border:#e5e7eb; --divider:#f0f0f0;
-  --ok:#22c55e; --no:#ef4444; --white:#fff;
-  --colA:156px; --colB:156px; --rowpad:13px; --feat:14px;
-  font-family:"Roboto",system-ui,-apple-system,sans-serif;
-  letter-spacing:-.2px; color:var(--ink);
-  -webkit-font-smoothing:antialiased;
-}
-.kct *, .kct *::before, .kct *::after { box-sizing:border-box; margin:0; padding:0; }
-.kct button { font:inherit; letter-spacing:inherit; color:inherit; background:none; border:none; cursor:pointer; }
-
-.kct-card {
-  max-width:1040px; margin:0 auto;
-  background:var(--white); border-radius:24px; padding:24px 32px 20px;
-}
-.kct-table { position:relative; }
-
-/* фиолетовая плашка колонки «Кайтен» во всю высоту таблицы */
-.kct-band {
-  position:absolute; top:0; bottom:0; right:var(--colB); width:var(--colA);
-  background:var(--brand-12); border-radius:16px 16px 0 0; z-index:0; pointer-events:none;
+export interface KctRow {
+  label: React.ReactNode;
+  /** Функция есть у Кайтена */
+  a: boolean;
+  /** Функция есть у конкурента */
+  b: boolean;
 }
 
-.kct-row { position:relative; z-index:1; display:grid;
-  grid-template-columns:minmax(0,1fr) var(--colA) var(--colB); align-items:center; }
-
-/* ── header ── */
-.kct-head { padding-top:6px; }
-.kct-h-title { padding:8px 4px 18px; font-size:36px; line-height:40px; font-weight:600; color:var(--ink); }
-.kct-h-prod { display:flex; align-items:center; justify-content:center; gap:8px;
-  padding:18px 8px; font-size:16px; line-height:24px; font-weight:600; color:var(--ink); }
-.kct-h-prod--a { font-weight:600; }
-.kct-logo { width:22px; height:22px; flex:none; }
-
-/* ── section header ── */
-.kct-sec { width:100%; text-align:left; }
-.kct-sec-label { display:inline-flex; align-items:center; gap:8px;
-  padding:16px 4px; font-size:15px; line-height:20px; }
-.kct-sec[data-open="true"] .kct-sec-label { color:var(--brand); font-weight:500; }
-.kct-sec[data-open="false"] .kct-sec-label { color:var(--ink); font-weight:600; }
-.kct-chev { width:16px; height:16px; flex:none; transition:transform .22s cubic-bezier(.2,0,.2,1); }
-.kct-sec[data-open="true"] .kct-chev { transform:rotate(180deg); }
-
-/* ── data row ── */
-.kct-data { border-top:1px solid var(--divider); }
-.kct-feat { padding:var(--rowpad) 4px; font-size:var(--feat); line-height:20px; color:var(--muted); }
-.kct-cell { display:flex; align-items:center; justify-content:center; padding:var(--rowpad) 8px; }
-.kct-ok { color:var(--ok); }
-.kct-no { width:14px; height:2.5px; border-radius:2px; background:var(--no); display:inline-block; }
-
-.kct-foot { padding:16px 4px 4px; font-size:13px; line-height:18px; color:var(--tertiary); }
-
-/* ───────────── TABLET ───────────── */
-@media (max-width:900px) {
-  .kct { --colA:128px; --colB:128px; --rowpad:10px; }
-  .kct-card { padding:20px 24px 16px; border-radius:20px; }
-  .kct-h-title { font-size:24px; line-height:32px; padding:6px 4px 14px; }
-  .kct-h-prod { font-size:15px; padding:14px 6px; }
+export interface KctSection {
+  title: React.ReactNode;
+  rows: KctRow[];
 }
-/* ───────────── MOBILE ───────────── */
-@media (max-width:560px) {
-  .kct { --colA:74px; --colB:74px; --rowpad:9px; --feat:12px; }
-  .kct-card { padding:16px 14px 14px; border-radius:16px; }
-  .kct-h-title { font-size:22px; line-height:28px; padding:4px 2px 12px; }
-  .kct-h-prod { font-size:12px; gap:5px; padding:12px 4px; }
-  .kct-logo { width:16px; height:16px; }
-  .kct-sec-label { font-size:13px; padding:13px 2px; }
-  .kct-feat { padding-left:2px; }
-  .kct-foot { font-size:12px; line-height:17px; }
+
+export interface ComparisonTableProps {
+  /** Заголовок таблицы (в шапке слева), напр. «Кайтен и X: сравнение функций» */
+  title: React.ReactNode;
+  /** Название конкурента в шапке правой колонки */
+  competitor: React.ReactNode;
+  /** Разделы со строками; по умолчанию раскрыт первый */
+  sections: KctSection[];
+  /** Сноска: источник + дата актуальности (обязательна по DS) */
+  footnote: React.ReactNode;
+  /** Логотип Кайтена в шапке; по умолчанию — встроенный */
+  kaitenLogo?: React.ReactNode;
+  className?: string;
+}
+
+const CSS = `
+.kct{--brand:#7d4ccf;--brand-12:#efe9f9;--ink:#2d2d2d;--tert:#9e9e9e;
+  --line:#d1d5db;--line-strong:#bdbdbd;--line-k:rgba(125,76,207,.28);
+  --ok:#4caf51;--no:#ef4444;--sec-bg:#f5f5f5;--colw:25%;
+  font-family:'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  letter-spacing:-.2px;color:var(--ink);-webkit-font-smoothing:antialiased}
+.kct *,.kct *::before,.kct *::after{box-sizing:border-box;margin:0;padding:0}
+.kct button{font:inherit;letter-spacing:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+.kct-table{position:relative}
+.kct-bg{position:absolute;top:var(--kct-bg-top,0px);bottom:0;border-radius:24px 24px 0 0;z-index:0;pointer-events:none}
+.kct-bg--a{right:var(--colw);width:var(--colw);background:var(--brand-12)}
+.kct-bg--b{right:0;width:var(--colw);background:var(--sec-bg)}
+.kct-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) var(--colw) var(--colw)}
+
+.kct-hcell{display:flex;align-items:center;justify-content:center;min-height:92px;padding:16px}
+.kct-hcell--label{justify-content:flex-start;padding-left:0}
+.kct-title{font-size:30px;line-height:36px;font-weight:600;letter-spacing:0;text-align:left}
+.kct-hcell--b{font-size:24px;line-height:32px;font-weight:500}
+.kct-logo{height:44px;width:auto;color:var(--ink)}
+
+.kct-sec{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;
+  border-bottom:1px solid var(--line-strong);text-align:left;padding:16px 0}
+.kct-sec--first{border-top:1px solid var(--line-strong)}
+.kct-sec[aria-expanded="true"]{border-bottom-color:transparent}
+.kct-sec-t{font-size:18px;line-height:28px;font-weight:600;transition:color .18s}
+.kct-sec[aria-expanded="true"] .kct-sec-t{color:var(--brand)}
+.kct-chev{order:-1;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;color:#757575;flex:none;transition:color .18s}
+.kct-chev svg{width:20px;height:20px;transition:transform .24s cubic-bezier(.2,0,.2,1)}
+.kct-sec[aria-expanded="true"] .kct-chev{color:var(--brand)}
+.kct-sec[aria-expanded="true"] .kct-chev svg{transform:rotate(180deg)}
+
+.kct-cell{display:flex;align-items:center;min-height:48px;padding:8px 16px;border-bottom:1px solid var(--line)}
+.kct-cell--label{font-size:16px;line-height:24px;padding-left:36px;padding-right:24px}
+.kct-cell--a,.kct-cell--b{justify-content:center}
+.kct-cell--a{border-bottom-color:var(--line-k)}
+.kct-cell--last{border-bottom-color:var(--line-strong)}
+.kct-cell--hidden{display:none}
+
+.kct-ic{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#fff;flex:none;box-shadow:0 0 0 1px rgba(45,45,45,.04)}
+.kct-ic--yes{color:var(--ok)}
+.kct-ic--yes svg{width:15px;height:15px}
+.kct-ic--no::after{content:"";width:10px;height:1.5px;border-radius:9999px;background:var(--no)}
+
+.kct-note{margin-top:24px;font-size:14px;line-height:20px;color:var(--tert)}
+
+@media(min-width:768px) and (max-width:1279px){
+  .kct-hcell{min-height:72px}
+  .kct-title,.kct-hcell--b{font-size:24px;line-height:32px}
+  .kct-logo{height:32px}
+  .kct-cell{min-height:44px}
+  .kct-cell--label{font-size:14px;line-height:20px;padding-right:16px}
+  .kct-sec-t{font-size:16px;line-height:24px}
+}
+@media(max-width:767px){
+  .kct-bg{border-radius:8px 8px 0 0}
+  .kct-hcell{min-height:56px;padding:10px 6px}
+  .kct-hcell--label{grid-column:1/-1;padding:0 0 16px;min-height:0}
+  .kct-hcell--a{grid-column:2}
+  .kct-hcell--b{grid-column:3;font-size:14px;line-height:20px;font-weight:600}
+  .kct-title{font-size:24px;line-height:32px}
+  .kct-logo{height:20px}
+  .kct-cell{min-height:40px;padding:6px 8px}
+  .kct-cell--label{font-size:12px;line-height:16px;padding-left:36px;padding-right:10px}
+  .kct-ic{width:20px;height:20px}
+  .kct-ic--yes svg{width:12px;height:12px}
+  .kct-sec{padding:12px 0}
+  .kct-sec-t{font-size:14px;line-height:20px}
+  .kct-note{margin-top:16px;font-size:12px;line-height:16px}
 }
 `;
 
-function KaitenLogo() {
+const Check = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+);
+const Chevron = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+);
+const KaitenLogoDefault = () => (
+  <svg className="kct-logo" viewBox="0 0 44 44" role="img" aria-label="Кайтен">
+    <path d="M32.5 0h-21C5.15 0 0 5.15 0 11.5v21C0 38.85 5.15 44 11.5 44h21C38.85 44 44 38.85 44 32.5v-21C44 5.15 38.85 0 32.5 0Z" fill="#F11F24" />
+    <path d="M17.52 4.8 4.8 17.52c-2.45 2.45-2.45 6.41 0 8.86L17.52 39.1c2.45 2.45 6.41 2.45 8.86 0L39.1 26.38c2.45-2.45 2.45-6.41 0-8.86L26.38 4.8c-2.45-2.45-6.41-2.45-8.86 0Z" fill="#78FFC7" />
+    <circle cx="21.88" cy="21.88" r="10.88" fill="#7D4CCF" />
+  </svg>
+);
+
+function Cell({ has, kaiten, hidden, last }: { has: boolean; kaiten?: boolean; hidden?: boolean; last?: boolean }) {
+  const cls = [
+    "kct-cell",
+    kaiten ? "kct-cell--a" : "kct-cell--b",
+    hidden ? "kct-cell--hidden" : "",
+    last ? "kct-cell--last" : "",
+  ].filter(Boolean).join(" ");
   return (
-    <svg className="kct-logo" viewBox="0 0 104 104" fill="none" aria-hidden="true">
-      <path d="M76.81 0H27.19C12.17 0 0 12.17 0 27.17v49.66C0 91.83 12.17 104 27.19 104h49.62C91.83 104 104 91.83 104 76.83V27.17C104 12.17 91.83 0 76.81 0Z" fill="#F11F24" />
-      <path d="M41.41 11.34 11.34 41.41c-5.79 5.78-5.79 15.16 0 20.94l30.07 30.08c5.79 5.78 15.16 5.78 20.94 0l30.08-30.08c5.78-5.78 5.78-15.16 0-20.94L62.35 11.34c-5.78-5.79-15.16-5.79-20.94 0Z" fill="#78FFC7" />
-      <path d="M51.72 77.43c14.2 0 25.71-11.51 25.71-25.72C77.43 37.51 65.92 26 51.72 26 37.51 26 26 37.51 26 51.71c0 14.21 11.51 25.72 25.72 25.72Z" fill="#7D4CCF" />
-    </svg>
+    <div className={cls}>
+      {has ? <i className="kct-ic kct-ic--yes"><Check /></i> : <i className="kct-ic kct-ic--no" />}
+    </div>
   );
 }
 
-function Chevron() {
-  return (
-    <svg className="kct-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
+export function ComparisonTableMock({ title, competitor, sections, footnote, kaitenLogo, className }: ComparisonTableProps) {
+  const [open, setOpen] = React.useState(() => sections.map((_, i) => i === 0));
+  const tableRef = React.useRef<HTMLDivElement>(null);
+  const headRef = React.useRef<HTMLDivElement>(null);
+  const modeRef = React.useRef<string | null>(null);
 
-function Cell({ on }: { on: boolean }) {
-  return on ? (
-    <span className="kct-cell">
-      <svg className="kct-ok" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-label="Есть">
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
-    </span>
-  ) : (
-    <span className="kct-cell"><span className="kct-no" aria-label="Нет" role="img" /></span>
-  );
-}
+  // Правило раскрытия: десктоп (≥1280) — все разделы раскрыты,
+  // планшет/мобила — только первый. Ручные клики внутри режима не перетираются.
+  React.useEffect(() => {
+    const apply = () => {
+      const desktop = window.innerWidth >= 1280;
+      const mode = desktop ? "d" : "m";
+      if (modeRef.current === mode) return;
+      modeRef.current = mode;
+      setOpen(sections.map((_, i) => desktop || i === 0));
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, [sections.length]);
 
-type Section = { title: string; rows: { name: string; a: boolean; b: boolean }[] };
-
-const COMPETITOR = "Zendesk";
-
-const SECTIONS: Section[] = [
-  {
-    title: "Задачи и проекты",
-    rows: [
-      { name: "Канбан- и scrum-доски", a: true, b: true },
-      { name: "Диаграмма Ганта", a: true, b: false },
-      { name: "Автоматизация процессов и правила", a: true, b: true },
-      { name: "Связи и зависимости задач", a: true, b: false },
-      { name: "Учёт времени и трудозатрат", a: true, b: true },
-      { name: "Портфели проектов", a: true, b: false },
-    ],
-  },
-  {
-    title: "Поддержка и сервис-деск",
-    rows: [
-      { name: "Очереди обращений", a: true, b: true },
-      { name: "SLA и эскалации", a: true, b: true },
-      { name: "Обращения из почты и мессенджеров", a: true, b: true },
-      { name: "Портал самообслуживания", a: true, b: true },
-    ],
-  },
-  {
-    title: "Документы и база знаний",
-    rows: [
-      { name: "Совместный редактор документов", a: true, b: false },
-      { name: "База знаний и регламенты", a: true, b: true },
-      { name: "История версий и комментарии", a: true, b: true },
-    ],
-  },
-  {
-    title: "Безопасность и размещение",
-    rows: [
-      { name: "Данные на серверах в России", a: true, b: false },
-      { name: "Коробочная версия (on-premise)", a: true, b: false },
-      { name: "Реестр отечественного ПО", a: true, b: false },
-      { name: "Двухфакторная аутентификация и SSO", a: true, b: true },
-    ],
-  },
-  {
-    title: "Тарифы и доступ",
-    rows: [
-      { name: "Бесплатный бессрочный тариф", a: true, b: false },
-      { name: "Без ограничения числа участников на Free", a: true, b: false },
-      { name: "Открытый API и вебхуки", a: true, b: true },
-    ],
-  },
-];
-
-/**
- * Адаптивная таблица «Сравнение функций» Kaiten vs конкурент. Колонка «Кайтен»
- * выделена фиолетовой плашкой (#efe9f9) во всю высоту; разделы — аккордеоны на
- * useState (раскрыты по умолчанию 1-й и «Безопасность»). Брейкпоинты desktop /
- * tablet (≤900) / mobile (≤560) через media-queries. Палитра и типографика —
- * Figma Landing-DS, токены V01.
- */
-export function ComparisonTableMock() {
-  const [open, setOpen] = React.useState<number[]>([0, 3]);
-  const toggle = (i: number) =>
-    setOpen((p) => (p.includes(i) ? p.filter((x) => x !== i) : [...p, i]));
+  // На мобиле заголовок занимает всю ширину шапки — панели опускаются под него
+  React.useEffect(() => {
+    const upd = () => {
+      const t = tableRef.current, h = headRef.current;
+      if (!t || !h) return;
+      t.style.setProperty("--kct-bg-top", (window.innerWidth < 768 ? h.offsetHeight : 0) + "px");
+    };
+    upd();
+    window.addEventListener("resize", upd);
+    const iv = window.setInterval(upd, 400); // страховка для iframe/эмуляций без resize-событий
+    return () => { window.removeEventListener("resize", upd); window.clearInterval(iv); };
+  }, []);
 
   return (
-    <section className="kct">
-      <style>{styles}</style>
-      <div className="kct-card">
-        <div className="kct-table">
-          <div className="kct-band" />
+    <div className={`kct${className ? ` ${className}` : ""}`}>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <div className="kct-table" ref={tableRef}>
+        <div className="kct-bg kct-bg--a" />
+        <div className="kct-bg kct-bg--b" />
+        <div className="kct-grid">
+          <div className="kct-hcell kct-hcell--label" ref={headRef}><h2 className="kct-title">{title}</h2></div>
+          <div className="kct-hcell kct-hcell--a">{kaitenLogo ?? <KaitenLogoDefault />}</div>
+          <div className="kct-hcell kct-hcell--b">{competitor}</div>
 
-          {/* header */}
-          <div className="kct-row kct-head">
-            <div className="kct-h-title">Сравнение функций</div>
-            <div className="kct-h-prod kct-h-prod--a"><KaitenLogo /> Кайтен</div>
-            <div className="kct-h-prod">{COMPETITOR}</div>
-          </div>
-
-          {/* sections */}
-          {SECTIONS.map((sec, i) => {
-            const isOpen = open.includes(i);
-            return (
-              <React.Fragment key={i}>
-                <button
-                  type="button"
-                  className="kct-row kct-sec"
-                  data-open={isOpen}
-                  aria-expanded={isOpen}
-                  onClick={() => toggle(i)}
-                >
-                  <span className="kct-sec-label"><Chevron /> {sec.title}</span>
-                  <span />
-                  <span />
-                </button>
-                {isOpen &&
-                  sec.rows.map((r, j) => (
-                    <div className="kct-row kct-data" key={j}>
-                      <div className="kct-feat">{r.name}</div>
-                      <Cell on={r.a} />
-                      <Cell on={r.b} />
-                    </div>
-                  ))}
-              </React.Fragment>
-            );
-          })}
+          {sections.map((sec, si) => (
+            <React.Fragment key={si}>
+              <button
+                className={`kct-sec${si === 0 ? " kct-sec--first" : ""}`}
+                type="button"
+                aria-expanded={open[si]}
+                onClick={() => setOpen(o => o.map((v, i) => (i === si ? !v : v)))}
+              >
+                <span className="kct-sec-t">{sec.title}</span>
+                <span className="kct-chev"><Chevron /></span>
+              </button>
+              {sec.rows.map((row, ri) => {
+                const hidden = !open[si];
+                const last = ri === sec.rows.length - 1;
+                return (
+                  <React.Fragment key={ri}>
+                    <div className={`kct-cell kct-cell--label${hidden ? " kct-cell--hidden" : ""}${last ? " kct-cell--last" : ""}`}>{row.label}</div>
+                    <Cell has={row.a} kaiten hidden={hidden} last={last} />
+                    <Cell has={row.b} hidden={hidden} last={last} />
+                  </React.Fragment>
+                );
+              })}
+            </React.Fragment>
+          ))}
         </div>
-
-        <p className="kct-foot">
-          Сравнение приведено на основе открытых источников. Актуально на апрель 2026.
-        </p>
       </div>
-    </section>
+      <p className="kct-note">{footnote}</p>
+    </div>
   );
 }
 
 export default ComparisonTableMock;
+
+/*
+Пример заполнения (контент — свой под каждое сравнение, структура та же):
+
+<ComparisonTableMock
+  title={<>Кайтен и&nbsp;Конкурент: сравнение функций</>}
+  competitor="Конкурент"
+  sections={[
+    { title: "Название раздела", rows: [
+      { label: <>Название функции</>, a: true,  b: true  },
+      { label: <>Ещё функция</>,      a: true,  b: false },
+    ]},
+    { title: "Второй раздел", rows: [
+      { label: "Функция", a: true, b: false },
+    ]},
+  ]}
+  footnote="Сравнение составлено на основании открытых источников по состоянию на ДД.ММ.ГГГГ. Функциональность сервисов может отличаться в зависимости от тарифа, конфигурации и настроек."
+/>
+*/

@@ -78,6 +78,7 @@ export const AssetRefSchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      'hero-screen-interface',
       'generic',
     ])
     .optional(),
@@ -89,6 +90,55 @@ export const AssetRefSchema = z.object({
   illustrationId: z.string().optional(),
 });
 export type AssetRef = z.infer<typeof AssetRefSchema>;
+
+/* ─── HeroScreenInterface board (для visual.variant='hero-screen-interface') ─ */
+const HeroBoardCardSchema = z.object({
+  /** Текст карточки — переписывается под логику ТЗ. */
+  title: z.string().min(1).max(80),
+  tags: z
+    .array(
+      z.object({
+        label: z.string().max(24),
+        variant: z.enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud']).optional(),
+      }),
+    )
+    .max(3)
+    .optional(),
+  checklist: z
+    .object({ label: z.string().max(24), done: z.number(), total: z.number() })
+    .optional(),
+  /** Цвета аватаров-исполнителей (hex). Декоративны. */
+  assignees: z.array(z.string()).max(4).optional(),
+  extraAssignee: z.string().max(8).optional(),
+  due: z.string().max(16).optional(),
+});
+const HeroBoardSchema = z.object({
+  boardTitle: z.string().min(1).max(40),
+  columns: z
+    .array(
+      z.object({
+        label: z.string().max(24),
+        count: z.number().optional(),
+        done: z.boolean().optional(),
+      }),
+    )
+    .min(2)
+    .max(4),
+  lanes: z
+    .array(
+      z.object({
+        name: z.string().max(24),
+        count: z.number().optional(),
+        columns: z.array(z.array(HeroBoardCardSchema)),
+      }),
+    )
+    .min(1)
+    .max(3),
+  animate: z.boolean().optional(),
+  animatedCard: z
+    .object({ card: HeroBoardCardSchema, fromColumn: z.number().optional() })
+    .optional(),
+});
 
 /* ─── HeroSection ─────────────────────────────────────────────────── */
 const HeroSectionSchema = z.object({
@@ -103,6 +153,12 @@ const HeroSectionSchema = z.object({
     secondaryCta: CtaSchema.nullable().optional(),
     visual: AssetRefSchema.nullable().optional(),
     visualPosition: z.enum(['side', 'below']).optional(),
+    /**
+     * Данные доски для visual.variant='hero-screen-interface' (анимированный
+     * первый экран HeroScreenInterface). Тексты карточек — под логику ТЗ.
+     * Если не задано — используется доменный дефолт. Правило: `comparison-hero-screen`.
+     */
+    board: HeroBoardSchema.optional(),
   }),
 });
 

@@ -142,12 +142,12 @@ function Lane({ lane, foot, animate, animatedCard }: { lane: HsiLane; foot: bool
           <div className="col" key={ci}>
             {col.map((card, ki) => <div className="card" key={ki}><CardBody card={card} /></div>)}
             {animate && animatedCard && ci === dragCol && (
-              <>
-                <div className="drag-layer"><div className="card drag-card"><CardBody card={animatedCard.card} /></div></div>
+              <div className="drag-layer">
+                <div className="card drag-card"><CardBody card={animatedCard.card} /></div>
                 <span className="hand" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="#fff" stroke="#2d2d2d" strokeWidth={1.4} strokeLinejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11V7.5a1.5 1.5 0 0 1 3 0V11v-1a1.5 1.5 0 0 1 3 0v5.5a5.5 5.5 0 0 1-5.5 5.5H12a5 5 0 0 1-4.3-2.5l-2.4-4a1.5 1.5 0 0 1 2.5-1.6L9 15z" /></svg>
                 </span>
-              </>
+              </div>
             )}
           </div>
         ))}

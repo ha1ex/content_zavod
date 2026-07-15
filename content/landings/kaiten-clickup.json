@@ -23,9 +23,135 @@
         "visual": {
           "type": "product_screenshot",
           "assetId": "kaiten-clickup-board",
-          "variant": "pm-board"
+          "variant": "hero-screen-interface"
         },
-        "visualPosition": "side"
+        "visualPosition": "side",
+        "board": {
+          "boardTitle": "Портфель задач команды",
+          "columns": [
+            {
+              "label": "Очередь",
+              "count": 3
+            },
+            {
+              "label": "В работе",
+              "count": 4
+            },
+            {
+              "label": "Готово",
+              "count": 5,
+              "done": true
+            }
+          ],
+          "lanes": [
+            {
+              "name": "Продукт",
+              "count": 6,
+              "columns": [
+                [],
+                [
+                  {
+                    "title": "Настроить дорожки и WIP-лимиты",
+                    "tags": [
+                      {
+                        "label": "Процесс",
+                        "variant": "jud"
+                      }
+                    ],
+                    "checklist": {
+                      "label": "Чек-лист",
+                      "done": 2,
+                      "total": 4
+                    },
+                    "assignees": [
+                      "#64b5f6",
+                      "#81c784"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Импорт задач завершён",
+                    "tags": [
+                      {
+                        "label": "Готово",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#9575cd"
+                    ],
+                    "due": "3 июн"
+                  }
+                ]
+              ]
+            },
+            {
+              "name": "Разработка",
+              "count": 4,
+              "columns": [
+                [
+                  {
+                    "title": "Спринт: карта пользовательских историй",
+                    "tags": [
+                      {
+                        "label": "Скрам",
+                        "variant": "prod"
+                      }
+                    ],
+                    "assignees": [
+                      "#4db6ac"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "API и вебхуки для GitLab",
+                    "tags": [
+                      {
+                        "label": "В работе",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#ff8a65"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "База знаний команды",
+                    "tags": [
+                      {
+                        "label": "Готово",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#a1887f"
+                    ]
+                  }
+                ]
+              ]
+            }
+          ],
+          "animate": true,
+          "animatedCard": {
+            "card": {
+              "title": "Согласовать переезд команды",
+              "tags": [
+                {
+                  "label": "Миграция",
+                  "variant": "blue"
+                }
+              ],
+              "assignees": [
+                "#e57373"
+              ]
+            },
+            "fromColumn": 0
+          }
+        }
       }
     },
     {
@@ -468,7 +594,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-15T18:08:25.621Z",
+    "generatedAt": "2026-07-15T19:29:53.491Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "tokenEstimate": 46401,

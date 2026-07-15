@@ -82,7 +82,9 @@ function collectUsedVariants(spec: LandingSpec): SectionVariantUsage[] {
   spec.sections.forEach((section, idx) => {
     if (section.component === 'HeroSection') {
       const v = section.props.visual?.variant;
-      if (v && v !== 'generic') {
+      // 'hero-screen-interface' — доменно-агностичный hero-шаблон (не доменный
+      // mock), допустим в любом домене, как и 'generic'.
+      if (v && v !== 'generic' && v !== 'hero-screen-interface') {
         usages.push({
           index: idx,
           component: section.component,

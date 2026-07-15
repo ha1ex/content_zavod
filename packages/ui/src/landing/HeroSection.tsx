@@ -2,6 +2,49 @@ import { ButtonLink } from '../primitives/ButtonLink';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { MockVisual, type MockVariant } from './mocks';
+import {
+  HeroScreenInterface,
+  type HsiColumnHeader,
+  type HsiLane,
+  type HsiAnimatedCard,
+} from './HeroScreenInterface';
+
+/**
+ * Доменная доска-заглушка для hero-варианта `hero-screen-interface`
+ * (анимированный первый экран `HeroScreenInterface`). Тема — управление
+ * задачами и проектами продуктовой/разработческой команды.
+ */
+const HSI_BOARD_COLUMNS: HsiColumnHeader[] = [
+  { label: 'Очередь', count: 3 },
+  { label: 'В работе', count: 4 },
+  { label: 'Готово', count: 5, done: true },
+];
+
+const HSI_BOARD_LANES: HsiLane[] = [
+  {
+    name: 'Продукт',
+    count: 6,
+    columns: [
+      [{ title: 'Импорт задач из ClickUp', tags: [{ label: 'Миграция', variant: 'blue' }], assignees: ['#e57373'], due: '12 июн' }],
+      [{ title: 'Настроить дорожки и WIP-лимиты', tags: [{ label: 'Процесс', variant: 'jud' }], checklist: { label: 'Чек-лист', done: 2, total: 4 }, assignees: ['#64b5f6', '#81c784'] }],
+      [{ title: 'Релиз мобильного приложения', tags: [{ label: 'Готово', variant: 'ok' }], assignees: ['#9575cd'], due: '3 июн' }],
+    ],
+  },
+  {
+    name: 'Разработка',
+    count: 4,
+    columns: [
+      [{ title: 'API вебхуки для GitLab', tags: [{ label: 'Разработка', variant: 'prod' }], assignees: ['#4db6ac'] }],
+      [{ title: 'Скрам-доска спринта', tags: [{ label: 'В работе', variant: 'urg' }], assignees: ['#ff8a65'] }],
+      [{ title: 'Обновить базу знаний', tags: [{ label: 'Готово', variant: 'ok' }], assignees: ['#a1887f'] }],
+    ],
+  },
+];
+
+const HSI_BOARD_ANIMATED: HsiAnimatedCard = {
+  card: { title: 'Согласовать переезд команды', tags: [{ label: 'Миграция', variant: 'blue' }], assignees: ['#e57373'] },
+  fromColumn: 0,
+};
 
 export interface CtaProps {
   label: string;
@@ -14,7 +57,7 @@ export interface AssetRefProps {
   src?: string;
   alt?: string;
   /** Built-in detailed mocks (see ./mocks). When set, ignores src. */
-  variant?: MockVariant | 'generic';
+  variant?: MockVariant | 'generic' | 'hero-screen-interface';
   /**
    * Reference to an auto-generated unique SVG illustration (P8 phase).
    * When set, renderer uses it instead of variant. Currently passed through
@@ -40,6 +83,17 @@ export interface HeroSectionProps {
    * 'below' — большой mock под текстом, контент по центру (Kaiten home pattern)
    */
   visualPosition?: 'side' | 'below';
+  /**
+   * Данные доски для visual.variant='hero-screen-interface' (тексты карточек
+   * под логику ТЗ). Если не задано — доменный дефолт HSI_BOARD_*.
+   */
+  board?: {
+    boardTitle: string;
+    columns: HsiColumnHeader[];
+    lanes: HsiLane[];
+    animate?: boolean;
+    animatedCard?: HsiAnimatedCard;
+  };
 }
 
 /**
@@ -59,7 +113,30 @@ export function HeroSection({
   secondaryCta,
   visual,
   visualPosition = 'side',
+  board,
 }: HeroSectionProps) {
+  // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
+  // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
+  // props, доску — из props.board (тексты под ТЗ) или доменный дефолт
+  // HSI_BOARD_*. Правило: `comparison-hero-screen`.
+  if (visual?.variant === 'hero-screen-interface') {
+    return (
+      <HeroScreenInterface
+        eyebrow={eyebrow}
+        heading={title}
+        subheading={subtitle}
+        primaryCta={{ label: primaryCta.label, href: primaryCta.href }}
+        secondaryCta={secondaryCta ? { label: secondaryCta.label, href: secondaryCta.href } : undefined}
+        boardTitle={board?.boardTitle ?? 'Портфель задач'}
+        columns={board?.columns ?? HSI_BOARD_COLUMNS}
+        lanes={board?.lanes ?? HSI_BOARD_LANES}
+        animate={board?.animate ?? true}
+        animatedCard={board?.animatedCard ?? HSI_BOARD_ANIMATED}
+        ariaLabel="Первый экран Kaiten"
+      />
+    );
+  }
+
   const renderedTitle = accentWord ? highlightAccent(title, accentWord) : title;
   const isBelow = visualPosition === 'below';
 
@@ -229,7 +306,9 @@ interface HeroVisualProps {
 }
 
 function HeroVisual({ src, alt, variant, large = false }: HeroVisualProps) {
-  if (variant && variant !== 'generic') {
+  // 'hero-screen-interface' обрабатывается в HeroSection (ранний возврат) и сюда
+  // не доходит; исключаем его из union перед вызовом MockVisual.
+  if (variant && variant !== 'generic' && variant !== 'hero-screen-interface') {
     const rendered = <MockVisual variant={variant} />;
     if (rendered) return rendered;
   }

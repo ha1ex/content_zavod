@@ -2,7 +2,7 @@
 slug: kaiten-clickup
 type: landing
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-07-16
 status: draft
 brief: content/briefs/kaiten-clickup.json
 archetype: saas_landing
@@ -152,7 +152,7 @@ stale: false
 - **Score:** 77.75 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-07-15T18:08:25.611Z
+- **Generated:** 2026-07-15T19:29:53.470Z
 
 ## Breakdown
 

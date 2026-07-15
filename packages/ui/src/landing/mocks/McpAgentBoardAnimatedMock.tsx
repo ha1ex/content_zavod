@@ -15,7 +15,7 @@ import { ScaleToFit } from './ScaleToFit';
 const CSS = `.maa{ --tp:#2d2d2d; --ts:#8a8a8f; --acc:#7d4ccf; --bd:#e8e8eb; --sec:#f4f4f6; }
 .maa *{ box-sizing:border-box; margin:0; padding:0; }
 .maa{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; color:var(--tp); -webkit-font-smoothing:antialiased; }
-.maa .wrap{ position:relative; width:870px; }
+.maa .wrap{ position:relative; width:1060px; }
 .maa .mod{ width:870px; background:#f1f1f4; border:1px solid var(--bd); border-radius:16px; box-shadow:0 18px 50px -24px rgba(45,45,45,.35); overflow:hidden; }
 .maa .hdr{ display:flex; align-items:center; gap:12px; padding:14px 18px; }
 .maa .grip{ display:grid; grid-template-columns:repeat(2,3px); gap:3px; }
@@ -52,7 +52,7 @@ const CSS = `.maa{ --tp:#2d2d2d; --ts:#8a8a8f; --acc:#7d4ccf; --bd:#e8e8eb; --se
 .maa .assignee{ opacity:0; animation:maAssign 8s ease-in-out infinite; }
 
 /* плавающий чат ИИ поверх доски */
-.maa .chat{ position:absolute; right:20px; bottom:18px; width:312px; z-index:40; background:#fff; border:1px solid var(--bd); border-radius:16px; box-shadow:0 26px 60px -20px rgba(45,45,45,.45); padding:13px; }
+.maa .chat{ position:absolute; right:0; bottom:72px; width:312px; z-index:40; background:#fff; border:1px solid var(--bd); border-radius:16px; box-shadow:0 26px 60px -20px rgba(45,45,45,.45); padding:13px; }
 .maa .chat .chd{ display:flex; align-items:center; gap:8px; padding-bottom:11px; }
 .maa .chat .dot{ width:9px; height:9px; border-radius:50%; }
 .maa .chat .cnm{ font-size:12.5px; font-weight:600; }
@@ -141,7 +141,7 @@ export function McpAgentBoardAnimatedMock() {
   return (
     <div className="maa" aria-hidden>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <ScaleToFit designWidth={870}>
+      <ScaleToFit designWidth={1060}>
         <div dangerouslySetInnerHTML={{ __html: MARKUP }} />
       </ScaleToFit>
     </div>

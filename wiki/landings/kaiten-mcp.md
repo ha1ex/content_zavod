@@ -100,8 +100,8 @@ stale: false
 
 ### hero (HeroSection)
 
-- **title:** "ИИ-ассистент управляет задачами в Kaiten"
-- **subtitle:** "Подключите Claude, Cursor или другой ИИ-инструмент к доскам Kaiten. Ассистент создаёт, читает и обновляет карточки прямо из диалога — по стандарту Model Context Protocol." _(170/200 chars)_
+- **title:** "Весь Kaiten — теперь через ИИ-ассистента"
+- **subtitle:** "От карточки до аналитики — 120+ операций голосом. Подключите Claude, Cursor или другой инструмент к Kaiten по стандарту Model Context Protocol: ассистент читает и меняет данные прямо из диалога." _(194/200 chars)_
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 - **secondaryCta:** "Как подключить"
 - **visual:** `product_screenshot` (assetId: `kaiten-mcp-agent-board`)
@@ -129,29 +129,31 @@ stale: false
 
 ### features (FeatureGrid)
 
-- **title:** "Что умеет ассистент с доступом к Kaiten"
-- **columns:** 3 · **items:** 6
-  1. `eye` · "Читает доски" — 75 chars
-  2. `plus` · "Создаёт задачи" — 77 chars
-  3. `move` · "Двигает статусы" — 87 chars
-  4. `bar-chart-3` · "Собирает сводки" — 73 chars
-  5. `plug` · "Открытый стандарт" — 77 chars
-  6. `shield-check` · "Права доступа" — 67 chars
+- **title:** "120+ операций в 10 областях"
+- **columns:** 4 · **items:** 8
+  1. `square-check-big` · "Карточки и задачи" — 77 chars
+  2. `users` · "Совместная работа" — 64 chars
+  3. `list-checks` · "Планирование и время" — 61 chars
+  4. `link` · "Связи и блокировки" — 65 chars
+  5. `layout-grid` · "Доски и структура" — 64 chars
+  6. `sliders-horizontal` · "Настраиваемые поля" — 69 chars
+  7. `book-open` · "База знаний" — 70 chars
+  8. `bar-chart-3` · "Аналитика и отчёты" — 71 chars
 
 ### faq (FAQAccordion)
 
 - **title:** "Вопросы о MCP-сервере"
 - **items:** 6 Q&A
-  1. "С какими ИИ-инструментами работает MCP-сервер?" — answer 127/600 chars
-  2. "Мы работаем в Jira — можно перейти?" — answer 127/600 chars
-  3. "Что ассистент может делать с задачами?" — answer 121/600 chars
-  4. "Насколько это безопасно?" — answer 168/600 chars
-  5. "Можно проверить без риска?" — answer 103/600 chars
+  1. "Что ассистент умеет через MCP-сервер?" — answer 180/600 chars
+  2. "С какими ИИ-инструментами работает MCP-сервер?" — answer 127/600 chars
+  3. "Мы работаем в Jira — можно перейти?" — answer 127/600 chars
+  4. "Насколько это безопасно?" — answer 194/600 chars
+  5. "Как подключить MCP-сервер?" — answer 118/600 chars
   6. "Работает ли на локальной версии?" — answer 52/600 chars
 
 ### final_cta (FinalCta)
 
-- **title:** "Отдайте рутину по задачам агенту"
+- **title:** "От карточки до аналитики — в одном диалоге"
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 
 ### kaiten_footer (LandingFooterMock)
@@ -162,16 +164,16 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `kaiten-mcp`
 
-- **Score:** 89.12 / 100 (threshold 70) — ✅ pass
+- **Score:** 88.34 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Unknown
-- **Generated:** 2026-07-02T10:39:40.290Z
+- **Generated:** 2026-07-02T13:42:31.410Z
 
 ## Breakdown
 
 | ID | Subscore | Raw | Weight | Weighted | Detail |
 |---|---|---|---|---|---|
-| S1 | Story coverage | 81.12 | 0.4 | 32.45 | top-6 stories: compare(w=0.98, c=1.00), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=1.00), ux-check(w=0.71, c=0.30), sandbox(w=0.62, c=0.77), security(w=0.53, c=0.52) |
+| S1 | Story coverage | 79.17 | 0.4 | 31.67 | top-6 stories: compare(w=0.98, c=1.00), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=1.00), ux-check(w=0.71, c=0.30), sandbox(w=0.62, c=0.77), security(w=0.53, c=0.35) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
 | S3 | Role addressability | 83.33 | 0.2 | 16.67 | PM=0.67, DM=1.00 |
 | S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial,Unknown], match=1/1 |
@@ -185,7 +187,7 @@ stale: false
 | fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 1 | ✅ covered |
 | ux-check — Хочу проверить UX до решения | 0.71 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | sandbox — Хочу проверить, не сломаем ли мы всё | 0.62 | 0.77 | ✅ covered |
-| security — Хочу понять ограничения и безопасность | 0.53 | 0.52 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
+| security — Хочу понять ограничения и безопасность | 0.53 | 0.35 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 
 ## Issues
 

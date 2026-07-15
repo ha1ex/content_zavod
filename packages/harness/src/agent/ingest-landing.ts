@@ -335,7 +335,19 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
       audienceReportMdRel = relative(opts.root, reportMdAbs);
 
       if (!audienceScore.ok) {
-        for (const e of audienceScore.errors) errors.push(landingAudienceToIngestError(e));
+        if (brief?.landingMode === 'custom') {
+          // Custom (1-в-1 по ТЗ): цель флоу — макет строго по ТЗ, а не оптимизация
+          // под скоринг аудитории. audience-score здесь ЧИСТО справочный: считаем и
+          // пишем отчёт для автора, но лендинг на доработку НЕ возвращаем. Правило:
+          // `audience-score-advisory-in-custom`.
+          warnings.push(
+            `audience-score ${audienceScore.score}/${audienceScore.threshold} ниже порога, ` +
+              `но landingMode=custom (1-в-1 по ТЗ) — оценка справочная, лендинг НЕ возвращается ` +
+              `на доработку. Детали: .context/audience-score/${opts.slug}.md`,
+          );
+        } else {
+          for (const e of audienceScore.errors) errors.push(landingAudienceToIngestError(e));
+        }
       }
     } catch (err) {
       warnings.push(

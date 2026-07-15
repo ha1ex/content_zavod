@@ -22,6 +22,14 @@ stale: false
 разделами и отметками наличия функций. Один макет, три брейкпоинта:
 Desktop / Tablet / Mobile.
 
+> **Дефолт пайплайна (правило `comparison-uses-mock`).** Для любого сравнения
+> «Кайтен vs конкурент» в обоих флоу (по брифу и custom) секция `ComparisonTable`
+> используется в **grouped-режиме** и рендерит эталонный `ComparisonTableMock`
+> (`packages/ui/src/landing/mocks/ComparisonTableMock.tsx`). Props:
+> `sections: [{ title, rows: [{ label, a, b }] }]` (a=Кайтен, b=конкурент),
+> `competitor`, `footnote`. Плоский режим (`columns`+`values`) — legacy-fallback.
+> Правило целиком — `packages/harness/src/prompts/content-factory-methodology.md`.
+
 ## Структура
 
 - **title** — «Сравнение функций»

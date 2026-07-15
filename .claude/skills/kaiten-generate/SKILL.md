@@ -309,10 +309,12 @@ On success, you get the preview URL.
 - `S3 Role addressability (×0.2)` — Тимлид/PM и ЛПР закрыты явно; для финансов/госа — плюс IT-директор (on-prem/ГОСТ).
 - `S4 CTA alignment (×0.1)` — CTA соответствуют preferred типу сегмента (Trial для PLG-сегментов, Demo для Sales-Enable).
 
-**Гейт по умолчанию:** `score ≥ 70` И все must-pass правила green. Если нет — `agent apply` exits с error, отчёт пишется в:
+**Гейт по умолчанию (brief-флоу):** `score ≥ 70` И все must-pass правила green. Если нет — `agent apply` exits с error, отчёт пишется в:
 
 - `.context/audience-score/<slug>.{json,md}` (детально, по каждой story / роли / правилу)
 - секцию `## Audience score` в `wiki/landings/<slug>.md` (часть досье)
+
+**⚠️ Custom-режим (`brief.landingMode: "custom"`, 1-в-1 по ТЗ) — гейт СПРАВОЧНЫЙ, не блокирующий.** Цель custom-флоу — макет строго по ТЗ, а не оптимизация под скоринг. Поэтому при `score < threshold` или падении must-pass `agent apply` НЕ возвращает лендинг на доработку: балл считается, отчёт пишется, но выдаётся **предупреждение**, а не ошибка — apply проходит. Покажи автору оценку в чате после первичной генерации как справку (можно предложить точечные улучшения, но не итерировать против ТЗ). Правило: `audience-score-advisory-in-custom`.
 
 **Что делать при `audience-resolve-needed`:**
 

@@ -140,7 +140,6 @@ function Lane({ lane, foot, animate, animatedCard }: { lane: HsiLane; foot: bool
       <div className="lanebody">
         {lane.columns.map((col, ci) => (
           <div className="col" key={ci}>
-            {col.map((card, ki) => <div className="card" key={ki}><CardBody card={card} /></div>)}
             {animate && animatedCard && ci === dragCol && (
               <div className="drag-layer">
                 <div className="card drag-card"><CardBody card={animatedCard.card} /></div>
@@ -149,6 +148,7 @@ function Lane({ lane, foot, animate, animatedCard }: { lane: HsiLane; foot: bool
                 </span>
               </div>
             )}
+            {col.map((card, ki) => <div className="card" key={ki}><CardBody card={card} /></div>)}
           </div>
         ))}
       </div>
@@ -238,12 +238,12 @@ const CSS = `
 .hsi .av:first-child{margin-left:0}
 .hsi .plus{font-size:12.5px;color:var(--ts);margin-left:7px}
 .hsi .due{display:inline-flex;align-items:center;gap:5px;color:var(--ts);font-size:12.5px}
-.hsi .drag-layer{position:absolute;top:0;left:9px;right:9px;z-index:30;animation:hsiTravel 5s ease-in-out infinite}
+.hsi .drag-layer{position:relative;z-index:30;animation:hsiTravel 5s ease-in-out infinite}
 .hsi .drag-card{border:1px solid #e0d6f3;transform-origin:center;animation:hsiLift 5s ease-in-out infinite}
 .hsi .hand{position:absolute;left:76%;top:32%;transform:translate(-50%,-50%);width:40px;height:40px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));animation:hsiHand 5s ease-in-out infinite;z-index:31}
-@keyframes hsiTravel{0%{transform:translate(0,0)}40%{transform:translate(0,0)}48%{transform:translate(4px,-12px)}66%{transform:translate(154px,48px)}74%{transform:translate(154px,48px)}90%{transform:translate(4px,-12px)}100%{transform:translate(0,0)}}
-@keyframes hsiLift{0%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}40%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}48%{transform:rotate(3deg) scale(1.03);box-shadow:0 22px 45px -12px rgba(45,45,45,.40)}90%{transform:rotate(3deg) scale(1.03);box-shadow:0 22px 45px -12px rgba(45,45,45,.40)}100%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}}
-@keyframes hsiHand{0%{opacity:0}40%{opacity:0}47%{opacity:1}90%{opacity:1}100%{opacity:0}}
+@keyframes hsiTravel{0%{transform:translate(0,0)}10%{transform:translate(0,0)}20%{transform:translate(4px,-12px)}44%{transform:translate(154px,48px)}56%{transform:translate(154px,48px)}82%{transform:translate(4px,-12px)}94%{transform:translate(0,0)}100%{transform:translate(0,0)}}
+@keyframes hsiLift{0%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}10%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}20%{transform:rotate(3deg) scale(1.03);box-shadow:0 22px 45px -12px rgba(45,45,45,.40)}82%{transform:rotate(3deg) scale(1.03);box-shadow:0 22px 45px -12px rgba(45,45,45,.40)}94%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}100%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}}
+@keyframes hsiHand{0%{opacity:0}10%{opacity:0}20%{opacity:1}86%{opacity:1}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.hsi .drag-layer,.hsi .drag-card,.hsi .hand{animation:none}}
 @media(max-width:1279px){.hsi{zoom:.68}}
 @media(max-width:980px){.hsi{zoom:.5}}

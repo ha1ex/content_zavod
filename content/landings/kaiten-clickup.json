@@ -1,0 +1,477 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Российское ПО · Бесплатный тариф · Автоматический импорт · Облако и коробка",
+        "title": "Кайтен — российская альтернатива ClickUp",
+        "accentWord": "альтернатива",
+        "subtitle": "Широкий набор инструментов для управления задачами и проектами — без риска ограничений доступа",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-clickup-board",
+          "variant": "pm-board"
+        },
+        "visualPosition": "side"
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Работайте с задачами так, как привыкли",
+        "description": "Кайтен покрывает те же сценарии, что ClickUp, с аналогичной гибкостью настройки.",
+        "items": [
+          {
+            "icon": "square-kanban",
+            "title": "Привычная канбан-доска",
+            "description": "Карточки ходят между колонками: чек-листы, файлы, комментарии и история внутри. Настраиваемые поля, метки, фильтры, дорожки и подколонки."
+          },
+          {
+            "icon": "layout-list",
+            "title": "Разное отображение задач",
+            "description": "Канбан-доска, список, таблица, календарь и диаграмма Ганта — переключайтесь между видами в один клик. Данные везде одинаковые."
+          },
+          {
+            "icon": "book-open",
+            "title": "Документы и база знаний",
+            "description": "Блочный редактор, иерархия страниц, версии документов и публичные ссылки — рядом с досками и задачами."
+          },
+          {
+            "icon": "zap",
+            "title": "Автоматизации без программирования",
+            "description": "Назначить ответственного при смене этапа, добавить чек-лист, создать повторяющуюся задачу — всё настраивается без участия ИТ-команды."
+          }
+        ],
+        "columns": 2
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Попробуйте Кайтен на своих задачах",
+        "description": "Бесплатный тариф без ограничения по сроку и 14 дней полного доступа в пробном периоде.",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": null
+      }
+    },
+    {
+      "id": "comparison_table",
+      "component": "ComparisonTable",
+      "props": {
+        "title": "Кайтен и ClickUp: сравнение функций",
+        "competitor": "ClickUp",
+        "footnote": "Сравнение составлено на основании открытых источников по состоянию на 19.05.2026 и приведено в целях сравнения. Функциональность может отличаться в зависимости от тарифа и настроек, а также изменяться правообладателями. ClickUp — товарный знак соответствующего правообладателя.",
+        "sections": [
+          {
+            "title": "Управление задачами",
+            "rows": [
+              {
+                "label": "Рабочие пространства, доски, карточки",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Список, таблица, доска, календарь, Ганта",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Несколько досок в одном пространстве",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Одна доска в нескольких пространствах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Дорожки",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Колонки второго уровня",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "WIP-лимиты",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Визуальные сигналы о застрявших задачах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Блокировка задач",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Настраиваемые поля",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Чек-листы",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Создание задачи из пункта чек-листа",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Назначение ответственного и срока в чек-листах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Иерархия задач",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Шаблоны задач и досок",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Повторяющиеся задачи",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Автоматизации",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Гостевые пользователи",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Воронка продаж (CRM)",
+                "a": true,
+                "b": true
+              }
+            ]
+          },
+          {
+            "title": "Планирование и гибкие подходы (Agile)",
+            "rows": [
+              {
+                "label": "Скрам и спринты",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Очередь задач",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Покерное планирование",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Карта пользовательских историй",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Учёт времени",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Загрузка сотрудников",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Скрам-аналитика: сгорание, скорость, поток",
+                "a": true,
+                "b": true
+              }
+            ]
+          },
+          {
+            "title": "Документы и знания",
+            "rows": [
+              {
+                "label": "База знаний",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Блочный редактор документов",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Публичные ссылки",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Права доступа к документам",
+                "a": true,
+                "b": false
+              }
+            ]
+          },
+          {
+            "title": "Интеграции и каналы",
+            "rows": [
+              {
+                "label": "API и вебхуки",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Уведомления в мессенджерах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Создание задач из мессенджеров",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Интеграция с GitHub / GitLab",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Мобильное приложение",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "ИИ-функции",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Интерактивные доски",
+                "a": false,
+                "b": true
+              },
+              {
+                "label": "Встроенный чат",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Видеозвонки",
+                "a": true,
+                "b": true
+              }
+            ]
+          },
+          {
+            "title": "Платформа",
+            "rows": [
+              {
+                "label": "Облачная версия",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Установка на собственный сервер",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Бесплатный тариф",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Российский реестр ПО",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Техподдержка на русском языке",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Служба поддержки (сервис-деск)",
+                "a": true,
+                "b": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Переходите из ClickUp в пару кликов",
+        "description": "Доски, карточки и списки переезжают автоматически. Без ручного копирования и остановки работы команды.",
+        "checklist": [
+          {
+            "icon": "check",
+            "text": "Переносятся пространства, списки, статусы, задачи, файлы, поля и комментарии"
+          },
+          {
+            "icon": "check",
+            "text": "Импорт по токену доступа ClickUp — по пошаговой инструкции"
+          },
+          {
+            "icon": "check",
+            "text": "Команда продолжает работать во время переезда"
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "pm-board-1"
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Кайтен — одна платформа для всей компании",
+        "description": "Оба сервиса покрывают базовые сценарии. Кайтен добавляет полноценный скрам, работу с заявками и общение внутри одной платформы.",
+        "items": [
+          {
+            "icon": "square-kanban",
+            "title": "Продвинутый канбан",
+            "description": "Дорожки, колонки второго уровня, WIP-лимиты, сигналы о застрявших задачах и блокировки — узкие места процесса видны сразу."
+          },
+          {
+            "icon": "life-buoy",
+            "title": "Служба поддержки",
+            "description": "Заявки из почты и мессенджеров попадают на доску как карточки. Контроль сроков (SLA), шаблонные ответы, история переписки в задаче."
+          },
+          {
+            "icon": "users",
+            "title": "CRM",
+            "description": "Воронки продаж, карточки сделок и каталог контактов на тех же досках. Из сделки сразу создаётся задача для команды."
+          },
+          {
+            "icon": "timer",
+            "title": "Учёт времени",
+            "description": "Плановые и фактические трудозатраты по каждой задаче. Видно, сколько времени уходит на проект и на каждого сотрудника."
+          }
+        ],
+        "columns": 2
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "title": "Ответы на частые вопросы",
+        "items": [
+          {
+            "question": "Какие тарифы можно попробовать?",
+            "answer": "У Kaiten есть бесплатный тариф без ограничения по времени и 14-дневный пробный период со всеми функциями."
+          },
+          {
+            "question": "Как работает пробный период?",
+            "answer": "После регистрации вы получаете бесплатный доступ ко всем модулям на 14 дней без привязки карты. После окончания пробного периода аккаунт автоматически переводится на бесплатный тариф."
+          },
+          {
+            "question": "Как начать пользоваться Кайтеном?",
+            "answer": "Зарегистрируйтесь в Kaiten, создайте пространство, выберите шаблон или импортируйте задачи из другой системы — и можно сразу начинать работу."
+          },
+          {
+            "question": "Можно ли перенести данные из ClickUp в Кайтен?",
+            "answer": "Да. В Kaiten есть автоматический импорт данных и досок из ClickUp по пошаговой инструкции: переносятся пространства, списки, статусы, задачи, файлы, поля и комментарии."
+          },
+          {
+            "question": "Можно ли установить Кайтен на собственный сервер?",
+            "answer": "Да. Установка на собственную инфраструктуру доступна в корпоративном тарифе — с настройкой и обучением."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Попробуйте Kaiten бесплатно",
+        "description": "Перенесите задачи из ClickUp и работайте в российском сервисе без риска ограничений доступа.",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": null,
+        "variant": "gradient",
+        "visualVariant": "portfolio-board"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Kaiten вместо ClickUp: российская альтернатива для управления задачами",
+    "description": "Кайтен — российская альтернатива ClickUp: сравнение функций, автоматический перенос данных, реестр отечественного ПО и коробка. Бесплатный тариф."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-07-15T18:08:25.621Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "tokenEstimate": 46401,
+    "domain": "pm"
+  }
+}

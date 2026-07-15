@@ -451,30 +451,64 @@ const PromoBannerSchema = z.object({
 const ComparisonTableSchema = z.object({
   id: z.literal('comparison_table'),
   component: z.literal('ComparisonTable'),
-  props: z.object({
-    eyebrow: z.string().max(80).optional(),
-    title: z.string().min(4).max(120),
-    description: z.string().max(400).optional(),
-    columns: z
-      .array(
-        z.object({
-          name: z.string().min(1).max(60),
-          badge: z.string().max(40).optional(),
-          highlighted: z.boolean().default(false),
-        }),
-      )
-      .min(2)
-      .max(4),
-    rows: z
-      .array(
-        z.object({
-          label: z.string().min(2).max(120),
-          values: z.array(z.union([z.string().max(80), z.boolean()])).min(2).max(4),
-        }),
-      )
-      .min(3)
-      .max(20),
-  }),
+  props: z
+    .object({
+      eyebrow: z.string().max(80).optional(),
+      title: z.string().min(4).max(120),
+      description: z.string().max(400).optional(),
+      /** Название конкурента в шапке правой колонки (grouped-режим ComparisonTableMock) */
+      competitor: z.string().min(1).max(60).optional(),
+      /** Сноска: источник + дата актуальности (grouped-режим, обязательна по DS) */
+      footnote: z.string().max(400).optional(),
+      /**
+       * Grouped-режим: разделы со строками для ComparisonTableMock (эталон Trello).
+       * Раскрытие: десктоп — все, планшет/мобила — первый. a=Кайтен, b=конкурент.
+       */
+      sections: z
+        .array(
+          z.object({
+            title: z.string().min(2).max(80),
+            rows: z
+              .array(
+                z.object({
+                  label: z.string().min(2).max(120),
+                  a: z.boolean(),
+                  b: z.boolean(),
+                }),
+              )
+              .min(1)
+              .max(30),
+          }),
+        )
+        .min(1)
+        .max(8)
+        .optional(),
+      /** Плоский режим (fallback): колонки продуктов */
+      columns: z
+        .array(
+          z.object({
+            name: z.string().min(1).max(60),
+            badge: z.string().max(40).optional(),
+            highlighted: z.boolean().default(false),
+          }),
+        )
+        .min(2)
+        .max(4)
+        .optional(),
+      rows: z
+        .array(
+          z.object({
+            label: z.string().min(2).max(120),
+            values: z.array(z.union([z.string().max(80), z.boolean()])).min(2).max(4),
+          }),
+        )
+        .min(3)
+        .max(20)
+        .optional(),
+    })
+    .refine((p) => (p.sections && p.sections.length > 0) || (p.columns && p.rows), {
+      message: 'ComparisonTable: нужны либо grouped sections, либо плоские columns+rows',
+    }),
 });
 
 /* ─── TimelineRoadmap (migration plan, product launch, case study) ── */

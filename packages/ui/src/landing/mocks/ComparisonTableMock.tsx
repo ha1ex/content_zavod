@@ -1,3 +1,5 @@
+'use client';
+
 // ComparisonTableMock.tsx — переиспользуемая адаптивная таблица «Кайтен vs конкурент».
 // Эталон стиля выверен на лендинге «Сравнение Кайтен с Trello» (июль 2026) и
 // соответствует DS-спеке wiki/design-system/components/comparison-table.md.

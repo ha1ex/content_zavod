@@ -1,5 +1,6 @@
 import { cn } from '../primitives/cn';
 import { Icon } from '../primitives/Icon';
+import { ComparisonTableMock } from './mocks/ComparisonTableMock';
 
 export interface ComparisonRowProps {
   label: string;
@@ -13,12 +14,32 @@ export interface ComparisonColumnProps {
   highlighted?: boolean;
 }
 
+/** Строка grouped-режима: a=Кайтен, b=конкурент. */
+export interface ComparisonGroupedRow {
+  label: string;
+  a: boolean;
+  b: boolean;
+}
+
+/** Раздел grouped-режима для ComparisonTableMock. */
+export interface ComparisonSection {
+  title: string;
+  rows: ComparisonGroupedRow[];
+}
+
 export interface ComparisonTableProps {
   eyebrow?: string;
   title: string;
   description?: string;
-  columns: ComparisonColumnProps[];
-  rows: ComparisonRowProps[];
+  /** Название конкурента (grouped-режим). */
+  competitor?: string;
+  /** Сноска источника/даты (grouped-режим). */
+  footnote?: string;
+  /** Grouped-режим — рендерит эталонный ComparisonTableMock. */
+  sections?: ComparisonSection[];
+  /** Плоский режим (fallback). */
+  columns?: ComparisonColumnProps[];
+  rows?: ComparisonRowProps[];
 }
 
 /**
@@ -30,9 +51,42 @@ export function ComparisonTable({
   eyebrow,
   title,
   description,
+  competitor,
+  footnote,
+  sections,
   columns,
   rows,
 }: ComparisonTableProps) {
+  // Grouped-режим: эталонный ComparisonTableMock (лиловая панель Кайтена,
+  // логотип в шапке, раскрытие разделов). Заголовок таблицы живёт в шапке мока.
+  if (sections && sections.length > 0) {
+    return (
+      <section
+        className={cn(
+          'mx-auto w-full max-w-(--container-kaiten)',
+          'px-4 py-16 md:px-6 lg:py-20',
+        )}
+      >
+        {eyebrow && (
+          <p
+            data-comp="comparison_table.eyebrow"
+            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+          >
+            {eyebrow}
+          </p>
+        )}
+        <ComparisonTableMock
+          title={title}
+          competitor={competitor ?? ''}
+          sections={sections}
+          footnote={footnote ?? ''}
+        />
+      </section>
+    );
+  }
+
+  if (!columns || !rows) return null;
+
   return (
     <section
       className={cn(

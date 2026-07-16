@@ -389,11 +389,11 @@ export function CTAmainMock() {
         {/* ── floating card ── */}
         <div className="floating">
           <div className="accent a-violet" />
-          <div className="title">Новая задача: Презентация<br />для акционеров</div>
+          <div className="title">Новая задача: Импорт<br />досок из{' '}Trello</div>
           <div className="fl-tags">
-            <span className="tag tag-peach">ООО Альфа</span>
-            <span className="tag tag-violet">Презентация</span>
-            <span className="tag tag-blue">Финансы</span>
+            <span className="tag tag-peach">Миграция</span>
+            <span className="tag tag-violet">Онбординг</span>
+            <span className="tag tag-blue">Настройка</span>
           </div>
           <div className="fl-footer">
             <span className="fl-meta">

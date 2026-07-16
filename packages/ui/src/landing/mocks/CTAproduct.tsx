@@ -1,5 +1,5 @@
 /**
- * CTAplatform — CTA-блок «текст + иллюстрация платформы» на градиенте.
+ * CTAproduct — CTA-блок «текст + иллюстрация платформы» на градиенте.
  *
  * Эталон стиля — блок «Переходите из Trello за пару кликов» лендинга
  * «Сравнение Кайтен с Trello» (kaiten-vs-trello.vercel.app).
@@ -14,7 +14,7 @@
  */
 import React from 'react';
 
-export type CTAplatformProps = {
+export type CTAproductProps = {
   /** Заголовок блока (без точки на конце) */
   title: React.ReactNode;
   /** Подзаголовок-польза, 1–2 предложения */
@@ -34,6 +34,7 @@ const css = `
   font-family:'Roboto',system-ui,sans-serif;color:#2d2d2d}
 .ctp__copy{position:relative;z-index:1}
 .ctp__copy h2{font-size:30px;line-height:36px;font-weight:600;color:#2d2d2d;margin:0}
+@media(min-width:1280px){.ctp__copy h2{font-size:36px;line-height:40px}}
 .ctp__copy p{font-size:16px;line-height:24px;color:#424242;margin:16px 0 0}
 .ctp__btn{display:inline-flex;align-items:center;justify-content:center;margin-top:24px;
   padding:14px 24px;border-radius:8px;background:#7d4ccf;color:#fff;
@@ -57,7 +58,7 @@ const css = `
 @media(max-width:559px){.ctp{padding:24px}}
 `;
 
-export default function CTAplatform({ title, text, buttonLabel, buttonHref, image }: CTAplatformProps) {
+export default function CTAproduct({ title, text, buttonLabel, buttonHref, image }: CTAproductProps) {
   return (
     <div className="ctp">
       <style dangerouslySetInnerHTML={{ __html: css }} />

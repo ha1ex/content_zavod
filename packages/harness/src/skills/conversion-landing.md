@@ -111,8 +111,10 @@ metadata:
 **Антипаттерн.** PPC-трафик не ведём на homepage — только на лендинг под кампанию
 (CXL). Homepage = brand traffic, не paid.
 
-**Маппинг в Контент-завод Кайтен.** В нашем `BriefSchema.pageArchetype` сейчас три значения:
-`saas` (≈ Homepage/Feature), `waitlist` (≈ Launch), `enterprise` (≈ Pricing/Comparison).
+**Маппинг в Контент-завод Кайтен.** В нашем `BriefSchema.pageArchetype` сейчас четыре значения:
+`saas` (≈ Homepage/Feature), `waitlist` (≈ Launch), `enterprise` (≈ Pricing/Comparison),
+`event` (лендинг мероприятия — вебинар/конференция; целевое действие это форма регистрации,
+см. `wiki/archetypes/event_landing.md`).
 Этого мало — на этапе 3-4 расширим до 8 типов через `Brief.pageType` или
 discriminated union archetype'ов.
 

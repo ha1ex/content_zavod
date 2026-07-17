@@ -29,6 +29,7 @@ export type Domain =
   | 'ecommerce'
   | 'docs'
   | 'manufacturing'
+  | 'cli-community-edition'
   | 'unknown';
 
 export interface DomainMockEntry {
@@ -749,7 +750,7 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
       'production',
       'производств',
       'цех',
-      'отк',
+      ' отк ',
       'снабжен',
       'технолог',
       'мастер',
@@ -805,7 +806,119 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
     missingMocks: [],
     referenceDoc: 'wiki/landings/manufacturing-reference.md',
   },
+  {
+    domain: 'cli-community-edition',
+    displayName: 'Kaiten CLI / Community Edition',
+    description:
+      'Инструмент командной строки для Kaiten: карточки, документы и метрики из терминала, ' +
+      'экспорт в Markdown, локальные снимки в SQLite, режим --json для скриптов и ИИ-агентов. ' +
+      'Публичный проект сообщества, установка из репозитория Git.',
+    aliases: [
+      'kaiten cli',
+      'kaiten-cli',
+      ' cli ',
+      'командной строк',
+      'командную строк',
+      'командная строк',
+      'терминал',
+      'интерфейс командной строки',
+      'markdown',
+      '--json',
+      'batch-get',
+      'batch-list',
+      'массовое чтение',
+      'снимок данных',
+      'снимки данных',
+      'snapshot',
+      'sqlite',
+      'реестр инструментов',
+      'автодополнение',
+      'uv tool',
+      'pipx',
+      'community edition',
+      'проект сообщества',
+    ],
+    mocks: [
+      {
+        variant: 'cli-terminal-hero',
+        sections: ['hero', 'media'],
+        description:
+          'Окно терминала: инженер открывает карточку Kaiten как файл Markdown и читает её в JSON, ' +
+          'внизу строка статистики stats с http_request_count. Сигнатурный визуал первого экрана',
+      },
+      {
+        variant: 'cli-terminal-hero-animated',
+        sections: ['hero'],
+        description:
+          'Анимированный первый экран: слева терминал печатает команду посимвольно с курсором, ' +
+          'справа карточка Kaiten реагирует на набранное — материализуется на `--card-id 123`, ' +
+          'получает бейдж экспорта на `--markdown`. CSS @keyframes, без хуков',
+      },
+      {
+        variant: 'cli-markdown-export',
+        sections: ['media'],
+        description:
+          'Слева терминал с командой documents get --markdown, справа получившийся файл .md — ' +
+          'заголовок, чек-лист и ссылка на вложение в формате API Kaiten',
+      },
+      {
+        variant: 'cli-snapshot-metrics',
+        sections: ['media', 'tab'],
+        description:
+          'Терминал: snapshot build собирает пространство за квартал, query metrics считает throughput ' +
+          'по снимку без обращений к API; ниже таблица потока задач по доскам с бейджем «без обращений к API»',
+      },
+      {
+        variant: 'cli-batch-stats',
+        sections: ['media', 'tab'],
+        description:
+          'Терминал: batch-get по списку карточек и блок stats с http_request_count; ' +
+          'ниже сравнение «по одной карточке — 3 обращения» и «batch-get — 1 обращение»',
+      },
+      {
+        variant: 'cli-install',
+        sections: ['hero', 'media'],
+        description:
+          'Компактное окно терминала: установка kaiten-cli одной командой uv tool install и проверка ' +
+          'версии. Для правой колонки градиентного финального CTA и шага установки',
+      },
+    ],
+    missingMocks: [],
+    referenceDoc: 'wiki/landings/cli-community-edition-reference.md',
+  },
 ];
+
+/**
+ * Считает вхождения одного алиаса в текст (оба в lowercase).
+ *
+ * По умолчанию — подстрока (это намеренно: стеммированные алиасы вроде
+ * `производств` / `разработк` должны ловить производственный/разработки).
+ * НО пробел в начале/конце алиаса помечает требование границы слова
+ * (Unicode-aware). Так короткие аббревиатуры (` отк `, ` cli `) ловятся только
+ * как самостоятельный токен и не прячутся внутри слов (разрабОТКи, ClickUp).
+ * Конвенция та же, что в `containsWord` из validators/landing-audience.ts.
+ */
+function countAliasHits(text: string, alias: string): number {
+  const needLeft = /^\s/.test(alias);
+  const needRight = /\s$/.test(alias);
+  const trimmed = alias.trim();
+  if (!trimmed) return 0;
+  if (!needLeft && !needRight) {
+    // Плоская подстрока — прежнее поведение (стемминг сохраняется).
+    let count = 0;
+    let pos = 0;
+    while ((pos = text.indexOf(trimmed, pos)) !== -1) {
+      count += 1;
+      pos += trimmed.length;
+    }
+    return count;
+  }
+  const escaped = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const left = needLeft ? '(?<![\\p{L}\\p{N}])' : '';
+  const right = needRight ? '(?![\\p{L}\\p{N}])' : '';
+  const re = new RegExp(`${left}${escaped}${right}`, 'gu');
+  return (text.match(re) ?? []).length;
+}
 
 /**
  * Lexical-резолв домена по brief. Возвращает первое совпадение по rank.
@@ -832,12 +945,7 @@ export function resolveDomainFromBrief(brief: Brief): Domain {
   for (const entry of DOMAIN_REGISTRY) {
     let score = 0;
     for (const alias of entry.aliases) {
-      const aliasLower = alias.toLowerCase();
-      let pos = 0;
-      while ((pos = text.indexOf(aliasLower, pos)) !== -1) {
-        score += 1;
-        pos += aliasLower.length;
-      }
+      score += countAliasHits(text, alias.toLowerCase());
     }
     if (score > bestScore) {
       bestScore = score;

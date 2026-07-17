@@ -20,7 +20,7 @@ import type { Brief } from '../schemas/brief';
 export interface SelectedContext {
   body: string;
   sources: string[];
-  archetype: 'saas_landing' | 'waitlist_landing' | 'enterprise_landing';
+  archetype: 'saas_landing' | 'waitlist_landing' | 'enterprise_landing' | 'event_landing';
   tokenEstimate: number;
 }
 
@@ -32,6 +32,8 @@ const COMPONENTS_BY_ARCHETYPE: Record<string, string[]> = {
   saas_landing: ['hero.md', 'feature-grid.md', 'pricing.md', 'faq.md', 'accordion.md', 'final-cta.md', 'footer.md', 'button.md'],
   waitlist_landing: ['hero.md', 'feature-grid.md', 'faq.md', 'accordion.md', 'final-cta.md', 'footer.md', 'button.md'],
   enterprise_landing: ['hero.md', 'feature-grid.md', 'pricing.md', 'faq.md', 'accordion.md', 'final-cta.md', 'footer.md', 'button.md'],
+  // Лендинг мероприятия: без прайсинга — целевое действие это форма регистрации.
+  event_landing: ['hero.md', 'feature-grid.md', 'faq.md', 'accordion.md', 'final-cta.md', 'footer.md', 'button.md'],
 };
 
 // Дополнительные DS-разделы по archetype.
@@ -39,6 +41,7 @@ const EXTRA_DS_BY_ARCHETYPE: Record<string, string[]> = {
   saas_landing: ['radius.md', 'motion.md', 'grid.md'],
   waitlist_landing: ['radius.md'],
   enterprise_landing: ['radius.md', 'motion.md', 'grid.md'],
+  event_landing: ['radius.md', 'motion.md', 'grid.md'],
 };
 
 export async function selectContext(repoRoot: string, brief: Brief): Promise<SelectedContext> {
@@ -112,9 +115,12 @@ async function readWikiPage(repoRoot: string, relPath: string): Promise<string |
   return readFile(resolve(repoRoot, 'wiki', relPath), 'utf-8').catch(() => null);
 }
 
-function archetypeFromBrief(brief: Brief): 'saas_landing' | 'waitlist_landing' | 'enterprise_landing' {
+function archetypeFromBrief(
+  brief: Brief,
+): 'saas_landing' | 'waitlist_landing' | 'enterprise_landing' | 'event_landing' {
   if (brief.pageArchetype === 'waitlist') return 'waitlist_landing';
   if (brief.pageArchetype === 'enterprise') return 'enterprise_landing';
+  if (brief.pageArchetype === 'event') return 'event_landing';
   return 'saas_landing';
 }
 

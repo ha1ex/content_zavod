@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 3000",
+    "dev:preview": "node scripts/dev-preview.mjs",
     "build": "next build",
     "start": "next start -p 3000",
     "lint": "next lint",

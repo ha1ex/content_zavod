@@ -100,3 +100,8 @@ export {
   type BriefQualityError,
   type BriefQualityResult,
 } from './brief-quality';
+export {
+  validateLandingTzFidelity,
+  type TzFidelityWarning,
+  type TzFidelityResult,
+} from './landing-tz-fidelity';

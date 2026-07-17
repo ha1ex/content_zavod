@@ -3,7 +3,8 @@ import { cn } from '../primitives/cn';
 import { Icon } from '../primitives/Icon';
 
 export interface TimelineMilestoneProps {
-  period: string;
+  /** Период вехи («Q1 2026», «2 недели»). Не нужен, когда timeline нумерованный. */
+  period?: string;
   title: string;
   description?: string;
   status?: 'done' | 'in-progress' | 'planned';
@@ -16,6 +17,12 @@ export interface TimelineRoadmapProps {
   description?: string;
   milestones: TimelineMilestoneProps[];
   orientation?: 'horizontal' | 'vertical';
+  /**
+   * Нумерованный вертикальный timeline: маркер несёт порядковый номер вехи
+   * вместо статусной точки. Для программ и планов, где важен порядок пунктов,
+   * а не даты. Только для orientation='vertical'.
+   */
+  numbered?: boolean;
 }
 
 /**
@@ -30,6 +37,7 @@ export function TimelineRoadmap({
   description,
   milestones,
   orientation = 'vertical',
+  numbered = false,
 }: TimelineRoadmapProps) {
   return (
     <section
@@ -76,12 +84,14 @@ export function TimelineRoadmap({
               )}
             >
               <StatusBadge status={m.status} />
-              <p
-                data-comp={`timeline_roadmap.milestones[${i}].period`}
-                className="mt-3 text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)"
-              >
-                {m.period}
-              </p>
+              {m.period && (
+                <p
+                  data-comp={`timeline_roadmap.milestones[${i}].period`}
+                  className="mt-3 text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)"
+                >
+                  {m.period}
+                </p>
+              )}
               <h3
                 data-comp={`timeline_roadmap.milestones[${i}].title`}
                 className="mt-2 text-lg font-semibold text-(--color-text-primary)"
@@ -108,28 +118,44 @@ export function TimelineRoadmap({
               name={`timeline_roadmap.milestones[${i}]`}
               className="relative"
             >
-              <span
-                aria-hidden
-                className={cn(
-                  'absolute -left-[37px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full border',
-                  m.status === 'done'
-                    ? 'border-(--color-action-primary) bg-(--color-action-primary) text-white'
-                    : m.status === 'in-progress'
-                      ? 'border-(--color-action-primary) bg-(--color-surface-card)'
-                      : 'border-(--color-border-default) bg-(--color-surface-card)',
-                )}
-              >
-                {m.status === 'done' && <Icon name="Check" className="h-3 w-3" />}
-              </span>
-              <div className="flex flex-wrap items-baseline gap-2">
-                <p
-                  data-comp={`timeline_roadmap.milestones[${i}].period`}
-                  className="text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)"
+              {numbered ? (
+                <span
+                  aria-hidden
+                  className={cn(
+                    'absolute -left-[48px] top-0 flex h-8 w-8 items-center justify-center rounded-full',
+                    'bg-(--color-action-primary) text-sm font-semibold text-(--color-text-inverse)',
+                  )}
                 >
-                  {m.period}
-                </p>
-                <StatusBadge status={m.status} />
-              </div>
+                  {i + 1}
+                </span>
+              ) : (
+                <span
+                  aria-hidden
+                  className={cn(
+                    'absolute -left-[37px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full border',
+                    m.status === 'done'
+                      ? 'border-(--color-action-primary) bg-(--color-action-primary) text-white'
+                      : m.status === 'in-progress'
+                        ? 'border-(--color-action-primary) bg-(--color-surface-card)'
+                        : 'border-(--color-border-default) bg-(--color-surface-card)',
+                  )}
+                >
+                  {m.status === 'done' && <Icon name="Check" className="h-3 w-3" />}
+                </span>
+              )}
+              {(m.period || m.status) && (
+                <div className="flex flex-wrap items-baseline gap-2">
+                  {m.period && (
+                    <p
+                      data-comp={`timeline_roadmap.milestones[${i}].period`}
+                      className="text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)"
+                    >
+                      {m.period}
+                    </p>
+                  )}
+                  <StatusBadge status={m.status} />
+                </div>
+              )}
               <h3
                 data-comp={`timeline_roadmap.milestones[${i}].title`}
                 className="mt-1 text-xl font-semibold text-(--color-text-primary)"

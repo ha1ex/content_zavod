@@ -2,7 +2,7 @@
 slug: kaiten-retail
 type: landing
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-07-17
 status: draft
 brief: content/briefs/kaiten-retail.json
 archetype: saas_landing
@@ -49,7 +49,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46401
+tokenEstimate: 46435
 tags:
   - landing
   - saas_landing
@@ -63,7 +63,7 @@ stale: false
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
 - **sections used:** `site_header, hero, benefits_strip, reviews, accordion_feature, features, media_copy, media_copy, accordion_feature, features, features, media_copy, process, faq, final_cta, kaiten_footer`
-- **token estimate:** `46401`
+- **token estimate:** `46435`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -186,7 +186,7 @@ stale: false
 - **Score:** 94.87 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** Торговля, IT
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-07-02T12:03:53.798Z
+- **Generated:** 2026-07-17T13:40:33.005Z
 
 ## Breakdown
 

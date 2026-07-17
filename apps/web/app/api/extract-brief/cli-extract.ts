@@ -31,7 +31,7 @@ const PROMPT_TEMPLATE = `Из текста ниже извлеки JSON Brief п
 - proofPoints (string[]): 3+ конкретных фактов (цифры, сертификаты, кейсы)
 - tone (string): обычно "clear, professional, non-hype"
 - cta (string): текст основной кнопки, согласованный с primaryGoal
-- pageArchetype (enum): saas | waitlist | enterprise (по умолчанию saas)
+- pageArchetype (enum): saas | waitlist | enterprise | event (по умолчанию saas; event — лендинг мероприятия: вебинар/конференция/митап, целевое действие это форма регистрации)
 - pageLayout (string|null): один из layouts если ясно из контекста:
     enterprise-modular-saas, single-module-deep-dive, compliance-first-enterprise,
     comparison-vs-competitor, story-led-unaware, depersonalized-product-tour,

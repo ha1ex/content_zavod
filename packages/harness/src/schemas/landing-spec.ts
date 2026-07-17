@@ -78,6 +78,12 @@ export const AssetRefSchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      'cli-terminal-hero',
+      'cli-terminal-hero-animated',
+      'cli-markdown-export',
+      'cli-snapshot-metrics',
+      'cli-batch-stats',
+      'cli-install',
       'hero-screen-interface',
       'generic',
     ])
@@ -140,6 +146,28 @@ const HeroBoardSchema = z.object({
     .optional(),
 });
 
+/* ─── Форма регистрации (слот hero + секция RegistrationCta) ───────── */
+const RegistrationFormSlotSchema = z.object({
+  /** Якорь формы — на него ведут промежуточные кнопки «Занять место». */
+  anchorId: z.string().max(40).optional(),
+  /** Endpoint отправки. Заглушка `#`; реальный подставляет верстальщик. */
+  action: z.string().optional(),
+  /** Ссылка на согласие на обработку персональных данных (152-ФЗ). */
+  dataConsentHref: z.string().optional(),
+  /** Мягкая строка под кнопкой. */
+  note: z.string().max(200).optional(),
+});
+
+/* ─── Спикер (строка в hero + блок SpeakerCard) ────────────────────── */
+const SpeakerSchema = z.object({
+  name: z.string().min(2).max(80),
+  role: z.string().min(2).max(120),
+  photoSrc: z.string().optional(),
+  photoAlt: z.string().max(160).optional(),
+  /** Заглушка, пока фото не передано. */
+  initials: z.string().max(4).optional(),
+});
+
 /* ─── HeroSection ─────────────────────────────────────────────────── */
 const HeroSectionSchema = z.object({
   id: z.literal('hero'),
@@ -159,6 +187,20 @@ const HeroSectionSchema = z.object({
      * Если не задано — используется доменный дефолт. Правило: `comparison-hero-screen`.
      */
     board: HeroBoardSchema.optional(),
+    /** Короткие буллеты под подзаголовком («что заберёте»). Только layout 'side'. */
+    bullets: z.array(z.string().min(2).max(160)).max(4).optional(),
+    /**
+     * Карточка формы регистрации в правой колонке вместо `visual` — для лендингов,
+     * где целевое действие это заполнить форму, а не перейти по кнопке. Подпись
+     * кнопки берётся из `primaryCta.label`, дублирующие CTA не рендерятся.
+     *
+     * Работает ТОЛЬКО при `visualPosition: 'side'` (дефолт). Раскладка `'below'` и
+     * вариант `visual.variant: 'hero-screen-interface'` форму игнорируют — она
+     * молча не отрендерится, а вместо неё останутся кнопки CTA.
+     */
+    form: RegistrationFormSlotSchema.optional(),
+    /** Строка ведущего/спикера под текстом первого экрана. */
+    speaker: SpeakerSchema.optional(),
   }),
 });
 
@@ -417,6 +459,12 @@ const MediaCopySchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      'cli-terminal-hero',
+      'cli-terminal-hero-animated',
+      'cli-markdown-export',
+      'cli-snapshot-metrics',
+      'cli-batch-stats',
+      'cli-install',
       ])
       .optional(),
     /**
@@ -578,7 +626,8 @@ const TimelineRoadmapSchema = z.object({
     milestones: z
       .array(
         z.object({
-          period: z.string().min(1).max(40),
+          /** Период вехи. Не нужен, когда timeline нумерованный. */
+          period: z.string().min(1).max(40).optional(),
           title: z.string().min(2).max(120),
           description: z.string().max(280).optional(),
           status: z.enum(['done', 'in-progress', 'planned']).optional(),
@@ -588,6 +637,11 @@ const TimelineRoadmapSchema = z.object({
       .min(2)
       .max(8),
     orientation: z.enum(['horizontal', 'vertical']).default('vertical'),
+    /**
+     * Нумерованный вертикальный timeline: маркер несёт порядковый номер вехи.
+     * Для программ и планов, где важен порядок пунктов, а не даты.
+     */
+    numbered: z.boolean().optional(),
   }),
 });
 
@@ -728,6 +782,12 @@ export const MockVariantSchema = z.enum([
 'retail-report-bottlenecks',
 'retail-report-ai',
 'gantt-chart',
+'cli-terminal-hero',
+'cli-terminal-hero-animated',
+'cli-markdown-export',
+'cli-snapshot-metrics',
+'cli-batch-stats',
+'cli-install',
 ]);
 export type MockVariant = z.infer<typeof MockVariantSchema>;
 
@@ -889,6 +949,60 @@ const LandingFooterMockSchema = z.object({
   props: z.object({}).default({}),
 });
 
+/* ─── LegalNote (мелкая юридическая сноска в конце страницы) ───────── */
+const LegalNoteSchema = z.object({
+  id: z.literal('legal_note'),
+  component: z.literal('LegalNote'),
+  props: z.object({
+    text: z.string().min(10).max(600),
+  }),
+});
+
+/* ─── PainBubbles (реплики клиентов облачками сообщений) ───────────── */
+const PainBubblesSchema = z.object({
+  id: z.literal('pain_bubbles'),
+  component: z.literal('PainBubbles'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(2).max(80),
+    description: z.string().max(200).optional(),
+    items: z
+      .array(z.object({ text: z.string().min(4).max(200) }))
+      .min(3)
+      .max(16),
+    /**
+     * Реплики проявляются по очереди, когда блок попадает в вид, — как приходящие
+     * сообщения. Уважает prefers-reduced-motion.
+     */
+    animate: z.boolean().optional(),
+  }),
+});
+
+/* ─── SpeakerCard (блок ведущего) ─────────────────────────────────── */
+const SpeakerCardSchema = z.object({
+  id: z.literal('speaker'),
+  component: z.literal('SpeakerCard'),
+  props: SpeakerSchema.extend({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().max(80).optional(),
+    /** 1–2 строки экспертизы: сколько внедрений, чем полезен зрителю. */
+    bio: z.string().max(400).optional(),
+  }),
+});
+
+/* ─── RegistrationCta (финальный блок: заголовок + повтор формы) ───── */
+const RegistrationCtaSchema = z.object({
+  id: z.literal('registration_cta'),
+  component: z.literal('RegistrationCta'),
+  props: RegistrationFormSlotSchema.extend({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    /** Подпись кнопки отправки. */
+    submitLabel: z.string().min(1).max(40),
+  }),
+});
+
 /* ─── Section union ───────────────────────────────────────────────── */
 export const SectionSchema = z.discriminatedUnion('component', [
   HeroSectionSchema,
@@ -915,6 +1029,10 @@ export const SectionSchema = z.discriminatedUnion('component', [
   BentoGridSchema,
   LogoCloudSchema,
   TestimonialQuoteSchema,
+  LegalNoteSchema,
+  PainBubblesSchema,
+  SpeakerCardSchema,
+  RegistrationCtaSchema,
   SiteHeaderSchema,
   LandingFooterMockSchema,
 ]);
@@ -942,6 +1060,7 @@ export const LandingSpecMetaSchema = z
         'ecommerce',
         'docs',
         'manufacturing',
+        'cli-community-edition',
         'unknown',
       ])
       .optional()
@@ -971,7 +1090,7 @@ export const LandingSpecMetaSchema = z
 export type LandingSpecMeta = z.infer<typeof LandingSpecMetaSchema>;
 
 export const LandingSpecSchema = z.object({
-  pageType: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing']),
+  pageType: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing', 'event_landing']),
   goal: z.string(),
   sections: z.array(SectionSchema).min(1),
   seo: z.object({

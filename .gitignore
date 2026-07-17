@@ -4,6 +4,7 @@ node_modules
 
 # build outputs
 .next
+.next-preview
 .turbo
 dist
 build
@@ -43,3 +44,4 @@ yarn-debug.log*
 
 # intake raw inputs (рабочие материалы фабрики ТЗ)
 inputs/
+.vercel

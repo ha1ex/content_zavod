@@ -1,5 +1,11 @@
 export { HeroSection } from './HeroSection';
-export type { HeroSectionProps, CtaProps, AssetRefProps } from './HeroSection';
+export type {
+  HeroSectionProps,
+  HeroFormProps,
+  HeroSpeakerProps,
+  CtaProps,
+  AssetRefProps,
+} from './HeroSection';
 
 export { FeatureGrid } from './FeatureGrid';
 export type { FeatureGridProps, FeatureItemProps } from './FeatureGrid';
@@ -87,6 +93,24 @@ export type { LogoCloudProps, LogoCloudItemProps } from './LogoCloud';
 
 export { TestimonialQuote } from './TestimonialQuote';
 export type { TestimonialQuoteProps } from './TestimonialQuote';
+
+export { LegalNote } from './LegalNote';
+export type { LegalNoteProps } from './LegalNote';
+
+export { RegistrationForm } from './RegistrationForm';
+export type { RegistrationFormProps } from './RegistrationForm';
+
+export { RegistrationCta } from './RegistrationCta';
+export type { RegistrationCtaProps } from './RegistrationCta';
+
+export { GradientPanel } from './GradientPanel';
+export type { GradientPanelProps } from './GradientPanel';
+
+export { PainBubbles } from './PainBubbles';
+export type { PainBubblesProps, PainBubbleProps } from './PainBubbles';
+
+export { SpeakerCard } from './SpeakerCard';
+export type { SpeakerCardProps } from './SpeakerCard';
 
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';

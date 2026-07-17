@@ -8,6 +8,7 @@ import {
   type HsiLane,
   type HsiAnimatedCard,
 } from './HeroScreenInterface';
+import { RegistrationForm } from './RegistrationForm';
 
 /**
  * Доменная доска-заглушка для hero-варианта `hero-screen-interface`
@@ -94,6 +95,37 @@ export interface HeroSectionProps {
     animate?: boolean;
     animatedCard?: HsiAnimatedCard;
   };
+  /**
+   * Короткие буллеты под подзаголовком («что заберёте» на лендинге вебинара).
+   * Рендерятся только в layout 'side'.
+   */
+  bullets?: string[];
+  /**
+   * Карточка формы регистрации в правой колонке — вместо `visual`. Когда задана,
+   * кнопки CTA не рендерятся: submit формы и есть целевое действие, а его подпись
+   * берётся из `primaryCta.label`. Для лендингов, у которых цель — регистрация.
+   *
+   * Только для `visualPosition: 'side'`. Раскладка `'below'` и вариант
+   * `hero-screen-interface` рендерят свой первый экран и форму не показывают.
+   */
+  form?: HeroFormProps;
+  /** Строка ведущего под формой/текстом: фото или инициалы, имя, роль. */
+  speaker?: HeroSpeakerProps;
+}
+
+export interface HeroFormProps {
+  anchorId?: string;
+  action?: string;
+  dataConsentHref?: string;
+  note?: string;
+}
+
+export interface HeroSpeakerProps {
+  name: string;
+  role: string;
+  photoSrc?: string;
+  photoAlt?: string;
+  initials?: string;
 }
 
 /**
@@ -114,6 +146,9 @@ export function HeroSection({
   visual,
   visualPosition = 'side',
   board,
+  bullets,
+  form,
+  speaker,
 }: HeroSectionProps) {
   // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
   // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
@@ -229,25 +264,53 @@ export function HeroSection({
               >
                 {subtitle}
               </p>
-              <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:items-center">
-                <Inspect name="hero.primaryCta">
-                  <ButtonLink size="lg" href={primaryCta.href}>
-                    {primaryCta.label}
-                  </ButtonLink>
-                </Inspect>
-                {secondaryCta && (
-                  <Inspect name="hero.secondaryCta">
-                    <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
-                      {secondaryCta.label}
+              {bullets && bullets.length > 0 && (
+                <ul data-comp="hero.bullets" className="mt-8 flex max-w-xl flex-col gap-3">
+                  {bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <CheckMark />
+                      <span className="text-base leading-relaxed text-(--color-text-secondary) sm:text-lg">
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {/* Форма сама несёт целевое действие — дублирующая кнопка не нужна. */}
+              {!form && (
+                <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:items-center">
+                  <Inspect name="hero.primaryCta">
+                    <ButtonLink size="lg" href={primaryCta.href}>
+                      {primaryCta.label}
                     </ButtonLink>
                   </Inspect>
-                )}
-              </div>
+                  {secondaryCta && (
+                    <Inspect name="hero.secondaryCta">
+                      <ButtonLink variant="outline" size="lg" href={secondaryCta.href}>
+                        {secondaryCta.label}
+                      </ButtonLink>
+                    </Inspect>
+                  )}
+                </div>
+              )}
+              {speaker && <SpeakerLine {...speaker} />}
             </div>
-            {visual && (
-              <div data-comp="hero.visual" className="xl:flex-1">
-                <HeroVisual src={visual.src} alt={visual.alt} variant={visual.variant} />
+            {form ? (
+              <div data-comp="hero.form" className="w-full xl:max-w-[420px] xl:flex-1">
+                <RegistrationForm
+                  submitLabel={primaryCta.label}
+                  anchorId={form.anchorId}
+                  action={form.action}
+                  dataConsentHref={form.dataConsentHref}
+                  note={form.note}
+                />
               </div>
+            ) : (
+              visual && (
+                <div data-comp="hero.visual" className="xl:flex-1">
+                  <HeroVisual src={visual.src} alt={visual.alt} variant={visual.variant} />
+                </div>
+              )
             )}
           </div>
         )}
@@ -257,6 +320,52 @@ export function HeroSection({
 }
 
 /* ─── private ─── */
+
+function CheckMark() {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        'mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full',
+        'bg-(--color-action-primary-soft) text-(--color-text-accent)',
+      )}
+    >
+      <svg viewBox="0 0 16 16" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M3.5 8.5l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
+
+function SpeakerLine({ name, role, photoSrc, photoAlt, initials }: HeroSpeakerProps) {
+  return (
+    <div data-comp="hero.speaker" className="mt-8 flex items-center gap-3">
+      {/* Фиолетовая заливка — и под фото: портрет вырезан с прозрачным фоном,
+          поэтому круг служит ему фоном (как в блоке SpeakerCard). */}
+      <span
+        className={cn(
+          'flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full',
+          'bg-(--color-action-primary) text-sm font-semibold text-(--color-text-inverse)',
+        )}
+      >
+        {photoSrc ? (
+          <img
+            src={photoSrc}
+            alt={photoAlt ?? name}
+            className="h-full w-full object-cover object-top"
+          />
+        ) : (
+          <span aria-hidden>{initials ?? name.slice(0, 1)}</span>
+        )}
+      </span>
+      <span className="text-base text-(--color-text-secondary)">
+        <span className="font-medium text-(--color-text-primary)">{name}</span>
+        {', '}
+        {role}
+      </span>
+    </div>
+  );
+}
 
 function EyebrowPill({ children }: { children: React.ReactNode }) {
   return (
@@ -275,13 +384,23 @@ function EyebrowPill({ children }: { children: React.ReactNode }) {
 /**
  * Splits the title around accentWord (case-insensitive, first match) and wraps
  * the match in a styled pill. If no match is found, returns title unchanged.
+ *
+ * Пробелы внутри accentWord сопоставляются с любым пробелом заголовка: по
+ * дизайн-системе в заголовке стоят неразрывные пробелы (висячие предлоги), и
+ * иначе подсветка молча пропадала бы из-за несовпадения обычного пробела с nbsp.
  */
 function highlightAccent(title: string, accent: string): React.ReactNode {
-  const idx = title.toLowerCase().indexOf(accent.toLowerCase());
-  if (idx === -1) return title;
+  const pattern = accent
+    .trim()
+    .split(/\s+/)
+    .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('\\s+');
+  const found = new RegExp(pattern, 'i').exec(title);
+  if (!found) return title;
+  const idx = found.index;
   const before = title.slice(0, idx);
-  const match = title.slice(idx, idx + accent.length);
-  const after = title.slice(idx + accent.length);
+  const match = found[0];
+  const after = title.slice(idx + match.length);
   return (
     <>
       {before}

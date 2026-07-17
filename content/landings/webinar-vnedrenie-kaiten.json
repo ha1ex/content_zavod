@@ -1,0 +1,248 @@
+{
+  "pageType": "event_landing",
+  "goal": "waitlist",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Бесплатный вебинар · 30 июля · онлайн",
+        "title": "Внедрение Кайтена без стресса для команды",
+        "accentWord": "без стресса",
+        "subtitle": "как переехать на новую систему, чтобы никто не сбежал обратно в чаты и таблицы",
+        "primaryCta": {
+          "label": "Занять место",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "visualPosition": "side",
+        "bullets": [
+          "как перенести процессы «как есть», без ломки привычного",
+          "как внедрять волнами, чтобы команда не сопротивлялась",
+          "как руководителю видеть всю работу — без микроменеджмента"
+        ],
+        "form": {
+          "anchorId": "registration-top",
+          "action": "#",
+          "dataConsentHref": "/privacy"
+        },
+        "speaker": {
+          "name": "Давид Гаранян",
+          "role": "Kaiten",
+          "photoSrc": "/landings/webinar-vnedrenie-kaiten/david-garanyan.png",
+          "photoAlt": "Давид Гаранян, Kaiten",
+          "initials": "ДГ"
+        }
+      }
+    },
+    {
+      "id": "pain_bubbles",
+      "component": "PainBubbles",
+      "props": {
+        "title": "Знакомо?",
+        "items": [
+          {
+            "text": "«Купили, а пользоваться так и не начали»"
+          },
+          {
+            "text": "«Подступался раза три — интерфейс и логика интуитивно непонятны»"
+          },
+          {
+            "text": "«Пытались пару раз — без помощи не разобрались»"
+          },
+          {
+            "text": "«На настройке и внедрении пока буксуем»"
+          },
+          {
+            "text": "«Чем больше погружаюсь, тем меньше понимаю»"
+          },
+          {
+            "text": "«Ребята отказываются в ней работать»"
+          },
+          {
+            "text": "«Это для опытных команд — бухгалтерия вообще не знает, что такое канбан»"
+          },
+          {
+            "text": "«Команда уже в двух системах — а тут третья»"
+          },
+          {
+            "text": "«Не знаю, смогу ли правильно настроить пространство»"
+          },
+          {
+            "text": "«Где почитать про модули подробнее?»"
+          },
+          {
+            "text": "«Нужно, чтобы не пришлось потом два месяца людей учить»"
+          },
+          {
+            "text": "«Людей приходится постоянно затаскивать в систему»"
+          },
+          {
+            "text": "«Некому и некогда этим заниматься»"
+          },
+          {
+            "text": "«Полдня разбирался — понял, что без ваших специалистов не осилю»"
+          }
+        ],
+        "animate": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Первое пространство настроим вместе — под ваши процессы",
+        "checklist": [
+          {
+            "text": "выделенный менеджер ведёт вас на старте"
+          },
+          {
+            "text": "помощь с ТЗ и разбор, как ваши процессы лягут на систему"
+          },
+          {
+            "text": "перенос процессов «как есть»"
+          },
+          {
+            "text": "автоматический перенос данных из Trello, Jira, Asana, Notion, ClickUp"
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "pm-board"
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "title": "Программа вебинара",
+        "description": "~45 минут выступление + 15 минут на вопросы",
+        "milestones": [
+          {
+            "title": "Почему внедрения ломаются — и при чём тут вообще не продукт"
+          },
+          {
+            "title": "Контроль без микроменеджмента — прозрачность работает на команду"
+          },
+          {
+            "title": "Как проходит внедрение на самом деле — сопровождение по шагам"
+          },
+          {
+            "title": "Проверенная механика перехода — волнами, а не всех сразу"
+          },
+          {
+            "title": "Разбор реального антикейса — что делать, если что-то пошло не так"
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Внедрение Кайтена без стресса для команды",
+        "description": "Бесплатный вебинар · 30 июля · онлайн",
+        "primaryCta": {
+          "label": "Занять место",
+          "href": "#registration"
+        },
+        "secondaryCta": null
+      }
+    },
+    {
+      "id": "stats",
+      "component": "StatStrip",
+      "props": {
+        "title": "Доказательства",
+        "stats": [
+          {
+            "value": "30 команд",
+            "label": "АльфаСтрахование",
+            "description": "перешли за 2 месяца"
+          },
+          {
+            "value": "Фокус-группа",
+            "label": "FitStars",
+            "description": "обязательный переход для всех"
+          },
+          {
+            "value": "Антикейс",
+            "label": "переусложнили, команда вернулась в чаты",
+            "description": "упростили — прижилось"
+          }
+        ]
+      }
+    },
+    {
+      "id": "speaker",
+      "component": "SpeakerCard",
+      "props": {
+        "name": "Давид Гаранян",
+        "role": "Kaiten",
+        "photoSrc": "/landings/webinar-vnedrenie-kaiten/david-garanyan.png",
+        "photoAlt": "Давид Гаранян, Kaiten",
+        "initials": "ДГ",
+        "title": "Ведущий",
+        "bio": "Ведёт внедрения Кайтена в командах разного размера. На вебинаре разбирает, из-за чего переход буксует и как довести его до конца"
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "registration",
+        "action": "#",
+        "dataConsentHref": "/privacy",
+        "note": "После вебинара поможем настроить первое пространство под ваши процессы",
+        "title": "Переезжайте без стресса — начнём с вебинара",
+        "submitLabel": "Занять место"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Вебинар: внедрение Кайтена без стресса для команды",
+    "description": "Бесплатный вебинар 30 июля: как перенести процессы «как есть», внедрять волнами и видеть всю работу без микроменеджмента. Ведущий — Давид Гаранян, Kaiten."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/event_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-07-17T18:19:33.136Z",
+    "generator": "host-agent",
+    "archetype": "event_landing",
+    "tokenEstimate": 46811,
+    "domain": "pm"
+  }
+}

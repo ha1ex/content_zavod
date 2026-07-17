@@ -132,7 +132,7 @@ pnpm -w run harness agent build landing --slug <slug> --brief content/briefs/<sl
 
 Open `content/briefs/<slug>.json`. If it does not exist:
 
-- Ask the user for: product, audience, market, primary goal (`book_demo` / `signup` / `waitlist` / `contact_sales` / `try_free` / `download`), main pain, main promise, 3 proof points, tone (default: "clear, practical, confident, no hype"), CTA label, `pageArchetype` (`saas` / `waitlist` / `enterprise`), **`pageLayout`** (slug из шага 0).
+- Ask the user for: product, audience, market, primary goal (`book_demo` / `signup` / `waitlist` / `contact_sales` / `try_free` / `download`), main pain, main promise, 3 proof points, tone (default: "clear, practical, confident, no hype"), CTA label, `pageArchetype` (`saas` / `waitlist` / `enterprise` / `event` — лендинг мероприятия: вебинар, конференция, митап; целевое действие это форма регистрации, см. `wiki/archetypes/event_landing.md`), **`pageLayout`** (slug из шага 0; для `event` в custom-флоу layout не нужен).
 - Write the brief to `content/briefs/<slug>.json` matching `BriefSchema` from `@kaiten/harness/schemas`.
 
 **Audience pre-resolve (optional but speeds up the gate):** если знаешь явно — какие сегменты из [`wiki/audiences/kaiten-scoring.md`](../../../wiki/audiences/kaiten-scoring.md) подходят к брифу — добавь `resolvedSegments: ["IT", ...]`. Если не уверен — оставь пустым, audience-score gate сам сделает lexical-match. Если match провалится — на шаге 4½ сделаешь audience research и впишешь.

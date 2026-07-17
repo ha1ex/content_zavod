@@ -2,7 +2,7 @@
 slug: kaiten-finance
 type: landing
 created: 2026-07-01
-updated: 2026-07-02
+updated: 2026-07-17
 status: draft
 brief: content/briefs/kaiten-finance.json
 archetype: enterprise_landing
@@ -46,7 +46,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46465
+tokenEstimate: 46499
 tags:
   - landing
   - saas_landing
@@ -60,7 +60,7 @@ stale: false
 - **archetype:** `enterprise_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать Кайтен")
 - **sections used:** `site_header, hero, benefits_strip, reviews, accordion_feature, media_copy, features, final_cta, features, features, process, kaiten_footer`
-- **token estimate:** `46465`
+- **token estimate:** `46499`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -164,7 +164,7 @@ stale: false
 - **Score:** 85.34 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** Финансы, IT
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-07-02T12:09:19.947Z
+- **Generated:** 2026-07-17T13:40:34.492Z
 
 ## Breakdown
 

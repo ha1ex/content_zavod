@@ -14,7 +14,9 @@ export function landingSpecFromBrief(brief: Brief): LandingSpec {
       ? 'waitlist_landing'
       : brief.pageArchetype === 'enterprise'
         ? 'enterprise_landing'
-        : 'saas_landing';
+        : brief.pageArchetype === 'event'
+          ? 'event_landing'
+          : 'saas_landing';
 
   const draft: LandingSpec = {
     pageType,

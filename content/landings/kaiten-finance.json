@@ -335,10 +335,10 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-02T12:09:19.969Z",
+    "generatedAt": "2026-07-17T13:40:34.500Z",
     "generator": "host-agent",
     "archetype": "enterprise_landing",
-    "tokenEstimate": 46465,
+    "tokenEstimate": 46499,
     "domain": "pm"
   }
 }

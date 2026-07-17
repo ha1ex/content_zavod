@@ -108,7 +108,9 @@ Tone of voice. Описание словами. По умолчанию подо
 
 ### `pageArchetype` (enum, default `"saas"`)
 
-Тип лендинга. Один из: `saas` / `waitlist` / `enterprise`.
+Тип лендинга. Один из: `saas` / `waitlist` / `enterprise` / `event`.
+
+`event` — лендинг мероприятия (вебинар, конференция, митап, воркшоп): целевое действие — заполнить форму регистрации, а не перейти по кнопке. См. `wiki/archetypes/event_landing.md`.
 
 ### `pageLayout` (enum, **highly recommended**)
 

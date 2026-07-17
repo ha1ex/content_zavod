@@ -1,6 +1,6 @@
 # wiki — каталог
 
-> AUTO-GENERATED командой `pnpm harness -- wiki index`. Last rebuild: 2026-06-10.
+> AUTO-GENERATED командой `pnpm harness -- wiki index`. Last rebuild: 2026-07-17.
 > Не редактируйте руками — изменения будут перетёрты.
 
 ## Корневые файлы
@@ -12,9 +12,10 @@
 ## Design system
 
 - [`design-system/colors.md`](design-system/colors.md) — Colors _(updated: 2026-05-15)_
-- [`design-system/components/accordion.md`](design-system/components/accordion.md) — Accordion _(updated: 2026-05-15)_
+- [`design-system/components/accordion.md`](design-system/components/accordion.md) — Accordion _(updated: 2026-06-29)_
 - [`design-system/components/badge.md`](design-system/components/badge.md) — Badge _(updated: 2026-06-03)_
 - [`design-system/components/button.md`](design-system/components/button.md) — Button _(updated: 2026-05-15)_
+- [`design-system/components/comparison-table.md`](design-system/components/comparison-table.md) — ComparisonTable _(updated: 2026-06-28)_
 - [`design-system/components/content-block.md`](design-system/components/content-block.md) — ContentBlock _(updated: 2026-06-03)_
 - [`design-system/components/cta-2-secondary.md`](design-system/components/cta-2-secondary.md) — CTA 2 Secondary _(updated: 2026-06-01)_
 - [`design-system/components/feature-grid.md`](design-system/components/feature-grid.md) — FeatureGrid _(updated: 2026-05-15)_
@@ -33,29 +34,38 @@
 ## Archetypes
 
 - [`archetypes/enterprise_landing.md`](archetypes/enterprise_landing.md) — Enterprise landing — archetype _(updated: 2026-05-15)_
+- [`archetypes/event_landing.md`](archetypes/event_landing.md) — Event landing — archetype _(updated: 2026-07-17)_
 - [`archetypes/saas_landing.md`](archetypes/saas_landing.md) — SaaS landing — archetype _(updated: 2026-05-15)_
 - [`archetypes/waitlist_landing.md`](archetypes/waitlist_landing.md) — Waitlist landing — archetype _(updated: 2026-05-15)_
 
 ## Landings (filed back)
 
 - [`landings/bpm-reference.md`](landings/bpm-reference.md) — BPM — internal reference _(updated: 2026-05-16)_
-- [`landings/crm.md`](landings/crm.md) — Landing summary _(updated: 2026-05-16)_
+- [`landings/crm.md`](landings/crm.md) — Landing summary _(updated: 2026-07-01)_
 - [`landings/crm-reference.md`](landings/crm-reference.md) — CRM — internal reference (CRM-домен mock'ов) _(updated: 2026-05-16)_
 - [`landings/docs-reference.md`](landings/docs-reference.md) — Документы и база знаний — internal reference (docs-домен mock'ов) _(updated: 2026-05-16)_
 - [`landings/ecommerce-reference.md`](landings/ecommerce-reference.md) — E-commerce — internal reference _(updated: 2026-05-16)_
 - [`landings/finance-reference.md`](landings/finance-reference.md) — Finance — internal reference _(updated: 2026-05-16)_
 - [`landings/hr-reference.md`](landings/hr-reference.md) — HR — internal reference (HR-домен mock'ов) _(updated: 2026-05-16)_
-- [`landings/kaiten-manufacturing.md`](landings/kaiten-manufacturing.md) — Landing summary _(updated: 2026-05-27)_
-- [`landings/kaiten-platform.md`](landings/kaiten-platform.md) — Landing summary _(updated: 2026-05-16)_
-- [`landings/kaiten-support.md`](landings/kaiten-support.md) — Landing summary _(updated: 2026-05-16)_
+- [`landings/kaiten-clickup.md`](landings/kaiten-clickup.md) — Landing summary _(updated: 2026-07-17)_
+- [`landings/kaiten-finance.md`](landings/kaiten-finance.md) — Landing summary _(updated: 2026-07-17)_
+- [`landings/kaiten-manufacturing.md`](landings/kaiten-manufacturing.md) — Landing summary _(updated: 2026-07-01)_
+- [`landings/kaiten-mcp.md`](landings/kaiten-mcp.md) — Landing summary _(updated: 2026-07-02)_
+- [`landings/kaiten-platform.md`](landings/kaiten-platform.md) — Landing summary _(updated: 2026-07-01)_
+- [`landings/kaiten-retail.md`](landings/kaiten-retail.md) — Landing summary _(updated: 2026-07-17)_
+- [`landings/kaiten-support.md`](landings/kaiten-support.md) — Landing summary _(updated: 2026-07-01)_
 - [`landings/kaiten-techsupport-reference.md`](landings/kaiten-techsupport-reference.md) — Kaiten для техподдержки — **internal** reference (не мировой эталон) _(updated: 2026-05-16)_
-- [`landings/knowledge-base.md`](landings/knowledge-base.md) — Landing summary _(updated: 2026-05-16)_
+- [`landings/knowledge-base.md`](landings/knowledge-base.md) — Landing summary _(updated: 2026-07-01)_
 - [`landings/marketing-reference.md`](landings/marketing-reference.md) — Marketing — internal reference _(updated: 2026-05-16)_
 - [`landings/test-kaiten.md`](landings/test-kaiten.md) — Landing summary _(updated: 2026-05-15)_
+- [`landings/webinar-vnedrenie-kaiten.md`](landings/webinar-vnedrenie-kaiten.md) — Landing summary _(updated: 2026-07-17)_
 
 ## Meta
 
 - [`audiences/AGENTS.md`](audiences/AGENTS.md) — wiki/audiences — конвенции _(updated: —)_
+- [`audiences/icp-overview.md`](audiences/icp-overview.md) — ICP overview _(updated: —)_
+- [`brand/kaiten-brand-platform.md`](brand/kaiten-brand-platform.md) — Kaiten — Бренд-платформа _(updated: —)_
+- [`cases.md`](cases.md) — Ключевые кейсы клиентов (выжимки) _(updated: —)_
 - [`design-system/components/faq.md`](design-system/components/faq.md) — FAQ _(updated: —)_
 - [`design-system/components/final-cta.md`](design-system/components/final-cta.md) — Final CTA _(updated: —)_
 - [`design-system/components/footer.md`](design-system/components/footer.md) — Footer _(updated: —)_
@@ -64,6 +74,8 @@
 - [`design-system/components/reviews.md`](design-system/components/reviews.md) — Reviews (Отзывы) _(updated: —)_
 - [`design-system/components/secondary-cta.md`](design-system/components/secondary-cta.md) — Secondary CTA _(updated: —)_
 - [`design-system/components/section-heading.md`](design-system/components/section-heading.md) — Section Heading _(updated: —)_
+- [`kaiten-company-overview.md`](kaiten-company-overview.md) — Kaiten: Всесторонний обзор компании _(updated: —)_
+- [`kaiten-roadmap-2026.md`](kaiten-roadmap-2026.md) — Дорожная карта продукта Kaiten · 2026 _(updated: —)_
 - [`marketing/brief-fields.md`](marketing/brief-fields.md) — Brief — поля в `content/briefs/<slug>.json` _(updated: —)_
 - [`marketing/edit-recipes.md`](marketing/edit-recipes.md) — Доработка готового лендинга — рецепты _(updated: —)_
 - [`marketing/getting-started.md`](marketing/getting-started.md) — Маркетинг — начало работы с Контент-завод Кайтен _(updated: —)_
@@ -76,6 +88,7 @@
 - [`references/domain-mock-matrix.md`](references/domain-mock-matrix.md) — Domain → Mock matrix (обязательное правило выбора mock'ов)
 - [`references/external-mock-references.md`](references/external-mock-references.md) — External mock-illustration references
 - [`references/kaiten-product-facts.md`](references/kaiten-product-facts.md) — Продуктовые факты Kaiten — источник истины по позиционированию
+- [`references/mock-wiring-guide.md`](references/mock-wiring-guide.md) — Как подключить мок (чтобы он не остался сиротой)
 - [`pipeline/phase-gates.md`](pipeline/phase-gates.md) — Phase gates — phased pipeline
 
 ## layout

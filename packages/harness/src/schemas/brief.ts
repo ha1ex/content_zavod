@@ -18,9 +18,13 @@ export const BriefSchema = z.object({
   tone: z.string().default('clear, professional, non-hype').describe('Tone of voice'),
   cta: z.string().describe('Основной CTA-текст (label кнопки)'),
   pageArchetype: z
-    .enum(['saas', 'waitlist', 'enterprise'])
+    .enum(['saas', 'waitlist', 'enterprise', 'event'])
     .default('saas')
-    .describe('Тип лендинга — выбирается из доступных archetype'),
+    .describe(
+      'Тип лендинга — выбирается из доступных archetype. `event` — лендинг ' +
+        'мероприятия (вебинар, конференция, митап): целевое действие — заполнить ' +
+        'форму регистрации, а не перейти по кнопке. См. wiki/archetypes/event_landing.md.',
+    ),
   pageLayout: z
     .enum([
       'enterprise-modular-saas',

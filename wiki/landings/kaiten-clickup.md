@@ -2,7 +2,7 @@
 slug: kaiten-clickup
 type: landing
 created: 2026-07-15
-updated: 2026-07-16
+updated: 2026-07-17
 status: draft
 brief: content/briefs/kaiten-clickup.json
 archetype: saas_landing
@@ -33,17 +33,20 @@ sources:
 sections:
   - site_header
   - hero
-  - features
+  - logo_cloud
+  - accordion_feature
   - cta_banner
   - comparison_table
   - media_copy
+  - cta_banner
   - features
   - faq
   - final_cta
+  - legal_note
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46401
+tokenEstimate: 46435
 tags:
   - landing
   - saas_landing
@@ -56,8 +59,8 @@ stale: false
 - **brief:** `content/briefs/kaiten-clickup.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `site_header, hero, features, cta_banner, comparison_table, media_copy, features, faq, final_cta, kaiten_footer`
-- **token estimate:** `46401`
+- **sections used:** `site_header, hero, logo_cloud, accordion_feature, cta_banner, comparison_table, media_copy, cta_banner, features, faq, final_cta, legal_note, kaiten_footer`
+- **token estimate:** `46435`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -99,14 +102,11 @@ stale: false
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 - **visual:** `product_screenshot` (assetId: `kaiten-clickup-board`)
 
-### features (FeatureGrid)
+### logo_cloud (LogoCloud)
 
-- **title:** "Работайте с задачами так, как привыкли"
-- **columns:** 2 · **items:** 4
-  1. `square-kanban` · "Привычная канбан-доска" — 137 chars
-  2. `layout-list` · "Разное отображение задач" — 126 chars
-  3. `book-open` · "Документы и база знаний" — 102 chars
-  4. `zap` · "Автоматизации без программирования" — 133 chars
+
+### accordion_feature (AccordionFeatureSection)
+
 
 ### cta_banner (CtaBanner)
 
@@ -117,29 +117,35 @@ stale: false
 ### media_copy (MediaCopy)
 
 
+### cta_banner (CtaBanner)
+
+
 ### features (FeatureGrid)
 
 - **title:** "Кайтен — одна платформа для всей компании"
 - **columns:** 2 · **items:** 4
-  1. `square-kanban` · "Продвинутый канбан" — 122 chars
-  2. `life-buoy` · "Служба поддержки" — 131 chars
-  3. `users` · "CRM" — 115 chars
-  4. `timer` · "Учёт времени" — 118 chars
+  1. `square-kanban` · "Продвинутый канбан" — 171 chars
+  2. `life-buoy` · "Служба поддержки" — 162 chars
+  3. `users` · "CRM" — 169 chars
+  4. `timer` · "Учет времени" — 139 chars
 
 ### faq (FAQAccordion)
 
 - **title:** "Ответы на частые вопросы"
 - **items:** 5 Q&A
-  1. "Какие тарифы можно попробовать?" — answer 105/600 chars
-  2. "Как работает пробный период?" — answer 183/600 chars
-  3. "Как начать пользоваться Кайтеном?" — answer 141/600 chars
-  4. "Можно ли перенести данные из ClickUp в Кайтен?" — answer 168/600 chars
+  1. "Какие тарифы можно попробовать?" — answer 127/600 chars
+  2. "Как работает пробный период?" — answer 198/600 chars
+  3. "Как начать пользоваться Кайтен?" — answer 141/600 chars
+  4. "Можно ли перенести данные из ClickUp в Кайтен?" — answer 74/600 chars
   5. "Можно ли установить Кайтен на собственный сервер?" — answer 103/600 chars
 
 ### final_cta (FinalCta)
 
 - **title:** "Попробуйте Kaiten бесплатно"
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
+
+### legal_note (LegalNote)
+
 
 ### kaiten_footer (LandingFooterMock)
 <!-- /gen:sections-summary -->
@@ -149,16 +155,16 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `kaiten-clickup`
 
-- **Score:** 77.75 / 100 (threshold 70) — ✅ pass
+- **Score:** 77.28 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-07-15T20:08:06.590Z
+- **Generated:** 2026-07-17T13:40:31.189Z
 
 ## Breakdown
 
 | ID | Subscore | Raw | Weight | Weighted | Detail |
 |---|---|---|---|---|---|
-| S1 | Story coverage | 69.38 | 0.4 | 27.75 | top-6 stories: compare(w=0.98, c=0.82), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=0.77), ux-check(w=0.71, c=0.53), sandbox(w=0.62, c=0.53), security(w=0.53, c=0.17) |
+| S1 | Story coverage | 68.2 | 0.4 | 27.28 | top-6 stories: compare(w=0.98, c=0.82), migrate-jira(w=0.95, c=0.77), fast-check(w=0.94, c=0.77), ux-check(w=0.71, c=0.77), sandbox(w=0.62, c=0.53), security(w=0.53, c=0.17) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
 | S3 | Role addressability | 50 | 0.2 | 10 | PM=1.00, DM=0.00 |
 | S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial], match=1/1 |
@@ -168,9 +174,9 @@ stale: false
 | Story | Weight | Covered | Status |
 |---|---|---|---|
 | compare — Хочу сравнить с тем, что уже есть | 0.98 | 0.83 | ✅ covered |
-| migrate-jira — Хочу понять, стоит ли переезжать с Jira | 0.95 | 1 | ✅ covered |
+| migrate-jira — Хочу понять, стоит ли переезжать с Jira | 0.95 | 0.77 | ✅ covered |
 | fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 0.77 | ✅ covered |
-| ux-check — Хочу проверить UX до решения | 0.71 | 0.53 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
+| ux-check — Хочу проверить UX до решения | 0.71 | 0.77 | ✅ covered |
 | sandbox — Хочу проверить, не сломаем ли мы всё | 0.62 | 0.53 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | security — Хочу понять ограничения и безопасность | 0.53 | 0.18 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 

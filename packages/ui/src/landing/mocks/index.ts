@@ -91,6 +91,12 @@ export { RetailMobileMock } from './RetailMobileMock';
 export { RetailDocMiniMock } from './RetailDocMiniMock';
 export { RetailReportMiniMock } from './RetailReportMiniMock';
 export { GanttChartMock } from './ModuleGanttChartMock';
+export { CliTerminalHeroMock } from './CliTerminalHeroMock';
+export { CliTerminalHeroAnimatedMock } from './CliTerminalHeroAnimatedMock';
+export { CliMarkdownExportMock } from './CliMarkdownExportMock';
+export { CliSnapshotMetricsMock } from './CliSnapshotMetricsMock';
+export { CliBatchStatsMock } from './CliBatchStatsMock';
+export { CliInstallMock } from './CliInstallMock';
 export { FitContain } from './FitContain';
 
 export { FeatureGridMock } from './FeatureGridMock';

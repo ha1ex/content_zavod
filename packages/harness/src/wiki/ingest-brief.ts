@@ -4,7 +4,7 @@
  * Что делает:
  *   1. Читает brief.json и валидирует через BriefSchema.
  *   2. Если есть LLM-кредиталы — вызывает модель для классификации:
- *      - archetype (saas_landing | waitlist_landing | enterprise_landing)
+ *      - archetype (saas_landing | waitlist_landing | enterprise_landing | event_landing)
  *      - audience-роли (mapping на существующие или новые wiki/audiences/*)
  *      - анализ pain/promise/proof points в формате wiki-знаний.
  *   3. Если новая audience — создаёт wiki/audiences/<slug>.md.
@@ -41,7 +41,7 @@ const AudienceClassificationSchema = z.object({
     )
     .min(1)
     .max(3),
-  archetypeHint: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing']),
+  archetypeHint: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing', 'event_landing']),
   patternCandidates: z
     .array(z.string())
     .describe('Похожие паттерны из wiki/patterns/*, если применимо')
@@ -130,7 +130,9 @@ async function classifyBriefWithLLM(brief: Brief): Promise<AudienceClassificatio
 
 Read the brief and:
 1. Extract 1-3 distinct audience profiles (role, top pains, top jobs-to-be-done, tone preferences).
-2. Pick the archetype hint: saas_landing | waitlist_landing | enterprise_landing.
+2. Pick the archetype hint: saas_landing | waitlist_landing | enterprise_landing | event_landing.
+   event_landing — a landing for an event (webinar, conference, meetup): the target action is
+   filling in a registration form, not clicking through to a product.
 3. Suggest patterns from wiki/patterns/* that might be reusable (use kebab-case slugs).
 
 Audience slugs: kebab-case, short, generic (e.g. "pm-saas", "marketing-lead", "founder-bootstrap").
@@ -195,9 +197,12 @@ ${aud.tonePreferences.length ? aud.tonePreferences.map((t) => `- ${t}`).join('\n
 `;
 }
 
-function archetypeFromBrief(brief: Brief): 'saas_landing' | 'waitlist_landing' | 'enterprise_landing' {
+function archetypeFromBrief(
+  brief: Brief,
+): 'saas_landing' | 'waitlist_landing' | 'enterprise_landing' | 'event_landing' {
   if (brief.pageArchetype === 'waitlist') return 'waitlist_landing';
   if (brief.pageArchetype === 'enterprise') return 'enterprise_landing';
+  if (brief.pageArchetype === 'event') return 'event_landing';
   return 'saas_landing';
 }
 

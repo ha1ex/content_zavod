@@ -22,6 +22,10 @@ import {
   BentoGrid,
   LogoCloud,
   TestimonialQuote,
+  LegalNote,
+  PainBubbles,
+  SpeakerCard,
+  RegistrationCta,
   SiteHeader,
   LandingFooterMock,
   ReviewSlider,
@@ -122,6 +126,14 @@ function RenderSection({ section }: { section: Section }) {
       return <LogoCloud {...section.props} />;
     case 'TestimonialQuote':
       return <TestimonialQuote {...section.props} />;
+    case 'LegalNote':
+      return <LegalNote {...section.props} />;
+    case 'PainBubbles':
+      return <PainBubbles {...section.props} />;
+    case 'SpeakerCard':
+      return <SpeakerCard {...section.props} />;
+    case 'RegistrationCta':
+      return <RegistrationCta {...section.props} />;
     default: {
       const _exhaustive: never = section;
       void _exhaustive;

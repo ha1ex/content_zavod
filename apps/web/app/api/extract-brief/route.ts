@@ -7,7 +7,7 @@ import { extractBriefViaCli, type CliProvider } from './cli-extract';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-export const maxDuration = 800;
+export const maxDuration = 300;
 
 const SYSTEM_PROMPT = `Ты — ассистент маркетингового харнесса Контент-завод Кайтен. Из произвольного текста (брифа, концепции, описания продукта) извлеки структурированный Brief в формате BriefSchema.
 
@@ -21,7 +21,7 @@ const SYSTEM_PROMPT = `Ты — ассистент маркетингового 
 - proofPoints: 3+ конкретных факта (цифры, сертификаты, кейсы). Если в тексте мало — выдели что есть.
 - tone: оставь "clear, professional, non-hype" если не явно указан другой.
 - cta: текст основной кнопки, согласованный с primaryGoal. Например: "Получить демо" / "Попробовать бесплатно".
-- pageArchetype: "saas" (по умолчанию) / "waitlist" / "enterprise".
+- pageArchetype: "saas" (по умолчанию) / "waitlist" / "enterprise" / "event" ("event" — лендинг мероприятия: вебинар, конференция, митап; целевое действие это форма регистрации).
 - pageLayout: один из 10 вариантов layout, выбери подходящий по смыслу: enterprise-modular-saas / single-module-deep-dive / compliance-first-enterprise / comparison-vs-competitor / story-led-unaware / depersonalized-product-tour / crm-product-tour / migration-from-competitor / product-launch / case-study-deep-dive. Если не уверен — оставь null.
 
 Извлекай ТОЛЬКО на основе текста. Не выдумывай факты которых нет. Если поле невозможно определить — выбирай реалистичный default.`;

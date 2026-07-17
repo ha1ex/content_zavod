@@ -64,6 +64,12 @@ import {
   RetailDocMiniMock,
   RetailReportMiniMock,
   GanttChartMock,
+  CliTerminalHeroMock,
+  CliTerminalHeroAnimatedMock,
+  CliMarkdownExportMock,
+  CliSnapshotMetricsMock,
+  CliBatchStatsMock,
+  CliInstallMock,
 } from '.';
 
 /**
@@ -162,7 +168,14 @@ export type MockVariant =
   | 'retail-report-stores'
   | 'retail-report-bottlenecks'
   | 'retail-report-ai'
-  | 'gantt-chart';
+  | 'gantt-chart'
+  // Kaiten CLI (cli-community-edition)
+  | 'cli-terminal-hero'
+  | 'cli-terminal-hero-animated'
+  | 'cli-markdown-export'
+  | 'cli-snapshot-metrics'
+  | 'cli-batch-stats'
+  | 'cli-install';
 
 export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
   switch (variant) {
@@ -268,8 +281,17 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <MeetListMock />;
     case 'pm-board-1':
       return <PmBoard1Mock />;
+    // Мок фиксированной ширины 1360px — в узких слотах (половина MediaCopy,
+    // карточка FeatureGrid) он рвёт страницу горизонтальным скроллом, поэтому
+    // масштабируется под контейнер. На широких слотах масштаб остаётся 1.
     case 'portfolio-board':
-      return <ModulePortfolioMock />;
+      return (
+        <div className="w-full overflow-hidden">
+          <ScaleToFit designWidth={1360}>
+            <ModulePortfolioMock />
+          </ScaleToFit>
+        </div>
+      );
     case 'approval-board':
       return <ApprovalBoardMock />;
     case 'reports-charts':
@@ -313,6 +335,18 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
           </ScaleToFit>
         </div>
       );
+    case 'cli-terminal-hero':
+      return <CliTerminalHeroMock />;
+    case 'cli-terminal-hero-animated':
+      return <CliTerminalHeroAnimatedMock />;
+    case 'cli-markdown-export':
+      return <CliMarkdownExportMock />;
+    case 'cli-snapshot-metrics':
+      return <CliSnapshotMetricsMock />;
+    case 'cli-batch-stats':
+      return <CliBatchStatsMock />;
+    case 'cli-install':
+      return <CliInstallMock />;
     default:
       return null;
   }

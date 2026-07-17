@@ -62,3 +62,21 @@ pnpm -w run harness agent build landing --slug <slug> --brief content/briefs/<sl
 ## Важно
 - ТЗ.md выводится детерминированно из того же JSON, что и бриф → они всегда согласованы. Правки вносить в `intake.json` (источник) и повторять apply, не редактируя `.tz.md` вручную.
 - Лендинг «готов» только после Playwright-скриншота и сверки с design-system (не HTTP 200).
+
+## ⚠️ Извлечение .docx ТЗ — ЦЕЛИКОМ (правило `custom-tz-full-extraction`)
+
+`python-docx` (`d.paragraphs` + `d.tables`) читает **не весь** документ — пропускает **текстбоксы/фигуры** и не видит текст, вшитый в **картинки**. В ТЗ там часто лежат подзаголовки CTA, промежуточные кнопки, блоки логотипов/доверия. Если извлечь неполно — блоки и тексты теряются, а custom-лендинг перестаёт соответствовать ТЗ.
+
+**Как извлекать docx для custom-ТЗ:**
+1. Основной текст в порядке документа — из `word/document.xml` (unzip), собирая ВСЕ `<w:t>` внутри `<w:p>`, **включая** `<w:txbxContent>` (текстбоксы):
+   ```python
+   import zipfile; from xml.etree import ElementTree as ET
+   W="{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+   root=ET.fromstring(zipfile.ZipFile(path).read("word/document.xml").decode())
+   for p in root.iter(f"{W}p"):
+       t="".join(x.text or "" for x in p.iter(f"{W}t")).strip()
+       if t: print(t)
+   ```
+2. Таблицы — как обычно (`d.tables`), но сверяй, что колонки конкурента (✓/—) не схлопнулись при merge.
+3. **Вшитые картинки/объекты** (логотипы, баннеры с текстом) — перечисли (`word/media/*`) и попроси у команды текст, который на них изображён (напр. «Более 200 тысяч компаний выбирают Kaiten» + список логотипов). Занеси в `tz.landing_copy` вручную.
+4. Проверь: число блоков в `tz.landing_structure` == числу смысловых блоков в docx (ни один не потерян).

@@ -25,6 +25,7 @@ import {
   type CrossLandingDiversityResult,
   validateLandingLanguage,
   type LandingLanguageError,
+  validateLandingTzFidelity,
 } from '../validators/index';
 import { renderLandingToTSX } from '../render/index';
 import { buildLandingSystemPromptWithMeta } from '../prompts/system';
@@ -204,16 +205,29 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
     );
   }
 
+  // Custom-режим (1-в-1 по ТЗ): тексты берутся из ТЗ дословно, поэтому бренд- и
+  // языковой гейты становятся СПРАВОЧНЫМИ (warnings) — они не должны заставлять
+  // менять текст ТЗ. Правило: `custom-copy-gates-advisory`.
+  const isCustom = brief?.landingMode === 'custom';
+
   const brand = validateLandingBrand(spec);
   if (!brand.ok) {
-    for (const e of brand.errors) errors.push(landingBrandToIngestError(e));
+    for (const e of brand.errors) {
+      const ie = landingBrandToIngestError(e);
+      if (isCustom) {
+        warnings.push(`brand:advisory (custom, 1-в-1 по ТЗ) ${ie.path ?? '*'} — ${ie.message}`);
+      } else {
+        errors.push(ie);
+      }
+    }
   }
 
-  // Language gate (§10 англицизмы) — soft по умолчанию (warnings), strict через languageStrict.
+  // Language gate (§10 англицизмы) — soft по умолчанию (warnings), strict через
+  // languageStrict. В custom-режиме — всегда advisory (текст ТЗ дословный).
   try {
     const language = await validateLandingLanguage(spec, { root: opts.root });
     for (const e of language.errors) {
-      if (opts.languageStrict && e.severity === 'error') {
+      if (opts.languageStrict && e.severity === 'error' && !isCustom) {
         errors.push(languageToIngestError(e));
       } else {
         warnings.push(
@@ -223,6 +237,21 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
     }
   } catch (err) {
     warnings.push(`language validator пропущен: ${(err as Error).message}`);
+  }
+
+  // custom-tz-fidelity: дословная сверка копирайта с ТЗ (advisory) — только custom.
+  if (isCustom) {
+    try {
+      const fid = await validateLandingTzFidelity(spec, { root: opts.root, slug: opts.slug });
+      if (fid.source && fid.warnings.length > 0) {
+        warnings.push(
+          `tz-fidelity: ${fid.warnings.length}/${fid.checked} копирайт-строк не найдены дословно в ${fid.source} — перефраз/выдумка/устаревший ТЗ:`,
+        );
+        for (const w of fid.warnings) warnings.push(`  tz-fidelity ${w.where} — «${w.text}»`);
+      }
+    } catch (err) {
+      warnings.push(`tz-fidelity пропущен: ${(err as Error).message}`);
+    }
   }
 
   if (brief) {

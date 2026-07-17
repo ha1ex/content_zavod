@@ -4,8 +4,9 @@
     {
       "name": "web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "apps/web", "run", "dev"],
-      "port": 3000
+      "runtimeArgs": ["--prefix", "apps/web", "run", "dev:preview"],
+      "port": 3001,
+      "autoPort": true
     },
     {
       "name": "storybook",

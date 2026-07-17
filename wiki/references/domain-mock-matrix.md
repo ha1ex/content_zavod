@@ -230,6 +230,26 @@ SLA, эскалация, BPMN, узкое место.
 
 **Reference:** [`wiki/landings/manufacturing-reference.md`](../landings/manufacturing-reference.md).
 
+### Kaiten CLI / Community Edition
+
+Аудитория: инженер и тимлид команды разработки, инженер автоматизации (DevOps),
+аналитик канбан-метрик, инженер, подключающий ИИ-агентов к Kaiten. Лексика:
+командная строка, терминал, команда, флаг, `--json`, экспорт в Markdown, снимок
+данных (snapshot) в SQLite, метрики (throughput), массовое чтение (batch-get),
+статистика выполнения (stats), профиль доступа, установка из репозитория Git,
+проект сообщества. Домен визуально уникален: весь набор — окна терминала и
+файлы кода, а не канбан-доски.
+
+| Mock | Variant slug | Что показывает |
+|---|---|---|
+| `CliTerminalHeroMock` | `cli-terminal-hero` | Окно терминала: `cards get --markdown` сохраняет карточку файлом .md, затем `--json cards get` печатает карточку в JSON; внизу строка stats с `http_request_count: 1`. Сигнатурный визуал первого экрана |
+| `CliMarkdownExportMock` | `cli-markdown-export` | Слева терминал `documents get --markdown`, справа готовый файл .md: заголовок, чек-лист (2 done / 1 todo) и ссылка на вложение `/api/documents/…/files/…` |
+| `CliSnapshotMetricsMock` | `cli-snapshot-metrics` | Терминал `snapshot build --preset analytics` (окно дат) + `query metrics --metric throughput --group-by board_id`; ниже таблица потока задач по 3 доскам с бейджем «без обращений к API» |
+| `CliBatchStatsMock` | `cli-batch-stats` | Терминал `card-location-history batch-get --card-ids '[101,102,103]'` + блок stats `http_request_count: 1`; ниже сравнение «по одной карточке — 3 обращения» vs «batch-get — 1 обращение» |
+| `CliInstallMock` | `cli-install` | Компактное окно терминала: `uv tool install git+…/kaiten-cli.git` → «установлено», затем `kaiten --version` → `0.1.27`. Для правой колонки градиентного финального CTA и шага установки |
+
+**Reference:** [`wiki/landings/cli-community-edition-reference.md`](../landings/cli-community-edition-reference.md).
+
 ## Жёсткие правила (повторно — для системного prompt'а)
 
 1. **Один лендинг = один домен.** Не миксуй mock'и из разных доменов «для

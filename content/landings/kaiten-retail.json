@@ -494,11 +494,11 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-02T12:03:53.810Z",
+    "generatedAt": "2026-07-17T13:40:33.013Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "depersonalized-product-tour",
-    "tokenEstimate": 46401,
+    "tokenEstimate": 46435,
     "domain": "pm"
   }
 }

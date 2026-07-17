@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-01T19:43:47.448Z",
+  "updatedAt": "2026-07-17T19:14:46.626Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -265,12 +265,102 @@
     },
     {
       "kind": "mock-use",
+      "variant": "mcp-agent-board-animated",
+      "landingSlug": "kaiten-mcp",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-07-02T13:42:31.422Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "pm-board",
+      "landingSlug": "kaiten-mcp",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "pm",
+      "recordedAt": "2026-07-02T13:42:31.422Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "mcp-agent-board",
+      "landingSlug": "kaiten-mcp",
+      "sectionId": "media_copy",
+      "sectionIdx": 5,
+      "domain": "pm",
+      "recordedAt": "2026-07-02T13:42:31.423Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "analytics-kpi",
+      "landingSlug": "kaiten-mcp",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-07-02T13:42:31.423Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "hero-screen-interface",
+      "landingSlug": "kaiten-clickup",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T13:40:31.200Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "pm-board-1",
+      "landingSlug": "kaiten-clickup",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T13:40:31.200Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "retail-portfolio-animated",
+      "landingSlug": "kaiten-retail",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T13:40:33.016Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "retail-mobile",
+      "landingSlug": "kaiten-retail",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T13:40:33.016Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "retail-task-card",
+      "landingSlug": "kaiten-retail",
+      "sectionId": "media_copy",
+      "sectionIdx": 7,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T13:40:33.017Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "integrations-console",
+      "landingSlug": "kaiten-retail",
+      "sectionId": "media_copy",
+      "sectionIdx": 11,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T13:40:33.017Z"
+    },
+    {
+      "kind": "mock-use",
       "variant": "portfolio-board",
       "landingSlug": "kaiten-finance",
       "sectionId": "hero",
       "sectionIdx": 1,
       "domain": "pm",
-      "recordedAt": "2026-07-01T19:43:47.447Z"
+      "recordedAt": "2026-07-17T13:40:34.503Z"
     },
     {
       "kind": "mock-use",
@@ -279,7 +369,61 @@
       "sectionId": "media_copy",
       "sectionIdx": 5,
       "domain": "pm",
-      "recordedAt": "2026-07-01T19:43:47.448Z"
+      "recordedAt": "2026-07-17T13:40:34.503Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "pm-board",
+      "landingSlug": "webinar-vnedrenie-kaiten",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T18:19:33.137Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "cli-terminal-hero-animated",
+      "landingSlug": "kaiten-cli",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "cli-community-edition",
+      "recordedAt": "2026-07-17T19:14:46.623Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "cli-markdown-export",
+      "landingSlug": "kaiten-cli",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "cli-community-edition",
+      "recordedAt": "2026-07-17T19:14:46.624Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "cli-snapshot-metrics",
+      "landingSlug": "kaiten-cli",
+      "sectionId": "media_copy",
+      "sectionIdx": 5,
+      "domain": "cli-community-edition",
+      "recordedAt": "2026-07-17T19:14:46.624Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "cli-batch-stats",
+      "landingSlug": "kaiten-cli",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "cli-community-edition",
+      "recordedAt": "2026-07-17T19:14:46.625Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "cli-install",
+      "landingSlug": "kaiten-cli",
+      "sectionId": "media_copy",
+      "sectionIdx": 8,
+      "domain": "cli-community-edition",
+      "recordedAt": "2026-07-17T19:14:46.626Z"
     }
   ]
 }

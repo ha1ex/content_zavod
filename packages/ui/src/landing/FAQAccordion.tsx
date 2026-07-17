@@ -52,7 +52,7 @@ const STYLE = `
   --brand-100:#7d4ccf;
   --border-default:#dbe1e0; --border-hover:#e5e7eb;
   --text-title:#2d2d2d; --text-secondary:#757575; --icon:#757575; --surface-section:#f7f7f8;
-  font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
   background:var(--surface-section); width:100%; padding:48px var(--sp-4);
 }
 .faq-mock *{box-sizing:border-box;}

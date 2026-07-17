@@ -58,7 +58,7 @@ const STYLE = `
   --fw-med:500; --fw-semi:600;
   --brand-100:#7d4ccf; --brand-hover:#6a3cbf; --brand-48:rgba(125,76,207,.48); --brand-12:#efe9f9;
   --border-default:#dbe1e0; --text-title:#2d2d2d; --text-secondary:#757575; --surface-section:#f7f7f8;
-  font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
   background:var(--surface-section); padding:48px 0;
 }
 .revx-mock *{box-sizing:border-box;}

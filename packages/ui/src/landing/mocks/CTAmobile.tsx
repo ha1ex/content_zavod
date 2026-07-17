@@ -39,7 +39,7 @@ const STYLE = `
   --fw-med:500; --fw-semi:600; --ls:0;
   --brand-12:#efe9f9; --brand-100:#7d4ccf; --brand-hover:#6a3cbf; --brand-48:rgba(125,76,207,.48);
   --border-default:#dbe1e0; --text-title:#2d2d2d;
-  font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
   display:block; width:100%; padding:96px var(--sp-4); box-sizing:border-box;
 }
 .ctam, .ctam *{box-sizing:border-box;}

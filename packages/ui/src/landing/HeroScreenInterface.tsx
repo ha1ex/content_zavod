@@ -171,7 +171,7 @@ const CSS = `
   --_brand:var(--brand-100,#7d4ccf);--_brand-hover:var(--brand-hover,#6f43b8);
   --_brand-12:var(--brand-12,#efe9f9);--_brand-12k:var(--brand-12k,rgba(125,76,207,.12));
   --_brand-48k:var(--brand-48k,rgba(125,76,207,.48));--_border:var(--border-default,#e0e0e0);
-  --_ink:#2d2d2d;--_font:var(--font,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
+  --_ink:#2d2d2d;--_font:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
   --_ls:var(--ls,-0.2px);
   position:relative;padding:var(--sp-12,48px) 0 var(--sp-20,80px);overflow:hidden;
   font-family:var(--_font);letter-spacing:var(--_ls);color:var(--_ink);
@@ -196,7 +196,7 @@ const CSS = `
 @media(max-width:480px){.hsi-screen__badge{max-width:100%}.hsi-screen__badge-text{white-space:normal}}
 @media(max-width:384px){.hsi-screen__title{font-size:var(--fs-3xl,30px);line-height:var(--lh-3xl,36px)}}
 
-.hsi{--tp:#2d2d2d;--ts:#8a8a8f;--acc:#7d4ccf;--bd:#e8e8eb;--sec:#f4f4f6;font-family:var(--font,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);color:var(--tp);-webkit-font-smoothing:antialiased;text-align:left;display:flex;justify-content:center;zoom:.86}
+.hsi{--tp:#2d2d2d;--ts:#8a8a8f;--acc:#7d4ccf;--bd:#e8e8eb;--sec:#f4f4f6;font-family:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);color:var(--tp);-webkit-font-smoothing:antialiased;text-align:left;display:flex;justify-content:center;zoom:.86}
 .hsi *{box-sizing:border-box;margin:0;padding:0}
 .hsi .mod{width:1360px;flex:0 0 auto;background:#f1f1f4;border:1px solid var(--bd);border-radius:16px;box-shadow:0 18px 50px -24px rgba(45,45,45,.35);overflow:hidden}
 .hsi .hdr{display:flex;align-items:center;gap:12px;padding:14px 18px}

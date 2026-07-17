@@ -25,7 +25,7 @@ stale: false
 
 | Family | Stack |
 |---|---|
-| `sans` | `"Inter", system-ui, -apple-system, "Segoe UI", sans-serif` |
+| `sans` | `"Roboto", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif` |
 
 ### Type scale
 

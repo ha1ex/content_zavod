@@ -16,7 +16,7 @@ const css = `
   --page:#f3f1f6; --card:#ffffff;
   --orange-bg:#fff3e0; --blue-bg:#eef4fc; --green:#4caf51;
   --legend:#6b4ba8;
-  font-family:"Inter",system-ui,sans-serif;color:var(--ink);
+  font-family:"Roboto","Inter",system-ui,sans-serif;color:var(--ink);
   background:var(--page);-webkit-font-smoothing:antialiased;
   display:flex;justify-content:center;padding:48px 24px;
 }

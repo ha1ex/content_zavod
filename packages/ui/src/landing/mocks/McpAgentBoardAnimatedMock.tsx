@@ -14,7 +14,7 @@ import { ScaleToFit } from './ScaleToFit';
  */
 const CSS = `.maa{ --tp:#2d2d2d; --ts:#8a8a8f; --acc:#7d4ccf; --bd:#e8e8eb; --sec:#f4f4f6; }
 .maa *{ box-sizing:border-box; margin:0; padding:0; }
-.maa{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; color:var(--tp); -webkit-font-smoothing:antialiased; }
+.maa{ font-family:"Roboto","Inter",system-ui,"Segoe UI",sans-serif; color:var(--tp); -webkit-font-smoothing:antialiased; }
 .maa .wrap{ position:relative; width:1060px; }
 .maa .mod{ width:870px; background:#f1f1f4; border:1px solid var(--bd); border-radius:16px; box-shadow:0 18px 50px -24px rgba(45,45,45,.35); overflow:hidden; }
 .maa .hdr{ display:flex; align-items:center; gap:12px; padding:14px 18px; }

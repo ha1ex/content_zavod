@@ -59,7 +59,7 @@ const STYLE = `
   --border-default:#e0e0e0; --text-title:#2d2d2d; --text-secondary:#757575;
   --surface-page:#ffffff; --surface-section:#f5f5f5;
   --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-24:96px;
-  font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
   display:block; width:100%; background:var(--surface-page);
   padding:var(--sp-24) var(--sp-4); box-sizing:border-box; letter-spacing:-.2px;
 }

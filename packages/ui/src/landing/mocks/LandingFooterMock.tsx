@@ -8,7 +8,7 @@ const STYLE = `
   --border:#d1d5db; --placeholder:#9ca3af; --ink:#2d2d2d; --social:#9e9e9e;
   background:var(--bg);
   color:var(--white);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif;
   letter-spacing:-.2px;
   -webkit-font-smoothing:antialiased;
 }

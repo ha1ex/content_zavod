@@ -22,7 +22,7 @@ const STYLE = `
   font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--color-text-primary);
 }
 .ctamain *{box-sizing:border-box;}
-.ctamain .frame{position:relative; width:1216px; height:780px; overflow:hidden; background:#ffffff; zoom:0.5;}
+.ctamain .frame{position:relative; width:1216px; height:780px; overflow:hidden; background:transparent; zoom:0.5;}
 .ctamain .window{position:absolute; left:8px; top:130px; width:1200px; height:800px; display:flex; overflow:hidden; border-radius:var(--radius-2xl); border:1px solid var(--color-border-default); background:var(--color-surface-card); box-shadow:0 30px 80px -30px rgba(0,0,0,0.10);}
 .ctamain .sidebar{width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:14px; border-right:1px solid var(--color-border-default); background:#f5f5f5; padding:18px 16px;}
 .ctamain .brand{display:flex; align-items:center; gap:8px;}

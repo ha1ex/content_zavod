@@ -48,6 +48,15 @@ export { VksArtifactFlowMock } from './VksArtifactFlowMock';
 export { MeetingRoomMock } from './MeetingRoomMock';
 export { MeetListMock } from './MeetListMock';
 export { CTAmainMock } from './CTAmainMock';
+
+/* ─── CTA-блоки ───────────────────────────────────────────────────── */
+export { CTAsecondaryMock } from './CTAsecondaryMock';
+export type { CTAsecondaryMockProps, CTAButton } from './CTAsecondaryMock';
+export { CTAmobile } from './CTAmobile';
+export type { CTAmobileProps, CTAmobileButton } from './CTAmobile';
+export { default as CTAproduct } from './CTAproduct';
+export type { CTAproductProps } from './CTAproduct';
+
 export { LandingFooterMock } from './LandingFooterMock';
 export { ComparisonTableMock } from './ComparisonTableMock';
 export { PmBoard1Mock } from './PmBoard1Mock';

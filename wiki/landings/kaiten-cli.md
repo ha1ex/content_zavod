@@ -49,7 +49,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46435
+tokenEstimate: 46438
 tags:
   - landing
   - saas_landing
@@ -63,7 +63,7 @@ stale: false
 - **archetype:** `saas_landing`
 - **goal:** `download` (brief.cta = "Установить")
 - **sections used:** `site_header, hero, benefits_strip, logo_cloud, media_copy, media_copy, media_copy, comparison_table, media_copy, metrics_split, process, features, faq, final_cta, kaiten_footer`
-- **token estimate:** `46435`
+- **token estimate:** `46438`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -176,7 +176,7 @@ stale: false
 - **Score:** 74.67 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Unknown
-- **Generated:** 2026-07-17T19:14:46.597Z
+- **Generated:** 2026-07-17T19:41:15.477Z
 
 ## Breakdown
 

@@ -47,9 +47,9 @@
       "id": "logo_cloud",
       "component": "LogoCloud",
       "props": {
-        "eyebrow": "Окружение",
-        "title": "Ставится и работает в привычном окружении",
-        "description": "Установка из репозитория Git, вывод в понятных форматах, автодополнение оболочки. Ничего экзотического.",
+        "eyebrow": "Что нужно для работы",
+        "title": "Ставится одной командой — нужен только Python 3.11",
+        "description": "Устанавливается из GitHub через uv, pipx или pip. Вывод в JSON и Markdown, автодополнение для Bash и Zsh, локальные данные в SQLite. Ни серверов, ни демонов — только ваш терминал.",
         "items": [
           {
             "brand": "uv"
@@ -476,11 +476,11 @@
       "wiki/layouts/single-module-deep-dive.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-17T19:14:46.620Z",
+    "generatedAt": "2026-07-17T19:41:15.487Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "single-module-deep-dive",
-    "tokenEstimate": 46435,
+    "tokenEstimate": 46438,
     "domain": "cli-community-edition"
   }
 }

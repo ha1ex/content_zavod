@@ -112,7 +112,7 @@
           }
         ],
         "mediaPosition": "right",
-        "mediaVariant": "pm-board"
+        "mediaVariant": "pm-board-1"
       }
     },
     {
@@ -239,10 +239,10 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-17T18:19:33.136Z",
+    "generatedAt": "2026-07-17T19:45:38.368Z",
     "generator": "host-agent",
     "archetype": "event_landing",
-    "tokenEstimate": 46811,
+    "tokenEstimate": 46813,
     "domain": "pm"
   }
 }

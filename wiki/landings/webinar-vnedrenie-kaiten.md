@@ -2,7 +2,7 @@
 slug: webinar-vnedrenie-kaiten
 type: landing
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-18
 status: draft
 brief: content/briefs/webinar-vnedrenie-kaiten.json
 archetype: event_landing
@@ -43,7 +43,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46811
+tokenEstimate: 46813
 tags:
   - landing
   - waitlist_landing
@@ -57,7 +57,7 @@ stale: false
 - **archetype:** `event_landing`
 - **goal:** `waitlist` (brief.cta = "Занять место")
 - **sections used:** `site_header, hero, pain_bubbles, media_copy, timeline_roadmap, cta_banner, stats, speaker, registration_cta, kaiten_footer`
-- **token estimate:** `46811`
+- **token estimate:** `46813`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -129,7 +129,7 @@ stale: false
 - **Score:** 46.3 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Unknown
-- **Generated:** 2026-07-17T18:19:33.125Z
+- **Generated:** 2026-07-17T19:45:38.357Z
 
 ## Breakdown
 

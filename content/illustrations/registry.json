@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-17T19:14:46.626Z",
+  "updatedAt": "2026-07-17T19:45:38.370Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -373,21 +373,12 @@
     },
     {
       "kind": "mock-use",
-      "variant": "pm-board",
-      "landingSlug": "webinar-vnedrenie-kaiten",
-      "sectionId": "media_copy",
-      "sectionIdx": 3,
-      "domain": "pm",
-      "recordedAt": "2026-07-17T18:19:33.137Z"
-    },
-    {
-      "kind": "mock-use",
       "variant": "cli-terminal-hero-animated",
       "landingSlug": "kaiten-cli",
       "sectionId": "hero",
       "sectionIdx": 1,
       "domain": "cli-community-edition",
-      "recordedAt": "2026-07-17T19:14:46.623Z"
+      "recordedAt": "2026-07-17T19:41:15.489Z"
     },
     {
       "kind": "mock-use",
@@ -396,7 +387,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 4,
       "domain": "cli-community-edition",
-      "recordedAt": "2026-07-17T19:14:46.624Z"
+      "recordedAt": "2026-07-17T19:41:15.490Z"
     },
     {
       "kind": "mock-use",
@@ -405,7 +396,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 5,
       "domain": "cli-community-edition",
-      "recordedAt": "2026-07-17T19:14:46.624Z"
+      "recordedAt": "2026-07-17T19:41:15.490Z"
     },
     {
       "kind": "mock-use",
@@ -414,7 +405,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 6,
       "domain": "cli-community-edition",
-      "recordedAt": "2026-07-17T19:14:46.625Z"
+      "recordedAt": "2026-07-17T19:41:15.491Z"
     },
     {
       "kind": "mock-use",
@@ -423,7 +414,16 @@
       "sectionId": "media_copy",
       "sectionIdx": 8,
       "domain": "cli-community-edition",
-      "recordedAt": "2026-07-17T19:14:46.626Z"
+      "recordedAt": "2026-07-17T19:41:15.492Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "pm-board-1",
+      "landingSlug": "webinar-vnedrenie-kaiten",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "pm",
+      "recordedAt": "2026-07-17T19:45:38.370Z"
     }
   ]
 }

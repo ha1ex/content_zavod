@@ -164,9 +164,12 @@ function Cta({ cta, variant }: { cta: HsiCta; variant: 'fill' | 'outline' }) {
   );
 }
 
-const DEFAULT_BG = 'radial-gradient(120% 100% at 50% 0%, var(--brand-12, #efe9f9) 0%, #fff 60%)';
+const DEFAULT_BG =
+  'radial-gradient(900px 420px at 50% -140px, var(--brand-12, #efe9f9) 0%, rgba(239,233,249,0) 70%), linear-gradient(#fff,#fff)';
 
 const CSS = `
+.hsi-screen__glow{position:absolute;width:720px;height:520px;left:50%;top:-220px;transform:translateX(-50%);border-radius:9999px;background:linear-gradient(-90deg,#e298ff,#6fe5ff);filter:blur(220px);opacity:.28;pointer-events:none;z-index:0}
+.hsi-screen__container{position:relative;z-index:1}
 .hsi-screen{
   --_brand:var(--brand-100,#7d4ccf);--_brand-hover:var(--brand-hover,#6f43b8);
   --_brand-12:var(--brand-12,#efe9f9);--_brand-12k:var(--brand-12k,rgba(125,76,207,.12));
@@ -276,6 +279,7 @@ export function HeroScreenInterface({
       style={{ background: background ?? DEFAULT_BG }}
     >
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <div className="hsi-screen__glow" aria-hidden="true" />
       <div className="hsi-screen__container hsi-screen__grid">
         <div className="hsi-screen__copy">
           {eyebrow && (

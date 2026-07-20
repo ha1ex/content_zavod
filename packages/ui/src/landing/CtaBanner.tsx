@@ -1,6 +1,7 @@
 import { ButtonLink } from '../primitives/ButtonLink';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
+import { GradientPanel } from './GradientPanel';
 
 export interface CtaBannerCtaProps {
   label: string;
@@ -12,29 +13,28 @@ export interface CtaBannerProps {
   description?: string;
   primaryCta: CtaBannerCtaProps;
   secondaryCta?: CtaBannerCtaProps | null;
+  /**
+   * Градиентный вид — подложка `GradientPanel` (та же, что у финального CTA и
+   * блока спикера): светло-лиловая заливка + размытый засвет. Opt-in: без него
+   * остаётся прежний плоский soft-фон, чтобы не менять старые лендинги.
+   */
+  gradient?: boolean;
 }
 
 /**
  * Inline CTA banner для размещения между секциями (вроде «Документы Кайтен
  * — бесплатно и без ограничений»). Слабый фиолетовый фон, скруглённая
- * карточка с CTA справа.
+ * карточка с CTA справа. С `gradient` — на подложке `GradientPanel`.
  */
-export function CtaBanner({ title, description, primaryCta, secondaryCta }: CtaBannerProps) {
-  return (
-    <section
+export function CtaBanner({ title, description, primaryCta, secondaryCta, gradient }: CtaBannerProps) {
+  const inner = (
+    <div
       className={cn(
-        'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-10 md:px-6 lg:py-12',
+        'flex flex-col gap-6',
+        'px-6 py-8 md:px-10 md:py-10 lg:flex-row lg:items-center lg:justify-between',
       )}
     >
-      <div
-        className={cn(
-          'flex flex-col gap-6 rounded-(--radius-3xl)',
-          'border border-(--color-action-primary)/20 bg-(--color-action-primary-soft)',
-          'px-6 py-8 md:px-10 md:py-10 lg:flex-row lg:items-center lg:justify-between',
-        )}
-      >
-        <div className="max-w-2xl">
+      <div className="max-w-2xl">
           <h3
             data-comp="cta_banner.title"
             className="text-2xl font-semibold leading-tight md:text-3xl"
@@ -64,7 +64,28 @@ export function CtaBanner({ title, description, primaryCta, secondaryCta }: CtaB
             </Inspect>
           )}
         </div>
-      </div>
+    </div>
+  );
+
+  return (
+    <section
+      className={cn(
+        'mx-auto w-full max-w-(--container-kaiten)',
+        'px-4 py-10 md:px-6 lg:py-12',
+      )}
+    >
+      {gradient ? (
+        <GradientPanel>{inner}</GradientPanel>
+      ) : (
+        <div
+          className={cn(
+            'rounded-(--radius-3xl) border border-(--color-action-primary)/20',
+            'bg-(--color-action-primary-soft)',
+          )}
+        >
+          {inner}
+        </div>
+      )}
     </section>
   );
 }

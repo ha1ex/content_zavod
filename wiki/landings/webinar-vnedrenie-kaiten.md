@@ -129,7 +129,7 @@ stale: false
 - **Score:** 46.3 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Unknown
-- **Generated:** 2026-07-17T19:45:38.357Z
+- **Generated:** 2026-07-18T07:41:15.686Z
 
 ## Breakdown
 

@@ -374,6 +374,8 @@ const CtaBannerSchema = z.object({
     description: z.string().max(280).optional(),
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
+    /** Градиентный вид (подложка GradientPanel). Opt-in, старые лендинги без него. */
+    gradient: z.boolean().optional(),
   }),
 });
 

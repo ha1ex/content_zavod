@@ -43,7 +43,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46868
+tokenEstimate: 47239
 tags:
   - landing
   - waitlist_landing
@@ -57,7 +57,7 @@ stale: false
 - **archetype:** `event_landing`
 - **goal:** `waitlist` (brief.cta = "Занять место")
 - **sections used:** `site_header, hero, pain_bubbles, media_copy, timeline_roadmap, cta_banner, stats, speaker, registration_cta, kaiten_footer`
-- **token estimate:** `46868`
+- **token estimate:** `47239`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -126,10 +126,10 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `webinar-vnedrenie-kaiten`
 
-- **Score:** 50.17 / 100 (threshold 70) — ❌ fail
+- **Score:** 53.5 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Unknown
-- **Generated:** 2026-07-20T14:15:20.236Z
+- **Generated:** 2026-07-20T16:04:01.813Z
 
 ## Breakdown
 
@@ -137,7 +137,7 @@ stale: false
 |---|---|---|---|---|---|
 | S1 | Story coverage | 37.92 | 0.4 | 15.17 | top-6 stories: compare(w=0.98, c=0.35), migrate-jira(w=0.95, c=0.47), fast-check(w=0.94, c=0.47), ux-check(w=0.71, c=0.47), sandbox(w=0.62, c=0.23), security(w=0.53, c=0.17) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
-| S3 | Role addressability | 25 | 0.2 | 5 | PM=0.00, DM=0.50 |
+| S3 | Role addressability | 41.67 | 0.2 | 8.33 | PM=0.33, DM=0.50 |
 | S4 | CTA alignment | 0 | 0.1 | 0 | cta-types=[Unknown], match=0/1 |
 
 ## Story coverage (top-N)
@@ -155,7 +155,7 @@ stale: false
 
 - **must-pass-failed** (`it-needs-compare-or-trial`): IT-сегмент в брифе, но нет ни покрытия story "compare/migrate-jira", ни Trial-CTA в hero.
   - _suggestion:_ Добавь либо сравнительный блок (Kaiten vs Jira/Trello/YouTrack), либо переведи hero.primaryCta на «Попробовать бесплатно».
-- **score-below-threshold**: Audience-score 50.17 ниже порога 70.
+- **score-below-threshold**: Audience-score 53.5 ниже порога 70.
   - _suggestion:_ Слабее всего S4 (CTA alignment=0): cta-types=[Unknown], match=0/1. Не покрыты stories: compare (Хочу сравнить с тем, что уже есть); migrate-jira (Хочу понять, стоит ли переезжать с Jira); fast-check (Хочу быстро проверить, подойдёт ли нам). Добавь соответствующие секции или ключевые слова.
 
 <!-- /gen:audience-score -->

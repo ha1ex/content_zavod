@@ -51,6 +51,7 @@ import {
   MeetListMock,
   CTAmainMock,
   PmBoard1Mock,
+  KanbanMinimalMock,
   ModulePortfolioMock,
   ApprovalBoardMock,
   ReportsChartsMock,
@@ -141,6 +142,7 @@ export type MockVariant =
   | 'meeting-room'
   | 'meet-list'
   | 'pm-board-1'
+  | 'kanban-minimal'
   // Финансы / портфель
   | 'portfolio-board'
   | 'approval-board'
@@ -281,6 +283,15 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <MeetListMock />;
     case 'pm-board-1':
       return <PmBoard1Mock />;
+    // Мок фикс. ширины 720px — в узком слоте (половина MediaCopy) масштабируем.
+    case 'kanban-minimal':
+      return (
+        <div className="w-full overflow-hidden">
+          <ScaleToFit designWidth={720}>
+            <KanbanMinimalMock />
+          </ScaleToFit>
+        </div>
+      );
     // Мок фиксированной ширины 1360px — в узких слотах (половина MediaCopy,
     // карточка FeatureGrid) он рвёт страницу горизонтальным скроллом, поэтому
     // масштабируется под контейнер. На широких слотах масштаб остаётся 1.

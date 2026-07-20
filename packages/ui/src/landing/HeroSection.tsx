@@ -111,6 +111,13 @@ export interface HeroSectionProps {
   form?: HeroFormProps;
   /** Строка ведущего под формой/текстом: фото или инициалы, имя, роль. */
   speaker?: HeroSpeakerProps;
+  /**
+   * Компактный первый экран: уменьшенные вертикальные отступы по шкале DS
+   * (top 24/32/40, bottom 40/48/64 вместо стандартных 56/80). Hero всё равно
+   * «дышит» под хедером — по дизайн-системе прижимать вплотную нельзя, но воздуха
+   * меньше стандартного. Горизонтальный `px` не трогаем. Opt-in.
+   */
+  flush?: boolean;
 }
 
 export interface HeroFormProps {
@@ -149,6 +156,7 @@ export function HeroSection({
   bullets,
   form,
   speaker,
+  flush,
 }: HeroSectionProps) {
   // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
   // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
@@ -198,9 +206,11 @@ export function HeroSection({
 
       <div
         className={cn(
-          'mx-auto w-full max-w-(--container-kaiten)',
-          'px-4 pt-14 pb-12 md:px-6 lg:pt-20',
-          isBelow ? 'lg:pb-12' : 'lg:pb-20',
+          'mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0',
+          flush
+            ? 'pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-16'
+            : 'pt-14 pb-12 lg:pt-20',
+          !flush && (isBelow ? 'lg:pb-12' : 'lg:pb-20'),
         )}
       >
         {isBelow ? (

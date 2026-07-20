@@ -39,11 +39,11 @@ stale: false
 
 ## Usage rules
 
-**Desktop (artboard `1920px`).** 12-column centered grid внутри `1216px`-контейнера: column `72px`, gutter `32px`, outer margin `248px` с каждой стороны.
+**Desktop (artboard `1920px`).** 12-column centered grid внутри `1216px`-контейнера: column `72px`, gutter `32px`, outer margin `248px` с каждой стороны. **Боковые поля на десктопе — это `margin` от центрирования (`mx-auto`), а НЕ `padding`.** Внутреннего `px` у контента на десктопе нет: контент занимает полные `1216px`. Контейнер: `mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0` — `xl:px-0` сбрасывает боковой padding на `≥1280px`.
 
-**Tablet (artboard `768px`).** 6-column stretch grid: column `100px`, gutter `24px`, side margin `24px`.
+**Tablet (artboard `768px`).** 6-column stretch grid: column `100px`, gutter `24px`, side margin `24px` (реализуется боковым `md:px-6`).
 
-**Mobile (artboard `360px`).** 4-column stretch grid: column `70px`, gutter `16px`, side margin `16px`.
+**Mobile (artboard `360px`).** 4-column stretch grid: column `70px`, gutter `16px`, side margin `16px` (реализуется боковым `px-4`).
 
 ### Какие колонки занимать
 
@@ -57,3 +57,4 @@ stale: false
 
 - ❌ Прыгающие брейкпойнты (например, ширина контента на tablet выходит за 6 колонок).
 - ❌ Inline `style={{ width: '60%' }}` — используйте CSS Grid или Flex с column-based значениями.
+- ❌ `px-4 md:px-6` без `xl:px-0` — боковой padding 24px протекает на десктоп поверх центрирования и сужает контент внутри `1216px`.

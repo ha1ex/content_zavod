@@ -24,7 +24,7 @@ export function SocialProof({ eyebrow, title, description, cases }: SocialProofP
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-16 md:px-6 lg:py-20',
+        'px-4 py-16 md:px-6 xl:px-0 lg:py-20',
       )}
     >
       {(eyebrow || title || description) && (

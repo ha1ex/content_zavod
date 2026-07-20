@@ -15,7 +15,7 @@ export function BenefitsStrip({ items }: BenefitsStripProps) {
         className={cn(
           'mx-auto w-full max-w-(--container-kaiten)',
           'flex flex-wrap items-center justify-center gap-x-8 gap-y-2',
-          'px-4 py-4 md:px-6',
+          'px-4 py-4 md:px-6 xl:px-0',
         )}
       >
         {items.map((item, i) => (

@@ -140,7 +140,7 @@ Desktop rules:
 Tablet/mobile rules:
 
 - Header height: `72px`.
-- Side padding: `24px` on tablet, `16px` on mobile.
+- Side padding: `24px` on tablet, `16px` on mobile — **на десктопе бокового padding нет (`xl:px-0`)**: поля даёт центрирование `mx-auto`, не padding. Образец контейнера: `mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0`.
 - Compact internal gap: `3/12`.
 - Medium internal gap: `4/16`.
 - Text to action gap: `6/24`.
@@ -200,8 +200,8 @@ Pattern (ДЕЛАЙ ТАК):
 // ✅ фон тянется на всю ширину секции, контент капится отдельно
 <section class="relative isolate overflow-hidden">
   <div aria-hidden class="pointer-events-none absolute inset-x-0 -top-32 -z-10 h-[720px] bg-[radial-gradient(...)]" />
-  <div class="mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6">
-    {/* content */}
+  <div class="mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0">
+    {/* content — на десктопе поля даёт mx-auto, не padding */}
   </div>
 </section>
 ```

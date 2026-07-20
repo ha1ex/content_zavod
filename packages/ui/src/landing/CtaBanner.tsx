@@ -71,7 +71,7 @@ export function CtaBanner({ title, description, primaryCta, secondaryCta, gradie
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-10 md:px-6 lg:py-12',
+        'px-4 py-10 md:px-6 xl:px-0 lg:py-12',
       )}
     >
       {gradient ? (

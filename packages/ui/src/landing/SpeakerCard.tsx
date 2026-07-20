@@ -29,7 +29,7 @@ export function SpeakerCard({
   initials,
 }: SpeakerCardProps) {
   return (
-    <section className="px-4 py-12 md:px-6 md:py-16 lg:py-24">
+    <section className="px-4 py-12 md:px-6 xl:px-0 md:py-16 lg:py-24">
       <div className="mx-auto flex w-full max-w-(--container-kaiten) flex-col gap-6 md:gap-8 lg:gap-12">
         {(eyebrow || title) && (
           <div className="flex flex-col gap-3 text-left md:items-center md:text-center">

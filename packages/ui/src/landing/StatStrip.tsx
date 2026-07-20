@@ -23,7 +23,7 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-12 md:px-6 lg:py-16',
+        'px-4 py-12 md:px-6 xl:px-0 lg:py-16',
       )}
     >
       {(eyebrow || title || description) && (

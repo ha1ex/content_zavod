@@ -40,7 +40,7 @@ export function WaitlistForm({
       id={anchorId}
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten) scroll-mt-24',
-        'px-4 py-16 md:px-6 lg:py-24',
+        'px-4 py-16 md:px-6 xl:px-0 lg:py-24',
       )}
     >
       <div

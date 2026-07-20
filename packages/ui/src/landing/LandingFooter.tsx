@@ -23,7 +23,7 @@ export function LandingFooter({
     <footer
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 pt-16 pb-10 md:px-6',
+        'px-4 pt-16 pb-10 md:px-6 xl:px-0',
       )}
     >
       <div className="grid grid-cols-2 gap-10 md:grid-cols-5">

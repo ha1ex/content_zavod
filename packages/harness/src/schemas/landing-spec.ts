@@ -201,6 +201,8 @@ const HeroSectionSchema = z.object({
     form: RegistrationFormSlotSchema.optional(),
     /** Строка ведущего/спикера под текстом первого экрана. */
     speaker: SpeakerSchema.optional(),
+    /** Компактный первый экран: уменьшенные вертикальные отступы (по шкале DS, с дыханием под хедером). */
+    flush: z.boolean().optional(),
   }),
 });
 

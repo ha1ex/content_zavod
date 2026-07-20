@@ -11,7 +11,7 @@ export interface LegalNoteProps {
  */
 export function LegalNote({ text }: LegalNoteProps) {
   return (
-    <section className={cn('mx-auto w-full max-w-(--container-kaiten)', 'px-4 pb-12 md:px-6')}>
+    <section className={cn('mx-auto w-full max-w-(--container-kaiten)', 'px-4 pb-12 md:px-6 xl:px-0')}>
       <p
         data-comp="legal_note.text"
         className="max-w-3xl text-xs leading-relaxed text-(--color-text-tertiary)"

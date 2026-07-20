@@ -34,7 +34,7 @@ export function RegistrationCta({
   dataConsentHref,
 }: RegistrationCtaProps) {
   return (
-    <section className="px-4 py-16 md:px-6 md:py-24 lg:py-32">
+    <section className="px-4 py-16 md:px-6 xl:px-0 md:py-24 lg:py-32">
       <GradientPanel
         className={cn(
           'mx-auto w-full max-w-(--container-kaiten)',

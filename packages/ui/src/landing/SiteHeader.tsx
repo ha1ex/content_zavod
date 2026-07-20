@@ -29,7 +29,7 @@ export function SiteHeader() {
     <header className="relative isolate">
       {/* promo bar */}
       <div className="w-full bg-[linear-gradient(90deg,#7d4ccf_0%,#9b5de5_100%)] text-white">
-        <div className="mx-auto flex w-full max-w-(--container-kaiten) flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 py-2.5 md:px-6">
+        <div className="mx-auto flex w-full max-w-(--container-kaiten) flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 py-2.5 md:px-6 xl:px-0">
           <span className="hidden shrink-0 sm:inline-flex">
             <PromoThumb />
           </span>
@@ -53,7 +53,7 @@ export function SiteHeader() {
 
       {/* main nav */}
       <div className="border-b border-(--color-border-default) bg-(--color-surface-page)">
-        <div className="mx-auto flex w-full max-w-(--container-kaiten) items-center gap-6 px-4 py-3.5 md:px-6">
+        <div className="mx-auto flex w-full max-w-(--container-kaiten) items-center gap-6 px-4 py-3.5 md:px-6 xl:px-0">
           {/* logo */}
           <a href="https://kaiten.ru" className="flex shrink-0 items-center" aria-label="Kaiten">
             <KaitenLogo tone="dark" className="h-8 w-auto" />

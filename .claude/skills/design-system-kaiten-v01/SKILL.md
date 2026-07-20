@@ -299,7 +299,7 @@ Desktop rules:
 Tablet/mobile rules:
 
 - Header height: `72px`.
-- Side padding: `24px` on tablet, `16px` on mobile.
+- Side padding: `24px` on tablet, `16px` on mobile — **on desktop side padding is `0`** (see rule below).
 - Compact internal gap: `3/12`.
 - Medium internal gap: `4/16`.
 - Text to action gap: `6/24`.
@@ -333,6 +333,22 @@ Desktop: `1920px` artboard, 12-column centered fixed grid, `1216px` content widt
 Tablet: `768px` artboard, 6-column stretch grid, `100px` columns, `24px` gutters, `24px` side margins.
 
 Mobile: `360px` artboard, 4-column stretch grid, `70px` columns, `16px` gutters, `16px` side margins.
+
+### Горизонтальный отступ контента — на десктопе `0` (ОБЯЗАТЕЛЬНО)
+
+Боковой `padding` у контентного контейнера нужен **только на планшете и мобиле**, где контент шире окна и без него текст касается края: `px-4` (16px mobile) → `md:px-6` (24px tablet). **На десктопе бокового padding нет** — как только окно достигает ширины контейнера (`--container-kaiten` = 1216px), поля по бокам создаёт центрирование (`mx-auto` → auto-`margin`), а не `padding`. Внутренний `px` на десктопе только сузил бы контент внутри 1216px, поэтому его обнуляем: добавляй `xl:px-0` (сброс на `≥1280px`).
+
+Частая ошибка (была во всех компонентах до 18.07.2026): образец `px-4 md:px-6` без верхнего сброса. `md:` в Tailwind не имеет верхней границы, поэтому 24px «протекал» на десктоп поверх центрирования и лишние 24px×2 съедали ширину контента. Правильный образец — с `xl:px-0`:
+
+```html
+<!-- ❌ 24px протекает на десктоп поверх центрирования -->
+<div class="mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6">
+
+<!-- ✅ padding только на планшете/мобиле; на десктопе поля даёт mx-auto -->
+<div class="mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0">
+```
+
+Исключение — **вложенные карточки/панели** (`GradientPanel`, `CTAsecondaryMock` и т.п.): их внутренний padding (`px-12` и т.п.) — это отступ контента ВНУТРИ карточки, не боковой отступ страницы. Его не трогаем.
 
 ### Adaptive preview — показывать на брейкпоинтах (ОБЯЗАТЕЛЬНО)
 
@@ -368,8 +384,8 @@ Pattern (ДЕЛАЙ ТАК):
 // ✅ фон тянется на всю ширину секции, контент капится отдельно
 <section class="relative isolate overflow-hidden">
   <div aria-hidden class="pointer-events-none absolute inset-x-0 -top-32 -z-10 h-[720px] bg-[radial-gradient(...)]" />
-  <div class="mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6">
-    {/* content */}
+  <div class="mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0">
+    {/* content — на десктопе поля даёт mx-auto, не padding */}
   </div>
 </section>
 ```

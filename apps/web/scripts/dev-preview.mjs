@@ -40,7 +40,12 @@ function freePort(p) {
   }
 }
 
+// Освобождаем и переданный порт, и канонический 3001. Второе обязательно:
+// Next 16 держит глобальный next-dev lock и падает с «another server already
+// running», даже если сам сел на другой порт из-за autoPort, — пока осиротевший
+// процесс на 3001 жив. Чистим оба, чтобы такого не было.
 freePort(port);
+if (port !== '3001') freePort('3001');
 
 const child = spawn(process.execPath, [nextBin, 'dev', '--turbopack'], {
   stdio: 'inherit',

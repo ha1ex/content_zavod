@@ -284,9 +284,13 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
     case 'pm-board-1':
       return <PmBoard1Mock />;
     // Мок фикс. ширины 720px — в узком слоте (половина MediaCopy) масштабируем.
+    // Обрамление (бордер + фиолетовая тень) даёт сам мок, как у прочих моков
+    // MediaCopy. overflow-hidden обязателен: scale не меняет layout-бокс 720px,
+    // а padding — запас, чтобы этот же clip не срезал фиолетовую тень мока
+    // (она направлена вниз, поэтому pb больше боковых и верхнего).
     case 'kanban-minimal':
       return (
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-hidden px-8 pt-4 pb-14">
           <ScaleToFit designWidth={720}>
             <KanbanMinimalMock />
           </ScaleToFit>

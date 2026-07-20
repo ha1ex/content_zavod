@@ -4,9 +4,6 @@ import { resolve } from 'node:path';
 const nextConfig: NextConfig = {
   transpilePackages: ['@kaiten/harness', '@kaiten/ui'],
   typedRoutes: true,
-  // Отдельный dist-dir для preview-сервера, чтобы не конфликтовать с dev-локом
-  // основного `next dev` (по умолчанию — .next).
-  distDir: process.env.NEXT_DIST_DIR || '.next',
   turbopack: {
     root: resolve(process.cwd(), '..', '..'),
   },

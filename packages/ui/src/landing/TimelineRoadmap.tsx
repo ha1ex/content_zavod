@@ -110,7 +110,7 @@ export function TimelineRoadmap({
           ))}
         </div>
       ) : (
-        <ol className="relative space-y-8 border-l border-(--color-border-default) pl-8 md:space-y-10">
+        <ol className="relative ml-4 space-y-8 border-l border-(--color-border-default) pl-8 md:space-y-10">
           {milestones.map((m, i) => (
             <Inspect
               as="li"

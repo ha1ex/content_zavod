@@ -1077,7 +1077,7 @@
 | Hover | только рамка `#e5e7eb` | рамка + **текст вопроса → `#7d4ccf`** |
 | Ширина текста ответа (desktop) | 776px | **900px** (`.faq-item__answer{max-width:900px}`), карточки — 1216px |
 | Отступы секции (desktop) | pt 96 / pb 128 | **96 / 96** (`#faq{padding:96px 0}` ≥1280); планшет 32, мобилка 24 (общий ритм) |
-| Шрифт | Roboto | `var(--font)` = Roboto/Inter/system-ui |
+| Шрифт | Roboto | `var(--font)` = Roboto |
 
 ### CSS (как в проекте)
 ```css

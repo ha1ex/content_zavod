@@ -19,7 +19,7 @@ const STYLE = `
   --color-text-accent:#7d4ccf;
   --skel:#d6d6d9;
   --radius-2xl:16px; --radius-xl:12px; --radius-lg:8px; --radius-md:6px;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--color-text-primary);
+  font-family:'Roboto',system-ui,-apple-system,sans-serif; color:var(--color-text-primary);
 }
 .ctamain *{box-sizing:border-box;}
 .ctamain .frame{position:relative; width:1216px; height:780px; overflow:hidden; background:transparent; zoom:0.5;}

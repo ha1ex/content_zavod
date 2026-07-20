@@ -11,7 +11,7 @@ import { ScaleToFit } from './ScaleToFit';
  */
 const CSS = `.rpa{ --tp:#2d2d2d; --ts:#8a8a8f; --acc:#7d4ccf; --bd:#e8e8eb; --sec:#f4f4f6; }
 .rpa *{ box-sizing:border-box; margin:0; padding:0; }
-.rpa{ font-family:"Roboto","Inter",system-ui,"Segoe UI",sans-serif; color:var(--tp); -webkit-font-smoothing:antialiased; }
+.rpa{ font-family:"Roboto",system-ui,"Segoe UI",sans-serif; color:var(--tp); -webkit-font-smoothing:antialiased; }
 .rpa .mod{ width:1360px; flex:0 0 auto; background:#f1f1f4; border:1px solid var(--bd); border-radius:16px; box-shadow:0 18px 50px -24px rgba(45,45,45,.35); overflow:hidden; }
 .rpa .hdr{ display:flex; align-items:center; gap:12px; padding:14px 18px; }
 .rpa .grip{ display:grid; grid-template-columns:repeat(2,3px); gap:3px; }

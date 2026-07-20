@@ -44,7 +44,7 @@ const STYLE = `
   --fw-med:500; --fw-semi:600; --ls:0;
   --brand-12:#efe9f9; --brand-100:#7d4ccf; --brand-hover:#6a3cbf; --brand-48:rgba(125,76,207,.48);
   --border-default:#dbe1e0; --text-title:#2d2d2d; --skel:#e6e6ea; --skel-strong:#d6d6d9; --surface-section:#f7f7f8;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto',system-ui,-apple-system,sans-serif; color:var(--text-title);
   display:block; width:100%; padding:48px var(--sp-4); box-sizing:border-box;
 }
 .cta-secondary, .cta-secondary *{box-sizing:border-box;}

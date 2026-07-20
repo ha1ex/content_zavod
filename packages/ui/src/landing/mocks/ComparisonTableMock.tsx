@@ -59,7 +59,7 @@ const CSS = `
 .kct{--brand:#7d4ccf;--brand-12:#efe9f9;--ink:#2d2d2d;--tert:#9e9e9e;
   --line:#d1d5db;--line-strong:#bdbdbd;--line-k:rgba(125,76,207,.28);
   --ok:#4caf51;--no:#ef4444;--sec-bg:#f5f5f5;--colw:25%;
-  font-family:'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;
   letter-spacing:-.2px;color:var(--ink);-webkit-font-smoothing:antialiased}
 .kct *,.kct *::before,.kct *::after{box-sizing:border-box;margin:0;padding:0}
 .kct button{font:inherit;letter-spacing:inherit;color:inherit;background:none;border:none;cursor:pointer}

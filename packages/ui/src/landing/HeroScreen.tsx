@@ -49,7 +49,7 @@ const CSS = `
   --_brand-48k:var(--brand-48k,rgba(125,76,207,.48));
   --_border:var(--border-default,#e0e0e0);
   --_ink:var(--text-title,#2d2d2d);
-  --_font:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
+  --_font:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);
   --_ls:var(--ls,-0.2px);
   position:relative;
   padding:var(--sp-12,48px) 0 var(--sp-20,80px);

@@ -31,7 +31,7 @@ const STYLE = `
   --fw-semi:600; --fw-reg:400;
   --brand-100:#7d4ccf; --brand-12:#efe9f9; --brand-hover:#6b3fbf;
   --text-title:#2d2d2d; --text-secondary:#757575; --border:#e0e0e0;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto',system-ui,-apple-system,sans-serif; color:var(--text-title);
   display:block; width:100%; padding:48px var(--sp-4); box-sizing:border-box;
 }
 .diagrams-mock, .diagrams-mock *{box-sizing:border-box;}

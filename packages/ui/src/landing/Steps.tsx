@@ -41,7 +41,7 @@ const STYLE = `
   --fw-semi:600; --fw-reg:400; --ls:0;
   --brand-100:#7d4ccf; --brand-12:#efe9f9;
   --text-title:#2d2d2d; --text-secondary:#757575; --surface-section:#f7f7f8;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:'Roboto',system-ui,-apple-system,sans-serif; color:var(--text-title);
   display:block; width:100%; padding:48px var(--sp-4); box-sizing:border-box;
 }
 .steps-mock, .steps-mock *{box-sizing:border-box;}

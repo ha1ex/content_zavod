@@ -18,7 +18,7 @@ import { ScaleToFit } from './ScaleToFit';
  */
 const CSS = `.cth{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn:#4caf51; --blu:#2196f3; --vio:#7d4ccf; --tp:#2d2d2d; --ts:#757575; --bd:#e0e0e0; --sec:#f5f5f5; --pur12:#f4e8f7; }
 .cth *{ box-sizing:border-box; margin:0; padding:0; }
-.cth{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+.cth{ font-family:"Roboto",system-ui,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
 .cth .wrap{ position:relative; width:800px; display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:center; }
 
 /* — терминал — */

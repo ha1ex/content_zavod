@@ -34,7 +34,7 @@ export interface LogoMarqueeMockProps {
 const CSS = `
 .lmq{
   --_ink:var(--text-title,#2d2d2d);
-  --_font:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
+  --_font:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);
   --_ls:var(--ls,-0.2px);
   font-family:var(--_font);letter-spacing:var(--_ls);color:var(--_ink);
 }

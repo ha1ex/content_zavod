@@ -94,6 +94,7 @@ export { RetailReportMiniMock } from './RetailReportMiniMock';
 export { GanttChartMock } from './ModuleGanttChartMock';
 export { CliTerminalHeroMock } from './CliTerminalHeroMock';
 export { CliTerminalHeroAnimatedMock } from './CliTerminalHeroAnimatedMock';
+export { CliTerminalFinalAnimatedMock } from './CliTerminalFinalAnimatedMock';
 export { CliMarkdownExportMock } from './CliMarkdownExportMock';
 export { CliSnapshotMetricsMock } from './CliSnapshotMetricsMock';
 export { CliBatchStatsMock } from './CliBatchStatsMock';

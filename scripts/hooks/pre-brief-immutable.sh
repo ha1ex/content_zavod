@@ -33,6 +33,24 @@ if [[ ! -f "$PROJECT_DIR/$REL" ]]; then
   exit 0
 fi
 
+# Исключение (правило operator-section-order): правка ТОЛЬКО поля sectionOrder
+# в существующем брифе разрешена. Для Write доступен полный новый контент —
+# сверяем точно. Для Edit/MultiEdit итог заранее не вычислить — пропускаем с
+# предупреждением (authoritative-проверку сделает agent apply и pre-commit).
+if command -v jq >/dev/null 2>&1; then
+  if [[ "$TOOL" == "Write" ]]; then
+    NEW_CONTENT="$(jq_get "$INPUT" '.tool_input.content')"
+    OLD_N="$(jq -S 'del(.sectionOrder)' "$PROJECT_DIR/$REL" 2>/dev/null || echo '__ERR_O__')"
+    NEW_N="$(printf '%s' "$NEW_CONTENT" | jq -S 'del(.sectionOrder)' 2>/dev/null || echo '__ERR_N__')"
+    if [[ "$OLD_N" != '__ERR_O__' && "$NEW_N" != '__ERR_N__' && "$OLD_N" == "$NEW_N" ]]; then
+      exit 0  # изменён только sectionOrder — разрешено
+    fi
+  else
+    echo "⚠ briefs: в существующем брифе разрешена правка ТОЛЬКО поля sectionOrder (operator-section-order). Прочие изменения будут отклонены на agent apply / pre-commit." >&2
+    exit 0
+  fi
+fi
+
 # Существующий brief → блок.
 SLUG="$(basename "$REL" .json)"
 cat >&2 <<EOF

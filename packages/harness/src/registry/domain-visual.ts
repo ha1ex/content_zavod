@@ -888,6 +888,14 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
           'Компактное окно терминала: установка kaiten-cli одной командой uv tool install и проверка ' +
           'версии. Для правой колонки градиентного финального CTA и шага установки',
       },
+      {
+        variant: 'cli-terminal-final-animated',
+        sections: ['hero', 'media'],
+        description:
+          'Анимированный визуал финального CTA: стек «терминал + живая карточка» (как в hero, но другая ' +
+          'мини-сессия). Команды create → update --priority → checklists add → update --column "Готово"; ' +
+          'карточка «Починить flaky-тесты в CI» получает приоритет, чек-лист и переезжает в «Готово». CSS @keyframes',
+      },
     ],
     missingMocks: [],
     referenceDoc: 'wiki/landings/cli-community-edition-reference.md',

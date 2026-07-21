@@ -12,6 +12,8 @@
  */
 
 import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import chalk from 'chalk';
 
 export type GitRunner = (args: string[], cwd: string) => { status: number | null; stdout: string };
@@ -69,10 +71,35 @@ export function checkBriefsUnmodified(
     if (!status || !file) continue;
     if (!/^[MDR]/.test(status)) continue;
     if (!file.startsWith('content/briefs/') || !file.endsWith('.json')) continue;
+    // Исключение (правило operator-section-order): правка ТОЛЬКО поля sectionOrder
+    // в существующем брифе разрешена — оператор меняет порядок блоков после
+    // первой генерации. Всё остальное в брифе по-прежнему immutable.
+    if (status.charAt(0) === 'M' && isSectionOrderOnlyChange(git, root, file)) continue;
     violations.push({ status: status.charAt(0), file });
   }
 
   return { ok: violations.length === 0, violations };
+}
+
+/**
+ * true, если единственное отличие worktree-версии брифа от HEAD — поле
+ * `sectionOrder` (добавлено/изменено/удалено). Тогда правка разрешена
+ * (правило operator-section-order). Любое другое изменение → false (immutable).
+ */
+function isSectionOrderOnlyChange(git: GitRunner, root: string, file: string): boolean {
+  try {
+    const head = git(['show', `HEAD:${file}`], root);
+    if (head.status !== 0) return false;
+    const a = JSON.parse(head.stdout) as Record<string, unknown>;
+    const b = JSON.parse(readFileSync(join(root, file), 'utf-8')) as Record<string, unknown>;
+    delete a.sectionOrder;
+    delete b.sectionOrder;
+    const norm = (o: Record<string, unknown>) =>
+      JSON.stringify(Object.fromEntries(Object.entries(o).sort(([x], [y]) => x.localeCompare(y))));
+    return norm(a) === norm(b);
+  } catch {
+    return false;
+  }
 }
 
 /** Текст зеркалит scripts/hooks/pre-brief-immutable.sh — одна формулировка на все слои. */

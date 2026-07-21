@@ -67,6 +67,7 @@ import {
   GanttChartMock,
   CliTerminalHeroMock,
   CliTerminalHeroAnimatedMock,
+  CliTerminalFinalAnimatedMock,
   CliMarkdownExportMock,
   CliSnapshotMetricsMock,
   CliBatchStatsMock,
@@ -174,6 +175,7 @@ export type MockVariant =
   // Kaiten CLI (cli-community-edition)
   | 'cli-terminal-hero'
   | 'cli-terminal-hero-animated'
+  | 'cli-terminal-final-animated'
   | 'cli-markdown-export'
   | 'cli-snapshot-metrics'
   | 'cli-batch-stats'
@@ -354,6 +356,8 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <CliTerminalHeroMock />;
     case 'cli-terminal-hero-animated':
       return <CliTerminalHeroAnimatedMock />;
+    case 'cli-terminal-final-animated':
+      return <CliTerminalFinalAnimatedMock />;
     case 'cli-markdown-export':
       return <CliMarkdownExportMock />;
     case 'cli-snapshot-metrics':

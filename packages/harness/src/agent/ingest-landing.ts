@@ -205,6 +205,62 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
     );
   }
 
+  // ── Кастомный порядок блоков (правило operator-section-order) ───────
+  // Оператор может после первой генерации задать brief.sectionOrder — список
+  // ключей секций сверху вниз. Секции ТЕЛА (между шапкой и подвалом) переставляются
+  // по нему; layout-conformance ниже пропускается. Custom-флоу (1-в-1 по ТЗ) не
+  // трогаем — там порядок и так строго из ТЗ.
+  const hasSectionOrder = !!(brief?.sectionOrder && brief.sectionOrder.length > 0);
+  if (hasSectionOrder && brief?.landingMode !== 'custom') {
+    const header = spec.sections[0];
+    const footer = spec.sections[spec.sections.length - 1];
+    const body = spec.sections.slice(1, -1);
+
+    const idCounts: Record<string, number> = {};
+    for (const s of body) idCounts[s.id] = (idCounts[s.id] ?? 0) + 1;
+    const keyed = body.map((s, i) => {
+      const props = s.props as { mediaVariant?: string; variant?: string } | undefined;
+      let k: string = s.id;
+      if ((idCounts[s.id] ?? 0) > 1) {
+        const disc = props?.mediaVariant ?? props?.variant;
+        k = disc ? `${s.id}:${disc}` : `${s.id}:${i}`;
+      }
+      return { s, k };
+    });
+
+    const orderedBody: typeof body = [];
+    const remaining = [...keyed];
+    for (const key of brief!.sectionOrder!) {
+      const idx = remaining.findIndex((x) => x.k === key);
+      if (idx >= 0) {
+        orderedBody.push(remaining[idx]!.s);
+        remaining.splice(idx, 1);
+      } else {
+        warnings.push(
+          `sectionOrder: ключ "${key}" не найден среди секций лендинга — пропущен. ` +
+            `Доступные ключи: ${keyed.map((x) => x.k).join(', ')}.`,
+        );
+      }
+    }
+    for (const r of remaining) {
+      warnings.push(`sectionOrder: секция "${r.k}" не перечислена — добавлена в конце тела.`);
+      orderedBody.push(r.s);
+    }
+
+    // Hero всегда первым в теле (правило hero-first), даже если оператор забыл.
+    const heroIdx = orderedBody.findIndex((s) => s.component === 'HeroSection');
+    if (heroIdx > 0) {
+      const [hero] = orderedBody.splice(heroIdx, 1);
+      orderedBody.unshift(hero!);
+    }
+
+    spec.sections = [header, ...orderedBody, footer] as LandingSpec['sections'];
+    warnings.push(
+      'brief.sectionOrder задан — секции тела переставлены по нему, layout-conformance пропущен ' +
+        '(правило operator-section-order).',
+    );
+  }
+
   // Custom-режим (1-в-1 по ТЗ): тексты берутся из ТЗ дословно, поэтому бренд- и
   // языковой гейты становятся СПРАВОЧНЫМИ (warnings) — они не должны заставлять
   // менять текст ТЗ. Правило: `custom-copy-gates-advisory`.
@@ -320,6 +376,11 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
     warnings.push(
       'landingMode=custom (1-в-1 по ТЗ) — layout игнорируется (в т.ч. enterprise-modular-saas), ' +
         'layout-conformance пропущен. Структура и контент берутся строго из ТЗ.',
+    );
+  } else if (hasSectionOrder) {
+    warnings.push(
+      'brief.sectionOrder задан — layout-conformance пропущен (порядок блоков задаёт оператор, ' +
+        'правило operator-section-order).',
     );
   } else if (layoutSlug) {
     const conformance = await validateLandingLayoutConformance(spec, {

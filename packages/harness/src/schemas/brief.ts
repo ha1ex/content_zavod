@@ -46,6 +46,21 @@ export const BriefSchema = z.object({
         'Для pageArchetype:"event" — layout "event-webinar". ' +
         'Лучшая практика: явно выбрать в брифе после прочтения wiki/layouts/index.md.',
     ),
+  sectionOrder: z
+    .array(z.string())
+    .optional()
+    .describe(
+      'Кастомный порядок блоков (brief-флоу). Список КЛЮЧЕЙ секций сверху вниз. Ключ секции = её ' +
+        '`id` (hero, features, faq, final_cta…); для повторяющихся блоков (несколько MediaCopy) — ' +
+        '`id:discriminator`, где discriminator = props.mediaVariant/variant (например ' +
+        '`media_copy:cli-markdown-export`) или порядковый индекс. Когда задан: `agent apply` ' +
+        'ПЕРЕСТАВЛЯЕТ секции лендинга по этому порядку, а `layout-conformance` ПРОПУСКАЕТСЯ ' +
+        '(порядок оператора — истина). Hero принудительно ставится первым в теле; шапка/подвал ' +
+        'добавляются автоматически (правило factory-chrome). Незнакомые ключи и не перечисленные ' +
+        'секции — предупреждение (не перечисленные добавляются в конце). ' +
+        'Оператор может править ТОЛЬКО это поле в основном брифе после первой генерации — гейт ' +
+        'briefs-immutable делает исключение для sectionOrder. Правило: `operator-section-order`.',
+    ),
   event: z
     .object({
       date: z.string().describe('Дата мероприятия, например «30 июля»'),

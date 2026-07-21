@@ -15,7 +15,24 @@ set -euo pipefail
 
 # M (modified) / D (deleted) / R (renamed) для существующих брифов — блок.
 # A (новый файл, в т.ч. <slug>-v2.json) — проходит свободно.
-VIOLATIONS="$(git diff --cached --name-status --diff-filter=MDR -- 'content/briefs/*.json' 2>/dev/null || true)"
+# Исключение (правило operator-section-order): правка ТОЛЬКО поля sectionOrder —
+# разрешена (оператор меняет порядок блоков после первой генерации).
+RAW="$(git diff --cached --name-status --diff-filter=MDR -- 'content/briefs/*.json' 2>/dev/null || true)"
+[[ -z "$RAW" ]] && exit 0
+
+VIOLATIONS=""
+while IFS=$'\t' read -r STATUS FILE _; do
+  [[ -z "$STATUS" || -z "$FILE" ]] && continue
+  if [[ "$STATUS" == M* ]] && command -v jq >/dev/null 2>&1; then
+    A="$(git show "HEAD:$FILE" 2>/dev/null | jq -S 'del(.sectionOrder)' 2>/dev/null || echo '__ERR_A__')"
+    B="$(git show ":$FILE" 2>/dev/null | jq -S 'del(.sectionOrder)' 2>/dev/null || echo '__ERR_B__')"
+    if [[ "$A" != '__ERR_A__' && "$B" != '__ERR_B__' && "$A" == "$B" ]]; then
+      continue  # изменён только sectionOrder — разрешено
+    fi
+  fi
+  VIOLATIONS+="$STATUS"$'\t'"$FILE"$'\n'
+done <<< "$RAW"
+
 [[ -z "$VIOLATIONS" ]] && exit 0
 
 {

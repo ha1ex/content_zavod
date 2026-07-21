@@ -67,6 +67,27 @@ Use semantic aliases:
 
 Use violet for CTA, links, active states, icons, focused/opened accordions, and carousel next controls. Use neutral grays for text hierarchy, borders, section backgrounds, and inactive UI.
 
+### Text color — headings, subheadings and body only dark (ОБЯЗАТЕЛЬНО)
+
+Заголовки, **подзаголовки** и **основной текст** — всегда `--text-primary` (#2d2d2d). Осветлять их до серого запрещено.
+
+| Роль | Токен | Значение |
+|---|---|---|
+| Заголовки секций, подзаголовки | `--text-primary` | #2d2d2d |
+| Основной текст: параграфы, описания, буллиты, текст карточек | `--text-primary` | #2d2d2d |
+| Вторичный: подписи, метаданные, плейсхолдеры, disabled | `--text-secondary` | #757575 |
+| Сноски, дисклеймеры | `--neutral-500` | #9e9e9e |
+
+Действует на **всех брейкпоинтах — desktop, tablet, mobile**. Цвет текста от брейкпоинта не зависит (в отличие от «Block radius»): уменьшение кегля на планшете и мобилке не даёт права осветлять текст. Проверять во всех трёх превью.
+
+**CTA-блоки — весь текст тёмный.** В CTA (final CTA, secondary CTA, любой блок на `--action-primary-soft` #efe9f9) серый не используется вообще: заголовок, подзаголовок, буллиты, поясняющий текст под кнопкой, мелкие подписи — всё #2d2d2d, на всех трёх брейкпоинтах. Единственное исключение — подпись **на залитой кнопке**: `--text-inverse` #ffffff на `--action-primary` #7d4ccf (это контрол, а не текст блока).
+
+Контраст на белом: #2d2d2d ≈ 13.8:1; #757575 ≈ 4.6:1 (проходит WCAG AA); #9e9e9e ≈ 2.7:1 (**не проходит AA** — только некритичный текст вроде сносок).
+
+Антипаттерны: серый подзаголовок секции; body светлее #2d2d2d «для воздуха»; серый поясняющий текст в CTA-блоке; #9e9e9e на смысловом тексте (оффер, состав тарифа, условия).
+
+Зеркало правила — в скилле `kaiten-ux-ui-designer` (`references/design-tokens.md`, раздел «Цвета»).
+
 ## Typography
 
 Use a neutral grotesk close to Inter:

@@ -35,7 +35,7 @@ sections:
   - hero
   - testimonial_quote
   - accordion_feature
-  - cta_banner
+  - cta_buttons
   - comparison_table
   - media_copy
   - features
@@ -45,7 +45,7 @@ sections:
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46808
+tokenEstimate: 47185
 tags:
   - landing
   - saas_landing
@@ -58,8 +58,8 @@ stale: false
 - **brief:** `content/briefs/kaiten-wrike.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `site_header, hero, testimonial_quote, accordion_feature, cta_banner, comparison_table, media_copy, features, final_cta, faq, legal_note, kaiten_footer`
-- **token estimate:** `46808`
+- **sections used:** `site_header, hero, testimonial_quote, accordion_feature, cta_buttons, comparison_table, media_copy, features, final_cta, faq, legal_note, kaiten_footer`
+- **token estimate:** `47185`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -107,7 +107,7 @@ stale: false
 ### accordion_feature (AccordionFeatureSection)
 
 
-### cta_banner (CtaBanner)
+### cta_buttons (CtaButtons)
 
 
 ### comparison_table (ComparisonTable)
@@ -152,19 +152,19 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `kaiten-wrike`
 
-- **Score:** 75.1 / 100 (threshold 70) — ✅ pass
+- **Score:** 76.44 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
-- **CTA types detected:** Trial
-- **Generated:** 2026-07-21T10:16:18.853Z
+- **CTA types detected:** Trial, Demo
+- **Generated:** 2026-07-21T17:16:06.692Z
 
 ## Breakdown
 
 | ID | Subscore | Raw | Weight | Weighted | Detail |
 |---|---|---|---|---|---|
-| S1 | Story coverage | 62.74 | 0.4 | 25.1 | top-6 stories: compare(w=0.98, c=0.82), migrate-jira(w=0.95, c=0.77), fast-check(w=0.94, c=0.77), ux-check(w=0.71, c=0.53), sandbox(w=0.62, c=0.53), security(w=0.53, c=0.00) |
+| S1 | Story coverage | 66.09 | 0.4 | 26.44 | top-6 stories: compare(w=0.98, c=0.82), migrate-jira(w=0.95, c=0.77), fast-check(w=0.94, c=0.77), ux-check(w=0.71, c=0.53), sandbox(w=0.62, c=0.53), security(w=0.53, c=0.30) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
 | S3 | Role addressability | 50 | 0.2 | 10 | PM=1.00, DM=0.00 |
-| S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial], match=1/1 |
+| S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial,Demo], match=1/1 |
 
 ## Story coverage (top-N)
 
@@ -175,7 +175,7 @@ stale: false
 | fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 0.77 | ✅ covered |
 | ux-check — Хочу проверить UX до решения | 0.71 | 0.53 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | sandbox — Хочу проверить, не сломаем ли мы всё | 0.62 | 0.53 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
-| security — Хочу понять ограничения и безопасность | 0.53 | 0 | ❌ not covered — добавь секцию/копи для "Хочу понять ограничения и безопасность" (keywords: безопасн, on-prem, on prem) |
+| security — Хочу понять ограничения и безопасность | 0.53 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 
 ## Issues
 

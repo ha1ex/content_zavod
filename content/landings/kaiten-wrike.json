@@ -168,16 +168,21 @@
       }
     },
     {
-      "id": "testimonial_quote",
-      "component": "TestimonialQuote",
+      "id": "reviews",
+      "component": "ReviewSlider",
       "props": {
-        "eyebrow": "История перехода",
-        "quote": "За 9 лет использования мы привыкли к Wrike, но работа в Kaiten не вызывает сложностей. Мы переехали за 1 месяц. Нам помогли с настройкой: сотрудники Kaiten провели вебинар и ответили на вопросы наших менеджеров.",
-        "authorName": "Виталий Радбиль",
-        "authorRole": "проектный менеджер диджитал-агентства",
-        "brandName": "Vivanti",
-        "brandInitial": "V",
-        "metric": "Переехали за 1 месяц"
+        "title": "История перехода",
+        "reviews": [
+          {
+            "logo": "Vivanti",
+            "quote": "«За 9 лет использования мы привыкли к Wrike, но работа в Kaiten не вызывает сложностей. Мы переехали за 1 месяц. Нам помогли с настройкой: сотрудники Kaiten провели вебинар и ответили на вопросы наших менеджеров.»",
+            "name": "Виталий Радбиль",
+            "role": "проектный менеджер диджитал-агентства",
+            "avatarInitial": "V",
+            "caseUrl": "/cases",
+            "caseLabel": "Читать кейс"
+          }
+        ]
       }
     },
     {
@@ -701,7 +706,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-21T17:16:06.702Z",
+    "generatedAt": "2026-07-21T18:07:28.658Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "tokenEstimate": 47185,

@@ -33,7 +33,7 @@ sources:
 sections:
   - site_header
   - hero
-  - testimonial_quote
+  - reviews
   - accordion_feature
   - cta_buttons
   - comparison_table
@@ -58,7 +58,7 @@ stale: false
 - **brief:** `content/briefs/kaiten-wrike.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `site_header, hero, testimonial_quote, accordion_feature, cta_buttons, comparison_table, media_copy, features, final_cta, faq, legal_note, kaiten_footer`
+- **sections used:** `site_header, hero, reviews, accordion_feature, cta_buttons, comparison_table, media_copy, features, final_cta, faq, legal_note, kaiten_footer`
 - **token estimate:** `47185`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
@@ -101,7 +101,7 @@ stale: false
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 - **visual:** `product_screenshot` (assetId: `kaiten-wrike-board`)
 
-### testimonial_quote (TestimonialQuote)
+### reviews (ReviewSlider)
 
 
 ### accordion_feature (AccordionFeatureSection)
@@ -152,18 +152,18 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `kaiten-wrike`
 
-- **Score:** 76.44 / 100 (threshold 70) — ✅ pass
+- **Score:** 83.29 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-07-21T17:16:06.692Z
+- **Generated:** 2026-07-21T18:07:28.632Z
 
 ## Breakdown
 
 | ID | Subscore | Raw | Weight | Weighted | Detail |
 |---|---|---|---|---|---|
-| S1 | Story coverage | 66.09 | 0.4 | 26.44 | top-6 stories: compare(w=0.98, c=0.82), migrate-jira(w=0.95, c=0.77), fast-check(w=0.94, c=0.77), ux-check(w=0.71, c=0.53), sandbox(w=0.62, c=0.53), security(w=0.53, c=0.30) |
+| S1 | Story coverage | 70.72 | 0.4 | 28.29 | top-6 stories: compare(w=0.98, c=0.82), migrate-jira(w=0.95, c=0.77), fast-check(w=0.94, c=1.00), ux-check(w=0.71, c=0.53), sandbox(w=0.62, c=0.53), security(w=0.53, c=0.30) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
-| S3 | Role addressability | 50 | 0.2 | 10 | PM=1.00, DM=0.00 |
+| S3 | Role addressability | 75 | 0.2 | 15 | PM=1.00, DM=0.50 |
 | S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial,Demo], match=1/1 |
 
 ## Story coverage (top-N)
@@ -172,7 +172,7 @@ stale: false
 |---|---|---|---|
 | compare — Хочу сравнить с тем, что уже есть | 0.98 | 0.83 | ✅ covered |
 | migrate-jira — Хочу понять, стоит ли переезжать с Jira | 0.95 | 0.77 | ✅ covered |
-| fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 0.77 | ✅ covered |
+| fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 1 | ✅ covered |
 | ux-check — Хочу проверить UX до решения | 0.71 | 0.53 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | sandbox — Хочу проверить, не сломаем ли мы всё | 0.62 | 0.53 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | security — Хочу понять ограничения и безопасность | 0.53 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |

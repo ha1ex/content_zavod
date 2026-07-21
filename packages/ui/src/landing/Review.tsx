@@ -68,6 +68,7 @@ const STYLE = `
 .revx-mock .revx__head p{font-size:16px; line-height:24px; color:var(--text-title); max-width:680px; margin:0;}
 .revx-mock .revx__wrap{width:100%; overflow:hidden; position:relative;}
 .revx-mock .revx__track{display:flex; gap:var(--sp-8); align-items:stretch; width:max-content; transition:transform .35s ease;}
+.revx-mock .revx__track--single{width:100%; justify-content:center;}
 .revx-mock .otz{flex-shrink:0; width:384px; height:460px; background:#fff; border-radius:var(--radius-2xl); padding:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6);}
 .revx-mock .otz__top{display:flex; flex-direction:column; gap:var(--sp-5); flex:1; min-height:0;}
 .revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4);}
@@ -198,7 +199,7 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
         </div>
 
         <div className="revx__wrap" ref={wrapRef}>
-          <div className="revx__track" ref={trackRef}>
+          <div className={`revx__track${data.length === 1 ? ' revx__track--single' : ''}`} ref={trackRef}>
             {data.map((r, i) => (
               <div className="otz" key={i}>
                 <div className="otz__top">

@@ -40,7 +40,7 @@ const STYLE = `
   --radius-2xl:16px; --radius-xl:12px;
   --fw-semi:600; --fw-reg:400; --ls:0;
   --brand-100:#7d4ccf; --brand-12:#efe9f9;
-  --text-title:#2d2d2d; --text-secondary:#757575; --surface-section:#f7f7f8;
+  --text-title:#2d2d2d; --surface-section:#f7f7f8;
   font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
   display:block; width:100%; padding:48px var(--sp-4); box-sizing:border-box;
 }
@@ -52,7 +52,7 @@ const STYLE = `
 .steps-mock .step{padding:var(--sp-6); border:0; border-radius:var(--radius-2xl); background:var(--surface-section);}
 .steps-mock .step .num{width:44px; height:44px; border-radius:var(--radius-xl); background:var(--brand-12); color:var(--brand-100); display:inline-flex; align-items:center; justify-content:center; font-size:18px; line-height:1; font-weight:var(--fw-semi); margin-bottom:var(--sp-4); flex:0 0 auto; font-variant-numeric:tabular-nums;}
 .steps-mock .step h4{font-size:18px; line-height:28px; font-weight:var(--fw-semi); margin:0 0 var(--sp-2);}
-.steps-mock .step p{font-size:14px; line-height:20px; color:var(--text-secondary); margin:0;}
+.steps-mock .step p{font-size:14px; line-height:20px; color:var(--text-title); margin:0;}
 .steps-mock .step .step-link{color:var(--brand-100); text-decoration:underline; text-underline-offset:2px;}
 @media(min-width:768px) and (max-width:1279px){.steps-mock .steps{gap:var(--sp-6);}}
 @media(max-width:767px){

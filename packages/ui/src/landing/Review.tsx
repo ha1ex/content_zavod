@@ -74,7 +74,7 @@ const STYLE = `
 .revx-mock .otz__co{font-size:18px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title);}
 .revx-mock .otz__co img{height:60px; width:auto; max-width:180px; object-fit:contain; display:block;}
 .revx-mock .otz__q{flex-shrink:0; width:79px; height:60px; color:#f3f4f6;}
-.revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-secondary); flex:1; display:flex; align-items:center;}
+.revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-title); flex:1; display:flex; align-items:center;}
 .revx-mock .otz__author{display:flex; gap:var(--sp-4); align-items:center;}
 .revx-mock .otz__av{position:relative; overflow:hidden; width:56px; height:56px; border-radius:9999px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:var(--fw-semi); color:#fff; background:#c4b5e0;}
 .revx-mock .otz__av img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}

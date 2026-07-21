@@ -31,5 +31,20 @@
   "resolvedSegments": [
     "IT"
   ],
-  "landingMode": "brief"
+  "landingMode": "brief",
+  "sectionOrder": [
+    "hero",
+    "benefits_strip",
+    "features",
+    "logo_cloud",
+    "media_copy:cli-markdown-export",
+    "media_copy:cli-snapshot-metrics",
+    "media_copy:cli-batch-stats",
+    "comparison_table",
+    "media_copy:cli-install",
+    "metrics_split",
+    "process",
+    "faq",
+    "final_cta"
+  ]
 }

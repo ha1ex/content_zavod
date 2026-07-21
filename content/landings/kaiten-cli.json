@@ -44,6 +44,57 @@
       }
     },
     {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Возможности",
+        "title": "Что умеет",
+        "items": [
+          {
+            "icon": "LayoutGrid",
+            "title": "Команды по сущностям",
+            "description": "kaiten <область> <действие> для карточек, комментариев, тегов, чек-листов, блокировок и связей"
+          },
+          {
+            "icon": "FolderTree",
+            "title": "Документы и каталоги",
+            "description": "Чтение дерева документов и работа с каталогами: таблицами клиентов, оборудования, подрядчиков"
+          },
+          {
+            "icon": "Clock",
+            "title": "Учёт времени",
+            "description": "Чтение и запись журналов времени по карточкам Kaiten"
+          },
+          {
+            "icon": "FileDown",
+            "title": "Экспорт в Markdown",
+            "description": "Карточка или документ сохраняются файлом .md рядом с кодом"
+          },
+          {
+            "icon": "Search",
+            "title": "Поиск возможностей",
+            "description": "search-tools, describe, examples и agent-help объясняют команды прямо в терминале"
+          },
+          {
+            "icon": "Plug",
+            "title": "Псевдонимы MCP",
+            "description": "Привычные имена вида kaiten_list_cards работают как обычные команды"
+          },
+          {
+            "icon": "Database",
+            "title": "Кэш чтения",
+            "description": "Режим --cache-mode auto сам выбирает срок хранения ответов, refresh берёт свежие данные"
+          },
+          {
+            "icon": "ShieldCheck",
+            "title": "Аккуратный клиент",
+            "description": "Ограничение частоты запросов, повторные попытки и явные ограничения времени ожидания"
+          }
+        ],
+        "columns": 4
+      }
+    },
+    {
       "id": "logo_cloud",
       "component": "LogoCloud",
       "props": {
@@ -169,7 +220,7 @@
         "eyebrow": "Сравнение подходов",
         "title": "Три способа получить данные из Kaiten",
         "description": "Инженеры сравнивают Kaiten с Jira, Trello и таблицами Excel. Получить из него данные можно тремя способами — сравните их под свою задачу.",
-        "footnote": "Сравнение подходов к работе с открытым API Kaiten. По описанию проекта на 17 июля 2026 года.",
+        "footnote": "Сравнение подходов к работе с открытым API Kaiten. По описанию проекта на 18 июля 2026 года.",
         "columns": [
           {
             "name": "Веб-интерфейс",
@@ -259,7 +310,7 @@
       "props": {
         "eyebrow": "В цифрах",
         "title": "Охват и экономия обращений",
-        "description": "Числа приведены по описанию проекта на 17 июля 2026 года и меняются с выпусками.",
+        "description": "Числа приведены по описанию проекта на 18 июля 2026 года и меняются с выпусками.",
         "metrics": [
           {
             "value": "356",
@@ -329,57 +380,6 @@
       }
     },
     {
-      "id": "features",
-      "component": "FeatureGrid",
-      "props": {
-        "eyebrow": "Возможности",
-        "title": "Что умеет",
-        "items": [
-          {
-            "icon": "LayoutGrid",
-            "title": "Команды по сущностям",
-            "description": "kaiten <область> <действие> для карточек, комментариев, тегов, чек-листов, блокировок и связей"
-          },
-          {
-            "icon": "FolderTree",
-            "title": "Документы и каталоги",
-            "description": "Чтение дерева документов и работа с каталогами: таблицами клиентов, оборудования, подрядчиков"
-          },
-          {
-            "icon": "Clock",
-            "title": "Учёт времени",
-            "description": "Чтение и запись журналов времени по карточкам Kaiten"
-          },
-          {
-            "icon": "FileDown",
-            "title": "Экспорт в Markdown",
-            "description": "Карточка или документ сохраняются файлом .md рядом с кодом"
-          },
-          {
-            "icon": "Search",
-            "title": "Поиск возможностей",
-            "description": "search-tools, describe, examples и agent-help объясняют команды прямо в терминале"
-          },
-          {
-            "icon": "Plug",
-            "title": "Псевдонимы MCP",
-            "description": "Привычные имена вида kaiten_list_cards работают как обычные команды"
-          },
-          {
-            "icon": "Database",
-            "title": "Кэш чтения",
-            "description": "Режим --cache-mode auto сам выбирает срок хранения ответов, refresh берёт свежие данные"
-          },
-          {
-            "icon": "ShieldCheck",
-            "title": "Аккуратный клиент",
-            "description": "Ограничение частоты запросов, повторные попытки и явные ограничения времени ожидания"
-          }
-        ],
-        "columns": 4
-      }
-    },
-    {
       "id": "faq",
       "component": "FAQAccordion",
       "props": {
@@ -436,7 +436,7 @@
           "href": "https://github.com/ViktorOgnev/kaiten-cli/blob/master/COMMAND_REFERENCE.md"
         },
         "variant": "gradient",
-        "visualVariant": "cli-install"
+        "visualVariant": "cli-terminal-final-animated"
       }
     },
     {
@@ -476,11 +476,11 @@
       "wiki/layouts/single-module-deep-dive.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-17T19:41:15.487Z",
+    "generatedAt": "2026-07-21T07:35:30.774Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "single-module-deep-dive",
-    "tokenEstimate": 46438,
+    "tokenEstimate": 46808,
     "domain": "cli-community-edition"
   }
 }

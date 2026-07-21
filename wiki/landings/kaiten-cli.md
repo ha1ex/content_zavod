@@ -2,7 +2,7 @@
 slug: kaiten-cli
 type: landing
 created: 2026-07-17
-updated: 2026-07-18
+updated: 2026-07-21
 status: draft
 brief: content/briefs/kaiten-cli.json
 archetype: saas_landing
@@ -35,6 +35,7 @@ sections:
   - site_header
   - hero
   - benefits_strip
+  - features
   - logo_cloud
   - media_copy
   - media_copy
@@ -43,13 +44,12 @@ sections:
   - media_copy
   - metrics_split
   - process
-  - features
   - faq
   - final_cta
   - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 46438
+tokenEstimate: 46808
 tags:
   - landing
   - saas_landing
@@ -62,8 +62,8 @@ stale: false
 - **brief:** `content/briefs/kaiten-cli.json`
 - **archetype:** `saas_landing`
 - **goal:** `download` (brief.cta = "Установить")
-- **sections used:** `site_header, hero, benefits_strip, logo_cloud, media_copy, media_copy, media_copy, comparison_table, media_copy, metrics_split, process, features, faq, final_cta, kaiten_footer`
-- **token estimate:** `46438`
+- **sections used:** `site_header, hero, benefits_strip, features, logo_cloud, media_copy, media_copy, media_copy, comparison_table, media_copy, metrics_split, process, faq, final_cta, kaiten_footer`
+- **token estimate:** `46808`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -110,6 +110,19 @@ stale: false
 ### benefits_strip (BenefitsStrip)
 
 
+### features (FeatureGrid)
+
+- **title:** "Что умеет"
+- **columns:** 4 · **items:** 8
+  1. `LayoutGrid` · "Команды по сущностям" — 94 chars
+  2. `FolderTree` · "Документы и каталоги" — 93 chars
+  3. `Clock` · "Учёт времени" — 52 chars
+  4. `FileDown` · "Экспорт в Markdown" — 58 chars
+  5. `Search` · "Поиск возможностей" — 81 chars
+  6. `Plug` · "Псевдонимы MCP" — 67 chars
+  7. `Database` · "Кэш чтения" — 87 chars
+  8. `ShieldCheck` · "Аккуратный клиент" — 84 chars
+
 ### logo_cloud (LogoCloud)
 
 
@@ -133,19 +146,6 @@ stale: false
 
 ### process (ProcessSteps)
 
-
-### features (FeatureGrid)
-
-- **title:** "Что умеет"
-- **columns:** 4 · **items:** 8
-  1. `LayoutGrid` · "Команды по сущностям" — 94 chars
-  2. `FolderTree` · "Документы и каталоги" — 93 chars
-  3. `Clock` · "Учёт времени" — 52 chars
-  4. `FileDown` · "Экспорт в Markdown" — 58 chars
-  5. `Search` · "Поиск возможностей" — 81 chars
-  6. `Plug` · "Псевдонимы MCP" — 67 chars
-  7. `Database` · "Кэш чтения" — 87 chars
-  8. `ShieldCheck` · "Аккуратный клиент" — 84 chars
 
 ### faq (FAQAccordion)
 
@@ -176,7 +176,7 @@ stale: false
 - **Score:** 74.67 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Unknown
-- **Generated:** 2026-07-17T19:41:15.477Z
+- **Generated:** 2026-07-21T07:35:30.745Z
 
 ## Breakdown
 

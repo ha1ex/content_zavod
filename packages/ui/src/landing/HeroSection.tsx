@@ -75,6 +75,12 @@ export interface HeroSectionProps {
    * (Kaiten signature — фиолетовая pill вокруг ключевого слова).
    */
   accentWord?: string;
+  /**
+   * Плашка-подсветка вокруг accentWord. По умолчанию `true` (Kaiten signature —
+   * фиолетовый pill). `false` — акцентное слово рендерится просто фиолетовым
+   * текстом, без фона/скругления/padding.
+   */
+  accentPill?: boolean;
   subtitle: string;
   primaryCta: CtaProps;
   secondaryCta?: CtaProps | null;
@@ -147,6 +153,7 @@ export function HeroSection({
   eyebrow,
   title,
   accentWord,
+  accentPill = true,
   subtitle,
   primaryCta,
   secondaryCta,
@@ -180,7 +187,7 @@ export function HeroSection({
     );
   }
 
-  const renderedTitle = accentWord ? highlightAccent(title, accentWord) : title;
+  const renderedTitle = accentWord ? highlightAccent(title, accentWord, accentPill) : title;
   const isBelow = visualPosition === 'below';
 
   return (
@@ -399,7 +406,7 @@ function EyebrowPill({ children }: { children: React.ReactNode }) {
  * дизайн-системе в заголовке стоят неразрывные пробелы (висячие предлоги), и
  * иначе подсветка молча пропадала бы из-за несовпадения обычного пробела с nbsp.
  */
-function highlightAccent(title: string, accent: string): React.ReactNode {
+function highlightAccent(title: string, accent: string, pill = true): React.ReactNode {
   const pattern = accent
     .trim()
     .split(/\s+/)
@@ -416,8 +423,8 @@ function highlightAccent(title: string, accent: string): React.ReactNode {
       {before}
       <span
         className={cn(
-          'inline-block rounded-(--radius-2xl) bg-(--color-action-primary-soft)',
-          'px-3 pb-1 text-(--color-text-accent)',
+          'text-(--color-text-accent)',
+          pill && 'inline-block rounded-(--radius-2xl) bg-(--color-action-primary-soft) px-3 pb-1',
         )}
       >
         {match}

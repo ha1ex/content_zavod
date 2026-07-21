@@ -177,6 +177,8 @@ const HeroSectionSchema = z.object({
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(120),
     accentWord: z.string().max(40).optional(),
+    /** Плашка вокруг accentWord. По умолчанию true; false — просто фиолетовый текст. */
+    accentPill: z.boolean().optional(),
     subtitle: z.string().min(10).max(280),
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),

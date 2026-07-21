@@ -20,8 +20,8 @@
 │  bg: white  border: 1px solid #7d4ccf  border-radius: 12px  p: 24px / 16px   │
 │  Заголовок вопроса (SemiBold #7d4ccf)                              [−]          │
 │                                                                                │
-│  Текст ответа (16px Regular #757575 — desktop/tablet                           │
-│               14px Regular #757575 — mobile)                                   │
+│  Текст ответа (16px Regular #2d2d2d — desktop/tablet                           │
+│               14px Regular #2d2d2d — mobile)                                   │
 └────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -136,7 +136,7 @@
 | `--text/brand-color` | `#7d4ccf` | Рамка Active |
 | `--colors/kaiten/brand-100k` | `#7d4ccf` | Цвет заголовка Active; рамка Mobile Active |
 | `--text/title-color` | `#2d2d2d` | Цвет заголовка Default |
-| `--text/secondary-text-color` | `#757575` | Цвет текста ответа |
+| `--text/title-color` | `#2d2d2d` | Цвет текста ответа |
 | `--border-radius/rounded-xl` | `12px` | Скругление элемента FAQ |
 | `--spacing/4` | `16px` | Gap внутри элемента; p Mobile; gap items |
 | `--spacing/6` | `24px` | p Desktop/Tablet |
@@ -179,7 +179,7 @@
     --faq-active-border:#7d4ccf;
     --text-title:       #2d2d2d;
     --text-brand:       #7d4ccf;
-    --text-answer:      #757575;
+    --text-answer:      #2d2d2d;
     --radius-xl:        12px;
     --ls:               -0.2px;
     --font:             'Roboto', sans-serif;
@@ -1111,7 +1111,7 @@
 .faq-item__icon::after{content:"";position:absolute;top:5px;bottom:5px;left:11px;width:2px;background:currentColor;border-radius:2px;transition:opacity .2s}
 .faq-item[open] .faq-item__icon::after{opacity:0}   /* открыт → минус */
 
-.faq-item__answer{font-weight:var(--fw-reg);color:var(--text-secondary);word-break:break-word;width:100%;max-width:900px;padding:0 var(--sp-6) var(--sp-6)}
+.faq-item__answer{font-weight:var(--fw-reg);color:var(--text-title);word-break:break-word;width:100%;max-width:900px;padding:0 var(--sp-6) var(--sp-6)}
 .faq-item__answer--md{font-size:var(--fs-md);line-height:var(--lh-md)}
 .faq-item__answer a{color:var(--brand-100);text-decoration:underline}   /* ссылки фиолетовые + подчёркивание */
 

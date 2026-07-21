@@ -61,7 +61,7 @@ const STYLES = `
 .afs .acc{display:flex;flex-direction:column;gap:12px}
 .afs .acc-intro{margin-bottom:auto}
 .afs .acc-h{font-size:30px;line-height:36px;font-weight:600;color:var(--afs-t1);margin:0 0 12px}
-.afs .acc-sub{font-size:16px;line-height:24px;color:var(--afs-t2);margin:0}
+.afs .acc-sub{font-size:16px;line-height:24px;color:var(--afs-t1);margin:0}
 .afs .acc-item{background:var(--afs-sec);border:1px solid transparent;border-radius:12px;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
 .afs .acc-item.open{background:#fff;border-color:var(--afs-brand);box-shadow:0 2px 10px -4px rgba(125,76,207,.18)}
 .afs .acc-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;margin:0;background:none;border:0;cursor:pointer;text-align:left;font-family:inherit}
@@ -75,7 +75,7 @@ const STYLES = `
 .afs .acc-item.open .acc-ic svg{transform:rotate(180deg)}
 .afs .acc-body{height:0;opacity:0;overflow:hidden;transition:height .26s cubic-bezier(.2,0,.2,1),opacity .2s ease}
 .afs .acc-item.open .acc-body{height:auto;opacity:1}
-.afs .acc-body__inner{padding:0 20px 20px;color:var(--afs-t2);font-size:16px;line-height:24px}
+.afs .acc-body__inner{padding:0 20px 20px;color:var(--afs-t1);font-size:16px;line-height:24px}
 /* Медиа-область — квадрат 592×592 с переключаемыми панелями */
 .afs .acc-media{position:relative;justify-self:center;align-self:center;width:100%;max-width:592px;aspect-ratio:1/1;
   background:linear-gradient(180deg,#ece0ff,#cdecff);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);place-items:stretch}

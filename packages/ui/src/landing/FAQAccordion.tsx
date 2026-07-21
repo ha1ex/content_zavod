@@ -51,7 +51,7 @@ const STYLE = `
   --fw-reg:400; --fw-semi:600; --ls:0;
   --brand-100:#7d4ccf;
   --border-default:#dbe1e0; --border-hover:#e5e7eb;
-  --text-title:#2d2d2d; --text-secondary:#757575; --icon:#757575; --surface-section:#f7f7f8;
+  --text-title:#2d2d2d; --icon:#757575; --surface-section:#f7f7f8;
   font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
   background:var(--surface-section); width:100%; padding:48px var(--sp-4);
 }
@@ -60,7 +60,7 @@ const STYLE = `
 .faq-mock .faq-section__head{display:flex; flex-direction:column; align-items:center; gap:var(--sp-3); width:100%;}
 .faq-mock .faq-section__eyebrow{font-weight:var(--fw-semi); font-size:14px; line-height:20px; text-transform:uppercase; letter-spacing:.04em; color:var(--brand-100); text-align:center; margin:0;}
 .faq-mock .faq-section__title{font-weight:var(--fw-semi); color:var(--text-title); text-align:center; width:100%; font-size:36px; line-height:40px; letter-spacing:0; margin:0;}
-.faq-mock .faq-section__desc{font-weight:var(--fw-reg); font-size:18px; line-height:26px; color:var(--text-secondary); text-align:center; max-width:640px; margin:0;}
+.faq-mock .faq-section__desc{font-weight:var(--fw-reg); font-size:18px; line-height:26px; color:var(--text-title); text-align:center; max-width:640px; margin:0;}
 .faq-mock .faq-list{display:flex; flex-direction:column; align-items:center; gap:var(--sp-4); width:100%; list-style:none; margin:0; padding:0;}
 .faq-mock .faq-list li{width:100%; list-style:none;}
 .faq-mock .faq-item{background:#fff; border-radius:12px; width:100%; border:1px solid transparent; display:flex; flex-direction:column; cursor:pointer; text-align:left; transition:border-color .2s ease; interpolate-size:allow-keywords;}
@@ -81,7 +81,7 @@ const STYLE = `
 .faq-mock .faq-item__icon::before{content:""; position:absolute; left:5px; right:5px; top:11px; height:2px; background:currentColor; border-radius:2px;}
 .faq-mock .faq-item__icon::after{content:""; position:absolute; top:5px; bottom:5px; left:11px; width:2px; background:currentColor; border-radius:2px; transition:opacity .2s;}
 .faq-mock .faq-item[open] .faq-item__icon::after{opacity:0;}
-.faq-mock .faq-item__answer{font-weight:var(--fw-reg); color:var(--text-secondary); letter-spacing:var(--ls); word-break:break-word; width:100%; max-width:900px; padding:0 var(--sp-6) var(--sp-6); margin:0; font-size:16px; line-height:24px;}
+.faq-mock .faq-item__answer{font-weight:var(--fw-reg); color:var(--text-title); letter-spacing:var(--ls); word-break:break-word; width:100%; max-width:900px; padding:0 var(--sp-6) var(--sp-6); margin:0; font-size:16px; line-height:24px;}
 .faq-mock .faq-item__answer a{color:var(--brand-100); text-decoration:underline;}
 @media(max-width:767px){
   .faq-mock{padding:48px var(--sp-4);}

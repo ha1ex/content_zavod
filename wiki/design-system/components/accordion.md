@@ -22,7 +22,7 @@ stale: false
 
 ## States
 
-- **Closed.** Строка на `surface-section`, neutral text, шеврон-вниз справа.
+- **Closed.** Строка на `surface-section`, тёмный текст `--text-primary`, шеврон-вниз справа.
 - **Hover.** Title и иконка → violet `#7D4CCF` (`transition:color .18s`).
 - **Open.** White / soft-violet panel, violet border, violet SemiBold title, шеврон повёрнут (`rotate(180deg)`), тело под заголовком.
 

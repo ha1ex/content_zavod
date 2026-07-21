@@ -33,6 +33,8 @@ export type { ProcessStepsProps, ProcessStepProps } from './ProcessSteps';
 
 export { CtaBanner } from './CtaBanner';
 export type { CtaBannerProps, CtaBannerCtaProps } from './CtaBanner';
+export { CtaButtons } from './CtaButtons';
+export type { CtaButtonsProps, CtaButtonsCtaProps } from './CtaButtons';
 
 export { MediaCopy } from './MediaCopy';
 export type { MediaCopyProps, MediaCopyCheckItemProps, MediaCopyCtaProps } from './MediaCopy';

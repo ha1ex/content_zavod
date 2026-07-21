@@ -220,15 +220,17 @@
       }
     },
     {
-      "id": "cta_banner",
-      "component": "CtaBanner",
+      "id": "cta_buttons",
+      "component": "CtaButtons",
       "props": {
-        "title": "Попробовать бесплатно",
         "primaryCta": {
           "label": "Попробовать бесплатно",
           "href": "/signup"
         },
-        "secondaryCta": null
+        "secondaryCta": {
+          "label": "Запросить демо",
+          "href": "/demo"
+        }
       }
     },
     {
@@ -699,10 +701,10 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-21T10:16:18.865Z",
+    "generatedAt": "2026-07-21T17:16:06.702Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
-    "tokenEstimate": 46808,
+    "tokenEstimate": 47185,
     "domain": "pm"
   }
 }

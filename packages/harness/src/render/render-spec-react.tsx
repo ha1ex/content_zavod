@@ -8,6 +8,7 @@ import {
   SocialProof,
   ProcessSteps,
   CtaBanner,
+  CtaButtons,
   MediaCopy,
   StatStrip,
   PromoBanner,
@@ -66,6 +67,8 @@ function RenderSection({ section }: { section: Section }) {
       return <ProcessSteps {...section.props} />;
     case 'CtaBanner':
       return <CtaBanner {...section.props} />;
+    case 'CtaButtons':
+      return <CtaButtons {...section.props} />;
     case 'MediaCopy':
       return <MediaCopy {...section.props} />;
     case 'StatStrip':

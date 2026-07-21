@@ -385,6 +385,16 @@ const CtaBannerSchema = z.object({
   }),
 });
 
+/* ─── CtaButtons (одиночная/парная кнопка по центру, без карточки) ──── */
+const CtaButtonsSchema = z.object({
+  id: z.literal('cta_buttons'),
+  component: z.literal('CtaButtons'),
+  props: z.object({
+    primaryCta: CtaSchema,
+    secondaryCta: CtaSchema.nullable().optional(),
+  }),
+});
+
 /* ─── MediaCopy (alternating text+screenshot) ─────────────────────── */
 const MediaCopySchema = z.object({
   id: z.literal('media_copy'),
@@ -1023,6 +1033,7 @@ export const SectionSchema = z.discriminatedUnion('component', [
   ReviewSliderSchema,
   ProcessStepsSchema,
   CtaBannerSchema,
+  CtaButtonsSchema,
   PricingPlansSchema,
   FAQAccordionSchema,
   FinalCtaSchema,

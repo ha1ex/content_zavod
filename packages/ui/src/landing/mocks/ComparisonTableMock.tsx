@@ -30,14 +30,15 @@ import * as React from "react";
 
 export interface KctRow {
   label: React.ReactNode;
-  /** Функция есть у Кайтена */
-  a: boolean;
-  /** Функция есть у конкурента */
-  b: boolean;
+  /** Кайтен: boolean → ✓/−; строка → текст ячейки (режим «есть/нет» ↔ описательный). */
+  a: boolean | string;
+  /** Конкурент: boolean → ✓/−; строка → текст ячейки. */
+  b: boolean | string;
 }
 
 export interface KctSection {
-  title: React.ReactNode;
+  /** Заголовок раздела. Пустой/отсутствует → раздел без раскрывашки, строки видны сразу. */
+  title?: React.ReactNode;
   rows: KctRow[];
 }
 
@@ -52,6 +53,8 @@ export interface ComparisonTableProps {
   footnote: React.ReactNode;
   /** Логотип Кайтена в шапке; по умолчанию — встроенный */
   kaitenLogo?: React.ReactNode;
+  /** Текстовый заголовок левой (лиловой) колонки вместо логотипа — когда сравниваются два продукта Кайтена (напр. «Kaiten CLI Community Edition»). */
+  brandLabel?: React.ReactNode;
   className?: string;
 }
 
@@ -75,6 +78,7 @@ const CSS = `
 .kct-title{font-size:30px;line-height:36px;font-weight:600;letter-spacing:0;text-align:left}
 .kct-hcell--b{font-size:24px;line-height:32px;font-weight:500}
 .kct-logo{height:44px;width:auto;color:var(--ink)}
+.kct-brand{font-size:22px;line-height:28px;font-weight:600;color:var(--brand);text-align:center}
 
 .kct-sec{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;
   border-bottom:1px solid var(--line-strong);text-align:left;padding:16px 0}
@@ -94,6 +98,14 @@ const CSS = `
 .kct-cell--last{border-bottom-color:var(--line-strong)}
 .kct-cell--hidden{display:none}
 
+/* Текстовый режим: описательные ячейки вместо ✓/− */
+.kct--text{--colw:33%}
+.kct--text .kct-cell--a,.kct--text .kct-cell--b{justify-content:center;text-align:center;padding-top:12px;padding-bottom:12px}
+.kct-txt{font-size:15px;line-height:22px;color:var(--ink)}
+.kct-cell--a .kct-txt{font-weight:500}
+/* Раздел без заголовка: верхняя граница строк как у первого раздела */
+.kct-rule{grid-column:1/-1;border-top:1px solid var(--line-strong)}
+
 .kct-ic{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#fff;flex:none;box-shadow:0 0 0 1px rgba(45,45,45,.04)}
 .kct-ic--yes{color:var(--ok)}
 .kct-ic--yes svg{width:15px;height:15px}
@@ -104,6 +116,7 @@ const CSS = `
 @media(min-width:768px) and (max-width:1279px){
   .kct-hcell{min-height:72px}
   .kct-title,.kct-hcell--b{font-size:24px;line-height:32px}
+  .kct-brand{font-size:19px;line-height:24px}
   .kct-logo{height:32px}
   .kct-cell{min-height:44px}
   .kct-cell--label{font-size:14px;line-height:20px;padding-right:16px}
@@ -115,6 +128,7 @@ const CSS = `
   .kct-hcell--label{grid-column:1/-1;padding:0 0 16px;min-height:0}
   .kct-hcell--a{grid-column:2}
   .kct-hcell--b{grid-column:3;font-size:14px;line-height:20px;font-weight:600}
+  .kct-brand{font-size:13px;line-height:16px}
   .kct-title{font-size:24px;line-height:32px}
   .kct-logo{height:20px}
   .kct-cell{min-height:40px;padding:6px 8px}
@@ -124,6 +138,15 @@ const CSS = `
   .kct-sec{padding:12px 0}
   .kct-sec-t{font-size:14px;line-height:20px}
   .kct-note{margin-top:16px;font-size:12px;line-height:16px}
+}
+@media(min-width:768px) and (max-width:1279px){
+  .kct--text .kct-txt{font-size:14px;line-height:20px}
+}
+@media(max-width:767px){
+  .kct--text{--colw:33%}
+  .kct--text .kct-cell--a,.kct--text .kct-cell--b{padding:8px}
+  .kct--text .kct-txt{font-size:12px;line-height:16px;font-weight:400}
+  .kct--text .kct-cell--a .kct-txt{font-weight:500}
 }
 `;
 
@@ -141,7 +164,8 @@ const KaitenLogoDefault = () => (
   </svg>
 );
 
-function Cell({ has, kaiten, hidden, last }: { has: boolean; kaiten?: boolean; hidden?: boolean; last?: boolean }) {
+function Cell({ value, kaiten, hidden, last }: { value: boolean | string; kaiten?: boolean; hidden?: boolean; last?: boolean }) {
+  const isText = typeof value === "string";
   const cls = [
     "kct-cell",
     kaiten ? "kct-cell--a" : "kct-cell--b",
@@ -150,12 +174,18 @@ function Cell({ has, kaiten, hidden, last }: { has: boolean; kaiten?: boolean; h
   ].filter(Boolean).join(" ");
   return (
     <div className={cls}>
-      {has ? <i className="kct-ic kct-ic--yes"><Check /></i> : <i className="kct-ic kct-ic--no" />}
+      {isText ? (
+        <span className="kct-txt">{value}</span>
+      ) : value ? (
+        <i className="kct-ic kct-ic--yes"><Check /></i>
+      ) : (
+        <i className="kct-ic kct-ic--no" />
+      )}
     </div>
   );
 }
 
-export function ComparisonTableMock({ title, competitor, sections, footnote, kaitenLogo, className }: ComparisonTableProps) {
+export function ComparisonTableMock({ title, competitor, sections, footnote, kaitenLogo, brandLabel, className }: ComparisonTableProps) {
   const [open, setOpen] = React.useState(() => sections.map((_, i) => i === 0));
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headRef = React.useRef<HTMLDivElement>(null);
@@ -189,41 +219,50 @@ export function ComparisonTableMock({ title, competitor, sections, footnote, kai
     return () => { window.removeEventListener("resize", upd); window.clearInterval(iv); };
   }, []);
 
+  const textMode = sections.some((s) => s.rows.some((r) => typeof r.a === "string" || typeof r.b === "string"));
+
   return (
-    <div className={`kct${className ? ` ${className}` : ""}`}>
+    <div className={`kct${textMode ? " kct--text" : ""}${className ? ` ${className}` : ""}`}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div className="kct-table" ref={tableRef}>
         <div className="kct-bg kct-bg--a" />
         <div className="kct-bg kct-bg--b" />
         <div className="kct-grid">
           <div className="kct-hcell kct-hcell--label" ref={headRef}><h2 className="kct-title">{title}</h2></div>
-          <div className="kct-hcell kct-hcell--a">{kaitenLogo ?? <KaitenLogoDefault />}</div>
+          <div className="kct-hcell kct-hcell--a">{brandLabel ? <span className="kct-brand">{brandLabel}</span> : (kaitenLogo ?? <KaitenLogoDefault />)}</div>
           <div className="kct-hcell kct-hcell--b">{competitor}</div>
 
-          {sections.map((sec, si) => (
-            <React.Fragment key={si}>
-              <button
-                className={`kct-sec${si === 0 ? " kct-sec--first" : ""}`}
-                type="button"
-                aria-expanded={open[si]}
-                onClick={() => setOpen(o => o.map((v, i) => (i === si ? !v : v)))}
-              >
-                <span className="kct-sec-t">{sec.title}</span>
-                <span className="kct-chev"><Chevron /></span>
-              </button>
-              {sec.rows.map((row, ri) => {
-                const hidden = !open[si];
-                const last = ri === sec.rows.length - 1;
-                return (
-                  <React.Fragment key={ri}>
-                    <div className={`kct-cell kct-cell--label${hidden ? " kct-cell--hidden" : ""}${last ? " kct-cell--last" : ""}`}>{row.label}</div>
-                    <Cell has={row.a} kaiten hidden={hidden} last={last} />
-                    <Cell has={row.b} hidden={hidden} last={last} />
-                  </React.Fragment>
-                );
-              })}
-            </React.Fragment>
-          ))}
+          {sections.map((sec, si) => {
+            const hasTitle = Boolean(sec.title);
+            return (
+              <React.Fragment key={si}>
+                {hasTitle ? (
+                  <button
+                    className={`kct-sec${si === 0 ? " kct-sec--first" : ""}`}
+                    type="button"
+                    aria-expanded={open[si]}
+                    onClick={() => setOpen(o => o.map((v, i) => (i === si ? !v : v)))}
+                  >
+                    <span className="kct-sec-t">{sec.title}</span>
+                    <span className="kct-chev"><Chevron /></span>
+                  </button>
+                ) : (
+                  <div className="kct-rule" />
+                )}
+                {sec.rows.map((row, ri) => {
+                  const hidden = hasTitle && !open[si];
+                  const last = ri === sec.rows.length - 1;
+                  return (
+                    <React.Fragment key={ri}>
+                      <div className={`kct-cell kct-cell--label${hidden ? " kct-cell--hidden" : ""}${last ? " kct-cell--last" : ""}`}>{row.label}</div>
+                      <Cell value={row.a} kaiten hidden={hidden} last={last} />
+                      <Cell value={row.b} hidden={hidden} last={last} />
+                    </React.Fragment>
+                  );
+                })}
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
       <p className="kct-note">{footnote}</p>

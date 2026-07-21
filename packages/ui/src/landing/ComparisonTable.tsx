@@ -14,16 +14,16 @@ export interface ComparisonColumnProps {
   highlighted?: boolean;
 }
 
-/** Строка grouped-режима: a=Кайтен, b=конкурент. */
+/** Строка grouped-режима: a=Кайтен, b=конкурент. boolean → ✓/−; строка → текст ячейки. */
 export interface ComparisonGroupedRow {
   label: string;
-  a: boolean;
-  b: boolean;
+  a: boolean | string;
+  b: boolean | string;
 }
 
-/** Раздел grouped-режима для ComparisonTableMock. */
+/** Раздел grouped-режима для ComparisonTableMock. Пустой title → без раскрывашки. */
 export interface ComparisonSection {
-  title: string;
+  title?: string;
   rows: ComparisonGroupedRow[];
 }
 
@@ -33,6 +33,8 @@ export interface ComparisonTableProps {
   description?: string;
   /** Название конкурента (grouped-режим). */
   competitor?: string;
+  /** Текстовый заголовок лиловой колонки вместо логотипа Кайтена (сравнение двух продуктов Кайтена). */
+  brandLabel?: string;
   /** Сноска источника/даты (grouped-режим). */
   footnote?: string;
   /** Grouped-режим — рендерит эталонный ComparisonTableMock. */
@@ -52,6 +54,7 @@ export function ComparisonTable({
   title,
   description,
   competitor,
+  brandLabel,
   footnote,
   sections,
   columns,
@@ -78,6 +81,7 @@ export function ComparisonTable({
         <ComparisonTableMock
           title={title}
           competitor={competitor ?? ''}
+          brandLabel={brandLabel}
           sections={sections}
           footnote={footnote ?? ''}
         />

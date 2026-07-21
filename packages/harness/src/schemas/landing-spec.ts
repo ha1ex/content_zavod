@@ -582,6 +582,8 @@ const ComparisonTableSchema = z.object({
       description: z.string().max(400).optional(),
       /** Название конкурента в шапке правой колонки (grouped-режим ComparisonTableMock) */
       competitor: z.string().min(1).max(60).optional(),
+      /** Текстовый заголовок лиловой колонки вместо логотипа Кайтена — когда сравниваются два продукта Кайтена (напр. «Kaiten CLI Community Edition»). */
+      brandLabel: z.string().min(1).max(60).optional(),
       /** Сноска: источник + дата актуальности (grouped-режим, обязательна по DS) */
       footnote: z.string().max(400).optional(),
       /**
@@ -591,13 +593,15 @@ const ComparisonTableSchema = z.object({
       sections: z
         .array(
           z.object({
-            title: z.string().min(2).max(80),
+            // Пустой/отсутствует → раздел без раскрывашки, строки видны сразу (описательный режим).
+            title: z.string().min(2).max(80).optional(),
             rows: z
               .array(
                 z.object({
                   label: z.string().min(2).max(120),
-                  a: z.boolean(),
-                  b: z.boolean(),
+                  // boolean → ✓/− иконка; строка → текст ячейки (описательный режим «есть/нет» ↔ «как обычно / с Kaiten»).
+                  a: z.union([z.boolean(), z.string().min(1).max(120)]),
+                  b: z.union([z.boolean(), z.string().min(1).max(120)]),
                 }),
               )
               .min(1)

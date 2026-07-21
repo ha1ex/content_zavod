@@ -56,7 +56,7 @@ export interface TabsGalleryProps {
 const STYLE = `
 .tabsg-mock{
   --brand-100:#7d4ccf; --brand-hover:#6a3fb3; --brand-12:#efe9f9; --brand-48k:#c4a9ee;
-  --border-default:#e0e0e0; --text-title:#2d2d2d; --text-secondary:#757575;
+  --border-default:#e0e0e0; --text-title:#2d2d2d;
   --surface-page:#ffffff; --surface-section:#f5f5f5;
   --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-24:96px;
   font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
@@ -66,7 +66,7 @@ const STYLE = `
 .tabsg-mock, .tabsg-mock *{box-sizing:border-box;}
 .tabsg-mock .s-head{display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; margin:0 auto var(--sp-12); max-width:760px;}
 .tabsg-mock .sh__heading{font-size:36px; line-height:40px; font-weight:600; color:var(--text-title); margin:0;}
-.tabsg-mock .sh__desc{font-size:16px; line-height:24px; color:var(--text-secondary); margin:0;}
+.tabsg-mock .sh__desc{font-size:16px; line-height:24px; color:var(--text-title); margin:0;}
 
 .tabsg-mock .stabs{width:100%; max-width:1216px; margin:0 auto;}
 .tabsg-mock .stabs__tabs{display:none; justify-content:center; margin-bottom:40px;}

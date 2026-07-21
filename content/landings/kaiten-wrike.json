@@ -1,0 +1,708 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Российское ПО · Бесплатный тариф · Автоматический импорт · Облако и коробка",
+        "title": "Кайтен — российская альтернатива Wrike",
+        "accentWord": "альтернатива",
+        "subtitle": "Российский сервис для команд, которым важны кастомные процессы — без зависимости от решений зарубежной компании и риска потерять доступ к данным",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-wrike-board",
+          "variant": "hero-screen-interface"
+        },
+        "visualPosition": "side",
+        "board": {
+          "boardTitle": "Портфель проектов агентства",
+          "columns": [
+            {
+              "label": "Очередь",
+              "count": 3
+            },
+            {
+              "label": "В работе",
+              "count": 4
+            },
+            {
+              "label": "Готово",
+              "count": 5,
+              "done": true
+            }
+          ],
+          "lanes": [
+            {
+              "name": "Проекты",
+              "count": 6,
+              "columns": [
+                [
+                  {
+                    "title": "Переезд из Wrike",
+                    "tags": [
+                      {
+                        "label": "Импорт",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#64b5f6"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Кастомный воркфлоу под клиента",
+                    "tags": [
+                      {
+                        "label": "Процесс",
+                        "variant": "jud"
+                      }
+                    ],
+                    "checklist": {
+                      "label": "Чек-лист",
+                      "done": 2,
+                      "total": 4
+                    },
+                    "assignees": [
+                      "#64b5f6",
+                      "#81c784"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Шаблон проекта готов",
+                    "tags": [
+                      {
+                        "label": "Готово",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#9575cd"
+                    ],
+                    "due": "3 июн"
+                  }
+                ]
+              ]
+            },
+            {
+              "name": "Процессы",
+              "count": 4,
+              "columns": [
+                [
+                  {
+                    "title": "Согласование договора",
+                    "tags": [
+                      {
+                        "label": "Согласование",
+                        "variant": "prod"
+                      }
+                    ],
+                    "assignees": [
+                      "#4db6ac"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Диаграмма Ганта: сроки этапов",
+                    "tags": [
+                      {
+                        "label": "В работе",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#ff8a65"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "База знаний команды",
+                    "tags": [
+                      {
+                        "label": "Готово",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#a1887f"
+                    ]
+                  }
+                ]
+              ]
+            }
+          ],
+          "animate": true,
+          "animatedCard": {
+            "card": {
+              "title": "Согласовать переезд команды",
+              "tags": [
+                {
+                  "label": "Миграция",
+                  "variant": "blue"
+                }
+              ],
+              "assignees": [
+                "#e57373"
+              ]
+            },
+            "fromColumn": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "testimonial_quote",
+      "component": "TestimonialQuote",
+      "props": {
+        "eyebrow": "История перехода",
+        "quote": "За 9 лет использования мы привыкли к Wrike, но работа в Kaiten не вызывает сложностей. Мы переехали за 1 месяц. Нам помогли с настройкой: сотрудники Kaiten провели вебинар и ответили на вопросы наших менеджеров.",
+        "authorName": "Виталий Радбиль",
+        "authorRole": "проектный менеджер диджитал-агентства",
+        "brandName": "Vivanti",
+        "brandInitial": "V",
+        "metric": "Переехали за 1 месяц"
+      }
+    },
+    {
+      "id": "accordion_feature",
+      "component": "AccordionFeatureSection",
+      "props": {
+        "title": "Управляйте проектами и процессами так, как привыкли",
+        "description": "Кастомные воркфлоу, диаграмма Ганта, согласования, шаблоны проектов — всё на месте",
+        "items": [
+          {
+            "id": "workflow",
+            "title": "Кастомные рабочие процессы",
+            "description": "Настройте статусы, этапы и правила переходов под процессы вашей команды. Используйте автоматизации для назначения ответственного, добавления чек-листа, уведомлений о сроках — без программирования",
+            "icon": "sliders-horizontal",
+            "mockVariant": "pm-board"
+          },
+          {
+            "id": "templates",
+            "title": "Шаблоны проектов",
+            "description": "Сохраните структуру проекта — задачи, зависимости, поля, автоматизации — и разворачивайте её для новых проектов в один клик. Не нужно каждый раз собирать проект с нуля",
+            "icon": "layout-grid",
+            "mockVariant": "pm-board-1"
+          },
+          {
+            "id": "gantt",
+            "title": "Диаграмма Ганта с зависимостями",
+            "description": "Стройте временную шкалу проекта, связывайте задачи. Сдвинули одну — зависимые пересчитываются автоматически. Базовый план позволяет сравнивать плановые и фактические сроки",
+            "icon": "square-kanban",
+            "mockVariant": "gantt-chart"
+          },
+          {
+            "id": "approvals",
+            "title": "Согласования",
+            "description": "Настройте процесс согласования задач и документов: ответственный получает уведомление, фиксирует решение внутри карточки. История согласований сохраняется",
+            "icon": "square-check-big",
+            "mockVariant": "approval-board"
+          }
+        ],
+        "mediaPosition": "right"
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Попробовать бесплатно",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": null
+      }
+    },
+    {
+      "id": "comparison_table",
+      "component": "ComparisonTable",
+      "props": {
+        "title": "Кайтен и Wrike: сравнение функций",
+        "competitor": "Wrike",
+        "footnote": "Сравнение составлено на основании открытых источников по состоянию на 19.05.2026. Функциональность сервисов может отличаться в зависимости от тарифа, конфигурации и настроек.",
+        "sections": [
+          {
+            "title": "Управление задачами",
+            "rows": [
+              {
+                "label": "Рабочие пространства, доски, карточки",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Список, таблица, доска, календарь, Ганта",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Кастомные статусы и воркфлоу",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Несколько досок в одном пространстве",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Одна доска в нескольких пространствах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Дорожки",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Колонки второго уровня",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Лимиты на одновременно выполняемую работу (WIP-лимиты)",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Визуальные сигналы о застрявших задачах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Блокировка задач",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Настраиваемые поля",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Чек-листы",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Назначение ответственного и срока в чек-листах",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Создание задачи из пункта чек-листа",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Иерархия задач",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Шаблоны задач и проектов",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Повторяющиеся задачи",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Форма-запрос для создания задач",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Автоматизации",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Согласования",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Гостевые пользователи",
+                "a": true,
+                "b": true
+              }
+            ]
+          },
+          {
+            "title": "Планирование и Agile",
+            "rows": [
+              {
+                "label": "Диаграмма Ганта с зависимостями",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Базовый план",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Загрузка сотрудников",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Учёт времени",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Скрам и спринты",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Покерное планирование",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Карта пользовательских историй",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Agile-аналитика (Burndown, Velocity, CFD)",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Канбан-аналитика",
+                "a": true,
+                "b": false
+              }
+            ]
+          },
+          {
+            "title": "Отчётность",
+            "rows": [
+              {
+                "label": "Встроенные дашборды",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Кастомные отчёты",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Отчёты по загрузке команды",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Отчёты по времени",
+                "a": true,
+                "b": true
+              }
+            ]
+          },
+          {
+            "title": "Документы и знания",
+            "rows": [
+              {
+                "label": "База знаний с блочным редактором",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Иерархия документов",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Публичные ссылки на документы",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Хранение файлов как вложений к задачам",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Проверка и разметка файлов",
+                "a": false,
+                "b": true
+              }
+            ]
+          },
+          {
+            "title": "CRM и служба поддержки",
+            "rows": [
+              {
+                "label": "CRM: воронки продаж и сделки",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "CRM: каталог контактов и компаний",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Телефония",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Служба поддержки (Service Desk)",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Контроль сроков (SLA)",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Клиентский портал",
+                "a": true,
+                "b": false
+              }
+            ]
+          },
+          {
+            "title": "Интеграции и каналы",
+            "rows": [
+              {
+                "label": "API и вебхуки",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Уведомления в Telegram",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Создание задач из Telegram",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Интеграция с GitHub / GitLab",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Мобильное приложение",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "ИИ-функции",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Встроенный чат",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Видеозвонки прямо из системы",
+                "a": true,
+                "b": false
+              }
+            ]
+          },
+          {
+            "title": "Платформа",
+            "rows": [
+              {
+                "label": "Облачная версия",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Установка на собственный сервер",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Бесплатный тариф",
+                "a": true,
+                "b": true
+              },
+              {
+                "label": "Российский реестр ПО",
+                "a": true,
+                "b": false
+              },
+              {
+                "label": "Техподдержка на русском языке",
+                "a": true,
+                "b": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Переходите из Wrike без потери данных",
+        "description": "Задачи, структура проектов и рабочие процессы переносятся через импорт — без ручного пересоздания",
+        "mediaPosition": "right",
+        "mediaVariant": "pm-board-1"
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Кайтен — одна платформа для всей компании",
+        "description": "Кайтен закрывает сценарии, которые в Wrike реализованы иначе или требуют дополнительных интеграций",
+        "items": [
+          {
+            "icon": "square-kanban",
+            "title": "Скрам и Agile-аналитика",
+            "description": "Бэклог, спринты, покерное планирование, карта пользовательских историй. Диаграммы сгорания (Burndown), скорости команды (Velocity) и потока задач (CFD) — для работы по скраму"
+          },
+          {
+            "icon": "users",
+            "title": "CRM",
+            "description": "Воронки продаж, карточки сделок, каталог контактов — на тех же досках, что и задачи. Не нужно переключаться между сервисами: из сделки сразу создаётся задача для команды"
+          },
+          {
+            "icon": "life-buoy",
+            "title": "Служба поддержки",
+            "description": "Заявки из почты, мессенджеров и клиентского портала попадают прямо на доску как карточки. Контроль сроков (SLA), шаблонные ответы, история переписки внутри задачи"
+          },
+          {
+            "icon": "book-open",
+            "title": "Бесплатный редактор документов",
+            "description": "В Wrike документы хранятся как вложения к задачам. В Кайтен есть блочный редактор, иерархия страниц и совместная работа над документами — без доплаты и отдельного сервиса"
+          }
+        ],
+        "columns": 2
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Попробуйте Kaiten бесплатно",
+        "description": "Российский сервис без риска блокировки · Перенос данных из Wrike через импорт · Бесплатный доступ ко всем функциям на 14 дней",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": null,
+        "variant": "gradient",
+        "visualVariant": "portfolio-board"
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "title": "Ответы на частые вопросы",
+        "items": [
+          {
+            "question": "Чем Кайтен отличается от Wrike?",
+            "answer": "Wrike — платформа с акцентом на сложные корпоративные процессы, согласования и проверку файлов. Кайтен покрывает те же сценарии управления проектами и добавляет встроенные CRM, службу поддержки, скрам и Telegram-интеграцию. Плюс Кайтен — российский сервис с установкой на собственный сервер и поддержкой на русском языке."
+          },
+          {
+            "question": "Можно ли перенести данные из Wrike в Кайтен?",
+            "answer": "Да. Данные переносятся через импорт CSV — задачи, структура проектов, исполнители и сроки."
+          },
+          {
+            "question": "Какие тарифы Кайтен попробовать?",
+            "answer": "У Kaiten есть бесплатный тариф без ограничения по времени и 14-дневный пробный период со всеми функциями. Подробнее о тарифах →"
+          },
+          {
+            "question": "Как работает пробный период?",
+            "answer": "После регистрации новые пользователи получают бесплатный доступ ко всем модулям на 14 дней без привязки карты. После окончания пробного периода аккаунт автоматически переводится на бесплатный тариф."
+          },
+          {
+            "question": "Как начать пользоваться Кайтен?",
+            "answer": "Зарегистрируйтесь в Kaiten, создайте пространство, выберите шаблон или импортируйте задачи из другой системы — и можно сразу начинать работу."
+          },
+          {
+            "question": "Можно ли установить Кайтен на собственный сервер?",
+            "answer": "Да. Установка на собственную инфраструктуру доступна в корпоративном тарифе — с настройкой и обучением."
+          }
+        ]
+      }
+    },
+    {
+      "id": "legal_note",
+      "component": "LegalNote",
+      "props": {
+        "text": "Информация приведена исключительно в целях сравнения и основана на открытых источниках на дату публикации. Функциональность сервисов может изменяться правообладателями. Wrike является товарным знаком соответствующего правообладателя."
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Kaiten вместо Wrike: российская альтернатива для управления проектами",
+    "description": "Кайтен — российская альтернатива Wrike: сравнение функций, перенос данных через импорт, реестр отечественного ПО и коробка. Бесплатный тариф."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-07-21T10:16:18.865Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "tokenEstimate": 46808,
+    "domain": "pm"
+  }
+}

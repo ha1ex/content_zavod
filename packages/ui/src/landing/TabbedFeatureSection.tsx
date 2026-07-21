@@ -83,7 +83,7 @@ export function TabbedFeatureSection({
       <div
         className={cn(
           'mb-8 inline-flex max-w-full flex-wrap gap-1 rounded-(--radius-2xl)',
-          'border border-(--color-border-default) bg-(--color-surface-section) p-1',
+          'bg-(--color-surface-section) p-1',
         )}
         role="tablist"
       >

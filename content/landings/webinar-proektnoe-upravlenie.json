@@ -1,0 +1,221 @@
+{
+  "pageType": "event_landing",
+  "goal": "waitlist",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Бесплатный вебинар · 15 августа · онлайн",
+        "title": "Проектное управление в Кайтене — от сроков до гибкости команды",
+        "accentWord": "гибкости",
+        "accentPill": false,
+        "subtitle": "как выстроить управление проектами с нуля — план по классике, работа команды по‑гибкому",
+        "primaryCta": {
+          "label": "Занять место",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "visualPosition": "side",
+        "bullets": [
+          "как собрать проект целиком: сроки, вехи и зависимости на одной диаграмме",
+          "как совместить жёсткий план с гибкой работой команды по доскам",
+          "как руководителю видеть статус всех проектов, не собирая его вручную"
+        ],
+        "form": {
+          "anchorId": "registration-top",
+          "action": "#",
+          "dataConsentHref": "/privacy"
+        },
+        "speaker": {
+          "name": "Юра Юруков",
+          "role": "Kaiten",
+          "initials": "ЮЮ"
+        },
+        "flush": true
+      }
+    },
+    {
+      "id": "pain_bubbles",
+      "component": "PainBubbles",
+      "props": {
+        "title": "Знакомо?",
+        "items": [
+          {
+            "text": "«План в одном файле, работа — в другом, и они давно разошлись»"
+          },
+          {
+            "text": "«Сроки плывут, а узнаём об этом в последний момент»"
+          },
+          {
+            "text": "«У каждой команды свой инструмент — общей картины по проекту нет»"
+          },
+          {
+            "text": "«Диаграмма Ганта красивая, но через неделю неактуальна»"
+          },
+          {
+            "text": "«Статусы по проектам собираю вручную к каждому совещанию»"
+          },
+          {
+            "text": "«Жёсткий план тормозит команду, а без плана — хаос»"
+          }
+        ],
+        "animate": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Соберите проект целиком — сроки, вехи и зависимости",
+        "checklist": [
+          {
+            "text": "этапы и вехи проекта на одной диаграмме Ганта"
+          },
+          {
+            "text": "зависимости между задачами: сдвинулся один срок — видно всю цепочку"
+          },
+          {
+            "text": "контрольные точки и дедлайны, которые не теряются"
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "gantt-chart"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "И оставьте команде привычную гибкость",
+        "checklist": [
+          {
+            "text": "команда работает на своих досках — канбан или спринты, что удобнее"
+          },
+          {
+            "text": "задачи с доски сами встают в общий план проекта"
+          },
+          {
+            "text": "один контур для плана сверху и работы снизу"
+          }
+        ],
+        "mediaPosition": "left",
+        "mediaVariant": "kanban-minimal"
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "title": "Программа вебинара",
+        "description": "~45 минут выступление + 15 минут на вопросы",
+        "milestones": [
+          {
+            "title": "С чего начать проект в Кайтене",
+            "description": "Как за вечер развернуть структуру проекта с нуля: пространство, доски, роли — чтобы было куда складывать работу."
+          },
+          {
+            "title": "Классический план: сроки, вехи, диаграмма Ганта",
+            "description": "Как выстроить график проекта и расставить зависимости между задачами, чтобы план не устаревал через неделю."
+          },
+          {
+            "title": "Гибкая работа команды поверх плана",
+            "description": "Как совместить график с канбаном и спринтами, чтобы команде было удобно, а план оставался живым и обновлялся сам."
+          },
+          {
+            "title": "Контроль без ручного сбора статусов",
+            "description": "Как руководителю видеть все проекты, сроки и риски на одном экране — без обхода команд перед каждым совещанием."
+          },
+          {
+            "title": "Разбор частых ошибок в управлении проектами",
+            "description": "Что чаще всего ломает проект — от переусложнённого плана до брошенных досок — и как этого избежать, на живых примерах."
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Проектное управление в Кайтене — без хаоса",
+        "description": "Бесплатный вебинар · 15 августа · онлайн",
+        "primaryCta": {
+          "label": "Занять место",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "gradient": true
+      }
+    },
+    {
+      "id": "speaker",
+      "component": "SpeakerCard",
+      "props": {
+        "name": "Юра Юруков",
+        "role": "Kaiten",
+        "initials": "ЮЮ",
+        "title": "Ведущий",
+        "bio": "Помогает командам выстраивать проектное управление в Кайтене. На вебинаре показывает, как совместить классический план и гибкую работу команды"
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "registration",
+        "action": "#",
+        "dataConsentHref": "/privacy",
+        "note": "После вебинара поможем настроить первый проект под ваши процессы",
+        "title": "Начните управлять проектами без хаоса — с вебинара",
+        "submitLabel": "Занять место"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Вебинар: проектное управление в Кайтене — план и гибкость",
+    "description": "Бесплатный вебинар 15 августа: как выстроить управление проектами в Кайтене — сроки и вехи по классике, работа команды по‑гибкому. Ведущий — Юра Юруков, Kaiten."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/event_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-07-21T10:21:58.626Z",
+    "generator": "host-agent",
+    "archetype": "event_landing",
+    "tokenEstimate": 47834,
+    "domain": "pm"
+  }
+}

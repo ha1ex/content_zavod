@@ -48,7 +48,7 @@ export function SocialProof({ eyebrow, title, description, cases }: SocialProofP
           {description && (
             <p
               data-comp="social_proof.description"
-              className="mt-4 text-lg text-(--color-text-secondary)"
+              className="mt-4 text-lg text-(--color-text-primary)"
             >
               {description}
             </p>

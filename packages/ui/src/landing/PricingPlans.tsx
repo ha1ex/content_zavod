@@ -41,7 +41,7 @@ export function PricingPlans({ eyebrow, title, description, plans }: PricingPlan
           {title}
         </h2>
         {description && (
-          <p data-comp="pricing.description" className="mt-4 text-lg text-(--color-text-secondary)">
+          <p data-comp="pricing.description" className="mt-4 text-lg text-(--color-text-primary)">
             {description}
           </p>
         )}

@@ -59,7 +59,7 @@ export function ScenarioWalkthroughSection({
         {description && (
           <p
             data-comp="scenario_walkthrough.description"
-            className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)"
+            className="mt-4 text-lg leading-relaxed text-(--color-text-primary)"
           >
             {description}
           </p>
@@ -127,7 +127,7 @@ export function ScenarioWalkthroughSection({
                 </h3>
                 <p
                   data-comp={`scenario_walkthrough.steps[${i}].description`}
-                  className="mt-3 text-base leading-relaxed text-(--color-text-secondary) md:text-lg"
+                  className="mt-3 text-base leading-relaxed text-(--color-text-primary) md:text-lg"
                 >
                   {s.description}
                 </p>

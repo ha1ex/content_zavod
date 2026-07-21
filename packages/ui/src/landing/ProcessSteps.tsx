@@ -40,7 +40,7 @@ export function ProcessSteps({ eyebrow, title, description, steps }: ProcessStep
           {title}
         </h2>
         {description && (
-          <p data-comp="process.description" className="mt-4 text-lg text-(--color-text-secondary)">
+          <p data-comp="process.description" className="mt-4 text-lg text-(--color-text-primary)">
             {description}
           </p>
         )}
@@ -89,7 +89,7 @@ export function ProcessSteps({ eyebrow, title, description, steps }: ProcessStep
             </h3>
             <p
               data-comp={`process.steps[${i}].description`}
-              className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+              className="mt-2 text-base leading-relaxed text-(--color-text-primary)"
             >
               {step.description}
             </p>

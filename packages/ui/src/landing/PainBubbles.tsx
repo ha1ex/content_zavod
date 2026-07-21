@@ -78,7 +78,7 @@ export function PainBubbles({
             {title}
           </h2>
           {description && (
-            <p className="max-w-2xl text-lg text-(--color-text-secondary)">{description}</p>
+            <p className="max-w-2xl text-lg text-(--color-text-primary)">{description}</p>
           )}
         </div>
 
@@ -143,7 +143,7 @@ function Bubble({ text, index }: { text: string; index: number }) {
         'relative w-fit max-w-[85%] rounded-(--radius-xl) lg:rounded-(--radius-2xl)',
         'border border-(--color-border-default) bg-(--color-surface-card)',
         'px-4 py-3 md:px-5 md:py-3.5',
-        'text-sm text-(--color-text-secondary) md:text-base',
+        'text-sm text-(--color-text-primary) md:text-base',
         'shadow-[0_10px_30px_-20px_rgba(0,0,0,0.35)]',
         TILT[index % TILT.length],
         ALIGN[index % ALIGN.length],

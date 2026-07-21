@@ -72,7 +72,7 @@ export function TabbedFeatureSection({
         {description && (
           <p
             data-comp="tabbed_feature.description"
-            className="mt-4 text-lg text-(--color-text-secondary)"
+            className="mt-4 text-lg text-(--color-text-primary)"
           >
             {description}
           </p>
@@ -128,7 +128,7 @@ export function TabbedFeatureSection({
           {active.description && (
             <p
               data-comp={`tabbed_feature.tabs[${activeIndex}].description`}
-              className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)"
+              className="mt-4 text-lg leading-relaxed text-(--color-text-primary)"
             >
               {active.description}
             </p>

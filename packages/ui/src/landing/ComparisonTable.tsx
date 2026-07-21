@@ -112,7 +112,7 @@ export function ComparisonTable({
         {description && (
           <p
             data-comp="comparison_table.description"
-            className="mt-4 text-lg text-(--color-text-secondary)"
+            className="mt-4 text-lg text-(--color-text-primary)"
           >
             {description}
           </p>

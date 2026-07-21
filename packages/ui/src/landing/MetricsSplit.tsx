@@ -58,7 +58,7 @@ export function MetricsSplit({
             {description && (
               <p
                 data-comp="metrics_split.description"
-                className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)"
+                className="mt-4 text-lg leading-relaxed text-(--color-text-primary)"
               >
                 {description}
               </p>
@@ -92,7 +92,7 @@ export function MetricsSplit({
                 </div>
                 <div
                   data-comp={`metrics_split.metrics[${i}].label`}
-                  className="mt-1.5 text-sm text-(--color-text-secondary)"
+                  className="mt-1.5 text-sm text-(--color-text-primary)"
                 >
                   {m.label}
                 </div>
@@ -121,7 +121,7 @@ export function MetricsSplit({
                 </h3>
                 <p
                   data-comp={`metrics_split.bullets[${i}].description`}
-                  className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+                  className="mt-2 text-base leading-relaxed text-(--color-text-primary)"
                 >
                   {b.description}
                 </p>

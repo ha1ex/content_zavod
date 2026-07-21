@@ -42,7 +42,7 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
             </h2>
           )}
           {description && (
-            <p data-comp="stats.description" className="mt-4 text-lg text-(--color-text-secondary)">
+            <p data-comp="stats.description" className="mt-4 text-lg text-(--color-text-primary)">
               {description}
             </p>
           )}
@@ -81,7 +81,7 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
             {stat.description && (
               <p
                 data-comp={`stats.stats[${i}].description`}
-                className="mt-1.5 text-sm leading-relaxed text-(--color-text-secondary)"
+                className="mt-1.5 text-sm leading-relaxed text-(--color-text-primary)"
               >
                 {stat.description}
               </p>

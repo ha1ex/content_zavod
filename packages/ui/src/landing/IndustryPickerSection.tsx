@@ -67,7 +67,7 @@ export function IndustryPickerSection({
         {description && (
           <p
             data-comp="industry_picker.description"
-            className="mt-4 text-lg text-(--color-text-secondary)"
+            className="mt-4 text-lg text-(--color-text-primary)"
           >
             {description}
           </p>
@@ -159,7 +159,7 @@ export function IndustryPickerSection({
               </h3>
               <p
                 data-comp={`industry_picker.industries[${activeIndex}].scenario`}
-                className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+                className="mt-2 text-base leading-relaxed text-(--color-text-primary)"
               >
                 {active.scenario}
               </p>

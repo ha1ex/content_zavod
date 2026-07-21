@@ -60,7 +60,7 @@ export function RegistrationForm({
     >
       {title && <h2 className="text-xl font-semibold md:text-2xl">{title}</h2>}
       {description && (
-        <p className={cn('text-base text-(--color-text-secondary)', title ? 'mt-2' : '')}>
+        <p className={cn('text-base text-(--color-text-primary)', title ? 'mt-2' : '')}>
           {description}
         </p>
       )}

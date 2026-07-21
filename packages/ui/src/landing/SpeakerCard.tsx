@@ -55,7 +55,7 @@ export function SpeakerCard({
             <div className="flex flex-col gap-2">
               <p className="text-xl font-semibold text-(--color-text-primary) md:text-2xl">{name}</p>
               <p className="text-base font-medium text-(--color-text-accent)">{role}</p>
-              {bio && <p className="text-base text-(--color-text-secondary) md:text-lg">{bio}</p>}
+              {bio && <p className="text-base text-(--color-text-primary) md:text-lg">{bio}</p>}
             </div>
           </div>
         </GradientPanel>

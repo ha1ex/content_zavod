@@ -80,7 +80,7 @@ export function MediaCopy({
           {description && (
             <p
               data-comp="media_copy.description"
-              className="mt-4 text-lg leading-relaxed text-(--color-text-secondary)"
+              className="mt-4 text-lg leading-relaxed text-(--color-text-primary)"
             >
               {description}
             </p>

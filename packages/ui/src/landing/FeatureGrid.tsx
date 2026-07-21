@@ -57,7 +57,7 @@ export function FeatureGrid({
         {description && (
           <p
             data-comp="features.description"
-            className="mt-4 text-lg text-(--color-text-secondary)"
+            className="mt-4 text-lg text-(--color-text-primary)"
           >
             {description}
           </p>
@@ -98,7 +98,7 @@ export function FeatureGrid({
             </h3>
             <p
               data-comp={`features.items[${i}].description`}
-              className="mt-2 text-base leading-relaxed text-(--color-text-secondary)"
+              className="mt-2 text-base leading-relaxed text-(--color-text-primary)"
             >
               {item.description}
             </p>

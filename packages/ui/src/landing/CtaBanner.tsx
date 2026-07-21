@@ -44,7 +44,7 @@ export function CtaBanner({ title, description, primaryCta, secondaryCta, gradie
           {description && (
             <p
               data-comp="cta_banner.description"
-              className="mt-3 text-base leading-relaxed text-(--color-text-secondary)"
+              className="mt-3 text-base leading-relaxed text-(--color-text-primary)"
             >
               {description}
             </p>

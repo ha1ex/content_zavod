@@ -47,7 +47,7 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
           {description && (
             <p
               data-comp="logo_cloud.description"
-              className="mt-3 text-base text-(--color-text-secondary)"
+              className="mt-3 text-base text-(--color-text-primary)"
             >
               {description}
             </p>

@@ -64,7 +64,7 @@ export function TimelineRoadmap({
         {description && (
           <p
             data-comp="timeline_roadmap.description"
-            className="mt-4 text-lg text-(--color-text-secondary)"
+            className="mt-4 text-lg text-(--color-text-primary)"
           >
             {description}
           </p>
@@ -101,7 +101,7 @@ export function TimelineRoadmap({
               {m.description && (
                 <p
                   data-comp={`timeline_roadmap.milestones[${i}].description`}
-                  className="mt-2 text-sm text-(--color-text-secondary)"
+                  className="mt-2 text-sm text-(--color-text-primary)"
                 >
                   {m.description}
                 </p>
@@ -165,7 +165,7 @@ export function TimelineRoadmap({
               {m.description && (
                 <p
                   data-comp={`timeline_roadmap.milestones[${i}].description`}
-                  className="mt-2 text-base text-(--color-text-secondary)"
+                  className="mt-2 text-base text-(--color-text-primary)"
                 >
                   {m.description}
                 </p>

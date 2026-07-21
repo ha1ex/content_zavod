@@ -56,7 +56,7 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
         {description && (
           <p
             data-comp="bento_grid.description"
-            className="mt-4 text-lg text-(--color-text-secondary)"
+            className="mt-4 text-lg text-(--color-text-primary)"
           >
             {description}
           </p>
@@ -101,7 +101,7 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
             </h3>
             <p
               data-comp={`bento_grid.cells[${i}].description`}
-              className="mt-2 text-sm text-(--color-text-secondary)"
+              className="mt-2 text-sm text-(--color-text-primary)"
             >
               {c.description}
             </p>

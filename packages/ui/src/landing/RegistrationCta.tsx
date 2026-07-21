@@ -55,7 +55,7 @@ export function RegistrationCta({
               {title}
             </h2>
             {description && (
-              <p className="mt-4 max-w-xl text-lg text-(--color-text-secondary)">{description}</p>
+              <p className="mt-4 max-w-xl text-lg text-(--color-text-primary)">{description}</p>
             )}
           </div>
 

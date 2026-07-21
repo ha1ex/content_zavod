@@ -236,7 +236,7 @@ export function HeroSection({
               </h1>
               <p
                 data-comp="hero.subtitle"
-                className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-(--color-text-secondary) sm:text-xl"
+                className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-(--color-text-primary) sm:text-xl"
               >
                 {subtitle}
               </p>
@@ -277,7 +277,7 @@ export function HeroSection({
               </h1>
               <p
                 data-comp="hero.subtitle"
-                className="mt-6 max-w-xl text-lg leading-relaxed text-(--color-text-secondary) sm:text-xl"
+                className="mt-6 max-w-xl text-lg leading-relaxed text-(--color-text-primary) sm:text-xl"
               >
                 {subtitle}
               </p>
@@ -286,7 +286,7 @@ export function HeroSection({
                   {bullets.map((b) => (
                     <li key={b} className="flex items-start gap-3">
                       <CheckMark />
-                      <span className="text-base leading-relaxed text-(--color-text-secondary) sm:text-lg">
+                      <span className="text-base leading-relaxed text-(--color-text-primary) sm:text-lg">
                         {b}
                       </span>
                     </li>

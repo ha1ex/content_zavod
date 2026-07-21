@@ -25,7 +25,14 @@ export type DecisionMaker = z.infer<typeof DecisionMakerSchema>;
  * Префикс `AudienceIntent` чтобы не конфликтовать с `CtaType` из
  * landing-audience validator (там тоже Enum CTA-типов).
  */
-export const AudienceIntentCtaTypeSchema = z.enum(['Trial', 'Demo', 'PDF', 'Partner', 'Blog']);
+export const AudienceIntentCtaTypeSchema = z.enum([
+  'Trial',
+  'Demo',
+  'PDF',
+  'Partner',
+  'Blog',
+  'Register',
+]);
 export type AudienceIntentCtaType = z.infer<typeof AudienceIntentCtaTypeSchema>;
 
 export const AudienceIntentPlanSchema = z.object({

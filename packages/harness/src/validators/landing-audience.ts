@@ -26,7 +26,7 @@ import type {
  * Возвращаемые ошибки/suggestions используются host-LLM для repair-loop.
  */
 
-export type CtaType = 'Trial' | 'Demo' | 'PDF' | 'Partner' | 'Blog' | 'Unknown';
+export type CtaType = 'Trial' | 'Demo' | 'PDF' | 'Partner' | 'Blog' | 'Register' | 'Unknown';
 
 export type AudienceErrorKind =
   | 'audience-resolve-needed'
@@ -122,6 +122,14 @@ function collectAllText(spec: LandingSpec): string {
 function classifyCta(label: string, href: string): CtaType {
   const l = normalize(label);
   const h = normalize(href);
+  // Register — регистрация на мероприятие (вебинар/конференция/митап). Стоит
+  // ПЕРВОЙ и узко по event-фразам, чтобы не перехватить «Записаться на демо»
+  // (Demo) и продуктовый signup (Trial). Правило: event-landing-type.
+  if (
+    /занять место|участвовать|на вебинар|на конференц|на митап|webinar/.test(l) ||
+    /webinar|#registration|registration-top/.test(h)
+  )
+    return 'Register';
   if (/демо|demo|записаться|забронир|book/.test(l) || /demo/.test(h)) return 'Demo';
   if (/попроб|trial|бесплат|регистр|sign\s?up|начать|create account|try/.test(l) || /signup|register|trial|start/.test(h))
     return 'Trial';
@@ -362,8 +370,10 @@ function checkMustPass(
     });
   }
 
-  // IT
-  if (resolved.includes('IT')) {
+  // IT — правило требует Trial-CTA/сравнение в hero. У лендинга мероприятия
+  // (event_landing) в hero форма регистрации, а не Trial-кнопка (by design),
+  // поэтому правило к нему не применяется. Правило: event-landing-type.
+  if (resolved.includes('IT') && spec.pageType !== 'event_landing') {
     const heroSection = spec.sections.find((s) => s.component === 'HeroSection');
     const heroCta = (heroSection?.props as { primaryCta?: { label?: string; href?: string } })?.primaryCta;
     const heroCtaType = heroCta?.label && heroCta?.href ? classifyCta(heroCta.label, heroCta.href) : 'Unknown';

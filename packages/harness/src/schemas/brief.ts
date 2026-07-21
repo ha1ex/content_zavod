@@ -37,12 +37,59 @@ export const BriefSchema = z.object({
       'migration-from-competitor',
       'product-launch',
       'case-study-deep-dive',
+      'event-webinar',
     ])
     .optional()
     .describe(
       'Выбранный layout из wiki/layouts/ — определяет порядок секций и per-slot mock-рекомендации. ' +
         'Если не указан, prepare попробует подобрать по эвристике (pageArchetype + audience), но это fallback. ' +
+        'Для pageArchetype:"event" — layout "event-webinar". ' +
         'Лучшая практика: явно выбрать в брифе после прочтения wiki/layouts/index.md.',
+    ),
+  event: z
+    .object({
+      date: z.string().describe('Дата мероприятия, например «30 июля»'),
+      time: z.string().optional().describe('Время начала + часовой пояс, например «16:00 МСК»'),
+      format: z.string().optional().describe('Формат: «онлайн» / «офлайн» / «гибрид»'),
+      eyebrow: z
+        .string()
+        .optional()
+        .describe(
+          'Надзаголовок hero целиком, например «Бесплатный вебинар · 30 июля · онлайн». ' +
+            'Если не задан — собирается из date/format.',
+        ),
+      speaker: z
+        .object({
+          name: z.string().describe('Имя ведущего'),
+          role: z.string().optional().describe('Роль/должность, например «Продукт-менеджер Kaiten»'),
+          bio: z
+            .string()
+            .optional()
+            .describe('Био/экспертиза — ТОЛЬКО подтверждённые факты, без выдуманных цифр про живого человека'),
+          photoSrc: z.string().optional().describe('Путь к фото ведущего'),
+        })
+        .optional()
+        .describe('Ведущий мероприятия — блок SpeakerCard'),
+      program: z
+        .array(z.object({ title: z.string(), description: z.string().optional() }))
+        .optional()
+        .describe('Программа/агенда — пункты для TimelineRoadmap (numbered)'),
+      registration: z
+        .object({
+          action: z.string().optional().describe('Endpoint формы (submit URL). Уточнять у команды'),
+          dataConsentHref: z.string().optional().describe('Ссылка на согласие 152-ФЗ'),
+          anchorTop: z.string().default('registration-top').describe('Якорь формы в hero'),
+          anchorFinal: z.string().default('registration').describe('Якорь финальной формы'),
+        })
+        .optional()
+        .describe('Параметры формы регистрации'),
+    })
+    .optional()
+    .describe(
+      'Данные мероприятия для pageArchetype:"event". Несёт ПОДТВЕРЖДЁННЫЕ факты ' +
+        '(дата/время/формат, ведущий, программа, endpoint формы), которые нельзя безопасно ' +
+        'выдумать. Что неизвестно — оставить пустым и уточнить у команды. ' +
+        'См. wiki/archetypes/event_landing.md и wiki/layouts/event-webinar.md.',
     ),
   resolvedSegments: z
     .array(z.string())

@@ -364,15 +364,23 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
       audienceReportMdRel = relative(opts.root, reportMdAbs);
 
       if (!audienceScore.ok) {
-        if (brief?.landingMode === 'custom') {
-          // Custom (1-в-1 по ТЗ): цель флоу — макет строго по ТЗ, а не оптимизация
-          // под скоринг аудитории. audience-score здесь ЧИСТО справочный: считаем и
-          // пишем отчёт для автора, но лендинг на доработку НЕ возвращаем. Правило:
-          // `audience-score-advisory-in-custom`.
+        const isCustom = brief?.landingMode === 'custom';
+        const isEvent = spec.pageType === 'event_landing';
+        if (isCustom || isEvent) {
+          // audience-score здесь ЧИСТО справочный (лендинг на доработку НЕ возвращаем):
+          //  - custom (1-в-1 по ТЗ): цель — макет строго по ТЗ, а не оптимизация под скоринг;
+          //  - event_landing: скоринг заточен под продуктовые лендинги (CTA Trial/Demo,
+          //    product-stories compare/migrate). У мероприятия целевое действие — форма
+          //    регистрации (CTA Register), поэтому S4 CTA-alignment и story-coverage
+          //    занижены by design — это не дефект лендинга.
+          // Правило: `audience-score-advisory-in-custom` (+ event_landing).
+          const why = isCustom
+            ? 'landingMode=custom (1-в-1 по ТЗ)'
+            : 'pageType=event_landing (мероприятие — скоринг заточен под продуктовые лендинги)';
           warnings.push(
             `audience-score ${audienceScore.score}/${audienceScore.threshold} ниже порога, ` +
-              `но landingMode=custom (1-в-1 по ТЗ) — оценка справочная, лендинг НЕ возвращается ` +
-              `на доработку. Детали: .context/audience-score/${opts.slug}.md`,
+              `но ${why} — оценка справочная, лендинг НЕ возвращается на доработку. ` +
+              `Детали: .context/audience-score/${opts.slug}.md`,
           );
         } else {
           for (const e of audienceScore.errors) errors.push(landingAudienceToIngestError(e));

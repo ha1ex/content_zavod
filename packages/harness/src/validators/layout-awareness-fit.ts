@@ -24,6 +24,7 @@ const LAYOUT_AWARENESS: Record<string, Set<AwarenessLevel>> = {
   'migration-from-competitor': new Set(['most-aware']),
   'product-launch': new Set(['unaware', 'problem-aware']),
   'case-study-deep-dive': new Set(['product-aware', 'most-aware']),
+  'event-webinar': new Set(['problem-aware', 'solution-aware']),
 };
 
 export interface LayoutAwarenessFitError {

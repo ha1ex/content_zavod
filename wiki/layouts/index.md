@@ -52,6 +52,7 @@ stale: false
 | [`migration-from-competitor`](./migration-from-competitor.md) | Лендинг про **процесс перехода** с конкретного конкурента (не сравнение, а how-to migrate). Hero «План миграции с {Brand} за {N} дней», главная секция — Timeline/Process | ИТ-директор, COO, ответственный за миграционный проект | most-aware | Medium (1-2 mock'а по домену + Timeline) |
 | [`product-launch`](./product-launch.md) | Анонс нового продукта / модуля / большой версии. Главная цель — early-access sign-up | Innovator-сегмент, early adopter | unaware → problem-aware | Medium-High (Bento + Hero mock + 1-2 MediaCopy + Timeline) |
 | [`case-study-deep-dive`](./case-study-deep-dive.md) | Один кейс конкретного клиента на всю страницу: «Как {Company} увеличил {KPI} на {N%} за {T}». Long-form lead-magnet | Похожий ЛПР по профилю с героем кейса (та же роль / отрасль / размер) | product-aware → most-aware | Medium (2 TestimonialQuote + 2 MediaCopy + Timeline) |
+| [`event-webinar`](./event-webinar.md) | Лендинг мероприятия (вебинар/конференция/митап): целевое действие — форма регистрации, есть дата, ведущий, программа | Участник целевой функции (для Kaiten — руководители/команды внедрения) | problem-aware → solution-aware | Low (форма вместо hero-визуала + 1 mock в оффере) |
 
 ## Жёсткие правила выбора
 

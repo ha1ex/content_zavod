@@ -42,6 +42,10 @@ export function validateSectionPlanMockChoice(
 
   plan.sections.forEach((s, idx) => {
     if (!VISUAL_COMPONENTS.has(s.component)) return;
+    // Hero лендинга мероприятия несёт форму регистрации (ctaType 'Register')
+    // вместо продуктового визуала — mockVariant ему не нужен by design.
+    // Правило: event-landing-type / layout event-webinar.
+    if (s.component === 'HeroSection' && s.ctaType === 'Register') return;
     if (!s.mockVariant) {
       errors.push({
         rule: 'visual-section-missing-mock',

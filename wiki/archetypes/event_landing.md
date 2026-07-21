@@ -2,11 +2,13 @@
 slug: archetype-event-landing
 type: archetype
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-21
 sources:
   - packages/harness/src/schemas/landing-spec.ts
+  - packages/harness/src/schemas/brief.ts
   - content/landings/webinar-vnedrenie-kaiten.json
 related:
+  - wiki/layouts/event-webinar.md
   - wiki/design-system/components/hero.md
   - wiki/design-system/components/final-cta.md
   - wiki/design-system/components/footer.md
@@ -68,11 +70,31 @@ stale: false
 
 Жёсткого запрета в коде нет: `SectionSchema` разрешает `PricingPlans` в любом спеке, а `COMPONENTS_BY_ARCHETYPE` в `select-context.ts` управляет лишь тем, какие страницы дизайн-системы подмешиваются в системный промпт (у `event_landing` `pricing.md` не грузится — модель просто не получает инструкцию по прайсингу). Так что это соглашение архетипа, а не гейт.
 
-## Известный пробел: audience-score
+## Генерация по брифу (brief-флоу)
 
-Валидатор `landing-audience` не знает про лендинги мероприятий: `CtaType` (`landing-audience.ts`) не имеет категории «регистрация на мероприятие», а must-pass правило `it-needs-compare-or-trial` требует Trial-кнопку в первом экране — которой на этом архетипе нет by design (там форма). Поэтому на IT-сегменте балл занижен и правило падает.
+Важное: **фазовый брифовый пайплайн (P0..P8) архетипный md в промпты НЕ подмешивает** — структуру задаёт **layout** (P2), а не архетип (архетипный текст читает только single-shot путь). Поэтому стандарт мероприятия закодирован отдельным layout `wiki/layouts/event-webinar.md` — с обязательной таблицей секций, которую парсит `landing-layout-conformance`.
 
-В custom-флоу это безвредно: `audience-score-advisory-in-custom` делает оценку справочной, apply проходит. Но в brief-флоу гейт жёсткий — лендинг мероприятия по брифу упрётся в это правило. Чинить нужно в `landing-audience.ts` (новая категория CTA + исключение правила для `event_landing`), но правка сдвинет баллы существующим лендингам, поэтому сделана не была.
+- Intake ставит `brief.pageArchetype: "event"` + `brief.pageLayout: "event-webinar"` + `brief.primaryGoal: "waitlist"`.
+- Специфика мероприятия (дата/время/формат, ведущий, программа, endpoint формы) живёт в блоке **`brief.event`** (`schemas/brief.ts`) — в остальном бриф её не несёт. Что неизвестно — оставить пустым и уточнить у команды; выдуманные факты про живого ведущего запрещены.
+- P2 выбирает `event-webinar`, P4 строит скелет по его таблице, P6 наполняет копию из `brief` + `brief.event`.
+
+## Audience-score (исправлено 21.07.2026)
+
+Раньше `landing-audience` не знал про мероприятия: must-pass правило `it-needs-compare-or-trial` требует Trial-кнопку в hero, которой у event-архетипа нет by design (там форма) — и в brief-флоу это роняло лендинг (в custom было advisory).
+
+Починено в `landing-audience.ts`:
+- добавлена CtaType-категория **`Register`** (регистрация на мероприятие); `classifyCta` ставит её ПЕРВОЙ и узко по event-фразам (`занять место|участвовать|на вебинар/конференц/митап`, href `webinar|#registration|registration-top`) — чтобы не перехватить «Записаться на демо» (Demo) и продуктовый signup (Trial);
+- правило `it-needs-compare-or-trial` теперь пропускает `event_landing`: `if (resolved.includes('IT') && spec.pageType !== 'event_landing')`.
+
+Сдвиг баллов существующим лендингам — нулевой: Register-regex по факту ловит только вебинар (проверено сканом hero-CTA всех лендингов), а pageType-guard затрагивает только event-лендинги.
+
+**Ещё 3 правки, вскрытые прогоном синтетического брифа через P0..P8 (21.07.2026):**
+
+1. `AudienceIntentCtaTypeSchema` (`schemas/audience-intent-plan.ts`) не имел `Register` — P1 не мог выставить `preferredCtaTypes` для мероприятия. Добавлено.
+2. `section-plan-mock-choice.ts` требовал `mockVariant` у любого `HeroSection` — но event-hero несёт форму, а не мок. Теперь пропускает hero с `ctaType: 'Register'`.
+3. **Главное:** даже со снятым must-pass общий audience-score всё равно ниже порога (S4 CTA-alignment=0, т.к. IT ждёт Trial/Demo, а не Register; product-stories compare/migrate не покрыты) — и в brief-флоу это уходило в hard errors. Сделано справочным для `event_landing` в `ingest-landing.ts` (тот же приём, что `audience-score-advisory-in-custom`): скоринг заточен под продуктовые лендинги, у мероприятия конверсия иная, поэтому балл занижен by design и лендинг на доработку не возвращается.
+
+**Прогон подтвердил end-to-end:** бриф с `pageArchetype:event`/`pageLayout:event-webinar`/`event`-блоком принят → routing pm/phased → P0 layout=event-webinar → P1 (Register) → P2 layout прошёл `validateLayoutAwarenessFit` → P3 coverage → P4 event-скелет (hero-форма без мока) прошёл семантические валидаторы; `it-needs-compare-or-trial` на IT-сегменте не сработал.
 
 ## Что уточнять у команды
 

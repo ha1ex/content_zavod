@@ -1,5 +1,5 @@
 import { cn } from '../../primitives/cn';
-import { TerminalChrome, Prompt, Flag } from './CliTerminalHeroMock';
+import { Prompt, Flag } from './CliTerminalHeroMock';
 
 /**
  * Скрипты и ИИ-агенты Kaiten CLI: массовое чтение batch-get берёт список
@@ -18,8 +18,6 @@ export function CliBatchStatsMock() {
         'shadow-[0_30px_80px_-30px_rgba(125,76,207,0.28)]',
       )}
     >
-      <TerminalChrome title="kaiten — агент" />
-
       <div className="space-y-2 bg-(--color-neutral-950) px-5 py-4 font-mono text-[11.5px] leading-relaxed md:text-[12px]">
         <div className="flex flex-wrap items-baseline gap-x-2">
           <Prompt />

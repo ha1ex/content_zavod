@@ -1,5 +1,5 @@
 import { cn } from '../../primitives/cn';
-import { TerminalChrome, Prompt, Flag, OkLine } from './CliTerminalHeroMock';
+import { Prompt, Flag, OkLine } from './CliTerminalHeroMock';
 
 /**
  * Компактное окно терминала с установкой Kaiten CLI одной командой и проверкой
@@ -17,8 +17,6 @@ export function CliInstallMock() {
         'shadow-[0_24px_60px_-28px_rgba(125,76,207,0.30)]',
       )}
     >
-      <TerminalChrome title="kaiten — установка" />
-
       <div className="space-y-2 bg-(--color-neutral-950) px-4 py-4 font-mono text-[11.5px] leading-relaxed">
         <div className="flex flex-wrap items-baseline gap-x-2">
           <Prompt />

@@ -1,5 +1,5 @@
 import { cn } from '../../primitives/cn';
-import { TerminalChrome, Prompt, Flag, Path, OkLine } from './CliTerminalHeroMock';
+import { Prompt, Flag, Path, OkLine } from './CliTerminalHeroMock';
 
 /**
  * Главный сценарий Kaiten CLI: карточка или документ открывается там же, где
@@ -20,7 +20,6 @@ export function CliMarkdownExportMock() {
       <div className="grid items-stretch gap-4 md:grid-cols-[1.05fr_0.95fr]">
         {/* — терминал — */}
         <div className="overflow-hidden rounded-(--radius-xl) border border-(--color-border-default)">
-          <TerminalChrome title="kaiten — экспорт" />
           <div className="space-y-2 bg-(--color-neutral-950) px-4 py-4 font-mono text-[11.5px] leading-relaxed">
             <div className="flex flex-wrap items-baseline gap-x-2">
               <Prompt />

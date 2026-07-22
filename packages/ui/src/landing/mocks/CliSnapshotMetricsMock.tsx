@@ -1,5 +1,5 @@
 import { cn } from '../../primitives/cn';
-import { TerminalChrome, Prompt, Flag, CheckGlyph } from './CliTerminalHeroMock';
+import { Prompt, Flag, CheckGlyph } from './CliTerminalHeroMock';
 
 /**
  * Локальные снимки и метрики Kaiten CLI: команда snapshot build один раз читает
@@ -17,8 +17,6 @@ export function CliSnapshotMetricsMock() {
         'shadow-[0_30px_80px_-30px_rgba(125,76,207,0.28)]',
       )}
     >
-      <TerminalChrome title="kaiten — аналитика" />
-
       <div className="space-y-2 bg-(--color-neutral-950) px-5 py-4 font-mono text-[11.5px] leading-relaxed md:text-[12px]">
         {/* сбор снимка */}
         <div className="flex flex-wrap items-baseline gap-x-2">

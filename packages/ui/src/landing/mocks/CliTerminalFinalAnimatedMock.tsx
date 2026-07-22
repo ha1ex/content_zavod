@@ -21,11 +21,6 @@ const CSS = `.ctf{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn
 
 /* — терминал — */
 .ctf .term{ overflow:hidden; border-radius:16px; border:1px solid var(--bd); background:#fff; box-shadow:0 24px 60px -28px rgba(125,76,207,.30); }
-.ctf .chrome{ display:flex; align-items:center; gap:8px; padding:11px 14px; background:var(--sec); border-bottom:1px solid var(--bd); }
-.ctf .dot{ width:9px; height:9px; border-radius:50%; }
-.ctf .dot.r{ background:#f44336; } .ctf .dot.y{ background:#a5ca00; } .ctf .dot.g{ background:#4caf51; }
-.ctf .chrome .nm{ margin-left:6px; font-size:11.5px; font-weight:500; color:var(--ts); display:inline-flex; align-items:center; gap:6px; }
-.ctf .chrome .nm svg{ color:var(--vio); }
 .ctf .body{ background:var(--bg); padding:14px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11.5px; line-height:1.7; }
 .ctf .line{ display:flex; align-items:center; white-space:nowrap; opacity:0; }
 .ctf .l1{ animation:ctfL1 15s linear infinite; }
@@ -119,14 +114,9 @@ const CLOCK = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" strok
 const CHEV = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
 const PLUS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
 const PLAY = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-const TERM = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg>';
 
 const MARKUP = `<div class="wrap" aria-hidden="true">
   <div class="term">
-    <div class="chrome">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="nm">${TERM} kaiten — zsh</span>
-    </div>
     <div class="body">
       <div class="line l1"><span class="p">$</span><span class="cmd c1"><span class="w">kaiten cards create</span> <span class="fl">--title</span> <span class="str">"Починить flaky-тесты в CI"</span></span><span class="cur u1"></span></div>
       <div class="line l2"><span class="p">$</span><span class="cmd c2"><span class="w">kaiten cards update</span> <span class="fl">--card-id</span> <span class="num">482</span> <span class="fl">--priority</span> <span class="str">"Высокий"</span></span><span class="cur u2"></span></div>

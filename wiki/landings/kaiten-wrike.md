@@ -2,7 +2,7 @@
 slug: kaiten-wrike
 type: landing
 created: 2026-07-21
-updated: 2026-07-21
+updated: 2026-07-22
 status: draft
 brief: content/briefs/kaiten-wrike.json
 archetype: saas_landing
@@ -155,7 +155,7 @@ stale: false
 - **Score:** 83.29 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-07-21T18:07:28.632Z
+- **Generated:** 2026-07-22T05:27:58.410Z
 
 ## Breakdown
 

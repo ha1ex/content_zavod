@@ -19,6 +19,7 @@ const STYLE = `
   max-width:1216px; margin:0 auto; padding:64px 24px 24px;
   display:flex; flex-direction:column; gap:32px;
 }
+@media (min-width: 1280px) { .kf-inner { padding-left:0; padding-right:0; } }
 .kf h4 { font-size:16px; line-height:24px; font-weight:600; color:var(--white); }
 .kf-links { display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:20px; }
 .kf-links a { color:var(--muted2); transition:color .12s cubic-bezier(.2,0,.2,1); }

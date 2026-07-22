@@ -581,7 +581,7 @@
         "title": "Переходите из Wrike без потери данных",
         "description": "Задачи, структура проектов и рабочие процессы переносятся через импорт — без ручного пересоздания",
         "mediaPosition": "right",
-        "mediaVariant": "pm-board-1"
+        "mediaVariant": "integrations-console"
       }
     },
     {
@@ -706,7 +706,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-07-21T18:07:28.658Z",
+    "generatedAt": "2026-07-22T05:27:58.420Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "tokenEstimate": 47185,

@@ -1,6 +1,7 @@
 import { cn } from '../primitives/cn';
 import { Icon } from '../primitives/Icon';
-import { ComparisonTableMock } from './mocks/ComparisonTableMock';
+import { ComparisonTableMock, type KctSection } from './mocks/ComparisonTableMock';
+import { ComparisonCopyMock } from './mocks/ComparisonCopyMock';
 
 export interface ComparisonRowProps {
   label: string;
@@ -60,9 +61,14 @@ export function ComparisonTable({
   columns,
   rows,
 }: ComparisonTableProps) {
-  // Grouped-режим: эталонный ComparisonTableMock (лиловая панель Кайтена,
-  // логотип в шапке, раскрытие разделов). Заголовок таблицы живёт в шапке мока.
+  // Grouped-режим. Два мока по типу ячеек:
+  //   • строковые a/b → ComparisonCopyMock (описательный текст, без раскрывашек);
+  //   • булевые a/b → эталонный ComparisonTableMock (✓/−, раскрывающиеся разделы).
+  // Разведены отдельными файлами, чтобы галочковый мок (90% случаев) оставался нетронутым.
   if (sections && sections.length > 0) {
+    const isCopy = sections.some((s) =>
+      s.rows.some((r) => typeof r.a === 'string' || typeof r.b === 'string'),
+    );
     return (
       <section
         className={cn(
@@ -78,13 +84,23 @@ export function ComparisonTable({
             {eyebrow}
           </p>
         )}
-        <ComparisonTableMock
-          title={title}
-          competitor={competitor ?? ''}
-          brandLabel={brandLabel}
-          sections={sections}
-          footnote={footnote ?? ''}
-        />
+        {isCopy ? (
+          <ComparisonCopyMock
+            title={title}
+            brandLabel={brandLabel}
+            competitor={competitor ?? ''}
+            sections={sections}
+            footnote={footnote ?? ''}
+          />
+        ) : (
+          <ComparisonTableMock
+            title={title}
+            competitor={competitor ?? ''}
+            // isCopy=false гарантирует булевые ячейки — сужаем тип для эталонного мока.
+            sections={sections as KctSection[]}
+            footnote={footnote ?? ''}
+          />
+        )}
       </section>
     );
   }

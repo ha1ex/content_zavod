@@ -1,0 +1,472 @@
+{
+  "pageType": "saas_landing",
+  "goal": "download",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Издание сообщества · релиз",
+        "title": "Kaiten CLI Издание сообщества: работайте с Kaiten прямо из терминала",
+        "accentWord": "прямо из терминала",
+        "subtitle": "Управляйте карточками, досками и аналитикой Kaiten прямо из терминала. Одни и те же команды запускают человек, скрипт и AI-агент.",
+        "primaryCta": {
+          "label": "Установить",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli"
+        },
+        "secondaryCta": {
+          "label": "Открыть на GitHub",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli"
+        },
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-cli-release-hero",
+          "variant": "cli-terminal-hero-animated"
+        },
+        "visualPosition": "below"
+      }
+    },
+    {
+      "id": "benefits_strip",
+      "component": "BenefitsStrip",
+      "props": {
+        "items": [
+          "Издание сообщества",
+          "356 инструментов",
+          "Python 3.11+",
+          "Бесплатно, open source"
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "eyebrow": "Open source и сообщество",
+        "title": "Проект сообщества",
+        "description": "Kaiten CLI Издание сообщества — публичный проект для автоматизации и интеграций. Проект поддерживает Виктор Огнев.",
+        "checklist": [
+          {
+            "text": "Предложения, сообщения об ошибках и вклад участников приветствуются."
+          },
+          {
+            "text": "Ставится одной командой из репозитория Git."
+          },
+          {
+            "text": "Корпоративная поддержка, аудит и индивидуальные интеграции — в Kaiten."
+          }
+        ],
+        "mediaPosition": "left",
+        "mediaVariant": "cli-markdown-export",
+        "primaryCta": {
+          "label": "GitHub",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli"
+        },
+        "secondaryCta": {
+          "label": "Issues",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli/issues"
+        }
+      }
+    },
+    {
+      "id": "comparison_table",
+      "component": "ComparisonTable",
+      "props": {
+        "eyebrow": "Проблема и решение",
+        "title": "Меньше кликов, больше автоматизации",
+        "competitor": "Облачная версия Kaiten",
+        "brandLabel": "Kaiten CLI Издание сообщества",
+        "footnote": "Сравнение подходов к работе с Kaiten из терминала и через веб-интерфейс. По описанию проекта на 21 июля 2026 года.",
+        "sections": [
+          {
+            "rows": [
+              {
+                "label": "Рутинные действия",
+                "a": "Одной командой в терминале",
+                "b": "Через переходы по вкладкам"
+              },
+              {
+                "label": "Повтор операций",
+                "a": "Встраиваются в скрипты и CI",
+                "b": "Повторяются вручную"
+              },
+              {
+                "label": "Аналитика",
+                "a": "Собирается локально, без лишних запросов",
+                "b": "Собираете руками, отчёт нагружает API"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Что такое Kaiten CLI",
+        "title": "Работает самостоятельно",
+        "description": "Kaiten CLI — интерфейс командной строки для Kaiten. Не тот же самый, что MCP.",
+        "items": [
+          {
+            "icon": "Unplug",
+            "title": "Не зависит от MCP",
+            "description": "CLI не перенаправляет команды в MCP и работает без него."
+          },
+          {
+            "icon": "Layers",
+            "title": "Тот же доменный слой",
+            "description": "Внутри — тот же доменный слой, что и в kaiten-mcp."
+          },
+          {
+            "icon": "Users",
+            "title": "Человек, скрипт или агент",
+            "description": "Одни и те же команды запускают люди, программы и LLM-агенты."
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "process",
+      "component": "ProcessSteps",
+      "props": {
+        "eyebrow": "Установка",
+        "title": "Установка за пару команд",
+        "description": "Нужен аккаунт Kaiten и API-токен. Python 3.11 или новее.",
+        "steps": [
+          {
+            "icon": "Download",
+            "title": "Установка",
+            "description": "uv tool install git+https://github.com/ViktorOgnev/kaiten-cli.git"
+          },
+          {
+            "icon": "KeyRound",
+            "title": "Профиль доступа",
+            "description": "kaiten profile add main --domain <company> --token <api-token> --set-active"
+          },
+          {
+            "icon": "CircleCheck",
+            "title": "Проверка",
+            "description": "kaiten --version. Не работает через uv? Поставьте через pipx."
+          }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Сценарии и роли",
+        "title": "Кому и зачем",
+        "items": [
+          {
+            "icon": "Terminal",
+            "title": "Человек в терминале",
+            "description": "Быстрые команды и поиск инструментов без перехода в веб."
+          },
+          {
+            "icon": "GitBranch",
+            "title": "Автоматизация и CI",
+            "description": "Те же команды в скриптах, cron и пайплайнах."
+          },
+          {
+            "icon": "Bot",
+            "title": "LLM-агент",
+            "description": "Инструмент с полным доступом к Kaiten и режимом только для чтения."
+          },
+          {
+            "icon": "Plug",
+            "title": "Интегратор",
+            "description": "Интеграции и переносы данных без своего API-клиента."
+          },
+          {
+            "icon": "Briefcase",
+            "title": "Проджект в агентстве",
+            "description": "Статусы по доскам и отчёты клиенту готовыми командами. Настройку один раз делает технический коллега."
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "eyebrow": "Локально и приватно",
+        "title": "Данные остаются у вас",
+        "description": "Терминал обращается к локальному кэшу и снимкам SQLite, затем к API Kaiten — облачному или локальному.",
+        "checklist": [
+          {
+            "text": "Кэш и снимки хранятся в локальных файлах на вашем диске."
+          },
+          {
+            "text": "CLI обращается только к API Kaiten — облачному или локальному."
+          },
+          {
+            "text": "Режим только для чтения блокирует изменения: --read-only, KAITEN_CLI_READ_ONLY."
+          },
+          {
+            "text": "Файлы кэша и снимков лежат в каталоге текущего пользователя. Шлюз для агентов защищает от случайной записи."
+          }
+        ],
+        "mediaPosition": "left",
+        "mediaVariant": "cli-snapshot-metrics",
+        "primaryCta": {
+          "label": "Политика безопасности",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli/blob/master/SECURITY.md"
+        }
+      }
+    },
+    {
+      "id": "metrics_split",
+      "component": "MetricsSplit",
+      "props": {
+        "eyebrow": "Карта возможностей",
+        "title": "356 инструментов, 31 модуль",
+        "description": "Полный доступ к возможностям Kaiten из командной строки. Числа приведены по описанию проекта на 21 июля 2026 года и меняются с выпусками.",
+        "metrics": [
+          {
+            "value": "356",
+            "label": "инструментов"
+          },
+          {
+            "value": "31",
+            "label": "модуль реестра"
+          }
+        ],
+        "bullets": [
+          {
+            "title": "Сервис-деск — 47",
+            "description": "Заявки, очереди и обслуживание клиентов из терминала."
+          },
+          {
+            "title": "Роли и группы — 30",
+            "description": "Права доступа, участники и команды одной командой."
+          },
+          {
+            "title": "Чек-листы 16 · Карточки 15 · Графики 15",
+            "description": "Ежедневная работа с задачами и данными досок."
+          },
+          {
+            "title": "Документы 13 · Проекты и спринты 13 · Аудит 12",
+            "description": "Тексты, планирование и история изменений."
+          },
+          {
+            "title": "Автоматизации 11 · Доски 6 · Снимки 5",
+            "description": "Правила, пространства и локальные срезы данных."
+          },
+          {
+            "title": "Запросы 2",
+            "description": "Метрики по снимку без обращений к API Kaiten."
+          }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Что умеет CLI",
+        "title": "Ключевые возможности",
+        "items": [
+          {
+            "icon": "BarChart3",
+            "title": "Локальные метрики",
+            "description": "Считайте WIP, пропускную способность и время цикла по снимку."
+          },
+          {
+            "icon": "Database",
+            "title": "Дисковый кэш",
+            "description": "Режим auto повторно использует ответы и экономит время."
+          },
+          {
+            "icon": "FileDown",
+            "title": "Экспорт в Markdown",
+            "description": "Выгружайте карточки и документы в файлы .md."
+          },
+          {
+            "icon": "Layers",
+            "title": "Массовое чтение",
+            "description": "Пакетные команды вместо сотен отдельных запросов."
+          },
+          {
+            "icon": "Braces",
+            "title": "JSON и статистика",
+            "description": "Единый формат ответа с разделом stats по выполнению."
+          },
+          {
+            "icon": "ShieldCheck",
+            "title": "Надёжный HTTP",
+            "description": "Ограничение частоты, повторные попытки и таймауты."
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "tabbed_feature",
+      "component": "TabbedFeatureSection",
+      "props": {
+        "eyebrow": "Рецепты",
+        "title": "Готовые рецепты",
+        "description": "Живые команды под типовые задачи. У каждой — кнопка «Скопировать».",
+        "tabs": [
+          {
+            "id": "cards",
+            "label": "Список карточек",
+            "icon": "List",
+            "title": "Список карточек доски",
+            "description": "kaiten --json cards list --board-id 42 --compact --fields id,title,state",
+            "mockVariant": "cli-batch-stats"
+          },
+          {
+            "id": "markdown",
+            "label": "Документ в Markdown",
+            "icon": "FileDown",
+            "title": "Документ в Markdown для клиента",
+            "description": "kaiten --json documents get --document-uid <uid> --markdown --output ./report.md",
+            "mockVariant": "cli-markdown-export"
+          },
+          {
+            "id": "metrics",
+            "label": "Метрики за период",
+            "icon": "BarChart3",
+            "title": "Загрузка команды за период",
+            "description": "Продвинутый рецепт. snapshot build --preset analytics, затем query metrics --metric throughput --group-by board_id.",
+            "checklist": [
+              {
+                "text": "kaiten --json snapshot build --name team --space-id 10 --preset analytics"
+              },
+              {
+                "text": "kaiten --json query metrics --snapshot team --metric throughput --group-by board_id"
+              }
+            ],
+            "mockVariant": "cli-snapshot-metrics"
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "eyebrow": "Для LLM-агентов",
+        "title": "Готов к работе с агентами",
+        "description": "Полный доступ к Kaiten, меньше токенов, данные не уходят наружу. Агент находит нужные команды сам и работает в безопасном режиме.",
+        "checklist": [
+          {
+            "text": "Поиск инструментов: search-tools, describe."
+          },
+          {
+            "text": "Безопасность: скиллы, режим read-only."
+          },
+          {
+            "text": "Экономия токенов: --compact, --fields."
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "cli-batch-stats",
+        "primaryCta": {
+          "label": "Скиллы для агентов",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli/tree/master/skills"
+        }
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Kaiten CLI и MCP",
+        "title": "Когда CLI, когда MCP",
+        "description": "Выбор зависит от задачи и требований к данным.",
+        "items": [
+          {
+            "icon": "Terminal",
+            "title": "Kaiten CLI",
+            "description": "Локальный процесс в вашем окружении. Данные обрабатываются на вашей стороне. Кэш и снимки на диске."
+          },
+          {
+            "icon": "Cloud",
+            "title": "Kaiten MCP",
+            "description": "Облачный коннектор для AI-ассистента. Готовая интеграция без установки. Подходит для диалоговых сценариев."
+          }
+        ],
+        "columns": 2
+      }
+    },
+    {
+      "id": "legal_note",
+      "component": "LegalNote",
+      "props": {
+        "text": "Стандартное коммерческое соглашение Kaiten об уровне обслуживания (SLA) не распространяется на проект, если не оговорено отдельно. По корпоративной поддержке, аудиту и индивидуальным интеграциям обращайтесь в Kaiten."
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Поставьте за минуту",
+        "description": "Установка одной командой из репозитория. Нужен аккаунт Kaiten и Python 3.11 или новее.",
+        "primaryCta": {
+          "label": "Установить",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli"
+        },
+        "secondaryCta": {
+          "label": "Документация",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli/blob/master/README.md"
+        },
+        "variant": "gradient",
+        "visualVariant": "cli-terminal-final-animated"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Kaiten CLI — управление Kaiten из терминала",
+    "description": "Интерфейс командной строки Kaiten: 356 инструментов, установка из Git одной командой, локальные снимки и метрики. Издание сообщества, open source."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/single-module-deep-dive.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-07-22T05:48:08.387Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "single-module-deep-dive",
+    "tokenEstimate": 47185,
+    "domain": "cli-community-edition"
+  }
+}

@@ -2,7 +2,7 @@
 slug: ds-component-accordion
 type: design-system
 created: 2026-05-15
-updated: 2026-06-29
+updated: 2026-07-23
 sources:
   - design-system/kaiten-v01/tokens.json
   - vercel_index.html (лендинг «Кайтен для производств»: #control слайдер-аккордион, #faq)
@@ -23,7 +23,7 @@ stale: false
 ## States
 
 - **Closed.** Строка на `surface-section`, тёмный текст `--text-primary`, шеврон-вниз справа.
-- **Hover.** Title и иконка → violet `#7D4CCF` (`transition:color .18s`).
+- **Hover.** Title и иконка → violet `#7D4CCF` (`transition:color .18s`). В **слайдер-аккордеоне** hover не только красит, но и **раскрывает пункт** (см. Usage rules).
 - **Open.** White / soft-violet panel, violet border, violet SemiBold title, шеврон повёрнут (`rotate(180deg)`), тело под заголовком.
 
 ## Motion
@@ -51,6 +51,7 @@ stale: false
 - 2–12 пар Q&A в одной секции (`FAQSection` в `packages/harness/src/registry/index.ts`).
 - Ответы — `10..600` символов.
 - **Default — открыт один пункт за раз** (эксклюзив). Multi-open допустим, но не по умолчанию.
+- **Слайдер-аккордеон раскрывается по наведению** (desktop, гард `matchMedia('(hover: hover) and (pointer: fine)')`): `mouseenter` на пункте открывает его и переключает медиа-панель, без тоггл-закрытия. Клик остаётся как тоггл — фолбэк для touch-устройств и клавиатуры. FAQ-аккордеон — только по клику, hover его не раскрывает.
 
 ## Anti-patterns
 
@@ -122,17 +123,21 @@ CSS (ключевое):
 ```
 Десктоп/планшет: слайд в правой панели `.acc-media`. Мобилка ≤767: панели нет, картинка `.acc-bmedia` внутри раскрытого пункта во всю ширину, карточка — на градиенте.
 
-JS (открыт один пункт + слайд синхронен пункту):
+JS (открыт один пункт + слайд синхронен пункту; на desktop раскрытие по наведению, клик — фолбэк для touch):
 ```js
 (function(){
   var items=[].slice.call(document.querySelectorAll('#control .acc-item')),
-      panels=[].slice.call(document.querySelectorAll('#control .acc-panel'));
+      panels=[].slice.call(document.querySelectorAll('#control .acc-panel')),
+      canHover=window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if(!items.length) return;
   function open(i){
     items.forEach(function(it,j){ it.classList.toggle('open', j===i); });
     panels.forEach(function(p,j){ p.classList.toggle('on', j===i); });
   }
-  items.forEach(function(it,i){ it.querySelector('.acc-head').addEventListener('click',function(){ open(i); }); });
+  items.forEach(function(it,i){
+    it.querySelector('.acc-head').addEventListener('click',function(){ open(i); });
+    if(canHover) it.addEventListener('mouseenter',function(){ open(i); });   // hover раскрывает
+  });
   open(0);                                   // по умолчанию открыт первый
 })();
 ```
@@ -161,5 +166,6 @@ JS (открыт один вопрос; в разметке `open` только 
 - Реальная высота (`height/block-size:auto` + `interpolate-size`), НЕ `max-height` фикс.
 - 0.24–0.26s, `cubic-bezier(.2,0,.2,1)`, без bounce.
 - Открыт один пункт (JS-эксклюзив).
+- Слайдер-аккордеон: на desktop раскрытие по `mouseenter` (гард `hover:hover and pointer:fine`), клик — фолбэк.
 - `overflow:hidden` + лёгкий `opacity`-фейд; шеврон `rotate(180deg)`.
 - Акцент раскрытого/hover — `var(--brand-100)` `#7D4CCF`.

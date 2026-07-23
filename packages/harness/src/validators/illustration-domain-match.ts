@@ -97,7 +97,8 @@ function collectUsedVariants(spec: LandingSpec): SectionVariantUsage[] {
     }
     if (section.component === 'MediaCopy') {
       const v = section.props.mediaVariant;
-      if (v && v !== 'default') {
+      // 'default' (плейсхолдер) и 'none' (текстовый режим без визуала) — не доменные моки.
+      if (v && v !== 'default' && v !== 'none') {
         usages.push({
           index: idx,
           component: section.component,

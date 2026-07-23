@@ -1,4 +1,5 @@
 import type { LandingSpec, Section } from '../schemas/landing-spec';
+import { ruNbsp } from './ru-typography';
 
 /**
  * Детерминированный TSX-string renderer для handoff (этап 6 ZIP).
@@ -11,7 +12,8 @@ import type { LandingSpec, Section } from '../schemas/landing-spec';
 const INDENT = '  ';
 
 function jsxString(value: string): string {
-  return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+  // Правило DS `ru-nbsp-typography` зашито в рендер (см. ./ru-typography).
+  return `"${ruNbsp(value).replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
 }
 
 function literal(value: unknown): string {
@@ -32,7 +34,7 @@ function literal(value: unknown): string {
 
 /** Экранирование текстового узла JSX (между тегами). */
 function jsxText(value: string): string {
-  return value
+  return ruNbsp(value)
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/\{/g, '&#123;')

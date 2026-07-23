@@ -98,6 +98,8 @@ export function validateLandingVisualDiversity(
   const mediaVariants: { variant: string; idx: number }[] = [];
   spec.sections.forEach((s, i) => {
     if (s.component !== 'MediaCopy') return;
+    // 'none' — текстовый режим без визуала: ритмику не ломает, из проверки исключаем.
+    if (s.props.mediaVariant === 'none') return;
     mediaVariants.push({ variant: s.props.mediaVariant ?? 'default', idx: i });
   });
   if (mediaVariants.length >= 2) {

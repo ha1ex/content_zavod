@@ -17,10 +17,10 @@ import { ScaleToFit } from './ScaleToFit';
 const CSS = `.ctf{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn:#4caf51; --blu:#2196f3; --vio:#7d4ccf; --tp:#2d2d2d; --ts:#757575; --bd:#e0e0e0; --sec:#f5f5f5; --red12:#fde8e6; --grn12:#e9f5ea; }
 .ctf *{ box-sizing:border-box; margin:0; padding:0; }
 .ctf{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
-.ctf .wrap{ position:relative; width:480px; display:flex; flex-direction:column; gap:16px; }
+.ctf .wrap{ position:relative; width:660px; height:360px; }
 
-/* — терминал — */
-.ctf .term{ overflow:hidden; border-radius:16px; border:1px solid var(--bd); background:#fff; box-shadow:0 24px 60px -28px rgba(125,76,207,.30); }
+/* — терминал (внахлёст: справа-сверху, спереди) — */
+.ctf .term{ position:absolute; top:0; right:0; width:440px; z-index:2; overflow:hidden; border-radius:16px; border:1px solid var(--bd); background:#fff; box-shadow:0 24px 60px -28px rgba(125,76,207,.30); }
 .ctf .body{ background:var(--bg); padding:14px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11.5px; line-height:1.7; }
 .ctf .line{ display:flex; align-items:center; white-space:nowrap; opacity:0; }
 .ctf .l1{ animation:ctfL1 15s linear infinite; }
@@ -46,7 +46,7 @@ const CSS = `.ctf{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn
 .ctf .stats{ animation:ctfStats 15s ease infinite; }
 
 /* — карточка задачи (визуальный язык WindowCardMock) — */
-.ctf .cardwrap{ position:relative; min-height:150px; }
+.ctf .cardwrap{ position:absolute; top:100px; left:0; width:300px; z-index:1; min-height:150px; }
 .ctf .skel{ position:absolute; inset:0; display:flex; flex-direction:column; gap:11px; justify-content:center; padding:16px; border:1px dashed var(--bd); border-radius:16px; background:#fbfbfc; animation:ctfSkel 15s ease infinite; }
 .ctf .skel .bar{ height:9px; border-radius:6px; background:#ededf0; }
 .ctf .skel .hint{ font-size:11.5px; color:#b0b0b6; font-family:ui-monospace,monospace; }
@@ -158,7 +158,7 @@ export function CliTerminalFinalAnimatedMock() {
   return (
     <div className="ctf" aria-hidden>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <ScaleToFit designWidth={480}>
+      <ScaleToFit designWidth={660}>
         <div dangerouslySetInnerHTML={{ __html: MARKUP }} />
       </ScaleToFit>
     </div>

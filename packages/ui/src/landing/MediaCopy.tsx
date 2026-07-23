@@ -14,7 +14,8 @@ export interface MediaCopyCtaProps {
   href: string;
 }
 
-export type MediaCopyVariant = 'default' | MockVariant;
+/** 'none' — текстовый режим без визуала (одна колонка). */
+export type MediaCopyVariant = 'default' | 'none' | MockVariant;
 
 export interface MediaCopyProps {
   eyebrow?: string;
@@ -49,6 +50,7 @@ export function MediaCopy({
   primaryCta,
   secondaryCta,
 }: MediaCopyProps) {
+  const hideMedia = mediaVariant === 'none';
   return (
     <section
       className={cn(
@@ -58,8 +60,10 @@ export function MediaCopy({
     >
       <div
         className={cn(
-          'grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center',
-          mediaPosition === 'left' && 'lg:[&>div:first-child]:order-2',
+          hideMedia
+            ? 'max-w-2xl'
+            : 'grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center',
+          !hideMedia && mediaPosition === 'left' && 'lg:[&>div:first-child]:order-2',
         )}
       >
         <div>
@@ -134,9 +138,11 @@ export function MediaCopy({
           )}
         </div>
 
-        <Inspect as="div" name="media_copy.media">
-          <MediaCopyVisual variant={mediaVariant} placeholder={mediaPlaceholder} />
-        </Inspect>
+        {!hideMedia && (
+          <Inspect as="div" name="media_copy.media">
+            <MediaCopyVisual variant={mediaVariant} placeholder={mediaPlaceholder} />
+          </Inspect>
+        )}
       </div>
     </section>
   );

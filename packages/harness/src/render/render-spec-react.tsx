@@ -34,6 +34,7 @@ import {
 } from '@kaiten/ui/landing';
 import { ButtonLink } from '@kaiten/ui/primitives';
 import type { LandingSpec, Section } from '../schemas/landing-spec';
+import { ruNbspDeep } from './ru-typography';
 
 /**
  * Прямой React-рендер LandingSpec в Next.js preview route.
@@ -146,9 +147,12 @@ function RenderSection({ section }: { section: Section }) {
 }
 
 export function RenderLanding({ spec }: { spec: LandingSpec }) {
+  // Правило DS `ru-nbsp-typography` зашито в рендер: неразрывные пробелы для
+  // висячих предлогов/союзов/частиц и длинного тире проставляются автоматически.
+  const s = ruNbspDeep(spec);
   return (
     <>
-      {spec.sections.map((section, i) => (
+      {s.sections.map((section, i) => (
         <div
           key={`${section.id}-${i}`}
           data-comp={section.id}

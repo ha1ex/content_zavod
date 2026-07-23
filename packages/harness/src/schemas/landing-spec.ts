@@ -417,6 +417,7 @@ const MediaCopySchema = z.object({
     mediaVariant: z
       .enum([
         'default',
+        'none',
         'support-board',
         'request-card',
         'kb-public',
@@ -502,7 +503,18 @@ const BenefitsStripSchema = z.object({
   id: z.literal('benefits_strip'),
   component: z.literal('BenefitsStrip'),
   props: z.object({
-    items: z.array(z.string().min(2).max(60)).min(2).max(6),
+    // Строка (плоский режим) или {icon?, text} — для chips-режима с иконками (lucide).
+    items: z
+      .array(
+        z.union([
+          z.string().min(2).max(60),
+          z.object({ icon: z.string().optional(), text: z.string().min(2).max(60) }),
+        ]),
+      )
+      .min(2)
+      .max(6),
+    /** 'plain' (дефолт) — пункты через точки; 'chips' — пилюли-бейджи по DS с иконками. */
+    variant: z.enum(['plain', 'chips']).optional(),
   }),
 });
 

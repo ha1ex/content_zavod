@@ -19,10 +19,10 @@ import { ScaleToFit } from './ScaleToFit';
 const CSS = `.cth{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn:#4caf51; --blu:#2196f3; --vio:#7d4ccf; --tp:#2d2d2d; --ts:#757575; --bd:#e0e0e0; --sec:#f5f5f5; --pur12:#f4e8f7; }
 .cth *{ box-sizing:border-box; margin:0; padding:0; }
 .cth{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
-.cth .wrap{ position:relative; width:800px; display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:center; }
+.cth .wrap{ position:relative; width:700px; height:400px; }
 
-/* — терминал — */
-.cth .term{ overflow:hidden; border-radius:20px; border:1px solid var(--bd); background:#fff; box-shadow:0 30px 80px -30px rgba(125,76,207,.30); }
+/* — терминал (внахлёст: слева-сверху, сзади) — */
+.cth .term{ position:absolute; top:0; left:0; width:580px; z-index:1; overflow:hidden; border-radius:20px; border:1px solid var(--bd); background:#fff; box-shadow:0 30px 80px -30px rgba(125,76,207,.30); }
 .cth .body{ background:var(--bg); padding:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.75; min-height:250px; }
 .cth .line{ display:flex; align-items:center; white-space:nowrap; opacity:0; }
 .cth .l1{ animation:cthL1 15s linear infinite; }
@@ -48,7 +48,7 @@ const CSS = `.cth{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn
 .cth .stats{ animation:cthStats 15s ease infinite; }
 
 /* — карточка задачи (визуальный язык WindowCardMock) — */
-.cth .cardwrap{ position:relative; min-height:250px; display:flex; flex-direction:column; justify-content:center; }
+.cth .cardwrap{ position:absolute; right:0; bottom:0; width:300px; z-index:2; min-height:200px; }
 .cth .skel{ position:absolute; inset:0; display:flex; flex-direction:column; gap:12px; justify-content:center; padding:18px; border:1px dashed var(--bd); border-radius:16px; background:#fbfbfc; animation:cthSkel 15s ease infinite; }
 .cth .skel .bar{ height:10px; border-radius:6px; background:#ededf0; }
 .cth .skel .hint{ font-size:12px; color:#b0b0b6; font-family:ui-monospace,monospace; }
@@ -162,8 +162,8 @@ export function CliTerminalHeroAnimatedMock() {
   return (
     <div className="cth" aria-hidden>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div style={{ maxWidth: 800, margin: '0 auto' }}>
-        <ScaleToFit designWidth={800}>
+      <div style={{ maxWidth: 700, margin: '0 auto' }}>
+        <ScaleToFit designWidth={700}>
           <div dangerouslySetInnerHTML={{ __html: MARKUP }} />
         </ScaleToFit>
       </div>

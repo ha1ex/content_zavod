@@ -66,6 +66,7 @@ export { LaptopDocEditorMock } from './GadgetLaptopDocEditorMock';
 export { MobileKanbanMock } from './GadgetMobileKanbanMock';
 export { LaptopBoardTreeMock } from './GadgetLaptopBoardTreeMock';
 export { KanbanMinimalMock } from './Kanbanminimal';
+export { KanbanMinimalAnimatedMock } from './KanbanminimalAnimated';
 export { MockVisual } from './MockVisual';
 export type { MockVariant } from './MockVisual';
 export { WindowCardMock } from './WindowCardMock';

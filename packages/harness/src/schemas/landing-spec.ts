@@ -70,6 +70,7 @@ export const AssetRefSchema = z.object({
       'meet-list',
       'pm-board-1',
       'kanban-minimal',
+      'kanban-minimal-animated',
       'portfolio-board',
       'approval-board',
       'reports-charts',
@@ -156,6 +157,10 @@ const RegistrationFormSlotSchema = z.object({
   action: z.string().optional(),
   /** Ссылка на согласие на обработку персональных данных (152-ФЗ). */
   dataConsentHref: z.string().optional(),
+  /** Deep-link регистрации через Telegram-бота (`https://t.me/<bot>?start=…`). Задан → рендерится кнопка «Telegram». */
+  telegramHref: z.string().optional(),
+  /** Deep-link регистрации через бота в MAX. Задан → рендерится кнопка «MAX». */
+  maxHref: z.string().optional(),
   /** Мягкая строка под кнопкой. */
   note: z.string().max(200).optional(),
 });
@@ -470,6 +475,7 @@ const MediaCopySchema = z.object({
         'meet-list',
         'pm-board-1',
         'kanban-minimal',
+        'kanban-minimal-animated',
         'portfolio-board',
         'approval-board',
       'reports-charts',
@@ -793,6 +799,7 @@ export const MockVariantSchema = z.enum([
   'meet-list',
   'pm-board-1',
   'kanban-minimal',
+  'kanban-minimal-animated',
   'portfolio-board',
   'approval-board',
 'reports-charts',

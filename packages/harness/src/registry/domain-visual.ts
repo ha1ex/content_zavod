@@ -153,6 +153,12 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
           'Минималистичная канбан-доска Kaiten без рамки устройства: колонки Очередь → В работе → Готово, карточки с метками и исполнителями — чистый вид рабочего пространства',
       },
       {
+        variant: 'kanban-minimal-animated',
+        sections: ['hero', 'media', 'tab', 'scenario'],
+        description:
+          'Анимированная канбан-доска Kaiten: карточка перетаскивается курсором-рукой из «Очередь» в «В работе» — живая демонстрация работы с доской',
+      },
+      {
         variant: 'meet-list',
         sections: ['hero', 'media', 'tab', 'scenario'],
         description:

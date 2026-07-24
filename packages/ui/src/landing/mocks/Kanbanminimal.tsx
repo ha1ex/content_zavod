@@ -50,7 +50,7 @@ const RAIL = ['LayoutGrid', 'Calendar', 'FileText', 'ChartBar', 'Users', 'Settin
 
 function Avatar({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-(--color-action-primary-soft) text-[9px] font-semibold text-(--color-text-accent)">
+    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-(--color-action-primary-soft) text-[10px] font-semibold text-(--color-text-accent)">
       {children}
     </span>
   );
@@ -72,8 +72,8 @@ function KanbanBoard() {
       {/* top bar */}
       <div className="flex items-center gap-2 border-b border-(--color-border-default) px-4 py-2.5">
         <KaitenMark />
-        <span className="text-[13px] font-semibold text-(--color-text-primary)">Разработка</span>
-        <span className="text-[12px] text-(--color-text-secondary)">/ Спринт 24</span>
+        <span className="text-[14px] font-semibold text-(--color-text-primary)">Разработка</span>
+        <span className="text-[13px] text-(--color-text-secondary)">/ Спринт 24</span>
       </div>
 
       {/* body */}
@@ -99,34 +99,34 @@ function KanbanBoard() {
             const column = (
               <div key={col.title} className="flex flex-1 flex-col rounded-(--radius-lg) bg-(--color-surface-section) px-1.5">
                 <div className="mb-2 flex items-center gap-1.5 px-1">
-                  <span className="text-[11px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+                  <span className="text-[12px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
                     {col.title}
                   </span>
-                  <span className="ml-auto inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-(--color-border-default) px-1 text-[10px] font-semibold text-(--color-text-secondary)">
+                  <span className="ml-auto inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-(--color-border-default) px-1 text-[11px] font-semibold text-(--color-text-secondary)">
                     {col.count}
                   </span>
                 </div>
                 <div className="space-y-2">
                   {col.cards.map((c, i) => (
                     <div key={i} className="space-y-2 rounded-(--radius-lg) border border-[#ededed] bg-(--color-surface-card) p-2.5">
-                      <span className={cn('inline-flex h-4 items-center rounded-full px-1.5 text-[9px] font-medium', LABEL_CLASS[c.tone])}>
+                      <span className={cn('inline-flex h-4 items-center rounded-full px-1.5 text-[10px] font-medium', LABEL_CLASS[c.tone])}>
                         {c.label}
                       </span>
-                      <div className="text-[12px] font-medium leading-snug text-(--color-text-primary)">{c.title}</div>
+                      <div className="text-[13px] font-medium leading-snug text-(--color-text-primary)">{c.title}</div>
                       <div className="flex items-center justify-between">
                         <Avatar>{c.who}</Avatar>
                         {c.done ? (
-                          <span className="inline-flex items-center gap-1 text-[9.5px] font-medium text-green-700">
+                          <span className="inline-flex items-center gap-1 text-[10.5px] font-medium text-green-700">
                             <Icon name="Check" className="h-3 w-3" strokeWidth={2.5} />
                             Готово
                           </span>
                         ) : c.check ? (
-                          <span className="inline-flex items-center gap-1 text-[9.5px] text-(--color-text-secondary)">
+                          <span className="inline-flex items-center gap-1 text-[10.5px] text-(--color-text-secondary)">
                             <Icon name="SquareCheck" className="h-3 w-3" strokeWidth={2} />
                             {c.check}
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-[9.5px] text-(--color-text-secondary)">
+                          <span className="inline-flex items-center gap-1 text-[10.5px] text-(--color-text-secondary)">
                             <Icon name="Calendar" className="h-3 w-3" strokeWidth={2} />
                             12 авг
                           </span>
@@ -151,6 +151,7 @@ function KanbanBoard() {
  * Минимальный mock канбан-доски Kaiten — без рамки-безеля устройства и камеры.
  * Обрамление — штатное для моков MediaCopy (как ProductMock/PmBoard1Mock):
  * скруглённый экран доски, тонкий бордер и мягкая фиолетовая тень Violet-12.
+ * Анимированный близнец — KanbanminimalAnimated.tsx (`kanban-minimal-animated`).
  */
 export function KanbanMinimalMock() {
   return (

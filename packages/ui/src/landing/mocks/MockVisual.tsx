@@ -52,6 +52,7 @@ import {
   CTAmainMock,
   PmBoard1Mock,
   KanbanMinimalMock,
+  KanbanMinimalAnimatedMock,
   ModulePortfolioMock,
   ApprovalBoardMock,
   ReportsChartsMock,
@@ -144,6 +145,7 @@ export type MockVariant =
   | 'meet-list'
   | 'pm-board-1'
   | 'kanban-minimal'
+  | 'kanban-minimal-animated'
   // Финансы / портфель
   | 'portfolio-board'
   | 'approval-board'
@@ -295,6 +297,15 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
         <div className="w-full overflow-hidden px-8 pt-4 pb-14">
           <ScaleToFit designWidth={720}>
             <KanbanMinimalMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Анимированный близнец kanban-minimal — карточка едет из «Очередь» в «В работе».
+    case 'kanban-minimal-animated':
+      return (
+        <div className="w-full overflow-hidden px-8 pt-4 pb-14">
+          <ScaleToFit designWidth={720}>
+            <KanbanMinimalAnimatedMock />
           </ScaleToFit>
         </div>
       );

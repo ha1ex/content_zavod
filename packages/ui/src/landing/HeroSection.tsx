@@ -130,6 +130,8 @@ export interface HeroFormProps {
   anchorId?: string;
   action?: string;
   dataConsentHref?: string;
+  telegramHref?: string;
+  maxHref?: string;
   note?: string;
 }
 
@@ -319,6 +321,8 @@ export function HeroSection({
                   anchorId={form.anchorId}
                   action={form.action}
                   dataConsentHref={form.dataConsentHref}
+                  telegramHref={form.telegramHref}
+                  maxHref={form.maxHref}
                   note={form.note}
                 />
               </div>

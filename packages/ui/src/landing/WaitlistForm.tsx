@@ -1,4 +1,5 @@
 import { cn } from '../primitives/cn';
+import { FormConsent } from './FormConsent';
 
 export interface WaitlistFormProps {
   title: string;
@@ -11,11 +12,11 @@ export interface WaitlistFormProps {
    * По умолчанию `#` — заглушка.
    */
   action?: string;
-  /** Ссылка на Политику конфиденциальности. */
+  /** @deprecated Ссылки согласий фиксированы в FormConsent (юр-ссылки Кайтен). Оставлены для совместимости со спеком. */
   privacyHref?: string;
-  /** Ссылка на согласие на обработку персональных данных. */
+  /** @deprecated см. privacyHref */
   dataConsentHref?: string;
-  /** Ссылка на условия согласия на рассылку. */
+  /** @deprecated см. privacyHref */
   marketingHref?: string;
 }
 
@@ -31,9 +32,6 @@ export function WaitlistForm({
   submitLabel,
   anchorId = 'waitlist',
   action = '#',
-  privacyHref = '/privacy',
-  dataConsentHref = '/privacy',
-  marketingHref = '/privacy',
 }: WaitlistFormProps) {
   return (
     <section
@@ -102,28 +100,7 @@ export function WaitlistForm({
               />
             </div>
 
-            <div className="mt-5 flex flex-col gap-3">
-              <Consent
-                id="consent-privacy"
-                name="consent_privacy"
-                label={
-                  <>
-                    Я согласен с <ConsentLink href={privacyHref}>Политикой конфиденциальности</ConsentLink>{' '}
-                    и даю <ConsentLink href={dataConsentHref}>согласие на обработку персональных данных</ConsentLink>
-                  </>
-                }
-              />
-              <Consent
-                id="consent-marketing"
-                name="consent_marketing"
-                label={
-                  <>
-                    Я согласен <ConsentLink href={marketingHref}>получать рассылку</ConsentLink> от Kaiten
-                    (обновления продукта и полезные материалы)
-                  </>
-                }
-              />
-            </div>
+            <FormConsent idPrefix={anchorId} />
 
             <button
               type="submit"
@@ -179,39 +156,3 @@ function Field({ id, name, type, label, placeholder, autoComplete }: FieldProps)
   );
 }
 
-function ConsentLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="font-medium text-(--color-action-primary) underline decoration-(--color-action-primary)/40 underline-offset-2 hover:decoration-(--color-action-primary)"
-    >
-      {children}
-    </a>
-  );
-}
-
-interface ConsentProps {
-  id: string;
-  name: string;
-  label: React.ReactNode;
-}
-
-function Consent({ id, name, label }: ConsentProps) {
-  return (
-    <label htmlFor={id} className="flex cursor-pointer items-start gap-2.5">
-      <input
-        id={id}
-        name={name}
-        type="checkbox"
-        required
-        className={cn(
-          'mt-0.5 h-4 w-4 shrink-0 rounded-(--radius-sm) border border-(--color-border-default)',
-          'accent-(--color-action-primary)',
-        )}
-      />
-      <span className="text-[13px] leading-snug text-(--color-text-secondary)">{label}</span>
-    </label>
-  );
-}

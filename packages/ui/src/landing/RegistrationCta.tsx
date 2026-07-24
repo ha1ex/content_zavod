@@ -12,6 +12,8 @@ export interface RegistrationCtaProps {
   anchorId?: string;
   action?: string;
   dataConsentHref?: string;
+  telegramHref?: string;
+  maxHref?: string;
 }
 
 /**
@@ -32,6 +34,8 @@ export function RegistrationCta({
   anchorId = 'registration',
   action,
   dataConsentHref,
+  telegramHref,
+  maxHref,
 }: RegistrationCtaProps) {
   return (
     <section className="px-4 py-16 md:px-6 xl:px-0 md:py-24 lg:py-32">
@@ -65,6 +69,8 @@ export function RegistrationCta({
             anchorId={anchorId}
             action={action}
             dataConsentHref={dataConsentHref}
+            telegramHref={telegramHref}
+            maxHref={maxHref}
           />
         </div>
       </GradientPanel>

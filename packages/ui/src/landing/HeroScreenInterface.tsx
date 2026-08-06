@@ -1,4 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
+
+/** Ширина, на которой нарисована доска, и её предел на десктопе (контейнер DS). */
+const BOARD_DESIGN_WIDTH = 1360;
+const BOARD_MAX_WIDTH = 1216;
 
 /**
  * HeroScreenInterface — переиспользуемый мокап ПЕРВОГО ЭКРАНА лендинга Kaiten:
@@ -75,6 +81,11 @@ export interface HeroScreenInterfaceProps {
   animatedCard?: HsiAnimatedCard;
   /** Базовый zoom доски (по умолчанию 0.86). */
   scale?: number;
+  /**
+   * Строка доверия под доской: короткие пункты через разделитель
+   * («Российское ПО · Облако и сервер · Бесплатный тариф · Легко освоить»).
+   */
+  trustLine?: string[];
 
   className?: string;
   ariaLabel?: string;
@@ -141,11 +152,16 @@ function Lane({ lane, foot, animate, animatedCard }: { lane: HsiLane; foot: bool
         {lane.columns.map((col, ci) => (
           <div className="col" key={ci}>
             {animate && animatedCard && ci === dragCol && (
-              <div className="drag-layer">
+              // .drag-slot остаётся в потоке: пока карточка «поднята», на её месте
+              // виден призрак-плашка (чёрный 10%), как в реальном перетаскивании
+              <div className="drag-slot">
+                <span className="drag-ghost" aria-hidden="true" />
+                <div className="drag-layer">
                 <div className="card drag-card"><CardBody card={animatedCard.card} /></div>
                 <span className="hand" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="#fff" stroke="#2d2d2d" strokeWidth={1.4} strokeLinejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11V7.5a1.5 1.5 0 0 1 3 0V11v-1a1.5 1.5 0 0 1 3 0v5.5a5.5 5.5 0 0 1-5.5 5.5H12a5 5 0 0 1-4.3-2.5l-2.4-4a1.5 1.5 0 0 1 2.5-1.6L9 15z" /></svg>
                 </span>
+                </div>
               </div>
             )}
             {col.map((card, ki) => <div className="card" key={ki}><CardBody card={card} /></div>)}
@@ -164,6 +180,40 @@ function Cta({ cta, variant }: { cta: HsiCta; variant: 'fill' | 'outline' }) {
   );
 }
 
+/* Иконки строки доверия (lucide-контуры, как на «Кайтен vs MS Project»).
+   Подбираются по ключевому слову пункта; фолбэк — галочка в круге. */
+const TRUST_ICONS: { match: RegExp; path: React.ReactNode }[] = [
+  { match: /российск|реестр|\bПО\b/i, path: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /></> },
+  { match: /облак|сервер|коробк|on-?premise/i, path: <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /> },
+  { match: /тариф|бесплат|цена|стоимост/i, path: <><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 3v18" /></> },
+  { match: /импорт|перенос|перееза?д|миграц/i, path: <><path d="M4 8h16" /><path d="m16 4 4 4-4 4" /><path d="M20 16H4" /><path d="m8 12-4 4 4 4" /></> },
+  { match: /освоить|прост|легк|быстр|внедрен/i, path: <><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><path d="M4 22V3" /></> },
+];
+
+function TrustIcon({ label }: { label: string }) {
+  const hit = TRUST_ICONS.find((i) => i.match.test(label));
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {hit ? hit.path : <><circle cx="12" cy="12" r="9" /><path d="m9 12 2 2 4-4" /></>}
+    </svg>
+  );
+}
+
+/** Один проход пунктов строки доверия с разделителями между ними. */
+function TrustSet({ items, clone }: { items: string[]; clone?: boolean }) {
+  return (
+    <div className="trust-set" {...(clone ? { 'aria-hidden': 'true' as const } : {})}>
+      <span className="sep sep--lead" aria-hidden="true" />
+      {items.map((label, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <span className="sep" />}
+          <b><TrustIcon label={label} />{label}</b>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
 const DEFAULT_BG =
   'radial-gradient(900px 420px at 50% -140px, var(--brand-12, #efe9f9) 0%, rgba(239,233,249,0) 70%), linear-gradient(#fff,#fff)';
 
@@ -174,19 +224,20 @@ const CSS = `
   --_brand:var(--brand-100,#7d4ccf);--_brand-hover:var(--brand-hover,#6f43b8);
   --_brand-12:var(--brand-12,#efe9f9);--_brand-12k:var(--brand-12k,rgba(125,76,207,.12));
   --_brand-48k:var(--brand-48k,rgba(125,76,207,.48));--_border:var(--border-default,#e0e0e0);
-  --_ink:#2d2d2d;--_font:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
-  --_ls:var(--ls,-0.2px);
-  position:relative;padding:var(--sp-12,48px) 0 var(--sp-20,80px);overflow:hidden;
+  --_ink:#2d2d2d;--_font:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);
+  --_ls:var(--ls,0);
+  position:relative;padding:var(--sp-12,48px) 0 var(--sp-6,24px);overflow:hidden;
   font-family:var(--_font);letter-spacing:var(--_ls);color:var(--_ink);
 }
 .hsi-screen *,.hsi-screen *::before,.hsi-screen *::after{box-sizing:border-box}
 .hsi-screen__container{max-width:var(--container,1216px);margin:0 auto;padding:0 var(--sp-4,16px)}
+@media(min-width:1280px){.hsi-screen__container{padding:0}}
 .hsi-screen__grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-12,48px)}
-.hsi-screen__copy{width:100%;max-width:820px;margin:0 auto;text-align:center}
+.hsi-screen__copy{width:100%;max-width:940px;margin:0 auto;text-align:center}
 .hsi-screen__badge{display:inline-flex;align-items:center;justify-content:center;background:var(--_brand-12k);border-radius:var(--radius-2xl,16px);padding:var(--sp-1,4px) var(--sp-4,16px);margin-bottom:var(--sp-4,16px)}
 .hsi-screen__badge-text{font-size:var(--fs-sm,14px);line-height:var(--lh-sm,20px);font-weight:var(--fw-med,500);color:var(--_brand);white-space:nowrap}
-.hsi-screen__title{font-size:var(--fs-5xl,48px);line-height:var(--lh-5xl,52px);font-weight:var(--fw-semi,600);letter-spacing:-1px;margin:var(--sp-4,16px) 0 var(--sp-5,20px)}
-.hsi-screen__sub{font-size:var(--fs-xl,20px);line-height:var(--lh-xl,28px);font-weight:var(--fw-reg,400);color:#2d2d2d;max-width:680px;margin:0 auto var(--sp-8,32px)}
+.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,44px);font-weight:var(--fw-semi,600);letter-spacing:0;margin:var(--sp-4,16px) 0 var(--sp-5,20px)}
+.hsi-screen__sub{font-size:var(--fs-lg,18px);line-height:var(--lh-lg,28px);font-weight:var(--fw-reg,400);color:#2d2d2d;max-width:820px;margin:0 auto var(--sp-8,32px)}
 .hsi-screen__cta{display:flex;gap:var(--sp-3,12px);flex-wrap:wrap;justify-content:center}
 .hsi-screen__btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-1,4px);height:48px;padding:var(--sp-3,12px) var(--sp-5,20px);font-family:var(--_font);font-size:var(--fs-md,16px);line-height:var(--lh-md,24px);font-weight:var(--fw-med,500);letter-spacing:var(--_ls);border-radius:var(--radius-lg,8px);border:none;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .18s,border-color .18s,color .18s}
 .hsi-screen__btn--fill{background:var(--_brand);color:#fff}
@@ -194,14 +245,36 @@ const CSS = `
 .hsi-screen__btn--outline{background:#fff;border:1px solid var(--_border);color:var(--_brand)}
 .hsi-screen__btn--outline:hover{background:var(--_brand-12);border-color:var(--_brand-48k);color:var(--_brand-hover)}
 .hsi-screen__visual{width:100%;display:flex;justify-content:center}
-@media(max-width:980px){.hsi-screen__grid{gap:var(--sp-10,40px)}.hsi-screen__copy{max-width:680px}}
-@media(max-width:767px){.hsi-screen{padding:var(--sp-12,48px) 0}.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,40px)}.hsi-screen__sub{font-size:var(--fs-md,16px)}.hsi-screen__copy{text-align:left}.hsi-screen__cta{justify-content:center}}
+/* Строка доверия — стилистика лендинга «Кайтен vs MS Project»:
+   иконка-контур брендового цвета + подпись, разделитель-палочка между пунктами,
+   на узких экранах — бегущая строка с растворением по краям. */
+.hsi-screen__trust{display:flex;align-items:center;justify-content:center;gap:16px;font-size:16px;margin-top:var(--sp-4,16px)}
+.hsi-screen__trust b{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-size:16px;line-height:22px;font-weight:var(--fw-reg,400);color:#424242}
+.hsi-screen__trust b svg{width:18px;height:18px;color:var(--_brand);flex:0 0 auto}
+.hsi-screen__trust .sep{width:1px;height:20px;background:var(--_border);flex:0 0 auto}
+.hsi-screen__trust .trust-track{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;min-width:0}
+.hsi-screen__trust .trust-set{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+.hsi-screen__trust .trust-track>[aria-hidden="true"],.hsi-screen__trust .trust-track>.trust-gap{display:none}
+.hsi-screen__trust .trust-gap{width:16px}
+.hsi-screen__trust .sep--lead{display:none}
+@media(max-width:839px){
+  .hsi-screen__trust{overflow:hidden;justify-content:flex-start;mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%)}
+  .hsi-screen__trust .trust-track{width:max-content;flex:0 0 auto;flex-wrap:nowrap;justify-content:flex-start;animation:hsiTrustMarquee 30s linear infinite}
+  .hsi-screen__trust .trust-track>[aria-hidden="true"]{display:flex}
+  .hsi-screen__trust .sep--lead{display:block}
+  .hsi-screen__trust .trust-track>.trust-gap{display:none}
+}
+@media(max-width:767px){.hsi-screen__trust{font-size:14px;gap:12px;padding-inline:16px}.hsi-screen__trust b{font-size:14px}.hsi-screen__trust b svg{width:16px;height:16px}.hsi-screen__trust .sep{height:16px}}
+@keyframes hsiTrustMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.hsi-screen__trust .trust-track{animation:none}}
+@media(max-width:980px){.hsi-screen__grid{gap:var(--sp-10,40px)}.hsi-screen__copy{max-width:none}.hsi-screen__sub{max-width:none}}
+@media(max-width:767px){.hsi-screen{padding:var(--sp-12,48px) 0 var(--sp-6,24px)}.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,40px)}.hsi-screen__sub{font-size:var(--fs-md,16px)}.hsi-screen__copy{text-align:left}.hsi-screen__cta{justify-content:center}}
 @media(max-width:480px){.hsi-screen__badge{max-width:100%}.hsi-screen__badge-text{white-space:normal}}
 @media(max-width:384px){.hsi-screen__title{font-size:var(--fs-3xl,30px);line-height:var(--lh-3xl,36px)}}
 
-.hsi{--tp:#2d2d2d;--ts:#8a8a8f;--acc:#7d4ccf;--bd:#e8e8eb;--sec:#f4f4f6;font-family:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);color:var(--tp);-webkit-font-smoothing:antialiased;text-align:left;display:flex;justify-content:center;zoom:.86}
+.hsi{--tp:#2d2d2d;--ts:#8a8a8f;--acc:#7d4ccf;--bd:#e8e8eb;--sec:#f4f4f6;font-family:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);color:var(--tp);-webkit-font-smoothing:antialiased;text-align:left;display:flex;justify-content:center;zoom:.894}
 .hsi *{box-sizing:border-box;margin:0;padding:0}
-.hsi .mod{width:1360px;flex:0 0 auto;background:#f1f1f4;border:1px solid var(--bd);border-radius:16px;box-shadow:0 18px 50px -24px rgba(45,45,45,.35);overflow:hidden}
+.hsi .mod{width:1360px;flex:0 0 auto;background:#f1f1f4;border:1px solid var(--bd);border-radius:16px;box-shadow:0 0 50px -24px rgba(45,45,45,.35);overflow:hidden}
 .hsi .hdr{display:flex;align-items:center;gap:12px;padding:14px 18px}
 .hsi .grip{display:grid;grid-template-columns:repeat(2,3px);gap:3px}
 .hsi .grip i{width:3px;height:3px;border-radius:50%;background:#c4c4c9;display:block}
@@ -220,7 +293,7 @@ const CSS = `
 .hsi .lanebody{display:flex;padding:14px 8px}
 .hsi .col{flex:1;padding:0 9px;display:flex;flex-direction:column;gap:12px;position:relative}
 .hsi .col + .col::before{content:"";position:absolute;left:0;top:-14px;bottom:-14px;border-left:1px solid var(--bd)}
-.hsi .card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(45,45,45,.05);display:flex;flex-direction:column;gap:11px}
+.hsi .card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px;box-shadow:0 0 2px rgba(45,45,45,.05);display:flex;flex-direction:column;gap:11px}
 .hsi .ct{font-size:14.5px;font-weight:500;line-height:1.35;color:var(--tp)}
 .hsi .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .hsi .prio{display:inline-flex;align-items:center;gap:3px;color:var(--ts);font-size:13px}
@@ -241,19 +314,33 @@ const CSS = `
 .hsi .av:first-child{margin-left:0}
 .hsi .plus{font-size:12.5px;color:var(--ts);margin-left:7px}
 .hsi .due{display:inline-flex;align-items:center;gap:5px;color:var(--ts);font-size:12.5px}
+.hsi .drag-slot{position:relative}
+/* Место, откуда карточку унесли: плашка чёрным с прозрачностью 10%. */
+.hsi .drag-ghost{position:absolute;inset:0;border-radius:12px;background:rgba(0,0,0,.1);opacity:0;z-index:1;pointer-events:none;animation:hsiGhost 5s ease-in-out infinite}
 .hsi .drag-layer{position:relative;z-index:30;animation:hsiTravel 5s ease-in-out infinite}
 .hsi .drag-card{border:1px solid #e0d6f3;transform-origin:center;animation:hsiLift 5s ease-in-out infinite}
-.hsi .hand{position:absolute;left:76%;top:32%;transform:translate(-50%,-50%);width:40px;height:40px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));animation:hsiHand 5s ease-in-out infinite;z-index:31}
+.hsi .hand{position:absolute;left:84%;top:32%;transform:translate(-50%,-50%);width:40px;height:40px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));animation:hsiHand 5s ease-in-out infinite;z-index:31}
 @keyframes hsiTravel{0%{transform:translate(0,0)}10%{transform:translate(0,0)}20%{transform:translate(4px,-12px)}44%{transform:translate(154px,48px)}56%{transform:translate(154px,48px)}82%{transform:translate(4px,-12px)}94%{transform:translate(0,0)}100%{transform:translate(0,0)}}
-@keyframes hsiLift{0%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}10%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}20%{transform:rotate(3deg) scale(1.03);box-shadow:0 22px 45px -12px rgba(45,45,45,.40)}82%{transform:rotate(3deg) scale(1.03);box-shadow:0 22px 45px -12px rgba(45,45,45,.40)}94%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}100%{transform:rotate(0) scale(1);box-shadow:0 1px 2px rgba(45,45,45,.06)}}
+@keyframes hsiLift{0%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}10%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}20%{transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}82%{transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}94%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}100%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}}
 @keyframes hsiHand{0%{opacity:0}10%{opacity:0}20%{opacity:1}86%{opacity:1}100%{opacity:0}}
-@media(prefers-reduced-motion:reduce){.hsi .drag-layer,.hsi .drag-card,.hsi .hand{animation:none}}
+@keyframes hsiGhost{0%{opacity:0}14%{opacity:0}20%{opacity:1}82%{opacity:1}92%{opacity:0}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.hsi .drag-layer,.hsi .drag-card,.hsi .hand,.hsi .drag-ghost{animation:none}}
+/* Фолбэк до гидратации: заведомо меньшие ступени, чтобы доска не вылезала
+   за экран ещё до того, как JS посчитает точный масштаб по ширине слота. */
 @media(max-width:1279px){.hsi{zoom:.68}}
 @media(max-width:980px){.hsi{zoom:.5}}
 @media(max-width:767px){.hsi{zoom:.42}}
 @media(max-width:600px){.hsi{zoom:.34}}
 @media(max-width:480px){.hsi{zoom:.26}}
 @media(max-width:384px){.hsi{zoom:.2}}
+/* Мобилка: доска без анимации. Кадр застывает в момент, когда карточку донесли до соседней
+   колонки: слой смещён в конечную точку, карточка приподнята, рука и призрак видны. */
+@media(max-width:767px){
+  .hsi .drag-layer{animation:none;transform:translate(154px,48px)}
+  .hsi .drag-card{animation:none;transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}
+  .hsi .hand{animation:none;opacity:1}
+  .hsi .drag-ghost{animation:none;opacity:1}
+}
 `;
 
 export function HeroScreenInterface({
@@ -269,9 +356,34 @@ export function HeroScreenInterface({
   animate,
   animatedCard,
   scale,
+  trustLine,
   className,
   ariaLabel,
 }: HeroScreenInterfaceProps) {
+  /*
+   * Доска нарисована на 1360px. Масштаб считаем от реальной ширины слота, а не
+   * ступенями по брейкпоинтам: на десктопе упираемся в контейнер DS (1216px),
+   * ниже — сжимаем пропорционально, чтобы доска целиком влезала в экран.
+   */
+  const visualRef = useRef<HTMLDivElement>(null);
+  const [fit, setFit] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = visualRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.clientWidth;
+      if (!w) return;
+      const next = Math.min(BOARD_MAX_WIDTH, w) / BOARD_DESIGN_WIDTH;
+      setFit((prev) => (prev == null || Math.abs(prev - next) > 0.001 ? next : prev));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const boardZoom = scale ?? fit ?? undefined;
   return (
     <section
       className={`hsi-screen${className ? ` ${className}` : ''}`}
@@ -295,8 +407,8 @@ export function HeroScreenInterface({
           )}
         </div>
 
-        <div className="hsi-screen__visual">
-          <div className="hsi" aria-hidden="true" style={scale != null ? { zoom: scale } : undefined}>
+        <div className="hsi-screen__visual" ref={visualRef}>
+          <div className="hsi" aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
             <div className="mod">
               <div className="hdr">
                 <span className="grip"><i /><i /><i /><i /><i /><i /></span>
@@ -318,6 +430,16 @@ export function HeroScreenInterface({
             </div>
           </div>
         </div>
+
+        {trustLine && trustLine.length > 0 && (
+          <div className="hsi-screen__trust">
+            <div className="trust-track">
+              <TrustSet items={trustLine} />
+              <span className="trust-gap" aria-hidden="true" />
+              <TrustSet items={trustLine} clone />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -42,10 +42,10 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
-      <div className="mb-10 max-w-2xl">
+      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:text-center lg:mb-12 lg:max-w-4xl">
         {eyebrow && (
           <p
             data-comp="bento_grid.eyebrow"
@@ -72,7 +72,7 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
 
       {cells.some((c) => c.featureTile) && <FeatureTilesStyle />}
 
-      <div className="grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
+      <div className="grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:gap-8">
         {cells.map((c, i) => (
           <Inspect
             as="div"

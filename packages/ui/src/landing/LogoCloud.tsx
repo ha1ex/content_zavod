@@ -23,11 +23,11 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-12 md:px-6 xl:px-0 md:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
       {(eyebrow || title || description) && (
-        <div className="mb-8 max-w-2xl">
+        <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:text-center lg:mb-12 lg:max-w-4xl">
           {eyebrow && (
             <p
               data-comp="logo_cloud.eyebrow"

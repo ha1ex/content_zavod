@@ -37,7 +37,7 @@ export function FinalCta({
   if (variant === 'dark') {
     return (
       <section
-        className={cn('mx-auto w-full max-w-(--container-kaiten)', 'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16')}
+        className={cn('mx-auto w-full max-w-(--container-kaiten)', 'px-4 py-16 md:px-6 md:py-24 xl:px-0 lg:py-32')}
       >
         <CTAdark
           title={title}
@@ -78,7 +78,7 @@ export function FinalCta({
 
   return (
     <section
-      className={cn('mx-auto w-full max-w-(--container-kaiten)', 'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16')}
+      className={cn('mx-auto w-full max-w-(--container-kaiten)', 'px-4 py-16 md:px-6 md:py-24 xl:px-0 lg:py-32')}
     >
       <div
         className={cn(

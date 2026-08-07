@@ -302,7 +302,7 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
     // (она направлена вниз, поэтому pb больше боковых и верхнего).
     case 'kanban-minimal':
       return (
-        <div className="w-full overflow-hidden px-8 pt-4 pb-14">
+        <div className="w-full overflow-hidden px-8">
           <ScaleToFit designWidth={720}>
             <KanbanMinimalMock />
           </ScaleToFit>
@@ -311,7 +311,7 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
     // Анимированный близнец kanban-minimal — карточка едет из «Очередь» в «В работе».
     case 'kanban-minimal-animated':
       return (
-        <div className="w-full overflow-hidden px-8 pt-4 pb-14">
+        <div className="w-full overflow-hidden px-8">
           <ScaleToFit designWidth={720}>
             <KanbanMinimalAnimatedMock />
           </ScaleToFit>

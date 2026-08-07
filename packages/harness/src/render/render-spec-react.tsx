@@ -9,6 +9,8 @@ import {
   ProcessSteps,
   CtaBanner,
   CtaButtons,
+  CtaProduct,
+  FeatureRows,
   MediaCopy,
   StatStrip,
   PromoBanner,
@@ -71,6 +73,10 @@ function RenderSection({ section }: { section: Section }) {
       return <CtaBanner {...section.props} />;
     case 'CtaButtons':
       return <CtaButtons {...section.props} />;
+    case 'CtaProduct':
+      return <CtaProduct {...section.props} />;
+    case 'FeatureRows':
+      return <FeatureRows {...section.props} />;
     case 'MediaCopy':
       return <MediaCopy {...section.props} />;
     case 'StatStrip':

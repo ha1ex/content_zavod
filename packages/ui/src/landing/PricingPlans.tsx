@@ -25,14 +25,14 @@ export function PricingPlans({ eyebrow, title, description, plans }: PricingPlan
       className={cn(
         'bg-(--color-surface-section)',
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
-      <div className="mb-12 max-w-2xl">
+      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:text-center lg:mb-12 lg:max-w-4xl">
         {eyebrow && (
           <p
             data-comp="pricing.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>
@@ -47,7 +47,7 @@ export function PricingPlans({ eyebrow, title, description, plans }: PricingPlan
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
         {plans.map((plan, i) => (
           <Inspect
             as="div"

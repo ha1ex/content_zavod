@@ -43,14 +43,14 @@ export function TimelineRoadmap({
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
-      <div className="mb-10 max-w-2xl">
+      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:text-center lg:mb-12 lg:max-w-4xl">
         {eyebrow && (
           <p
             data-comp="timeline_roadmap.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>
@@ -72,7 +72,7 @@ export function TimelineRoadmap({
       </div>
 
       {orientation === 'horizontal' ? (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
           {milestones.map((m, i) => (
             <Inspect
               as="div"
@@ -87,7 +87,7 @@ export function TimelineRoadmap({
               {m.period && (
                 <p
                   data-comp={`timeline_roadmap.milestones[${i}].period`}
-                  className="mt-3 text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)"
+                  className="mt-3 text-xs font-medium uppercase text-(--color-text-secondary)"
                 >
                   {m.period}
                 </p>
@@ -148,7 +148,7 @@ export function TimelineRoadmap({
                   {m.period && (
                     <p
                       data-comp={`timeline_roadmap.milestones[${i}].period`}
-                      className="text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)"
+                      className="text-xs font-medium uppercase text-(--color-text-secondary)"
                     >
                       {m.period}
                     </p>
@@ -209,7 +209,7 @@ function StatusBadge({ status }: { status?: TimelineMilestoneProps['status'] }) 
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide',
+        'inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase',
         className,
       )}
     >

@@ -42,14 +42,16 @@ export function LogoMarquee({
   durationSec,
 }: LogoMarqueeProps) {
   return (
-    <section className={cn('w-full overflow-hidden px-4 py-12 md:px-6 md:py-16')}>
+    // Снизу отступа нет: за лентой логотипов идёт цветной CTA со своей
+    // вертикальной шкалой — иначе просвет складывается вдвое.
+    <section className={cn('w-full overflow-hidden px-4 pt-16 md:px-6 md:pt-24 lg:pt-32')}>
       {(eyebrow || title || description) && (
         // отступ до ленты задаёт сам мок (.lmq__marq margin-top)
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-left md:text-center">
           {eyebrow && (
             <p
               data-comp="logo_marquee.eyebrow"
-              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
             >
               {eyebrow}
             </p>

@@ -35,6 +35,10 @@ export { CtaBanner } from './CtaBanner';
 export type { CtaBannerProps, CtaBannerCtaProps } from './CtaBanner';
 export { CtaButtons } from './CtaButtons';
 export type { CtaButtonsProps, CtaButtonsCtaProps } from './CtaButtons';
+export { CtaProduct } from './CtaProduct';
+export { FeatureRows } from './FeatureRows';
+export type { FeatureRowsProps, FeatureRowProps } from './FeatureRows';
+export type { CtaProductProps } from './CtaProduct';
 
 export { MediaCopy } from './MediaCopy';
 export type { MediaCopyProps, MediaCopyCheckItemProps, MediaCopyCtaProps } from './MediaCopy';

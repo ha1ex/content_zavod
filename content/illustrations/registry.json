@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-31T16:52:02.981Z",
+  "updatedAt": "2026-08-07T12:32:28.076Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -427,12 +427,12 @@
     },
     {
       "kind": "mock-use",
-      "variant": "kanban-minimal-animated",
+      "variant": "hero-screen-interface",
       "landingSlug": "kaiten-task-tracker",
       "sectionId": "hero",
       "sectionIdx": 1,
       "domain": "pm",
-      "recordedAt": "2026-07-31T16:52:02.981Z"
+      "recordedAt": "2026-08-07T12:32:28.076Z"
     }
   ]
 }

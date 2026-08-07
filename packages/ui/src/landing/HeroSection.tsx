@@ -171,7 +171,7 @@ export function HeroSection({
   // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
   // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
   // props, доску — из props.board (тексты под ТЗ) или доменный дефолт
-  // HSI_BOARD_*. Правило: `comparison-hero-screen`.
+  // HSI_BOARD_*. Правило: `hero-screen-interface-default`.
   if (visual?.variant === 'hero-screen-interface') {
     return (
       <HeroScreenInterface
@@ -185,6 +185,8 @@ export function HeroSection({
         lanes={board?.lanes ?? HSI_BOARD_LANES}
         animate={board?.animate ?? true}
         animatedCard={board?.animatedCard ?? HSI_BOARD_ANIMATED}
+        // строка доверия из ТЗ — под доской, разделители между пунктами
+        trustLine={bullets}
         ariaLabel="Первый экран Kaiten"
       />
     );
@@ -233,7 +235,7 @@ export function HeroSection({
               )}
               <h1
                 data-comp="hero.title"
-                className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl"
+                className="text-4xl font-semibold leading-[1.05] sm:text-5xl xl:text-6xl"
               >
                 {renderedTitle}
               </h1>
@@ -274,7 +276,7 @@ export function HeroSection({
               )}
               <h1
                 data-comp="hero.title"
-                className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl"
+                className="text-4xl font-semibold leading-[1.05] sm:text-5xl xl:text-6xl"
               >
                 {renderedTitle}
               </h1>

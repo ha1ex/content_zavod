@@ -35,7 +35,7 @@ export function PromoBanner({
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-12 md:px-6 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
       <div
@@ -60,7 +60,7 @@ export function PromoBanner({
             <p
               data-comp="promo_banner.eyebrow"
               className={cn(
-                'mb-3 text-sm font-medium uppercase tracking-wide',
+                'mb-3 text-sm font-medium uppercase',
                 isViolet ? 'text-white/80' : 'text-(--color-text-accent)',
               )}
             >

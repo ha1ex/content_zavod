@@ -136,7 +136,7 @@ const HeroBoardSchema = z.object({
       }),
     )
     .min(2)
-    .max(4),
+    .max(5),
   lanes: z
     .array(
       z.object({
@@ -199,7 +199,7 @@ const HeroSectionSchema = z.object({
     /**
      * Данные доски для visual.variant='hero-screen-interface' (анимированный
      * первый экран HeroScreenInterface). Тексты карточек — под логику ТЗ.
-     * Если не задано — используется доменный дефолт. Правило: `comparison-hero-screen`.
+     * Если не задано — используется доменный дефолт. Правило: `hero-screen-interface-default`.
      */
     board: HeroBoardSchema.optional(),
     /** Короткие буллеты под подзаголовком («что заберёте»). Только layout 'side'. */
@@ -239,11 +239,35 @@ const FeatureGridSchema = z.object({
             .string()
             .optional()
             .describe('опциональное компактное мок-превью внутри карточки'),
+          featureTile: z
+            .string()
+            .optional()
+            .describe(
+              'подпись плитки из галереи мини-мокапов фич (FeatureMocksV01), напр. «Канбан-доски»',
+            ),
+          /** Растровый скриншот вместо мока: путь из public + alt. Приоритет выше mockVariant/featureTile. */
+          image: z
+            .object({ src: z.string().min(1), alt: z.string().max(200).optional() })
+            .optional(),
+          /** Карточка занимает весь ряд — уходит отдельной строкой вниз. */
+          wide: z.boolean().optional(),
+          /** Иллюстрация сбоку от текста (десктоп), под текстом на узких экранах. */
+          imageAside: z.boolean().optional(),
+          /** Карточка-CTA: кнопки встают под описанием внутри карточки. */
+          primaryCta: z.object({ label: z.string().min(2), href: z.string().min(1) }).optional(),
+          secondaryCta: z
+            .object({ label: z.string().min(2), href: z.string().min(1) })
+            .nullable()
+            .optional(),
         }),
       )
       .min(2)
       .max(8),
     columns: z.union([z.literal(2), z.literal(3), z.literal(4)]).default(3),
+    /** Листалка вбок на планшете и мобилке — для секций с 6+ карточками. */
+    slider: z.boolean().optional(),
+    /** Убрать верхний отступ секции (когда блок сверху уже несёт свою шкалу). */
+    flushTop: z.boolean().optional(),
   }),
 });
 
@@ -345,7 +369,11 @@ const ReviewSliderSchema = z.object({
     reviews: z
       .array(
         z.object({
-          logo: z.string().max(60).optional(),
+          logo: z.string().max(120).optional(),
+          /** Крупная метрика кейса — рендерится вплотную над цитатой. */
+          metric: z.string().max(80).optional(),
+          /** Высота логотипа в px (дефолт 40) — вертикальным знакам нужно больше. */
+          logoHeight: z.number().min(16).max(96).optional(),
           quote: z.string().min(10).max(600),
           name: z.string().min(2).max(80),
           role: z.string().min(2).max(120),
@@ -405,6 +433,47 @@ const CtaButtonsSchema = z.object({
   props: z.object({
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
+  }),
+});
+
+/* ─── CtaProduct (цветной CTA-блок со скриншотом продукта) ─────────── */
+const CtaProductSchema = z.object({
+  id: z.literal('cta_product'),
+  component: z.literal('CtaProduct'),
+  props: z.object({
+    title: z.string().min(4).max(120),
+    description: z.string().min(10).max(280),
+    primaryCta: CtaSchema,
+    secondaryCta: CtaSchema.nullable().optional(),
+    /** Не задана — эталонный скриншот продукта из мока CTAproduct. */
+    image: z
+      .object({ src: z.string().min(1), alt: z.string().max(200).optional() })
+      .optional(),
+  }),
+});
+
+/* ─── FeatureRows (раскрытая шахматка вместо аккордеона) ──────────── */
+const FeatureRowsSchema = z.object({
+  id: z.literal('feature_rows'),
+  component: z.literal('FeatureRows'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    items: z
+      .array(
+        z.object({
+          title: z.string().min(2).max(120),
+          description: z.string().min(10).max(400),
+          image: z.object({ src: z.string().min(1), alt: z.string().max(200).optional() }),
+          /** 'edge' (дефолт) — скриншот в край плашки; 'center' — по центру колонки. */
+          imageAlign: z.enum(['edge', 'center']).optional(),
+          /** Поведение кадра на мобилке: 'bleed' (дефолт) — в оба края, 'right' — только вправо, 'inset' — с полями. */
+          imageMobile: z.enum(['bleed', 'right', 'inset']).optional(),
+        }),
+      )
+      .min(2)
+      .max(6),
   }),
 });
 
@@ -1116,6 +1185,8 @@ export const SectionSchema = z.discriminatedUnion('component', [
   ProcessStepsSchema,
   CtaBannerSchema,
   CtaButtonsSchema,
+  CtaProductSchema,
+  FeatureRowsSchema,
   PricingPlansSchema,
   FAQAccordionSchema,
   FinalCtaSchema,
@@ -1174,6 +1245,18 @@ export const LandingSpecMetaSchema = z
         'Резолвленный домен продукта (из brief.product/market/audience). Используется ' +
           'illustration-domain-match валидатором для блокировки cross-domain reuse. ' +
           'Если не задан явно — резолвится из brief при ingest. См. wiki/references/domain-mock-matrix.md.',
+      ),
+    chrome: z
+      .object({
+        footer: z
+          .boolean()
+          .optional()
+          .describe('false — не подставлять статичный подвал kaiten.ru (LandingFooterMock)'),
+      })
+      .optional()
+      .describe(
+        'Опт-аут из правила factory-chrome. По умолчанию шапка и подвал kaiten.ru ' +
+          'подставляются принудительно; выключается осознанно и только по решению оператора.',
       ),
     illustrationAllocations: z
       .array(

@@ -2,7 +2,7 @@
 slug: kaiten-task-tracker
 type: landing
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-08-07
 status: draft
 brief: content/briefs/kaiten-task-tracker.json
 archetype: saas_landing
@@ -34,19 +34,18 @@ sections:
   - site_header
   - hero
   - reviews
-  - features
+  - feature_rows
   - cta_buttons
   - features
-  - cta_buttons
-  - bento_grid
+  - cta_product
+  - features
   - cta_buttons
   - logo_marquee
   - final_cta
   - faq
-  - kaiten_footer
 generator: host-agent
 durationMs: 0
-tokenEstimate: 48142
+tokenEstimate: 48139
 tags:
   - landing
   - saas_landing
@@ -59,8 +58,8 @@ stale: false
 - **brief:** `content/briefs/kaiten-task-tracker.json`
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
-- **sections used:** `site_header, hero, reviews, features, cta_buttons, features, cta_buttons, bento_grid, cta_buttons, logo_marquee, final_cta, faq, kaiten_footer`
-- **token estimate:** `48142`
+- **sections used:** `site_header, hero, reviews, feature_rows, cta_buttons, features, cta_product, features, cta_buttons, logo_marquee, final_cta, faq`
+- **token estimate:** `48139`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -106,14 +105,8 @@ stale: false
 ### reviews (ReviewSlider)
 
 
-### features (FeatureGrid)
+### feature_rows (FeatureRows)
 
-- **title:** "Отслеживайте статус каждой задачи без совещаний и напоминаний"
-- **columns:** 2 · **items:** 4
-  1. `layout-grid` · "Все задачи — в одной системе" — 147 chars
-  2. `user-check` · "Ответственный и срок — у каждой задачи" — 115 chars
-  3. `alert-triangle` · "Риски видны заранее" — 131 chars
-  4. `layers` · "Один таск-трекер вместо десятка сервисов" — 131 chars
 
 ### cta_buttons (CtaButtons)
 
@@ -121,16 +114,23 @@ stale: false
 ### features (FeatureGrid)
 
 - **title:** "Почему компании доверяют Кайтен"
-- **columns:** 3 · **items:** 3
+- **columns:** 2 · **items:** 2
   1. `shield-check` · "Российский сервис с защитой данных" — 102 chars
   2. `server` · "Серверная версия (on-premise)" — 105 chars
-  3. `rocket` · "Быстрое внедрение без остановки работы" — 160 chars
 
-### cta_buttons (CtaButtons)
+### cta_product (CtaProduct)
 
 
-### bento_grid (BentoGrid)
+### features (FeatureGrid)
 
+- **title:** "Кайтен — единая среда для всей компании"
+- **columns:** 3 · **items:** 6
+  1. `square-check-big` · "Задачи" — 177 chars
+  2. `file-text` · "Документы" — 151 chars
+  3. `folder-kanban` · "Проекты" — 152 chars
+  4. `inbox` · "Заявки" — 146 chars
+  5. `handshake` · "Продажи" — 150 chars
+  6. `message-circle` · "Коммуникации" — 142 chars
 
 ### cta_buttons (CtaButtons)
 
@@ -147,12 +147,10 @@ stale: false
 
 - **title:** "Вопросы и ответы"
 - **items:** 4 Q&A
-  1. "Можно ли использовать Кайтен бесплатно?" — answer 274/600 chars
-  2. "Какие методологии поддерживает Кайтен?" — answer 175/600 chars
+  1. "Можно ли использовать Кайтен бесплатно?" — answer 303/600 chars
+  2. "Какие методологии поддерживает Кайтен?" — answer 196/600 chars
   3. "Нужен ли ИТ-отдел для внедрения?" — answer 102/600 chars
-  4. "Как перенести данные из другого сервиса?" — answer 248/600 chars
-
-### kaiten_footer (LandingFooterMock)
+  4. "Как перенести данные из другого сервиса?" — answer 310/600 chars
 <!-- /gen:sections-summary -->
 
 ## Audience score
@@ -163,7 +161,7 @@ stale: false
 - **Score:** 88.43 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT, Торговля, Производство, Строительство
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-07-31T16:52:02.903Z
+- **Generated:** 2026-08-07T12:32:27.960Z
 
 ## Breakdown
 

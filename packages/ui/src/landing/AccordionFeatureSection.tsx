@@ -54,7 +54,7 @@ const ChevronDown = () => (
 
 const STYLES = `
 .afs{--afs-brand:#7d4ccf;--afs-brand-12:#efe9f9;--afs-bd:#e0e0e0;--afs-t1:#2d2d2d;--afs-t2:#757575;--afs-sec:#f5f5f5;
-  interpolate-size:allow-keywords;font-family:'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--afs-t1);padding:64px 0}
+  interpolate-size:allow-keywords;font-family:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);color:var(--afs-t1);padding:96px 0 0}
 .afs *{box-sizing:border-box}
 .afs__container{max-width:1216px;margin:0 auto;padding:0 16px}
 @media(min-width:768px){.afs__container{padding-left:24px;padding-right:24px}}
@@ -65,6 +65,7 @@ const STYLES = `
 .afs .acc-h{font-size:30px;line-height:36px;font-weight:600;color:var(--afs-t1);margin:0 0 12px}
 .afs .acc-sub{font-size:16px;line-height:24px;color:var(--afs-t1);margin:0}
 .afs .acc-item{background:var(--afs-sec);border:1px solid transparent;border-radius:12px;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.afs .acc-item:not(.open):hover{border-color:#eee}
 .afs .acc-item.open{background:#fff;border-color:var(--afs-brand);box-shadow:0 2px 10px -4px rgba(125,76,207,.18)}
 .afs .acc-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;margin:0;background:none;border:0;cursor:pointer;text-align:left;font-family:inherit}
 .afs .acc-item.open .acc-head{padding-bottom:12px}
@@ -86,8 +87,13 @@ const STYLES = `
 .afs .acc-panel.on{opacity:1;visibility:visible;transform:none}
 .afs .acc-panel img{width:100%;height:100%;object-fit:cover;display:block}
 .afs .acc-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:48px}
+@media(max-width:1023px){
+  .afs{padding:64px 0 0}
+}
+@media(max-width:767px){
+  .afs{padding:48px 0 0}
+}
 @media(max-width:900px){
-  .afs{padding:40px 0}
   .afs .acc-wrap{grid-template-columns:1fr;gap:24px}
   .afs .acc-intro{margin-bottom:0}
   .afs .acc-media{order:-1;margin-bottom:8px}

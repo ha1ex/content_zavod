@@ -59,12 +59,13 @@ const css = `
   font-size:16px;line-height:24px;font-weight:600;text-decoration:none;
   transition:background .14s cubic-bezier(.2,0,.2,1)}
 .ctp__btn:hover{background:#6f42bb}
+/* Ховер как у всех контурных кнопок DS — лавандовый, а не серый. */
 .ctp__btn--ghost{background:#fff;color:#2d2d2d}
-.ctp__btn--ghost:hover{background:#f5f5f5}
+.ctp__btn--ghost:hover{background:#efe9f9;color:#6a3cbf}
 .ctp__visual{position:relative;z-index:1;display:flex;justify-content:center;align-items:center}
 .ctp__visual img{width:85%;height:auto;display:block;border-radius:12px}
 @media(min-width:1024px){.ctp{border-radius:16px}.ctp__visual img{border-radius:16px}}
-@media(min-width:768px) and (max-width:1279px){.ctp__visual img{width:62%}}
+@media(min-width:768px) and (max-width:1279px){.ctp__visual img{width:80%}}
 @media(min-width:1280px){.ctp__visual img{width:72%}}
 @media(max-width:1023px){
   .ctp{grid-template-columns:1fr;text-align:center;background:linear-gradient(180deg,#ece0ff,#cdecff)}

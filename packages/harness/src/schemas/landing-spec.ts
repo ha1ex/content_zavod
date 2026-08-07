@@ -881,6 +881,10 @@ export const MockVariantSchema = z.enum([
 'retail-report-bottlenecks',
 'retail-report-ai',
 'gantt-chart',
+// Window-моки планирования (эталон — лендинг сравнения с MS Project)
+'window-links',
+'window-resource',
+'window-reports',
 'cli-terminal-hero',
 'cli-terminal-hero-animated',
 'cli-terminal-final-animated',

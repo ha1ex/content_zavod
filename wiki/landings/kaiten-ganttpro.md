@@ -2,7 +2,7 @@
 slug: kaiten-ganttpro
 type: landing
 created: 2026-07-30
-updated: 2026-07-30
+updated: 2026-08-07
 status: draft
 brief: content/briefs/kaiten-ganttpro.json
 archetype: saas_landing
@@ -98,7 +98,7 @@ stale: false
 ### hero (HeroSection)
 
 - **title:** "Кайтен — альтернатива GanttPRO"
-- **subtitle:** "Всё, что есть в GanttPRO для планирования проектов — плюс канбан-доски, документы, Agile-инструменты и полноценное мобильное приложение" _(135/200 chars)_
+- **subtitle:** "Все, что есть в GanttPRO для планирования проектов — плюс канбан-доски, документы, Agile-инструменты и полноценное мобильное приложение" _(135/200 chars)_
 - **primaryCta:** "Попробовать бесплатно" → `/signup`
 - **visual:** `product_screenshot` (assetId: `kaiten-ganttpro-board`)
 
@@ -157,7 +157,7 @@ stale: false
 - **Score:** 76.33 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-07-30T17:40:02.693Z
+- **Generated:** 2026-08-07T14:45:00.409Z
 
 ## Breakdown
 

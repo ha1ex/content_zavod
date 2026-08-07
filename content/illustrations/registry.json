@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-31T16:52:02.981Z",
+  "updatedAt": "2026-08-07T14:45:00.557Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -433,6 +433,51 @@
       "sectionIdx": 1,
       "domain": "pm",
       "recordedAt": "2026-07-31T16:52:02.981Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "hero-screen-interface",
+      "landingSlug": "kaiten-ganttpro",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-08-07T14:45:00.459Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "pm-board",
+      "landingSlug": "kaiten-ganttpro",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-08-07T14:45:00.487Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "kanban-minimal",
+      "landingSlug": "kaiten-ganttpro",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-08-07T14:45:00.513Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "portfolio-board",
+      "landingSlug": "kaiten-ganttpro",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-08-07T14:45:00.534Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "pm-board-1",
+      "landingSlug": "kaiten-ganttpro",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-08-07T14:45:00.557Z"
     }
   ]
 }

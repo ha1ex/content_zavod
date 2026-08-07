@@ -1,0 +1,908 @@
+:root {
+  --k000:#fff;--k200:#eee;--k300:#e0e0e0;--k400:#bdbdbd;--k500:#9e9e9e;--k600:#757575;--k900:#2d2d2d;
+  --brand-100:#7d4ccf;--brand-hover:#6f43b8;--brand-12:#efe9f9;--brand-48k:rgba(125,76,207,.48);
+--green-100:#4caf51;
+  --neutral-400:#a3a3a3;--border-tertiary:#d1d5db;--input-placeholder:#9ca3af;
+  --text-title:#2d2d2d;--text-secondary:#757575;--text-brand:#7d4ccf;--surface-page:#fff;--surface-section:#f5f5f5;--border-default:#e0e0e0;
+  --radius-lg:8px;--radius-xl:12px;--radius-2xl:16px;--container:1216px;--ls:-0.2px;
+  --font:'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--fw-reg:400;--fw-med:500;--fw-semi:600;
+  --sp-1:4px;--sp-1-5:6px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;--sp-16:64px;--sp-20:80px;--sp-24:96px;
+  --fs-xs:12px;--lh-xs:16px;--fs-sm:14px;--lh-sm:20px;--fs-md:16px;--lh-md:24px;--fs-lg:18px;--lh-lg:28px;--fs-xl:20px;--lh-xl:28px;--fs-2xl:24px;--lh-2xl:32px;--fs-3xl:30px;--lh-3xl:36px;--fs-4xl:36px;--lh-4xl:40px;--fs-5xl:48px;--lh-5xl:52px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--text-title);background:var(--surface-page);line-height:1.5;letter-spacing:var(--ls);-webkit-font-smoothing:antialiased}
+b,strong,h1,h2,h3,h4,h5,h6{font-weight:var(--fw-semi)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:var(--container);margin:0 auto;padding:0 var(--sp-4)}
+@media(min-width:1280px) {.container{max-width:calc(var(--container) + var(--sp-8) * 2);padding:0 var(--sp-8)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-1);font-family:var(--font);font-weight:var(--fw-med);letter-spacing:var(--ls);border-radius:var(--radius-lg);border:none;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .18s,border-color .18s}
+.btn--md{height:44px;padding:10px var(--sp-4);font-size:var(--fs-md);line-height:var(--lh-md)}
+.btn--lg{height:48px;padding:var(--sp-3) var(--sp-5);font-size:var(--fs-md);line-height:var(--lh-md)}
+.btn--fill{background:var(--brand-100);color:#fff}
+.btn--fill:hover{background:var(--brand-hover)}
+.btn--outline{background:#fff;border:1px solid var(--border-default);color:var(--brand-100)}
+.btn--outline:hover{background:var(--brand-12);border-color:var(--brand-48k);color:var(--brand-hover)}
+.btn--full{width:100%}
+
+.klogo{height:44px;width:auto;display:block;color:var(--text-title)}
+.klogo--m{height:40px}
+.klogo--f{color:#fff}
+/* NAVIGATION */
+.navbar{background:var(--k000);width:100%;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:50;border-bottom:1px solid var(--k200)}
+.navbar--desktop{height:80px}.navbar--mobile{height:72px;display:none}
+.navbar__container{display:flex;align-items:center;width:100%;max-width:1280px;padding:0 var(--sp-8)}
+.navbar__container--mobile{padding:0 var(--sp-3) 0 var(--sp-4)}
+.navbar__content{display:flex;align-items:center;flex:1 0 0;min-width:0}
+.navbar__menu-with-logo{display:flex;align-items:center;flex:1 0 0;min-width:0;gap:var(--sp-4)}
+.navbar__logo{flex-shrink:0;width:148px}
+.navbar__nav{display:flex;align-items:center;justify-content:center;flex:1 0 0;min-width:0;gap:var(--sp-5)}
+.navbar__link{display:flex;align-items:center;gap:var(--sp-1-5);flex-shrink:0;border-radius:var(--radius-lg);cursor:pointer}
+.navbar__link-text{font-family:var(--font);font-weight:var(--fw-med);font-size:var(--fs-md);line-height:var(--lh-md);letter-spacing:var(--ls);color:var(--text-title);white-space:nowrap}
+.navbar__link:hover .navbar__link-text{color:var(--text-brand)}
+.navbar__link-text--active{color:var(--text-brand)}
+.navbar__link-icon{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center}
+.navbar__actions{display:flex;align-items:center;flex-shrink:0;gap:var(--sp-10)}
+.navbar__action-group{display:flex;align-items:center;gap:var(--sp-2)}
+.navbar__phone{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--border-default);border-radius:var(--radius-lg);background:#fff;color:var(--text-title);flex-shrink:0;transition:border-color .18s,color .18s}
+.navbar__phone:hover{border-color:var(--brand-48k);color:var(--brand-100)}
+.navbar__phone svg{width:22px;height:22px}
+.navbar__link-icon{width:20px;height:20px}
+.navbar__burger{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--k000);border:none;border-radius:var(--radius-lg);padding:var(--sp-2);cursor:pointer}
+.navbar__burger span{display:block;width:22px;height:2px;background:var(--k900);border-radius:2px;margin:3px 0}
+.mobile-menu{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--k200);padding:var(--sp-4);flex-direction:column;gap:var(--sp-4);z-index:49}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:var(--fs-md);color:var(--text-title);font-weight:var(--fw-med)}
+.chev{width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-bottom:3px;color:var(--text-secondary)}
+/* SectionTitleK + BageSfera */
+
+.sh{display:flex;flex-direction:column;gap:var(--sp-4)}
+.sh--center{align-items:center;text-align:center;margin:0 auto;max-width:760px}
+.sh__heading{font-family:var(--font);font-size:var(--fs-4xl);font-weight:var(--fw-semi);line-height:var(--lh-4xl);letter-spacing:0;color:var(--text-title)}
+.sh__desc{font-family:var(--font);font-size:var(--fs-md);font-weight:var(--fw-reg);line-height:var(--lh-md);letter-spacing:var(--ls);color:var(--text-title)}
+section.s{padding:var(--sp-12) 0}
+@media(min-width:768px) and (max-width:1279px) {section.s{padding:var(--sp-8) 0}#features{padding-top:var(--sp-24)}#features .s-head {margin-bottom:var(--sp-8)}#faq{padding-top:var(--sp-16);padding-bottom:var(--sp-16)}#depsec{padding-top:var(--sp-24);padding-bottom:var(--sp-24)}#cta{padding-bottom:var(--sp-16)}}
+@media(min-width:1280px) {section.hero{padding-top:var(--sp-12)}#depsec{padding-top:calc(var(--sp-24) + var(--sp-8));padding-bottom:var(--sp-24)}#features{padding-top:calc(var(--sp-24) + var(--sp-8));padding-bottom:0}#cta{padding-bottom:var(--sp-24)}#faq{padding-top:var(--sp-24);padding-bottom:var(--sp-24)}}
+
+.s-head{margin-bottom:var(--sp-16)}
+
+/* Фон первого экрана — как на лендинге Weeek: радиальное лавандовое пятно фиксированного
+   размера, приподнятое за верхнюю кромку, затухает в прозрачность поверх белой подложки,
+   плюс отдельный размытый засвет .hero__glow под контентом. */
+.hero{position:relative;padding:var(--sp-12) 0 0;overflow:hidden;
+  background:radial-gradient(900px 420px at 50% -140px, var(--brand-12) 0%, rgba(239,233,249,0) 70%), linear-gradient(#fff,#fff)}
+.hero__glow{position:absolute;width:720px;height:520px;left:50%;top:-220px;transform:translateX(-50%);
+  border-radius:9999px;background:linear-gradient(-90deg,#e298ff,#6fe5ff);filter:blur(220px);opacity:.28;
+  pointer-events:none;z-index:0}
+.hero>.container{position:relative;z-index:1}
+@media(min-width:768px) and (max-width:1279px) {.hero{padding-top:var(--sp-8)}}
+.hero__grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-12)}
+.hero__copy{width:100%;max-width:820px;margin:0 auto;text-align:center}
+.hero h1{font-size:var(--fs-4xl);line-height:var(--lh-4xl);font-weight:var(--fw-semi);letter-spacing:-1px;margin:var(--sp-4) 0 var(--sp-5)}
+.hero__sub{font-size:var(--fs-xl);line-height:var(--lh-xl);color:#2d2d2d;font-weight:var(--fw-reg);max-width:760px;margin:0 auto var(--sp-8)}
+.hero__cta{display:flex;gap:var(--sp-3);flex-wrap:wrap;justify-content:center}
+.hero__visual{width:100%;display:flex;justify-content:center}
+
+/* MPA — ModuleProjectAnimateMock (анимированный портфель с drag-курсором), site_zavod */
+
+@media(max-width:980px) {.hero__grid{gap:var(--sp-10)}.hero__copy{max-width:680px}}
+/* MPF — faithful port of ModulePortfolioMock (Кайтен «Портфель проектов»), site_zavod */
+
+/* Accordion (slider) — DS accordion.md */
+.acc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-8);align-items:stretch;margin-top:var(--sp-12)}
+.acc{display:flex;flex-direction:column;gap:var(--sp-3);interpolate-size:allow-keywords}
+
+.acc-item{background:var(--surface-section);border:1px solid transparent;border-radius:12px;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.acc-item:hover{border-color:transparent}
+.acc-item.open{background:#fff;border-color:var(--brand-100);box-shadow:0 2px 10px -4px rgba(125,76,207,.18)}
+.acc-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);padding:var(--sp-5);margin:0;background:none;border:0;cursor:pointer;text-align:left;font-family:inherit}
+.acc-item.open .acc-head{padding-bottom:var(--sp-3)}
+.acc-title{font-size:var(--fs-lg);line-height:1.3;font-weight:var(--fw-reg);color:var(--text-title);transition:color .18s}
+.acc-head:hover .acc-title,.acc-item.open .acc-title{color:var(--brand-100)}
+.acc-item.open .acc-title{font-weight:var(--fw-semi)}
+.acc-ic{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:24px;height:24px;color:var(--text-secondary);transition:color .18s}
+.acc-item.open .acc-ic{color:var(--brand-100)}
+.acc-ic svg{width:20px;height:20px;transition:transform .24s ease}
+.acc-item.open .acc-ic svg{transform:rotate(180deg)}
+.acc-body{height:0;opacity:0;overflow:hidden;transition:height .26s cubic-bezier(.2,0,.2,1),opacity .2s ease}
+.acc-item.open .acc-body{height:auto;opacity:1}
+.acc-body p{color:#2D2D2D;font-size:var(--fs-md);line-height:var(--lh-md);padding:0 var(--sp-5) var(--sp-5)}
+.acc-media{position:relative;justify-self:center;align-self:center;width:100%;max-width:592px;aspect-ratio:1/1;background:linear-gradient(180deg,#ece0ff,#cdecff);border-radius:16px;overflow:hidden;display:grid;place-items:stretch;padding:0}
+.acc-media img{width:100%;height:auto;display:block;box-shadow:none}
+.acc-panel{grid-area:1/1;width:100%;height:100%;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .28s ease,transform .28s ease}
+.acc-panel.on{opacity:1;visibility:visible;transform:none}
+@media(max-width:860px) {.acc-wrap{grid-template-columns:1fr;gap:var(--sp-8)}}
+@media(min-width:861px) and (max-width:1279px) {.acc-media{align-self:stretch;aspect-ratio:auto}}
+
+@media(max-width:767px) {.acc-media{display:none}.acc-item.open{background:linear-gradient(180deg,#ece0ff,#cdecff)}}
+
+/* Templates */
+
+@media(min-width:769px) {.s-head{margin-bottom:var(--sp-12)}}
+@media(min-width:768px) and (max-width:1279px) {.container{padding:0 var(--sp-6)}.acc-wrap {gap:var(--sp-6)}}
+
+#features .sh--center{max-width:none}
+
+#features .sh__heading{white-space:nowrap}
+@media(max-width:1279px) {#features .sh__heading{white-space:normal}}
+
+/* FAQ (components/faq.md) */
+.faq-section{background-color:var(--surface-section);width:100%}
+.faq-section__container{display:flex;flex-direction:column;align-items:center;width:100%;gap:var(--sp-12);max-width:1216px;margin:0 auto}
+.faq-section__title{font-family:var(--font);font-weight:var(--fw-semi);color:var(--text-title);text-align:center;width:100%;font-size:var(--fs-4xl);line-height:var(--lh-4xl);letter-spacing:0}
+.faq-list{display:flex;flex-direction:column;align-items:center;gap:var(--sp-4);width:100%;list-style:none}
+.faq-item{background:#fff;border-radius:12px;width:100%;border:1px solid transparent;display:flex;flex-direction:column;cursor:pointer;text-align:left;font-family:var(--font);transition:border-color .2s ease;interpolate-size:allow-keywords}
+.faq-item::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size .24s cubic-bezier(.2,0,.2,1),opacity .2s ease,content-visibility .24s allow-discrete}
+.faq-item[open]::details-content{block-size:auto;opacity:1}
+.faq-item:hover{border-color:#e5e7eb}
+.faq-item[open]{border-color:var(--brand-100)}
+
+.faq-item>summary{list-style:none}.faq-item>summary::-webkit-details-marker{display:none}
+
+/* FOOTER */
+.footer{background:var(--k900);color:var(--k000);padding:var(--sp-16) 0 var(--sp-6);font-family:var(--font);letter-spacing:var(--ls)}
+.footer__container{max-width:var(--container);margin:0 auto;padding:0 var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-8)}
+.footer__top{display:flex;justify-content:space-between;gap:var(--sp-8);flex-wrap:wrap}
+.footer__cols{display:flex;gap:var(--sp-8);flex-wrap:wrap}
+.footer__col-title{font-size:var(--fs-md);font-weight:var(--fw-semi);color:var(--k000);margin-bottom:var(--sp-4)}
+.footer__links{display:flex;flex-direction:column;gap:var(--sp-3)}
+.footer__links a{font-size:var(--fs-sm);color:var(--neutral-400)}
+.footer__links a:hover{color:var(--k000)}
+.footer__divider{height:1px;background:rgba(255,255,255,.12)}
+.footer__bottom{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-8);flex-wrap:wrap}
+.footer__contacts{display:flex;gap:var(--sp-8);flex-wrap:wrap}
+.footer__contact{font-size:var(--fs-md);font-weight:var(--fw-med);color:var(--k000)}
+.footer__legal-links{display:flex;flex-wrap:wrap;gap:var(--sp-4) var(--sp-8)}
+.footer__legal-links a{font-size:var(--fs-sm);color:var(--k400)}
+.footer__legal-links a:hover{color:var(--k000)}
+.footer__compare{display:flex;flex-direction:column;gap:var(--sp-4)}
+
+.footer__subscribe{background:var(--brand-12);border-radius:var(--radius-2xl);padding:var(--sp-4);max-width:360px}
+.footer__subscribe-title{font-size:var(--fs-md);font-weight:var(--fw-semi);color:var(--brand-100);margin-bottom:var(--sp-2)}
+.footer__subscribe-desc{font-size:var(--fs-sm);color:var(--k900);margin-bottom:var(--sp-4)}
+.footer__input{background:#fff;border:1px solid var(--border-tertiary);border-radius:var(--radius-lg);height:44px;width:100%;padding:var(--sp-2) var(--sp-4);font-size:var(--fs-sm);color:var(--k900);outline:none;margin-bottom:var(--sp-3);font-family:var(--font)}
+.footer__input::placeholder{color:var(--input-placeholder)}
+.footer__compare-tags{display:flex;flex-wrap:wrap;gap:var(--sp-3)}
+.footer__compare-tags span{font-size:var(--fs-sm);color:var(--k400)}
+.footer__status-row{display:flex;gap:var(--sp-8);flex-wrap:wrap}
+.footer__status-left,.footer__status-right{flex:1 1 360px}
+.footer__section-title{font-size:var(--fs-md);font-weight:var(--fw-semi);color:var(--k000);margin-bottom:var(--sp-4)}
+.footer__section-text{font-size:var(--fs-sm);color:var(--k400);margin-bottom:var(--sp-3)}
+.footer__section-text strong{color:var(--k000);font-weight:var(--fw-med)}
+.footer__legal-cols{display:flex;gap:var(--sp-8);flex-wrap:wrap}
+.footer__legal-label{font-size:var(--fs-sm);color:var(--k000);font-weight:var(--fw-med);display:block;margin-bottom:var(--sp-1)}
+.footer__legal-value{font-size:var(--fs-sm);color:var(--k400)}
+
+/* RESPONSIVE */
+@media(max-width:1279px) {
+  .navbar--desktop{display:none}.navbar--mobile{display:flex}
+  .hero h1{font-size:var(--fs-4xl);line-height:var(--lh-4xl)}
+
+
+
+
+}
+@media(max-width:767px) {
+  section.s{padding:var(--sp-6) 0}.hero{padding:var(--sp-6) 0 0}
+
+  #depsec{padding-top:var(--sp-6);padding-bottom:var(--sp-12)}#depsec .s-head{margin-bottom:var(--sp-6)}
+
+  #cta{padding-bottom:var(--sp-12)}.faq-section__container{gap:var(--sp-6)}
+
+  #features{padding-top:var(--sp-12)}#features .s-head{margin-bottom:var(--sp-6)}
+
+  #faq{padding-top:var(--sp-12);padding-bottom:var(--sp-12)}
+  .hero h1{font-size:var(--fs-4xl);line-height:var(--lh-4xl)}
+  .hero__sub{font-size:var(--fs-md)}
+  .sh__heading,.faq-section__title{font-size:var(--fs-2xl);line-height:var(--lh-2xl);letter-spacing:var(--ls)}
+  .sh--center{align-items:flex-start;text-align:left;margin-inline:0}.faq-section__title{text-align:left}
+  .hero__grid{align-items:flex-start;text-align:left}.hero__copy{text-align:left}
+
+
+
+
+  .footer__bottom{flex-direction:column;align-items:flex-start}
+  .footer__legal-links{flex-direction:column;gap:var(--sp-3)}
+  .footer__status-row{flex-direction:column;gap:var(--sp-6)}
+  .faq-section__title{font-size:var(--fs-2xl)}
+
+
+
+
+
+}
+
+/* HERO board (.mpa) responsive scale — держим последним, чтобы меньшие ширины перекрывали; адаптация первого экрана до 328px */
+
+@media(max-width:384px) {.hero h1{font-size:var(--fs-3xl);line-height:var(--lh-3xl)}}
+
+  /* ===== Supplemental tokens for custom mocks (scrum board, KB, Otziv) — map to reference vars ===== */
+  :root {
+    --violet-100:var(--brand-100); --violet-12:var(--brand-12); --violet-48:var(--brand-48k);
+    --text-primary:var(--text-title);
+    --r-lg:var(--radius-lg); --r-xl:var(--radius-xl); --r-2xl:var(--radius-2xl);
+    --ease-ui:cubic-bezier(0.2,0,0.2,1);
+}
+
+
+
+
+  /* ── Hero PM-доска (PmBoardMock, без скролла) ─────── */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* ── Custom: reviews Otziv carousel ── */
+  .otziv-track{ display:flex; gap:32px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom:0; -ms-overflow-style:none; scrollbar-width:none; }
+  .otziv-track::-webkit-scrollbar{ display:none; }
+  @media(max-width:1279px) { .otziv-track{ gap:24px; justify-content:safe center; } .otziv-track>.otziv:last-child { margin-right:var(--sp-6); } }
+  @media(max-width:767px) { .otziv-track{ gap:16px; } .otziv-track>.otziv:last-child { margin-right:var(--sp-4); } }
+  .otziv{ flex:1 1 0; min-width:0; max-width:420px; scroll-snap-align:start; overflow:hidden;
+    background:#fff; border-radius:var(--r-2xl); padding:24px; display:flex; flex-direction:column; gap:24px; }
+  @media(max-width:1279px) { .otziv{ flex:0 0 318px; max-width:318px; border-radius:var(--r-xl); padding:16px; gap:16px; } }
+  @media(max-width:767px) { .otziv{ flex:0 0 318px; } }
+  @media(max-width:1279px) { .otziv-track { margin-inline:calc(-1 * var(--sp-6)); padding-left:var(--sp-6); scroll-padding-left:var(--sp-6); } }
+  @media(max-width:767px) { .otziv-track { margin-inline:calc(-1 * var(--sp-4)); padding-left:var(--sp-4); scroll-padding-left:var(--sp-4); } }
+  .otziv-top{ display:flex; flex-direction:column; gap:24px; width:100%; flex:0 0 auto; margin-bottom:24px; }
+  @media(max-width:1279px) { .otziv-top{ gap:16px; margin-bottom:16px; } }
+  .otziv-head{ display:flex; align-items:flex-start; justify-content:flex-end; flex:none; }
+  .otziv-quote{ width:79px; height:60px; flex:none; color:#f3f4f6; display:block; transform:rotate(180deg); }
+  @media(max-width:1279px) { .otziv-quote{ width:64px; height:48px; } }
+  .otziv-text{ flex:0 0 auto; display:flex; align-items:flex-start; }
+  .otziv-text p{ font-size:16px; line-height:24px; color:var(--text-secondary); }
+  @media(max-width:1279px) { .otziv-text p{ font-size:14px; line-height:20px; } }
+  .otziv-author{ display:flex; align-items:center; gap:16px; margin-top:auto; }
+  .otziv-ava{ width:56px; height:56px; flex:none; border-radius:9999px; background:var(--violet-12); color:var(--violet-100); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600; letter-spacing:0; }
+  @media(max-width:1279px) { .otziv-ava{ width:48px; height:48px; font-size:16px; } }
+  .otziv-name{ font-size:16px; font-weight:500; color:var(--text-primary); }
+  .otziv-role{ font-size:16px; color:var(--text-secondary); }
+  @media(max-width:1279px) { .otziv-name,.otziv-role{ font-size:14px; } }
+  .otziv-btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; align-self:flex-start;
+    background:#fff; border:1px solid var(--border-default); border-radius:var(--r-lg); padding:10px 16px;
+    font-size:16px; font-weight:500; color:var(--violet-100); transition:background .14s var(--ease-ui), border-color .14s var(--ease-ui); }
+  .otziv-btn svg{ width:18px; height:18px; }
+  .otziv-btn:hover{ background:var(--violet-12); border-color:var(--violet-48); }
+  @media(max-width:767px) { .otziv-btn{ align-self:stretch; padding:10px 14px; font-size:14px; } }
+  .otziv-nav{ display:none; align-items:center; justify-content:center; gap:14px; margin-top:32px; }
+  @media(max-width:1279px) { .otziv-nav{ display:flex; } }
+  .otziv-nav button{ width:40px; height:40px; flex:none; border-radius:9999px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:opacity .14s var(--ease-ui), background .14s var(--ease-ui), border-color .14s var(--ease-ui), color .14s var(--ease-ui); }
+  .otziv-nav button svg{ width:20px; height:20px; }
+  .otziv-nav .prev{ background:#fff; border:1px solid var(--border-default); color:var(--text-primary); }
+  .otziv-nav .next{ background:#fff; border:1px solid var(--border-default); color:var(--text-primary); }
+  .otziv-nav button:not(:disabled):hover{ background:var(--brand-12); border-color:var(--brand-48k); color:var(--brand-100); }
+  .otziv-nav button:disabled{ opacity:.35; cursor:default; }
+  .otziv-count{ font-size:16px; color:var(--text-primary); min-width:48px; text-align:center; }
+  .otziv-count b{ color:var(--violet-100); font-weight:500; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* ── Custom: hero trust line + hero CTA centering ── */
+  .trust-line{ display:flex; align-items:center; justify-content:safe center; flex-wrap:nowrap; gap:16px; color:#424242; font-size:16px; line-height:22px; letter-spacing:-0.2px; margin-top:8px; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none; min-width:0; max-width:100%; }
+  .trust-line .sep{ width:1px; height:20px; border-radius:0; background:var(--border-default); flex:none; }
+  .trust-line b{ color:#424242; font-weight:400; }
+  .hero__copy .hero__cta{ justify-content:center; }
+  @media(max-width:767px) { .trust-line{ justify-content:flex-start; } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* ── Custom: reviews section wrapper + section head (centered) ── */
+  .reviews-sec{ background:var(--surface-section); padding:var(--sp-20) 0; }
+  @media(max-width:1279px) { .reviews-sec{ padding:var(--sp-16) 0 var(--sp-8); } }
+  @media(max-width:767px) { .reviews-sec{ padding:var(--sp-12) 0 var(--sp-6); } }
+
+
+
+
+
+  /* ── Custom: FAQ button-accordion (overrides reference details styling for our markup) ── */
+  .faq-section .faq-list{ gap:var(--sp-4); margin-top:0; }
+  .faq-item{ background:#fff; border:1px solid transparent; border-radius:12px; width:100%; transition:border-color .2s ease; cursor:pointer; }
+  .faq-item.open{ border-color:var(--brand-100); }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; cursor:pointer; font-family:var(--font); letter-spacing:var(--ls);
+    display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); padding:var(--sp-6); font-size:var(--fs-xl); line-height:var(--lh-xl); font-weight:var(--fw-reg); color:var(--text-title); }
+  .faq-item:hover .faq-q{ color:var(--brand-100); }
+  .faq-item.open .faq-q{ font-weight:var(--fw-semi); color:var(--brand-100); padding-bottom:var(--sp-4); }
+  .faq-q .pm{ flex:none; width:24px; height:24px; position:relative; color:var(--k600); }
+  .faq-item.open .faq-q .pm,.faq-item:hover .faq-q .pm{ color:var(--brand-100); }
+  .faq-q .pm::before{ content:""; position:absolute; left:5px; right:5px; top:11px; height:2px; background:currentColor; border-radius:2px; }
+  .faq-q .pm::after{ content:""; position:absolute; top:5px; bottom:5px; left:11px; width:2px; background:currentColor; border-radius:2px; transition:opacity .2s; }
+  .faq-item.open .faq-q .pm::after{ opacity:0; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .24s cubic-bezier(.2,0,.2,1); }
+  .faq-a p{ padding:0 var(--sp-6) var(--sp-6); font-size:var(--fs-md); line-height:var(--lh-md); color:var(--text-secondary); }
+  .faq-a a{ color:var(--brand-100); text-decoration:underline; font-weight:400; }
+  @media(max-width:767px) { .faq-q{ font-size:var(--fs-md); line-height:var(--lh-md); padding:var(--sp-4); } .faq-item.open .faq-q{ padding-bottom:var(--sp-3); } .faq-a p{ font-size:var(--fs-sm); line-height:var(--lh-sm); padding:0 var(--sp-4) var(--sp-4); } }
+  /* ── Custom: templates as simple link cards (no media) ── */
+
+.acc-item.open{background:#fff}
+
+.otziv-head{justify-content:space-between}
+.otziv-logo{height:50px;width:auto;max-width:185px;object-fit:contain;align-self:center}
+.otziv-ava{overflow:hidden;background:none}
+.otziv-ava img{width:100%;height:100%;object-fit:cover;display:block;border-radius:9999px}
+.trust-line b{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.trust-line b svg{width:18px;height:18px;color:var(--brand-100);flex:none}
+
+@media(max-width:860px) {.acc-wrap{grid-template-columns:1fr;grid-template-areas:"intro" "media" "acc"}}
+
+.acc-wrap--benefits{grid-template-areas:none}
+@media(min-width:768px) {.acc-wrap--benefits{grid-template-columns:1fr 1fr;align-items:start}}
+.acc-wrap--benefits .acc-media{aspect-ratio:1/1;background:linear-gradient(160deg,#ece0ff,#cdecff);padding:0;place-items:stretch}
+.acc-wrap--benefits .acc-panel{display:flex;align-items:center;justify-content:center;padding:0}
+.acc-wrap--benefits .acc-panel img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px}
+@media(min-width:768px) and (max-width:1279px) {.acc-wrap--benefits .acc-media{align-self:stretch;aspect-ratio:auto}.acc-wrap--benefits .acc-panel{align-items:flex-end}.acc-wrap--benefits .acc-panel img{width:100%;height:auto;object-fit:contain;object-position:bottom;border-radius:0}}
+@media(max-width:767px) {.acc-wrap--benefits .acc-media{max-width:560px;margin:0 auto;width:100%}}
+.acc-inline{display:none}
+
+@media(max-width:767px) {.acc-wrap--benefits .acc-media{display:none}.acc-wrap--benefits .acc-inline{display:block;margin:0;overflow:hidden}.acc-wrap--benefits .acc-inline img{width:100%;height:auto;object-fit:contain;object-position:bottom;display:block}}
+@media(max-width:767px) {.acc-item.open{background:linear-gradient(180deg,#ece0ff,#cdecff)}.acc-wrap--benefits .acc-inline {background:transparent}}
+
+.trust-line{padding-top:0;padding-bottom:24px;margin-top:16px}
+@media(max-width:1279px) {.trust-line{padding-top:0;padding-bottom:24px;margin-top:24px}}
+@media(max-width:767px) {.trust-line{padding-top:0;padding-bottom:24px;margin-top:0}}
+.trust-line::-webkit-scrollbar{display:none}@media(max-width:767px) {.trust-line{font-size:14px;gap:12px;padding-inline:16px}.trust-line b svg{width:16px;height:16px}.trust-line .sep{height:16px}}
+
+.acc-wrap--benefits .bnf-col{display:flex;flex-direction:column;min-width:0;align-self:start}
+.bnf-cta{align-self:flex-start;margin-top:var(--sp-6)}
+@media(min-width:768px) and (max-width:1279px) {.bnf-cta{align-self:flex-start;margin-top:var(--sp-5)}}
+@media(max-width:767px) {.bnf-cta{align-self:center;margin-top:var(--sp-6)}}
+
+/* плавающий чат ИИ поверх доски */
+
+.trust-track{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;min-width:0}
+.trust-set{display:flex;align-items:center;gap:16px;flex:none}
+.trust-track>[aria-hidden="true"],.trust-track>.trust-gap{display:none}
+/* Бегущая строка только там, где набор физически не помещается. Набор из четырех
+   пунктов занимает 768px плюс 63px полей контейнера, то есть статично влезает
+   от 831px — порог с запасом 840. Выше строка статичная и по центру, ничего не
+   режется. Ниже край растушеван маской, чтобы текст истаивал, а не обрубался. */
+@media(max-width:839px) {
+  .trust-line{overflow:hidden;justify-content:flex-start;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%)}
+  .trust-track{width:max-content;flex:0 0 auto;flex-wrap:nowrap;justify-content:flex-start;animation:trustmarquee 30s linear infinite}
+  .trust-track>[aria-hidden="true"]{display:flex}
+  .trust-track>.trust-gap{display:block}
+}
+@keyframes trustmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce) {.trust-track{animation:none}}
+
+/* ── ComparisonTable (wiki/design-system/components/comparison-table.md) ── */
+.cmp{max-width:var(--container);margin:0 auto}
+.cmp__table{position:relative;--colw:25%}
+.cmp__bg{position:absolute;top:0;bottom:0;border-radius:24px 24px 0 0;z-index:0;pointer-events:none;border-bottom:1px solid var(--border-tertiary)}
+.cmp__bg--kaiten{right:var(--colw);width:var(--colw);background:var(--brand-12)}
+.cmp__bg--trello{right:0;width:var(--colw);background:var(--surface-section)}
+.cmp__grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) var(--colw) var(--colw)}
+.cmp__hcell{display:flex;align-items:center;justify-content:center;min-height:92px;padding:16px}
+.cmp__hcell--label{justify-content:flex-start;padding-left:0}
+.cmp__logo{height:44px;width:auto;color:var(--text-title)}
+.cmp__hcell--t{font-size:var(--fs-2xl);line-height:var(--lh-2xl);font-weight:var(--fw-med);color:var(--text-title)}
+.cmp__sec{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;background:none;border:0;border-top:1px solid var(--border-tertiary);border-bottom:1px solid var(--border-tertiary);cursor:pointer;font-family:var(--font);text-align:left;padding:16px 0;color:var(--text-title)}
+.cmp__chev{order:-1}
+.cmp__sec-t{font-size:var(--fs-lg);line-height:var(--lh-lg);font-weight:var(--fw-semi);letter-spacing:var(--ls);color:var(--text-title);transition:color .18s}
+.cmp__sec[aria-expanded="true"] .cmp__sec-t{color:var(--brand-100)}
+/* hover на заголовке раздела таблицы — текст фиолетовый.
+   hover:hover — чтобы на тач-экранах цвет не залипал после тапа */
+@media(hover:hover) {.cmp__sec:hover .cmp__sec-t{color:var(--brand-100)}}
+.cmp__chev{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;color:var(--text-secondary);flex:none;transition:color .18s}
+.cmp__chev svg{width:20px;height:20px;transition:transform .24s ease}
+.cmp__sec[aria-expanded="true"] .cmp__chev{color:var(--brand-100)}
+.cmp__sec[aria-expanded="true"] .cmp__chev svg{transform:rotate(180deg)}
+.cmp__cell{display:flex;align-items:center;min-height:48px;padding:8px 16px;border-bottom:1px solid var(--border-tertiary)}
+.cmp__cell--label{color:var(--text-title);font-size:var(--fs-md);line-height:var(--lh-md);padding-left:36px;padding-right:24px}
+.cmp__cell--k,.cmp__cell--t{justify-content:center}
+.cmp__cell--k{border-bottom-color:rgba(125,76,207,.28)}
+.cmp__cell--t{border-bottom-color:var(--border-tertiary)}
+.cmp__cell--hidden{display:none}
+.cmp__ic{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#fff;flex:none;box-shadow:0 0 0 1px rgba(45,45,45,.04)}
+.cmp__ic.yes{color:var(--green-100)}
+.cmp__ic.yes svg{width:15px;height:15px}
+.cmp__ic.no::after{content:"";width:10px;height:1.5px;border-radius:9999px;background:#ef4444}
+.cmp__note{max-width:var(--container);margin:24px auto 0;font-size:var(--fs-sm);line-height:var(--lh-sm);color:var(--k500)}
+@media(min-width:768px) and (max-width:1279px) {.cmp__hcell{min-height:72px}.cmp__hcell--t{font-size:var(--fs-md);line-height:var(--lh-md)}.cmp__logo{height:32px}.cmp__cell{min-height:44px}.cmp__cell--label{font-size:var(--fs-sm);line-height:var(--lh-sm);padding-right:16px}.cmp__sec-t{font-size:var(--fs-md);line-height:var(--lh-md)}}
+@media(max-width:767px) {.cmp__bg{border-radius:8px 8px 0 0}.cmp__hcell{min-height:56px;padding:10px 6px}.cmp__hcell--t{font-size:var(--fs-sm);line-height:var(--lh-sm);font-weight:var(--fw-semi)}.cmp__logo{height:20px}.cmp__cell{min-height:40px;padding:6px 8px}.cmp__cell--label{font-size:var(--fs-xs);line-height:var(--lh-xs);padding-right:10px}.cmp__ic{width:20px;height:20px}.cmp__ic.yes svg{width:12px;height:12px}.cmp__sec{padding:12px 0}.cmp__sec-t{font-size:var(--fs-md);line-height:var(--lh-md)}.cmp__note{margin-top:16px;font-size:var(--fs-xs);line-height:var(--lh-xs)}}
+
+/* ── Товарный знак / дисклеймер в футере ── */
+.footer__trademark{font-size:var(--fs-xs);line-height:var(--lh-xs);color:var(--k500);margin-top:var(--sp-2)}
+
+/* ScaleToFit: масштабирует доску фикс. ширины (1360) под контейнер */
+
+/* Секция сравнения — отступ сверху 96px */
+#compare{padding-top:var(--sp-24)}
+@media(max-width:767px) {#compare{padding-top:var(--sp-12)}}
+
+/* Hero: подзаголовок в 2 строки на десктопе */
+@media(min-width:1000px) {.hero__copy{max-width:1040px}.hero__sub{max-width:980px}}
+
+/* Заголовок сравнения — в шапке таблицы (DS: title в шапке на десктопе) */
+.cmp__title{font-size:var(--fs-3xl);line-height:var(--lh-3xl);font-weight:var(--fw-semi);letter-spacing:0;color:var(--text-title);text-align:left}
+@media(min-width:768px) and (max-width:1279px) {.cmp__title{font-size:var(--fs-2xl);line-height:var(--lh-2xl)}}
+@media(max-width:767px) {
+  .cmp__title{font-size:var(--fs-2xl);line-height:var(--lh-2xl)}
+  .cmp__hcell--label{grid-column:1/-1;padding:0 0 16px;min-height:0}
+  .cmp__hcell--k{grid-column:2}
+  .cmp__hcell--t{grid-column:3}
+}
+@media(max-width:767px) {.cmp__bg{top:var(--cmp-bg-top,0px)}}
+
+/* Таблица: одна линия на границе разделов (убираем сложение top+bottom бордеров) */
+.cmp__grid > .cmp__sec{border-top:0}
+.cmp__grid > .cmp__sec[data-sec="1"]{border-top:1px solid var(--border-tertiary)}
+
+/* Таблица: границы разделов контрастнее строк */
+.cmp__grid > .cmp__sec{border-bottom-color:var(--k400)}
+.cmp__grid > .cmp__sec[data-sec="1"]{border-top-color:var(--k400)}
+
+/* Перетаскиваемая карточка: тень мягче */
+
+/* Модули-аккордеон: нативные мокапы в панели вместо картинок */
+.acc-wrap--modules .acc-panel{display:flex;align-items:center;justify-content:center;padding:0}
+
+@media(min-width:768px) and (max-width:1279px) {.acc-wrap--modules .acc-media{aspect-ratio:auto}.acc-wrap--modules .acc-panel{align-items:center}}
+@media(max-width:767px) {
+  .acc-wrap--modules .acc-media{display:none}
+  .acc-wrap--modules .acc-inline{display:flex;justify-content:center;padding:0 16px 16px;background:transparent}
+
+}
+
+/* Раскрытый раздел — без линии под заголовком */
+.cmp__grid > .cmp__sec[aria-expanded="true"]{border-bottom-color:transparent}
+
+/* Последняя строка раздела — контрастная замыкающая линия */
+.cmp__grid > .cmp__cell--label:has(+ .cmp__cell--k + .cmp__cell--t + .cmp__sec),
+.cmp__grid > .cmp__cell--k:has(+ .cmp__cell--t + .cmp__sec),
+.cmp__grid > .cmp__cell--t:has(+ .cmp__sec),
+.cmp__grid > .cmp__cell:nth-last-child(-n+3){border-bottom-color:var(--k400)}
+
+/* DS-радиусы: крупное медиа в панели аккордеона — 16px (2xl), не 8 */
+.acc-wrap--modules .acc-panel img{border-radius:16px}
+
+/* Секция сравнения — без нижнего отступа */
+#compare{padding-bottom:0}
+
+/* Мобилка: заголовки разделов таблицы — 12px */
+@media(max-width:767px) {.cmp__sec-t{font-size:var(--fs-sm);line-height:var(--lh-sm)}}
+
+/* Hero: подзаголовок мельче — lg 18/28 (на мобилке остается 16) */
+.hero__sub{font-size:var(--fs-lg);line-height:var(--lh-lg)}
+
+/* Перенос только на мобилке */
+.br-m{display:none}
+@media(max-width:767px) {.br-m{display:inline}}
+
+/* Заголовок «Работайте с задачами…»: отступ снизу 48 / 32 / 24 */
+#features .s-head{margin-bottom:var(--sp-12)}
+@media(min-width:768px) and (max-width:1279px) {#features .s-head{margin-bottom:var(--sp-8)}}
+@media(max-width:767px) {#features .s-head{margin-bottom:var(--sp-6)}}
+
+/* Секция «Переходите из Asana»: отступы 128 сверху и снизу на десктопе */
+@media(min-width:1280px) {#depsec{padding-top:128px;padding-bottom:128px}}
+
+/* Таблица на мобилке: заголовок раздела переносится и не залезает на цветные колонки */
+@media(max-width:767px) {.cmp__sec-t{max-width:calc(50% - 36px)}}
+
+/* Фичи: без отступа под заголовком секции на мобилке */
+@media(max-width:767px) {#features .s-head{margin-bottom:0}}
+
+/* Отзывы: спикеры на одном уровне — резервируем высоту всего блока автора (система Trello-лендинга) */
+.otziv-author{align-items:flex-start}
+@media(min-width:1280px) {.otziv-author{min-height:96px}}
+@media(min-width:1050px) and (max-width:1279px) {.otziv-author{min-height:80px}}
+@media(max-width:1049px) {.otziv-author{align-items:flex-start;min-height:84px}}
+
+/* Таблица: заголовки разделов высотой 64px на десктопе и планшете */
+@media(min-width:768px) {.cmp__sec{padding-top:0;padding-bottom:0;min-height:64px}}
+
+/* Аккордеоны фич и модулей: картинки прижаты к нижнему краю панели */
+@media(min-width:768px) {
+  .acc-wrap--benefits .acc-panel,
+  .acc-wrap--modules .acc-panel{align-items:flex-end}
+  .acc-wrap--benefits .acc-panel img,
+  .acc-wrap--modules .acc-panel img{width:100%;max-height:100%;height:auto;object-fit:contain;object-position:bottom;border-radius:0}
+}
+
+/* ── CTAplatform — CTA-блок «текст + иллюстрация платформы» на градиенте ──
+   Порт эталона Standart mockups/CTAplatform.tsx (стиль не меняем) */
+.ctp{position:relative;overflow:hidden;border-radius:24px;padding:48px;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;
+  background:linear-gradient(90deg,#ece0ff,#cdecff);
+  font-family:'Roboto',system-ui,sans-serif;color:#2d2d2d}
+.ctp__copy{position:relative;z-index:1}
+.ctp__copy h2{font-size:30px;line-height:36px;font-weight:600;color:#2d2d2d;margin:0}
+.ctp__copy p{font-size:16px;line-height:24px;color:#424242;margin:16px 0 0}
+.ctp__btn{display:inline-flex;align-items:center;justify-content:center;margin-top:24px;
+  padding:14px 24px;border-radius:8px;background:#7d4ccf;color:#fff;
+  font-size:16px;line-height:24px;font-weight:600;text-decoration:none;
+  transition:background .14s cubic-bezier(.2,0,.2,1)}
+.ctp__btn:hover{background:#6f42bb}
+.ctp__visual{position:relative;z-index:1;display:flex;justify-content:center;align-items:center}
+.ctp__visual img{width:100%;height:auto;display:block;border-radius:16px}
+@media(min-width:1280px) {.ctp__visual img{width:85%}}
+@media(max-width:1023px) {
+  .ctp{grid-template-columns:1fr;text-align:center;background:linear-gradient(180deg,#ece0ff,#cdecff)}
+  .ctp__btn{margin-inline:auto}
+  .ctp__visual{order:2}
+}
+@media(max-width:767px) {
+  .ctp{border-radius:16px;text-align:left}
+  .ctp__copy h2{font-size:24px;line-height:32px}
+  .ctp__btn{display:flex;width:fit-content}
+}
+@media(min-width:560px) and (max-width:767px) {.ctp{padding:48px}}
+@media(max-width:559px) {.ctp{padding:24px}}
+
+/* Дисклеймер под FAQ — эталон с Trello-лендинга */
+.faq-note{max-width:var(--container);margin:24px auto 0;font-size:var(--fs-sm);line-height:var(--lh-sm);color:var(--k500);text-align:center}
+@media(max-width:767px) {.faq-note{margin-top:16px;font-size:var(--fs-xs);line-height:var(--lh-xs);text-align:left}}
+.faq-section__container .faq-note{margin-top:calc(24px - var(--sp-12))}
+@media(max-width:767px) {.faq-section__container .faq-note{margin-top:calc(16px - var(--sp-6))}}
+
+/* Финальный CTA: верхний отступ 64 на планшете */
+@media(min-width:768px) and (max-width:1279px) {#cta{padding-top:var(--sp-16)}}
+
+/* Таблица сравнения: верхний отступ 128 на десктопе */
+@media(min-width:1280px) {#compare{padding-top:128px}}
+
+/* Мобилка: картинки в аккордеонах — во всю ширину пункта и вплотную к нижнему краю
+   (перебиваем padding от старых нативных мокапов) */
+@media(max-width:767px) {
+  .acc-wrap--modules .acc-inline,
+  .acc-wrap--benefits .acc-inline{display:block;padding:0;margin:0;overflow:hidden}
+  .acc-wrap--modules .acc-inline img,
+  .acc-wrap--benefits .acc-inline img{width:100%;height:auto;display:block;object-fit:contain;object-position:bottom;border-radius:0}
+}
+
+/* Фичи: зазор под заголовком задает .s-head (48/32/0), .acc-wrap обнулен —
+   иначе его margin-top:48 схлопывается с ним и перебивает значения */
+#features .acc-wrap{margin-top:0}
+
+/* Финальный CTA: верхний отступ 96 на десктопе (симметрично нижнему) */
+@media(min-width:1280px) {#cta{padding-top:var(--sp-24)}}
+
+/* CTA-блоки: радиус по правилу DS «Block radius по адаптиву»
+   мобилка и планшет 12, десктоп 16 (mobile-first: база 12 → переопределяем) */
+.ctp{border-radius:12px}
+@media(min-width:1280px) {
+  .ctp{border-radius:16px}
+}
+
+/* Фичи: верхний отступ на десктопе 96 */
+@media(min-width:1280px) {#features{padding-top:var(--sp-24)}}
+
+/* Дисклеймер под FAQ — по левому краю на всех брейкпоинтах */
+.faq-note{text-align:left}
+
+/* Фичи: отступ под заголовком на мобилке 24 (перебивает более раннее обнуление) */
+@media(max-width:767px) {#features .s-head{margin-bottom:var(--sp-6)}}
+
+/* Блок переезда: верхний отступ на мобилке 48 */
+@media(max-width:767px) {#depsec{padding-top:var(--sp-12)}}
+
+/* Перенос строки только на десктопе и планшете (на мобилке текст льется сам) */
+.br-d{display:inline}
+@media(max-width:1023px) {.br-d{display:none}}
+
+/* Заголовок таблицы: на мобилке 20/28 (text-xl) — чтобы уместился в одну строку */
+@media(max-width:767px) {.cmp__title{font-size:var(--fs-xl);line-height:var(--lh-xl)}}
+
+/* Финальный CTA: верхний отступ на десктопе 128 */
+@media(min-width:1280px) {#cta{padding-top:128px}}
+
+/* Дисклеймер FAQ: левый край вровень с вопросами.
+   Родитель — flex-колонка с align-items:center, поэтому одного margin:0 мало: тянем блок по ширине */
+.faq-note{margin-inline:0;max-width:none;align-self:stretch}
+
+/* Hero: на всей мобилке заголовок 30/36 (text-3xl) — размер hero по DS */
+@media(max-width:767px) {.hero h1{font-size:var(--fs-3xl);line-height:var(--lh-3xl)}}
+
+/* Hero: на десктопе заголовок 48/52 (text-5xl) — размер hero по DS */
+@media(min-width:1280px) {.hero h1{font-size:var(--fs-5xl);line-height:var(--lh-5xl)}}
+
+/* Дисклеймер таблицы: по центру на всех брейкпоинтах */
+.cmp__note{text-align:center}
+/* На мобилке дисклеймер выключен влево: центрированная «лесенка» из четырех строк
+   читается хуже, чем ровный левый край. */
+@media(max-width:767px) {.cmp__note{text-align:left}}
+
+/* Дисклеймер FAQ: на десктопе по центру — как у дисклеймера таблицы */
+@media(min-width:1280px) {.faq-note{text-align:center}}
+
+/* Отзывы: нижний отступ секции — как в Weeek.
+   Со стрелками нижний отступ равен зазору над стрелками, без стрелок — равен верхнему отступу секции.
+   Класс has-nav ставит скрипт, когда карусель реально прокручивается. */
+@media(max-width:767px) {#cases .otziv-nav{margin-top:var(--sp-6)}#cases{padding-bottom:var(--sp-12)}#cases.has-nav{padding-bottom:var(--sp-6)}}
+@media(min-width:768px) and (max-width:1279px) {#cases .otziv-nav{margin-top:var(--sp-8)}#cases{padding-bottom:var(--sp-16)}#cases.has-nav{padding-bottom:var(--sp-8)}}
+@media(min-width:1280px) {#cases .otziv-nav{margin-top:var(--sp-12)}}
+
+/* Отзывы на широком планшете (1024–1279): карточки тянутся по ширине, а не стоят фикс. 318 по центру.
+   Ниже 1024 растянутая карточка была бы уже ~270px — там остается карусель с фикс. шириной. */
+@media(min-width:1050px) and (max-width:1279px) {
+  /* снимаем карусельный вынос за край контейнера — иначе слева 24, справа 0 */
+  .otziv-track{margin-inline:0;padding-left:0;scroll-padding-left:0}
+  .otziv{flex:1 1 0;max-width:420px}
+  .otziv-track>.otziv:last-child{margin-right:0}
+}
+
+/* Финальный CTA переведен на компонент CTAproduct (класс .ctp).
+   Отличия от эталона — контент: чеклист вместо абзаца и нативный мокап вместо <img>. */
+@media(min-width:1280px) {.ctp__copy h2{font-size:30px;line-height:36px}}
+.ctp__list{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ctp__list li{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:24px;color:#424242}
+.ctp__tick{flex:none;width:20px;height:20px;margin-top:2px;border-radius:9999px;background:#fff;color:#7d4ccf;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(45,45,45,.12)}
+.ctp__tick svg{width:12px;height:12px}
+@media(max-width:1023px) {.ctp--final .ctp__list{max-width:520px;margin-inline:auto}}
+@media(max-width:767px) {.ctp--final .ctp__list{margin-inline:0}}
+
+/* Блок переезда — компонент CTArelocation (.fcta): лавандовая плашка с blur-glow
+   и иллюстрацией миграции. Кнопка — общая .btn лендинга, радиус блока по правилу DS. */
+.fcta{position:relative;overflow:hidden;background:var(--brand-12);border-radius:12px;text-align:left;padding:var(--sp-16) var(--sp-12)}
+@media(min-width:1280px) {.fcta{border-radius:16px}}
+.fcta__blur{position:absolute;width:786px;height:744px;left:55%;top:-120px;border-radius:9999px;background:linear-gradient(-90deg,#e298ff,#6fe5ff);filter:blur(200px);opacity:.5;pointer-events:none;z-index:0}
+.fcta__in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:var(--sp-10);align-items:center}
+.fcta__copy{max-width:560px;align-self:start}
+.fcta h2{font-size:30px;line-height:36px;font-weight:var(--fw-semi);margin:0 0 var(--sp-4);color:#2d2d2d}
+.fcta p{font-size:16px;line-height:24px;color:#2d2d2d;margin:0 0 var(--sp-8)}
+.fcta__cta{display:flex;gap:var(--sp-3);justify-content:flex-start;flex-wrap:nowrap}
+.fcta__visual{justify-self:end;align-self:center;width:520px;max-width:100%;overflow:visible;text-align:left}
+.fcta__visual img{width:100%;height:auto;display:block}
+@media(max-width:1279px) {
+  .fcta__in{grid-template-columns:minmax(0,1fr);text-align:center;gap:var(--sp-12);justify-items:center}
+  .fcta__copy{max-width:680px;margin:0 auto;min-width:0}
+  .fcta__cta{justify-content:center;flex-wrap:wrap}
+  .fcta__visual{justify-self:center;width:100%;max-width:520px;text-align:center}
+}
+@media(max-width:767px) {
+  .fcta{padding:var(--sp-12) var(--sp-6)}
+  .fcta h2{font-size:20px;line-height:28px}
+  .fcta__copy{text-align:left}
+  .fcta__cta{flex-direction:column;width:100%;max-width:360px;margin-inline:auto;align-items:center}
+  .fcta__cta .btn{width:auto}
+}
+
+/* Hero: рендер диаграммы Ганта */
+.hero-shot{width:100%;max-width:1030px;height:auto;margin:0 auto;display:block;border:1px solid var(--k300);border-radius:16px;box-shadow:0 12px 32px -16px rgba(45,45,45,.18)}
+@media(min-width:768px) and (max-width:1279px) {.hero-shot{border-radius:12px}}
+@media(max-width:767px) {.hero-shot{border-radius:8px}}
+
+/* Отзывы: логотип слева, кавычки справа */
+.otziv-logo{margin-right:auto}
+
+/* Секция «Кайтен подходит для любых команд» */
+.teams-sec{background:var(--surface-section)}
+@media(min-width:1280px) {#teams{padding-top:var(--sp-24);padding-bottom:var(--sp-24)}#teams .s-head{margin-bottom:var(--sp-8)}}
+@media(min-width:768px) and (max-width:1279px) {#teams{padding-top:var(--sp-16)}}
+
+/* TabsGallery (команды): вкладки-пилюли + панель с превью */
+.stabs{width:100%;max-width:var(--container);margin:0 auto}
+.stabs__tabs{display:flex;justify-content:center;margin-bottom:var(--sp-10)}
+.stabs__tabgroup{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px;border-radius:var(--radius-lg);background:#fff;padding:4px}
+.stabs__tab{height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:6px;padding:0 20px;font-size:var(--fs-sm);font-weight:var(--fw-med);color:var(--text-title);background:none;border:0;cursor:pointer;font-family:var(--font);letter-spacing:var(--ls);transition:background .15s,color .15s}
+.stabs__tab:hover{background:var(--brand-12)}
+.stabs__tab.on{background:var(--brand-100);color:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.stabs__panels{display:grid}
+.stp{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;z-index:0;transition:opacity .4s cubic-bezier(.2,0,.2,1),visibility 0s linear .4s}
+.stp.leaving{opacity:1;visibility:visible;transition:none}
+.stp.on{opacity:1;visibility:visible;pointer-events:auto;z-index:1;transition:opacity .4s cubic-bezier(.2,0,.2,1),visibility 0s}
+@media(prefers-reduced-motion:reduce) {.stp{transition:none}}
+.stabs__card{overflow:hidden;border-radius:var(--radius-2xl);background:#fff}
+.stabs__row{display:flex;flex-direction:column}
+.stabs__imgwrap{min-width:0;flex:1;padding:var(--sp-4)}
+.stabs__img{width:100%;overflow:hidden;border-radius:var(--radius-lg);display:flex}
+.stabs__img img{display:block;width:100%;height:auto;border-radius:var(--radius-lg)}
+.stabs__nav{margin-top:var(--sp-6);display:flex;align-items:center;justify-content:center;gap:var(--sp-4)}
+@media(min-width:768px) and (max-width:1023px) {.stabs__nav{margin-top:var(--sp-8)}}
+.stabs__navbtn{width:40px;height:40px;border-radius:9999px;border:1px solid var(--border-default);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--brand-100);transition:background .18s,border-color .18s,color .18s}
+.stabs__navbtn:hover:not(:disabled){background:var(--brand-12);border-color:var(--brand-48k)}
+.stabs__navbtn:disabled{opacity:.45;cursor:default}
+.stabs__navbtn svg{width:20px;height:20px}
+.stabs__counter{min-width:48px;text-align:center;font-size:var(--fs-md);color:var(--text-title);font-variant-numeric:tabular-nums}
+.stabs__counter b{color:var(--brand-100);font-weight:var(--fw-med)}
+.stabs__nav{display:none}
+@media(max-width:1023px) {.stabs__tabs{margin-bottom:var(--sp-6)}}
+
+/* Отзывы: на десктопе компактнее отступ от автора до кнопки */
+@media(min-width:1280px) { .otziv{ gap:8px; } .otziv-top{ margin-bottom:24px; } }
+
+/* Hero: картинка ближе к кнопке */
+.hero__visual{margin-top:calc(-1 * var(--sp-2))}
+
+/* Одна платформа: карта продукта одной картинкой */
+.plat{position:relative;max-width:var(--container);margin:0 auto}
+.plat img{display:block;width:100%;height:auto;border-radius:0}
+.pgrid__cta{display:flex;justify-content:center;margin-top:var(--sp-8)}
+@media(max-width:767px) {.pgrid__cta{margin-top:var(--sp-6)}.pgrid__cta .btn{width:auto}}
+
+/* Команды: подзаголовок в одну строку на десктопе */
+#teams .sh--center{max-width:none}
+
+/* Платформа: ритм 96px сверху, компактный стык с финальным CTA */
+@media(min-width:1280px) {#platform{padding-top:var(--sp-24);padding-bottom:0}#cta{padding-top:var(--sp-24)}}
+
+/* FAQ: ограничение длины строки ответа (~100 знаков) */
+@media(min-width:1024px) {.faq-a p{max-width:820px}}
+
+/* Отзывы: отступ автор -> кнопка 8px на всех брейкпоинтах */
+.otziv{gap:8px}
+.otziv-top{margin-bottom:24px}
+@media(max-width:1279px) {.otziv-top{margin-bottom:16px}}
+
+/* Платформа: планшетный ритм — 64 сверху, компактный стык с CTA */
+@media(min-width:768px) and (max-width:1279px) {#platform{padding-top:var(--sp-16);padding-bottom:0}#cta{padding-top:var(--sp-16)}}
+@media(max-width:767px) {#platform{padding-top:var(--sp-12);padding-bottom:0}#cta{padding-top:var(--sp-16)}}
+
+/* Отзывы: логотип-ссылка ведет на кейс */
+.otziv-logolink{display:flex;align-items:center;align-self:stretch;margin-right:auto}
+.otziv-logolink .otziv-logo{margin-right:0}
+
+/* Отзывы: лого «самолет» компактнее на планшете и мобилке */
+@media(max-width:1279px) {.otziv-logo[src*="samolet-logo"]{height:22px!important}}
+
+/* Платформа: отступ под заголовком на мобилке 24 */
+@media(max-width:767px) {#platform .s-head{margin-bottom:var(--sp-6)}}
+
+/* Команды: мобилка — 48 сверху секции, 24 под заголовком */
+@media(max-width:767px) {#teams{padding-top:var(--sp-12)}#teams .s-head{margin-bottom:var(--sp-6)}}
+
+/* Hero: подзаголовок на мобилке 16px (позднее правило fs-lg перебивало мобильную типографику) */
+@media(max-width:767px) {.hero__sub{font-size:var(--fs-md);line-height:var(--lh-md)}}
+
+/* Команды на мобилке: подпись под картинкой + стрелки вместо пилюль */
+.stabs__caption{display:none}
+@media(max-width:767px) {
+  #teamTabs .stabs__tabs{display:none}
+  #teamTabs .stabs__caption{display:block;order:-1;text-align:left;font-size:var(--fs-md);line-height:var(--lh-md);font-weight:var(--fw-med);color:var(--text-title);padding:var(--sp-4) var(--sp-4) 0}
+  #teamTabs .stabs__nav{display:flex;margin-top:var(--sp-6)}
+}
+
+/* CTArelocation (эталон Standart mockups): текст слева, иллюстрация справа 520px */
+#depsec .fcta{position:relative;overflow:hidden;background:var(--brand-12);border-radius:12px;text-align:left;padding:var(--sp-16) var(--sp-12)}
+@media(min-width:1280px) {#depsec .fcta{border-radius:16px}}
+#depsec .fcta__blur{position:absolute;width:786px;height:744px;left:55%;top:-120px;border-radius:9999px;background:linear-gradient(-90deg,#e298ff,#6fe5ff);filter:blur(200px);opacity:.5;pointer-events:none;z-index:0}
+#depsec .fcta__in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:var(--sp-10);align-items:center}
+#depsec .fcta__copy{max-width:560px;align-self:start;margin:0}
+#depsec .fcta h2{font-size:var(--fs-3xl);line-height:var(--lh-3xl);font-weight:var(--fw-semi);margin:0 0 var(--sp-4);color:var(--text-title)}
+#depsec .fcta p{font-size:var(--fs-lg);line-height:var(--lh-lg)}
+#depsec .fcta p{font-size:16px;line-height:24px;color:#2d2d2d;margin:0 0 var(--sp-8)}
+#depsec .fcta__cta{display:flex;gap:var(--sp-3);justify-content:flex-start;flex-wrap:nowrap;margin:0}
+#depsec .fcta__visual{justify-self:end;align-self:center;width:520px;max-width:100%;margin:0;overflow:visible;text-align:left}
+#depsec .fcta__visual img{width:100%;height:auto;display:block}
+@media(max-width:1279px) {
+  #depsec .fcta__in{grid-template-columns:minmax(0,1fr);text-align:center;gap:var(--sp-12);justify-items:center}
+  #depsec .fcta__copy{max-width:680px;margin:0 auto;min-width:0}
+  #depsec .fcta__cta{justify-content:center;flex-wrap:wrap}
+  #depsec .fcta__visual{justify-self:center;width:100%;max-width:520px;text-align:center}
+}
+@media(max-width:767px) {
+  #depsec .fcta{padding:var(--sp-12) var(--sp-6);border-radius:12px}
+  #depsec .fcta h2{font-size:var(--fs-2xl);line-height:var(--lh-2xl)}
+  #depsec .fcta__copy{text-align:left}
+  #depsec .fcta__cta{flex-direction:column;width:100%;max-width:360px;margin-inline:auto;align-items:center}
+  #depsec .fcta__cta .btn{width:auto}
+}
+
+/* Команды и платформа: отступ под заголовком на планшете 32 */
+@media(min-width:768px) and (max-width:1279px) {#teams .s-head,#platform .s-head{margin-bottom:var(--sp-8)}}
+
+/* Фичи: отступ под заголовком на планшете 32 */
+@media(min-width:768px) and (max-width:1279px) {#features .s-head{margin-bottom:var(--sp-8)}}
+
+/* Фичи: отступ сверху на планшете 64 */
+@media(min-width:768px) and (max-width:1279px) {#features{padding-top:var(--sp-16)}}
+
+/* Вкладки команд: отступ до карточки на планшете 32 */
+@media(min-width:768px) and (max-width:1279px) {#teamTabs .stabs__tabs{margin-bottom:var(--sp-8)}}

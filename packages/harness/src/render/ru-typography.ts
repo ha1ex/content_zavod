@@ -1,6 +1,6 @@
 /**
  * ru-typography — авто-простановка неразрывных пробелов по правилу дизайн-системы
- * (`.claude/skills/design-system-kaiten-v01/SKILL.md`, раздел «неразрывные пробелы»).
+ * (`.claude/skills/design-system-kaiten-v01-landingpage/SKILL.md`, раздел «неразрывные пробелы»).
  * Применяется в ОБОИХ путях рендера (preview `RenderLanding` + TSX-генератор
  * `render-landing`), поэтому авторам вручную ставить ` ` не нужно — правило
  * зашито в рендер. Правило контент-завода: `ru-nbsp-typography`.

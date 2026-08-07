@@ -102,7 +102,7 @@ content/approvals/              Approval-статусы (pending/approved/…)
 content/illustrations/          Specs SVG-иллюстраций
 generated/landings/<slug>/      Output: page.tsx (regeneratable)
 .claude/skills/                 Project-level Claude Code skills
-                                (kaiten-generate, kaiten-review, design-system-kaiten-v01)
+                                (kaiten-generate, kaiten-review, design-system-kaiten-v01-landingpage)
 out/                            Handoff ZIP-пакеты (gitignored)
 ```
 
@@ -300,7 +300,7 @@ Playbook блог-поверхности (статус ⏳ planned). Будет 
 |-------|-------------------|------------|
 | `kaiten-generate/SKILL.md` | «сгенерируй лендинг», «kaiten generate <slug>», «новый лендинг для X» | Проводит весь E2E в agent-mode: prepare prompt → ты-LLM пишешь spec → apply (валидаторы + TSX) → preview → handoff |
 | `kaiten-review/SKILL.md` | «проверь лендинг <slug>», «что не так с <slug>», «approve?» | QA-цикл: zod-валидация, brand+business rules, иллюстрации, visual regression, /approve, summary report |
-| `design-system-kaiten-v01/SKILL.md` | Любой UI-вопрос в стиле Kaiten | Выжимка из `design-system/kaiten-v01/`: цвета, типографика, сетка, состояния компонент |
+| `design-system-kaiten-v01-landingpage/SKILL.md` | Любой UI-вопрос в стиле Kaiten | Выжимка из `design-system/kaiten-v01/`: цвета, типографика, сетка, состояния компонент |
 
 Скиллы — декларативные, они **ссылаются на CLI и валидаторы**, никакого магического
 кода вне harness.

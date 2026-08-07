@@ -1,5 +1,5 @@
 ---
-name: design-system-kaiten-v01
+name: design-system-kaiten-v01-landingpage
 description: Kaiten landing design system V01. Use when designing, reviewing, or implementing Kaiten-style landing pages, marketing UI sections, responsive grids, spacing, typography, colors, component states, FAQ/accordion, review cards, CTA blocks, headers, footers, and product-led SaaS UI patterns.
 ---
 

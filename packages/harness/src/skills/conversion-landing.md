@@ -6,7 +6,7 @@ metadata:
   surface: harness
   pipeline: brief → spec → tsx
   related:
-    - design-system-kaiten-v01
+    - design-system-kaiten-v01-landingpage
     - content-marketing
 ---
 
@@ -897,7 +897,7 @@ audit-mode (§15) при первой попытке. Repair-loop поднима
    list, правит spec, перерисовывает TSX, прогоняет validators ещё раз.
 
 > **Связанные skills и документы:**
-> - `design-system-kaiten-v01` — токены, типографика, цвета, состояния.
+> - `design-system-kaiten-v01-landingpage` — токены, типографика, цвета, состояния.
 > - `content-marketing` — playbook для будущей блог-поверхности генератора.
 > - `LandingSpec` schema — `packages/harness/src/schemas/landing-spec.ts`.
 > - `IllustrationSpec` schema — `packages/harness/src/schemas/illustration-spec.ts`.

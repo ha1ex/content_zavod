@@ -270,7 +270,7 @@ Healthcare, Education, Legal и др. → `routePipeline` вернёт
 | 🆕 [`kaiten-intake`](.claude/skills/kaiten-intake/SKILL.md) | Claude Code skill | Фабрика ТЗ: сырьё → ТЗ + brief → пайплайн (`agent intake` → `intake-apply` → `build`) |
 | [`kaiten-generate`](.claude/skills/kaiten-generate/SKILL.md) | Claude Code skill | E2E workflow: **Domain audit → agent build → routing → execute** |
 | [`kaiten-review`](.claude/skills/kaiten-review/SKILL.md) | Claude Code skill | QA-цикл: validators chain + visual regression + /approve |
-| [`design-system-kaiten-v01`](.claude/skills/design-system-kaiten-v01/SKILL.md) | Claude Code skill | Выжимка DS: цвета, типографика, сетка |
+| [`design-system-kaiten-v01-landingpage`](.claude/skills/design-system-kaiten-v01-landingpage/SKILL.md) | Claude Code skill | Выжимка DS: цвета, типографика, сетка |
 | [`conversion-landing.md`](packages/harness/src/skills/conversion-landing.md) | system prompt | 8 page types, awareness levels, hero/CTA правила, 100-балльный audit |
 | [`section-mock-skill.md`](packages/harness/src/prompts/section-mock-skill.md) | system prompt | Правила mock-компонентов: §0 Domain fit, DS-tokens, lucide, density |
 | [`svg-illustration-skill.md`](packages/harness/src/prompts/svg-illustration-skill.md) | system prompt | Правила SVG: dual light/dark, AST-validatable, domain realism |

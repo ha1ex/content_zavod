@@ -1,7 +1,7 @@
 # Презентации Кайтена — раскладки и когда какую брать
 
 Дизайн-система: `design-system/presentation-v02/`.
-Скилл-выжимка для агента: `.claude/skills/design-system-kaiten-presentation-v02/`.
+Скилл-выжимка для агента: `.claude/skills/design-system-kaiten-v02-presentation/`.
 Правила цвета и текста: [`rules.md`](rules.md).
 
 Правила этой папки действуют **только на презентации**. Лендинги живут по

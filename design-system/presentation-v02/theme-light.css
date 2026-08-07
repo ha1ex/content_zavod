@@ -43,12 +43,16 @@
   --surface-frame:#f2f2f2;              /* фрейм в шаблоне именно такой */
   --surface-accent:var(--violet-12);
   --border-default:var(--neutral-300);
+  --table-line:#D1D5DB;                 /* разделители строк в таблице сравнения */
   --action-primary:var(--violet-100);
 
   --text-primary:var(--neutral-900);
   --text-secondary:var(--neutral-600);
   --text-accent:var(--violet-100);
   --frame-accent-fg:var(--violet-100);  /* заголовок на акцентном фрейме */
+
+  --badge-bg:var(--surface-frame);      /* бейдж на обложке */
+  --chevron-bg:var(--surface-accent);   /* сегмент шеврон-ленты */
 
   --tile-bg:var(--violet-12);           /* иконочная плашка */
   --tile-fg:var(--violet-100);

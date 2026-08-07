@@ -23,7 +23,7 @@
   --neutral-600:#757575;
   --neutral-900:#2d2d2d;
   --violet-100:#7d4ccf;
-  --violet-12:rgba(125,76,207,.12);   /* на темном 12-я прозрачная, как у фреймов */
+  --violet-12:rgba(125,76,207,.24);   /* сиреневая заливка узлов и столбиков на темном */
   --violet-tint:#efe9f9;             /* светлая 12-я нужна поверх сплошного сиреневого */
 
   /* статусные пары: на темном подложка из того же цвета под 18%,
@@ -41,12 +41,16 @@
   --surface-frame:rgba(125,76,207,.12);  /* #7D4CCF под 12% — пара 100/12 из DS */
   --surface-accent:var(--violet-100);    /* акцентный фрейм — сплошной */
   --border-default:rgba(255,255,255,.16);
+  --table-line:rgba(255,255,255,.16);    /* на темном разделители еле заметны */
   --action-primary:var(--violet-100);
 
   --text-primary:#ffffff;
   --text-secondary:rgba(255,255,255,.7); /* в макете opacity .7 на тексте */
   --text-accent:#c4a6f5;                 /* акцентное слово на темном фоне */
   --frame-accent-fg:#ffffff;             /* на сплошном сиреневом — белый */
+
+  --badge-bg:var(--violet-12);          /* сиреневый под 24% */
+  --chevron-bg:var(--violet-12);
 
   --tile-bg:var(--violet-100);           /* в темной теме плашка залитая */
   --tile-fg:#ffffff;
@@ -113,6 +117,21 @@
 [data-theme="dark"] .nav .dot { background:rgba(255,255,255,.26); }
 [data-theme="dark"] .nav .dot[aria-current="true"] { background:var(--violet-100); }
 [data-theme="dark"] .theme-bar button[aria-pressed="true"] { background:var(--violet-100); color:#fff; }
+
+/* Кружок под галочкой и прочерком в таблице остается белым: он лежит на
+   тонированной колонке, и подложка цвета полотна там сливается с фоном. */
+[data-theme="dark"] .cmp-mark { background:#ffffff; }
+
+/* Подписи сегментов ленты на темном — белые: сиреневый на сиреневой
+   подложке под 24% почти не читается. */
+[data-theme="dark"] .chevron { color:#ffffff; }
+
+/* Акцентное слово в шапке таблицы — брендовый сиреневый, а не осветленный */
+[data-theme="dark"] .cmp-head .accent { color:var(--violet-100); }
+
+/* Заголовок контактной карточки на темном — белый: сиреневый на почти
+   черной подложке читается тяжело. */
+[data-theme="dark"] .contact-title { color:#ffffff; }
 
 /* Серые буллиты списка «было/стало» на темном полотне читаются хуже —
    поднимаем до полупрозрачного белого. */

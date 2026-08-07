@@ -111,6 +111,8 @@ body:has(#s7:target) .nav-row[data-for="s7"] { display:flex; }
 body:has(#s8:target) .nav-row[data-for="s8"] { display:flex; }
 body:has(#s9:target) .nav-row[data-for="s9"] { display:flex; }
 body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
+body:has(#s12:target) .nav-row[data-for="s12"] { display:flex; }
+body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
 
 
 /* Размытая полоса по низу. В макете это прямоугольник шириной 2005.5,
@@ -251,7 +253,7 @@ body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
 .badges { display:flex; flex-wrap:wrap; gap:.6cqw; margin:0; padding:0; list-style:none; }
 .badge {
   font-size:1.0417cqw; line-height:1.4; color:var(--text-primary);
-  background:var(--surface-frame); border-radius:9999px;
+  background:var(--badge-bg); border-radius:9999px;
   padding:.42cqw 1.05cqw; white-space:nowrap;
 }
 /* Бейдж набирается целиком Regular — цифра внутри не выделяется начертанием */
@@ -328,17 +330,17 @@ body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
    в работе; голубой — информация. Раскрашиваем только те шаги, где статус
    есть на самом деле, остальные оставляем сиреневыми. */
 
-.chevrons { display:flex; gap:.05cqw; }
+.chevrons { display:flex; gap:.208cqw; }   /* 4px */
 .chevron {
   flex:1; height:2.5cqw;                  /* 48px */
   display:flex; align-items:center; justify-content:center;
   padding:0 .6cqw; text-align:center;
   font-size:1.0417cqw; line-height:1.2; font-weight:500;
-  background:var(--surface-accent); color:var(--text-accent);
+  background:var(--chevron-bg); color:var(--text-accent); border-radius:.31cqw;
   clip-path: polygon(0 0, calc(100% - 1.046cqw) 0, 100% 50%, calc(100% - 1.046cqw) 100%, 0 100%, 1.046cqw 50%);
 }
-.chevron:first-child { clip-path: polygon(0 0, calc(100% - 1.046cqw) 0, 100% 50%, calc(100% - 1.046cqw) 100%, 0 100%); border-radius:.513cqw 0 0 .513cqw; }
-.chevron:last-child  { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 1.046cqw 50%); border-radius:0 .513cqw .513cqw 0; }
+.chevron:first-child { clip-path: polygon(0 0, calc(100% - 1.046cqw) 0, 100% 50%, calc(100% - 1.046cqw) 100%, 0 100%); border-radius:.625cqw 0 0 .625cqw; }
+.chevron:last-child  { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 1.046cqw 50%); border-radius:0 .625cqw .625cqw 0; }
 .chevron.is-strong  { background:var(--action-primary); color:#fff; }
 .chevron.is-success { background:var(--green-12);  color:var(--green-100); }
 .chevron.is-danger  { background:var(--red-12);    color:var(--red-100); }
@@ -400,6 +402,7 @@ body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
    Палитра берется модификатором: .c-violet .c-green .c-red .c-orange
    .c-blue .c-lime — они задают только пару цветов, форму задает компонент. */
 
+.c-gray   { --c-100:var(--text-secondary); --c-12:var(--surface-frame); }
 .c-violet { --c-100:var(--violet-100); --c-12:var(--violet-12); }
 .c-green  { --c-100:var(--green-100);  --c-12:var(--green-12); }
 .c-red    { --c-100:var(--red-100);    --c-12:var(--red-12); }
@@ -422,15 +425,18 @@ body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
   font-size:1.0417cqw; font-weight:600; color:var(--c-100, var(--text-accent));
 }
 .bars .bar-label { font-size:1.0417cqw; color:var(--text-secondary); text-align:center; margin-top:.8cqw; }
+/* Серая плашка над столбиком — остаток до полного покрытия. Ставится
+   перед .bar и занимает всю свободную высоту колонки. */
+.bars .bar-rest { flex:1; min-height:0; border-radius:.63cqw .63cqw 0 0; background:var(--surface-frame); }
 
 /* Узел схемы: заголовок цветом пары, под ним путь или пояснение */
 .node {
   background:var(--c-12, var(--surface-accent)); border-radius:.63cqw;
-  border-top:.156cqw solid var(--c-100, var(--action-primary));
+  border-left:.156cqw solid var(--c-100, var(--action-primary));
   padding:.9cqw 1.1cqw;
 }
 .node .node-title { font-size:1.0417cqw; font-weight:600; color:var(--c-100, var(--text-accent)); margin:0 0 .3cqw; }
-.node .node-text  { font-size:.94cqw; line-height:1.35; color:var(--text-secondary); margin:0; }
+.node .node-text  { font-size:.94cqw; line-height:1.35; color:var(--text-primary); margin:0; }
 
 /* Подпись на соединителе — серая пилюля */
 .link-label {
@@ -466,16 +472,16 @@ body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
 .cmp-table .cmp-cell {
   height:3.75cqw;                                     /* 72px */
   display:flex; align-items:center;
-  font-size:1.25cqw; line-height:1.333;               /* 24/32 */
+  font-size:1.25cqw; line-height:1.333; font-weight:400;   /* 24/32 Regular */
 }
 .cmp-table .cmp-head { height:6.25cqw; font-weight:600; font-size:1.5625cqw; line-height:1.2; }  /* 120px, 30/36 */
 
 /* Разделители идут во всех трех колонках: в макете их 33 — по 11 на колонку.
    Одиннадцать это шапка плюс десять строк, то есть линия есть и под последней. */
-.cmp-table .cmp-cell { border-bottom:.078cqw solid #D1D5DB; }
+.cmp-table .cmp-cell { border-bottom:.078cqw solid var(--table-line); }
 
 /* Колонка параметров: текст слева */
-.cmp-table .cmp-param { padding-left:2.95cqw; color:var(--text-primary); }  /* 56.6px */
+.cmp-table .cmp-param { padding-left:1.46cqw; color:var(--text-primary); }  /* 28px */
 .cmp-table .cmp-param.cmp-head { padding-left:0; gap:1.4cqw; }  /* 27px */
 .cmp-table .cmp-param.cmp-head .tile { margin:0; }
 .cmp-table .cmp-param.cmp-head .accent { color:var(--text-accent); }
@@ -498,6 +504,26 @@ body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
 .cmp-mark svg { width:1.15cqw; height:1.15cqw; }
 .cmp-mark.is-yes { color:#22C55E; }
 .cmp-mark.is-no  { color:#EF4444; }
+
+/* ------------------------------------------------ карточки кейсов (10-1541) ---
+   Ряд серых карточек: пилюля-метка сверху, текст кейса, снизу пара логотипов
+   «клиент + Кайтен» через разделитель-плюс. */
+.cases { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); }
+.case {
+  background:var(--surface-frame); border-radius:var(--radius-frame);
+  padding:1.6cqw; display:flex; flex-direction:column; gap:1.2cqw;
+}
+.case .case-tag {
+  align-self:flex-start; background:var(--surface-page); color:var(--text-secondary);
+  font-size:.83cqw; letter-spacing:.08em; text-transform:uppercase;
+  padding:.4cqw .9cqw; border-radius:.42cqw;
+}
+.case .case-text { font-size:1.0417cqw; line-height:1.4; margin:0; flex:1; }
+.case .case-text b { font-weight:600; }
+.case .case-logos { display:flex; align-items:center; gap:1.2cqw; }
+.case .case-logos img { height:1.6cqw; width:auto; display:block; }
+.case .case-logos .client { font-size:1.15cqw; font-weight:600; }
+.case .case-logos .plus { color:var(--neutral-400); font-size:1.15cqw; }
 
 /* Шаг конвейера */
 .flow { display:flex; align-items:stretch; gap:.6cqw; }

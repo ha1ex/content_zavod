@@ -222,18 +222,14 @@
             <div class="bar-col c-blue"><div class="bar" style="--h:45%">4</div><div class="bar-label">было</div></div>
             <div class="bar-col c-violet"><div class="bar-delta">+100%</div><div class="bar" style="--h:90%">8</div><div class="bar-label">сейчас</div></div>
           </div>
-          <p class="body muted" style="margin-top:1.4cqw">За ними 27 макетов интерфейса и 10 сценариев страницы</p>
         </div>
 
-        <div>
+        <div style="order:-1">
           <h3 class="h2">Если проверка не прошла</h3>
-          <div style="display:grid; gap:.7cqw; align-content:start; margin-top:1.4cqw">
+          <div style="display:grid; gap:.7cqw; align-content:start; margin-top:1.4cqw; max-width:29.5cqw">
             <div class="node c-violet"><p class="node-title">Фаза P4</p><p class="node-text">Секции спланированы</p></div>
-            <div><span class="link-label">не прошла проверку</span></div>
             <div class="node c-orange"><p class="node-title">Починка</p><p class="node-text">Конвейер получает список ошибок и прошлый ответ</p></div>
-            <div><span class="link-label">до трех попыток</span></div>
             <div class="node c-green"><p class="node-title">Фаза P5</p><p class="node-text">Проверка пройдена, идем дальше</p></div>
-            <div><span class="link-label">если три раза подряд мимо</span></div>
             <div class="node c-red"><p class="node-title">Эскалация</p><p class="node-text">Конвейер останавливается и зовет человека</p></div>
           </div>
         </div>
@@ -280,8 +276,97 @@
       </div>
     </section>
 
+    <!-- ============================================ веб-поверхность === -->
+    <section class="slide" id="s8">
+      <div class="s-head">
+        <h2 class="s-title">Результат видно в браузере, а не в диффе</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Веб-поверхность завода</h3>
+          <p class="body">Маркетолог не открывает редактор кода. ТЗ, превью страницы и согласование живут в браузере, конвейер отдает туда каждый прогон.</p>
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></div>
+              <p class="tile-title">ТЗ на ревью</p>
+              <p class="tile-text">Человекочитаемое ТЗ до сборки, правки до запуска</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <p class="tile-title">Превью страницы</p>
+              <p class="tile-text">Ровно то, что увидит пользователь, на трех ширинах</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div>
+              <p class="tile-title">Согласование кнопкой</p>
+              <p class="tile-text">Решение фиксируется в истории</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+              <p class="tile-title">Каталог и статусы</p>
+              <p class="tile-text">Что собрано, что на согласовании, чем занят конвейер</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ЗАГЛУШКА: заменить на скриншот страницы согласования -->
+        <div style="display:flex; align-items:center"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.833cqw" /></div>
+      </div>
+    </section>
+
+    <!-- =========================================== четыре карточки === -->
+    <section class="slide" id="s9">
+      <div class="s-head">
+        <h2 class="s-title">Из чего собирается страница</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-4">
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Реестр компонентов</h3><p class="body muted">22 секционных компонента. Ничего кроме них конвейер вставить не может.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Макеты интерфейса</h3><p class="body muted">27 макетов по восьми доменам. Чужой домен заблокирован.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Сценарии страницы</h3><p class="body muted">10 плейбуков под разные уровни осведомленности аудитории.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Проверки</h3><p class="body">12 валидаторов на каждом прогоне: бренд, домен, доступность, бизнес-правила.</p></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== кейсы === -->
+    <section class="slide" id="s10">
+      <div class="s-head">
+        <h2 class="s-title">Где завод уже поработал</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="frame is-accent" style="display:grid; grid-template-columns:1.3fr 1fr; gap:2cqw; align-items:center">
+          <p class="body">Конвейер собрал страницы для разных доменов — от продуктовых до сравнений с конкурентами. Каждая прошла те же проверки и ушла в вeрстку обычным пул-реквестом.</p>
+          <img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.833cqw" />
+        </div>
+
+        <!-- ЗАГЛУШКА: вместо названий подставить логотипы клиентов -->
+        <div class="cases" style="margin-top:var(--gap)">
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text">Страница <b>сравнения с конкурентом</b> собрана из брифа за один прогон</p>
+            <div class="case-logos"><span class="client">Сравнение</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text"><b>Продуктовая страница</b> прошла восемь фаз без ручных правок</p>
+            <div class="case-logos"><span class="client">Продукт</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text"><b>Страница вебинара</b> ушла в верстку архивом одной командой</p>
+            <div class="case-logos"><span class="client">Вебинар</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ================================================ контактный === -->
-    <section class="slide contact" id="s8">
+    <section class="slide contact" id="s11">
       <div class="contact-card">
         <div class="contact-brand">
           <img src="../assets/kaiten-logo-latin.svg" alt="Kaiten" />
@@ -309,14 +394,17 @@
 </div>
 
 <nav class="nav-fallback" aria-label="Слайды">
-  <div class="nav-row" data-for="s1"><a class="is-off" aria-hidden="true">←</a><span class="counter">1 / 8</span><a href="#s2" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s2"><a href="#s1" aria-label="Предыдущий слайд">←</a><span class="counter">2 / 8</span><a href="#s3" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s3"><a href="#s2" aria-label="Предыдущий слайд">←</a><span class="counter">3 / 8</span><a href="#s4" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s4"><a href="#s3" aria-label="Предыдущий слайд">←</a><span class="counter">4 / 8</span><a href="#s5" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s5"><a href="#s4" aria-label="Предыдущий слайд">←</a><span class="counter">5 / 8</span><a href="#s6" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s6"><a href="#s5" aria-label="Предыдущий слайд">←</a><span class="counter">6 / 8</span><a href="#s7" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s7"><a href="#s6" aria-label="Предыдущий слайд">←</a><span class="counter">7 / 8</span><a href="#s8" aria-label="Следующий слайд">→</a></div>
-  <div class="nav-row" data-for="s8"><a href="#s7" aria-label="Предыдущий слайд">←</a><span class="counter">8 / 8</span><a class="is-off" aria-hidden="true">→</a></div>
+  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 11</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 11</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 11</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 11</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 11</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 11</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 11</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 11</span><a href="#s9">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 11</span><a href="#s10">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 11</span><a href="#s11">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 11</span><a class="is-off">→</a></div>
 </nav>
 
 <script src="../kaiten-slides.js"></script>

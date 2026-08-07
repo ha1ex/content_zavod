@@ -73,7 +73,7 @@ export function WindowLinksMock() {
           </span>
         </div>
       </div>
-      <span className="mt-2.5 inline-block rounded-(--radius-lg) border border-(--color-border-default) px-3.5 py-2 text-[11px] font-semibold tracking-wide text-(--color-text-primary)">
+      <span className="mt-2.5 inline-block rounded-(--radius-lg) border border-(--color-border-default) px-3.5 py-2 text-[11px] font-semibold text-(--color-text-primary)">
         ДОБАВИТЬ РОДИТЕЛЬСКУЮ КАРТОЧКУ
       </span>
 

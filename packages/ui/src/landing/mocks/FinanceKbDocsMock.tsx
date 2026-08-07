@@ -53,7 +53,7 @@ function RegulationDoc() {
         Порядок согласования платёжных поручений, авансов и расходных операций в
         финансовом отделе.
       </div>
-      <div className="mt-3 text-[10px] font-medium uppercase tracking-wide text-(--color-text-tertiary)">
+      <div className="mt-3 text-[10px] font-medium uppercase text-(--color-text-tertiary)">
         Содержание
       </div>
       <ul className="mt-1.5 space-y-1">

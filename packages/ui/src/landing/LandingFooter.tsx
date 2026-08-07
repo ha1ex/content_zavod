@@ -44,7 +44,7 @@ export function LandingFooter({
           <Inspect as="div" key={i} name={`footer.columns[${i}]`}>
             <p
               data-comp={`footer.columns[${i}].title`}
-              className="text-sm font-medium uppercase tracking-wide text-(--color-text-secondary)"
+              className="text-sm font-medium uppercase text-(--color-text-secondary)"
             >
               {col.title}
             </p>

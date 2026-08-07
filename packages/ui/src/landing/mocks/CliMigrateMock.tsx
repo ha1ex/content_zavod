@@ -40,7 +40,7 @@ export function CliMigrateMock() {
 
       <ResultCard>
         <div className="mb-3 flex items-center justify-between">
-          <span className="text-[11px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+          <span className="text-[11px] font-semibold uppercase text-(--color-text-secondary)">
             Перенос в Kaiten
           </span>
           <span className="inline-flex items-center gap-1 rounded-full bg-(--color-green-12) px-2 py-0.5 text-[10px] font-semibold text-green-700">

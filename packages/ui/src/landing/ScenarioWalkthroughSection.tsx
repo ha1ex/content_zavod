@@ -45,7 +45,7 @@ export function ScenarioWalkthroughSection({
         {eyebrow && (
           <p
             data-comp="scenario_walkthrough.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>

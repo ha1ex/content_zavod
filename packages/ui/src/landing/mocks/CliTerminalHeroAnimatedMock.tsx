@@ -18,7 +18,7 @@ import { ScaleToFit } from './ScaleToFit';
  */
 const CSS = `.cth{ --bg:#1b1626; --w:#cfc6e4; --fl:#8f82ab; --mut:#8f82ab; --grn:#78ffc7; --blu:#b79cff; --vio:#7d4ccf; --tp:#2d2d2d; --ts:#757575; --bd:#e0e0e0; --sec:#f5f5f5; --pur12:#f4e8f7; }
 .cth *{ box-sizing:border-box; margin:0; padding:0; }
-.cth{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+.cth{ font-family:var(--font-sans,"Roboto",system-ui,"Segoe UI",sans-serif); -webkit-font-smoothing:antialiased; }
 .cth .wrap{ position:relative; width:700px; height:400px; }
 
 /* — терминал (внахлёст: слева-сверху, сзади), стиль DarkTerminal/CTAdark — */

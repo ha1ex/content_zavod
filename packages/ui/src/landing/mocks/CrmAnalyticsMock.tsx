@@ -95,7 +95,7 @@ export function CrmAnalyticsMock() {
                   {k.delta}
                 </span>
               </div>
-              <div className="mt-1 text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+              <div className="mt-1 text-[10px] uppercase text-(--color-text-secondary)">
                 {k.label}
               </div>
             </div>
@@ -104,7 +104,7 @@ export function CrmAnalyticsMock() {
 
         {/* Funnel chart */}
         <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3">
-          <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="mb-2 flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary)">
             <span>Воронка продаж · конверсия по стадиям</span>
             <span>9,2% Лид → Оплата</span>
           </div>
@@ -129,7 +129,7 @@ export function CrmAnalyticsMock() {
 
         {/* Sources */}
         <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3">
-          <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="mb-2 flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary)">
             <span>Источники лидов</span>
             <span>сквозная аналитика</span>
           </div>

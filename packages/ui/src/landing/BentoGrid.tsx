@@ -49,7 +49,7 @@ export function BentoGrid({ eyebrow, title, description, cells }: BentoGridProps
         {eyebrow && (
           <p
             data-comp="bento_grid.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>

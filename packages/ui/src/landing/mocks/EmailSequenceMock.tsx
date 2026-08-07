@@ -50,7 +50,7 @@ export function EmailSequenceMock() {
               <span className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-(--color-border-default) bg-(--color-surface-page) text-[10px] font-semibold text-(--color-text-primary)">{i + 1}</span>
               <div className={cn('flex-1 rounded-(--radius-xl) border p-3', s.active ? 'border-(--color-action-primary)/40 bg-(--color-action-primary-soft)/30 shadow-sm' : 'border-(--color-border-default) bg-(--color-surface-page)')}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <span className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">{s.day}</span>
+                  <span className="text-[10px] uppercase text-(--color-text-secondary)">{s.day}</span>
                   <span className="text-[10px] text-(--color-text-secondary)">Trigger · {s.trigger}</span>
                 </div>
                 <div className="mt-1 flex items-start gap-2">

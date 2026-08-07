@@ -43,7 +43,7 @@ export function MeetListMock() {
               <span className="text-[17px] font-bold text-(--color-text-primary)">
                 Kaiten <span className="text-(--color-action-primary)">Meet</span>
               </span>
-              <span className="inline-flex h-8 items-center gap-1.5 rounded-(--radius-lg) bg-(--color-action-primary) px-3 text-[10px] font-semibold uppercase tracking-wide text-white">
+              <span className="inline-flex h-8 items-center gap-1.5 rounded-(--radius-lg) bg-(--color-action-primary) px-3 text-[10px] font-semibold uppercase text-white">
                 <Icon name="Video" className="h-3.5 w-3.5" strokeWidth={2} />
                 Создать встречу
               </span>
@@ -52,7 +52,7 @@ export function MeetListMock() {
               <span className="inline-flex h-8 min-w-[150px] items-center rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page) px-2.5 text-[11px] text-(--color-text-secondary)">
                 Ссылка или ID встречи
               </span>
-              <span className="inline-flex h-8 items-center rounded-(--radius-lg) border border-(--color-border-default) px-3 text-[10px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+              <span className="inline-flex h-8 items-center rounded-(--radius-lg) border border-(--color-border-default) px-3 text-[10px] font-semibold uppercase text-(--color-text-secondary)">
                 Подключиться
               </span>
             </div>
@@ -77,7 +77,7 @@ export function MeetListMock() {
           </div>
 
           {/* table header */}
-          <div className={cn(GRID, 'border-b border-(--color-border-default) px-3 py-2.5 text-[9px] font-semibold uppercase tracking-wide text-(--color-text-secondary)')}>
+          <div className={cn(GRID, 'border-b border-(--color-border-default) px-3 py-2.5 text-[9px] font-semibold uppercase text-(--color-text-secondary)')}>
             <span className="inline-flex items-center gap-1">
               Название <Icon name="Search" className="h-3 w-3" strokeWidth={2} />
             </span>

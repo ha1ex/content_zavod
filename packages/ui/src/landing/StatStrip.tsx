@@ -31,7 +31,7 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
           {eyebrow && (
             <p
               data-comp="stats.eyebrow"
-              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
             >
               {eyebrow}
             </p>

@@ -34,8 +34,8 @@ export interface LogoAnimateProps {
 const CSS = `
 .lmq{
   --_ink:var(--text-title,#2d2d2d);
-  --_font:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
-  --_ls:var(--ls,-0.2px);
+  --_font:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);
+  --_ls:var(--ls,0);
   font-family:var(--_font);letter-spacing:var(--_ls);color:var(--_ink);
 }
 .lmq *,.lmq *::before,.lmq *::after{box-sizing:border-box}

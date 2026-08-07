@@ -64,11 +64,11 @@ export function MarketplaceConnectorMock() {
                 </div>
                 <dl className="mt-3 grid grid-cols-2 gap-2">
                   <div>
-                    <dt className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Активных карточек</dt>
+                    <dt className="text-[9px] uppercase text-(--color-text-secondary)">Активных карточек</dt>
                     <dd className={cn('mt-0.5 text-[14px] font-semibold tabular-nums', m.activeCards === 0 ? 'text-(--color-text-secondary)' : 'text-(--color-text-primary)')}>{m.activeCards}</dd>
                   </div>
                   <div>
-                    <dt className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Заказов сегодня</dt>
+                    <dt className="text-[9px] uppercase text-(--color-text-secondary)">Заказов сегодня</dt>
                     <dd className={cn('mt-0.5 text-[14px] font-semibold tabular-nums', m.ordersToday === 0 ? 'text-(--color-text-secondary)' : 'text-(--color-text-accent)')}>{m.ordersToday}</dd>
                   </div>
                 </dl>

@@ -68,7 +68,7 @@ export function DocEditorRichMock() {
       <div className="grid grid-cols-[1fr] gap-0 md:grid-cols-[180px_1fr]">
         {/* outline */}
         <div className="hidden border-r border-(--color-border-default) bg-(--color-surface-section) p-3 md:block">
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="text-[10px] font-semibold uppercase text-(--color-text-secondary)">
             Содержание
           </div>
           <div className="mt-2 space-y-1">
@@ -100,7 +100,7 @@ export function DocEditorRichMock() {
 
           {/* checklist block */}
           <div className="space-y-1.5 rounded-(--radius-lg) border border-(--color-action-primary)/20 bg-(--color-action-primary-soft)/30 p-3">
-            <div className="text-[10px] font-semibold uppercase tracking-wide text-(--color-text-accent)">
+            <div className="text-[10px] font-semibold uppercase text-(--color-text-accent)">
               Чек-лист дежурного
             </div>
             {[
@@ -134,7 +134,7 @@ export function DocEditorRichMock() {
 
           {/* table block */}
           <div className="overflow-hidden rounded-(--radius-lg) border border-(--color-border-default)">
-            <div className="grid grid-cols-[1fr_64px_116px] gap-2 border-b border-(--color-border-default) bg-(--color-surface-section) px-2.5 py-1.5 text-[9.5px] uppercase tracking-wide text-(--color-text-secondary)">
+            <div className="grid grid-cols-[1fr_64px_116px] gap-2 border-b border-(--color-border-default) bg-(--color-surface-section) px-2.5 py-1.5 text-[9.5px] uppercase text-(--color-text-secondary)">
               <span>Уровень</span>
               <span>SLA</span>
               <span>Ответственный</span>

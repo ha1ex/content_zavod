@@ -68,7 +68,7 @@ export function PerformanceReviewMock() {
       <div className="grid gap-3 p-4 md:gap-4 md:p-5">
         <div className="flex items-center justify-between rounded-(--radius-xl) border border-(--color-action-primary)/30 bg-(--color-action-primary-soft)/30 p-3">
           <div>
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Итоговая оценка · H1 2026</div>
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">Итоговая оценка · H1 2026</div>
             <div className="mt-0.5 text-[14px] font-semibold text-(--color-text-primary)">Exceeds expectations</div>
             <div className="mt-0.5 text-[10.5px] text-(--color-text-secondary)">3 из 4 целей выполнены, 1 в финале · 4 оценки коллег учтены</div>
           </div>
@@ -78,7 +78,7 @@ export function PerformanceReviewMock() {
           </span>
         </div>
         <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3">
-          <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="mb-2 flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary)">
             <span>Цели на полугодие · 4 из 4</span>
             <span>прогресс 91%</span>
           </div>
@@ -87,7 +87,7 @@ export function PerformanceReviewMock() {
               <div key={g.title} className="space-y-1">
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="text-[11px] font-medium text-(--color-text-primary)">{g.title}</span>
-                  <span className="shrink-0 text-[9px] uppercase tracking-wide text-(--color-text-secondary)">вес {g.weight}</span>
+                  <span className="shrink-0 text-[9px] uppercase text-(--color-text-secondary)">вес {g.weight}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-(--color-neutral-200)">
@@ -101,7 +101,7 @@ export function PerformanceReviewMock() {
           </div>
         </div>
         <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3">
-          <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="mb-2 flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary)">
             <span>Обратная связь · manager + 3 peers</span>
             <span>360°</span>
           </div>

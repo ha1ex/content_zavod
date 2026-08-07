@@ -63,7 +63,7 @@ export function ProcessFlowchartMock() {
             <div key={s.num} className={cn('rounded-(--radius-xl) border p-2.5', STATUS_CLASS[s.status].box)}>
               <div className="flex items-center gap-2">
                 <span className={cn('inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold', STATUS_CLASS[s.status].icon)}>{s.num}</span>
-                <span className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">{STATUS_LABEL[s.status]}</span>
+                <span className="text-[9px] uppercase text-(--color-text-secondary)">{STATUS_LABEL[s.status]}</span>
               </div>
               <div className="mt-1.5 text-[11.5px] font-semibold leading-tight text-(--color-text-primary)">{s.title}</div>
               <div className="mt-1 truncate text-[10px] text-(--color-text-secondary)">{s.owner}</div>
@@ -76,11 +76,11 @@ export function ProcessFlowchartMock() {
         </div>
         <div className="mt-3 grid gap-2 md:grid-cols-2">
           <div className="rounded-(--radius-lg) border border-dashed border-(--color-border-default) bg-(--color-surface-page) p-2.5 text-[11px] text-(--color-text-primary)">
-            <span className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Ветвление</span>
+            <span className="text-[10px] uppercase text-(--color-text-secondary)">Ветвление</span>
             <div className="mt-0.5">Если &gt; 500 000 ₽ → согласование CEO</div>
           </div>
           <div className="rounded-(--radius-lg) border border-dashed border-(--color-border-default) bg-(--color-surface-page) p-2.5 text-[11px] text-(--color-text-primary)">
-            <span className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Иначе</span>
+            <span className="text-[10px] uppercase text-(--color-text-secondary)">Иначе</span>
             <div className="mt-0.5">Сразу к закупкам, без CEO</div>
           </div>
         </div>

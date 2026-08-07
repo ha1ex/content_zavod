@@ -58,7 +58,7 @@ export function TabbedFeatureSection({
         {eyebrow && (
           <p
             data-comp="tabbed_feature.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>
@@ -124,7 +124,7 @@ export function TabbedFeatureSection({
                 {t.eyebrow && (
                   <p
                     data-comp={`tabbed_feature.tabs[${idx}].eyebrow`}
-                    className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+                    className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
                   >
                     {t.eyebrow}
                   </p>

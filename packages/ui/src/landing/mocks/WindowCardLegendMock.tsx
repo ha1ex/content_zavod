@@ -16,7 +16,7 @@ const css = `
   --page:#f3f1f6; --card:#ffffff;
   --orange-bg:#fff3e0; --blue-bg:#eef4fc; --green:#4caf51;
   --legend:#6b4ba8;
-  font-family:"Roboto","Inter",system-ui,sans-serif;color:var(--ink);
+  font-family:"Roboto",system-ui,sans-serif;color:var(--ink);
   background:var(--page);-webkit-font-smoothing:antialiased;
   display:flex;justify-content:center;padding:48px 24px;
 }
@@ -29,7 +29,7 @@ const css = `
 .wclm .links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible;}
 .wclm .window{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(40,30,70,.14);display:grid;grid-template-columns:1fr 312px;min-height:540px;}
 .wclm .main{padding:20px 22px 26px;border-right:1px solid var(--line-2);}
-.wclm .h1{font-size:21px;font-weight:700;letter-spacing:-.2px;}
+.wclm .h1{font-size:21px;font-weight:700;letter-spacing:0;}
 .wclm .id{color:var(--violet);font-size:12px;border-bottom:1px solid var(--violet);display:inline-block;margin-top:6px;}
 .wclm .toolbar{display:flex;align-items:center;gap:8px;margin:14px 0 4px;}
 .wclm .plus{width:34px;height:34px;border-radius:50%;background:var(--violet);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
@@ -44,7 +44,7 @@ const css = `
 .wclm .support .notify{margin-top:8px;}
 .wclm .support .new{margin-top:11px;padding-top:10px;border-top:1px solid #dce6f3;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .wclm .support .new .l{display:flex;align-items:center;gap:7px;color:var(--ink-2);}
-.wclm .support .new .r{color:var(--violet);font-weight:600;font-size:10.5px;letter-spacing:.4px;}
+.wclm .support .new .r{color:var(--violet);font-weight:600;font-size:10.5px;letter-spacing:0;}
 .wclm .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--violet);}
 .wclm .props{margin-top:18px;display:grid;grid-template-columns:108px 1fr;row-gap:13px;font-size:13px;align-items:center;}
 .wclm .props .k{color:var(--ink-3);}

@@ -31,7 +31,7 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
           {eyebrow && (
             <p
               data-comp="logo_cloud.eyebrow"
-              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
             >
               {eyebrow}
             </p>

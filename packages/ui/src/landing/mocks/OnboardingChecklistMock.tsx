@@ -78,7 +78,7 @@ export function OnboardingChecklistMock() {
       </div>
       <div className="p-4 md:p-5">
         <div className="mb-4 space-y-1.5">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary)">
             <span>Прогресс первой недели</span>
             <span className="font-semibold text-(--color-text-accent)">47%</span>
           </div>
@@ -91,7 +91,7 @@ export function OnboardingChecklistMock() {
             <div key={d.num} className={cn('rounded-(--radius-xl) border p-2.5', d.active ? 'border-(--color-action-primary)/40 bg-(--color-action-primary-soft)/30 shadow-sm' : 'border-(--color-border-default) bg-(--color-surface-page)')}>
               <div className="mb-2 flex items-baseline justify-between">
                 <div>
-                  <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">День {d.num}</div>
+                  <div className="text-[10px] uppercase text-(--color-text-secondary)">День {d.num}</div>
                   <div className={cn('text-[11.5px] font-semibold leading-tight', d.active ? 'text-(--color-text-accent)' : 'text-(--color-text-primary)')}>{d.title}</div>
                 </div>
                 <span className="text-[9px] text-(--color-text-secondary)">{d.date}</span>

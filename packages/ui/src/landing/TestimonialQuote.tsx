@@ -47,7 +47,7 @@ export function TestimonialQuote({
           {eyebrow && (
             <p
               data-comp="testimonial_quote.eyebrow"
-              className="mb-4 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              className="mb-4 text-sm font-medium uppercase text-(--color-text-accent)"
             >
               {eyebrow}
             </p>

@@ -46,7 +46,7 @@ export function LedgerViewMock() {
         <div className="overflow-hidden rounded-(--radius-xl) border border-(--color-border-default)">
           <table className="w-full text-left text-[11px]">
             <thead>
-              <tr className="border-b border-(--color-border-default) bg-(--color-surface-section) text-[9px] uppercase tracking-wide text-(--color-text-secondary)">
+              <tr className="border-b border-(--color-border-default) bg-(--color-surface-section) text-[9px] uppercase text-(--color-text-secondary)">
                 <th className="px-3 py-2">Дата</th>
                 <th className="px-3 py-2">Документ</th>
                 <th className="px-3 py-2">Описание</th>

@@ -93,7 +93,7 @@ export function CrmClientCardMock() {
           <div className="space-y-1.5">
             {FIELDS.map((f) => (
               <div key={f.label}>
-                <div className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">
+                <div className="text-[9px] uppercase text-(--color-text-secondary)">
                   {f.label}
                 </div>
                 <div className="truncate text-[11px] font-medium text-(--color-text-primary)">
@@ -141,7 +141,7 @@ export function CrmClientCardMock() {
           <div className="rounded-(--radius-xl) border border-(--color-action-primary)/30 bg-(--color-action-primary-soft)/30 p-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[11px] uppercase tracking-wide text-(--color-text-secondary)">
+                <div className="text-[11px] uppercase text-(--color-text-secondary)">
                   Активная сделка
                 </div>
                 <div className="mt-0.5 text-[12.5px] font-semibold text-(--color-text-primary)">
@@ -162,7 +162,7 @@ export function CrmClientCardMock() {
 
           {/* timeline */}
           <div className="space-y-1.5">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">
               Последние события
             </div>
             {TIMELINE.map((e, i) => (

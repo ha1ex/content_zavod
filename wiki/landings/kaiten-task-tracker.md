@@ -45,7 +45,7 @@ sections:
   - faq
 generator: host-agent
 durationMs: 0
-tokenEstimate: 48139
+tokenEstimate: 48142
 tags:
   - landing
   - saas_landing
@@ -59,7 +59,7 @@ stale: false
 - **archetype:** `saas_landing`
 - **goal:** `try_free` (brief.cta = "Попробовать бесплатно")
 - **sections used:** `site_header, hero, reviews, feature_rows, cta_buttons, features, cta_product, features, cta_buttons, logo_marquee, final_cta, faq`
-- **token estimate:** `48139`
+- **token estimate:** `48142`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
 
@@ -161,7 +161,7 @@ stale: false
 - **Score:** 88.43 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT, Торговля, Производство, Строительство
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-08-07T12:32:27.960Z
+- **Generated:** 2026-08-07T16:02:05.818Z
 
 ## Breakdown
 

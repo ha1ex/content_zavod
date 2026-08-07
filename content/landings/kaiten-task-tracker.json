@@ -666,10 +666,10 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-07T12:32:28.017Z",
+    "generatedAt": "2026-08-07T16:02:06.242Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
-    "tokenEstimate": 48139,
+    "tokenEstimate": 48142,
     "domain": "pm",
     "chrome": {
       "footer": false

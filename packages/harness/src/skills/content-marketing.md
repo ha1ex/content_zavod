@@ -8,7 +8,7 @@ metadata:
   status: planned
   related:
     - conversion-landing
-    - design-system-kaiten-v01
+    - design-system-kaiten-v01-landingpage
 ---
 
 # Контент-завод Кайтен — Content Marketing Skill
@@ -425,6 +425,6 @@ CTA:
 
 > **Связанные skills и документы:**
 > - `conversion-landing` — правила лендингов; статья → лендинг → продукт.
-> - `design-system-kaiten-v01` — визуальная база (если статья экспортится
+> - `design-system-kaiten-v01-landingpage` — визуальная база (если статья экспортится
 >   в MDX-страницу с UI-компонентами).
 > - `LandingSpec` / future `ArticleSpec` schemas — в `packages/harness/src/schemas/`.

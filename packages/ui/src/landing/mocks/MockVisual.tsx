@@ -66,6 +66,9 @@ import {
   RetailDocMiniMock,
   RetailReportMiniMock,
   GanttChartMock,
+  WindowLinksMock,
+  WindowResourceMock,
+  WindowReportsMock,
   CliTerminalHeroMock,
   CliTerminalHeroAnimatedMock,
   CliTerminalFinalAnimatedMock,
@@ -178,6 +181,10 @@ export type MockVariant =
   | 'retail-report-bottlenecks'
   | 'retail-report-ai'
   | 'gantt-chart'
+  // Window-моки планирования (эталон — лендинг сравнения с MS Project)
+  | 'window-links'
+  | 'window-resource'
+  | 'window-reports'
   // Kaiten CLI (cli-community-edition)
   | 'cli-terminal-hero'
   | 'cli-terminal-hero-animated'
@@ -371,6 +378,12 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
           </ScaleToFit>
         </div>
       );
+    case 'window-links':
+      return <WindowLinksMock />;
+    case 'window-resource':
+      return <WindowResourceMock />;
+    case 'window-reports':
+      return <WindowReportsMock />;
     case 'cli-terminal-hero':
       return <CliTerminalHeroMock />;
     case 'cli-terminal-hero-animated':

@@ -291,10 +291,10 @@ export default async function DashboardPage() {
                         href={`/api/handoff/${slug}`}
                         download={`landing-${slug}.zip`}
                         className="inline-flex items-center gap-1.5 justify-self-start text-(--color-neutral-500) transition-colors hover:text-(--color-text-primary)"
-                        title="Скачать ZIP-архив для разработчика"
+                        title="Скачать ZIP-архив для вёрстки"
                       >
                         <ActionIcon name="handoff" />
-                        <span className="hidden sm:inline">handoff</span>
+                        <span className="hidden sm:inline">ZIP для верстки</span>
                       </a>
                     </>
                   )}

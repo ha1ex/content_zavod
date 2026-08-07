@@ -1424,7 +1424,7 @@ section.s{padding:var(--sp-12) 0}
 @media(min-width:1000px){.hero__copy{max-width:1040px}.hero__sub{max-width:980px}}
 
 /* Сущности карточек по продуктовому референсу: полоса-метка во всю ширину,
-   эмодзи у заголовка, счётчик комментариев, эмодзи/буквенные аватары,
+   эмодзи у заголовка, счетчик комментариев, эмодзи/буквенные аватары,
    пилюля-дата, красная полоса просроченной задачи */
 .hsi .strip{position:absolute;top:0;left:0;right:0;height:4px;border-radius:12px 12px 0 0}
 .hsi .strip.v{background:#7d4ccf}.hsi .strip.b{background:#2f80ed}.hsi .strip.o{background:#ffa100}.hsi .strip.g{background:#4caf51}.hsi .strip.p{background:#ec4d8b}.hsi .strip.y{background:#f5c542}
@@ -1450,7 +1450,7 @@ section.s{padding:var(--sp-12) 0}
 }
 @media(max-width:767px){.cmp__bg{top:var(--cmp-bg-top,0px)}}
 
-/* Счётчики доски — цифра строго по центру */
+/* Счетчики доски — цифра строго по центру */
 .hsi .cnt,.hsi .cnt2,.hsi .lane .cnt2{line-height:1}
 
 /* Таблица: одна линия на границе разделов (убираем сложение top+bottom бордеров) */
@@ -1507,7 +1507,7 @@ section.s{padding:var(--sp-12) 0}
 /* Мобилка: заголовок секции модулей — отступ снизу 24 */
 @media(max-width:767px){#modules .s-head{margin-bottom:var(--sp-6)}}
 
-/* Hero: подзаголовок мельче — lg 18/28 (на мобилке остаётся 16) */
+/* Hero: подзаголовок мельче — lg 18/28 (на мобилке остается 16) */
 .hero__sub{font-size:var(--fs-lg);line-height:var(--lh-lg)}
 
 /* Перенос только на мобилке */
@@ -1554,7 +1554,7 @@ section.s{padding:var(--sp-12) 0}
 /* Секция «Переходите из Asana»: отступы 128 сверху и снизу на десктопе */
 @media(min-width:1280px){#depsec{padding-top:128px;padding-bottom:128px}}
 
-/* Модули: без верхнего отступа на десктопе (128px уже даёт секция переезда) */
+/* Модули: без верхнего отступа на десктопе (128px уже дает секция переезда) */
 @media(min-width:1280px){#modules{padding-top:0}}
 
 /* Таблица на мобилке: заголовок раздела переносится и не залезает на цветные колонки */
@@ -1638,7 +1638,7 @@ section.s{padding:var(--sp-12) 0}
 /* Weeek: примечание таблицы сравнения — по центру на планшете */
 @media(min-width:768px){.cmp__note{text-align:center}}
 /* Weeek: hero-подзаголовок — перенос перед «и служба».
-   Только с 1000px: ниже .hero__copy ограничен 680px и часть до переноса (740px) не влезает — строка рвётся */
+   Только с 1000px: ниже .hero__copy ограничен 680px и часть до переноса (740px) не влезает — строка рвется */
 .hs-br{display:none}
 @media(min-width:1000px){.hs-br{display:inline}}
 /* Weeek: описание фич — перенос после «инструменты» только на десктопе */

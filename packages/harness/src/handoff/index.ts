@@ -1,3 +1,7 @@
+export { buildStaticHandoff } from './static-handoff';
+export type { StaticHandoffManifest } from './static-handoff';
+export { scopeCss } from './scope-css';
+
 import archiver from 'archiver';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';

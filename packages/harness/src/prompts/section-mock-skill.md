@@ -7,7 +7,7 @@ metadata:
   pipeline: spec → variant-decision → mock-component
   related:
     - svg-illustration-skill
-    - design-system-kaiten-v01
+    - design-system-kaiten-v01-landingpage
     - conversion-landing
 ---
 

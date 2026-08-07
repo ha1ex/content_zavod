@@ -121,7 +121,9 @@ const CSS = `
   .kct-cell--label{font-size:12px;line-height:16px;padding-left:36px;padding-right:10px}
   .kct-ic{width:20px;height:20px}
   .kct-ic--yes svg{width:12px;height:12px}
-  .kct-sec{padding:12px 0}
+  /* заголовок раздела держим в левой колонке — иначе длинный текст налазит на
+     подсветку колонки (band начинается на 2×colw от правого края) */
+  .kct-sec{padding:12px calc(2 * var(--colw) + 10px) 12px 0}
   .kct-sec-t{font-size:14px;line-height:20px}
   .kct-note{margin-top:16px;font-size:12px;line-height:16px}
 }

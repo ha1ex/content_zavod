@@ -101,7 +101,9 @@ const CSS = `
   .kctc-cell--label{font-size:12px;line-height:16px;padding-left:36px;padding-right:10px}
   .kctc-txt{font-size:12px;line-height:16px;font-weight:400}
   .kctc-cell--a .kctc-txt{font-weight:500}
-  .kctc-sec{padding:12px 0}
+  /* заголовок раздела держим в левой колонке — иначе длинный текст налазит на
+     подсветку CLI-колонки (band начинается на 2×colw от правого края) */
+  .kctc-sec{padding:12px calc(2 * var(--colw) + 10px) 12px 0}
   .kctc-sec-t{font-size:14px;line-height:20px}
   .kctc-note{margin-top:16px;font-size:12px;line-height:16px}
 }

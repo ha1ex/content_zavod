@@ -1,0 +1,153 @@
+/* ============================================================================
+   Тема Dark — темная презентация Кайтена.
+   Снята с Figma «Шаблон презентации V02»: слайды 149-583 (обложка) и
+   163-1250 (контентный). Значения взяты из SVG-экспорта, не на глаз.
+
+   Темно-фиолетовое полотно #190F29, белый текст, фреймы — сиреневый под 24%,
+   акцентный фрейм — сплошной сиреневый, размытая подложка по нижнему краю.
+
+   Подключается ПОСЛЕ kaiten-slides.css:
+     <link rel="stylesheet" href="kaiten-slides.css" />
+     <link rel="stylesheet" href="theme-dark.css" />
+   и <html data-theme="dark">.
+   ============================================================================ */
+
+[data-theme="dark"] {
+  /* --- палитра --- */
+  --neutral-000:#ffffff;
+  --neutral-100:#f5f5f5;
+  --neutral-200:#eeeeee;
+  --neutral-300:#e0e0e0;
+  --neutral-400:#bdbdbd;
+  --neutral-500:#9e9e9e;
+  --neutral-600:#757575;
+  --neutral-900:#2d2d2d;
+  --violet-100:#7d4ccf;
+  --violet-12:rgba(125,76,207,.24);   /* сиреневая заливка узлов и столбиков на темном */
+  --violet-tint:#efe9f9;             /* светлая 12-я нужна поверх сплошного сиреневого */
+
+  /* статусные пары: на темном подложка из того же цвета под 18%,
+     светлая 12-я из светлой темы здесь не читается */
+  --green-100:#7bd07f;  --green-12:rgba(76,175,81,.18);
+  --red-100:#ff7b70;    --red-12:rgba(244,67,54,.18);
+  --orange-100:#ffbc4d; --orange-12:rgba(255,161,0,.18);
+  --blue-100:#6bb8f7;   --blue-12:rgba(33,150,243,.18);
+  --lime-100:#c6e04a;   --lime-12:rgba(165,202,0,.18);
+  --ink:#190f29;              /* полотно слайда из макета */
+
+  /* --- роли --- */
+  --stage-bg:#0e0817;         /* поле вокруг слайда — темнее полотна */
+  --surface-page:var(--ink);
+  --surface-frame:rgba(125,76,207,.12);  /* #7D4CCF под 12% — пара 100/12 из DS */
+  --surface-accent:var(--violet-100);    /* акцентный фрейм — сплошной */
+  --border-default:rgba(255,255,255,.16);
+  --table-line:rgba(255,255,255,.16);    /* на темном разделители еле заметны */
+  --action-primary:var(--violet-100);
+
+  --text-primary:#ffffff;
+  --text-secondary:rgba(255,255,255,.7); /* в макете opacity .7 на тексте */
+  --text-accent:#c4a6f5;                 /* акцентное слово на темном фоне */
+  --frame-accent-fg:#ffffff;             /* на сплошном сиреневом — белый */
+
+  --badge-bg:var(--violet-12);          /* сиреневый под 24% */
+  --chevron-bg:var(--violet-12);
+
+  --tile-bg:var(--violet-100);           /* в темной теме плашка залитая */
+  --tile-fg:#ffffff;
+
+  --contact-row-bg:rgba(255,255,255,.06);
+
+  --cmd-bg:rgba(255,255,255,.08);
+  --cmd-fg:#ffffff;
+  --code-bg:rgba(255,255,255,.1);
+
+  /* --- декор: полоса по нижнему краю ---
+     Геометрия и мягкость те же, что в светлой теме, отличается только
+     режим наложения — hard light (правило ниже). В темном макете полоса
+     была 42px и плотнее, но в одинаковых цифрах обе темы держатся ровнее. */
+  --glow-gradient: linear-gradient(90deg, #6FE5FF, #E298FF);
+  --glow-h: 1.599cqw;         /* 30.7px — как в Light */
+  --glow-bottom: -.804cqw;    /* низ уходит на 15.43px за край слайда */
+  --glow-opacity: .42;
+  --glow-blur: 1.3cqw;
+
+  /* --- декор: круг на обложке ---
+     Эллипс r=431 в точке (1406.9, 588.1), fill-opacity .75, blur 199.6.
+     Градиент развернут: слева magenta, справа cyan — обратно светлой теме. */
+  --cover-glow-gradient: linear-gradient(90deg, #E298FF, #6FE5FF);
+  --cover-glow-left: 50.826cqw;   /* 975.9px */
+  --cover-glow-top: 8.177cqw;     /* 157px */
+  --cover-glow-size: 44.903cqw;   /* 862px */
+  --cover-glow-opacity: .42;  /* в макете .75; убавлено — с hard light засвет был слишком плотным */
+  --glow-blur-cover: 5.2cqw;      /* в макете stdDeviation 199.57; убавлено вдвое — свечение собраннее */
+}
+
+/* Режим наложения свечения.
+   На темном полотне градиент в обычном режиме ложится матовой пленкой и
+   сереет. Hard light дает более контрастное свечение, чем screen: светлые
+   участки градиента высветляют фон сильнее, темные — уходят в глубину.
+   Правило действует и на полосу контентных слайдов, и на круг обложки —
+   это один и тот же псевдоэлемент. */
+[data-theme="dark"] .slide::after { mix-blend-mode: hard-light; }
+
+/* Логотип на темном: знак остается цветным, надпись «Кайтен» — белая.
+   Подменяем файл целиком, чтобы не трогать разметку слайда. */
+[data-theme="dark"] .cover-logo img { content: url("assets/kaiten-logo-on-dark.svg"); }
+/* Логотип в углу контентных слайдов — тоже с белой надписью */
+[data-theme="dark"] .mark { content: url("assets/kaiten-logo-on-dark.svg"); }
+/* То же на контактном слайде — там лого латиницей */
+[data-theme="dark"] .contact-brand img { content: url("assets/kaiten-logo-latin-on-dark.svg"); }
+/* Разделитель в лого-блоке на темном тоже светлеет */
+[data-theme="dark"] .contact-brand .divider { background: rgba(255,255,255,.22); }
+
+/* Хром вокруг слайда — навигация и панель стилей — тоже темнеет,
+   иначе белые пилюли режут глаз на темном полотне. */
+[data-theme="dark"] .nav,
+[data-theme="dark"] .theme-bar {
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.14);
+  color:rgba(255,255,255,.7);
+  box-shadow:none;
+}
+[data-theme="dark"] .nav button,
+[data-theme="dark"] .theme-bar button { color:rgba(255,255,255,.72); }
+[data-theme="dark"] .nav button:hover,
+[data-theme="dark"] .theme-bar button:hover { background:rgba(255,255,255,.12); color:#fff; }
+[data-theme="dark"] .nav button:disabled { color:rgba(255,255,255,.26); background:none; }
+[data-theme="dark"] .nav .dot { background:rgba(255,255,255,.26); }
+[data-theme="dark"] .nav .dot[aria-current="true"] { background:var(--violet-100); }
+[data-theme="dark"] .theme-bar button[aria-pressed="true"] { background:var(--violet-100); color:#fff; }
+
+/* Кружок под галочкой и прочерком в таблице остается белым: он лежит на
+   тонированной колонке, и подложка цвета полотна там сливается с фоном. */
+[data-theme="dark"] .cmp-mark { background:#ffffff; }
+
+/* Подписи сегментов ленты на темном — белые: сиреневый на сиреневой
+   подложке под 24% почти не читается. */
+[data-theme="dark"] .chevron { color:#ffffff; }
+
+/* Акцентное слово в шапке таблицы — брендовый сиреневый, а не осветленный */
+[data-theme="dark"] .cmp-head .accent { color:var(--violet-100); }
+
+/* Заголовок контактной карточки на темном — белый: сиреневый на почти
+   черной подложке читается тяжело. */
+[data-theme="dark"] .contact-title { color:#ffffff; }
+
+/* Серые буллиты списка «было/стало» на темном полотне читаются хуже —
+   поднимаем до полупрозрачного белого. */
+[data-theme="dark"] .bullets li::before { background: rgba(255,255,255,.32); }
+
+/* Внутри сплошного акцентного фрейма полярность переворачивается:
+   плашка становится светлой, иконка — сиреневой, пояснения — белые
+   вполсилы. Иначе залитая плашка на залитом фрейме сливается. */
+[data-theme="dark"] .frame.is-accent .tile { background: var(--violet-tint); color: var(--violet-100); }
+[data-theme="dark"] .frame.is-accent .tile-title { color: #ffffff; }
+[data-theme="dark"] .frame.is-accent .tile-text,
+[data-theme="dark"] .frame.is-accent .body.muted { color: rgba(255,255,255,.72); }
+
+/* --- Правило применения цвета в темной теме -------------------------------
+   Здесь залитый сиреневый — норма, а не исключение: иконочные плашки залиты
+   по умолчанию, потому что на темном фоне светлая подложка не читается.
+   Сильное выделение в темной теме — сплошной акцентный фрейм: он один
+   на слайд, как в макете 163-1250.
+   -------------------------------------------------------------------------- */

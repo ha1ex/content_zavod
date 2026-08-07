@@ -53,7 +53,7 @@ pnpm -w run harness agent context     # каждый новый сеанс; + --
 | Генерация лендинга от и до (engineer-flow) | [`.claude/skills/kaiten-generate/SKILL.md`](.claude/skills/kaiten-generate/SKILL.md) |
 | Фабрика ТЗ: сырьё → ТЗ + brief | [`.claude/skills/kaiten-intake/SKILL.md`](.claude/skills/kaiten-intake/SKILL.md) |
 | Ревью существующего лендинга | [`.claude/skills/kaiten-review/SKILL.md`](.claude/skills/kaiten-review/SKILL.md) |
-| Дизайн-система Kaiten (цвета, типографика, сетка) | [`.claude/skills/design-system-kaiten-v01/SKILL.md`](.claude/skills/design-system-kaiten-v01/SKILL.md) |
+| Дизайн-система Kaiten (цвета, типографика, сетка) | [`.claude/skills/design-system-kaiten-v01-landingpage/SKILL.md`](.claude/skills/design-system-kaiten-v01-landingpage/SKILL.md) |
 | Фазы P0–P8 и их гейты | [`docs/pipeline.md`](docs/pipeline.md) + [`wiki/pipeline/phase-gates.md`](wiki/pipeline/phase-gates.md) |
 | Доработать готовый лендинг | [`wiki/marketing/edit-recipes.md`](wiki/marketing/edit-recipes.md) |
 | Что-то пошло не так | [`wiki/marketing/troubleshooting.md`](wiki/marketing/troubleshooting.md) |

@@ -1,0 +1,92 @@
+/* ============================================================================
+   Тема Light — светлая презентация Кайтена.
+   Снята с Figma «Шаблон презентации V02»: слайды 154-618, 163-1748,
+   164-2258, 166-2832, 218-2366.
+
+   Белое полотно, темный текст, серые фреймы, сиреневый акцент,
+   размытая холодно-теплая подложка по нижнему краю.
+
+   Подключается ПОСЛЕ kaiten-slides.css:
+     <link rel="stylesheet" href="kaiten-slides.css" />
+     <link rel="stylesheet" href="theme-light.css" />
+   и <html data-theme="light">.
+
+   Тема задает только цвет и декор. Сетка, типографика и компоненты живут
+   в kaiten-slides.css и от темы не зависят.
+   ============================================================================ */
+
+:root,
+[data-theme="light"] {
+  /* --- палитра (design-system/kaiten-v01) --- */
+  --neutral-000:#ffffff;
+  --neutral-050:#fafafa;
+  --neutral-100:#f5f5f5;
+  --neutral-200:#eeeeee;
+  --neutral-300:#e0e0e0;
+  --neutral-400:#bdbdbd;
+  --neutral-500:#9e9e9e;
+  --neutral-600:#757575;
+  --neutral-900:#2d2d2d;
+  --violet-100:#7d4ccf;
+  --violet-12:#efe9f9;
+
+  /* статусные пары 100/12 — для процессных лент и таймлайнов */
+  --green-100:#4caf51;  --green-12:#e9f5ea;
+  --red-100:#f44336;    --red-12:#fde8e6;
+  --orange-100:#ffa100; --orange-12:#fff3e0;
+  --blue-100:#2196f3;   --blue-12:#e4f2fd;
+  --lime-100:#a5ca00;   --lime-12:#f4f8e0;
+
+  /* --- роли --- */
+  --stage-bg:var(--neutral-200);        /* поле вокруг слайда */
+  --surface-page:var(--neutral-000);
+  --surface-frame:#f2f2f2;              /* фрейм в шаблоне именно такой */
+  --surface-accent:var(--violet-12);
+  --border-default:var(--neutral-300);
+  --table-line:#D1D5DB;                 /* разделители строк в таблице сравнения */
+  --action-primary:var(--violet-100);
+
+  --text-primary:var(--neutral-900);
+  --text-secondary:var(--neutral-600);
+  --text-accent:var(--violet-100);
+  --frame-accent-fg:var(--violet-100);  /* заголовок на акцентном фрейме */
+
+  --badge-bg:var(--surface-frame);      /* бейдж на обложке */
+  --chevron-bg:var(--surface-accent);   /* сегмент шеврон-ленты */
+
+  --tile-bg:var(--violet-12);           /* иконочная плашка */
+  --tile-fg:var(--violet-100);
+
+  /* В светлой теме темных плашек не используем: командная строка тоже светлая */
+  /* Пилюли контактов светлее обычного фрейма: они лежат на белой карточке */
+  --contact-row-bg:var(--neutral-100);
+
+  --cmd-bg:var(--surface-frame);
+  --cmd-fg:var(--text-primary);
+  --code-bg:var(--neutral-200);
+
+  /* --- декор: полоса по нижнему краю ---
+     В макете прямоугольник 2005.5×30.7 в точке y=1064.73, opacity .75,
+     gaussian blur 50. Здесь тише, чтобы не спорить с контентом. */
+  --glow-gradient: linear-gradient(90deg, #6FE5FF, #E298FF);
+  --glow-h: 1.599cqw;        /* 30.7px */
+  --glow-bottom: -.804cqw;   /* низ уходит на 15.43px за край слайда */
+  --glow-opacity: .42;       /* в макете .75 */
+  --glow-blur: 1.3cqw;       /* в макете stdDeviation 50 */
+
+  /* --- декор: круг на обложке ---
+     Круг r=282 в точке (1408, 562), тот же градиент, blur 200. */
+  --cover-glow-gradient: linear-gradient(90deg, #6FE5FF, #E298FF);
+  --cover-glow-left: 58.646cqw;   /* 1126px */
+  --cover-glow-top: 14.583cqw;    /* 280px */
+  --cover-glow-size: 29.375cqw;   /* 564px */
+  --cover-glow-opacity: 1;
+  --glow-blur-cover: 10.417cqw;   /* stdDeviation 200 */
+}
+
+/* --- Правило применения цвета в светлой теме -------------------------------
+   Залитый сиреневый (--action-primary фоном) — сильное выделение. На светлом
+   слайде допускается на ОДИН действительно важный элемент. Все остальное —
+   светлая подложка --surface-accent с сиреневым содержимым.
+   Модификатор .is-accent и есть это исключение: по одному на слайд.
+   -------------------------------------------------------------------------- */

@@ -505,8 +505,8 @@
     }
   ],
   "seo": {
-    "title": "Kaiten CLI — управление Kaiten из терминала",
-    "description": "Интерфейс командной строки Kaiten: 356 инструментов, установка из Git одной командой, локальные снимки и метрики. Издание сообщества, open source."
+    "title": "Kaiten CLI Community edition: управляйте Kaiten из LLM или терминала",
+    "description": "Kaiten CLI издание сообщества: установка из Git одной командой, управление карточками и пространствами из LLM или терминала. Community edition, open source."
   },
   "illustrationSpecs": [],
   "meta": {

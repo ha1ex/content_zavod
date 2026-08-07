@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кайтен — альтернатива GanttPRO с диаграммой Ганта: сравнение функций и переезд</title>
+<meta name="description" content="Кайтен — альтернатива GanttPRO с диаграммой Ганта. Все, что есть в GanttPRO для планирования проектов: вехи, зависимости, критический путь и ресурсное планирование. Плюс канбан-доски, скрам, документы и мобильное приложение. Сравнение функций и перенос проектов." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css?v=42">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="kaiten-logo" viewBox="0 0 147.654 44"><path d="M32.4971 0H11.5029C5.15002 0 0 5.14722 0 11.4966V32.5034C0 38.8528 5.15002 44 11.5029 44H32.4971C38.85 44 44 38.8528 44 32.5034V11.4966C44 5.14722 38.85 0 32.4971 0Z" fill="#F11F24"/><path d="M17.5217 4.79618L4.79618 17.5217C2.34999 19.9679 2.34999 23.9339 4.79618 26.3801L17.5217 39.1056C19.9679 41.5518 23.9339 41.5518 26.3801 39.1056L39.1056 26.3801C41.5518 23.9339 41.5518 19.9679 39.1056 17.5217L26.3801 4.79618C23.9339 2.34999 19.9679 2.34999 17.5217 4.79618Z" fill="#78FFC7"/><path d="M21.8794 32.7575C27.888 32.7575 32.7589 27.8869 32.7589 21.8787C32.7589 15.8706 27.888 11 21.8794 11C15.8709 11 11 15.8706 11 21.8787C11 27.8869 15.8709 32.7575 21.8794 32.7575Z" fill="#7D4CCF"/><path d="M68.7116 21.4228L74.7932 29.579H71.0066L65.7281 22.4567H61.7122V29.579H58.3846V13.4964H61.7122V20.7336H65.4988L70.7769 13.4964H74.4491L68.7116 21.4228ZM78.8182 25.7881C78.8182 27.2432 79.698 27.9707 81.4575 27.9707H84.6705V23.6055H81.4575C79.698 23.6055 78.8182 24.333 78.8182 25.7881ZM84.6705 21.9972C84.6705 20.8944 84.3796 20.0826 83.7985 19.5619C83.2323 19.0411 82.4903 18.7807 81.5723 18.7807C80.8839 18.7807 80.2106 18.8879 79.5528 19.1024C78.8948 19.3015 78.3059 19.5772 77.7857 19.9294L76.9825 18.551C77.319 18.3212 77.6862 18.1221 78.0839 17.9536C78.497 17.7851 78.9177 17.6473 79.3461 17.54C79.7745 17.4175 80.1952 17.3256 80.6083 17.2644C81.0367 17.2031 81.4345 17.1724 81.8016 17.1724C82.7809 17.1724 83.6453 17.2873 84.3949 17.5171C85.1449 17.7468 85.7796 18.0761 86.2999 18.505C86.8201 18.9339 87.2102 19.447 87.4702 20.0443C87.7455 20.6264 87.8833 21.2773 87.8833 21.9972V29.579H81.4575C79.3768 29.579 77.8393 29.265 76.8447 28.637C75.8654 28.009 75.3758 27.0594 75.3758 25.7881C75.3758 24.5168 75.8654 23.5672 76.8447 22.9392C77.8393 22.3112 79.3768 21.9972 81.4575 21.9972H84.6705ZM97.1669 16.2534C95.729 16.2534 94.6425 15.9241 93.9082 15.2655C93.1739 14.5916 92.8068 13.7339 92.8068 12.6923H95.4457C95.4457 13.2743 95.6141 13.7492 95.9506 14.1168C96.3025 14.469 96.7079 14.6452 97.1669 14.6452C97.6259 14.6452 98.0237 14.469 98.3605 14.1168C98.7124 13.7492 98.8881 13.2743 98.8881 12.6923H101.527C101.527 13.7339 101.16 14.5916 100.426 15.2655C99.6913 15.9241 98.6052 16.2534 97.1669 16.2534ZM103.822 17.6319V29.579H100.609V20.6187H100.38L95.1015 29.579H90.9707V17.6319H94.1835V26.5922H94.4132L99.6913 17.6319H103.822ZM118.514 19.2402H113.695V29.579H110.482V19.2402H105.663V17.6319H118.514V19.2402ZM126.542 28.4302C127.292 28.4302 127.988 28.3 128.631 28.0396C129.288 27.7793 129.931 27.4117 130.558 26.9368L131.476 28.3154C131.186 28.5757 130.841 28.8131 130.443 29.0276C130.061 29.242 129.64 29.4258 129.181 29.579C128.738 29.7168 128.271 29.824 127.782 29.9006C127.292 29.9925 126.802 30.0385 126.313 30.0385C125.227 30.0385 124.232 29.893 123.329 29.6019C122.442 29.3263 121.685 28.9203 121.057 28.3843C120.43 27.8329 119.94 27.1589 119.589 26.3625C119.252 25.566 119.084 24.647 119.084 23.6055C119.084 22.5792 119.244 21.6679 119.566 20.8714C119.902 20.0596 120.361 19.3857 120.943 18.8496C121.539 18.2982 122.243 17.8847 123.054 17.609C123.865 17.3179 124.76 17.1724 125.739 17.1724C126.657 17.1724 127.521 17.3103 128.332 17.586C129.143 17.8617 129.847 18.2676 130.443 18.8037C131.04 19.3244 131.515 19.9601 131.866 20.7106C132.218 21.4611 132.394 22.3112 132.394 23.2608V24.8691H122.595C122.778 26.1404 123.214 27.0517 123.903 27.6031C124.607 28.1545 125.487 28.4302 126.542 28.4302ZM125.739 18.6658C125.295 18.6658 124.882 18.7501 124.5 18.9185C124.117 19.087 123.781 19.3551 123.49 19.7227C123.214 20.0903 122.985 20.5651 122.801 21.1471C122.633 21.7292 122.541 22.4337 122.526 23.2608H128.952C128.952 22.4644 128.86 21.7751 128.676 21.1931C128.493 20.611 128.248 20.1362 127.942 19.7686C127.651 19.3857 127.307 19.11 126.91 18.9415C126.527 18.7577 126.137 18.6658 125.739 18.6658ZM147.654 17.6319V29.579H144.441V24.2947H138.245V29.579H135.032V17.6319H138.245V22.6865H144.441V17.6319H147.654Z" fill="currentColor"/></symbol></svg>
+
+<!-- NAVIGATION (desktop) -->
+<nav class="navbar navbar--desktop" aria-label="Основная навигация">
+  <div class="navbar__container"><div class="navbar__content">
+    <div class="navbar__menu-with-logo">
+      <div class="navbar__logo"><a href="https://kaiten.ru" aria-label="Кайтен — на&nbsp;главную"><svg class="klogo" viewBox="0 0 147.654 44" role="img" aria-label="Кайтен"><use href="#kaiten-logo"/></svg></a></div>
+      <div class="navbar__nav">
+        <a class="navbar__link" href="#features"><span class="navbar__link-text">Продукт</span><span class="navbar__link-icon"><span class="chev"></span></span></a>
+        <a class="navbar__link" href="#compare"><span class="navbar__link-text navbar__link-text--active">Сравнение</span></a>
+        <a class="navbar__link" href="https://kaiten.ru"><span class="navbar__link-text">Услуги</span><span class="navbar__link-icon"><span class="chev"></span></span></a>
+        <a class="navbar__link" href="https://kaiten.ru"><span class="navbar__link-text">On-premise</span></a>
+        <a class="navbar__link" href="https://kaiten.ru"><span class="navbar__link-text">AI</span></a>
+        <a class="navbar__link" href="https://kaiten.ru/tariffs"><span class="navbar__link-text">Тарифы</span></a>
+        <a class="navbar__link" href="#cases"><span class="navbar__link-text">Кейсы</span></a>
+        <a class="navbar__link" href="https://kaiten.ru"><span class="navbar__link-text">Блог</span></a>
+      </div>
+    </div>
+    <div class="navbar__actions"><div class="navbar__action-group">
+      <a class="navbar__phone" href="tel:+78005005843" aria-label="Позвонить нам"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      <a class="btn btn--md btn--fill" href="https://passport.kaiten.ru/">Войти</a>
+      <a class="btn btn--md btn--outline" href="https://passport.kaiten.ru/">Регистрация</a>
+    </div></div>
+  </div></div>
+</nav>
+<nav class="navbar navbar--mobile" aria-label="Мобильная навигация">
+  <div class="navbar__container navbar__container--mobile"><div class="navbar__content" style="justify-content:space-between">
+    <a href="https://kaiten.ru" aria-label="Кайтен — на&nbsp;главную"><svg class="klogo klogo--m" viewBox="0 0 147.654 44" role="img" aria-label="Кайтен"><use href="#kaiten-logo"/></svg></a>
+    <button class="navbar__burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+  </div></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Продукт</a><a href="#compare">Сравнение</a><a href="https://kaiten.ru">Услуги</a><a href="https://kaiten.ru">On-premise</a><a href="https://kaiten.ru">AI</a><a href="https://kaiten.ru/tariffs">Тарифы</a><a href="#cases">Кейсы</a><a href="https://kaiten.ru">Блог</a>
+  <a class="btn btn--md btn--fill btn--full" href="https://passport.kaiten.ru/">Войти</a>
+  <a class="btn btn--md btn--outline btn--full" href="https://passport.kaiten.ru/">Регистрация</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1>Кайтен — альтернатива GanttPRO</h1>
+      <p class="hero__sub">Все, что&nbsp;есть в&nbsp;GanttPRO для&nbsp;планирования проектов — плюс канбан-доски, <br class="br-d">документы, Agile-инструменты и&nbsp;полноценное мобильное приложение</p>
+      <div class="hero__cta">
+        <a class="btn btn--lg btn--fill" href="https://passport.kaiten.ru/">Попробовать бесплатно</a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <img class="hero-shot" src="assets/mocks/hero-gantt.png?v=4" alt="Диаграмма Ганта в Кайтен: план проекта с зависимостями между задачами" width="1028" height="592" fetchpriority="high">
+    </div>
+    <div class="trust-line">
+      <div class="trust-track"><div class="trust-set"><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Российское ПО</b><span class="sep"></span>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>Бесплатный тариф</b><span class="sep"></span>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"/><path d="m16 4 4 4-4 4"/><path d="M20 16H4"/><path d="m8 12-4 4 4 4"/></svg>Автоматический импорт</b><span class="sep"></span>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>Облако и&nbsp;коробка</b></div><span class="sep trust-gap"></span><div class="trust-set" aria-hidden="true"><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Российское ПО</b><span class="sep"></span>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>Бесплатный тариф</b><span class="sep"></span>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"/><path d="m16 4 4 4-4 4"/><path d="M20 16H4"/><path d="m8 12-4 4 4 4"/></svg>Автоматический импорт</b><span class="sep"></span>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>Облако и&nbsp;коробка</b></div><span class="sep trust-gap"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS / CASES -->
+<section class="reviews-sec" id="cases" aria-label="Отзывы клиентов">
+  <div class="container">
+      <div class="otziv-track" id="otzivTrack">
+        <article class="otziv">
+          <div class="otziv-top">
+            <div class="otziv-head"><a class="otziv-logolink" href="https://kaiten.ru/blog/case-ekspriess-42/" target="_blank" rel="noopener"><img class="otziv-logo" src="assets/reviews/express-logo.png" alt="Экспресс 42" style="height:38px"></a><svg class="otziv-quote" viewBox="0 0 79 60" fill="currentColor" aria-hidden="true"><path d="M63.0091 60C57.4401 60 52.8258 58.16 49.1662 54.48C45.6657 50.8 43.9154 45.52 43.9154 38.64C43.9154 31.28 45.9839 24 50.1208 16.8C54.4169 9.6 60.3837 4 68.0211 0L73.5106 8.4C65.2367 14.16 60.3041 21.44 58.713 30.24C60.145 29.6 61.8157 29.28 63.7251 29.28C68.1803 29.28 71.8399 30.72 74.7039 33.6C77.568 36.48 79 40.16 79 44.64C79 49.12 77.4884 52.8 74.4653 55.68C71.4421 58.56 67.6234 60 63.0091 60ZM19.0937 60C13.5247 60 8.91037 58.16 5.25075 54.48C1.75025 50.8 0 45.52 0 38.64C0 31.28 2.06848 24 6.20544 16.8C10.5015 9.6 16.4683 4 24.1057 0L29.5952 8.4C21.3212 14.16 16.3887 21.44 14.7976 30.24C16.2296 29.6 17.9003 29.28 19.8097 29.28C24.2649 29.28 27.9245 30.72 30.7885 33.6C33.6526 36.48 35.0846 40.16 35.0846 44.64C35.0846 49.12 33.573 52.8 30.5498 55.68C27.5267 58.56 23.708 60 19.0937 60Z"/></svg></div>
+            <div class="otziv-text"><p>«Использование Диаграммы Ганта в&nbsp;Кайтен помогает всем сотрудникам понимать, как&nbsp;мы ведем работу, и&nbsp;увеличивает вовлеченность. На&nbsp;временной шкале у&nbsp;нас получается распределять ресурсы и&nbsp;смотреть, чтобы их&nbsp;было достаточно для&nbsp;выполнения проекта в&nbsp;срок»</p></div>
+          </div>
+          <div class="otziv-author">
+            <a class="otziv-ava" href="https://kaiten.ru/blog/case-ekspriess-42/" target="_blank" rel="noopener"><img src="assets/reviews/express-ava.png?v=2" alt="Юлия Фатеева"></a>
+            <div><div class="otziv-name">Юлия Фатеева</div><div class="otziv-role">руководитель проектного офиса<br>Экспресс 42</div></div>
+          </div>
+          <a class="otziv-btn" href="https://kaiten.ru/blog/case-ekspriess-42/" target="_blank" rel="noopener">Читать кейс</a>
+        </article>
+        <article class="otziv">
+          <div class="otziv-top">
+            <div class="otziv-head"><a class="otziv-logolink" href="https://kaiten.ru/blog/case-samolet/" target="_blank" rel="noopener"><img class="otziv-logo" src="assets/reviews/samolet-logo.png" alt="Самолет" style="height:26px"></a><svg class="otziv-quote" viewBox="0 0 79 60" fill="currentColor" aria-hidden="true"><path d="M63.0091 60C57.4401 60 52.8258 58.16 49.1662 54.48C45.6657 50.8 43.9154 45.52 43.9154 38.64C43.9154 31.28 45.9839 24 50.1208 16.8C54.4169 9.6 60.3837 4 68.0211 0L73.5106 8.4C65.2367 14.16 60.3041 21.44 58.713 30.24C60.145 29.6 61.8157 29.28 63.7251 29.28C68.1803 29.28 71.8399 30.72 74.7039 33.6C77.568 36.48 79 40.16 79 44.64C79 49.12 77.4884 52.8 74.4653 55.68C71.4421 58.56 67.6234 60 63.0091 60ZM19.0937 60C13.5247 60 8.91037 58.16 5.25075 54.48C1.75025 50.8 0 45.52 0 38.64C0 31.28 2.06848 24 6.20544 16.8C10.5015 9.6 16.4683 4 24.1057 0L29.5952 8.4C21.3212 14.16 16.3887 21.44 14.7976 30.24C16.2296 29.6 17.9003 29.28 19.8097 29.28C24.2649 29.28 27.9245 30.72 30.7885 33.6C33.6526 36.48 35.0846 40.16 35.0846 44.64C35.0846 49.12 33.573 52.8 30.5498 55.68C27.5267 58.56 23.708 60 19.0937 60Z"/></svg></div>
+            <div class="otziv-text"><p>«Диаграмма Ганта в&nbsp;Кайтен помогает отследить прогресс по&nbsp;выполнению проектов. На&nbsp;графике показаны все временные промежутки и&nbsp;показан прогресс в&nbsp;процентах»</p></div>
+          </div>
+          <div class="otziv-author">
+            <a class="otziv-ava" href="https://kaiten.ru/blog/case-samolet/" target="_blank" rel="noopener"><img src="assets/reviews/samolet-ava.png" alt="Мирослава Аристова"></a>
+            <div><div class="otziv-name">Мирослава Аристова</div><div class="otziv-role">эксперт по&nbsp;Agile-трансформации «Самолет»</div></div>
+          </div>
+          <a class="otziv-btn" href="https://kaiten.ru/blog/case-samolet/" target="_blank" rel="noopener">Читать кейс</a>
+        </article>
+        <article class="otziv">
+          <div class="otziv-top">
+            <div class="otziv-head"><a class="otziv-logolink" href="https://kaiten.ru/blog/case-nieftiekhimichieskaya-transportnaya-kompaniya/" target="_blank" rel="noopener"><img class="otziv-logo" src="assets/reviews/nhtk-logo.png" alt="НХТК" style="height:34px"></a><svg class="otziv-quote" viewBox="0 0 79 60" fill="currentColor" aria-hidden="true"><path d="M63.0091 60C57.4401 60 52.8258 58.16 49.1662 54.48C45.6657 50.8 43.9154 45.52 43.9154 38.64C43.9154 31.28 45.9839 24 50.1208 16.8C54.4169 9.6 60.3837 4 68.0211 0L73.5106 8.4C65.2367 14.16 60.3041 21.44 58.713 30.24C60.145 29.6 61.8157 29.28 63.7251 29.28C68.1803 29.28 71.8399 30.72 74.7039 33.6C77.568 36.48 79 40.16 79 44.64C79 49.12 77.4884 52.8 74.4653 55.68C71.4421 58.56 67.6234 60 63.0091 60ZM19.0937 60C13.5247 60 8.91037 58.16 5.25075 54.48C1.75025 50.8 0 45.52 0 38.64C0 31.28 2.06848 24 6.20544 16.8C10.5015 9.6 16.4683 4 24.1057 0L29.5952 8.4C21.3212 14.16 16.3887 21.44 14.7976 30.24C16.2296 29.6 17.9003 29.28 19.8097 29.28C24.2649 29.28 27.9245 30.72 30.7885 33.6C33.6526 36.48 35.0846 40.16 35.0846 44.64C35.0846 49.12 33.573 52.8 30.5498 55.68C27.5267 58.56 23.708 60 19.0937 60Z"/></svg></div>
+            <div class="otziv-text"><p>«Есть крупный проект с&nbsp;фиксированными сроками работы. Команда в&nbsp;целом работает по&nbsp;Agile, но&nbsp;в&nbsp;то&nbsp;же время есть четкие этапы. Визуализировать сроки, эпики и&nbsp;задачи в&nbsp;Кайтен помогают не&nbsp;только доски, но&nbsp;и&nbsp;инструмент управления проектами — Диаграмма Ганта»</p></div>
+          </div>
+          <div class="otziv-author">
+            <a class="otziv-ava" href="https://kaiten.ru/blog/case-nieftiekhimichieskaya-transportnaya-kompaniya/" target="_blank" rel="noopener"><img src="assets/reviews/nhtk-ava.png" alt="Антон Мартынов"></a>
+            <div><div class="otziv-name">Антон Мартынов</div><div class="otziv-role">руководитель по&nbsp;цифровизации в&nbsp;НХТК</div></div>
+          </div>
+          <a class="otziv-btn" href="https://kaiten.ru/blog/case-nieftiekhimichieskaya-transportnaya-kompaniya/" target="_blank" rel="noopener">Читать кейс</a>
+        </article>
+      </div>
+      <div class="otziv-nav">
+        <button class="prev" id="otzivPrev" aria-label="Предыдущий" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.25 6L9 12.25L15.25 18.5"/></svg>
+        </button>
+        <span class="otziv-count" id="otzivCount"><b>1</b> / 3</span>
+        <button class="next" id="otzivNext" aria-label="Следующий">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.75 19L15 12.75L8.75 6.5"/></svg>
+        </button>
+      </div>
+  </div>
+</section>
+
+<!-- FEATURES: планируйте проекты так, как привыкли -->
+<section class="s" id="features"><div class="container">
+  <div class="sh sh--center s-head">
+    <h2 class="sh__heading">Планируйте проекты так, как&nbsp;привыкли</h2>
+  </div>
+  <div class="acc-wrap acc-wrap--benefits acc-wrap--modules">
+    <div class="bnf-col">
+      <div class="acc" id="featuresAcc">
+      <div class="acc-item open">
+        <button class="acc-head" type="button"><span class="acc-title">Диаграмма Ганта</span><span class="acc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="acc-body"><p>Стройте временную шкалу проекта, задавайте вехи, связывайте задачи. Сдвинули одну — зависимые пересчитываются автоматически. Базовый план позволяет в&nbsp;любой момент сравнить плановые сроки с&nbsp;фактическими</p><div class="acc-inline">
+      <img src="assets/mocks/feat-gantt.png" alt="Диаграмма Ганта в Кайтен" loading="lazy">
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" type="button"><span class="acc-title">Зависимости между задачами</span><span class="acc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="acc-body"><p>Связывайте задачи по&nbsp;типу финиш–старт: выполнение одной автоматически определяет старт следующей. Критический путь показывает, какие задачи напрямую влияют на&nbsp;срок сдачи проекта</p><div class="acc-inline">
+      <img src="assets/mocks/feat-deps.png" alt="Связи между задачами в Кайтен: родительские и дочерние карточки" loading="lazy">
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" type="button"><span class="acc-title">Ресурсное планирование</span><span class="acc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="acc-body"><p>Назначайте исполнителей на&nbsp;задачи, отслеживайте загрузку и&nbsp;доступность команды. Плановые и&nbsp;фактические трудозатраты — в&nbsp;одном месте. Видно, кто&nbsp;перегружен, до&nbsp;того как&nbsp;срок уже горит</p><div class="acc-inline">
+      <img src="assets/mocks/feat-resource.png" alt="Ресурсное планирование в Кайтен: загрузка команды по часам" loading="lazy">
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" type="button"><span class="acc-title">Отчеты и&nbsp;аналитика</span><span class="acc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="acc-body"><p>Встроенные отчеты показывают статус проекта, загрузку команды и&nbsp;отклонения от&nbsp;плана — без&nbsp;экспорта в&nbsp;сторонние инструменты. Данные обновляются автоматически по&nbsp;мере работы команды</p><div class="acc-inline">
+      <img src="assets/mocks/feat-reports.png" alt="Отчеты и аналитика в Кайтен" loading="lazy">
+        </div></div>
+      </div>
+    </div>
+      <a class="btn btn--lg btn--fill bnf-cta" href="https://passport.kaiten.ru/">Попробовать бесплатно</a>
+    </div>
+    <div class="acc-media">
+      <div class="acc-panel on">
+      <img src="assets/mocks/feat-gantt.png" alt="Диаграмма Ганта в Кайтен" loading="lazy">
+      </div>
+      <div class="acc-panel">
+      <img src="assets/mocks/feat-deps.png" alt="Связи между задачами в Кайтен: родительские и дочерние карточки" loading="lazy">
+      </div>
+      <div class="acc-panel">
+      <img src="assets/mocks/feat-resource.png" alt="Ресурсное планирование в Кайтен: загрузка команды по часам" loading="lazy">
+      </div>
+      <div class="acc-panel">
+      <img src="assets/mocks/feat-reports.png" alt="Отчеты и аналитика в Кайтен" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- COMPARISON TABLE -->
+<section class="s cmp-sec" id="compare"><div class="container">
+  <div class="cmp">
+    <div class="cmp__table" id="cmpTable">
+      <div class="cmp__bg cmp__bg--kaiten"></div>
+      <div class="cmp__bg cmp__bg--trello"></div>
+      <div class="cmp__grid">
+        <!-- product header -->
+        <div class="cmp__hcell cmp__hcell--label"><h2 class="cmp__title">Кайтен и&nbsp;GanttPRO: <br>сравнение функций</h2></div>
+        <div class="cmp__hcell cmp__hcell--k"><svg class="cmp__logo" viewBox="0 0 147.654 44" role="img" aria-label="Кайтен"><use href="#kaiten-logo"/></svg></div>
+        <div class="cmp__hcell cmp__hcell--t">GanttPRO</div>
+
+        <button class="cmp__sec" type="button" data-sec="1" aria-expanded="true"><span class="cmp__sec-t">Планирование проектов</span><span class="cmp__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Диаграмма Ганта с&nbsp;зависимостями</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Вехи проекта</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Автоматический пересчет сроков</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Базовый план (план vs&nbsp;факт)</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Критический путь</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Многоуровневая иерархия задач</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Процент выполнения задачи</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Портфель проектов</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label" data-g="1">Встроенные отчеты</div><div class="cmp__cell cmp__cell--k" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t" data-g="1"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+
+        <button class="cmp__sec" type="button" data-sec="2" aria-expanded="false"><span class="cmp__sec-t">Ресурсное планирование</span><span class="cmp__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="2">Назначение ресурсов на&nbsp;задачи</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="2">Загрузка сотрудников</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="2">Плановые и&nbsp;фактические трудозатраты</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="2">Учет времени</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="2"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+
+        <button class="cmp__sec" type="button" data-sec="3" aria-expanded="false"><span class="cmp__sec-t">Управление задачами</span><span class="cmp__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Канбан-доска</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Список и&nbsp;таблица</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Календарь</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Несколько досок в&nbsp;одном пространстве</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Скрам и&nbsp;спринты</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Бэклог</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Покерное планирование</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Настраиваемые поля</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Чек-листы в&nbsp;карточках</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Назначение ответственного в&nbsp;чек-листах</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Автоматизации</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Шаблоны проектов</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Повторяющиеся задачи</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="3">Гостевые пользователи</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="3"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="3"><i class="cmp__ic no"></i></div>
+
+        <button class="cmp__sec" type="button" data-sec="4" aria-expanded="false"><span class="cmp__sec-t">Документы<br class="br-m"> и&nbsp;знания</span><span class="cmp__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="4">База знаний с&nbsp;блочным редактором</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="4"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="4"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="4">Иерархия документов</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="4"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="4"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="4">Публичные ссылки на&nbsp;документы</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="4"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="4"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="4">Хранение файлов как&nbsp;вложений</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="4"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="4"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+
+        <button class="cmp__sec" type="button" data-sec="5" aria-expanded="false"><span class="cmp__sec-t">Интеграции и&nbsp;каналы</span><span class="cmp__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">API и&nbsp;вебхуки</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Уведомления в&nbsp;Telegram</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Создание задач из&nbsp;Telegram</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Интеграция с&nbsp;GitHub / GitLab</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Экспорт в&nbsp;Excel (XLSX)</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Мобильное приложение</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Работа с&nbsp;Гантом в&nbsp;мобильном приложении</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Встроенный чат</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">Видеозвонки</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="5">ИИ-ассистент</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="5"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="5"><i class="cmp__ic no"></i></div>
+
+        <button class="cmp__sec" type="button" data-sec="6" aria-expanded="false"><span class="cmp__sec-t">Платформа</span><span class="cmp__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="6">Облачная версия</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="6">Установка на&nbsp;собственный сервер</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="6"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="6">Бесплатный тариф</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="6"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="6">Российский реестр&nbsp;ПО</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="6"><i class="cmp__ic no"></i></div>
+        <div class="cmp__cell cmp__cell--label cmp__cell--hidden" data-g="6">Техподдержка на&nbsp;русском языке</div><div class="cmp__cell cmp__cell--k cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div><div class="cmp__cell cmp__cell--t cmp__cell--hidden" data-g="6"><i class="cmp__ic yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i></div>
+      </div>
+    </div>
+    <p class="cmp__note">Сравнение составлено на&nbsp;основании открытых источников по&nbsp;состоянию на&nbsp;19.05.2026. <br>Функциональность сервисов может отличаться в&nbsp;зависимости от&nbsp;тарифа, конфигурации и&nbsp;настроек</p>
+  </div>
+</div></section>
+
+<!-- MIGRATION / SECONDARY CTA -->
+<section class="s" id="depsec"><div class="container">
+  <div class="fcta">
+    <div class="fcta__blur" aria-hidden="true"></div>
+    <div class="fcta__in">
+      <div class="fcta__copy">
+        <h2>Переходите из&nbsp;GanttPRO без&nbsp;потери данных</h2>
+        <p>Проекты, задачи, сроки и&nbsp;структура переносятся <br class="br-d">через импорт CSV — без&nbsp;ручного пересоздания</p>
+        <div class="fcta__cta">
+          <a class="btn btn--lg btn--fill" href="https://passport.kaiten.ru/">Попробовать Кайтен</a>
+        </div>
+      </div>
+      <div class="fcta__visual">
+        <img src="assets/cta-relocation.png?v=1" alt="Перенос проектов и задач из GanttPRO в Кайтен" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- TEAMS -->
+<section class="s teams-sec" id="teams"><div class="container">
+  <div class="sh sh--center s-head">
+    <h2 class="sh__heading">Кайтен подходит для&nbsp;любых команд</h2>
+    <p class="sh__desc">Создайте проект, запланируйте задачи, добавьте взаимосвязи, распределите ресурсы и&nbsp;следите за&nbsp;ходом выполнения</p>
+  </div>
+  <div class="stabs" id="teamTabs">
+    <div class="stabs__tabs"><div class="stabs__tabgroup" role="tablist"><button type="button" role="tab" class="stabs__tab on" data-tab="0">Разработка</button><button type="button" role="tab" class="stabs__tab" data-tab="1">Маркетинг</button><button type="button" role="tab" class="stabs__tab" data-tab="2">Строительство</button><button type="button" role="tab" class="stabs__tab" data-tab="3">HR и&nbsp;кадровые процессы</button></div></div>
+    <div class="stabs__panels"><div class="stp on" data-panel="0" role="tabpanel"><div class="stabs__card"><div class="stabs__row stabs__row--img"><div class="stabs__imgwrap"><div class="stabs__img"><img src="assets/tabs/tab-dev.png" alt="Диаграмма Ганта в Кайтен для команды разработки" loading="lazy"></div></div><div class="stabs__caption">Разработка</div></div></div></div><div class="stp" data-panel="1" role="tabpanel"><div class="stabs__card"><div class="stabs__row stabs__row--img"><div class="stabs__imgwrap"><div class="stabs__img"><img src="assets/tabs/tab-mkt.png?v=2" alt="Диаграмма Ганта в Кайтен для маркетинга" loading="lazy"></div></div><div class="stabs__caption">Маркетинг</div></div></div></div><div class="stp" data-panel="2" role="tabpanel"><div class="stabs__card"><div class="stabs__row stabs__row--img"><div class="stabs__imgwrap"><div class="stabs__img"><img src="assets/tabs/tab-bld.png?v=2" alt="Диаграмма Ганта в Кайтен для строительства" loading="lazy"></div></div><div class="stabs__caption">Строительство</div></div></div></div><div class="stp" data-panel="3" role="tabpanel"><div class="stabs__card"><div class="stabs__row stabs__row--img"><div class="stabs__imgwrap"><div class="stabs__img"><img src="assets/tabs/tab-projects.png" alt="Диаграмма Ганта в Кайтен для HR и кадровых процессов" loading="lazy"></div></div><div class="stabs__caption">HR и&nbsp;кадровые процессы</div></div></div></div></div>
+    <div class="stabs__nav" role="group" aria-label="Листать команды">
+      <button type="button" class="stabs__navbtn" data-nav="prev" aria-label="Предыдущая"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <span class="stabs__counter"><b class="stabs__cur">1</b> / 4</span>
+      <button type="button" class="stabs__navbtn" data-nav="next" aria-label="Следующая"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div></section>
+
+<!-- PLATFORM -->
+<section class="s plat-sec" id="platform"><div class="container">
+  <div class="sh sh--center s-head">
+    <h2 class="sh__heading">Одна платформа для&nbsp;всей компании</h2>
+    <p class="sh__desc">Кайтен объединяет задачи всех отделов, а&nbsp;также документацию компании, воронку продаж, внутренние коммуникации и&nbsp;поддержку клиентов</p>
+  </div>
+  <div class="plat">
+    <img src="assets/platform/platform.png" alt="Карта платформы Кайтен: ядро, модули и сквозной ИИ" loading="lazy">
+  </div>
+  <div class="pgrid__cta">
+    <a class="btn btn--lg btn--fill" href="https://passport.kaiten.ru/">Зарегистрироваться в&nbsp;Кайтен</a>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="s" id="cta"><div class="container">
+  <div class="ctp ctp--final">
+    <div class="ctp__copy">
+        <h2>Попробуйте Kaiten бесплатно</h2>
+        <ul class="ctp__list">
+          <li><span class="ctp__tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Российский сервис без&nbsp;риска блокировки</li>
+          <li><span class="ctp__tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Импорт задач из&nbsp;GanttPRO</li>
+          <li><span class="ctp__tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Бесплатный доступ ко&nbsp;всем функциям на&nbsp;14 дней</li>
+        </ul>
+        <a class="ctp__btn" href="https://passport.kaiten.ru/">Попробовать бесплатно</a>
+    </div>
+    <div class="ctp__visual">
+      <img src="assets/cta-product.png?v=1" alt="Кайтен: задачи, загрузка команды, аналитика и Гант-план" loading="lazy">
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="s faq-section" id="faq" aria-label="Часто задаваемые вопросы"><div class="container">
+  <div class="faq-section__container">
+    <h2 class="faq-section__title">Ответы на&nbsp;частые вопросы</h2>
+    <div class="faq-list" style="list-style:none">
+      <div class="faq-item">
+        <button class="faq-q" type="button">Какие тарифы есть в&nbsp;Кайтен и&nbsp;можно ли&nbsp;использовать инструмент бесплатно?<span class="pm"></span></button>
+        <div class="faq-a"><p>Да, у&nbsp;Kaiten есть бесплатный тариф без&nbsp;ограничения по&nbsp;времени. Он&nbsp;подходит для&nbsp;небольших команд и&nbsp;включает базовые инструменты для&nbsp;управления задачами, документами и&nbsp;совместной работы: доски, карточки, календарь, таблицы и&nbsp;списки. Также доступны платные тарифы и&nbsp;модули — например, диаграмма Ганта, автоматизации, Scrum/Kanban-отчеты, Service Desk и&nbsp;ресурсное планирование.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Как&nbsp;работает пробный период?<span class="pm"></span></button>
+        <div class="faq-a"><p>После регистрации новым пользователям открывается 14-дневный пробный период со&nbsp;всеми модулями и&nbsp;функциями Kaiten. Можно протестировать диаграмму Ганта, автоматизации, Scrum-инструменты, учет времени и&nbsp;другие возможности без&nbsp;привязки банковской карты. После завершения теста аккаунт автоматически переключится на&nbsp;бесплатный тариф, а&nbsp;все данные сохранятся.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Как&nbsp;перенести проект из&nbsp;GanttPRO в&nbsp;Кайтен?<span class="pm"></span></button>
+        <div class="faq-a"><p>Проекты можно перенести через импорт CSV/XLS-файлов или&nbsp;JSON. Для&nbsp;этого нужно выгрузить данные из&nbsp;GanttPRO, создать рабочее пространство в&nbsp;Kaiten и&nbsp;импортировать задачи, сроки, исполнителей и&nbsp;структуру проекта. Это&nbsp;позволяет перейти на&nbsp;Kaiten без&nbsp;ручного пересоздания процессов.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Как&nbsp;начать пользоваться Кайтен?<span class="pm"></span></button>
+        <div class="faq-a"><p>Достаточно <a href="https://passport.kaiten.ru/" target="_blank" rel="noopener">зарегистрироваться на&nbsp;сайте Kaiten</a> и&nbsp;создать первое рабочее пространство. После этого можно выбрать подходящий формат работы — Kanban, Scrum, диаграмму Ганта или&nbsp;обычный список задач — пригласить команду и&nbsp;начать вести проекты. Для&nbsp;новых пользователей сразу доступен бесплатный тест всех функций системы.</p></div>
+      </div>
+    </div>
+    <p class="faq-note">Информация приведена исключительно в&nbsp;целях сравнения и&nbsp;основана на&nbsp;открытых источниках на&nbsp;дату публикации. <br>Функциональность сервисов может изменяться правообладателями. GanttPRO является товарным знаком соответствующего правообладателя</p>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Подвал сайта">
+  <div class="footer__container">
+    <div class="footer__top">
+      <div class="footer__cols">
+        <div><div class="footer__col-title">Компания</div>
+          <nav class="footer__links" aria-label="Компания"><a href="https://kaiten.ru/tariffs">Тарифы</a><a href="#cta">Контакты</a><a href="#">Сертификаты</a><a href="#">Скачать презентацию</a></nav></div>
+        <div><div class="footer__col-title">Ресурсы</div>
+          <nav class="footer__links" aria-label="Ресурсы"><a href="#">База знаний</a><a href="#cases">Кейсы</a><a href="https://kaiten.ru">Блог</a><a href="#">API</a><a href="#">Комьюнити</a></nav></div>
+        <div><div class="footer__col-title">Возможности</div>
+          <nav class="footer__links" aria-label="Возможности"><a href="#">Партнерская программа</a><a href="#">On-premise</a><a href="#">Внедрение</a><a href="#">Кайтен AI</a></nav></div>
+      </div>
+      <div class="footer__subscribe">
+        <div class="footer__subscribe-title">Подписаться на&nbsp;рассылку</div>
+        <div class="footer__subscribe-desc">Кейсы пользователей, статьи и&nbsp;обновления.</div>
+        <input class="footer__input" type="email" placeholder="Ваш e-mail" aria-label="Ваш e-mail">
+        <button class="btn btn--md btn--fill btn--full" type="button">Подписаться</button>
+      </div>
+    </div>
+    <div class="footer__compare">
+      <div class="footer__col-title">Сравнили Кайтен с&nbsp;другими сервисами</div>
+      <div class="footer__compare-tags"><span>Trello</span><span>Jira</span><span>Asana</span><span>Weeek</span><span>Wrike</span><span>ClickUp</span><span>MS Project</span><span>Notion</span><span>Confluence</span><span>GanttPRO</span><span>Redmine</span><span>Youtrack</span></div>
+    </div>
+    <div class="footer__divider" role="separator"></div>
+    <div class="footer__status-row">
+      <div class="footer__status-left">
+        <div class="footer__section-title">Официальный статус российского ИТ-разработчика</div>
+        <div class="footer__section-text">Кайтен внесен в&nbsp;реестр отечественного ПО&nbsp;<strong>№14347</strong>, компания аккредитована как&nbsp;ИТ-организация.</div>
+      </div>
+      <div class="footer__status-right">
+        <div class="footer__section-title">ООО «Кайтен Софтвер»</div>
+        <div class="footer__legal-cols">
+          <div><span class="footer__legal-label">ИНН</span><span class="footer__legal-value">7714426252</span></div>
+          <div><span class="footer__legal-label">КПП</span><span class="footer__legal-value">771401001</span></div>
+          <div style="flex:1 1 240px"><span class="footer__legal-label">Юридический адрес</span><span class="footer__legal-value">125252, г. Москва, проезд Березовой рощи, д. 12, этаж 2, комната 55</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__divider" role="separator"></div>
+    <div class="footer__bottom">
+      <div style="display:flex;align-items:center;gap:var(--sp-8);flex-wrap:wrap">
+        <a href="https://kaiten.ru" aria-label="Кайтен — на&nbsp;главную"><svg class="klogo klogo--f" viewBox="0 0 147.654 44" role="img" aria-label="Кайтен"><use href="#kaiten-logo"/></svg></a>
+        <div class="footer__contacts">
+          <a class="footer__contact" href="tel:+74994906499">+7 (499) 490-64-99</a>
+          <a class="footer__contact" href="mailto:sales@kaiten.ru">sales@kaiten.ru</a>
+        </div>
+      </div>
+      <div class="footer__legal-links">
+        <a href="#">Политика конфиденциальности</a><a href="#">Лицензионный договор</a><a href="#">Пользовательское соглашение</a><a href="#">Техническая поддержка</a>
+      </div>
+    </div>
+    <div class="footer__trademark">Информация приведена исключительно в&nbsp;целях сравнения и&nbsp;основана на&nbsp;открытых источниках на&nbsp;дату публикации. Функциональность сервисов может изменяться правообладателями. GanttPRO является товарным знаком соответствующего правообладателя.</div>
+  </div>
+</footer>
+
+<script src="script.js?v=6"></script>
+</body>
+</html>

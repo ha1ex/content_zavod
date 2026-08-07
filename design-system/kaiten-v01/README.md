@@ -23,7 +23,7 @@
 | --- | --- | --- |
 | `packages/ui/src/tokens.css` | `@theme`-блок с CSS-переменными | Runtime-токены для всех TSX-компонентов (Tailwind v4). |
 | `packages/harness/src/prompts/design-system-kaiten.md` | Markdown-методичка | Подмешивается в system prompt LLM при генерации лендингов. |
-| `.claude/skills/design-system-kaiten-v01/SKILL.md` | Skill | Активируется в Claude Code, когда задача касается дизайна/верстки Kaiten. |
+| `.claude/skills/design-system-kaiten-v01-landingpage/SKILL.md` | Skill | Активируется в Claude Code, когда задача касается дизайна/верстки Kaiten. |
 
 ## Как пользоваться
 

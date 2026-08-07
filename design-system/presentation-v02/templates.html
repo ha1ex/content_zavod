@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ru" data-theme="light" data-themes="light:Light dark:Dark comparison:Сравнение">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kaiten Slides — шаблоны</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="kaiten-slides.css" />
+<link rel="stylesheet" href="theme-light.css" />
+<link rel="stylesheet" href="theme-dark.css" />
+<link rel="stylesheet" href="theme-comparison.css" />
+</head>
+<body>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- ============================== T0 — модульная сетка (эталон) === -->
+    <section class="slide" id="s0">
+      <div class="s-head">
+        <h2 class="s-title">Модульная сетка</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body grid-4x2">
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+        <div class="frame" style="background:#d4d4d4"></div>
+      </div>
+    </section>
+
+    <!-- ================================================== T1 — обложка === -->
+    <section class="slide cover is-active" id="s1">
+      <div class="cover-logo">
+        <img src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="cover-text">
+        <h1>Заголовок презентации 72/90</h1>
+        <p class="sub">Подзаголовок 30/36 — одно-два предложения о том, что внутри</p>
+        <p class="meta">Мета-строка 20/28 · факты · цифры · дата</p>
+      </div>
+
+      <div class="cover-shot">
+        <img src="assets/kaiten-board.png" alt="Интерфейс Кайтена" />
+      </div>
+    </section>
+
+    <!-- ================================ T2 — текст + продуктовый визуал === -->
+    <section class="slide" id="s2">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Заголовок 2 уровня 30/36</h3>
+          <p class="body">Абзац 20/28. Три-пять строк на мысль: что происходит, почему это важно и что из этого следует для команды.</p>
+
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item is-accent">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Акцент, если он нужен</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center;">
+          <img src="assets/kaiten-board.png" alt="Интерфейс Кайтена" style="width:100%; height:auto; display:block;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ T3 — текст + сетка фреймов 2×2 === -->
+    <section class="slide" id="s3">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Заголовок 2 уровня 30/36</h3>
+          <h4 class="h3">Заголовок 3 уровня 24/32</h4>
+          <p class="body">Абзац 20/28. Здесь живет основная мысль слайда — пять-шесть строк максимум, дальше внимание уходит.</p>
+
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item is-accent">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Акцент, если он нужен</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2x2">
+          <div class="frame"></div>
+          <div class="frame"></div>
+          <div class="frame"></div>
+          <div class="frame is-accent is-center">
+            <p class="h2" style="margin:0">Акцентный фрейм,<br />если он нужен</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== T4 — четыре фрейма «визуал + текст» === -->
+    <section class="slide" id="s4">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body grid-2x2">
+        <div class="frame" style="display:grid; grid-template-columns:1fr 1fr; gap:1.6cqw; align-items:center;">
+          <img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; border-radius:.6cqw;" />
+          <div>
+            <h3 class="h3">Заголовок 2 уровня 24/32</h3>
+            <p class="body muted">Пояснение 20/28. Четыре-шесть строк описания того, что показано слева.</p>
+          </div>
+        </div>
+        <div class="frame" style="display:grid; grid-template-columns:1fr 1fr; gap:1.6cqw; align-items:center;">
+          <img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; border-radius:.6cqw;" />
+          <div>
+            <h3 class="h3">Заголовок 2 уровня 24/32</h3>
+            <p class="body muted">Пояснение 20/28. Четыре-шесть строк описания того, что показано слева.</p>
+          </div>
+        </div>
+        <div class="frame" style="display:grid; grid-template-columns:1fr 1fr; gap:1.6cqw; align-items:center;">
+          <img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; border-radius:.6cqw;" />
+          <div>
+            <h3 class="h3">Заголовок 2 уровня 24/32</h3>
+            <p class="body muted">Пояснение 20/28. Четыре-шесть строк описания того, что показано слева.</p>
+          </div>
+        </div>
+        <div class="frame is-accent" style="display:grid; grid-template-columns:1fr 1fr; gap:1.6cqw; align-items:center;">
+          <img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; border-radius:.6cqw;" />
+          <div>
+            <h3 class="h3">Заголовок 2 уровня акцент</h3>
+            <p class="body">Пояснение 20/28. Четыре-шесть строк описания того, что показано слева.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ T5 — чек-лист + карточки-цифры === -->
+    <section class="slide" id="s5">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <ul class="checks">
+          <li>Пункт чек-листа 20/28</li>
+          <li>Пункт чек-листа 20/28</li>
+          <li>Пункт чек-листа 20/28</li>
+          <li>Пункт чек-листа 20/28</li>
+          <li>Пункт чек-листа 20/28</li>
+          <li>Пункт чек-листа 20/28</li>
+          <li>Пункт чек-листа 20/28</li>
+        </ul>
+
+        <div style="display:grid; grid-template-rows:1fr 1fr auto; gap:var(--gap); min-height:0;">
+          <div class="cols-2" style="min-height:0">
+            <div class="stat-card"><div class="stat-value">90+</div><div class="stat-label">подпись к цифре</div></div>
+            <div class="stat-card"><div class="stat-value">7</div><div class="stat-label">подпись к цифре</div></div>
+          </div>
+          <div class="cols-2" style="min-height:0">
+            <div class="stat-card"><div class="stat-value">x18</div><div class="stat-label">подпись к цифре</div></div>
+            <div class="stat-card"><div class="stat-value">0</div><div class="stat-label">подпись к цифре</div></div>
+          </div>
+          <div class="banner">
+            <div class="tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S4 15.6 4 10.2A4.2 4.2 0 0 1 12 8a4.2 4.2 0 0 1 8 2.2c0 5.4-8 10.3-8 10.3z"/></svg>
+            </div>
+            <p><span class="accent">Акцентное слово</span>, дальше обычный текст 20/28</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= T6 — два больших фрейма с полным содержимым === -->
+    <section class="slide" id="s6">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div class="frame">
+          <h3 class="h2">Заголовок 2 уровня 30/36</h3>
+          <h4 class="h3">Заголовок 3 уровня 24/32</h4>
+          <p class="body muted">Абзац 20/28. Основная мысль этой половины слайда — пять-шесть строк, дальше внимание уходит.</p>
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+          </div>
+        </div>
+        <div class="frame is-accent">
+          <h3 class="h2">Заголовок 2 уровня 30/36</h3>
+          <h4 class="h3">Заголовок 3 уровня 24/32</h4>
+          <p class="body">Абзац 20/28. Основная мысль этой половины слайда — пять-шесть строк, дальше внимание уходит.</p>
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Заголовок пункта 20/28</p>
+              <p class="tile-text">Пояснение 20/28 в одну-две строки</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= T7 — финальный слайд (наше дополнение) === -->
+    <section class="slide" id="s7">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок финального слайда 48/52</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-3">
+          <div class="tile-item">
+            <div class="tile is-num">1</div>
+            <p class="tile-title">Первый шаг 20/28</p>
+            <p class="tile-text">Что делает команда после презентации</p>
+          </div>
+          <div class="tile-item">
+            <div class="tile is-num">2</div>
+            <p class="tile-title">Второй шаг 20/28</p>
+            <p class="tile-text">Что делает команда после презентации</p>
+          </div>
+          <div class="tile-item">
+            <div class="tile is-num">3</div>
+            <p class="tile-title">Третий шаг 20/28</p>
+            <p class="tile-text">Что делает команда после презентации</p>
+          </div>
+        </div>
+        <div class="cmd" style="margin-top:3cqw"><span class="prompt">$</span>команда · ссылка · контакт</div>
+      </div>
+    </section>
+
+    <!-- ============================ T7 — контактный слайд (149-703) === -->
+    <section class="slide contact" id="s8">
+      <div class="contact-card">
+        <div class="contact-brand">
+          <img src="assets/kaiten-logo-latin.svg" alt="Kaiten" />
+          <span class="divider"></span>
+          <p class="tagline">профессиональный инструмент<br />для прозрачных процессов</p>
+        </div>
+
+        <p class="contact-title">Быстро ответим на все вопросы:</p>
+
+        <div class="contact-cols">
+          <div class="contact-rows">
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 1.7z"/></svg><span>+7 (499) 647-41-30</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm8 7.2 7.4-4.6H4.6L12 12.2z"/></svg><span>sales@kaiten.ru</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg><span>kaiten.ru</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 3.6 11.2c-1.1.4-1.1 1.1-.2 1.4l4.5 1.4 1.7 5.2c.2.6.4.6.8.6.3 0 .5-.1.7-.4l2.2-2.2 4.6 3.4c.8.5 1.4.2 1.6-.8l2.9-13.6c.2-1.1-.4-1.6-1.4-1.2z"/></svg><span>t.me/kaiten_ru</span></div>
+          </div>
+          <div class="contact-note">
+            <p style="margin:0">Поможем быстро перенести ваши процессы в Kaiten и бесплатно настроим систему для удобной работы</p>
+            <svg class="decor" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2zm9 3.6c0-.6-.05-1.1-.14-1.7l2.06-1.5-2-3.5-2.4 1a8.9 8.9 0 0 0-2.9-1.7L15.3 2h-4l-.32 2.6c-1.06.35-2.04.92-2.9 1.7l-2.4-1-2 3.5 2.06 1.5c-.1.56-.14 1.1-.14 1.7s.05 1.14.14 1.7L3.68 15.2l2 3.5 2.4-1c.86.78 1.84 1.35 2.9 1.7l.32 2.6h4l.32-2.6a8.9 8.9 0 0 0 2.9-1.7l2.4 1 2-3.5-2.06-1.5c.1-.56.14-1.1.14-1.7z"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ T8 — процессные ленты и таймлайн (Color Dop) === -->
+    <section class="slide" id="s9">
+      <div class="s-head">
+        <h2 class="s-title">Процессные ленты и таймлайн</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="chevrons">
+          <div class="chevron is-strong">Старт</div><div class="chevron">Шаг 1</div><div class="chevron">Шаг 2</div>
+          <div class="chevron is-success">Шаг 3</div><div class="chevron is-danger">Шаг 4</div>
+          <div class="chevron">Шаг 5</div><div class="chevron">Шаг 6</div><div class="chevron is-strong">Финиш</div>
+        </div>
+
+        <div class="chevrons is-wide" style="margin-top:2.4cqw">
+          <div class="chevron"><b>Q1</b><span class="year">2026</span></div>
+          <div class="chevron is-info"><b>Q2</b><span class="year">2026</span></div>
+          <div class="chevron is-success"><b>Q3</b><span class="year">2026</span></div>
+          <div class="chevron is-warning"><b>Q4</b><span class="year">2026</span></div>
+        </div>
+
+        <div class="diamonds" style="margin-top:2.4cqw">
+          <div class="diamond"><span>Q1</span></div><div class="diamond-link"></div>
+          <div class="diamond is-info"><span>Q2</span></div><div class="diamond-link"></div>
+          <div class="diamond is-success"><span>Q3</span></div><div class="diamond-link"></div>
+          <div class="diamond is-warning"><span>Q4</span></div>
+        </div>
+
+        <div class="milestones" style="margin-top:2.4cqw">
+          <div class="milestone is-strong"><div class="dot">1</div><p class="m-title">Шаг 1 старт</p><p class="m-text">Кружок работает как буллит</p></div>
+          <div class="milestone"><div class="dot">2</div><p class="m-title">Шаг 2 стандарт</p><p class="m-text">Кружок работает как буллит</p></div>
+          <div class="milestone is-danger"><div class="dot">3</div><p class="m-title">Шаг 3 отклонение</p><p class="m-text">Кружок работает как буллит</p></div>
+          <div class="milestone is-success"><div class="dot">4</div><p class="m-title">Шаг 4 реализовано</p><p class="m-text">Кружок работает как буллит</p></div>
+          <div class="milestone"><div class="dot">5</div><p class="m-title">Шаг 5 стандарт</p><p class="m-text">Кружок работает как буллит</p></div>
+          <div class="milestone is-strong"><div class="dot">6</div><p class="m-title">Шаг 6 финиш</p><p class="m-text">Кружок работает как буллит</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== T9 — слайд сравнения, колонтитул с парой === -->
+    <section class="slide" id="s10">
+      <div class="s-head">
+        <h2 class="s-title">Сравнение функций</h2>
+        <div class="brand-pair">
+          <img class="rival" src="assets/rival-bitrix24.svg" alt="Битрикс24" />
+          <span class="brand-divider"></span>
+          <img src="assets/kaiten-logo.svg" alt="Кайтен" />
+        </div>
+      </div>
+
+      <div class="s-body cols-2">
+        <div class="frame">
+          <h3 class="h2">Как у конкурента</h3>
+          <p class="body muted">Абзац 20/28 про подход конкурента — по фактам, без оценок.</p>
+        </div>
+        <div class="frame is-accent">
+          <h3 class="h2">Как в Кайтене</h3>
+          <p class="body">Абзац 20/28 про наш подход — тоже по фактам, с рабочим сценарием.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== T10 — четыре карточки: визуал сверху, текст снизу === -->
+    <section class="slide" id="s11">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-4">
+        <div class="frame" style="padding:1.4cqw"><img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw;" /><h3 class="h3">Заголовок 2 уровня 24/32</h3><p class="body muted">Абзац 20/28. Шесть-восемь строк описания того, что показано на визуале сверху.</p></div>
+        <div class="frame" style="padding:1.4cqw"><img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw;" /><h3 class="h3">Заголовок 2 уровня 24/32</h3><p class="body muted">Абзац 20/28. Шесть-восемь строк описания того, что показано на визуале сверху.</p></div>
+        <div class="frame" style="padding:1.4cqw"><img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw;" /><h3 class="h3">Заголовок 2 уровня 24/32</h3><p class="body muted">Абзац 20/28. Шесть-восемь строк описания того, что показано на визуале сверху.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw;" /><h3 class="h3">Заголовок 2 уровня 24/32</h3><p class="body">Абзац 20/28. Шесть-восемь строк описания того, что показано на визуале сверху.</p></div>
+      </div>
+    </section>
+
+    <!-- ====================================== T11 — кейсы (10-1541) === -->
+    <section class="slide" id="s12">
+      <div class="s-head">
+        <h2 class="s-title">Заголовок слайда 48/52, желательно в 1 строку</h2>
+        <img class="mark" src="assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="frame is-accent" style="display:grid; grid-template-columns:1.3fr 1fr; gap:2cqw; align-items:center">
+          <p class="body">Вводный абзац 20/28: чем продукт отличается и почему компании выбирают его на замену. Две-четыре строки.</p>
+          <img src="assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw;" />
+        </div>
+
+        <div class="cases" style="margin-top:var(--gap)">
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text"><b>Клиент А</b> сравнили разные системы и остановились на Кайтене</p>
+            <div class="case-logos"><span class="client">Клиент А</span><span class="plus">+</span><img src="assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text">Агентство <b>Клиент Б</b> перевело 40 человек на Кайтен</p>
+            <div class="case-logos"><span class="client">Клиент Б</span><span class="plus">+</span><img src="assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text">В <b>Клиенте В</b> реорганизовали систему тестирования через Кайтен</p>
+            <div class="case-logos"><span class="client">Клиент В</span><span class="plus">+</span><img src="assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="nav-fallback" aria-label="Слайды">
+  <div class="nav-row" data-for="s0"><a class="is-off">←</a><span class="counter">1 / 13</span><a href="#s1">→</a></div>
+  <div class="nav-row" data-for="s1"><a href="#s0">←</a><span class="counter">2 / 13</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">3 / 13</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">4 / 13</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">5 / 13</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">6 / 13</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">7 / 13</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">8 / 13</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">9 / 13</span><a href="#s9">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">10 / 13</span><a href="#s10">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">11 / 13</span><a href="#s11">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">12 / 13</span><a href="#s12">→</a></div>
+  <div class="nav-row" data-for="s12"><a href="#s11">←</a><span class="counter">13 / 13</span><a class="is-off">→</a></div>
+</nav>
+
+<script src="kaiten-slides.js"></script>
+</body>
+</html>

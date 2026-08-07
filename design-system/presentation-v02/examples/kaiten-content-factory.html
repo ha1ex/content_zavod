@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ru" data-theme="light" data-themes="light:Light dark:Dark comparison:Сравнение">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Контент-завод Кайтен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../kaiten-slides.css" />
+<link rel="stylesheet" href="../theme-light.css" />
+<link rel="stylesheet" href="../theme-dark.css" />
+<link rel="stylesheet" href="../theme-comparison.css" />
+<style>
+  .bullets { margin:0; padding:0; list-style:none; }
+  .bullets li { font-size:1.0417cqw; line-height:1.4; padding-left:1.7cqw; position:relative; }
+  .bullets li + li { margin-top:1.2cqw; }
+  .bullets li::before {
+    content:""; position:absolute; left:0; top:.55em;
+    width:.6cqw; height:.6cqw; border-radius:50%; background:var(--neutral-400);
+  }
+  .frame.is-accent .bullets li::before { background:var(--action-primary); }
+  /* Фреймы «было / стало» садятся на верхний ряд модульной сетки (418px),
+     а не растягиваются на оба — иначе текст висит вверху над пустотой. */
+  #s2 .s-body { align-items:start; }
+  #s2 .frame { height:var(--row); }
+  #s2 .bullets li + li { margin-top:1.6cqw; }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- ========================================================= обложка === -->
+    <section class="slide cover is-active" id="s1">
+      <div class="cover-logo">
+        <img src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="cover-text">
+        <h1>Контент-завод Кайтен</h1>
+        <p class="sub">Бриф превращается в готовую страницу на наших компонентах — за минуту, а не за неделю</p>
+        <ul class="badges">
+          <li class="badge">Конвейер на LLM</li>
+          <li class="badge"><b>P0–P8</b> фазы</li>
+          <li class="badge"><b>8</b> доменов</li>
+          <li class="badge-break"></li>
+          <li class="badge"><b>27</b> макетов интерфейса</li>
+          <li class="badge"><b>10</b> сценариев страницы</li>
+        </ul>
+      </div>
+
+      <div class="cover-shot">
+        <img src="../assets/kaiten-board.png" alt="Интерфейс Кайтена" />
+      </div>
+    </section>
+
+    <!-- ==================================================== что меняется === -->
+    <section class="slide" id="s2">
+      <div class="s-head">
+        <h2 class="s-title">Страница перестает быть проектом</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div class="frame">
+          <h3 class="h2">Было</h3>
+          <ul class="bullets">
+            <li>Новая страница занимает у фронтенд-команды несколько дней</li>
+            <li>Блоки собираются вручную, мимо дизайн-системы</li>
+            <li>Тон бренда и качество держатся на ручной проверке</li>
+          </ul>
+        </div>
+        <div class="frame is-accent">
+          <h3 class="h2">Стало</h3>
+          <ul class="bullets">
+            <li>Бриф превращается в страницу за минуту</li>
+            <li>Доступны только компоненты из реестра — чужой блок не вставить</li>
+            <li>Проверки бренда, домена, доступности и бизнес-правил идут внутри конвейера</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================= как это работает === -->
+    <section class="slide" id="s3">
+      <div class="s-head">
+        <h2 class="s-title">Один конвейер от сырья до передачи в верстку</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="chevrons">
+          <div class="chevron is-strong">Сырье</div>
+          <div class="chevron">Фабрика ТЗ</div>
+          <div class="chevron">Гейт домена</div>
+          <div class="chevron is-accent">Фазы P0–P8</div>
+          <div class="chevron">Просмотр</div>
+          <div class="chevron">Согласование</div>
+          <div class="chevron is-strong">Передача</div>
+        </div>
+
+        <div class="tiles" style="margin-top:3.4cqw">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+            <p class="tile-title">Девять фаз, на каждой своя проверка</p>
+            <p class="tile-text">Не прошло — конвейер чинит и пробует снова, до трех раз</p>
+          </div>
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12a8 8 0 1 1 2.5 5.8"/><polyline points="4 20 4 14 10 14"/></svg></div>
+            <p class="tile-title">Перезапуск безопасен</p>
+            <p class="tile-text">Готовые фазы пропускаются, сделанное не переписывается</p>
+          </div>
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+            <p class="tile-title">Ключи к моделям не нужны</p>
+            <p class="tile-text">Модель — это сам агент: Claude Code, Codex, Gemini CLI</p>
+          </div>
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v13"/><polyline points="7 11 12 16 17 11"/><path d="M4 20h16"/></svg></div>
+            <p class="tile-title">На выходе обычный TSX</p>
+            <p class="tile-text">Проходит проверку кода, типизацию и визуальные тесты как любой PR</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ почему не разъезжается === -->
+    <section class="slide" id="s4">
+      <div class="s-head">
+        <h2 class="s-title">Качество зашито в конвейер, а не в ручную проверку</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <ul class="checks">
+          <li>Брифы неизменяемы — новая итерация это новый файл</li>
+          <li>Макеты интерфейса берутся только из домена брифа</li>
+          <li>Повтор макета из чужого домена заблокирован</li>
+          <li>Папка <code>generated/</code> — производный артефакт, руками не правится</li>
+          <li>Единственная точка входа сборки — <code>agent build</code></li>
+          <li>Порядок секций сверяется со сценарием страницы</li>
+          <li>Тон бренда, англицизмы и доступность проверяются на каждом прогоне</li>
+        </ul>
+
+        <!-- Ряды фиксированные, как в макете 166-2832: карточки по 241, плашка
+             146. Иначе карточки растягиваются на всю высоту и прижимают
+             плашку к нижнему краю. -->
+        <div style="display:grid; grid-template-rows:12.552cqw 12.552cqw auto; align-content:start; gap:var(--gap); min-height:0;">
+          <div class="cols-2" style="min-height:0">
+            <div class="stat-card">
+              <div class="stat-value">8 / 27</div>
+              <div class="stat-label">доменов и макетов интерфейса покрыто</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">12</div>
+              <div class="stat-label">проверок на каждом прогоне</div>
+            </div>
+          </div>
+          <div class="cols-2" style="min-height:0">
+            <div class="stat-card">
+              <div class="stat-value">10</div>
+              <div class="stat-label">сценариев страницы</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">3</div>
+              <div class="stat-label">слоя, на которых держатся проверки</div>
+            </div>
+          </div>
+          <div class="banner">
+            <div class="tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.2-7 9.5-4.1-1.3-7-5.2-7-9.5V6l7-3z"/><polyline points="9 12 11 14 15.5 9.5"/></svg>
+            </div>
+            <p><span class="accent">Проверки машинные, а не на честном слове</span> — git-хук, командная строка и хуки агента</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== финал === -->
+    <section class="slide" id="s5">
+      <div class="s-head">
+        <h2 class="s-title">Что дальше</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-3">
+          <div class="tile-item">
+            <div class="tile is-num">1</div>
+            <p class="tile-title">Приносите сырье</p>
+            <p class="tile-text">Свободный запрос и папка материалов — фабрика ТЗ соберет ТЗ и бриф</p>
+          </div>
+          <div class="tile-item">
+            <div class="tile is-num">2</div>
+            <p class="tile-title">Смотрите результат</p>
+            <p class="tile-text">Проверка ТЗ и страницы в браузере, согласование на <code>/approve/&lt;slug&gt;</code></p>
+          </div>
+          <div class="tile-item">
+            <div class="tile is-num">3</div>
+            <p class="tile-title">Забирайте результат</p>
+            <p class="tile-text">TSX в пул-реквест или архив для верстки — на выбор</p>
+          </div>
+        </div>
+
+        <div class="cmd" style="margin-top:3.4cqw"><span class="prompt">$</span>pnpm -w run harness agent build landing --slug &lt;slug&gt;</div>
+      </div>
+    </section>
+
+    <!-- ============================================ цифры и починка === -->
+    <section class="slide" id="s6">
+      <div class="s-head">
+        <h2 class="s-title">Покрытие растет, а ошибки чинятся на месте</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <h3 class="h2">Доменов покрыто</h3>
+          <div class="bars" style="flex:1; padding-top:2cqw">
+            <div class="bar-col c-blue"><div class="bar" style="--h:45%">4</div><div class="bar-label">было</div></div>
+            <div class="bar-col c-violet"><div class="bar-delta">+100%</div><div class="bar" style="--h:90%">8</div><div class="bar-label">сейчас</div></div>
+          </div>
+        </div>
+
+        <div style="order:-1">
+          <h3 class="h2">Если проверка не прошла</h3>
+          <div style="display:grid; gap:.7cqw; align-content:start; margin-top:1.4cqw; max-width:29.5cqw">
+            <div class="node c-violet"><p class="node-title">Фаза P4</p><p class="node-text">Секции спланированы</p></div>
+            <div class="node c-orange"><p class="node-title">Починка</p><p class="node-text">Конвейер получает список ошибок и прошлый ответ</p></div>
+            <div class="node c-green"><p class="node-title">Фаза P5</p><p class="node-text">Проверка пройдена, идем дальше</p></div>
+            <div class="node c-red"><p class="node-title">Эскалация</p><p class="node-text">Конвейер останавливается и зовет человека</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== таблица сравнения === -->
+    <section class="slide" id="s7">
+      <div class="s-head">
+        <h2 class="s-title">Сравнение с ручной сборкой</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cmp-table">
+          <div class="cmp-cell cmp-head cmp-param"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><span><span class="accent">Что умеет сборка</span> страницы</span></div>
+          <div class="cmp-cell cmp-head cmp-old">Вручную</div>
+          <div class="cmp-cell cmp-head cmp-ours">Контент-завод</div>
+          <div class="cmp-cell cmp-param"><span>Страница собирается за минуту</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param"><span>Блоки только из реестра компонентов</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param"><span>Тон бренда проверяется автоматически</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param"><span>Домен сверяется до сборки</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param"><span>Доступность проверяется на каждом прогоне</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param"><span>Порядок секций сверяется со сценарием</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param"><span>TSX уходит в пул-реквест</span></div>
+          <div class="cmp-cell cmp-old"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-ours"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+          <div class="cmp-cell cmp-param is-last"><span>Архив для верстки собирается одной командой</span></div>
+          <div class="cmp-cell cmp-old is-last"><div class="cmp-mark is-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="cmp-cell cmp-ours is-last"><div class="cmp-mark is-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ веб-поверхность === -->
+    <section class="slide" id="s8">
+      <div class="s-head">
+        <h2 class="s-title">Результат видно в браузере, а не в диффе</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Веб-поверхность завода</h3>
+          <p class="body">Маркетолог не открывает редактор кода. ТЗ, превью страницы и согласование живут в браузере, конвейер отдает туда каждый прогон.</p>
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></div>
+              <p class="tile-title">ТЗ на ревью</p>
+              <p class="tile-text">Человекочитаемое ТЗ до сборки, правки до запуска</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <p class="tile-title">Превью страницы</p>
+              <p class="tile-text">Ровно то, что увидит пользователь, на трех ширинах</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg></div>
+              <p class="tile-title">Согласование кнопкой</p>
+              <p class="tile-text">Решение фиксируется в истории</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+              <p class="tile-title">Каталог и статусы</p>
+              <p class="tile-text">Что собрано, что на согласовании, чем занят конвейер</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ЗАГЛУШКА: заменить на скриншот страницы согласования -->
+        <div style="display:flex; align-items:center"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.833cqw" /></div>
+      </div>
+    </section>
+
+    <!-- =========================================== четыре карточки === -->
+    <section class="slide" id="s9">
+      <div class="s-head">
+        <h2 class="s-title">Из чего собирается страница</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-4">
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Реестр компонентов</h3><p class="body muted">22 секционных компонента. Ничего кроме них конвейер вставить не может.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Макеты интерфейса</h3><p class="body muted">27 макетов по восьми доменам. Чужой домен заблокирован.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Сценарии страницы</h3><p class="body muted">10 плейбуков под разные уровни осведомленности аудитории.</p></div>
+        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Проверки</h3><p class="body">12 валидаторов на каждом прогоне: бренд, домен, доступность, бизнес-правила.</p></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== кейсы === -->
+    <section class="slide" id="s10">
+      <div class="s-head">
+        <h2 class="s-title">Где завод уже поработал</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="frame is-accent" style="display:grid; grid-template-columns:1.3fr 1fr; gap:2cqw; align-items:center">
+          <p class="body">Конвейер собрал страницы для разных доменов — от продуктовых до сравнений с конкурентами. Каждая прошла те же проверки и ушла в вeрстку обычным пул-реквестом.</p>
+          <img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.833cqw" />
+        </div>
+
+        <!-- ЗАГЛУШКА: вместо названий подставить логотипы клиентов -->
+        <div class="cases" style="margin-top:var(--gap)">
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text">Страница <b>сравнения с конкурентом</b> собрана из брифа за один прогон</p>
+            <div class="case-logos"><span class="client">Сравнение</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text"><b>Продуктовая страница</b> прошла восемь фаз без ручных правок</p>
+            <div class="case-logos"><span class="client">Продукт</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-text"><b>Страница вебинара</b> ушла в верстку архивом одной командой</p>
+            <div class="case-logos"><span class="client">Вебинар</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================ контактный === -->
+    <section class="slide contact" id="s11">
+      <div class="contact-card">
+        <div class="contact-brand">
+          <img src="../assets/kaiten-logo-latin.svg" alt="Kaiten" />
+          <span class="divider"></span>
+          <p class="tagline">Единая рабочая среда<br />для всей компании</p>
+        </div>
+
+        <p class="contact-title">Приходите с задачей — соберем страницу:</p>
+
+        <div class="contact-cols">
+          <div class="contact-rows">
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 3.6 11.2c-1.1.4-1.1 1.1-.2 1.4l4.5 1.4 1.7 5.2c.2.6.4.6.8.6.3 0 .5-.1.7-.4l2.2-2.2 4.6 3.4c.8.5 1.4.2 1.6-.8l2.9-13.6c.2-1.1-.4-1.6-1.4-1.2z"/></svg><span>@kaiten-content-factory</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm8 7.2 7.4-4.6H4.6L12 12.2z"/></svg><span>имя@kaiten.ru</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg><span>AGENTS.md и docs/pipeline.md</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5h6l2 2.5h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-11z"/></svg><span>inputs/&lt;slug&gt;/</span></div>
+          </div>
+          <div class="contact-note">
+            <p style="margin:0">Приносите сырье — фабрика ТЗ соберет ТЗ и бриф, а конвейер страницу. Домен не покрыт — остановимся и выдадим список макетов</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="nav-fallback" aria-label="Слайды">
+  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 11</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 11</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 11</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 11</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 11</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 11</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 11</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 11</span><a href="#s9">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 11</span><a href="#s10">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 11</span><a href="#s11">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 11</span><a class="is-off">→</a></div>
+</nav>
+
+<script src="../kaiten-slides.js"></script>
+</body>
+</html>

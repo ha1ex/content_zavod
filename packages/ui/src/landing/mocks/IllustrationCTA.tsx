@@ -468,6 +468,16 @@ export function ServerInstallMock({
 
 /* ------------------------------------------------- композиция финального CTA */
 
+/**
+ * KaitenBox — коробка продукта «Кайтен» с прозрачным фоном.
+ * Готовое значение для пропа `box` компонента IllustrationCTA.
+ * Файл лежит в apps/web/public/brand — путь абсолютный от корня сайта.
+ */
+export const KaitenBox = {
+  src: '/brand/kaiten-box.png',
+  alt: 'Коробочная версия Кайтен',
+} as const;
+
 export type IllustrationCTAProps = ServerInstallMockProps & {
   /** Коробка продукта — PNG/WebP с прозрачным фоном */
   box: { src: string; alt?: string };

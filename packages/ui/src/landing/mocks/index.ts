@@ -81,6 +81,9 @@ export { ModulePortfolioMock } from './ModulePortfolioMock';
 export { ApprovalBoardMock } from './ApprovalBoardMock';
 export { ReportsChartsMock } from './ReportsChartsMock';
 export { WindowCardLegendMock } from './WindowCardLegendMock';
+export { WindowLinksMock } from './WindowLinksMock';
+export { WindowResourceMock } from './WindowResourceMock';
+export { WindowReportsMock } from './WindowReportsMock';
 export { ModuleProjectAnimateMock } from './ModuleProjectAnimateMock';
 export { FinanceKbDocsMock } from './FinanceKbDocsMock';
 export { SliderTabs } from './SliderTabs';
@@ -111,7 +114,7 @@ export { FeatureGridMock } from './FeatureGridMock';
 export { default as RoadmapSteps } from './RoadmapSteps';
 export type { RoadmapStepsProps, RoadmapStep } from './RoadmapSteps';
 
-export { RfiEnvelopeMock, SupportChatMock, ServerInstallMock, default as IllustrationCTA } from './IllustrationCTA';
+export { RfiEnvelopeMock, SupportChatMock, ServerInstallMock, KaitenBox, default as IllustrationCTA } from './IllustrationCTA';
 export type {
   RfiEnvelopeMockProps,
   SupportChatMockProps,
@@ -119,3 +122,5 @@ export type {
   ServerInstallMockProps,
   IllustrationCTAProps,
 } from './IllustrationCTA';
+export { default as GanttSteps } from './GanttSteps';
+export type { GanttStepsProps, GanttStep } from './GanttSteps';

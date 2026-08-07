@@ -1,4 +1,4 @@
-import { buildHandoff } from '@kaiten/harness/handoff';
+import { buildHandoff, buildStaticHandoff } from '@kaiten/harness/handoff';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -10,7 +10,7 @@ function findRepoRoot(): string {
 }
 
 export async function GET(
-  _req: Request,
+  req: Request,
   ctx: { params: Promise<{ slug: string }> },
 ): Promise<Response> {
   const { slug } = await ctx.params;
@@ -24,7 +24,13 @@ export async function GET(
 
   try {
     const root = findRepoRoot();
-    const manifest = await buildHandoff(slug, { root });
+    const url = new URL(req.url);
+    // По умолчанию — СТАТИКА для верстальщика; ?format=source — старые Next.js-исходники.
+    const format = url.searchParams.get('format');
+    const manifest =
+      format === 'source'
+        ? await buildHandoff(slug, { root })
+        : await buildStaticHandoff(slug, { root, baseUrl: `${url.protocol}//${url.host}` });
     const buffer = await readFile(manifest.zipPath);
     return new Response(new Uint8Array(buffer), {
       status: 200,

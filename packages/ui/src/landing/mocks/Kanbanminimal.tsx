@@ -157,7 +157,7 @@ export function KanbanMinimalMock() {
   return (
     <div
       aria-hidden
-      className="relative h-[480px] w-[720px] overflow-hidden rounded-(--radius-3xl) border border-(--color-border-default) bg-(--color-surface-card) shadow-[0_30px_80px_-30px_rgba(125,76,207,0.30)]"
+      className="relative h-[480px] w-[720px] overflow-hidden rounded-(--radius-3xl) border border-(--color-border-default) bg-(--color-surface-card)"
     >
       <KanbanBoard />
     </div>

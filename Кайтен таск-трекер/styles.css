@@ -1255,25 +1255,22 @@ html {background: var(--color-surface-page);
 .revx-mock .revx__navbtn svg {width:24px; height:24px;}
 .revx-mock .revx__count {font-size:16px; line-height:24px; color:var(--text-secondary); min-width:52px; text-align:center;}
 .revx-mock .revx__count b {font-weight:var(--fw-med); color:var(--brand-100);}
+/* Боковой отступ: 16 на мобилке, 24 с планшета и на десктопе. Контейнер на
+   десктопе шире на два отступа, чтобы контент внутри остался 1216. */
+@media(min-width:768px) {
+  .revx-mock {--pad:var(--sp-6);}
+}
 @media(min-width:1280px) {
-  .revx-mock {--pad:32px;}
-  .revx-mock .revx__in {max-width:calc(1216px + 64px);}
+  .revx-mock .revx__in {max-width:calc(1216px + var(--sp-6) * 2);}
   .revx-mock .revx__track {gap:var(--sp-8);}
 }
 @media(min-width:768px) and (max-width:1279px) {
-  .revx-mock {--pad:var(--sp-6);}
   .revx-mock .revx__in {gap:var(--sp-8);}
   .revx-mock .revx__track {gap:var(--sp-6);}
-  .revx-mock .otz {width:var(--otz-w,318px);}
+  .revx-mock .otz {width:318px;}
 }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
-/* Лента карточек идёт до краёв экрана: окно листалки гасит боковые отступы
-   контейнера. У заголовка и листалки они остаются. На десктопе контейнер
-   упирается в 1216 и до краёв не тянется — там гасить нечего. */
-@media(max-width:1279px) {
-  .revx-mock .revx__wrap {width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);}
-}
 @media(max-width:1279px) {
   .revx-mock {padding-bottom:var(--sp-8);}
   .revx-mock.revx--nopager {padding-bottom:96px;}
@@ -1287,7 +1284,7 @@ html {background: var(--color-surface-page);
   .revx-mock {padding:48px 0 var(--sp-6);}
   .revx-mock.revx--nopager {padding-bottom:48px;}
   .revx-mock .revx__in {gap:var(--sp-6);}
-  .revx-mock .otz {width:var(--otz-w,318px); max-width:100%; height:auto;}
+  .revx-mock .otz {width:318px; max-width:100%; height:auto;}
   .revx-mock .otz__co {font-size:16px; line-height:24px;}
   .revx-mock .otz__co img {height:50px; max-width:150px;}
 }

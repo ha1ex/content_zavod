@@ -255,11 +255,10 @@ export async function buildStaticHandoff(
     // В статике листалки нет, а в разметку мог запечься сдвиг с момента съёмки —
     // возвращаем трек в начало, иначе первая карточка уезжает за левый край.
     'track.style.transform="translateX(0px)";' +
-    'if(window.innerWidth>=1280){track.style.removeProperty("--otz-w");return;}' +
-    'var gap=parseFloat(getComputedStyle(track).columnGap)||16,avail=wrap.clientWidth,MIN=318;' +
-    'var n=Math.floor((avail+gap)/(MIN+gap));' +
-    'if(n>=2)track.style.setProperty("--otz-w",((avail-(n-1)*gap)/n)+"px");' +
-    'else track.style.setProperty("--otz-w",avail+"px");' +
+    // Ширина карточки задана в CSS; снятый снимок мог принести инлайновую
+    // переменную с момента съёмки — снимаем её, чтобы не перебивала стиль.
+    'track.style.removeProperty("--otz-w");' +
+    'var gap=parseFloat(getComputedStyle(track).columnGap)||16;' +
     'pager(track,wrap,gap);});}' +
     // Листалка: в снятой разметке её может не быть (на широком экране React
     // её не рисует), поэтому собираем сами и listaem треком — иначе часть
@@ -269,7 +268,9 @@ export async function buildStaticHandoff(
     'for(var i=0;i<k.length;i++)total+=k[i].getBoundingClientRect().width;' +
     'total+=gap*(k.length-1);' +
     'var step=k.length>1?k[1].getBoundingClientRect().left-k[0].getBoundingClientRect().left:0;' +
-    'var vis=step?Math.max(1,Math.round((wrap.clientWidth+gap)/step)):k.length;' +
+    // Целиком влезающие карточки — floor, а не round: округление вверх делало
+    // вид, будто влезает больше, и листалка пропадала.
+    'var vis=step?Math.max(1,Math.floor((wrap.clientWidth+gap)/step)):k.length;' +
     'var max=Math.max(0,k.length-vis);' +
     'var sec=wrap.closest(".revx-mock"),host=wrap.parentElement;' +
     'var nav=sec?sec.querySelector(".revx__nav"):null;' +

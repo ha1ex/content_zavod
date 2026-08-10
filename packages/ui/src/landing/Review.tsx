@@ -110,6 +110,10 @@ const STYLE = `
   .revx-mock .otz{width:var(--otz-w,318px);} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
+/* Лента карточек идёт до краёв экрана: окно листалки гасит боковые отступы
+   контейнера. У заголовка и листалки они остаются. На десктопе контейнер
+   упирается в 1216 и до краёв не тянется — там гасить нечего. */
+@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);} }
 @media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
 @media(max-width:1023px){ .revx-mock{padding:64px 0 var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:64px;} .revx-mock .revx__in{gap:var(--sp-8);} }
 @media(max-width:767px){

@@ -129,7 +129,7 @@ const STYLE = `
   .revx-mock .revx__in{gap:var(--sp-6);}
   .revx-mock .revx__head{align-items:flex-start; text-align:left; margin-inline:0;}
   .revx-mock .revx__head h2{font-size:24px; line-height:32px;}
-  .revx-mock .otz{width:318px; max-width:100%; height:auto;}
+  .revx-mock .otz{width:328px; max-width:100%; height:auto;}
   .revx-mock .otz__co{font-size:16px; line-height:24px;}
   .revx-mock .otz__co img{height:50px; max-width:150px;}
 }

@@ -260,15 +260,38 @@ export async function buildStaticHandoff(
     'var n=Math.floor((avail+gap)/(MIN+gap));' +
     'if(n>=2)track.style.setProperty("--otz-w",((avail-(n-1)*gap)/n)+"px");' +
     'else track.style.setProperty("--otz-w",avail+"px");' +
-    'wrapRow(track,wrap,gap);});}' +
-    // В статике нет стрелок листалки: то, что не влезло в ряд, было бы просто
-    // недоступно. Переносим лишние карточки на следующую строку — видно все.
-    'function wrapRow(track,wrap,gap){var total=0,k=track.children;' +
+    'pager(track,wrap,gap);});}' +
+    // Листалка: в снятой разметке её может не быть (на широком экране React
+    // её не рисует), поэтому собираем сами и listaem треком — иначе часть
+    // отзывов в статике была бы недоступна.
+    'function arrow(d){return \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="\'+d+\'"/></svg>\';}' +
+    'function pager(track,wrap,gap){var k=track.children,total=0;' +
     'for(var i=0;i<k.length;i++)total+=k[i].getBoundingClientRect().width;' +
     'total+=gap*(k.length-1);' +
-    'if(total>wrap.clientWidth+1){track.classList.remove("revx__track--single");' +
-    'track.style.flexWrap="wrap";track.style.rowGap=gap+"px";track.style.justifyContent="center";}' +
-    'else{track.style.flexWrap="";track.style.rowGap="";track.style.justifyContent="";}}' +
+    'var step=k.length>1?k[1].getBoundingClientRect().left-k[0].getBoundingClientRect().left:0;' +
+    'var vis=step?Math.max(1,Math.round((wrap.clientWidth+gap)/step)):k.length;' +
+    'var max=Math.max(0,k.length-vis);' +
+    'var sec=wrap.closest(".revx-mock"),host=wrap.parentElement;' +
+    'var nav=sec?sec.querySelector(".revx__nav"):null;' +
+    'if(!max){if(nav)nav.style.display="none";if(sec)sec.classList.add("revx--nopager");' +
+    'track.classList.add("revx__track--single");track.style.transform="translateX(0px)";return;}' +
+    'if(sec)sec.classList.remove("revx--nopager");track.classList.remove("revx__track--single");' +
+    'if(!nav){nav=document.createElement("div");nav.className="revx__nav";' +
+    'nav.innerHTML=\'<button class="revx__navbtn" data-rev="-1" aria-label="Предыдущий отзыв">\'+arrow("m15 18-6-6 6-6")+\'</button>\'' +
+    '+\'<span class="revx__count"><b>1</b> / \'+k.length+\'</span>\'' +
+    '+\'<button class="revx__navbtn" data-rev="1" aria-label="Следующий отзыв">\'+arrow("m9 18 6-6-6-6")+\'</button>\';' +
+    'host.appendChild(nav);' +
+    'nav.addEventListener("click",function(e){var btn=e.target.closest("[data-rev]");if(!btn)return;' +
+    'var cur=+(track.getAttribute("data-i")||0)+ +btn.getAttribute("data-rev");' +
+    'track.setAttribute("data-i",cur);pager(track,track.parentElement,gap);});}' +
+    'nav.style.display="";' +
+    'var idx=Math.min(Math.max(0,+(track.getAttribute("data-i")||0)),max);' +
+    'track.setAttribute("data-i",idx);' +
+    'var tail=Math.max(0,track.scrollWidth-wrap.clientWidth);' +
+    'track.style.transform="translateX(-"+Math.min(idx*step,tail)+"px)";' +
+    'var b=nav.querySelector("b");if(b)b.textContent=Math.min(idx+1,k.length);' +
+    'var btns=nav.querySelectorAll("[data-rev]");' +
+    'btns[0].disabled=idx<=0;btns[1].disabled=idx>=max;}' +
     'function adapt(){fit();band();revx();}' +
     'tabs();adapt();window.addEventListener("resize",adapt);' +
     'window.addEventListener("load",adapt);setTimeout(adapt,300);' +

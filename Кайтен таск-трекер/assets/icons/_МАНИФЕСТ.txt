@@ -38,3 +38,4 @@ icon-34.svg
 icon-35.svg
 icon-36.svg
 icon-37.svg
+icon-38.svg

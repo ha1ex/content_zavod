@@ -1247,6 +1247,14 @@ html {background: var(--color-surface-page);
 .revx-mock .otz__role {font-size:16px; line-height:24px; color:var(--text-secondary); white-space:pre-line;}
 .revx-mock .otz__btn {align-self:flex-start; display:inline-flex; align-items:center; border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:10px var(--sp-4); font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--brand-100); background:#fff; text-decoration:none; cursor:pointer; transition:background .18s, border-color .18s, color .18s;}
 .revx-mock .otz__btn:hover {border-color:var(--brand-48); background:var(--brand-12); color:var(--brand-hover);}
+.revx-mock .revx__nav {display:flex; gap:14px; align-items:center;}
+.revx-mock .revx__navbtn {width:40px; height:40px; border-radius:9999px; border:1px solid var(--border-default); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s, box-shadow .18s;}
+.revx-mock .revx__navbtn:hover:not(:disabled) {background:var(--brand-12); border-color:var(--brand-48); color:var(--brand-hover);}
+.revx-mock .revx__navbtn:focus-visible {outline:none; box-shadow:0 0 0 4px rgba(152,162,179,.14);}
+.revx-mock .revx__navbtn:disabled {background:#fff; border-color:var(--border-default); color:var(--border-default); cursor:default;}
+.revx-mock .revx__navbtn svg {width:24px; height:24px;}
+.revx-mock .revx__count {font-size:16px; line-height:24px; color:var(--text-secondary); min-width:52px; text-align:center;}
+.revx-mock .revx__count b {font-weight:var(--fw-med); color:var(--brand-100);}
 @media(min-width:1280px) {
   .revx-mock {--pad:32px;}
   .revx-mock .revx__in {max-width:calc(1216px + 64px);}

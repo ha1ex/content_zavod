@@ -104,6 +104,9 @@ const STYLE = `
 .revx-mock .revx__count b{font-weight:var(--fw-med); color:var(--brand-100);}
 @media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + 64px); padding:0 32px;} .revx-mock .revx__track{gap:var(--sp-8);} }
 @media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8); padding:0 var(--sp-6);} .revx-mock .revx__track{gap:var(--sp-6);}
+  /* Карточки идут от края до края: окно листалки гасит боковые отступы
+     контейнера. У заголовка и листалки они остаются. */
+  .revx-mock .revx__wrap{width:calc(100% + var(--sp-6) * 2); margin-inline:calc(var(--sp-6) * -1);}
   .revx-mock .otz{width:var(--otz-w,318px);} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */

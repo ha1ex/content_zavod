@@ -115,9 +115,11 @@ const STYLE = `
   .revx-mock .otz{width:318px;} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
-/* Лента прижата к левому отступу, а справа выходит в край экрана: карточка,
-   которая не влезла целиком, доходит до края, а не обрывается по контейнеру. */
-@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad)); margin-right:calc(var(--pad) * -1);} }
+/* Окно листалки выходит в оба края экрана, а сам трек отбит внутренними
+   отступами: первая карточка стоит по сетке, а те, что не влезли, уходят
+   в край экрана слева и справа, а не обрываются по границе контейнера. */
+@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);}
+  .revx-mock .revx__track{padding-inline:var(--pad);} }
 @media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
 @media(max-width:1023px){ .revx-mock{padding:64px 0 var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:64px;} .revx-mock .revx__in{gap:var(--sp-8);} }
 @media(max-width:767px){
@@ -204,7 +206,12 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     if (!wrap || !track) return 0;
     const s = step();
     if (!s) return 0;
-    const vis = Math.max(1, Math.floor((wrap.clientWidth + GAP) / s));
+    // Считаем по содержимому трека: его внутренние отступы (лента выходит
+    // в края экрана) в ширину карточек не идут.
+    const cs = getComputedStyle(track);
+    const inner = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const gap = parseFloat(cs.columnGap) || GAP;
+    const vis = Math.max(1, Math.floor((inner + gap) / s));
     return Math.max(0, track.children.length - vis);
   }, [step]);
 

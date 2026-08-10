@@ -269,8 +269,11 @@ export async function buildStaticHandoff(
     'total+=gap*(k.length-1);' +
     'var step=k.length>1?k[1].getBoundingClientRect().left-k[0].getBoundingClientRect().left:0;' +
     // Целиком влезающие карточки — floor, а не round: округление вверх делало
-    // вид, будто влезает больше, и листалка пропадала.
-    'var vis=step?Math.max(1,Math.floor((wrap.clientWidth+gap)/step)):k.length;' +
+    // вид, будто влезает больше, и листалка пропадала. Внутренние отступы
+    // трека (лента выходит в края экрана) в ширину карточек не идут.
+    'var ts=getComputedStyle(track);' +
+    'var inner=wrap.clientWidth-parseFloat(ts.paddingLeft)-parseFloat(ts.paddingRight);' +
+    'var vis=step?Math.max(1,Math.floor((inner+gap)/step)):k.length;' +
     'var max=Math.max(0,k.length-vis);' +
     'var sec=wrap.closest(".revx-mock"),host=wrap.parentElement;' +
     'var nav=sec?sec.querySelector(".revx__nav"):null;' +

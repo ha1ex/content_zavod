@@ -247,7 +247,30 @@ export async function buildStaticHandoff(
     '[".kct-table","--kct-bg-top",".kct-hcell--label"]].forEach(function(c){' +
     'document.querySelectorAll(c[0]).forEach(function(t){var h=t.querySelector(c[2]);' +
     't.style.setProperty(c[1],(window.innerWidth<768&&h?h.offsetHeight:0)+"px");});});}' +
-    'function adapt(){fit();band();}' +
+    // 4) revx — ширина карточек отзыва: в окно должно попадать целое число,
+    //    иначе крайняя режется. Повторяет fitCards из ReviewSlider (там это
+    //    делает React, в статике его нет).
+    'function revx(){document.querySelectorAll(".revx__track").forEach(function(track){' +
+    'var wrap=track.parentElement;if(!wrap||!wrap.clientWidth)return;' +
+    // В статике листалки нет, а в разметку мог запечься сдвиг с момента съёмки —
+    // возвращаем трек в начало, иначе первая карточка уезжает за левый край.
+    'track.style.transform="translateX(0px)";' +
+    'if(window.innerWidth>=1280){track.style.removeProperty("--otz-w");return;}' +
+    'var gap=parseFloat(getComputedStyle(track).columnGap)||16,avail=wrap.clientWidth,MIN=318;' +
+    'var n=Math.floor((avail+gap)/(MIN+gap));' +
+    'if(n>=2)track.style.setProperty("--otz-w",((avail-(n-1)*gap)/n)+"px");' +
+    'else if(avail-MIN-gap>64)track.style.setProperty("--otz-w",avail+"px");' +
+    'else track.style.removeProperty("--otz-w");' +
+    'wrapRow(track,wrap,gap);});}' +
+    // В статике нет стрелок листалки: то, что не влезло в ряд, было бы просто
+    // недоступно. Переносим лишние карточки на следующую строку — видно все.
+    'function wrapRow(track,wrap,gap){var total=0,k=track.children;' +
+    'for(var i=0;i<k.length;i++)total+=k[i].getBoundingClientRect().width;' +
+    'total+=gap*(k.length-1);' +
+    'if(total>wrap.clientWidth+1){track.classList.remove("revx__track--single");' +
+    'track.style.flexWrap="wrap";track.style.rowGap=gap+"px";track.style.justifyContent="center";}' +
+    'else{track.style.flexWrap="";track.style.rowGap="";track.style.justifyContent="";}}' +
+    'function adapt(){fit();band();revx();}' +
     'tabs();adapt();window.addEventListener("resize",adapt);' +
     'window.addEventListener("load",adapt);setTimeout(adapt,300);' +
     '})();</script>';

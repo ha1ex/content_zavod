@@ -104,15 +104,18 @@ const STYLE = `
 .revx-mock .revx__count b{font-weight:var(--fw-med); color:var(--brand-100);}
 @media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + 64px); padding:0 32px;} .revx-mock .revx__track{gap:var(--sp-8);} }
 @media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8); padding:0 var(--sp-6);} .revx-mock .revx__track{gap:var(--sp-6);}
-  .revx-mock .otz{width:318px;} }
-@media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} }
-@media(max-width:1023px){ .revx-mock{padding:64px 0 var(--sp-8);} .revx-mock .revx__in{gap:var(--sp-8);} }
+  .revx-mock .otz{width:var(--otz-w,318px);} }
+/* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
+   Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
+@media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
+@media(max-width:1023px){ .revx-mock{padding:64px 0 var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:64px;} .revx-mock .revx__in{gap:var(--sp-8);} }
 @media(max-width:767px){
   .revx-mock{padding:48px 0 var(--sp-6);}
+  .revx-mock.revx--nopager{padding-bottom:48px;}
   .revx-mock .revx__in{gap:var(--sp-6); padding:0 var(--sp-4);}
   .revx-mock .revx__head{align-items:flex-start; text-align:left; margin-inline:0;}
   .revx-mock .revx__head h2{font-size:24px; line-height:32px;}
-  .revx-mock .otz{width:318px; max-width:100%; height:auto;}
+  .revx-mock .otz{width:var(--otz-w,318px); max-width:100%; height:auto;}
   .revx-mock .otz__co{font-size:16px; line-height:24px;}
   .revx-mock .otz__co img{height:50px; max-width:150px;}
 }
@@ -162,6 +165,8 @@ const PLACEHOLDER_REVIEWS: Review[] = Array.from({ length: 4 }, (_, i) => ({
 }));
 
 const GAP = 32;
+/** Минимальная ширина карточки на планшете — от неё считаем, сколько влезет. */
+const MIN_CARD = 318;
 
 export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
   const data = reviews && reviews.length ? reviews : PLACEHOLDER_REVIEWS;
@@ -194,10 +199,39 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     return Math.max(0, track.children.length - vis);
   }, [step]);
 
+  /**
+   * На планшете карточка фиксированной ширины (318) редко укладывается в окно
+   * целым числом — с краю торчала обрезанная. Раздаём остаток по карточкам:
+   * в окно попадает целое число, ни одна не режется.
+   */
+  const fitCards = useCallback(() => {
+    const wrap = wrapRef.current;
+    const track = trackRef.current;
+    if (!wrap || !track) return;
+    if (window.innerWidth >= 1280) {
+      track.style.removeProperty('--otz-w');
+      return;
+    }
+    const gap = parseFloat(getComputedStyle(track).columnGap) || GAP;
+    const avail = wrap.clientWidth;
+    const n = Math.floor((avail + gap) / (MIN_CARD + gap));
+    if (n >= 2) {
+      track.style.setProperty('--otz-w', `${(avail - (n - 1) * gap) / n}px`);
+      return;
+    }
+    // Влезает одна карточка. Если следующая выглядывает краем чуть-чуть —
+    // это подсказка, что блок листается, и базовую ширину не трогаем.
+    // Когда «хвост» большой, карточка режется по-настоящему: тянем на всё окно.
+    const tail = avail - MIN_CARD - gap;
+    if (tail > 64) track.style.setProperty('--otz-w', `${avail}px`);
+    else track.style.removeProperty('--otz-w');
+  }, []);
+
   const apply = useCallback(() => {
     const track = trackRef.current;
     const wrap = wrapRef.current;
     if (!track) return;
+    fitCards();
     const m = maxIdx();
     const clamped = Math.min(idx, m);
     if (clamped !== idx) setIdx(clamped);
@@ -211,7 +245,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     const offset = Math.min(clamped * step(), tail);
     track.style.transform = `translateX(-${offset}px)`;
     setMaxI(m);
-  }, [idx, maxIdx, step]);
+  }, [fitCards, idx, maxIdx, step]);
 
   useEffect(() => {
     apply();
@@ -224,7 +258,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
   }, [apply]);
 
   return (
-    <section className="revx-mock" aria-label="Отзывы клиентов">
+    <section className={`revx-mock${maxI === 0 ? ' revx--nopager' : ''}`} aria-label="Отзывы клиентов">
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="revx__in">
         {/* Шапка секции опциональна: без title и subtitle блок не рендерится. */}

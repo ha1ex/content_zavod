@@ -469,7 +469,7 @@ const FeatureRowsSchema = z.object({
           /** 'edge' (дефолт) — скриншот в край плашки; 'center' — по центру колонки. */
           imageAlign: z.enum(['edge', 'center']).optional(),
           /** Поведение кадра на мобилке: 'bleed' (дефолт) — в оба края, 'right' — только вправо, 'inset' — с полями. */
-          imageMobile: z.enum(['bleed', 'right', 'inset']).optional(),
+          imageMobile: z.enum(['bleed', 'right', 'left', 'inset']).optional(),
         }),
       )
       .min(2)

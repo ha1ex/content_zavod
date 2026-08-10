@@ -14,10 +14,10 @@ export interface FeatureRowProps {
   /**
    * Поведение кадра на мобилке:
    * 'bleed' (дефолт) — выходит в оба края экрана, самый крупный;
-   * 'right' — выходит только вправо, слева остаётся поле плашки;
+   * 'right' / 'left' — выходит только в одну сторону, с другой остаётся поле;
    * 'inset' — поля с обеих сторон, самый мелкий.
    */
-  imageMobile?: 'bleed' | 'right' | 'inset';
+  imageMobile?: 'bleed' | 'right' | 'left' | 'inset';
 }
 
 /**
@@ -53,7 +53,7 @@ export function FeatureRows({ eyebrow, title, description, items }: FeatureRowsP
         'px-4 pt-12 md:px-6 md:pt-16 xl:px-0 lg:pt-24',
       )}
     >
-      <div className="mb-12 max-w-2xl text-left md:mx-auto md:mb-16 md:text-center lg:mb-24 lg:max-w-4xl">
+      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-16 md:text-center lg:mb-24 lg:max-w-4xl">
         {eyebrow && (
           <p
             data-comp="feature_rows.eyebrow"
@@ -78,14 +78,14 @@ export function FeatureRows({ eyebrow, title, description, items }: FeatureRowsP
         )}
       </div>
 
-      <div className="flex flex-col gap-12 md:gap-16 lg:gap-24">
+      <div className="flex flex-col gap-6 md:gap-16 lg:gap-24">
         {items.map((item, i) => (
           <Inspect
             as="div"
             key={i}
             name={`feature_rows.items[${i}]`}
             className={cn(
-              'grid items-center gap-6 md:grid-cols-2 md:gap-8 lg:gap-12',
+              'grid items-center gap-8 md:grid-cols-2 lg:gap-12',
               // Серая плашка на всю ширину строки. Внутренние отступы и радиус —
               // по шкале DS для блоков (24/32/48 и 12/16).
               'rounded-(--radius-xl) p-6 md:p-8 lg:rounded-(--radius-2xl) lg:p-12',
@@ -123,15 +123,22 @@ export function FeatureRows({ eyebrow, title, description, items }: FeatureRowsP
                 // На мобилке подъёма нет: там картинка стоит под текстом
                 // и отрицательный отступ наехал бы на него.
                 'min-w-0 self-end -mb-6 md:mx-0 md:-mt-16 md:-mb-8 lg:-mt-24 lg:-mb-12',
+                // Отступ ровно по паддингу плашки: кадр доходит до её края,
+                // но за границы блока не выходит.
                 item.imageMobile === 'inset'
                   ? ''
-                  : item.imageMobile === 'right'
-                    ? '-mr-6'
-                    : '-mx-6',
+                  : // С противоположной стороны поле шире внутреннего отступа
+                    // плашки — иначе кадр упирается в текст над ним.
+                    item.imageMobile === 'right'
+                    ? 'ml-6 -mr-6'
+                    : item.imageMobile === 'left'
+                      ? '-ml-6 mr-6'
+                      : '-mx-6',
                 i % 2 ? 'md:order-1' : 'md:order-2',
-                // Выход в боковой край плашки — только для кадров по краю.
+                // В боковой край плашки кадр выходит только на планшете:
+                // на десктопе сбоку остаётся полный внутренний отступ 48.
                 item.imageAlign !== 'center' &&
-                  (i % 2 ? 'md:-ml-8 lg:-ml-12' : 'md:-mr-8 lg:-mr-12'),
+                  (i % 2 ? 'md:-ml-8 lg:ml-0' : 'md:-mr-8 lg:mr-0'),
               )}
             >
               <img
@@ -150,23 +157,47 @@ export function FeatureRows({ eyebrow, title, description, items }: FeatureRowsP
                   'rounded-(--radius-base)',
                   // На мобилке кадр всегда прижат вправо (или по центру, если
                   // так задано); сторону по макету включает уже планшет.
+                  // Кадр по центру колонки — но на десктопе прижат к внешней
+                  // стороне строки: по центру он висел слишком близко к тексту.
+                  // На мобилке кадр прижат вправо у всех строк — колонка одна,
+                  // и чередование сторон там не читается. Сторону по макету
+                  // включает планшет.
+                  // На мобилке сторона идёт за `imageMobile` — кадр прижат к тому
+                  // краю, в который выходит. С планшета включается шахматка.
                   item.imageAlign === 'center'
-                    ? 'object-center'
-                    : i % 2
-                      ? 'object-right md:object-left'
-                      : 'object-right',
+                    ? cn('object-center', i % 2 ? 'lg:object-left' : 'lg:object-right')
+                    : cn(
+                        item.imageMobile === 'left' ? 'object-left' : 'object-right',
+                        i % 2 ? 'md:object-left' : 'md:object-right',
+                      ),
                   // Углы внешней стороны — по радиусу плашки: снизу скриншот
                   // ложится в её угол, сверху выходит за неё, и квадратные
                   // углы там читаются как обрез.
-                  item.imageAlign !== 'center' &&
-                    (i % 2
-                      ? 'rounded-l-(--radius-xl) lg:rounded-l-(--radius-2xl)'
-                      : 'rounded-r-(--radius-xl) lg:rounded-r-(--radius-2xl)'),
+                  // На мобилке кадр приходит в угол плашки только снизу и только
+                  // если выходит в край: при `inset` полей хватает, и скругление
+                  // там читается случайным срезом.
+                  // Нижний внешний угол скругляем только там, где кадр реально
+                  // ложится в угол плашки, — на мобилке и планшете. На десктопе
+                  // сбоку остаётся отступ 48, до угла кадр не достаёт.
+                  item.imageAlign !== 'center' && [
+                    // На мобилке скругляем тот угол, которым кадр реально
+                    // выходит в край плашки, — он зависит от `imageMobile`,
+                    // а не от чётности строки.
+                    (item.imageMobile === 'bleed' || item.imageMobile === undefined || item.imageMobile === 'left') &&
+                      'rounded-bl-(--radius-xl)',
+                    (item.imageMobile === 'bleed' || item.imageMobile === undefined || item.imageMobile === 'right') &&
+                      'rounded-br-(--radius-xl)',
+                    // С планшета сторону задаёт шахматка, на десктопе кадр до
+                    // угла не достаёт — там скругления нет.
+                    i % 2
+                      ? 'md:rounded-bl-(--radius-xl) md:rounded-br-none lg:rounded-bl-none'
+                      : 'md:rounded-br-(--radius-xl) md:rounded-bl-none lg:rounded-br-none',
+                  ],
                 )}
-                // Тень без смещения (X=0, Y=0) — правило DS: мокап лежит
-                // в плоскости страницы, а не «висит» над ней. У картинки
+                // Тень уходит вверх (отрицательный Y): кадр стоит на нижней
+                // границе плашки, и подсвечивать нужно верхний край. У картинки
                 // прозрачные поля, поэтому тень вешаем на пиксели, а не на бокс.
-                style={{ filter: 'drop-shadow(0 0 10px rgba(45,45,45,.10))' }}
+                style={{ filter: 'drop-shadow(0 -6px 12px rgba(45,45,45,.12))' }}
               />
             </div>
           </Inspect>

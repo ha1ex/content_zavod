@@ -29,7 +29,7 @@ export function CtaProduct({
         'mx-auto w-full max-w-(--container-kaiten)',
         // Сверху половина шкалы: над блоком уже стоит сетка фич со своим
         // нижним отступом, полные 128 складывались в провал.
-        'px-4 pt-8 pb-16 md:px-6 md:pt-12 md:pb-24 xl:px-0 lg:pt-16 lg:pb-32',
+        'px-4 pt-8 pb-16 md:px-6 md:pt-12 md:pb-24 xl:px-0 lg:pt-24 lg:pb-32',
       )}
     >
       <Inspect name="cta_product">

@@ -212,9 +212,9 @@ export function FeatureGrid({
                 // мобилка/планшет — горизонтальный трек со снапом
                 'flex snap-x snap-mandatory gap-4 overflow-x-auto md:gap-6',
                 // десктоп — обычная сетка
-                'lg:grid lg:gap-8 lg:overflow-visible',
+                'lg:grid lg:gap-6 lg:overflow-visible xl:gap-8',
               )
-            : 'grid grid-cols-1 gap-4 md:gap-6 lg:gap-8',
+            : 'grid grid-cols-1 gap-4 md:gap-6 xl:gap-8',
           colsClass[columns],
         )}
       >
@@ -225,9 +225,14 @@ export function FeatureGrid({
             name={`features.items[${i}]`}
             className={cn(
               // Внутренние отступы по шкале DS: 24 / 32 / 48.
-              'rounded-(--radius-xl) bg-(--color-surface-section) p-6 md:p-8 lg:rounded-(--radius-2xl) lg:p-12',
+              'rounded-(--radius-xl) bg-(--color-surface-section) p-6 md:p-8 lg:rounded-(--radius-2xl)',
               // в треке карточка держит свою ширину и цепляется снапом
-              slider && 'w-[318px] max-w-[calc(100vw-64px)] shrink-0 snap-start md:w-[calc(50%-12px)] md:max-w-none lg:w-auto lg:shrink',
+              // Ширина карточки — доля трека, чтобы в окно попадало целое число
+              // карточек: на мобилке одна, на планшете две. Фиксированная ширина
+              // резала следующую карточку краем.
+              // На мобилке ширина фиксированная — 318, как у карточки отзыва;
+              // на узких экранах ужимается до ширины трека.
+              slider && 'w-[318px] max-w-full shrink-0 snap-start md:w-[calc(50%-12px)] lg:w-auto lg:shrink',
               // широкая карточка занимает весь ряд — уходит отдельной строкой вниз
               item.wide && 'md:w-full lg:col-span-full',
               // текст и картинка бок о бок

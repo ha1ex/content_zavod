@@ -41,7 +41,8 @@ const CSS = `
 .lmq *,.lmq *::before,.lmq *::after{box-sizing:border-box}
 .lmq__head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-4,16px);max-width:760px;margin:0 auto}
 .lmq__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,40px);font-weight:var(--fw-semi,600);letter-spacing:0;color:var(--_ink)}
-.lmq__marq{margin-top:var(--sp-12,48px);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+/* Лента живёт в контейнере страницы, а не во всю ширину окна. */
+.lmq__marq{max-width:var(--container,1216px);margin-left:auto;margin-right:auto;margin-top:var(--sp-12,48px);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .lmq__track{display:flex;align-items:center;width:max-content;animation:lmqScroll 38s linear infinite}
 .lmq__marq:hover .lmq__track{animation-play-state:paused}
 .lmq__track img{height:46px;width:auto;margin-right:var(--sp-10,40px);flex:none;display:block;object-fit:contain}

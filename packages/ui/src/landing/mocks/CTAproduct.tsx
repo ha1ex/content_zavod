@@ -54,19 +54,21 @@ const css = `
 /* Кнопки в один ряд; в столбик уходят только на самых узких экранах,
    где две штуки физически не помещаются по ширине. */
 .ctp__cta{display:flex;flex-wrap:nowrap;gap:12px;margin-top:24px}
+/* Кнопки по шкале DS: высота 48, паддинг 12/20, радиус 8, начертание 500. */
 .ctp__btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
-  padding:14px 24px;border-radius:8px;background:#7d4ccf;color:#fff;
-  font-size:16px;line-height:24px;font-weight:600;text-decoration:none;
-  transition:background .14s cubic-bezier(.2,0,.2,1)}
-.ctp__btn:hover{background:#6f42bb}
-/* Ховер как у всех контурных кнопок DS — лавандовый, а не серый. */
-.ctp__btn--ghost{background:#fff;color:#2d2d2d}
-.ctp__btn--ghost:hover{background:#efe9f9;color:#6a3cbf}
+  height:48px;padding:12px 20px;border-radius:8px;border:1px solid transparent;
+  background:#7d4ccf;color:#fff;
+  font-size:16px;line-height:24px;font-weight:500;text-decoration:none;
+  transition:background .18s, border-color .18s, color .18s}
+.ctp__btn:hover{background:#6a3cbf}
+/* Контурная — как btn--outline в DS: белая с рамкой и брендовым текстом. */
+.ctp__btn--ghost{background:#fff;border-color:#dbe1e0;color:#7d4ccf}
+.ctp__btn--ghost:hover{background:#efe9f9;border-color:rgba(125,76,207,.48);color:#6a3cbf}
 .ctp__visual{position:relative;z-index:1;display:flex;justify-content:center;align-items:center}
 .ctp__visual img{width:85%;height:auto;display:block;border-radius:12px}
 @media(min-width:1024px){.ctp{border-radius:16px}.ctp__visual img{border-radius:16px}}
 @media(min-width:768px) and (max-width:1279px){.ctp__visual img{width:80%}}
-@media(min-width:1280px){.ctp__visual img{width:72%}}
+@media(min-width:1280px){.ctp__visual img{width:84%}}
 @media(max-width:1023px){
   .ctp{grid-template-columns:1fr;text-align:center;background:linear-gradient(180deg,#ece0ff,#cdecff)}
   .ctp__cta{justify-content:center}
@@ -75,7 +77,7 @@ const css = `
 @media(max-width:767px){
   .ctp{text-align:left}
   .ctp__copy h2{font-size:24px;line-height:32px}
-  .ctp__cta{justify-content:flex-start}
+  .ctp__cta{justify-content:center}
 }
 @media(min-width:560px) and (max-width:767px){.ctp{padding:48px}}
 @media(max-width:559px){.ctp{padding:24px}.ctp__cta{flex-wrap:wrap}}

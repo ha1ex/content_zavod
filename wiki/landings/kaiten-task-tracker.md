@@ -2,7 +2,7 @@
 slug: kaiten-task-tracker
 type: landing
 created: 2026-07-31
-updated: 2026-08-07
+updated: 2026-08-10
 status: draft
 brief: content/briefs/kaiten-task-tracker.json
 archetype: saas_landing
@@ -161,7 +161,7 @@ stale: false
 - **Score:** 88.43 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT, Торговля, Производство, Строительство
 - **CTA types detected:** Trial, Demo
-- **Generated:** 2026-08-07T16:02:05.818Z
+- **Generated:** 2026-08-10T13:05:26.545Z
 
 ## Breakdown
 

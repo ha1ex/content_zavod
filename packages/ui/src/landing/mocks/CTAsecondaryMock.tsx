@@ -48,7 +48,7 @@ const STYLE = `
   display:block; width:100%; padding:128px var(--sp-4); box-sizing:border-box;
 }
 .cta-secondary, .cta-secondary *{box-sizing:border-box;}
-.cta-secondary .fcta{position:relative; overflow:hidden; max-width:1216px; margin:0 auto; background:linear-gradient(90deg,#ece0ff,#cdecff); border-radius:var(--radius-3xl); text-align:left; padding:var(--sp-16) var(--sp-12) var(--sp-12);}
+.cta-secondary .fcta{position:relative; overflow:hidden; max-width:1216px; margin:0 auto; background:linear-gradient(90deg,#ece0ff,#cdecff); border-radius:var(--radius-3xl); text-align:left; padding:var(--sp-16) var(--sp-12);}
 .cta-secondary .fcta__blur{display:none;}
 @media(max-width:1279px){.cta-secondary .fcta{background:linear-gradient(180deg,#ece0ff 30%,#cdecff 85%);}}
 .cta-secondary .fcta__in{position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) 500px; gap:var(--sp-8); align-items:center;}
@@ -77,15 +77,16 @@ const STYLE = `
   .cta-secondary .fcta__in{grid-template-columns:minmax(0,1fr); text-align:center; gap:var(--sp-12); justify-items:center;}
   .cta-secondary .fcta__copy{max-width:680px; margin:0 auto; min-width:0;}
   .cta-secondary .fcta__cta{justify-content:center; flex-wrap:nowrap;}
-  .cta-secondary .fcta__visual{justify-self:center; align-self:auto; width:100%; max-width:520px; text-align:center;}
+  .cta-secondary .fcta__visual{justify-self:center; align-self:auto; width:100%; max-width:520px; text-align:left;}
 }
 @media(max-width:767px){
   .cta-secondary{padding:64px var(--sp-4);}
-  .cta-secondary .fcta{padding:var(--sp-12) var(--sp-6) 0; border-radius:12px;}
+  .cta-secondary .fcta{padding:var(--sp-12) var(--sp-6); border-radius:12px;}
   .cta-secondary .fcta h2{font-size:20px; line-height:28px;}
   .cta-secondary .fcta p{font-size:16px; line-height:24px;}
   .cta-secondary .fcta__copy{text-align:left;}
-  .cta-secondary .fcta__cta{flex-direction:column; width:100%; max-width:360px; margin-inline:auto; align-items:center;}
+  /* Кнопки в один ряд и на мобилке: две штуки помещаются по ширине. */
+  .cta-secondary .fcta__cta{flex-direction:row; flex-wrap:wrap; justify-content:center; margin-inline:auto;}
   .cta-secondary .fcta__cta .btn{width:auto;}
 }
 `;

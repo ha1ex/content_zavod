@@ -201,7 +201,7 @@
             },
             {
               "name": "SMM",
-              "count": 4,
+              "count": 5,
               "columns": [
                 [
                   {
@@ -217,7 +217,24 @@
                     ]
                   }
                 ],
-                [],
+                [
+                  {
+                    "title": "Сторис: обзор обновлений за месяц",
+                    "tags": [
+                      {
+                        "label": "Telegram",
+                        "variant": "blue"
+                      },
+                      {
+                        "label": "VK",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a3"
+                    ]
+                  }
+                ],
                 [
                   {
                     "title": "Серия рилсов: закулисье производства",
@@ -242,7 +259,7 @@
                     "tags": [
                       {
                         "label": "Telegram",
-                        "variant": "urg"
+                        "variant": "blue"
                       }
                     ],
                     "assignees": [
@@ -256,7 +273,7 @@
                     "tags": [
                       {
                         "label": "Telegram",
-                        "variant": "urg"
+                        "variant": "blue"
                       },
                       {
                         "label": "VK",
@@ -327,7 +344,7 @@
             "avatar": "/brand/reviews/buzzolls-avatar.png",
             "avatarInitial": "В",
             "avatarBg": "#8aa8c9",
-            "caseUrl": "https://kaiten.ru/blog/tag/case/",
+            "caseUrl": "https://kaiten.ru/blog/kak-buzzolls-uskorila-razrabotku-i-obiedinila-komandy-s-pomoshchiu-kaiten/",
             "caseLabel": "Читать кейс"
           },
           {
@@ -353,7 +370,7 @@
             "avatar": "/brand/reviews/habr-avatar.png",
             "avatarInitial": "Д",
             "avatarBg": "#b88ac9",
-            "caseUrl": "https://habr.com/ru/articles/938880/",
+            "caseUrl": "https://kaiten.ru/blog/case-habr/",
             "caseLabel": "Читать кейс"
           }
         ]
@@ -401,7 +418,7 @@
               "src": "/brand/flow/flow-3.png",
               "alt": "Доски найма и адаптации: карточки с пометками о блокировках и согласованиях"
             },
-            "imageMobile": "inset"
+            "imageMobile": "right"
           }
         ]
       }
@@ -507,7 +524,7 @@
             "icon": "message-circle",
             "title": "Коммуникации",
             "description": "Обсуждайте задачи, проводите созвоны и принимайте решения прямо в системе. Вся история общения остаётся рядом с работой, а не теряется в чатах",
-            "featureTile": "Комментарии и упоминания"
+            "featureTile": "Чат поддержки"
           }
         ],
         "columns": 3,
@@ -666,7 +683,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-07T16:02:06.242Z",
+    "generatedAt": "2026-08-10T13:05:26.564Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "tokenEstimate": 48142,

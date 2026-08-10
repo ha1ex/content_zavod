@@ -937,6 +937,9 @@
     .lg\:max-w-4xl {max-width: var(--container-4xl);}
   }
   @media (min-width: 64rem) {
+    .lg\:max-w-6xl {max-width: var(--container-6xl);}
+  }
+  @media (min-width: 64rem) {
     .lg\:min-w-0 {min-width: var(--spacing-0);}
   }
   @media (min-width: 64rem) {

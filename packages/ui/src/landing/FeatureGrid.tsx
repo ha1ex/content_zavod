@@ -176,7 +176,7 @@ export function FeatureGrid({
     >
       {/* На планшете шапке даём ту же ширину, что на десктопе: с 2xl заголовок
           ломался на две строки уже там, где помещается в одну. */}
-      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:max-w-4xl md:text-center lg:mb-12">
+      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:max-w-4xl md:text-center lg:mb-12 lg:max-w-6xl">
         {eyebrow && (
           <p
             data-comp="features.eyebrow"

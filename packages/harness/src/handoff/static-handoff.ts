@@ -298,7 +298,13 @@ export async function buildStaticHandoff(
     'var b=nav.querySelector("b");if(b)b.textContent=Math.min(idx+1,k.length);' +
     'var btns=nav.querySelectorAll("[data-rev]");' +
     'btns[0].disabled=idx<=0;btns[1].disabled=idx>=max;}' +
-    'function adapt(){fit();band();revx();}' +
+    // 5) board — масштаб доски первого экрана. В живом лендинге его считает
+    //    React от ширины слота (доска нарисована на 1360, потолок 1216), в
+    //    статике без этого оставались ступени по брейкпоинтам из CSS.
+    'function board(){document.querySelectorAll(".hsi-screen__visual .hsi").forEach(function(el){' +
+    'var slot=el.parentElement;if(!slot||!slot.clientWidth)return;' +
+    'el.style.zoom=Math.min(1216,slot.clientWidth)/1360;});}' +
+    'function adapt(){fit();band();revx();board();}' +
     'tabs();adapt();window.addEventListener("resize",adapt);' +
     'window.addEventListener("load",adapt);setTimeout(adapt,300);' +
     '})();</script>';

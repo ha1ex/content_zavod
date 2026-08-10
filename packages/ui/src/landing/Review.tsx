@@ -108,10 +108,6 @@ const STYLE = `
 @media(min-width:1280px){ .revx-mock{--pad:32px;} .revx-mock .revx__in{max-width:calc(1216px + 64px);} .revx-mock .revx__track{gap:var(--sp-8);} }
 @media(min-width:768px) and (max-width:1279px){ .revx-mock{--pad:var(--sp-6);} .revx-mock .revx__in{gap:var(--sp-8);} .revx-mock .revx__track{gap:var(--sp-6);}
   .revx-mock .otz{width:var(--otz-w,318px);} }
-/* Карточки идут от края до края: окно листалки гасит боковые отступы
-   контейнера. У заголовка и листалки они остаются. На десктопе контейнер
-   упирается в 1216 и до краёв экрана не тянется — там гасить нечего. */
-@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
 @media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
@@ -226,12 +222,9 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
       track.style.setProperty('--otz-w', `${(avail - (n - 1) * gap) / n}px`);
       return;
     }
-    // Влезает одна карточка. Если следующая выглядывает краем чуть-чуть —
-    // это подсказка, что блок листается, и базовую ширину не трогаем.
-    // Когда «хвост» большой, карточка режется по-настоящему: тянем на всё окно.
-    const tail = avail - MIN_CARD - gap;
-    if (tail > 64) track.style.setProperty('--otz-w', `${avail}px`);
-    else track.style.removeProperty('--otz-w');
+    // Влезает одна — тянем её на всю ширину окна. Иначе соседняя выглядывала
+    // бы обрезанным краем, а обрезков в кадре быть не должно.
+    track.style.setProperty('--otz-w', `${avail}px`);
   }, []);
 
   const apply = useCallback(() => {

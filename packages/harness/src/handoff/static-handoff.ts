@@ -259,8 +259,7 @@ export async function buildStaticHandoff(
     'var gap=parseFloat(getComputedStyle(track).columnGap)||16,avail=wrap.clientWidth,MIN=318;' +
     'var n=Math.floor((avail+gap)/(MIN+gap));' +
     'if(n>=2)track.style.setProperty("--otz-w",((avail-(n-1)*gap)/n)+"px");' +
-    'else if(avail-MIN-gap>64)track.style.setProperty("--otz-w",avail+"px");' +
-    'else track.style.removeProperty("--otz-w");' +
+    'else track.style.setProperty("--otz-w",avail+"px");' +
     'wrapRow(track,wrap,gap);});}' +
     // В статике нет стрелок листалки: то, что не влезло в ряд, было бы просто
     // недоступно. Переносим лишние карточки на следующую строку — видно все.

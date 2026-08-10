@@ -259,6 +259,14 @@ export async function buildStaticHandoff(
     // переменную с момента съёмки — снимаем её, чтобы не перебивала стиль.
     'track.style.removeProperty("--otz-w");' +
     'var gap=parseFloat(getComputedStyle(track).columnGap)||16;' +
+    // Окно листалки — целое число карточек фиксированной ширины; остаток
+    // уходит в боковые поля, иначе с краю торчала бы обрезанная (см.
+    // fitWindow в ReviewSlider).
+    'var host=wrap.parentElement,hs=host?getComputedStyle(host):null;' +
+    'var card=track.children[0]?track.children[0].offsetWidth:0;' +
+    'var avail=hs?host.clientWidth-parseFloat(hs.paddingLeft)-parseFloat(hs.paddingRight):0;' +
+    'if(card&&avail){var n=Math.max(1,Math.floor((avail+gap)/(card+gap)));' +
+    'wrap.style.maxWidth=Math.min(avail,n*card+(n-1)*gap)+"px";wrap.style.marginInline="auto";}' +
     'pager(track,wrap,gap);});}' +
     // Листалка: в снятой разметке её может не быть (на широком экране React
     // её не рисует), поэтому собираем сами и listaem треком — иначе часть

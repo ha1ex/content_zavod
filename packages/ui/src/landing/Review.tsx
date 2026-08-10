@@ -203,10 +203,34 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     return Math.max(0, track.children.length - vis);
   }, [step]);
 
+  /**
+   * Ширина карточки фиксированная (318 до 1280), и в окно она укладывается
+   * целым числом далеко не на каждом экране — остаток вылезал обрезанной
+   * карточкой с краю. Сужаем окно листалки до целого числа карточек и
+   * центруем: остаток уходит в боковые поля, обрезков в кадре нет.
+   */
+  const fitWindow = useCallback(() => {
+    const wrap = wrapRef.current;
+    const track = trackRef.current;
+    if (!wrap || !track || !track.children.length) return;
+    const host = wrap.parentElement;
+    if (!host) return;
+    const cs = getComputedStyle(host);
+    const avail = host.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const card = (track.children[0] as HTMLElement).offsetWidth;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || GAP;
+    if (!card || !avail) return;
+    const n = Math.max(1, Math.floor((avail + gap) / (card + gap)));
+    const width = Math.min(avail, n * card + (n - 1) * gap);
+    wrap.style.maxWidth = `${width}px`;
+    wrap.style.marginInline = 'auto';
+  }, []);
+
   const apply = useCallback(() => {
     const track = trackRef.current;
     const wrap = wrapRef.current;
     if (!track) return;
+    fitWindow();
     const m = maxIdx();
     const clamped = Math.min(idx, m);
     if (clamped !== idx) setIdx(clamped);
@@ -220,7 +244,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     const offset = Math.min(clamped * step(), tail);
     track.style.transform = `translateX(-${offset}px)`;
     setMaxI(m);
-  }, [idx, maxIdx, step]);
+  }, [fitWindow, idx, maxIdx, step]);
 
   useEffect(() => {
     apply();

@@ -231,6 +231,9 @@ const CSS = `
 }
 .hsi-screen *,.hsi-screen *::before,.hsi-screen *::after{box-sizing:border-box}
 .hsi-screen__container{max-width:var(--container,1216px);margin:0 auto;padding:0 var(--sp-4,16px)}
+/* Боковой отступ: 16 на мобилке, 24 с планшета; на десктопе контейнер
+   упирается в 1216 и отступ не нужен. */
+@media(min-width:768px){.hsi-screen__container{padding:0 var(--sp-6,24px)}}
 @media(min-width:1280px){.hsi-screen__container{padding:0}}
 .hsi-screen__grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-12,48px)}
 .hsi-screen__copy{width:100%;max-width:940px;margin:0 auto;text-align:center}

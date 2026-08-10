@@ -291,7 +291,9 @@ export async function buildStaticHandoff(
     'nav.style.display="";' +
     'var idx=Math.min(Math.max(0,+(track.getAttribute("data-i")||0)),max);' +
     'track.setAttribute("data-i",idx);' +
-    'var tail=Math.max(0,track.scrollWidth-wrap.clientWidth);' +
+    // scrollWidth теряет правый внутренний отступ трека при переполнении —
+    // добавляем его, иначе последняя карточка встаёт вплотную к краю экрана.
+    'var tail=Math.max(0,track.scrollWidth+parseFloat(ts.paddingRight)-wrap.clientWidth);' +
     'track.style.transform="translateX(-"+Math.min(idx*step,tail)+"px)";' +
     'var b=nav.querySelector("b");if(b)b.textContent=Math.min(idx+1,k.length);' +
     'var btns=nav.querySelectorAll("[data-rev]");' +

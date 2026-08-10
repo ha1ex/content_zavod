@@ -1078,6 +1078,11 @@ html {background: var(--color-surface-page);
   font-family:var(--_font);letter-spacing:var(--_ls);color:var(--_ink);}
 .hsi-screen *, .hsi-screen *::before, .hsi-screen *::after {box-sizing:border-box}
 .hsi-screen__container {max-width:var(--container,1216px);margin:0 auto;padding:0 var(--sp-4,16px)}
+/* Боковой отступ: 16 на мобилке, 24 с планшета; на десктопе контейнер
+   упирается в 1216 и отступ не нужен. */
+@media(min-width:768px) {
+  .hsi-screen__container {padding:0 var(--sp-6,24px)}
+}
 @media(min-width:1280px) {
   .hsi-screen__container {padding:0}
 }
@@ -1272,10 +1277,11 @@ html {background: var(--color-surface-page);
   .revx-mock .revx__in {max-width:calc(1216px + var(--sp-6) * 2);}
   .revx-mock .revx__track {gap:var(--sp-8);}
 }
+/* На планшете карточка той же ширины, что на десктопе (384): своя ширина
+   осталась только на мобилке. */
 @media(min-width:768px) and (max-width:1279px) {
   .revx-mock .revx__in {gap:var(--sp-8);}
   .revx-mock .revx__track {gap:var(--sp-6);}
-  .revx-mock .otz {width:318px;}
 }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */

@@ -111,8 +111,9 @@ const STYLE = `
    десктопе шире на два отступа, чтобы контент внутри остался 1216. */
 @media(min-width:768px){ .revx-mock{--pad:var(--sp-6);} }
 @media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + var(--sp-6) * 2);} .revx-mock .revx__track{gap:var(--sp-8);} }
-@media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8);} .revx-mock .revx__track{gap:var(--sp-6);}
-  .revx-mock .otz{width:318px;} }
+/* На планшете карточка той же ширины, что на десктопе (384): своя ширина
+   осталась только на мобилке. */
+@media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8);} .revx-mock .revx__track{gap:var(--sp-6);} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
 /* Окно листалки выходит в оба края экрана, а сам трек отбит внутренними
@@ -226,8 +227,11 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     // укладываются в ширину окна целым числом, и на последнем шаге трек
     // уезжал за край — последняя карточка вставала левее, чем нужно, а справа
     // оставался пустой кусок.
+    // scrollWidth теряет правый внутренний отступ трека при переполнении —
+    // возвращаем его вручную, иначе последняя карточка встаёт вплотную к краю
+    // экрана, без поля, которое есть у первой слева.
     const tail = wrap
-      ? Math.max(0, track.scrollWidth - wrap.clientWidth)
+      ? Math.max(0, track.scrollWidth + parseFloat(getComputedStyle(track).paddingRight) - wrap.clientWidth)
       : Number.POSITIVE_INFINITY;
     const offset = Math.min(clamped * step(), tail);
     track.style.transform = `translateX(-${offset}px)`;

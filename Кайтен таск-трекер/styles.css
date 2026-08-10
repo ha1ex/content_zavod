@@ -827,6 +827,9 @@
     .md\:w-\[calc\(50\%-12px\)\] {width: calc(50% - 12px);}
   }
   @media (min-width: 48rem) {
+    .md\:max-w-4xl {max-width: var(--container-4xl);}
+  }
+  @media (min-width: 48rem) {
     .md\:grid-cols-2 {grid-template-columns: repeat(2, minmax(0, 1fr));}
   }
   @media (min-width: 48rem) {
@@ -1231,11 +1234,13 @@ html {background: var(--color-surface-page);
 .revx-mock .revx__track--single {width:100%; justify-content:center;}
 .revx-mock .otz {flex-shrink:0; width:384px; height:460px; background:#fff; border-radius:var(--radius-2xl); padding:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6);}
 .revx-mock .otz__top {display:flex; flex-direction:column; gap:var(--sp-5); flex:1; min-height:0;}
-.revx-mock .otz__hd {display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4);}
+.revx-mock .otz__hd {display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4); min-height:64px;}
 .revx-mock .otz__co {font-size:18px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title);}
 .revx-mock .otz__co img {height:40px; width:auto; max-width:140px; object-fit:contain; display:block;}
 .revx-mock .otz__q {flex-shrink:0; width:79px; height:60px; color:#f3f4f6;}
-.revx-mock .otz__body {flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; gap:var(--sp-3);}
+/* Текст отзыва начинается на одной высоте во всех карточках: по центру
+   свободного места он ездил вверх-вниз вслед за высотой подписи автора. */
+.revx-mock .otz__body {flex:1; min-height:0; display:flex; flex-direction:column; justify-content:flex-start; gap:var(--sp-3);}
 .revx-mock .otz__metric {font-size:18px; line-height:26px; font-weight:var(--fw-semi); color:var(--green-100);}
 .revx-mock .otz__text {font-size:16px; line-height:24px; color:var(--text-title);}
 .revx-mock .otz__author {display:flex; gap:var(--sp-4); align-items:center;}
@@ -1271,6 +1276,11 @@ html {background: var(--color-surface-page);
 }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
+/* Лента прижата к левому отступу, а справа выходит в край экрана: карточка,
+   которая не влезла целиком, доходит до края, а не обрывается по контейнеру. */
+@media(max-width:1279px) {
+  .revx-mock .revx__wrap {width:calc(100% + var(--pad)); margin-right:calc(var(--pad) * -1);}
+}
 @media(max-width:1279px) {
   .revx-mock {padding-bottom:var(--sp-8);}
   .revx-mock.revx--nopager {padding-bottom:96px;}

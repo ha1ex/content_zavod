@@ -81,11 +81,13 @@ const STYLE = `
 .revx-mock .revx__track--single{width:100%; justify-content:center;}
 .revx-mock .otz{flex-shrink:0; width:384px; height:460px; background:#fff; border-radius:var(--radius-2xl); padding:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6);}
 .revx-mock .otz__top{display:flex; flex-direction:column; gap:var(--sp-5); flex:1; min-height:0;}
-.revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4);}
+.revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4); min-height:64px;}
 .revx-mock .otz__co{font-size:18px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title);}
 .revx-mock .otz__co img{height:40px; width:auto; max-width:140px; object-fit:contain; display:block;}
 .revx-mock .otz__q{flex-shrink:0; width:79px; height:60px; color:#f3f4f6;}
-.revx-mock .otz__body{flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; gap:var(--sp-3);}
+/* Текст отзыва начинается на одной высоте во всех карточках: по центру
+   свободного места он ездил вверх-вниз вслед за высотой подписи автора. */
+.revx-mock .otz__body{flex:1; min-height:0; display:flex; flex-direction:column; justify-content:flex-start; gap:var(--sp-3);}
 .revx-mock .otz__metric{font-size:18px; line-height:26px; font-weight:var(--fw-semi); color:var(--green-100);}
 .revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-title);}
 .revx-mock .otz__author{display:flex; gap:var(--sp-4); align-items:center;}
@@ -113,6 +115,9 @@ const STYLE = `
   .revx-mock .otz{width:318px;} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
+/* Лента прижата к левому отступу, а справа выходит в край экрана: карточка,
+   которая не влезла целиком, доходит до края, а не обрывается по контейнеру. */
+@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad)); margin-right:calc(var(--pad) * -1);} }
 @media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
 @media(max-width:1023px){ .revx-mock{padding:64px 0 var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:64px;} .revx-mock .revx__in{gap:var(--sp-8);} }
 @media(max-width:767px){
@@ -203,34 +208,10 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     return Math.max(0, track.children.length - vis);
   }, [step]);
 
-  /**
-   * Ширина карточки фиксированная (318 до 1280), и в окно она укладывается
-   * целым числом далеко не на каждом экране — остаток вылезал обрезанной
-   * карточкой с краю. Сужаем окно листалки до целого числа карточек и
-   * центруем: остаток уходит в боковые поля, обрезков в кадре нет.
-   */
-  const fitWindow = useCallback(() => {
-    const wrap = wrapRef.current;
-    const track = trackRef.current;
-    if (!wrap || !track || !track.children.length) return;
-    const host = wrap.parentElement;
-    if (!host) return;
-    const cs = getComputedStyle(host);
-    const avail = host.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-    const card = (track.children[0] as HTMLElement).offsetWidth;
-    const gap = parseFloat(getComputedStyle(track).columnGap) || GAP;
-    if (!card || !avail) return;
-    const n = Math.max(1, Math.floor((avail + gap) / (card + gap)));
-    const width = Math.min(avail, n * card + (n - 1) * gap);
-    wrap.style.maxWidth = `${width}px`;
-    wrap.style.marginInline = 'auto';
-  }, []);
-
   const apply = useCallback(() => {
     const track = trackRef.current;
     const wrap = wrapRef.current;
     if (!track) return;
-    fitWindow();
     const m = maxIdx();
     const clamped = Math.min(idx, m);
     if (clamped !== idx) setIdx(clamped);
@@ -244,7 +225,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     const offset = Math.min(clamped * step(), tail);
     track.style.transform = `translateX(-${offset}px)`;
     setMaxI(m);
-  }, [fitWindow, idx, maxIdx, step]);
+  }, [idx, maxIdx, step]);
 
   useEffect(() => {
     apply();

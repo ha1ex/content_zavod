@@ -1,0 +1,695 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "title": "Кайтен — таск-трекер и планировщик задач для команды и бизнеса",
+        "accentWord": "таск-трекер",
+        "accentPill": false,
+        "subtitle": "Ставьте задачи, назначайте ответственных и контролируйте сроки — без потерь в чатах и Excel. Канбан, Гант, Скрам и учет времени в одном сервисе",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": {
+          "label": "Записаться на демо",
+          "href": "/demo"
+        },
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-task-board",
+          "alt": "Доска задач в Кайтен: карточка переезжает из колонки «Очередь» в «В работе»",
+          "variant": "hero-screen-interface"
+        },
+        "visualPosition": "side",
+        "board": {
+          "boardTitle": "Маркетинг",
+          "columns": [
+            {
+              "label": "Идея",
+              "count": 4
+            },
+            {
+              "label": "Очередь",
+              "count": 2
+            },
+            {
+              "label": "В работе",
+              "count": 2
+            },
+            {
+              "label": "Согласование",
+              "count": 3
+            },
+            {
+              "label": "Готово",
+              "count": 2,
+              "done": true
+            }
+          ],
+          "lanes": [
+            {
+              "name": "Контент",
+              "count": 9,
+              "columns": [
+                [
+                  {
+                    "title": "Статья: 10 трендов e-commerce в 2026 году",
+                    "tags": [
+                      {
+                        "label": "SEO",
+                        "variant": "ok"
+                      },
+                      {
+                        "label": "Блог",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#d9a3a3"
+                    ]
+                  },
+                  {
+                    "title": "Лендинг для партнёрской программы",
+                    "tags": [
+                      {
+                        "label": "контент",
+                        "variant": "prod"
+                      },
+                      {
+                        "label": "Продукт",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9"
+                    ]
+                  },
+                  {
+                    "title": "Обновить описание API в документации",
+                    "tags": [
+                      {
+                        "label": "контент",
+                        "variant": "prod"
+                      },
+                      {
+                        "label": "Разработка",
+                        "variant": "cx"
+                      }
+                    ],
+                    "assignees": [
+                      "#b88ac9"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Обновить страницу «О компании»",
+                    "tags": [
+                      {
+                        "label": "Сайт",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a0"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Email-рассылка: весенняя распродажа",
+                    "tags": [
+                      {
+                        "label": "Email",
+                        "variant": "big"
+                      }
+                    ],
+                    "assignees": [
+                      "#b88ac9",
+                      "#c9b88a"
+                    ],
+                    "extraAssignee": "+1"
+                  }
+                ],
+                [
+                  {
+                    "title": "Статья: зачем бизнесу CRM-маркетинг",
+                    "tags": [
+                      {
+                        "label": "SEO",
+                        "variant": "ok"
+                      },
+                      {
+                        "label": "Блог",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#d9a3a3",
+                      "#8aa8c9"
+                    ]
+                  },
+                  {
+                    "title": "Кейс: как мы увеличили конверсию лендинга на 30%",
+                    "tags": [
+                      {
+                        "label": "Блог",
+                        "variant": "blue"
+                      }
+                    ],
+                    "checklist": {
+                      "label": "Чек-лист",
+                      "done": 2,
+                      "total": 5
+                    },
+                    "assignees": [
+                      "#b88ac9",
+                      "#d9a3a3"
+                    ],
+                    "extraAssignee": "+1"
+                  }
+                ],
+                [
+                  {
+                    "title": "Белая книга: путеводитель по аналитике для маркетолога",
+                    "tags": [
+                      {
+                        "label": "Лидген",
+                        "variant": "urg"
+                      },
+                      {
+                        "label": "Сайт",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9",
+                      "#c9b88a"
+                    ]
+                  }
+                ]
+              ]
+            },
+            {
+              "name": "SMM",
+              "count": 5,
+              "columns": [
+                [
+                  {
+                    "title": "Карусель: 5 причин попробовать наш сервис",
+                    "tags": [
+                      {
+                        "label": "VK",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Сторис: обзор обновлений за месяц",
+                    "tags": [
+                      {
+                        "label": "Telegram",
+                        "variant": "blue"
+                      },
+                      {
+                        "label": "VK",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a3"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Серия рилсов: закулисье производства",
+                    "tags": [
+                      {
+                        "label": "VK",
+                        "variant": "urg"
+                      },
+                      {
+                        "label": "YouTube",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#d9a3a3"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Пост: итоги участия в конференции",
+                    "tags": [
+                      {
+                        "label": "Telegram",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#b88ac9"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "title": "Пост: день рождения компании — 5 лет",
+                    "tags": [
+                      {
+                        "label": "Telegram",
+                        "variant": "blue"
+                      },
+                      {
+                        "label": "VK",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#c9b88a"
+                    ],
+                    "due": "19 февр"
+                  }
+                ]
+              ]
+            }
+          ],
+          "animate": true,
+          "animatedCard": {
+            "card": {
+              "title": "8 марта — идеи подарков с доставкой",
+              "tags": [
+                {
+                  "label": "VK",
+                  "variant": "urg"
+                },
+                {
+                  "label": "Спецпроект",
+                  "variant": "blue"
+                },
+                {
+                  "label": "ТГ",
+                  "variant": "urg"
+                }
+              ],
+              "checklist": {
+                "label": "Чек-лист",
+                "done": 4,
+                "total": 6
+              },
+              "assignees": [
+                "#8aa8c9",
+                "#b88ac9"
+              ],
+              "extraAssignee": "+4"
+            },
+            "fromColumn": 1
+          }
+        },
+        "bullets": [
+          "Российское ПО",
+          "Облако и сервер",
+          "Бесплатный тариф",
+          "Легко освоить"
+        ]
+      }
+    },
+    {
+      "id": "reviews",
+      "component": "ReviewSlider",
+      "props": {
+        "reviews": [
+          {
+            "logo": "/brand/reviews/buzzolls-logo.png",
+            "metric": "+25% к скорости запуска проектов",
+            "logoHeight": 42,
+            "quote": "«После перехода на Кайтен промежутки между релизами составляют не месяцы, а дни»",
+            "name": "Владимир Фаст",
+            "role": "руководитель ИТ-отдела\nBuzzolls",
+            "avatar": "/brand/reviews/buzzolls-avatar.png",
+            "avatarInitial": "В",
+            "avatarBg": "#8aa8c9",
+            "caseUrl": "https://kaiten.ru/blog/kak-buzzolls-uskorila-razrabotku-i-obiedinila-komandy-s-pomoshchiu-kaiten/",
+            "caseLabel": "Читать кейс"
+          },
+          {
+            "logo": "/brand/reviews/prodman-logo.png",
+            "metric": "-70% потерянных задач",
+            "logoHeight": 64,
+            "quote": "«Благодаря визуализации команда не теряет задачи и может быстро оценить состояние проекта»",
+            "name": "Павел Попов",
+            "role": "Генеральный директор\n«Продман»",
+            "avatar": "/brand/reviews/prodman-avatar.png",
+            "avatarInitial": "П",
+            "avatarBg": "#8ac9a0",
+            "caseUrl": "https://kaiten.ru/blog/case-prodman/",
+            "caseLabel": "Читать кейс"
+          },
+          {
+            "logo": "/brand/reviews/habr-logo.png",
+            "metric": "1 день на переезд",
+            "logoHeight": 42,
+            "quote": "«Пространство создали, авторов пригласили, доску настроили — заняло не больше трех часов»",
+            "name": "Денис",
+            "role": "сотрудник информационной службы Хабра",
+            "avatar": "/brand/reviews/habr-avatar.png",
+            "avatarInitial": "Д",
+            "avatarBg": "#b88ac9",
+            "caseUrl": "https://kaiten.ru/blog/case-habr/",
+            "caseLabel": "Читать кейс"
+          }
+        ]
+      }
+    },
+    {
+      "id": "feature_rows",
+      "component": "FeatureRows",
+      "props": {
+        "title": "Отслеживайте статус каждой задачи без совещаний и напоминаний",
+        "description": "Кайтен наводит порядок в задачах команды — от постановки до контроля выполнения",
+        "items": [
+          {
+            "title": "Все задачи — в одной системе",
+            "description": "Продажи, маркетинг, разработка — у каждого отдела своя доска и свои процессы, но руководитель видит всё в одной системе, без сборки отчетов вручную",
+            "image": {
+              "src": "/brand/flow/flow-1.png",
+              "alt": "Портфель проектов в Кайтен: доски отделов, письма и документы в одном пространстве"
+            },
+            "imageMobile": "right"
+          },
+          {
+            "title": "Ответственный и срок — у каждой задачи",
+            "description": "Понятно с первого взгляда, кто чем занимается и когда дедлайн без лишних переписок и встреч для обсуждения статусов",
+            "image": {
+              "src": "/brand/flow/flow-2.png",
+              "alt": "Карточка задачи в Кайтен: исполнитель, сроки, чек-листы и вложенные документы"
+            },
+            "imageAlign": "center",
+            "imageMobile": "inset"
+          },
+          {
+            "title": "Один таск-трекер вместо десятка сервисов",
+            "description": "Задачи, документы, заявки и обсуждения — в одном месте. Не нужно переключаться между чатами, таблицами и разрозненными приложениями",
+            "image": {
+              "src": "/brand/flow/flow-4.png",
+              "alt": "Заявка поддержки, доски команд и график сгорания в одном сервисе"
+            },
+            "imageMobile": "right"
+          },
+          {
+            "title": "Риски видны заранее",
+            "description": "Просроченные задачи, перегруженные сотрудники и работа без движения видны сразу — можно среагировать до того, как сроки уже сорваны",
+            "image": {
+              "src": "/brand/flow/flow-3.png",
+              "alt": "Доски найма и адаптации: карточки с пометками о блокировках и согласованиях"
+            },
+            "imageMobile": "right"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta_buttons",
+      "component": "CtaButtons",
+      "props": {
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": {
+          "label": "Записаться на демо",
+          "href": "/demo"
+        }
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Почему компании доверяют Кайтен",
+        "items": [
+          {
+            "icon": "shield-check",
+            "title": "Российский сервис с защитой данных",
+            "description": "Кайтен в реестре ПО РФ, №14347. Данные хранятся в России, есть версия для установки на сервер компании",
+            "image": {
+              "src": "/brand/features/access-control.png",
+              "alt": "Настройка доступа: участники, роли и защита данных в Кайтен"
+            },
+            "imageAside": true
+          },
+          {
+            "icon": "server",
+            "title": "Серверная версия (on-premise)",
+            "description": "Возможна установка на сервере компании. Для тех, кому важен полный контроль над инфраструктурой и данными",
+            "image": {
+              "src": "/brand/features/onpremise-board.png",
+              "alt": "Доска Кайтен на сервере компании: колонки Очередь, В работе, Согласование, Готово"
+            },
+            "imageAside": true
+          }
+        ],
+        "columns": 2
+      }
+    },
+    {
+      "id": "cta_product",
+      "component": "CtaProduct",
+      "props": {
+        "title": "Быстрое внедрение без остановки работы",
+        "description": "Регистрация без длинных форм, привязки карты, звонков и интеграторов. Внутри есть готовые шаблоны под задачи команды — настроить можно без ИТ-команды за 5 минут",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": {
+          "label": "Записаться на демо",
+          "href": "/demo"
+        }
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Кайтен — единая среда для всей компании",
+        "description": "Команды работают в общем пространстве: ведут проекты, согласовывают документы, принимают заявки, взаимодействуют с коллегами и клиентами — без потери данных и постоянных переключений между системами",
+        "items": [
+          {
+            "icon": "square-check-big",
+            "title": "Задачи",
+            "description": "Ставьте задачи, контролируйте сроки и прогресс в Канбане, Скраме или на диаграмме Ганта. Ведите учет времени по каждой задаче — используйте любую методологию или сразу несколько",
+            "featureTile": "Канбан-доски"
+          },
+          {
+            "icon": "file-text",
+            "title": "Документы",
+            "description": "Создавайте регламенты, инструкции и базу знаний для клиентов. Новые сотрудники быстрее адаптируются, а команда всегда работает по актуальным документам",
+            "featureTile": "База знаний"
+          },
+          {
+            "icon": "folder-kanban",
+            "title": "Проекты",
+            "description": "Планируйте проекты, распределяйте ресурсы и контролируйте выполнение. Руководитель в любой момент видит статус работ, загрузку команды и возможные риски",
+            "featureTile": "Роадмап проектов"
+          },
+          {
+            "icon": "inbox",
+            "title": "Заявки",
+            "description": "Принимайте обращения от сотрудников и клиентов через единое окно. Заявки автоматически попадают нужным исполнителям и проходят все этапы обработки",
+            "featureTile": "Служба поддержки · SLA"
+          },
+          {
+            "icon": "handshake",
+            "title": "Продажи",
+            "description": "Ведите клиентов и сделки в CRM, а после продажи сразу передавайте работу исполнителям. Все этапы — от первого контакта до реализации — в одной системе",
+            "featureTile": "CRM"
+          },
+          {
+            "icon": "message-circle",
+            "title": "Коммуникации",
+            "description": "Обсуждайте задачи, проводите созвоны и принимайте решения прямо в системе. Вся история общения остаётся рядом с работой, а не теряется в чатах",
+            "featureTile": "Чат поддержки"
+          }
+        ],
+        "columns": 3,
+        "slider": true,
+        "flushTop": true
+      }
+    },
+    {
+      "id": "cta_buttons",
+      "component": "CtaButtons",
+      "props": {
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": {
+          "label": "Записаться на демо",
+          "href": "/demo"
+        }
+      }
+    },
+    {
+      "id": "logo_marquee",
+      "component": "LogoMarquee",
+      "props": {
+        "title": "Более 200 тысяч компаний работают эффективнее с Кайтен",
+        "accentWord": "200 тысяч",
+        "description": "в ИТ, ритейле, производстве, строительстве, образовании и других отраслях",
+        "items": [
+          {
+            "brand": "Эксмо",
+            "logoSrc": "/brand/client-logos/wrap-3.png"
+          },
+          {
+            "brand": "Самолет",
+            "logoSrc": "/brand/client-logos/wrap-4.png"
+          },
+          {
+            "brand": "Tele2",
+            "logoSrc": "/brand/client-logos/wrap-5.png"
+          },
+          {
+            "brand": "DNS",
+            "logoSrc": "/brand/client-logos/wrap-6.png"
+          },
+          {
+            "brand": "РусГидро",
+            "logoSrc": "/brand/client-logos/wrap-1.png"
+          },
+          {
+            "brand": "Сибагро",
+            "logoSrc": "/brand/client-logos/wrap-2.png"
+          },
+          {
+            "brand": "Сколково",
+            "logoSrc": "/brand/client-logos/wrap-11.png"
+          },
+          {
+            "brand": "X5 Tech",
+            "logoSrc": "/brand/client-logos/wrap-12.png"
+          },
+          {
+            "brand": "Норникель",
+            "logoSrc": "/brand/client-logos/wrap-13.png"
+          },
+          {
+            "brand": "Whoosh",
+            "logoSrc": "/brand/client-logos/wrap-7.png"
+          },
+          {
+            "brand": "S7 Airlines",
+            "logoSrc": "/brand/client-logos/wrap-8.png"
+          },
+          {
+            "brand": "АТОЛ",
+            "logoSrc": "/brand/client-logos/wrap-9.png"
+          },
+          {
+            "brand": "Альфа-Банк",
+            "logoSrc": "/brand/client-logos/wrap-10.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Порядок в задачах — с первого дня в Кайтен",
+        "description": "Задачи не теряются, каждый в команде понимает приоритеты, а руководитель видит статус работ без совещаний и напоминаний. Начните бесплатно",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "/signup"
+        },
+        "secondaryCta": {
+          "label": "Записаться на демо",
+          "href": "/demo"
+        },
+        "variant": "gradient",
+        "visualVariant": "kanban-minimal"
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "title": "Вопросы и ответы",
+        "items": [
+          {
+            "question": "Можно ли использовать Кайтен бесплатно?",
+            "answer": "Да. Вы можете вести свои задачи бесплатно без ограничения по времени. Вы можете пригласить до 5 пользователей, создать до 5 пространств и бесконечное количество документов. Платные тарифы нужны для расширенных функций и большего количества пользователей. [Подробнее о тарифах](https://kaiten.ru/tariffs)"
+          },
+          {
+            "question": "Какие методологии поддерживает Кайтен?",
+            "answer": "Канбан, Скрам и Гант — можно использовать любую отдельно или сочетать в одном пространстве. Есть также учет времени по задачам и проектам. Больше о функциях — [на сайте Кайтен](https://kaiten.ru)."
+          },
+          {
+            "question": "Нужен ли ИТ-отдел для внедрения?",
+            "answer": "Нет. Интерфейс настраивается без программирования, регистрация и первая доска занимают около 30 минут."
+          },
+          {
+            "question": "Как перенести данные из другого сервиса?",
+            "answer": "Экспортируйте все пространства в формате PDF, HTML или CSV. [Как экспортировать данные](https://faq-ru.kaiten.site/). Скачанные файлы можно будет импортировать в Кайтен — доски с помощью CSV-файла, документы — копипастом. [Как перенести задачи с помощью выгрузки в формате CSV/XLS](https://faq-ru.kaiten.site/)"
+          }
+        ]
+      }
+    }
+  ],
+  "seo": {
+    "title": "Кайтен для команды и бизнеса: таск-трекер и планировщик задач",
+    "description": "Ставьте задачи, назначайте ответственных и контролируйте сроки в одном сервисе. Канбан, Гант, скрам и учет времени. Российское ПО, попробовать бесплатно."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-08-10T13:05:26.564Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "tokenEstimate": 48142,
+    "domain": "pm",
+    "chrome": {
+      "footer": false
+    }
+  }
+}

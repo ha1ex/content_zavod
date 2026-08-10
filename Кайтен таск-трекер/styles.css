@@ -1219,7 +1219,10 @@ html {background: var(--color-surface-page);
   font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
   background:var(--surface-section); padding:96px 0;}
 .revx-mock * {box-sizing:border-box;}
-.revx-mock .revx__in {width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--sp-4); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
+/* Боковой отступ контейнера держим в переменной: окно листалки гасит его на
+   свою ширину, чтобы карточки шли от края до края на всех брейкпоинтах. */
+.revx-mock {--pad:var(--sp-4);}
+.revx-mock .revx__in {width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--pad); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
 .revx-mock .revx__wrap {width:100%; overflow:hidden; position:relative;}
 /* Ширина трека равна окну — карточки задаются в процентах от него и выходят
    за край, обрезаясь overflow'ом обёртки. При width:max-content проценты
@@ -1245,16 +1248,21 @@ html {background: var(--color-surface-page);
 .revx-mock .otz__btn {align-self:flex-start; display:inline-flex; align-items:center; border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:10px var(--sp-4); font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--brand-100); background:#fff; text-decoration:none; cursor:pointer; transition:background .18s, border-color .18s, color .18s;}
 .revx-mock .otz__btn:hover {border-color:var(--brand-48); background:var(--brand-12); color:var(--brand-hover);}
 @media(min-width:1280px) {
-  .revx-mock .revx__in {max-width:calc(1216px + 64px); padding:0 32px;}
+  .revx-mock {--pad:32px;}
+  .revx-mock .revx__in {max-width:calc(1216px + 64px);}
   .revx-mock .revx__track {gap:var(--sp-8);}
 }
 @media(min-width:768px) and (max-width:1279px) {
-  .revx-mock .revx__in {gap:var(--sp-8); padding:0 var(--sp-6);}
+  .revx-mock {--pad:var(--sp-6);}
+  .revx-mock .revx__in {gap:var(--sp-8);}
   .revx-mock .revx__track {gap:var(--sp-6);}
-  /* Карточки идут от края до края: окно листалки гасит боковые отступы
-     контейнера. У заголовка и листалки они остаются. */
-  .revx-mock .revx__wrap {width:calc(100% + var(--sp-6) * 2); margin-inline:calc(var(--sp-6) * -1);}
   .revx-mock .otz {width:var(--otz-w,318px);}
+}
+/* Карточки идут от края до края: окно листалки гасит боковые отступы
+   контейнера. У заголовка и листалки они остаются. На десктопе контейнер
+   упирается в 1216 и до краёв экрана не тянется — там гасить нечего. */
+@media(max-width:1279px) {
+  .revx-mock .revx__wrap {width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);}
 }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
@@ -1270,7 +1278,7 @@ html {background: var(--color-surface-page);
 @media(max-width:767px) {
   .revx-mock {padding:48px 0 var(--sp-6);}
   .revx-mock.revx--nopager {padding-bottom:48px;}
-  .revx-mock .revx__in {gap:var(--sp-6); padding:0 var(--sp-4);}
+  .revx-mock .revx__in {gap:var(--sp-6);}
   .revx-mock .otz {width:var(--otz-w,318px); max-width:100%; height:auto;}
   .revx-mock .otz__co {font-size:16px; line-height:24px;}
   .revx-mock .otz__co img {height:50px; max-width:150px;}

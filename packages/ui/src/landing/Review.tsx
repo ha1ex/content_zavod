@@ -66,7 +66,10 @@ const STYLE = `
   background:var(--surface-section); padding:96px 0;
 }
 .revx-mock *{box-sizing:border-box;}
-.revx-mock .revx__in{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--sp-4); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
+/* Боковой отступ контейнера держим в переменной: окно листалки гасит его на
+   свою ширину, чтобы карточки шли от края до края на всех брейкпоинтах. */
+.revx-mock{--pad:var(--sp-4);}
+.revx-mock .revx__in{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--pad); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
 .revx-mock .revx__head{display:flex; flex-direction:column; gap:var(--sp-4); align-items:center; text-align:center; width:100%;}
 .revx-mock .revx__head h2{font-size:36px; line-height:40px; font-weight:var(--fw-semi); color:var(--text-title); margin:0;}
 .revx-mock .revx__head p{font-size:16px; line-height:24px; color:var(--text-title); max-width:680px; margin:0;}
@@ -102,12 +105,13 @@ const STYLE = `
 .revx-mock .revx__navbtn svg{width:24px; height:24px;}
 .revx-mock .revx__count{font-size:16px; line-height:24px; color:var(--text-secondary); min-width:52px; text-align:center;}
 .revx-mock .revx__count b{font-weight:var(--fw-med); color:var(--brand-100);}
-@media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + 64px); padding:0 32px;} .revx-mock .revx__track{gap:var(--sp-8);} }
-@media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8); padding:0 var(--sp-6);} .revx-mock .revx__track{gap:var(--sp-6);}
-  /* Карточки идут от края до края: окно листалки гасит боковые отступы
-     контейнера. У заголовка и листалки они остаются. */
-  .revx-mock .revx__wrap{width:calc(100% + var(--sp-6) * 2); margin-inline:calc(var(--sp-6) * -1);}
+@media(min-width:1280px){ .revx-mock{--pad:32px;} .revx-mock .revx__in{max-width:calc(1216px + 64px);} .revx-mock .revx__track{gap:var(--sp-8);} }
+@media(min-width:768px) and (max-width:1279px){ .revx-mock{--pad:var(--sp-6);} .revx-mock .revx__in{gap:var(--sp-8);} .revx-mock .revx__track{gap:var(--sp-6);}
   .revx-mock .otz{width:var(--otz-w,318px);} }
+/* Карточки идут от края до края: окно листалки гасит боковые отступы
+   контейнера. У заголовка и листалки они остаются. На десктопе контейнер
+   упирается в 1216 и до краёв экрана не тянется — там гасить нечего. */
+@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);} }
 /* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
    Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
 @media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
@@ -115,7 +119,7 @@ const STYLE = `
 @media(max-width:767px){
   .revx-mock{padding:48px 0 var(--sp-6);}
   .revx-mock.revx--nopager{padding-bottom:48px;}
-  .revx-mock .revx__in{gap:var(--sp-6); padding:0 var(--sp-4);}
+  .revx-mock .revx__in{gap:var(--sp-6);}
   .revx-mock .revx__head{align-items:flex-start; text-align:left; margin-inline:0;}
   .revx-mock .revx__head h2{font-size:24px; line-height:32px;}
   .revx-mock .otz{width:var(--otz-w,318px); max-width:100%; height:auto;}

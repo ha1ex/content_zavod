@@ -110,7 +110,7 @@ export function TimelineRoadmap({
           ))}
         </div>
       ) : (
-        <ol className="relative ml-4 space-y-8 border-l border-(--color-border-default) pl-8 md:space-y-10">
+        <ol className="relative mx-auto ml-4 max-w-3xl space-y-8 border-l border-(--color-border-default) pl-8 md:ml-auto md:space-y-10">
           {milestones.map((m, i) => (
             <Inspect
               as="li"
@@ -132,7 +132,7 @@ export function TimelineRoadmap({
                 <span
                   aria-hidden
                   className={cn(
-                    'absolute -left-[37px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full border',
+                    'absolute -left-[42px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full border',
                     m.status === 'done'
                       ? 'border-(--color-action-primary) bg-(--color-action-primary) text-white'
                       : m.status === 'in-progress'

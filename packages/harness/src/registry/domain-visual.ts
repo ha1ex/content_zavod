@@ -912,6 +912,34 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
           'мини-сессия). Команды create → update --priority → checklists add → update --column "Готово"; ' +
           'карточка «Починить flaky-тесты в CI» получает приоритет, чек-лист и переезжает в «Готово». CSS @keyframes',
       },
+      {
+        variant: 'cli-project-gantt',
+        sections: ['tab'],
+        description:
+          'Сценарий «Запуск проекта»: одной прогонкой скрипта заводятся этапы, карточки, веха и связи, ' +
+          'а результатом становится мини-диаграмма Ганта под окном терминала. Полосы «прорастают» при въезде во вьюпорт',
+      },
+      {
+        variant: 'cli-migrate',
+        sections: ['tab'],
+        description:
+          'Сценарий «Переезд в Kaiten»: перенос досок, карточек, участников и связей из другого трекера ' +
+          '(Trello / Jira / CSV) командами import; снизу карта-сводка миграции с счётчиками перенесённых сущностей',
+      },
+      {
+        variant: 'cli-safe-mode',
+        sections: ['media'],
+        description:
+          'Блок «Данные остаются у вас»: безопасный режим только для чтения. Терминал показывает --read-only, ' +
+          'результат — карта-щит «Режим только для чтения · Активен»',
+      },
+      {
+        variant: 'cli-ai-models',
+        sections: ['media'],
+        description:
+          'Блок «Готов к работе с агентами»: терминал batch-get со сравнением обращений к API плюс полоска ' +
+          'совместимых нейросетей снизу (GigaChat, YandexGPT первыми, затем международные)',
+      },
     ],
     missingMocks: [],
     referenceDoc: 'wiki/landings/cli-community-edition-reference.md',

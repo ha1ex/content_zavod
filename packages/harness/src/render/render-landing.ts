@@ -106,9 +106,13 @@ function renderAccordionFeature(props: AccordionFeatureProps): string {
   return lines.join('\n');
 }
 
-function renderSection(section: Section): string {
+function renderSection(section: Section, theme: 'light' | 'dark' = 'light'): string {
   if (section.component === 'AccordionFeatureSection') {
     return renderAccordionFeature(section.props as AccordionFeatureProps);
+  }
+  // В тёмной схеме шапка получает белый wordmark логотипа.
+  if (section.component === 'SiteHeader' && theme === 'dark') {
+    return `<SiteHeader\n${INDENT}logoTone="light"\n/>`;
   }
   const tagName = section.component;
   const props = section.props as Record<string, unknown>;
@@ -125,6 +129,7 @@ function renderSection(section: Section): string {
 export function renderLandingToTSX(spec: LandingSpec, slug: string): string {
   const usedComponents = new Set<string>();
   const sectionJSX: string[] = [];
+  const theme = spec.theme ?? 'light';
 
   for (const section of spec.sections) {
     usedComponents.add(section.component);
@@ -133,8 +138,13 @@ export function renderLandingToTSX(spec: LandingSpec, slug: string): string {
     if (section.component === 'AccordionFeatureSection') {
       usedComponents.add('MockVisual');
     }
-    sectionJSX.push(renderSection(section));
+    sectionJSX.push(renderSection(section, theme));
   }
+
+  const mainClass =
+    theme === 'dark'
+      ? ' className="landing-theme-dark min-h-screen bg-(--color-surface-page) text-(--color-text-primary)"'
+      : '';
 
   const imports = [...usedComponents].sort().join(', ');
 
@@ -152,7 +162,7 @@ export const metadata = {
 
 export default function Landing_${slug.replace(/[^a-zA-Z0-9_]/g, '_')}() {
   return (
-    <main>
+    <main${mainClass}>
 ${sectionJSX.map((s) => s.split('\n').map((l) => INDENT + INDENT + l).join('\n')).join('\n\n')}
     </main>
   );

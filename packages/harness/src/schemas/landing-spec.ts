@@ -218,6 +218,8 @@ const HeroSectionSchema = z.object({
     speaker: SpeakerSchema.optional(),
     /** Компактный первый экран: уменьшенные вертикальные отступы (по шкале DS, с дыханием под хедером). */
     flush: z.boolean().optional(),
+    /** Фирменный анимированный мотив под текстом (только visualPosition 'below' без visual). 'chaos-order' — карточки из хаоса в сетку; 'threads' — нити расплетаются в дорожки. */
+    motif: z.enum(['chaos-order', 'threads']).optional(),
   }),
 });
 
@@ -765,6 +767,8 @@ const TimelineRoadmapSchema = z.object({
      * Для программ и планов, где важен порядок пунктов, а не даты.
      */
     numbered: z.boolean().optional(),
+    /** Цвет трека: 'violet' (дефолт) или 'cyan'. */
+    accent: z.enum(['violet', 'cyan']).optional(),
   }),
 });
 
@@ -1167,6 +1171,41 @@ const SpeakerCardSchema = z.object({
   }),
 });
 
+/* ─── SpeakerGrid (сетка спикеров крупными блоками, квадратные фото) ── */
+const SpeakerGridSchema = z.object({
+  id: z.literal('speaker_grid'),
+  component: z.literal('SpeakerGrid'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    /** Число колонок сетки. По умолчанию 2 — крупные блоки. */
+    columns: z.union([z.literal(2), z.literal(3)]).optional(),
+    /** Цвет трека: 'violet' (дефолт) или 'cyan'. */
+    accent: z.enum(['violet', 'cyan']).optional(),
+    speakers: z
+      .array(
+        z.object({
+          name: z.string().min(2).max(80),
+          /** Роль / компания спикера (1–2 строки). */
+          role: z.string().max(160).optional(),
+          /** Название доклада. */
+          talkTitle: z.string().max(160).optional(),
+          /** Тайминг и длительность, напр. «16:00 / 30 мин». */
+          time: z.string().max(40).optional(),
+          /** Короткая метка темы/трека, напр. «ИИ vs консалтинг». */
+          tag: z.string().max(40).optional(),
+          /** Квадратный портрет (готовится заранее). Нет ассета → заглушка. */
+          photoSrc: z.string().optional(),
+          photoAlt: z.string().max(160).optional(),
+          initials: z.string().max(4).optional(),
+        }),
+      )
+      .min(1)
+      .max(12),
+  }),
+});
+
 /* ─── RegistrationCta (финальный блок: заголовок + повтор формы) ───── */
 const RegistrationCtaSchema = z.object({
   id: z.literal('registration_cta'),
@@ -1177,6 +1216,8 @@ const RegistrationCtaSchema = z.object({
     description: z.string().max(280).optional(),
     /** Подпись кнопки отправки. */
     submitLabel: z.string().min(1).max(40),
+    /** Вариант формы: 'default' или 'conference' (иконки в полях + вопрос про клиента). */
+    variant: z.enum(['default', 'conference']).optional(),
   }),
 });
 
@@ -1213,6 +1254,7 @@ export const SectionSchema = z.discriminatedUnion('component', [
   LegalNoteSchema,
   PainBubblesSchema,
   SpeakerCardSchema,
+  SpeakerGridSchema,
   RegistrationCtaSchema,
   SiteHeaderSchema,
   LandingFooterMockSchema,
@@ -1285,6 +1327,12 @@ export type LandingSpecMeta = z.infer<typeof LandingSpecMetaSchema>;
 export const LandingSpecSchema = z.object({
   pageType: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing', 'event_landing']),
   goal: z.string(),
+  theme: z
+    .enum(['light', 'dark'])
+    .optional()
+    .describe(
+      "Цветовая схема всей страницы. 'light' (дефолт) — обычные лендинги. 'dark' — тёмная схема: рендер оборачивается в .landing-theme-dark, семантические токены (--color-*) и кнопки переопределяются на тёмную палитру, логотип шапки становится белым. Продуктовые mock'и остаются светлыми (светлые карточки на тёмном фоне — как на старом лендинге конференции).",
+    ),
   sections: z.array(SectionSchema).min(1),
   seo: z.object({
     title: z.string().min(4).max(70),

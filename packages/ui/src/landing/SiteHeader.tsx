@@ -23,7 +23,15 @@ const NAV: { label: string; href: string; caret?: boolean }[] = [
 const LOGIN = 'https://passport.kaiten.ru/';
 const SIGNUP = 'https://passport.kaiten.ru/ru/registration';
 
-export function SiteHeader() {
+export interface SiteHeaderProps {
+  /**
+   * Тон wordmark в логотипе: 'dark' — чёрный (светлая страница, дефолт),
+   * 'light' — белый (тёмная схема). Проставляется рендером из spec.theme.
+   */
+  logoTone?: 'light' | 'dark';
+}
+
+export function SiteHeader({ logoTone = 'dark' }: SiteHeaderProps = {}) {
   return (
     <header className="relative isolate">
       {/* main nav */}
@@ -31,7 +39,7 @@ export function SiteHeader() {
         <div className="mx-auto flex w-full max-w-(--container-kaiten) items-center gap-6 px-4 py-3.5 md:px-6 xl:px-0">
           {/* logo */}
           <a href="https://kaiten.ru" className="flex shrink-0 items-center" aria-label="Kaiten">
-            <KaitenLogo tone="dark" className="h-8 w-auto" />
+            <KaitenLogo tone={logoTone} className="h-8 w-auto" />
           </a>
 
           {/* nav links */}

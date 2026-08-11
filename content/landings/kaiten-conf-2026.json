@@ -1,0 +1,399 @@
+{
+  "pageType": "event_landing",
+  "goal": "waitlist",
+  "theme": "dark",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Бесплатная онлайн-конференция · 23–24 сентября 2026",
+        "title": "ИИ и порядок в работе: как делать больше меньшими силами",
+        "accentWord": "меньшими силами",
+        "accentPill": false,
+        "subtitle": "Двухдневная конференция Кайтен для руководителей. Два трека: «Ускорение» — про прикладной ИИ в ежедневной работе, «Эффективность» — про то, как доводить работу до конца. Практика с цифрами, без громких обещаний.",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "visualPosition": "below",
+        "motif": "threads"
+      }
+    },
+    {
+      "id": "speaker_grid",
+      "component": "SpeakerGrid",
+      "props": {
+        "eyebrow": "Спикеры · День 1 — Ускорение",
+        "title": "Спикеры первого дня",
+        "description": "Состав докладчиков финализируем ближе к событию. Зарегистрируйтесь, чтобы узнать первыми.",
+        "columns": 2,
+        "accent": "violet",
+        "speakers": [
+          {
+            "name": "Мария Савельева",
+            "role": "Эксперт и консультант по Канбан Методу в Neogenda, архитектор бизнес-процессов в Банке Точка",
+            "talkTitle": "Восстание машин: бизнес-консультанты больше не нужны?",
+            "time": "16:00 / 30 мин",
+            "tag": "ИИ vs консалтинг",
+            "photoSrc": "https://kaiten.ru/assets/img/kw-conf-ai/speaker/savelyeva.jpg",
+            "photoAlt": "Мария Савельева"
+          },
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "Автоматизация"
+          },
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "ИИ и база знаний"
+          },
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "Экономика ИИ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "speaker_grid",
+      "component": "SpeakerGrid",
+      "props": {
+        "eyebrow": "Спикеры · День 2 — Эффективность",
+        "title": "Спикеры второго дня",
+        "description": "Практики с докладами о том, как доводить работу до конца и видеть загрузку без слежки.",
+        "columns": 2,
+        "accent": "cyan",
+        "speakers": [
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "Загрузка команды"
+          },
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "Поток задач"
+          },
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "Портфель проектов"
+          },
+          {
+            "name": "Спикер уточняется",
+            "talkTitle": "Тема доклада уточняется",
+            "tag": "Адаптация новичков"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stats",
+      "component": "StatStrip",
+      "props": {
+        "eyebrow": "Коротко о конференции",
+        "stats": [
+          {
+            "value": "23–24",
+            "label": "сентября 2026",
+            "description": "Два дня, полностью онлайн"
+          },
+          {
+            "value": "2",
+            "label": "трека",
+            "description": "«Ускорение» и «Эффективность»"
+          },
+          {
+            "value": "28",
+            "label": "тем от практиков",
+            "description": "С цифрами до и после"
+          },
+          {
+            "value": "2 200",
+            "label": "участников в апреле",
+            "description": "Руководители из разных отраслей"
+          }
+        ]
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "eyebrow": "День 1 · 23 сентября",
+        "title": "Трек «Ускорение»",
+        "description": "Прикладной ИИ, агенты и автоматизация — чем умножать результат и что реально работает, а не остаётся пилотом. В программе ещё 8 тем трека.",
+        "milestones": [
+          {
+            "title": "Восемь из десяти ИИ-проектов остаются пилотами"
+          },
+          {
+            "title": "Экономию времени съедает проверка"
+          },
+          {
+            "title": "ИИ не чинит хаос — он его масштабирует"
+          },
+          {
+            "title": "Теневой ИИ: 80% сотрудников уже используют ИИ без ведома руководителя"
+          },
+          {
+            "title": "Почему ИИ не находит ответ в вашей базе знаний"
+          },
+          {
+            "title": "Как я запустил компанию из десяти агентов"
+          },
+          {
+            "title": "Первая линия схлопнулась: ИИ дешевле оператора в 145 раз"
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true,
+        "accent": "violet"
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "eyebrow": "День 2 · 24 сентября",
+        "title": "Трек «Эффективность»",
+        "description": "Как не терять: доводить работу до конца, видеть загрузку команды без слежки, быстро выводить людей на продуктивность. В программе ещё 6 тем трека.",
+        "milestones": [
+          {
+            "title": "Полторы ставки директора уходит на созвоны"
+          },
+          {
+            "title": "Где компания на сто человек теряет шесть часов в неделю"
+          },
+          {
+            "title": "Решение принимается за 8 минут и ждёт 11 дней"
+          },
+          {
+            "title": "Берём в работу 80%, доводим до конца 65%"
+          },
+          {
+            "title": "Портфель из 120 проектов: как решить, что не делать"
+          },
+          {
+            "title": "Хочу видеть работу, но не хочу следить за людьми"
+          },
+          {
+            "title": "Новичок выходит на эффективность за месяц, а не за полгода"
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true,
+        "accent": "cyan"
+      }
+    },
+    {
+      "id": "social_proof",
+      "component": "SocialProof",
+      "props": {
+        "eyebrow": "Отзывы участников",
+        "title": "Что говорили на прошлой конференции",
+        "description": "Отзывы с апрельской конференции. Обновим свежими после сентября.",
+        "cases": [
+          {
+            "brand": "Операционный директор, ИТ-компания",
+            "brandInitial": "ОД",
+            "quote": "Ушёл не с вдохновением, а со списком из пяти вещей, которые внедрили уже в понедельник.",
+            "metric": "Апрель 2026"
+          },
+          {
+            "brand": "Руководитель PMO, ритейл",
+            "brandInitial": "РП",
+            "quote": "Ценно, что докладчики честно показывали, что не сработало. Без этого — просто реклама.",
+            "metric": "Апрель 2026"
+          },
+          {
+            "brand": "CTO, финтех",
+            "brandInitial": "CT",
+            "quote": "Половина зала — не из ИТ. Про эффективность говорили на языке, понятном каждому.",
+            "metric": "Апрель 2026"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Участие бесплатное — займите место на оба дня",
+        "description": "Регистрация открыта. Ссылку на подключение пришлём на почту в день конференции, запись — всем зарегистрированным.",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "gradient": true
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Для кого",
+        "title": "Кому будет полезно",
+        "description": "Руководители команд и компаний от 50 до нескольких тысяч человек — далеко не только из ИТ.",
+        "items": [
+          {
+            "icon": "Cpu",
+            "title": "CTO и руководители разработки",
+            "description": "Ищете, что из ИИ реально даёт результат, а что остаётся пилотом"
+          },
+          {
+            "icon": "Settings",
+            "title": "Операционные и ИТ-директора",
+            "description": "Отвечаете за эффективность и хотите видеть работу, а не следить за людьми"
+          },
+          {
+            "icon": "FolderKanban",
+            "title": "Руководители PMO и портфеля",
+            "description": "Решаете, что не делать, когда бюджет режут, а цели оставляют прежними"
+          },
+          {
+            "icon": "ClipboardList",
+            "title": "Продакт- и проджект-менеджеры",
+            "description": "Доводите работу до конца и убираете зоопарк инструментов"
+          },
+          {
+            "icon": "Users",
+            "title": "Директора по персоналу",
+            "description": "Выводите новичков на продуктивность за месяц, а не за полгода"
+          },
+          {
+            "icon": "Building2",
+            "title": "Руководители бизнеса",
+            "description": "Делаете больше меньшими силами — в ИТ и финтехе, торговле, промышленности и госсекторе"
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "logo_cloud",
+      "component": "LogoCloud",
+      "props": {
+        "eyebrow": "Инфопартнёры",
+        "title": "Информационные партнёры",
+        "description": "В апреле конференцию поддержали 15 партнёров — профильные телеграм-каналы и сообщества. К сентябрю партнёрская сеть расширяется.",
+        "items": [
+          {
+            "brand": "ИТ-сообщества"
+          },
+          {
+            "brand": "Телеграм-каналы"
+          },
+          {
+            "brand": "Отраслевые медиа"
+          },
+          {
+            "brand": "Профессиональные клубы"
+          },
+          {
+            "brand": "Бизнес-СМИ"
+          },
+          {
+            "brand": "Экспертные блоги"
+          }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "eyebrow": "Подарки",
+        "title": "Подарки всем участникам",
+        "description": "Зарегистрируйтесь и участвуйте — подарки получат все, кто будет на эфире.",
+        "items": [
+          {
+            "icon": "Timer",
+            "title": "Расширенный тестовый период",
+            "description": "30 дней доступа к возможностям Кайтена — для новых клиентов"
+          },
+          {
+            "icon": "Sparkles",
+            "title": "Токены для ИИ-помощника",
+            "description": "Бесплатные токены для работы с ИИ-ассистентом Кайтена"
+          },
+          {
+            "icon": "Gift",
+            "title": "Розыгрыш фирменного мерча",
+            "description": "Уникальный мерч Кайтена среди участников конференции"
+          },
+          {
+            "icon": "MessagesSquare",
+            "title": "Консультации экспертов",
+            "description": "Персональные консультации экспертов по вашим проектам"
+          }
+        ],
+        "columns": 4
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "registration",
+        "action": "#",
+        "note": "Нажимая «Зарегистрироваться», вы соглашаетесь с политикой обработки персональных данных.",
+        "eyebrow": "Регистрация",
+        "title": "Зарегистрируйтесь на конференцию",
+        "description": "Бесплатно, онлайн, 23–24 сентября 2026. Ссылку на подключение и запись пришлём на указанную почту.",
+        "submitLabel": "Зарегистрироваться",
+        "variant": "conference"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Конференция Кайтен 2026 — ИИ и порядок в работе, 23–24 сентября",
+    "description": "Бесплатная онлайн-конференция Кайтен для руководителей: прикладной ИИ и эффективность команд. Два трека, 28 тем, 23–24 сентября 2026, с записью."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/event_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-08-11T13:53:09.730Z",
+    "generator": "host-agent",
+    "archetype": "event_landing",
+    "layout": "event-webinar",
+    "tokenEstimate": 48508,
+    "domain": "pm"
+  }
+}

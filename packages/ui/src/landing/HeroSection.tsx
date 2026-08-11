@@ -9,6 +9,8 @@ import {
   type HsiAnimatedCard,
 } from './HeroScreenInterface';
 import { RegistrationForm } from './RegistrationForm';
+import { ChaosOrderMotif } from './ChaosOrderMotif';
+import { ThreadsMotif } from './ThreadsMotif';
 
 /**
  * Доменная доска-заглушка для hero-варианта `hero-screen-interface`
@@ -124,6 +126,13 @@ export interface HeroSectionProps {
    * меньше стандартного. Горизонтальный `px` не трогаем. Opt-in.
    */
   flush?: boolean;
+  /**
+   * Фирменный анимированный мотив под текстом первого экрана (только при
+   * `visualPosition: 'below'` и когда `visual` не задан). `'chaos-order'` —
+   * разбросанные карточки съезжаются в сетку; `'threads'` — спутанные нити
+   * расплетаются в параллельные дорожки. Opt-in.
+   */
+  motif?: 'chaos-order' | 'threads';
 }
 
 export interface HeroFormProps {
@@ -167,6 +176,7 @@ export function HeroSection({
   form,
   speaker,
   flush,
+  motif,
 }: HeroSectionProps) {
   // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
   // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
@@ -260,6 +270,16 @@ export function HeroSection({
                 )}
               </div>
             </div>
+            {!visual && motif === 'chaos-order' && (
+              <div data-comp="hero.motif" className="w-full">
+                <ChaosOrderMotif />
+              </div>
+            )}
+            {!visual && motif === 'threads' && (
+              <div data-comp="hero.motif" className="w-full">
+                <ThreadsMotif />
+              </div>
+            )}
             {visual && (
               <div data-comp="hero.visual" className="w-full">
                 <HeroVisual src={visual.src} alt={visual.alt} variant={visual.variant} large />

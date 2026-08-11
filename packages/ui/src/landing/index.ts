@@ -120,6 +120,10 @@ export type { PainBubblesProps, PainBubbleProps } from './PainBubbles';
 
 export { SpeakerCard } from './SpeakerCard';
 export type { SpeakerCardProps } from './SpeakerCard';
+export { SpeakerGrid } from './SpeakerGrid';
+export type { SpeakerGridProps, SpeakerItemProps } from './SpeakerGrid';
+export { ChaosOrderMotif } from './ChaosOrderMotif';
+export { ThreadsMotif } from './ThreadsMotif';
 
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';

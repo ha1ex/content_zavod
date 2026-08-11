@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../../../packages/ui/src/tokens.css";
+@import "../../../packages/ui/src/theme-dark.css";
 
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 @source "../../../packages/harness/src/**/*.{ts,tsx}";

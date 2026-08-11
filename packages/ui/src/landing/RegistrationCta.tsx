@@ -15,6 +15,8 @@ export interface RegistrationCtaProps {
   telegramHref?: string;
   maxHref?: string;
   newsletterRequired?: boolean;
+  /** Вариант формы: 'default' или 'conference' (поля с иконками + вопрос про клиента). */
+  variant?: 'default' | 'conference';
 }
 
 /**
@@ -38,6 +40,7 @@ export function RegistrationCta({
   telegramHref,
   maxHref,
   newsletterRequired,
+  variant,
 }: RegistrationCtaProps) {
   return (
     <section className="px-4 py-16 md:px-6 xl:px-0 md:py-24 lg:py-32">
@@ -74,6 +77,7 @@ export function RegistrationCta({
             telegramHref={telegramHref}
             maxHref={maxHref}
             newsletterRequired={newsletterRequired}
+            variant={variant}
           />
         </div>
       </GradientPanel>

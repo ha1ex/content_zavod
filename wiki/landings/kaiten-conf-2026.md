@@ -2,7 +2,7 @@
 slug: kaiten-conf-2026
 type: landing
 created: 2026-08-11
-updated: 2026-08-11
+updated: 2026-08-12
 status: draft
 brief: content/briefs/kaiten-conf-2026.json
 archetype: event_landing
@@ -158,7 +158,7 @@ stale: false
 - **Score:** 66.16 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-11T13:53:09.718Z
+- **Generated:** 2026-08-12T07:10:40.917Z
 
 ## Breakdown
 

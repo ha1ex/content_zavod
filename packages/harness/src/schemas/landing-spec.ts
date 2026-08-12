@@ -1218,6 +1218,8 @@ const RegistrationCtaSchema = z.object({
     submitLabel: z.string().min(1).max(40),
     /** Вариант формы: 'default' или 'conference' (иконки в полях + вопрос про клиента). */
     variant: z.enum(['default', 'conference']).optional(),
+    /** Акцентное продолжение заголовка (градиентом на новой строке) — для conference. */
+    accentWord: z.string().max(60).optional(),
   }),
 });
 

@@ -124,6 +124,7 @@ export { SpeakerGrid } from './SpeakerGrid';
 export type { SpeakerGridProps, SpeakerItemProps } from './SpeakerGrid';
 export { ChaosOrderMotif } from './ChaosOrderMotif';
 export { ThreadsMotif } from './ThreadsMotif';
+export { NonNativeSelect } from './NonNativeSelect';
 
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';

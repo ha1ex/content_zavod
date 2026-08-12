@@ -2,35 +2,24 @@ import { Icon } from '../primitives/Icon';
 import { cn } from '../primitives/cn';
 import { FormConsent } from './FormConsent';
 import { FormMessengers } from './FormMessengers';
+import { NonNativeSelect } from './NonNativeSelect';
 
 export interface RegistrationFormProps {
-  /** Заголовок карточки. Опционален: в первом экране форма идёт без своего заголовка. */
   title?: string;
   description?: string;
   submitLabel: string;
-  /** Мягкая строка под кнопкой (напр. обещание сопровождения после вебинара). */
   note?: string;
-  /**
-   * Якорь формы — на него ведут кнопки «Занять место». Он же префикс `id` полей,
-   * поэтому на странице с двумя формами якоря ОБЯЗАНЫ различаться: иначе `id`
-   * полей совпадут и `<label>` второй формы будет фокусировать поле первой.
-   */
   anchorId?: string;
-  /**
-   * Куда форма POST-ится. Верстальщик подменит на реальный endpoint.
-   * По умолчанию `#` — заглушка.
-   */
   action?: string;
   telegramHref?: string;
   maxHref?: string;
-  /** Сделать согласие на рассылку тоже обязательным (по умолчанию оно опционально). */
   newsletterRequired?: boolean;
-  /** @deprecated Ссылки согласий теперь фиксированы в компоненте (юр-ссылки Кайтен). Поле оставлено для совместимости со спеком. */
+  /** @deprecated ссылки согласий фиксированы в компоненте. */
   dataConsentHref?: string;
   /**
-   * Вариант формы. 'default' — имя/email/телефон (эталон вебинара). 'conference' —
-   * форма как на конференции kaiten-conf-ai: поля с иконками (имя/телефон/email/
-   * компания) + вопрос «уже клиент Кайтена». Правило: `conference-form-variant`.
+   * 'default' — имя/email/телефон (эталон вебинара). 'conference' — форма 1-в-1
+   * с конференции kaiten-conf-ai: белые поля с иконками, «Имя» на всю ширину,
+   * «Телефон» + «E-mail» в строку, селект «Являюсь действующим клиентом Кайтена».
    */
   variant?: 'default' | 'conference';
 }
@@ -61,9 +50,10 @@ export function RegistrationForm({
       action={action}
       method="post"
       className={cn(
-        'w-full scroll-mt-24 rounded-(--radius-xl) lg:rounded-(--radius-2xl)',
-        'border border-(--color-border-default) bg-(--color-surface-card) p-6 md:p-8',
-        'text-(--color-text-primary) shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]',
+        'w-full scroll-mt-24',
+        !isConf &&
+          'rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-card) p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)] md:p-8 lg:rounded-(--radius-2xl)',
+        'text-(--color-text-primary)',
       )}
     >
       {title && <h2 className="text-xl font-semibold md:text-2xl">{title}</h2>}
@@ -73,89 +63,61 @@ export function RegistrationForm({
         </p>
       )}
 
-      <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
-        <Field
-          id={fid('name')}
-          name="name"
-          type="text"
-          label="Имя"
-          required
-          autoComplete="name"
-          icon={isConf ? 'User' : undefined}
-        />
-        {isConf && (
-          <Field
-            id={fid('phone')}
-            name="phone"
-            type="tel"
-            label="Телефон"
-            placeholder="+7 999 000-00-00"
-            autoComplete="tel"
-            icon="Phone"
-          />
-        )}
-        <Field
-          id={fid('email')}
-          name="email"
-          type="email"
-          label="Email"
-          required
-          placeholder="name@company.ru"
-          autoComplete="email"
-          icon={isConf ? 'Mail' : undefined}
-        />
-        {isConf ? (
-          <Field
-            id={fid('company')}
-            name="company"
-            type="text"
-            label="Компания или сайт"
-            placeholder="kaiten.ru"
-            autoComplete="organization"
-            icon="Globe"
-          />
-        ) : (
-          <Field
-            id={fid('phone')}
-            name="phone"
-            type="tel"
-            label="Телефон"
-            placeholder="+7 999 000-00-00"
-            autoComplete="tel"
-          />
-        )}
-      </div>
-
-      {isConf && (
-        <fieldset className="mt-5">
-          <legend className="text-sm font-medium text-(--color-text-primary)">
-            Уже пользуетесь Кайтеном?
-          </legend>
-          <div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-2">
-            <label className="flex items-center gap-2 text-sm text-(--color-text-primary)">
-              <input
-                type="radio"
-                name="is_client"
-                value="yes"
-                className="h-4 w-4 accent-(--color-action-primary)"
-              />
-              Да
-            </label>
-            <label className="flex items-center gap-2 text-sm text-(--color-text-primary)">
-              <input
-                type="radio"
-                name="is_client"
-                value="no"
-                defaultChecked
-                className="h-4 w-4 accent-(--color-action-primary)"
-              />
-              Ещё нет
-            </label>
+      {isConf ? (
+        <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
+          <Field id={fid('name')} name="name" type="text" label="Имя" required icon="User" />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field
+              id={fid('phone')}
+              name="phone"
+              type="tel"
+              label="Телефон"
+              autoComplete="tel"
+              icon="Phone"
+            />
+            <Field
+              id={fid('email')}
+              name="email"
+              type="email"
+              label="E-mail"
+              required
+              autoComplete="email"
+              icon="Mail"
+            />
           </div>
-        </fieldset>
+          <NonNativeSelect
+            id={fid('is_client')}
+            name="is_client"
+            icon="Globe"
+            placeholder="Являюсь действующим клиентом Кайтена"
+            options={[
+              { value: 'yes', label: 'Да' },
+              { value: 'no', label: 'Ещё нет' },
+            ]}
+          />
+        </div>
+      ) : (
+        <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
+          <Field id={fid('name')} name="name" type="text" label="Имя" required autoComplete="name" />
+          <Field
+            id={fid('email')}
+            name="email"
+            type="email"
+            label="Email"
+            required
+            placeholder="name@company.ru"
+            autoComplete="email"
+          />
+          <Field
+            id={fid('phone')}
+            name="phone"
+            type="tel"
+            label="Телефон"
+            placeholder="+7 999 000-00-00"
+            autoComplete="tel"
+          />
+        </div>
       )}
-
-      <FormConsent idPrefix={anchorId ?? 'reg'} newsletterRequired={newsletterRequired} />
 
       <button
         type="submit"
@@ -168,6 +130,8 @@ export function RegistrationForm({
       >
         {submitLabel}
       </button>
+
+      <FormConsent idPrefix={anchorId ?? 'reg'} newsletterRequired={newsletterRequired} />
 
       <FormMessengers telegramHref={telegramHref} maxHref={maxHref} />
 
@@ -184,7 +148,7 @@ interface FieldProps {
   required?: boolean;
   placeholder?: string;
   autoComplete?: string;
-  /** lucide-иконка слева внутри поля (вариант 'conference'). */
+  /** lucide-иконка слева внутри поля (вариант 'conference'). Только для белых полей → серая. */
   icon?: string;
 }
 
@@ -203,7 +167,7 @@ function Field({ id, name, type, label, required, placeholder, autoComplete, ico
         {icon && (
           <Icon
             name={icon}
-            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-(--color-text-secondary)"
+            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8b8b9a]"
             strokeWidth={2}
           />
         )}
@@ -226,3 +190,4 @@ function Field({ id, name, type, label, required, placeholder, autoComplete, ico
     </div>
   );
 }
+

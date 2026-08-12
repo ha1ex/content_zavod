@@ -346,12 +346,12 @@
       "props": {
         "anchorId": "registration",
         "action": "#",
-        "note": "Нажимая «Зарегистрироваться», вы соглашаетесь с политикой обработки персональных данных.",
-        "eyebrow": "Регистрация",
-        "title": "Зарегистрируйтесь на конференцию",
-        "description": "Бесплатно, онлайн, 23–24 сентября 2026. Ссылку на подключение и запись пришлём на указанную почту.",
+        "eyebrow": "Бесплатное участие",
+        "title": "Регистрация",
+        "description": "Конференция «ИИ и порядок в работе»: 23–24 сентября 2026, онлайн. Ссылку на подключение и запись пришлём на указанную почту.",
         "submitLabel": "Зарегистрироваться",
-        "variant": "conference"
+        "variant": "conference",
+        "accentWord": "до 22 сентября"
       }
     },
     {
@@ -389,7 +389,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-11T13:53:09.730Z",
+    "generatedAt": "2026-08-12T07:10:40.928Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "layout": "event-webinar",

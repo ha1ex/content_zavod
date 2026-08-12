@@ -191,15 +191,34 @@
   }
 }
 
-/* ─── Поля формы регистрации: чистые обведённые поля, не «чёрные дыры» ── */
+/* ─── Форма регистрации: белые поля на градиентной панели (как на апрельском) ── */
 .landing-theme-dark form input[type="text"],
 .landing-theme-dark form input[type="email"],
-.landing-theme-dark form input[type="tel"] {
-  background-color: rgba(255, 255, 255, 0.045) !important;
-  border-color: rgba(255, 255, 255, 0.22);
+.landing-theme-dark form input[type="tel"],
+.landing-theme-dark form select {
+  background-color: #ffffff !important;
+  color: #221a2e;
+  border-color: transparent;
 }
 .landing-theme-dark form input::placeholder {
-  color: rgba(244, 242, 251, 0.4);
+  color: #8b8b9a;
+}
+.landing-theme-dark form select {
+  color: #5a5a68;
+}
+
+/* Заголовок финального блока: «Регистрация» белым, дата — градиентом (1-в-1 апрель) */
+.landing-theme-dark h2.reg-heading {
+  -webkit-text-fill-color: #f4f2fb;
+  color: #f4f2fb;
+  background: none;
+}
+.landing-theme-dark h2.reg-heading .reg-accent {
+  background-image: linear-gradient(90deg, #8b5cf0 0%, #a78bfa 45%, #6fe5ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 /* ─── FAQAccordion: собственная светлая палитра → тёмная ───────────── */

@@ -165,6 +165,17 @@
   top: 0;
   z-index: 40;
 }
+
+/* ─── Ховер карточек спикеров без мигания ──────────────────────────────
+   Карточки стеклянные (backdrop-filter) и на ховере делают translate. Без
+   стабильного слоя Chromium промоутит/демоутит композит-слой на каждый ховер
+   и пересемплирует размытый фон над анимированной «авророй» → мерцание.
+   will-change: transform держит слой постоянным, backface-visibility гасит
+   субпиксельный джиттер. */
+.landing-theme-dark [data-comp="speaker_grid"] article > div {
+  will-change: transform;
+  backface-visibility: hidden;
+}
 .landing-theme-dark header > div {
   background-color: rgba(13, 11, 20, 0.72) !important;
   @apply backdrop-blur-md;

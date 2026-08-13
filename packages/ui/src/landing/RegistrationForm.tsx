@@ -106,7 +106,7 @@ export function RegistrationForm({
             placeholder="Являюсь действующим клиентом Кайтена"
             options={[
               { value: 'yes', label: 'Да' },
-              { value: 'no', label: 'Ещё нет' },
+              { value: 'no', label: 'Еще нет' },
             ]}
           />
         </div>

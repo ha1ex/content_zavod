@@ -24,9 +24,19 @@ const GLUE_NEXT =
   'в|и|к|с|у|о|на|по|за|из|от|до|под|без|для|над|при|про|что|как|или|а|но|не|если|во|со|об|то|это|мы|вы|их|я';
 const GLUE_NEXT_RE = new RegExp(`(^|[\\s(«„"'\\-—])(${GLUE_NEXT})[ \\t]+`, 'gi');
 
+/**
+ * Редполитика Кайтен (`ru-no-yo`): букву «ё»/«Ё» не используем — всегда «е»/«Е».
+ * Зашито в рендер, чтобы правило не «слетало» при авторинге: что бы ни было в
+ * спеке, наружу уходит без «ё». Идентификаторы (href/src/id) сюда не попадают —
+ * их отсекает IDENTIFIER_KEYS в ruNbspDeep.
+ */
+export function ruNoYo(text: string): string {
+  return text.replace(/ё/g, 'е').replace(/Ё/g, 'Е');
+}
+
 export function ruNbsp(text: string): string {
   if (typeof text !== 'string' || text.length === 0) return text;
-  let t = text;
+  let t = ruNoYo(text);
   // 1) предлоги/союзы → к следующему слову; несколько проходов для цепочек («и в …»)
   for (let i = 0; i < 3; i++) {
     const prev = t;

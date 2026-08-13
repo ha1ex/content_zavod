@@ -817,6 +817,10 @@ const LogoCloudSchema = z.object({
         z.object({
           brand: z.string().min(1).max(60),
           brandInitial: z.string().max(4).optional(),
+          /** URL логотипа — картинка на светлой плитке вместо инициала. */
+          logoSrc: z.string().optional(),
+          /** Ссылка на сайт партнёра. */
+          href: z.string().optional(),
         }),
       )
       .min(4)

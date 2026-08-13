@@ -295,7 +295,7 @@ export function LandingFooterMock() {
               </div>
               <div className="kf-legal-cell kf-addr">
                 <div className="lab">Юридический адрес</div>
-                <div className="val">125252, г. Москва, проезд Берёзовой рощи, дом 12, этаж 2, комната 55</div>
+                <div className="val">125252, г. Москва, проезд Березовой рощи, дом 12, этаж 2, комната 55</div>
               </div>
             </div>
           </div>

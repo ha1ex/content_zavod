@@ -22,7 +22,7 @@
             "href": "#features"
           },
           {
-            "label": "Инфопартнёры",
+            "label": "Инфопартнеры",
             "href": "#logo_cloud"
           }
         ],
@@ -163,7 +163,7 @@
       "props": {
         "eyebrow": "Как это было",
         "title": "Записи прошлой конференции",
-        "description": "Самые просматриваемые доклады апрельской конференции — на разогрев перед сентябрём.",
+        "description": "Самые просматриваемые доклады апрельской конференции — на разогрев перед сентябрем.",
         "columns": 3,
         "videos": [
           {
@@ -187,7 +187,7 @@
       "props": {
         "eyebrow": "День 1 · 23 сентября",
         "title": "Трек «Ускорение»",
-        "description": "Прикладной ИИ, агенты и автоматизация — чем умножать результат и что реально работает, а не остаётся пилотом. В программе ещё 8 тем трека.",
+        "description": "Прикладной ИИ, агенты и автоматизация — чем умножать результат и что реально работает, а не остается пилотом. В программе еще 8 тем трека.",
         "milestones": [
           {
             "title": "Восемь из десяти ИИ-проектов остаются пилотами"
@@ -222,7 +222,7 @@
       "props": {
         "eyebrow": "День 2 · 24 сентября",
         "title": "Трек «Эффективность»",
-        "description": "Как не терять: доводить работу до конца, видеть загрузку команды без слежки, быстро выводить людей на продуктивность. В программе ещё 6 тем трека.",
+        "description": "Как не терять: доводить работу до конца, видеть загрузку команды без слежки, быстро выводить людей на продуктивность. В программе еще 6 тем трека.",
         "milestones": [
           {
             "title": "Полторы ставки директора уходит на созвоны"
@@ -231,10 +231,10 @@
             "title": "Где компания на сто человек теряет шесть часов в неделю"
           },
           {
-            "title": "Решение принимается за 8 минут и ждёт 11 дней"
+            "title": "Решение принимается за 8 минут и ждет 11 дней"
           },
           {
-            "title": "Берём в работу 80%, доводим до конца 65%"
+            "title": "Берем в работу 80%, доводим до конца 65%"
           },
           {
             "title": "Портфель из 120 проектов: как решить, что не делать"
@@ -262,7 +262,7 @@
           {
             "brand": "Операционный директор, ИТ-компания",
             "brandInitial": "ОД",
-            "quote": "Ушёл не с вдохновением, а со списком из пяти вещей, которые внедрили уже в понедельник.",
+            "quote": "Ушел не с вдохновением, а со списком из пяти вещей, которые внедрили уже в понедельник.",
             "metric": "Апрель 2026"
           },
           {
@@ -285,7 +285,7 @@
       "component": "CtaBanner",
       "props": {
         "title": "Участие бесплатное — займите место на оба дня",
-        "description": "Регистрация открыта. Ссылку на подключение пришлём на почту в день конференции, запись — всем зарегистрированным.",
+        "description": "Регистрация открыта. Ссылку на подключение пришлем на почту в день конференции, запись — всем зарегистрированным.",
         "primaryCta": {
           "label": "Зарегистрироваться",
           "href": "#registration"
@@ -304,7 +304,7 @@
           {
             "icon": "Cpu",
             "title": "CTO и руководители разработки",
-            "description": "Ищете, что из ИИ реально даёт результат, а что остаётся пилотом"
+            "description": "Ищете, что из ИИ реально дает результат, а что остается пилотом"
           },
           {
             "icon": "Settings",
@@ -339,27 +339,79 @@
       "id": "logo_cloud",
       "component": "LogoCloud",
       "props": {
-        "eyebrow": "Инфопартнёры",
-        "title": "Информационные партнёры",
-        "description": "В апреле конференцию поддержали 15 партнёров — профильные телеграм-каналы и сообщества. К сентябрю партнёрская сеть расширяется.",
+        "eyebrow": "Инфопартнеры",
+        "title": "Информационные партнеры",
+        "description": "В апреле конференцию поддержали агентства, медиа и профессиональные сообщества. К сентябрю партнерская сеть расширяется.",
         "items": [
           {
-            "brand": "ИТ-сообщества"
+            "brand": "Neogenda",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/neogenda.png",
+            "href": "https://neogenda.com"
           },
           {
-            "brand": "Телеграм-каналы"
+            "brand": "ScrumTrek",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/scrumtrek.svg",
+            "href": "https://scrumtrek.ru"
           },
           {
-            "brand": "Отраслевые медиа"
+            "brand": "Head Promo",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/headpromo.png",
+            "href": "https://head-promo.ru"
           },
           {
-            "brand": "Профессиональные клубы"
+            "brand": "Nimax",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/nimax.svg",
+            "href": "https://www.nimax.ru"
           },
           {
-            "brand": "Бизнес-СМИ"
+            "brand": "СисСофт",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/sissoft.png",
+            "href": "https://www.syssoft.ru"
           },
           {
-            "brand": "Экспертные блоги"
+            "brand": "о'смысле",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/osmysle.svg",
+            "href": "https://osmisle-agency.ru"
+          },
+          {
+            "brand": "manaraga.ai",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/manaraga.svg",
+            "href": "https://manaraga.ai"
+          },
+          {
+            "brand": "Лидеры изменений",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/lideryizmeneniy.png",
+            "href": "https://changeleaders.ru"
+          },
+          {
+            "brand": "Карта гипотез",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/kartagipotez.svg",
+            "href": "https://xn--80aajikek0bigwf.xn--p1ai"
+          },
+          {
+            "brand": "AXOFT",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/axoft.png",
+            "href": "https://axoftglobal.ru"
+          },
+          {
+            "brand": "Custodia-Silentis",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/custodia.svg",
+            "href": "https://www.custodia-silentis.com"
+          },
+          {
+            "brand": "Coactors",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/coactors.svg",
+            "href": "https://co-actors.com/ru"
+          },
+          {
+            "brand": "Rubytech",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/rubytech.svg",
+            "href": "https://rubytech.ru"
+          },
+          {
+            "brand": "Суда смотри",
+            "logoSrc": "/landings/kaiten-conf-2026/partners/telegram.svg",
+            "href": "https://t.me/suda_smotri"
           }
         ]
       }
@@ -404,7 +456,7 @@
         "action": "#",
         "eyebrow": "Бесплатное участие",
         "title": "Регистрация",
-        "description": "Конференция «ИИ и порядок в работе»: 23–24 сентября 2026, онлайн. Ссылку на подключение и запись пришлём на указанную почту.",
+        "description": "Конференция «ИИ и порядок в работе»: 23–24 сентября 2026, онлайн. Ссылку на подключение и запись пришлем на указанную почту.",
         "submitLabel": "Зарегистрироваться",
         "variant": "conference",
         "accentWord": "до 22 сентября"

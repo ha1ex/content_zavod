@@ -138,14 +138,23 @@
    Карточки теперь на своих непрозрачных токенах surface-section/surface-card.
    Матовое стекло оставлено ТОЛЬКО у липкой шапки — там оно реально читается на
    фоне уезжающего контента, а стоит ровно один слой. */
+/* Шапка: закреплена наверху (fixed), сплошная тёмная, без стекла.
+   fixed (а не sticky) — потому что sticky ограничен своей короткой обёрткой-
+   секцией и по странице не держится. Стекло убрано (это был самый тяжёлый при
+   скролле слой — размывался каждый кадр). Контент компенсируем padding-top. */
 .landing-theme-dark header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
 }
 .landing-theme-dark header > div {
-  background-color: rgba(13, 11, 20, 0.72) !important;
-  @apply backdrop-blur-md;
+  background-color: var(--color-surface-page) !important;
+}
+/* Отступ под фиксированную шапку (высота ≈ 65px), чтобы hero не прятался. */
+.landing-theme-dark {
+  padding-top: 65px;
 }
 
 /* ─── Единый вертикальный ритм секций (DS: секция 48/64/96) ─────────

@@ -105,6 +105,13 @@
         },
         "speakers": [
           {
+            "name": "Алексей Халезов",
+            "role": "Бизнес-лидер SMB-сегмента Кайтен, 12+ лет опыта в продукте, SaaS и венчуре",
+            "talkTitle": "Как победить зоопарк инструментов?",
+            "tag": "Инструменты",
+            "photoSrc": "/landings/kaiten-conf-2026/speakers/halezov.jpg"
+          },
+          {
             "name": "Спикер уточняется",
             "talkTitle": "Тема доклада уточняется",
             "tag": "Загрузка команды"
@@ -182,6 +189,19 @@
             "poster": "/landings/kaiten-conf-2026/video/4303eb61f6a3ff3e9db77060d3430fbe.jpg"
           }
         ]
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Не пропустите доклады сентября",
+        "description": "Зарегистрируйтесь заранее — пришлём ссылку на подключение и записи всех выступлений на почту.",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "gradient": true
       }
     },
     {

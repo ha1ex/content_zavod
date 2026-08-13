@@ -129,41 +129,19 @@
   background-size: 160% 160%, 150% 150%, 170% 170%;
 }
 
-/* ─── Зерно/шум поверх страницы (едва заметная плёнка) ──────────────── */
-.landing-theme-dark::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.045;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ─── Glassmorphism: карточки и шапка — матовое стекло ──────────────── */
-/* Карточки на токенах surface-section/surface-card → полупрозрачные + blur. */
-.landing-theme-dark [class*="bg-(--color-surface-section)"],
-.landing-theme-dark [class*="bg-(--color-surface-card)"] {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  @apply backdrop-blur-lg;
-}
-/* Шапка kaiten.ru — липкая и стеклянная. */
+/* ─── Стекло только на шапке (карточки — сплошные, без backdrop-blur) ───
+   Шаги 2–3 скролл-оптимизации. Убраны два самых тяжёлых при скролле приёма:
+   1) полноэкранный шум-оверлей (`::after` fixed + mix-blend-mode) — блендил
+      весь вьюпорт на каждый кадр;
+   2) backdrop-blur у ~31 карточки — каждое размытие пересчитывалось на каждый
+      кадр, пока фон за карточкой едет.
+   Карточки теперь на своих непрозрачных токенах surface-section/surface-card.
+   Матовое стекло оставлено ТОЛЬКО у липкой шапки — там оно реально читается на
+   фоне уезжающего контента, а стоит ровно один слой. */
 .landing-theme-dark header {
   position: sticky;
   top: 0;
   z-index: 40;
-}
-
-/* ─── Ховер карточек спикеров без мигания ──────────────────────────────
-   Карточки стеклянные (backdrop-filter) и на ховере делают translate. Без
-   стабильного слоя Chromium промоутит/демоутит композит-слой на каждый ховер
-   и пересемплирует размытый фон над анимированной «авророй» → мерцание.
-   will-change: transform держит слой постоянным, backface-visibility гасит
-   субпиксельный джиттер. */
-.landing-theme-dark [data-comp="speaker_grid"] article > div {
-  will-change: transform;
-  backface-visibility: hidden;
 }
 .landing-theme-dark header > div {
   background-color: rgba(13, 11, 20, 0.72) !important;

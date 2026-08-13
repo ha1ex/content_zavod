@@ -30,6 +30,8 @@ import {
   PainBubbles,
   SpeakerCard,
   SpeakerGrid,
+  EventHeader,
+  VideoGallery,
   RegistrationCta,
   SiteHeader,
   LandingFooterMock,
@@ -70,6 +72,8 @@ function RenderSection({
       return <LandingFooter {...section.props} />;
     case 'SiteHeader':
       return <SiteHeader logoTone={theme === 'dark' ? 'light' : 'dark'} />;
+    case 'EventHeader':
+      return <EventHeader {...section.props} />;
     case 'LandingFooterMock':
       return <LandingFooterMock />;
     case 'SocialProof':
@@ -156,6 +160,8 @@ function RenderSection({
       return <SpeakerCard {...section.props} />;
     case 'SpeakerGrid':
       return <SpeakerGrid {...section.props} />;
+    case 'VideoGallery':
+      return <VideoGallery {...section.props} />;
     case 'RegistrationCta':
       return <RegistrationCta {...section.props} />;
     default: {
@@ -178,6 +184,13 @@ export function RenderLanding({
   // висячих предлогов/союзов/частиц и длинного тире проставляются автоматически.
   const s = ruNbspDeep(spec);
   const theme = s.theme ?? 'light';
+  // Уникальные id секций-обёрток (для якорей навигации). Повторяющиеся id
+  // компонентов (два speaker_grid и т.п.) получают суффикс -2, -3…
+  const idSeen: Record<string, number> = {};
+  const domId = (base: string) => {
+    const n = (idSeen[base] = (idSeen[base] ?? 0) + 1);
+    return n === 1 ? base : `${base}-${n}`;
+  };
   return (
     <div
       data-landing-theme={theme}
@@ -190,6 +203,7 @@ export function RenderLanding({
       {s.sections.map((section, i) => (
         <div
           key={`${section.id}-${i}`}
+          id={domId(section.id)}
           data-comp={section.id}
           data-comp-index={String(i)}
           className={theme === 'dark' && i >= 2 ? 'reveal-section' : undefined}

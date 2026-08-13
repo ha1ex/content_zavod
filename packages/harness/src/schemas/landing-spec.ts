@@ -1124,6 +1124,37 @@ const SiteHeaderSchema = z.object({
   props: z.object({}).default({}),
 });
 
+/* ─── VideoGallery (сетка видеозаписей RuTube) ────────────────────── */
+const VideoGallerySchema = z.object({
+  id: z.literal('video_gallery'),
+  component: z.literal('VideoGallery'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    columns: z.union([z.literal(2), z.literal(3)]).optional(),
+    videos: z
+      .array(z.object({ videoId: z.string().min(4), title: z.string().max(160).optional() }))
+      .min(1)
+      .max(6),
+  }),
+});
+
+/* ─── EventHeader (минимальная шапка мероприятия вместо kaiten.ru-шапки) ─ */
+const EventHeaderSchema = z.object({
+  id: z.literal('event_header'),
+  component: z.literal('EventHeader'),
+  props: z.object({
+    nav: z
+      .array(z.object({ label: z.string().min(2).max(40), href: z.string().min(1) }))
+      .max(6)
+      .optional(),
+    cta: z.object({ label: z.string().min(2).max(40), href: z.string().min(1) }).optional(),
+    logoTone: z.enum(['light', 'dark']).optional(),
+    logoHref: z.string().optional(),
+  }),
+});
+
 const LandingFooterMockSchema = z.object({
   id: z.literal('kaiten_footer'),
   component: z.literal('LandingFooterMock'),
@@ -1177,12 +1208,18 @@ const SpeakerGridSchema = z.object({
   component: z.literal('SpeakerGrid'),
   props: z.object({
     eyebrow: z.string().max(80).optional(),
+    /** Акцентный бейдж трека (напр. «Ускорение») — залитая пилюля в цвете трека. */
+    badge: z.string().max(40).optional(),
+    /** Визуал трека «Разгон ↔ Фокус»; если задан — рендерится вместо пилюли. */
+    visual: z.enum(['acceleration', 'efficiency']).optional(),
     title: z.string().min(4).max(120),
     description: z.string().max(280).optional(),
     /** Число колонок сетки. По умолчанию 2 — крупные блоки. */
     columns: z.union([z.literal(2), z.literal(3)]).optional(),
     /** Цвет трека: 'violet' (дефолт) или 'cyan'. */
     accent: z.enum(['violet', 'cyan']).optional(),
+    /** Кнопка под сеткой (напр. «Стать экспертом»). */
+    cta: z.object({ label: z.string().min(2).max(40), href: z.string().min(1) }).optional(),
     speakers: z
       .array(
         z.object({
@@ -1257,8 +1294,10 @@ export const SectionSchema = z.discriminatedUnion('component', [
   PainBubblesSchema,
   SpeakerCardSchema,
   SpeakerGridSchema,
+  VideoGallerySchema,
   RegistrationCtaSchema,
   SiteHeaderSchema,
+  EventHeaderSchema,
   LandingFooterMockSchema,
 ]);
 export type Section = z.infer<typeof SectionSchema>;
@@ -1300,6 +1339,10 @@ export const LandingSpecMetaSchema = z
           .boolean()
           .optional()
           .describe('false — не подставлять статичный подвал kaiten.ru (LandingFooterMock)'),
+        header: z
+          .boolean()
+          .optional()
+          .describe('false — не подставлять общую шапку kaiten.ru (SiteHeader); своя шапка секцией'),
       })
       .optional()
       .describe(

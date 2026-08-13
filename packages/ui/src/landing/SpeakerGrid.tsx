@@ -1,6 +1,7 @@
 import { Icon } from '../primitives/Icon';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
+import { TrackVisual } from './TrackVisual';
 
 export interface SpeakerItemProps {
   /** Имя спикера. Пока не подтверждён — «Спикер уточняется». */
@@ -22,12 +23,22 @@ export interface SpeakerItemProps {
 
 export interface SpeakerGridProps {
   eyebrow?: string;
+  /** Акцентный бейдж трека (напр. «Ускорение») — залитая пилюля в цвете трека. */
+  badge?: string;
+  /**
+   * Визуал трека (концепт «Разгон ↔ Фокус»): 'acceleration' — простреливающие
+   * штрихи, 'efficiency' — схождение линий в одну. Слово трека берётся из badge.
+   * Если задан — рендерится вместо пилюли-бейджа.
+   */
+  visual?: 'acceleration' | 'efficiency';
   title: string;
   description?: string;
   /** Число колонок сетки. По умолчанию 2 — крупные карточки докладов. */
   columns?: 2 | 3;
   /** Цвет трека: 'violet' (дефолт) или 'cyan' — переопределяет акцент секции. */
   accent?: 'violet' | 'cyan';
+  /** Кнопка под сеткой (напр. «Стать экспертом»). */
+  cta?: { label: string; href: string };
   speakers: SpeakerItemProps[];
 }
 
@@ -69,21 +80,33 @@ export function trackAccentStyle(accent?: 'violet' | 'cyan'): React.CSSPropertie
  */
 export function SpeakerGrid({
   eyebrow,
+  badge,
+  visual,
   title,
   description,
   columns = 2,
   accent,
+  cta,
   speakers,
 }: SpeakerGridProps) {
   return (
     <section className="px-4 py-12 md:px-6 xl:px-0 md:py-16 lg:py-20" style={trackAccentStyle(accent)}>
       <div className="mx-auto flex w-full max-w-(--container-kaiten) flex-col gap-8 md:gap-10 lg:gap-12">
-        {(eyebrow || title || description) && (
+        {(eyebrow || badge || title || description) && (
           <div className="flex flex-col gap-3">
             {eyebrow && (
-              <p className="text-sm font-semibold uppercase tracking-wide text-(--color-text-accent)">
+              <p className="text-sm font-semibold uppercase tracking-wide text-(--color-text-secondary)">
                 {eyebrow}
               </p>
+            )}
+            {visual ? (
+              <TrackVisual variant={visual} label={badge} />
+            ) : (
+              badge && (
+                <span className="inline-flex w-fit items-center rounded-(--radius-full) bg-(--color-action-primary) px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-(--color-text-inverse)">
+                  {badge}
+                </span>
+              )
             )}
             {title && (
               <h2 className="text-3xl font-semibold text-(--color-text-primary) md:text-4xl">
@@ -162,6 +185,19 @@ export function SpeakerGrid({
             </Inspect>
           ))}
         </div>
+
+        {cta && (
+          <div className="flex justify-center">
+            <a
+              href={cta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-(--radius-lg) bg-[#8b5cf0] px-6 py-3 text-base font-semibold text-white transition hover:opacity-90"
+            >
+              {cta.label}
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

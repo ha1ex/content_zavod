@@ -65,13 +65,25 @@ export function RegistrationForm({
 
       {isConf ? (
         <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
-          <Field id={fid('name')} name="name" type="text" label="Имя" required icon="User" />
+          <Field
+            id={fid('name')}
+            name="name"
+            type="text"
+            label="Имя"
+            placeholder="Имя"
+            labelHidden
+            required
+            autoComplete="name"
+            icon="User"
+          />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field
               id={fid('phone')}
               name="phone"
               type="tel"
               label="Телефон"
+              placeholder="Телефон"
+              labelHidden
               autoComplete="tel"
               icon="Phone"
             />
@@ -80,6 +92,8 @@ export function RegistrationForm({
               name="email"
               type="email"
               label="E-mail"
+              placeholder="E-mail"
+              labelHidden
               required
               autoComplete="email"
               icon="Mail"
@@ -150,14 +164,29 @@ interface FieldProps {
   autoComplete?: string;
   /** lucide-иконка слева внутри поля (вариант 'conference'). Только для белых полей → серая. */
   icon?: string;
+  /** Скрыть подпись визуально (остаётся для скринридеров) — placeholder-only, как на апрельской форме. */
+  labelHidden?: boolean;
 }
 
-function Field({ id, name, type, label, required, placeholder, autoComplete, icon }: FieldProps) {
+function Field({
+  id,
+  name,
+  type,
+  label,
+  required,
+  placeholder,
+  autoComplete,
+  icon,
+  labelHidden,
+}: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-(--color-text-primary)">
+      <label
+        htmlFor={id}
+        className={cn('text-sm font-medium text-(--color-text-primary)', labelHidden && 'sr-only')}
+      >
         {label}
-        {required && (
+        {required && !labelHidden && (
           <span aria-hidden className="ml-0.5 text-(--color-action-primary)">
             *
           </span>

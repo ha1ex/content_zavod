@@ -40,6 +40,23 @@
   --button-outline-text-hover: #e0d3fb;
 }
 
+/* ─── Крупный тег-eyebrow в hero (больше кегль и подложка) ──────────── */
+.landing-theme-dark [data-comp="hero.eyebrow"] > span {
+  padding: 0.5rem 1.125rem;
+  font-size: 0.9375rem;
+}
+@media (min-width: 768px) {
+  .landing-theme-dark [data-comp="hero.eyebrow"] > span {
+    padding: 0.625rem 1.375rem;
+    font-size: 1.0625rem;
+  }
+}
+
+/* ─── Отступ под липкую шапку при переходе по якорям навигации ──────── */
+.landing-theme-dark > div[data-comp] {
+  scroll-margin-top: 88px;
+}
+
 /* ─── Градиентный текст (фиолет → циан, цвета из hero-мотива) ───────── */
 /* Заголовки секций (h2) и акцентное слово в hero заливаются градиентом —
    единый яркий приём по всей странице. Тело текста не трогаем (читаемость). */
@@ -164,6 +181,7 @@
 .landing-theme-dark [data-comp="social_proof"] > section,
 .landing-theme-dark [data-comp="features"] > section,
 .landing-theme-dark [data-comp="logo_cloud"] > section,
+.landing-theme-dark [data-comp="video_gallery"] > section,
 .landing-theme-dark [data-comp="cta_banner"] > section {
   padding-top: 48px;
   padding-bottom: 0;
@@ -175,6 +193,7 @@
   .landing-theme-dark [data-comp="social_proof"] > section,
   .landing-theme-dark [data-comp="features"] > section,
   .landing-theme-dark [data-comp="logo_cloud"] > section,
+  .landing-theme-dark [data-comp="video_gallery"] > section,
   .landing-theme-dark [data-comp="cta_banner"] > section {
     padding-top: 64px;
   }
@@ -186,6 +205,7 @@
   .landing-theme-dark [data-comp="social_proof"] > section,
   .landing-theme-dark [data-comp="features"] > section,
   .landing-theme-dark [data-comp="logo_cloud"] > section,
+  .landing-theme-dark [data-comp="video_gallery"] > section,
   .landing-theme-dark [data-comp="cta_banner"] > section {
     padding-top: 96px;
   }

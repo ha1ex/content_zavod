@@ -125,6 +125,10 @@ export type { SpeakerGridProps, SpeakerItemProps } from './SpeakerGrid';
 export { ChaosOrderMotif } from './ChaosOrderMotif';
 export { ThreadsMotif } from './ThreadsMotif';
 export { NonNativeSelect } from './NonNativeSelect';
+export { EventHeader } from './EventHeader';
+export { VideoGallery } from './VideoGallery';
+export { TrackVisual } from './TrackVisual';
+export type { TrackVisualProps } from './TrackVisual';
 
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';

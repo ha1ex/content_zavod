@@ -1138,7 +1138,14 @@ const VideoGallerySchema = z.object({
     description: z.string().max(280).optional(),
     columns: z.union([z.literal(2), z.literal(3)]).optional(),
     videos: z
-      .array(z.object({ videoId: z.string().min(4), title: z.string().max(160).optional() }))
+      .array(
+        z.object({
+          videoId: z.string().min(4),
+          title: z.string().max(160).optional(),
+          /** Локальный постер-превью; до клика вместо тяжёлого плеера. */
+          poster: z.string().optional(),
+        }),
+      )
       .min(1)
       .max(6),
   }),

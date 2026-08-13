@@ -114,40 +114,19 @@
   }
 }
 
-/* ─── Аврора-фон: медленно плывущие градиентные пятна ──────────────── */
-/* Живёт на фоне wrapper'а; прозрачные секции показывают его, стеклянные
-   карточки — размывают. Чтобы откатить — удалить этот и два блока ниже. */
+/* ─── Аврора-фон: статичные градиентные пятна ──────────────────────────
+   Шаг 1 оптимизации скролла. Раньше был `background-attachment: fixed` +
+   parallax позиции по scroll-timeline — фиксированный фон и анимация
+   background-position заставляли браузер перерисовывать фон на КАЖДЫЙ кадр
+   скролла (главный источник джанка). Теперь статичный градиент: прокручивается
+   вместе со страницей, композитится один раз. Пятна те же. */
 .landing-theme-dark {
   background-image:
     radial-gradient(38% 40% at 18% 22%, rgba(139, 92, 240, 0.20), transparent 60%),
     radial-gradient(34% 36% at 82% 16%, rgba(111, 229, 255, 0.14), transparent 60%),
     radial-gradient(46% 46% at 62% 88%, rgba(139, 92, 240, 0.16), transparent 62%);
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 160% 160%, 150% 150%, 170% 170%;
-}
-/* Пятна «гуляют» вместе со скроллом: позиция фона привязана к прогрессу
-   прокрутки страницы (parallax). Разные слои едут с разной скоростью. */
-@keyframes landing-aurora-scroll {
-  from { background-position: 12% 8%, 82% 12%, 58% 88%; }
-  to   { background-position: 60% 78%, 40% 62%, 18% 30%; }
-}
-@supports (animation-timeline: scroll()) {
-  .landing-theme-dark {
-    animation-name: landing-aurora-scroll;
-    animation-timing-function: linear;
-    animation-fill-mode: both;
-    animation-timeline: scroll(root);
-  }
-}
-/* Фолбэк для браузеров без scroll-timeline — мягкий дрейф по таймеру. */
-@supports not (animation-timeline: scroll()) {
-  .landing-theme-dark {
-    animation: landing-aurora-scroll 28s ease-in-out infinite alternate;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .landing-theme-dark { animation: none; }
 }
 
 /* ─── Зерно/шум поверх страницы (едва заметная плёнка) ──────────────── */

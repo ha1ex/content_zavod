@@ -11,11 +11,11 @@
  * вибрация — CSS только в фазе искажения. Без JS, детерминировано от индекса.
  */
 
-const N = 14;
+const N = 12;
 const K = 36;
 const W = 1000;
 const H = 340;
-const MAXAMP = 100; // амплитуда искажения (в обе стороны)
+const MAXAMP = 60; // амплитуда искажения (в обе стороны) — снижена ради спокойствия/перф
 const MARGIN = 12; // защитный отступ сверху/снизу, чтобы пики не вылезали за кромку
 const DUR = 10;
 // цикл: покой(hold) → плавный морф → гряда(дольше hold) → плавный морф → покой
@@ -91,7 +91,7 @@ export function ThreadsMotif() {
       fillValues: `${flat + close};${flat + close};${ridge + close};${ridge + close};${flat + close};${flat + close}`,
       color: PALETTE[Math.floor(rand(i, 91.7) * PALETTE.length) % PALETTE.length],
       width: (0.6 + rand(i, 5.23) * 3.4).toFixed(2),
-      glow: (3 + rand(i, 7.71) * 6).toFixed(1),
+      glow: (1.5 + rand(i, 7.71) * 2.5).toFixed(1),
       opacity: (0.5 + rand(i, 2.13) * 0.38).toFixed(2),
     };
   });
@@ -165,8 +165,7 @@ const CSS = `
   stroke:currentColor;
   stroke-linecap:round;
   stroke-linejoin:round;
-  filter:drop-shadow(0 0 calc(var(--glow) * 1px) currentColor)
-         drop-shadow(0 0 calc(var(--glow) * 2px) currentColor);
+  filter:drop-shadow(0 0 calc(var(--glow) * 1px) currentColor);
   vector-effect:non-scaling-stroke;
   mix-blend-mode:screen;
 }

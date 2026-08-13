@@ -1,13 +1,14 @@
 /**
  * ThreadsMotif — фирменный мотив: много светящихся неоновых нитей разной
- * толщины и цвета, застывшая волновая гряда в духе обложки Joy Division
- * «Unknown Pleasures» (ровные по краям линии с грядой острых пиков в центре,
- * пики выше в средних рядах; нижние линии перекрывают верхние — hidden-line).
+ * толщины и цвета. ПОКОЙ — ровные параллельные линии без искажения. ИСКАЖЕНИЕ —
+ * знаковая волновая гряда в духе обложки Joy Division «Unknown Pleasures»
+ * (ровные по краям линии с грядой острых пиков в центре, пики выше в средних
+ * рядах; нижние линии перекрывают верхние — hidden-line). Цикл: покой → гряда
+ * поднимается и вибрирует → покой. Метафора «из хаоса — в порядок».
  *
- * СТАТИКА: раньше нити морфились SMIL-анимацией (flat↔ridge) — это пересчёт
- * геометрии + glow каждый кадр на главном потоке, давало скролл-джанк. Теперь
- * гряда заморожена: каждая нить — заливка-«гора» + неоновый штрих, рисуется один
- * раз. Без JS/SMIL, детерминировано от индекса.
+ * Каждая нить — заливка-«гора» (цвет фона, перекрывает нити позади; видна только
+ * в фазе искажения) + неоновый штрих (контур). Морфинг — SMIL `<animate d>`;
+ * вибрация — CSS только в фазе искажения. Без JS, детерминировано от индекса.
  */
 
 const N = 14;
@@ -16,6 +17,10 @@ const W = 1000;
 const H = 340;
 const MAXAMP = 100; // амплитуда искажения (в обе стороны)
 const MARGIN = 12; // защитный отступ сверху/снизу, чтобы пики не вылезали за кромку
+const DUR = 10;
+// цикл: покой(hold) → плавный морф → гряда(дольше hold) → плавный морф → покой
+const KEYTIMES = '0;0.1;0.38;0.66;0.9;1';
+const SPLINES = '0 0 1 1 ; 0.42 0 0.58 1 ; 0 0 1 1 ; 0.42 0 0.58 1 ; 0 0 1 1';
 
 const PALETTE = ['#8b5cf0', '#a855f7', '#7c3aed', '#818cf8', '#38bdf8', '#22b8d6', '#6fe5ff'];
 
@@ -31,6 +36,12 @@ function laneY(i: number): number {
 function envelope(i: number): number {
   // мягче → искажение захватывает больше рядов
   return Math.pow(1 - Math.abs(i / (N - 1) - 0.5) * 2, 0.82);
+}
+
+/** Ровная линия (покой). */
+function flatPts(i: number): Array<[number, number]> {
+  const y = laneY(i);
+  return Array.from({ length: K }, (_, k) => [Math.round((k / (K - 1)) * W), Math.round(y)]);
 }
 
 /**
@@ -66,6 +77,7 @@ function polyline(pts: Array<[number, number]>): string {
 
 export function ThreadsMotif() {
   const threads = Array.from({ length: N }, (_, i) => {
+    const flat = polyline(flatPts(i));
     const ridge = polyline(ridgePts(i));
     const y0 = Math.round(laneY(i));
     // заливка-«гора» замыкается на базовую линию ряда → локальная прозрачная гора
@@ -73,9 +85,10 @@ export function ThreadsMotif() {
     // цикл: flat, flat(hold), ridge, ridge(hold), flat, flat(hold)
     return {
       i,
-      // СТАТИКА: замороженная гряда (без морфинга flat↔ridge). flat не нужен.
-      ridge,
-      fillRidge: ridge + close,
+      flat,
+      strokeValues: `${flat};${flat};${ridge};${ridge};${flat};${flat}`,
+      fillFlat: flat + close,
+      fillValues: `${flat + close};${flat + close};${ridge + close};${ridge + close};${flat + close};${flat + close}`,
       color: PALETTE[Math.floor(rand(i, 91.7) * PALETTE.length) % PALETTE.length],
       width: (0.6 + rand(i, 5.23) * 3.4).toFixed(2),
       glow: (3 + rand(i, 7.71) * 6).toFixed(1),
@@ -89,10 +102,27 @@ export function ThreadsMotif() {
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" width="100%" height="100%">
         {threads.map((t) => (
           <g key={t.i}>
-            <path className="threads-motif__fill" d={t.fillRidge} fill={t.color} opacity={0.16} />
+            <path className="threads-motif__fill" d={t.fillFlat} fill={t.color} opacity={0}>
+              <animate
+                attributeName="d"
+                values={t.fillValues}
+                keyTimes={KEYTIMES}
+                calcMode="spline"
+                keySplines={SPLINES}
+                dur={`${DUR}s`}
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values="0;0;0.16;0.16;0;0"
+                keyTimes={KEYTIMES}
+                dur={`${DUR}s`}
+                repeatCount="indefinite"
+              />
+            </path>
             <path
               className="threads-motif__thread"
-              d={t.ridge}
+              d={t.flat}
               style={
                 {
                   color: t.color,
@@ -101,7 +131,17 @@ export function ThreadsMotif() {
                   ['--glow']: t.glow,
                 } as React.CSSProperties
               }
-            />
+            >
+              <animate
+                attributeName="d"
+                values={t.strokeValues}
+                keyTimes={KEYTIMES}
+                calcMode="spline"
+                keySplines={SPLINES}
+                dur={`${DUR}s`}
+                repeatCount="indefinite"
+              />
+            </path>
           </g>
         ))}
       </svg>

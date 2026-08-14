@@ -27,6 +27,10 @@ export interface Review {
   quote: string;
   /** Имя автора. */
   name: string;
+  /** Крупная метрика кейса («+25% к скорости запуска проектов»). Стоит вплотную над цитатой. */
+  metric?: string;
+  /** Высота логотипа в px. Дефолт 40; вертикальным знакам нужно больше. */
+  logoHeight?: number;
   /** Должность / роль автора. */
   role: string;
   /** URL фото-аватара (если есть). */
@@ -57,47 +61,75 @@ const STYLE = `
   --radius-2xl:16px; --radius-lg:8px;
   --fw-med:500; --fw-semi:600;
   --brand-100:#7d4ccf; --brand-hover:#6a3cbf; --brand-48:rgba(125,76,207,.48); --brand-12:#efe9f9;
-  --border-default:#dbe1e0; --text-title:#2d2d2d; --text-secondary:#757575; --surface-section:#f7f7f8;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
-  background:var(--surface-section); padding:48px 0;
+  --border-default:#dbe1e0; --text-title:#2d2d2d; --text-secondary:#757575; --surface-section:#f7f7f8; --green-100:#4caf51;
+  font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
+  background:var(--surface-section); padding:96px 0;
 }
 .revx-mock *{box-sizing:border-box;}
-.revx-mock .revx__in{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--sp-4); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
+/* Боковой отступ контейнера держим в переменной: окно листалки гасит его на
+   свою ширину, чтобы карточки шли от края до края на всех брейкпоинтах. */
+.revx-mock{--pad:var(--sp-4);}
+.revx-mock .revx__in{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--pad); display:flex; flex-direction:column; gap:var(--sp-12); align-items:center;}
 .revx-mock .revx__head{display:flex; flex-direction:column; gap:var(--sp-4); align-items:center; text-align:center; width:100%;}
 .revx-mock .revx__head h2{font-size:36px; line-height:40px; font-weight:var(--fw-semi); color:var(--text-title); margin:0;}
 .revx-mock .revx__head p{font-size:16px; line-height:24px; color:var(--text-title); max-width:680px; margin:0;}
 .revx-mock .revx__wrap{width:100%; overflow:hidden; position:relative;}
-.revx-mock .revx__track{display:flex; gap:var(--sp-8); align-items:stretch; width:max-content; transition:transform .35s ease;}
+/* Ширина трека равна окну — карточки задаются в процентах от него и выходят
+   за край, обрезаясь overflow'ом обёртки. При width:max-content проценты
+   считать было не от чего, и карточки резались краем. */
+.revx-mock .revx__track{display:flex; gap:var(--sp-4); align-items:stretch; width:100%; transition:transform .35s ease;}
 .revx-mock .revx__track--single{width:100%; justify-content:center;}
 .revx-mock .otz{flex-shrink:0; width:384px; height:460px; background:#fff; border-radius:var(--radius-2xl); padding:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6);}
 .revx-mock .otz__top{display:flex; flex-direction:column; gap:var(--sp-5); flex:1; min-height:0;}
-.revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4);}
+.revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4); min-height:64px;}
 .revx-mock .otz__co{font-size:18px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title);}
-.revx-mock .otz__co img{height:60px; width:auto; max-width:180px; object-fit:contain; display:block;}
+.revx-mock .otz__co img{height:40px; width:auto; max-width:140px; object-fit:contain; display:block;}
 .revx-mock .otz__q{flex-shrink:0; width:79px; height:60px; color:#f3f4f6;}
-.revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-title); flex:1; display:flex; align-items:center;}
+/* Текст отзыва начинается на одной высоте во всех карточках: по центру
+   свободного места он ездил вверх-вниз вслед за высотой подписи автора. */
+.revx-mock .otz__body{flex:1; min-height:0; display:flex; flex-direction:column; justify-content:flex-start; gap:var(--sp-3);}
+.revx-mock .otz__metric{font-size:18px; line-height:26px; font-weight:var(--fw-semi); color:var(--green-100);}
+.revx-mock .otz__text{font-size:16px; line-height:24px; color:var(--text-title);}
 .revx-mock .otz__author{display:flex; gap:var(--sp-4); align-items:center;}
-.revx-mock .otz__av{position:relative; overflow:hidden; width:56px; height:56px; border-radius:9999px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:var(--fw-semi); color:#fff; background:#c4b5e0;}
-.revx-mock .otz__av img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+.revx-mock .otz__av{position:relative; overflow:hidden; isolation:isolate; width:56px; height:56px; border-radius:9999px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:var(--fw-semi); color:#fff; background:#c4b5e0;}
+.revx-mock .otz__av:has(img){background:none;}
+.revx-mock .otz__av img{position:absolute; inset:-1px; width:calc(100% + 2px); height:calc(100% + 2px); object-fit:cover; border-radius:inherit;}
 .revx-mock .otz__who{display:flex; flex-direction:column; min-width:0;}
 .revx-mock .otz__name{font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--text-title);}
-.revx-mock .otz__role{font-size:16px; line-height:24px; color:var(--text-secondary);}
+.revx-mock .otz__role{font-size:16px; line-height:24px; color:var(--text-secondary); white-space:pre-line;}
 .revx-mock .otz__btn{align-self:flex-start; display:inline-flex; align-items:center; border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:10px var(--sp-4); font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--brand-100); background:#fff; text-decoration:none; cursor:pointer; transition:background .18s, border-color .18s, color .18s;}
 .revx-mock .otz__btn:hover{border-color:var(--brand-48); background:var(--brand-12); color:var(--brand-hover);}
 .revx-mock .revx__nav{display:flex; gap:14px; align-items:center;}
-.revx-mock .revx__navbtn{width:48px; height:48px; border-radius:9999px; border:1px solid var(--border-default); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s, box-shadow .18s;}
+.revx-mock .revx__navbtn{width:40px; height:40px; border-radius:9999px; border:1px solid var(--border-default); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s, box-shadow .18s;}
 .revx-mock .revx__navbtn:hover:not(:disabled){background:var(--brand-12); border-color:var(--brand-48); color:var(--brand-hover);}
 .revx-mock .revx__navbtn:focus-visible{outline:none; box-shadow:0 0 0 4px rgba(152,162,179,.14);}
 .revx-mock .revx__navbtn:disabled{background:#fff; border-color:var(--border-default); color:var(--border-default); cursor:default;}
 .revx-mock .revx__navbtn svg{width:24px; height:24px;}
-@media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + 64px); padding:0 32px;} }
-@media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8);} }
-@media(max-width:768px){
-  .revx-mock .revx__in{gap:var(--sp-8); padding:0 0 0 var(--sp-4);}
+.revx-mock .revx__count{font-size:16px; line-height:24px; color:var(--text-secondary); min-width:52px; text-align:center;}
+.revx-mock .revx__count b{font-weight:var(--fw-med); color:var(--brand-100);}
+/* Боковой отступ: 16 на мобилке, 24 с планшета и на десктопе. Контейнер на
+   десктопе шире на два отступа, чтобы контент внутри остался 1216. */
+@media(min-width:768px){ .revx-mock{--pad:var(--sp-6);} }
+@media(min-width:1280px){ .revx-mock .revx__in{max-width:calc(1216px + var(--sp-6) * 2);} .revx-mock .revx__track{gap:var(--sp-8);} }
+/* На планшете карточка той же ширины, что на десктопе (384): своя ширина
+   осталась только на мобилке. */
+@media(min-width:768px) and (max-width:1279px){ .revx-mock .revx__in{gap:var(--sp-8);} .revx-mock .revx__track{gap:var(--sp-6);} }
+/* Уменьшённый нижний отступ компенсирует блок листалки под карточками.
+   Когда все карточки влезли и листалки нет — отступ снизу равен верхнему. */
+/* Окно листалки выходит в оба края экрана, а сам трек отбит внутренними
+   отступами: первая карточка стоит по сетке, а те, что не влезли, уходят
+   в край экрана слева и справа, а не обрываются по границе контейнера. */
+@media(max-width:1279px){ .revx-mock .revx__wrap{width:calc(100% + var(--pad) * 2); margin-inline:calc(var(--pad) * -1);}
+  .revx-mock .revx__track{padding-inline:var(--pad);} }
+@media(max-width:1279px){ .revx-mock{padding-bottom:var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:96px;} }
+@media(max-width:1023px){ .revx-mock{padding:64px 0 var(--sp-8);} .revx-mock.revx--nopager{padding-bottom:64px;} .revx-mock .revx__in{gap:var(--sp-8);} }
+@media(max-width:767px){
+  .revx-mock{padding:48px 0 var(--sp-6);}
+  .revx-mock.revx--nopager{padding-bottom:48px;}
+  .revx-mock .revx__in{gap:var(--sp-6);}
   .revx-mock .revx__head{align-items:flex-start; text-align:left; margin-inline:0;}
   .revx-mock .revx__head h2{font-size:24px; line-height:32px;}
-  .revx-mock .revx__track{gap:var(--sp-3);}
-  .revx-mock .otz{width:318px; max-width:calc(100vw - 64px); height:auto;}
+  .revx-mock .otz{width:328px; max-width:100%; height:auto;}
   .revx-mock .otz__co{font-size:16px; line-height:24px;}
   .revx-mock .otz__co img{height:50px; max-width:150px;}
 }
@@ -116,10 +148,20 @@ function QuoteMark() {
 }
 
 /** Логотип: строка-URL → <img>, строка-текст → как есть, ReactNode → как есть. */
-function renderLogo(logo: ReactNode) {
+function renderLogo(logo: ReactNode, logoHeight?: number) {
   if (typeof logo === 'string') {
     const isImg = /^https?:\/\//.test(logo) || logo.includes('/') || /\.(png|jpe?g|svg|webp|gif)$/i.test(logo);
-    return isImg ? <img src={logo} alt="" onError={(e) => e.currentTarget.remove()} /> : logo;
+    return isImg ? (
+      <img
+        src={logo}
+        alt=""
+        // вертикальные знаки читаются мельче словесных — высота задаётся на карточку
+        style={logoHeight ? { height: `${logoHeight}px` } : undefined}
+        onError={(e) => e.currentTarget.remove()}
+      />
+    ) : (
+      logo
+    );
   }
   return logo;
 }
@@ -138,7 +180,7 @@ const PLACEHOLDER_REVIEWS: Review[] = Array.from({ length: 4 }, (_, i) => ({
 
 const GAP = 32;
 
-export function ReviewSlider({ title = 'Заголовок секции отзывов', subtitle, reviews }: ReviewSliderProps) {
+export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
   const data = reviews && reviews.length ? reviews : PLACEHOLDER_REVIEWS;
 
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -165,17 +207,34 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
     if (!wrap || !track) return 0;
     const s = step();
     if (!s) return 0;
-    const vis = Math.max(1, Math.floor((wrap.clientWidth + GAP) / s));
+    // Считаем по содержимому трека: его внутренние отступы (лента выходит
+    // в края экрана) в ширину карточек не идут.
+    const cs = getComputedStyle(track);
+    const inner = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const gap = parseFloat(cs.columnGap) || GAP;
+    const vis = Math.max(1, Math.floor((inner + gap) / s));
     return Math.max(0, track.children.length - vis);
   }, [step]);
 
   const apply = useCallback(() => {
     const track = trackRef.current;
+    const wrap = wrapRef.current;
     if (!track) return;
     const m = maxIdx();
     const clamped = Math.min(idx, m);
     if (clamped !== idx) setIdx(clamped);
-    track.style.transform = `translateX(-${clamped * step()}px)`;
+    // Сдвиг шагами по карточке, но не дальше конца трека: карточки не всегда
+    // укладываются в ширину окна целым числом, и на последнем шаге трек
+    // уезжал за край — последняя карточка вставала левее, чем нужно, а справа
+    // оставался пустой кусок.
+    // scrollWidth теряет правый внутренний отступ трека при переполнении —
+    // возвращаем его вручную, иначе последняя карточка встаёт вплотную к краю
+    // экрана, без поля, которое есть у первой слева.
+    const tail = wrap
+      ? Math.max(0, track.scrollWidth + parseFloat(getComputedStyle(track).paddingRight) - wrap.clientWidth)
+      : Number.POSITIVE_INFINITY;
+    const offset = Math.min(clamped * step(), tail);
+    track.style.transform = `translateX(-${offset}px)`;
     setMaxI(m);
   }, [idx, maxIdx, step]);
 
@@ -190,28 +249,41 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
   }, [apply]);
 
   return (
-    <section className="revx-mock" aria-label="Отзывы клиентов">
+    <section className={`revx-mock${maxI === 0 ? ' revx--nopager' : ''}`} aria-label="Отзывы клиентов">
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="revx__in">
-        <div className="revx__head">
-          <h2>{title}</h2>
-          {subtitle ? <p>{subtitle}</p> : null}
-        </div>
+        {/* Шапка секции опциональна: без title и subtitle блок не рендерится. */}
+        {(title || subtitle) && (
+          <div className="revx__head">
+            {title ? <h2>{title}</h2> : null}
+            {subtitle ? <p>{subtitle}</p> : null}
+          </div>
+        )}
 
         <div className="revx__wrap" ref={wrapRef}>
-          <div className={`revx__track${data.length === 1 ? ' revx__track--single' : ''}`} ref={trackRef}>
+          {/* Когда листать нечего (все карточки видны), центрируем их в окне —
+              иначе при узком треке они жались к левому краю. */}
+          <div
+            className={`revx__track${data.length === 1 || maxI === 0 ? ' revx__track--single' : ''}`}
+            ref={trackRef}
+          >
             {data.map((r, i) => (
               <div className="otz" key={i}>
                 <div className="otz__top">
                   <div className="otz__hd">
-                    <div className="otz__co">{renderLogo(r.logo)}</div>
+                    <div className="otz__co">{renderLogo(r.logo, r.logoHeight)}</div>
                     <QuoteMark />
                   </div>
-                  <p className="otz__text">{r.quote}</p>
+                  {/* метрика стоит вплотную к цитате, а не отдельным блоком сверху */}
+                  <div className="otz__body">
+                    {r.metric ? <div className="otz__metric">{r.metric}</div> : null}
+                    <p className="otz__text">{r.quote}</p>
+                  </div>
                 </div>
 
                 <div className="otz__author">
-                  <span className="otz__av" style={r.avatarBg ? { background: r.avatarBg } : undefined}>
+                  {/* под фотографией фона нет — иначе он проступает каёмкой в 1px по краю круга */}
+                  <span className="otz__av" style={!r.avatar && r.avatarBg ? { background: r.avatarBg } : undefined}>
                     {r.avatar ? <img src={r.avatar} alt={r.name} onError={(e) => e.currentTarget.remove()} /> : null}
                     {r.avatarInitial ?? r.name.charAt(0)}
                   </span>
@@ -229,8 +301,10 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
           </div>
         </div>
 
-        {/* Листалки нужны только когда отзывов больше 3 (иначе всё видно сразу). */}
-        {data.length > 3 ? (
+        {/* Листалки показываем, когда карточки не влезают в экран — на планшете
+            и мобилке это происходит и при трёх отзывах. Считаем по реальному
+            переполнению трека (maxI), а не по количеству карточек. */}
+        {maxI > 0 ? (
           <div className="revx__nav" role="group" aria-label="Листать отзывы">
             <button
               type="button"
@@ -241,6 +315,7 @@ export function ReviewSlider({ title = 'Заголовок секции отзы
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
             </button>
+            <span className="revx__count"><b>{Math.min(idx + 1, data.length)}</b> / {data.length}</span>
             <button
               type="button"
               className="revx__navbtn"

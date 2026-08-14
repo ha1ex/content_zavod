@@ -53,15 +53,15 @@ export function CandidateCardMock() {
           </div>
           <div className="space-y-1.5 text-[11px]">
             <div>
-              <div className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Ожидания</div>
+              <div className="text-[9px] uppercase text-(--color-text-secondary)">Ожидания</div>
               <div className="font-semibold text-(--color-text-accent)">320 000 ₽ · на руки</div>
             </div>
             <div>
-              <div className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Опыт</div>
+              <div className="text-[9px] uppercase text-(--color-text-secondary)">Опыт</div>
               <div className="font-medium text-(--color-text-primary)">7 лет · Avito, Тинькофф</div>
             </div>
             <div>
-              <div className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Готова выйти</div>
+              <div className="text-[9px] uppercase text-(--color-text-secondary)">Готова выйти</div>
               <div className="font-medium text-(--color-text-primary)">Через 2 недели</div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export function CandidateCardMock() {
           <div className="rounded-(--radius-xl) border border-(--color-action-primary)/30 bg-(--color-action-primary-soft)/30 p-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Стадия</div>
+                <div className="text-[10px] uppercase text-(--color-text-secondary)">Стадия</div>
                 <div className="mt-0.5 text-[12.5px] font-semibold text-(--color-text-primary)">Готова к офферу · вакансия Senior Backend</div>
               </div>
               <span className="inline-flex h-6 items-center gap-1 rounded-full bg-(--color-action-primary) px-2 text-[10px] font-medium text-white">
@@ -93,7 +93,7 @@ export function CandidateCardMock() {
             </div>
           </div>
           <div className="space-y-1.5">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">История контактов</div>
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">История контактов</div>
             {HISTORY.map((h, i) => (
               <div key={i} className="flex items-start gap-2 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page) p-2">
                 <span className={cn('inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-(--radius-lg)', TONE_CLASS[h.tone])}>
@@ -107,7 +107,7 @@ export function CandidateCardMock() {
             ))}
           </div>
           <div className="space-y-1.5">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Оценки интервьюеров · 3 из 3</div>
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">Оценки интервьюеров · 3 из 3</div>
             {REVIEWS.map((r, i) => (
               <div key={i} className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page) p-2.5">
                 <div className="flex items-center gap-2">

@@ -65,7 +65,7 @@ export function CampaignDashboardMock() {
         <div className="grid grid-cols-2 gap-2.5 md:gap-3">
           {KPIS.map((k) => (
             <div key={k.label} className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3">
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">{k.label}</div>
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">{k.label}</div>
               <div className="mt-1 flex items-baseline gap-2">
                 <span className="text-2xl font-semibold text-(--color-text-primary) tabular-nums">{k.value}</span>
                 <span className={cn('inline-flex items-center gap-0.5 text-[11px] font-medium', k.positive ? 'text-green-700' : 'text-red-700')}>
@@ -77,7 +77,7 @@ export function CampaignDashboardMock() {
           ))}
         </div>
         <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3">
-          <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="mb-2 flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary)">
             <span>Распределение по каналам</span>
             <span>1,2 млн ₽</span>
           </div>

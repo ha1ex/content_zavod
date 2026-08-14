@@ -8,8 +8,8 @@ const STYLE = `
   --border:#d1d5db; --placeholder:#9ca3af; --ink:#2d2d2d; --social:#9e9e9e;
   background:var(--bg);
   color:var(--white);
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif;
-  letter-spacing:-.2px;
+  font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif);
+  letter-spacing:0;
   -webkit-font-smoothing:antialiased;
 }
 .kf *, .kf *::before, .kf *::after { box-sizing:border-box; margin:0; padding:0; }
@@ -69,9 +69,9 @@ const STYLE = `
 .kf-sub-title { font-size:16px; line-height:24px; font-weight:600; color:var(--violet); }
 .kf-sub-desc { font-size:14px; line-height:20px; color:var(--ink); }
 .kf-sub-form { display:flex; flex-direction:column; gap:12px; margin-top:16px; }
-.kf-input { height:44px; border:1px solid var(--border); background:#fff; border-radius:8px; padding:10px 16px; font:inherit; font-size:14px; color:var(--ink); letter-spacing:-.2px; }
+.kf-input { height:44px; border:1px solid var(--border); background:#fff; border-radius:8px; padding:10px 16px; font:inherit; font-size:14px; color:var(--ink); letter-spacing:0; }
 .kf-input::placeholder { color:var(--placeholder); }
-.kf-btn { height:44px; border:none; border-radius:8px; background:var(--violet); color:#fff; font:inherit; font-size:16px; line-height:24px; font-weight:500; letter-spacing:-.2px; cursor:pointer; transition:background .12s cubic-bezier(.2,0,.2,1); }
+.kf-btn { height:44px; border:none; border-radius:8px; background:var(--violet); color:#fff; font:inherit; font-size:16px; line-height:24px; font-weight:500; letter-spacing:0; cursor:pointer; transition:background .12s cubic-bezier(.2,0,.2,1); }
 .kf-btn:hover { background:#6c3fbb; }
 .kf-consents { position:relative; display:flex; flex-direction:column; gap:16px; }
 .kf-consent { display:flex; gap:8px; align-items:flex-start; }
@@ -295,7 +295,7 @@ export function LandingFooterMock() {
               </div>
               <div className="kf-legal-cell kf-addr">
                 <div className="lab">Юридический адрес</div>
-                <div className="val">125252, г. Москва, проезд Берёзовой рощи, дом 12, этаж 2, комната 55</div>
+                <div className="val">125252, г. Москва, проезд Березовой рощи, дом 12, этаж 2, комната 55</div>
               </div>
             </div>
           </div>

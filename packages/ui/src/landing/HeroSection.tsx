@@ -9,6 +9,8 @@ import {
   type HsiAnimatedCard,
 } from './HeroScreenInterface';
 import { RegistrationForm } from './RegistrationForm';
+import { ChaosOrderMotif } from './ChaosOrderMotif';
+import { ThreadsMotif } from './ThreadsMotif';
 
 /**
  * Доменная доска-заглушка для hero-варианта `hero-screen-interface`
@@ -124,6 +126,13 @@ export interface HeroSectionProps {
    * меньше стандартного. Горизонтальный `px` не трогаем. Opt-in.
    */
   flush?: boolean;
+  /**
+   * Фирменный анимированный мотив под текстом первого экрана (только при
+   * `visualPosition: 'below'` и когда `visual` не задан). `'chaos-order'` —
+   * разбросанные карточки съезжаются в сетку; `'threads'` — спутанные нити
+   * расплетаются в параллельные дорожки. Opt-in.
+   */
+  motif?: 'chaos-order' | 'threads';
 }
 
 export interface HeroFormProps {
@@ -167,11 +176,12 @@ export function HeroSection({
   form,
   speaker,
   flush,
+  motif,
 }: HeroSectionProps) {
   // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
   // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
   // props, доску — из props.board (тексты под ТЗ) или доменный дефолт
-  // HSI_BOARD_*. Правило: `comparison-hero-screen`.
+  // HSI_BOARD_*. Правило: `hero-screen-interface-default`.
   if (visual?.variant === 'hero-screen-interface') {
     return (
       <HeroScreenInterface
@@ -185,6 +195,8 @@ export function HeroSection({
         lanes={board?.lanes ?? HSI_BOARD_LANES}
         animate={board?.animate ?? true}
         animatedCard={board?.animatedCard ?? HSI_BOARD_ANIMATED}
+        // строка доверия из ТЗ — под доской, разделители между пунктами
+        trustLine={bullets}
         ariaLabel="Первый экран Kaiten"
       />
     );
@@ -233,7 +245,7 @@ export function HeroSection({
               )}
               <h1
                 data-comp="hero.title"
-                className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl"
+                className="text-4xl font-semibold leading-[1.05] sm:text-5xl xl:text-6xl"
               >
                 {renderedTitle}
               </h1>
@@ -258,6 +270,16 @@ export function HeroSection({
                 )}
               </div>
             </div>
+            {!visual && motif === 'chaos-order' && (
+              <div data-comp="hero.motif" className="w-full">
+                <ChaosOrderMotif />
+              </div>
+            )}
+            {!visual && motif === 'threads' && (
+              <div data-comp="hero.motif" className="w-full">
+                <ThreadsMotif />
+              </div>
+            )}
             {visual && (
               <div data-comp="hero.visual" className="w-full">
                 <HeroVisual src={visual.src} alt={visual.alt} variant={visual.variant} large />
@@ -274,7 +296,7 @@ export function HeroSection({
               )}
               <h1
                 data-comp="hero.title"
-                className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl"
+                className="text-4xl font-semibold leading-[1.05] sm:text-5xl xl:text-6xl"
               >
                 {renderedTitle}
               </h1>

@@ -24,7 +24,7 @@ const CSS = `
 .dterm__bar i:first-child{background:#f44336}
 .dterm__bar i:nth-child(2){background:#ffa100}
 .dterm__bar i:nth-child(3){background:#4caf51}
-.dterm__bar b{margin-left:8px;color:#8f82ab;font-size:11px;font-weight:400;letter-spacing:.01em}
+.dterm__bar b{margin-left:8px;color:#8f82ab;font-size:11px;font-weight:400;letter-spacing:0}
 .dterm__body{padding:16px 18px 20px;color:#cfc6e4;font-size:12.5px;line-height:1.6;min-height:184px}
 .dterm__body .ln{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px}
 .dterm__body .ln + .ln{margin-top:6px}

@@ -136,7 +136,7 @@ const HeroBoardSchema = z.object({
       }),
     )
     .min(2)
-    .max(4),
+    .max(5),
   lanes: z
     .array(
       z.object({
@@ -199,7 +199,7 @@ const HeroSectionSchema = z.object({
     /**
      * Данные доски для visual.variant='hero-screen-interface' (анимированный
      * первый экран HeroScreenInterface). Тексты карточек — под логику ТЗ.
-     * Если не задано — используется доменный дефолт. Правило: `comparison-hero-screen`.
+     * Если не задано — используется доменный дефолт. Правило: `hero-screen-interface-default`.
      */
     board: HeroBoardSchema.optional(),
     /** Короткие буллеты под подзаголовком («что заберёте»). Только layout 'side'. */
@@ -218,6 +218,8 @@ const HeroSectionSchema = z.object({
     speaker: SpeakerSchema.optional(),
     /** Компактный первый экран: уменьшенные вертикальные отступы (по шкале DS, с дыханием под хедером). */
     flush: z.boolean().optional(),
+    /** Фирменный анимированный мотив под текстом (только visualPosition 'below' без visual). 'chaos-order' — карточки из хаоса в сетку; 'threads' — нити расплетаются в дорожки. */
+    motif: z.enum(['chaos-order', 'threads']).optional(),
   }),
 });
 
@@ -239,11 +241,35 @@ const FeatureGridSchema = z.object({
             .string()
             .optional()
             .describe('опциональное компактное мок-превью внутри карточки'),
+          featureTile: z
+            .string()
+            .optional()
+            .describe(
+              'подпись плитки из галереи мини-мокапов фич (FeatureMocksV01), напр. «Канбан-доски»',
+            ),
+          /** Растровый скриншот вместо мока: путь из public + alt. Приоритет выше mockVariant/featureTile. */
+          image: z
+            .object({ src: z.string().min(1), alt: z.string().max(200).optional() })
+            .optional(),
+          /** Карточка занимает весь ряд — уходит отдельной строкой вниз. */
+          wide: z.boolean().optional(),
+          /** Иллюстрация сбоку от текста (десктоп), под текстом на узких экранах. */
+          imageAside: z.boolean().optional(),
+          /** Карточка-CTA: кнопки встают под описанием внутри карточки. */
+          primaryCta: z.object({ label: z.string().min(2), href: z.string().min(1) }).optional(),
+          secondaryCta: z
+            .object({ label: z.string().min(2), href: z.string().min(1) })
+            .nullable()
+            .optional(),
         }),
       )
       .min(2)
       .max(8),
     columns: z.union([z.literal(2), z.literal(3), z.literal(4)]).default(3),
+    /** Листалка вбок на планшете и мобилке — для секций с 6+ карточками. */
+    slider: z.boolean().optional(),
+    /** Убрать верхний отступ секции (когда блок сверху уже несёт свою шкалу). */
+    flushTop: z.boolean().optional(),
   }),
 });
 
@@ -345,7 +371,11 @@ const ReviewSliderSchema = z.object({
     reviews: z
       .array(
         z.object({
-          logo: z.string().max(60).optional(),
+          logo: z.string().max(120).optional(),
+          /** Крупная метрика кейса — рендерится вплотную над цитатой. */
+          metric: z.string().max(80).optional(),
+          /** Высота логотипа в px (дефолт 40) — вертикальным знакам нужно больше. */
+          logoHeight: z.number().min(16).max(96).optional(),
           quote: z.string().min(10).max(600),
           name: z.string().min(2).max(80),
           role: z.string().min(2).max(120),
@@ -405,6 +435,47 @@ const CtaButtonsSchema = z.object({
   props: z.object({
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
+  }),
+});
+
+/* ─── CtaProduct (цветной CTA-блок со скриншотом продукта) ─────────── */
+const CtaProductSchema = z.object({
+  id: z.literal('cta_product'),
+  component: z.literal('CtaProduct'),
+  props: z.object({
+    title: z.string().min(4).max(120),
+    description: z.string().min(10).max(280),
+    primaryCta: CtaSchema,
+    secondaryCta: CtaSchema.nullable().optional(),
+    /** Не задана — эталонный скриншот продукта из мока CTAproduct. */
+    image: z
+      .object({ src: z.string().min(1), alt: z.string().max(200).optional() })
+      .optional(),
+  }),
+});
+
+/* ─── FeatureRows (раскрытая шахматка вместо аккордеона) ──────────── */
+const FeatureRowsSchema = z.object({
+  id: z.literal('feature_rows'),
+  component: z.literal('FeatureRows'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    items: z
+      .array(
+        z.object({
+          title: z.string().min(2).max(120),
+          description: z.string().min(10).max(400),
+          image: z.object({ src: z.string().min(1), alt: z.string().max(200).optional() }),
+          /** 'edge' (дефолт) — скриншот в край плашки; 'center' — по центру колонки. */
+          imageAlign: z.enum(['edge', 'center']).optional(),
+          /** Поведение кадра на мобилке: 'bleed' (дефолт) — в оба края, 'right' — только вправо, 'inset' — с полями. */
+          imageMobile: z.enum(['bleed', 'right', 'left', 'inset']).optional(),
+        }),
+      )
+      .min(2)
+      .max(6),
   }),
 });
 
@@ -696,6 +767,8 @@ const TimelineRoadmapSchema = z.object({
      * Для программ и планов, где важен порядок пунктов, а не даты.
      */
     numbered: z.boolean().optional(),
+    /** Цвет трека: 'violet' (дефолт) или 'cyan'. */
+    accent: z.enum(['violet', 'cyan']).optional(),
   }),
 });
 
@@ -744,6 +817,10 @@ const LogoCloudSchema = z.object({
         z.object({
           brand: z.string().min(1).max(60),
           brandInitial: z.string().max(4).optional(),
+          /** URL логотипа — картинка на светлой плитке вместо инициала. */
+          logoSrc: z.string().optional(),
+          /** Ссылка на сайт партнёра. */
+          href: z.string().optional(),
         }),
       )
       .min(4)
@@ -1051,6 +1128,44 @@ const SiteHeaderSchema = z.object({
   props: z.object({}).default({}),
 });
 
+/* ─── VideoGallery (сетка видеозаписей RuTube) ────────────────────── */
+const VideoGallerySchema = z.object({
+  id: z.literal('video_gallery'),
+  component: z.literal('VideoGallery'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    columns: z.union([z.literal(2), z.literal(3)]).optional(),
+    videos: z
+      .array(
+        z.object({
+          videoId: z.string().min(4),
+          title: z.string().max(160).optional(),
+          /** Локальный постер-превью; до клика вместо тяжёлого плеера. */
+          poster: z.string().optional(),
+        }),
+      )
+      .min(1)
+      .max(6),
+  }),
+});
+
+/* ─── EventHeader (минимальная шапка мероприятия вместо kaiten.ru-шапки) ─ */
+const EventHeaderSchema = z.object({
+  id: z.literal('event_header'),
+  component: z.literal('EventHeader'),
+  props: z.object({
+    nav: z
+      .array(z.object({ label: z.string().min(2).max(40), href: z.string().min(1) }))
+      .max(6)
+      .optional(),
+    cta: z.object({ label: z.string().min(2).max(40), href: z.string().min(1) }).optional(),
+    logoTone: z.enum(['light', 'dark']).optional(),
+    logoHref: z.string().optional(),
+  }),
+});
+
 const LandingFooterMockSchema = z.object({
   id: z.literal('kaiten_footer'),
   component: z.literal('LandingFooterMock'),
@@ -1098,6 +1213,47 @@ const SpeakerCardSchema = z.object({
   }),
 });
 
+/* ─── SpeakerGrid (сетка спикеров крупными блоками, квадратные фото) ── */
+const SpeakerGridSchema = z.object({
+  id: z.literal('speaker_grid'),
+  component: z.literal('SpeakerGrid'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    /** Акцентный бейдж трека (напр. «Ускорение») — залитая пилюля в цвете трека. */
+    badge: z.string().max(40).optional(),
+    /** Визуал трека «Разгон ↔ Фокус»; если задан — рендерится вместо пилюли. */
+    visual: z.enum(['acceleration', 'efficiency']).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    /** Число колонок сетки. По умолчанию 2 — крупные блоки. */
+    columns: z.union([z.literal(2), z.literal(3)]).optional(),
+    /** Цвет трека: 'violet' (дефолт) или 'cyan'. */
+    accent: z.enum(['violet', 'cyan']).optional(),
+    /** Кнопка под сеткой (напр. «Стать экспертом»). */
+    cta: z.object({ label: z.string().min(2).max(40), href: z.string().min(1) }).optional(),
+    speakers: z
+      .array(
+        z.object({
+          name: z.string().min(2).max(80),
+          /** Роль / компания спикера (1–2 строки). */
+          role: z.string().max(160).optional(),
+          /** Название доклада. */
+          talkTitle: z.string().max(160).optional(),
+          /** Тайминг и длительность, напр. «16:00 / 30 мин». */
+          time: z.string().max(40).optional(),
+          /** Короткая метка темы/трека, напр. «ИИ vs консалтинг». */
+          tag: z.string().max(40).optional(),
+          /** Квадратный портрет (готовится заранее). Нет ассета → заглушка. */
+          photoSrc: z.string().optional(),
+          photoAlt: z.string().max(160).optional(),
+          initials: z.string().max(4).optional(),
+        }),
+      )
+      .min(1)
+      .max(12),
+  }),
+});
+
 /* ─── RegistrationCta (финальный блок: заголовок + повтор формы) ───── */
 const RegistrationCtaSchema = z.object({
   id: z.literal('registration_cta'),
@@ -1108,6 +1264,10 @@ const RegistrationCtaSchema = z.object({
     description: z.string().max(280).optional(),
     /** Подпись кнопки отправки. */
     submitLabel: z.string().min(1).max(40),
+    /** Вариант формы: 'default' или 'conference' (иконки в полях + вопрос про клиента). */
+    variant: z.enum(['default', 'conference']).optional(),
+    /** Акцентное продолжение заголовка (градиентом на новой строке) — для conference. */
+    accentWord: z.string().max(60).optional(),
   }),
 });
 
@@ -1120,6 +1280,8 @@ export const SectionSchema = z.discriminatedUnion('component', [
   ProcessStepsSchema,
   CtaBannerSchema,
   CtaButtonsSchema,
+  CtaProductSchema,
+  FeatureRowsSchema,
   PricingPlansSchema,
   FAQAccordionSchema,
   FinalCtaSchema,
@@ -1142,8 +1304,11 @@ export const SectionSchema = z.discriminatedUnion('component', [
   LegalNoteSchema,
   PainBubblesSchema,
   SpeakerCardSchema,
+  SpeakerGridSchema,
+  VideoGallerySchema,
   RegistrationCtaSchema,
   SiteHeaderSchema,
+  EventHeaderSchema,
   LandingFooterMockSchema,
 ]);
 export type Section = z.infer<typeof SectionSchema>;
@@ -1179,6 +1344,22 @@ export const LandingSpecMetaSchema = z
           'illustration-domain-match валидатором для блокировки cross-domain reuse. ' +
           'Если не задан явно — резолвится из brief при ingest. См. wiki/references/domain-mock-matrix.md.',
       ),
+    chrome: z
+      .object({
+        footer: z
+          .boolean()
+          .optional()
+          .describe('false — не подставлять статичный подвал kaiten.ru (LandingFooterMock)'),
+        header: z
+          .boolean()
+          .optional()
+          .describe('false — не подставлять общую шапку kaiten.ru (SiteHeader); своя шапка секцией'),
+      })
+      .optional()
+      .describe(
+        'Опт-аут из правила factory-chrome. По умолчанию шапка и подвал kaiten.ru ' +
+          'подставляются принудительно; выключается осознанно и только по решению оператора.',
+      ),
     illustrationAllocations: z
       .array(
         z.object({
@@ -1202,6 +1383,12 @@ export type LandingSpecMeta = z.infer<typeof LandingSpecMetaSchema>;
 export const LandingSpecSchema = z.object({
   pageType: z.enum(['saas_landing', 'waitlist_landing', 'enterprise_landing', 'event_landing']),
   goal: z.string(),
+  theme: z
+    .enum(['light', 'dark'])
+    .optional()
+    .describe(
+      "Цветовая схема всей страницы. 'light' (дефолт) — обычные лендинги. 'dark' — тёмная схема: рендер оборачивается в .landing-theme-dark, семантические токены (--color-*) и кнопки переопределяются на тёмную палитру, логотип шапки становится белым. Продуктовые mock'и остаются светлыми (светлые карточки на тёмном фоне — как на старом лендинге конференции).",
+    ),
   sections: z.array(SectionSchema).min(1),
   seo: z.object({
     title: z.string().min(4).max(70),

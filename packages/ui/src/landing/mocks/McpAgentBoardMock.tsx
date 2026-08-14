@@ -86,7 +86,7 @@ function McpLink() {
     <div className="flex items-center justify-center">
       {/* horizontal on desktop, vertical on mobile */}
       <div className="hidden items-center gap-1 md:flex md:flex-col">
-        <span className="text-[10px] font-semibold tracking-wide text-(--color-text-secondary)">
+        <span className="text-[10px] font-semibold text-(--color-text-secondary)">
           MCP
         </span>
         <div className="flex items-center">
@@ -142,7 +142,7 @@ function Column({
   return (
     <div className="flex flex-col">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+        <span className="text-[10px] font-semibold uppercase text-(--color-text-secondary)">
           {title}
         </span>
         <span className="text-[10px] text-(--color-text-secondary)">{count}</span>

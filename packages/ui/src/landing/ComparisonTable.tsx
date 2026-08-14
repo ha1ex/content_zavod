@@ -73,13 +73,13 @@ export function ComparisonTable({
       <section
         className={cn(
           'mx-auto w-full max-w-(--container-kaiten)',
-          'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+          'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
         )}
       >
         {eyebrow && (
           <p
             data-comp="comparison_table.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>
@@ -111,14 +111,14 @@ export function ComparisonTable({
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
-      <div className="mb-10 max-w-2xl">
+      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:text-center lg:mb-12 lg:max-w-4xl">
         {eyebrow && (
           <p
             data-comp="comparison_table.eyebrow"
-            className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
           >
             {eyebrow}
           </p>
@@ -148,7 +148,7 @@ export function ComparisonTable({
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead>
             <tr className="border-b border-(--color-border-default) bg-(--color-surface-section)">
-              <th className="px-5 py-4 text-xs font-medium uppercase tracking-wide text-(--color-text-secondary)">
+              <th className="px-5 py-4 text-xs font-medium uppercase text-(--color-text-secondary)">
                 Возможность
               </th>
               {columns.map((c, i) => (

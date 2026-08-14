@@ -1,0 +1,293 @@
+{
+  "pageType": "event_landing",
+  "goal": "waitlist",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Бесплатный вебинар · онлайн · 20 августа, 16:00 МСК · 60 минут",
+        "title": "Kaiten CLI: ставим за минуту и применяем в трёх сценариях",
+        "accentWord": "за минуту",
+        "accentPill": false,
+        "subtitle": "Виктор Огнев, лидер комьюнити Кайтена, покажет установку и разберёт три рабочих кейса. Всё вживую, в окне терминала.",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "webinar-kaiten-cli-hero",
+          "variant": "cli-terminal-hero-animated"
+        },
+        "visualPosition": "side",
+        "bullets": [
+          "Бесплатно",
+          "Запись всем зарегистрированным",
+          "Ответы на вопросы в эфире"
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Что вы увидите на экране",
+        "items": [
+          {
+            "icon": "MousePointerClick",
+            "title": "Работа без лишних кликов",
+            "description": "Заводите карточки, участников и метки одной командой. Показываем на живой доске."
+          },
+          {
+            "icon": "Repeat",
+            "title": "Повторяемые операции",
+            "description": "Те же команды работают в скриптах, cron и пайплайнах CI. Собираем сценарий с нуля."
+          },
+          {
+            "icon": "HardDrive",
+            "title": "Данные остаются у вас",
+            "description": "Кэш и снимки лежат на вашем диске. Показываем режим только для чтения."
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "title": "Как пройдёт вебинар",
+        "description": "Программа может измениться: часть времени отдаём вопросам.",
+        "milestones": [
+          {
+            "period": "16:00–16:05",
+            "title": "Знакомство: зачем команде инструмент командной строки"
+          },
+          {
+            "period": "16:05–16:15",
+            "title": "Что умеет Kaiten CLI: карточки, документы, аналитика"
+          },
+          {
+            "period": "16:15–16:25",
+            "title": "Установка и профиль доступа за три шага"
+          },
+          {
+            "period": "16:25–16:50",
+            "title": "Три практических кейса"
+          },
+          {
+            "period": "16:50–17:00",
+            "title": "Вопросы из чата"
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true
+      }
+    },
+    {
+      "id": "tabbed_feature",
+      "component": "TabbedFeatureSection",
+      "props": {
+        "title": "Что разберём на практике",
+        "description": "Каждый кейс Виктор проходит вживую. Команды забираете себе — они останутся в материалах после эфира.",
+        "tabs": [
+          {
+            "id": "project",
+            "label": "Поднять проект",
+            "icon": "Rocket",
+            "title": "Поднять проект из скрипта",
+            "description": "Стартуете проект по брифу. Заводите карточки, вехи и связи одной прогонкой скрипта — вместо ручной сборки по одной карточке.",
+            "checklist": [
+              {
+                "icon": "Terminal",
+                "text": "kaiten --json project init --preset delivery"
+              }
+            ],
+            "mockVariant": "cli-project-gantt"
+          },
+          {
+            "id": "migrate",
+            "label": "Переезд в Кайтен",
+            "icon": "ArrowRightLeft",
+            "title": "Переезд в Кайтен из другого трекера",
+            "description": "Переезжаете с Jira, Trello или из таблиц. Переносите доски, карточки, участников и связи командами import.",
+            "checklist": [
+              {
+                "icon": "Terminal",
+                "text": "kaiten import boards --from trello --file ./export.json"
+              }
+            ],
+            "mockVariant": "cli-migrate"
+          },
+          {
+            "id": "metrics",
+            "label": "Загрузка команды",
+            "icon": "BarChart3",
+            "title": "Загрузка команды за период",
+            "description": "Собираете снимок пространства и считаете пропускную способность локально, без нагрузки на API.",
+            "checklist": [
+              {
+                "icon": "Terminal",
+                "text": "kaiten --json query metrics --metric throughput --group-by board_id"
+              }
+            ],
+            "mockVariant": "cli-snapshot-metrics"
+          }
+        ]
+      }
+    },
+    {
+      "id": "speaker",
+      "component": "SpeakerCard",
+      "props": {
+        "name": "Виктор Огнев",
+        "role": "Лидер комьюнити Кайтена, разработчик Kaiten CLI Издания сообщества",
+        "initials": "ВО",
+        "title": "Кто ведёт",
+        "bio": "Виктор ведёт комьюнити Кайтена и развивает Kaiten CLI — проект с открытым кодом для работы с Кайтеном из терминала и из чата с ИИ-инструментами. Отвечает за реестр команд, режим только для чтения и локальные снимки для аналитики."
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Что вы заберёте с собой",
+        "checklist": [
+          {
+            "text": "Запись вебинара — придёт на почту в течение суток"
+          },
+          {
+            "text": "Набор команд из трёх кейсов"
+          },
+          {
+            "text": "Ссылки на репозиторий и канал комьюнити"
+          }
+        ],
+        "mediaVariant": "none",
+        "primaryCta": {
+          "label": "Репозиторий на GitHub",
+          "href": "https://github.com/ViktorOgnev/kaiten-cli"
+        },
+        "secondaryCta": {
+          "label": "Канал комьюнити в Telegram",
+          "href": "https://t.me/kaiten"
+        }
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "registration",
+        "action": "#",
+        "dataConsentHref": "/privacy",
+        "newsletterRequired": true,
+        "title": "Занять место на вебинаре",
+        "description": "20 августа, 16:00 по Москве. Пришлём ссылку на эфир и добавим встречу в календарь.",
+        "submitLabel": "Зарегистрироваться"
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "title": "Частые вопросы",
+        "items": [
+          {
+            "question": "Нужен опыт работы в терминале?",
+            "answer": "Нет. Установку разбираем с нуля, все команды показываем на экране."
+          },
+          {
+            "question": "Нужен платный тариф Кайтена?",
+            "answer": "Нет. Нужен аккаунт Кайтена и API-токен."
+          },
+          {
+            "question": "Что установить заранее?",
+            "answer": "Python 3.11 или новее. Всё остальное поставим в эфире."
+          },
+          {
+            "question": "Будет запись?",
+            "answer": "Да. Отправим её всем, кто зарегистрировался, даже если не получится прийти."
+          },
+          {
+            "question": "Работает ли CLI с версией на своём сервере?",
+            "answer": "CLI обращается к API Кайтена — облачному или локальному."
+          },
+          {
+            "question": "Чем CLI отличается от Kaiten MCP?",
+            "answer": "Kaiten CLI — локальный процесс в вашем окружении: кэш и снимки на диске. Kaiten MCP — облачный коннектор для ИИ-ассистента, работает без установки. Разницу разберём в эфире."
+          },
+          {
+            "question": "Кто отвечает за поддержку проекта?",
+            "answer": "Kaiten CLI — проект с открытым кодом, его развивает комьюнити. Стандартный коммерческий SLA Кайтена на него не распространяется. SLA (Service Level Agreement) — соглашение об уровне обслуживания: гарантии доступности сервиса и времени реакции поддержки. Прод-поддержку с SLA, аудит и индивидуальные интеграции закрывает корпоративная поддержка Кайтена."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "До эфира осталось немного",
+        "description": "Четверг, 20 августа, 16:00 по Москве. Регистрация занимает минуту.",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "secondaryCta": {
+          "label": "Посмотреть возможности Kaiten CLI",
+          "href": "/landings/kaiten-cli-release"
+        },
+        "variant": "gradient",
+        "visualVariant": "cli-terminal-final-animated"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Вебинар по Kaiten CLI: установка и три сценария применения",
+    "description": "20 августа Виктор Огнев покажет, как поставить Kaiten CLI, настроить профиль доступа и применить инструмент в трёх рабочих сценариях. Бесплатно, с записью."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/event_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-08-10T14:21:20.912Z",
+    "generator": "host-agent",
+    "archetype": "event_landing",
+    "tokenEstimate": 48508,
+    "domain": "cli-community-edition"
+  }
+}

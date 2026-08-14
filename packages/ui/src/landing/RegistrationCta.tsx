@@ -15,6 +15,10 @@ export interface RegistrationCtaProps {
   telegramHref?: string;
   maxHref?: string;
   newsletterRequired?: boolean;
+  /** Вариант формы: 'default' или 'conference' (поля с иконками + вопрос про клиента). */
+  variant?: 'default' | 'conference';
+  /** Акцентное продолжение заголовка (градиентом на новой строке) — для conference. */
+  accentWord?: string;
 }
 
 /**
@@ -38,7 +42,10 @@ export function RegistrationCta({
   telegramHref,
   maxHref,
   newsletterRequired,
+  variant,
+  accentWord,
 }: RegistrationCtaProps) {
+  const isConf = variant === 'conference';
   return (
     <section className="px-4 py-16 md:px-6 xl:px-0 md:py-24 lg:py-32">
       <GradientPanel
@@ -49,16 +56,28 @@ export function RegistrationCta({
       >
         <div className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
           <div>
-            {eyebrow && (
-              <p className="text-sm font-medium text-(--color-text-secondary)">{eyebrow}</p>
-            )}
+            {eyebrow &&
+              (isConf ? (
+                <span className="inline-flex items-center rounded-(--radius-full) bg-(--color-action-primary-soft) px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-(--color-text-accent)">
+                  {eyebrow}
+                </span>
+              ) : (
+                <p className="text-sm font-medium text-(--color-text-secondary)">{eyebrow}</p>
+              ))}
             <h2
               className={cn(
                 'text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl',
-                eyebrow ? 'mt-3' : '',
+                eyebrow ? 'mt-4' : '',
+                isConf && 'reg-heading',
               )}
             >
               {title}
+              {isConf && accentWord && (
+                <>
+                  <br />
+                  <span className="reg-accent">{accentWord}</span>
+                </>
+              )}
             </h2>
             {description && (
               <p className="mt-4 max-w-xl text-lg text-(--color-text-primary)">{description}</p>
@@ -74,6 +93,7 @@ export function RegistrationCta({
             telegramHref={telegramHref}
             maxHref={maxHref}
             newsletterRequired={newsletterRequired}
+            variant={variant}
           />
         </div>
       </GradientPanel>

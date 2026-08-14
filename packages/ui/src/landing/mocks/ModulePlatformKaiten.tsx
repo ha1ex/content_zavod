@@ -93,7 +93,7 @@ function AICard({ d }: { d: AI }) {
 function CoreCard({ d }: { d: { label: string; title: string; tags: string[]; mock: React.ReactNode } }) {
   return (
     <div className="flex-1 rounded-(--radius-lg) border border-(--color-border-default) bg-white p-6">
-      <div className="text-[12px] font-semibold uppercase tracking-wide text-(--color-text-accent)">{d.label}</div>
+      <div className="text-[12px] font-semibold uppercase text-(--color-text-accent)">{d.label}</div>
       <div className="mt-1 text-[24px] font-bold text-(--color-text-primary)">{d.title}</div>
       <div className="mt-3 flex flex-wrap gap-2">{d.tags.map((t) => <Tag key={t}>{t}</Tag>)}</div>
       <div className="mt-4">{d.mock}</div>
@@ -106,7 +106,7 @@ function ModuleCard({ d }: { d: Mod }) {
       <div className="absolute -right-6 top-1/2 -translate-y-1/2 opacity-10"><Icon name={d.icon} className="h-28 w-28 text-(--color-blue)" strokeWidth={1.2} /></div>
       {d.soon && <span className="absolute right-4 top-4"><Soon /></span>}
       <div className="relative">
-        <div className="text-[12px] font-semibold uppercase tracking-wide text-(--color-text-accent)">{d.label}</div>
+        <div className="text-[12px] font-semibold uppercase text-(--color-text-accent)">{d.label}</div>
         <div className="mt-1 text-[22px] font-bold text-(--color-text-primary)">{d.title}</div>
         <div className="mt-3 flex flex-wrap gap-2">{d.tags.map((t) => <Tag key={t}>{t}</Tag>)}</div>
       </div>

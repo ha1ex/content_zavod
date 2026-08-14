@@ -193,7 +193,7 @@ export function OrgBoardMiniMock({ variant }: { variant: string }) {
         {board.cols.map((col) => (
           <div key={col.name} className="flex flex-col gap-1">
             <div className="flex items-center justify-between gap-1">
-              <span className="truncate text-[8px] font-medium uppercase tracking-wide text-(--color-text-tertiary)">
+              <span className="truncate text-[8px] font-medium uppercase text-(--color-text-tertiary)">
                 {col.name}
               </span>
               <span className="rounded bg-(--color-neutral-200) px-1 text-[7.5px] font-semibold text-(--color-text-secondary)">

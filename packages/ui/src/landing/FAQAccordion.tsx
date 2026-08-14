@@ -52,13 +52,13 @@ const STYLE = `
   --brand-100:#7d4ccf;
   --border-default:#dbe1e0; --border-hover:#e5e7eb;
   --text-title:#2d2d2d; --icon:#757575; --surface-section:#f7f7f8;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
-  background:var(--surface-section); width:100%; padding:48px var(--sp-4);
+  font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
+  background:var(--surface-section); width:100%; padding:96px var(--sp-4);
 }
 .faq-mock *{box-sizing:border-box;}
 .faq-mock .faq-section__container{display:flex; flex-direction:column; align-items:center; width:100%; gap:var(--sp-12); max-width:1216px; margin:0 auto;}
 .faq-mock .faq-section__head{display:flex; flex-direction:column; align-items:center; gap:var(--sp-3); width:100%;}
-.faq-mock .faq-section__eyebrow{font-weight:var(--fw-semi); font-size:14px; line-height:20px; text-transform:uppercase; letter-spacing:.04em; color:var(--brand-100); text-align:center; margin:0;}
+.faq-mock .faq-section__eyebrow{font-weight:var(--fw-semi); font-size:14px; line-height:20px; text-transform:uppercase; letter-spacing:0; color:var(--brand-100); text-align:center; margin:0;}
 .faq-mock .faq-section__title{font-weight:var(--fw-semi); color:var(--text-title); text-align:center; width:100%; font-size:36px; line-height:40px; letter-spacing:0; margin:0;}
 .faq-mock .faq-section__desc{font-weight:var(--fw-reg); font-size:18px; line-height:26px; color:var(--text-title); text-align:center; max-width:640px; margin:0;}
 .faq-mock .faq-list{display:flex; flex-direction:column; align-items:center; gap:var(--sp-4); width:100%; list-style:none; margin:0; padding:0;}
@@ -83,6 +83,9 @@ const STYLE = `
 .faq-mock .faq-item[open] .faq-item__icon::after{opacity:0;}
 .faq-mock .faq-item__answer{font-weight:var(--fw-reg); color:var(--text-title); letter-spacing:var(--ls); word-break:break-word; width:100%; max-width:900px; padding:0 var(--sp-6) var(--sp-6); margin:0; font-size:16px; line-height:24px;}
 .faq-mock .faq-item__answer a{color:var(--brand-100); text-decoration:underline;}
+@media(max-width:1023px){
+  .faq-mock{padding:64px var(--sp-4);}
+}
 @media(max-width:767px){
   .faq-mock{padding:48px var(--sp-4);}
   .faq-mock .faq-section__container{gap:var(--sp-6);}
@@ -96,6 +99,36 @@ const STYLE = `
   .faq-mock .faq-item__answer{padding:0 var(--sp-4) var(--sp-4); font-size:14px; line-height:20px;}
 }
 `;
+
+/**
+ * Ответ приходит из спека строкой, а ссылки в ТЗ заданы подписью. Разбираем
+ * markdown-ссылки `[подпись](url)` в настоящие <a>. ReactNode проходит как есть.
+ */
+function renderAnswer(answer: ReactNode): ReactNode {
+  if (typeof answer !== 'string') return answer;
+  const parts: ReactNode[] = [];
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(answer)) !== null) {
+    if (m.index > last) parts.push(answer.slice(last, m.index));
+    const label = m[1] ?? '';
+    const href = m[2] ?? '#';
+    const external = /^https?:\/\//.test(href);
+    parts.push(
+      <a
+        key={m.index}
+        href={href}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {label}
+      </a>,
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < answer.length) parts.push(answer.slice(last));
+  return parts.length ? parts : answer;
+}
 
 /** Нейтральные плейсхолдеры — заменяются реальными парами через проп `items`. */
 const PLACEHOLDER_ITEMS: FAQItemProps[] = [
@@ -166,7 +199,7 @@ export function FAQAccordion({ eyebrow, title = 'Заголовок FAQ-секц
                     <span className="faq-item__icon" aria-hidden="true" />
                   </span>
                 </summary>
-                <p className="faq-item__answer">{item.answer}</p>
+                <p className="faq-item__answer">{renderAnswer(item.answer)}</p>
               </details>
             </li>
           ))}

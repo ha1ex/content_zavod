@@ -22,7 +22,7 @@ export function CtaButtons({ primaryCta, secondaryCta }: CtaButtonsProps) {
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'flex justify-center px-4 py-10 md:px-6 xl:px-0 lg:py-12',
+        'flex justify-center px-4 pt-6 md:px-6 md:pt-10 xl:px-0 lg:pt-12',
       )}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">

@@ -59,9 +59,9 @@ const STYLE = `
   --border-default:#e0e0e0; --text-title:#2d2d2d;
   --surface-page:#ffffff; --surface-section:#f5f5f5;
   --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-24:96px;
-  font-family:'Roboto','Inter',system-ui,-apple-system,sans-serif; color:var(--text-title);
+  font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
   display:block; width:100%; background:var(--surface-page);
-  padding:var(--sp-24) var(--sp-4); box-sizing:border-box; letter-spacing:-.2px;
+  padding:var(--sp-24) var(--sp-4); box-sizing:border-box; letter-spacing:0;
 }
 .tabsg-mock, .tabsg-mock *{box-sizing:border-box;}
 .tabsg-mock .s-head{display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; margin:0 auto var(--sp-12); max-width:760px;}

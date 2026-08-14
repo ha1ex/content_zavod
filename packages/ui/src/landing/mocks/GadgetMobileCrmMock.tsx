@@ -76,7 +76,7 @@ export function MobileCrmMock() {
         <div className="px-3.5 pt-3 pb-2">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">
                 Сегодня · 14 мая
               </div>
               <div className="text-[14px] font-semibold text-(--color-text-primary)">
@@ -128,7 +128,7 @@ export function MobileCrmMock() {
 
         {/* deals list */}
         <div className="mx-3.5 mb-2 space-y-1.5">
-          <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+          <div className="text-[10px] uppercase text-(--color-text-secondary)">
             Активные сделки
           </div>
           {DEALS.map((d, i) => (

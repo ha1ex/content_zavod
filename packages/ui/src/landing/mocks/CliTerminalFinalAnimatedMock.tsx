@@ -16,7 +16,7 @@ import { ScaleToFit } from './ScaleToFit';
  */
 const CSS = `.ctf{ --bg:#121212; --w:#ffffff; --fl:#9e9e9e; --mut:#bdbdbd; --grn:#4caf51; --blu:#2196f3; --vio:#7d4ccf; --tp:#2d2d2d; --ts:#757575; --bd:#e0e0e0; --sec:#f5f5f5; --red12:#fde8e6; --grn12:#e9f5ea; }
 .ctf *{ box-sizing:border-box; margin:0; padding:0; }
-.ctf{ font-family:"Inter",system-ui,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+.ctf{ font-family:var(--font-sans,"Roboto",system-ui,"Segoe UI",sans-serif); -webkit-font-smoothing:antialiased; }
 .ctf .wrap{ position:relative; width:660px; height:360px; }
 
 /* — терминал (внахлёст: справа-сверху, спереди) — */

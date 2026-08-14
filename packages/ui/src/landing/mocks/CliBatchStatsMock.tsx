@@ -46,7 +46,7 @@ export function CliBatchStatsMock() {
 
       {/* результат: сравнение стратегий чтения — одна карта, две строки */}
       <ResultCard>
-        <div className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+        <div className="mb-3 text-[11px] font-semibold uppercase text-(--color-text-secondary)">
           Обращений к API за задачу
         </div>
         <div className="space-y-2">

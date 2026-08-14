@@ -177,14 +177,33 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
   // Любые header/footer, написанные host-агентом (в т.ч. кастомный LandingFooter
   // с придуманными ссылками), отбрасываются: состав подвала не сочиняется,
   // ставится «как есть». После шапки всегда идёт Hero.
+  // Опт-аут: meta.chrome.footer === false — страница живёт без подвала
+  // (напр. когда лендинг встраивается в чужой шаблон). Ставится оператором
+  // руками в спеке, host-агент сам себе подвал не отключает.
   {
     const CHROME = new Set(['SiteHeader', 'LandingFooter', 'LandingFooterMock']);
+    const withFooter = spec.meta?.chrome?.footer !== false;
+    const withHeader = spec.meta?.chrome?.header !== false;
     const body = spec.sections.filter((s) => !CHROME.has(s.component));
     spec.sections = [
-      { id: 'site_header', component: 'SiteHeader', props: {} },
+      ...(withHeader
+        ? [{ id: 'site_header', component: 'SiteHeader', props: {} }]
+        : []),
       ...body,
-      { id: 'kaiten_footer', component: 'LandingFooterMock', props: {} },
+      ...(withFooter
+        ? [{ id: 'kaiten_footer', component: 'LandingFooterMock', props: {} }]
+        : []),
     ] as LandingSpec['sections'];
+    if (!withHeader) {
+      warnings.push(
+        'meta.chrome.header=false — общая шапка kaiten.ru не подставлена (опт-аут из factory-chrome); используется своя шапка секцией.',
+      );
+    }
+    if (!withFooter) {
+      warnings.push(
+        'meta.chrome.footer=false — подвал kaiten.ru не подставлен (опт-аут из factory-chrome).',
+      );
+    }
   }
 
   let brief: Brief | undefined;
@@ -496,6 +515,9 @@ export async function ingestLanding(opts: IngestLandingOptions): Promise<IngestL
     layout: layoutSlug,
     tokenEstimate,
     domain: resolvedDomain,
+    // Решения оператора переживают перегенерацию: meta пересобирается целиком,
+    // поэтому опт-ауты нужно переносить руками.
+    ...(spec.meta?.chrome ? { chrome: spec.meta.chrome } : {}),
   };
 
   // Persist spec (possibly с пересохранёнными meta).

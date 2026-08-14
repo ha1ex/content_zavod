@@ -29,7 +29,7 @@ export function RetailReportMiniMock({ variant }: { variant: RetailReportVariant
 
 function Head({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+    <div className="mb-3 text-[11px] font-semibold uppercase text-(--color-text-secondary)">
       {children}
     </div>
   );

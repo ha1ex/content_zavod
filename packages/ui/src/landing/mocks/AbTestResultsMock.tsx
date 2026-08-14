@@ -45,7 +45,7 @@ export function AbTestResultsMock() {
           {VARIANTS.map((v) => (
             <div key={v.label} className={cn('rounded-(--radius-xl) border p-4', v.winner ? 'border-(--color-action-primary)/40 bg-(--color-action-primary-soft)/30 shadow-sm' : 'border-(--color-border-default) bg-(--color-surface-page)')}>
               <div className="flex items-center justify-between">
-                <span className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">{v.label}</span>
+                <span className="text-[10px] uppercase text-(--color-text-secondary)">{v.label}</span>
                 {v.winner && (
                   <span className="inline-flex h-5 items-center gap-1 rounded-full bg-(--color-action-primary) px-2 text-[10px] font-medium text-white">
                     <Icon name="Trophy" className="h-3 w-3" strokeWidth={2.5} />
@@ -58,15 +58,15 @@ export function AbTestResultsMock() {
               </div>
               <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
                 <div>
-                  <dt className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Показы</dt>
+                  <dt className="text-[9px] uppercase text-(--color-text-secondary)">Показы</dt>
                   <dd className="mt-0.5 text-[11px] font-semibold tabular-nums text-(--color-text-primary)">{v.impressions}</dd>
                 </div>
                 <div>
-                  <dt className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">Клики</dt>
+                  <dt className="text-[9px] uppercase text-(--color-text-secondary)">Клики</dt>
                   <dd className="mt-0.5 text-[11px] font-semibold tabular-nums text-(--color-text-primary)">{v.clicks}</dd>
                 </div>
                 <div>
-                  <dt className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">CR</dt>
+                  <dt className="text-[9px] uppercase text-(--color-text-secondary)">CR</dt>
                   <dd className={cn('mt-0.5 text-[11px] font-semibold tabular-nums', v.winner ? 'text-(--color-text-accent)' : 'text-(--color-text-primary)')}>{v.conversionRate}</dd>
                 </div>
               </dl>

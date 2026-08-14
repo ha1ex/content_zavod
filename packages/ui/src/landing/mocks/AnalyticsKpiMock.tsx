@@ -90,7 +90,7 @@ export function AnalyticsKpiMock() {
                   {k.delta}
                 </span>
               </div>
-              <div className="mt-1 text-[10px] uppercase tracking-wide text-(--color-text-secondary) md:text-[11px]">
+              <div className="mt-1 text-[10px] uppercase text-(--color-text-secondary) md:text-[11px]">
                 {k.label}
               </div>
             </div>
@@ -99,7 +99,7 @@ export function AnalyticsKpiMock() {
 
         {/* Teams load */}
         <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-page) p-3 md:p-4">
-          <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-wide text-(--color-text-secondary) md:text-[11px]">
+          <div className="mb-2 flex items-center justify-between text-[10px] uppercase text-(--color-text-secondary) md:text-[11px]">
             <span>Загрузка команд</span>
             <span>capacity</span>
           </div>

@@ -101,7 +101,7 @@ function Lane({ name, dot, band, body, prog, info, cells }: { name: string; dot:
         <span className="h-3 w-3 rounded-full" style={{ background: dot }} />
         {info && <Icon name="Info" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} />}
         <span className="text-[13px] text-(--color-text-primary)">Σ {prog}</span>
-        <span className="inline-flex items-center gap-1 text-[12px] font-medium uppercase tracking-wide text-(--color-text-secondary)"><Icon name="SquarePlus" className="h-4 w-4" strokeWidth={2} /> Создать на досках</span>
+        <span className="inline-flex items-center gap-1 text-[12px] font-medium uppercase text-(--color-text-secondary)"><Icon name="SquarePlus" className="h-4 w-4" strokeWidth={2} /> Создать на досках</span>
         <Icon name="ChevronUp" className="ml-auto h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} />
       </div>
       <div className="px-4 py-4" style={{ background: body }}>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-07T14:45:00.557Z",
+  "updatedAt": "2026-08-10T13:05:26.581Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -427,15 +427,6 @@
     },
     {
       "kind": "mock-use",
-      "variant": "kanban-minimal-animated",
-      "landingSlug": "kaiten-task-tracker",
-      "sectionId": "hero",
-      "sectionIdx": 1,
-      "domain": "pm",
-      "recordedAt": "2026-07-31T16:52:02.981Z"
-    },
-    {
-      "kind": "mock-use",
       "variant": "hero-screen-interface",
       "landingSlug": "kaiten-ganttpro",
       "sectionId": "hero",
@@ -478,6 +469,15 @@
       "sectionIdx": 6,
       "domain": "pm",
       "recordedAt": "2026-08-07T14:45:00.557Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "hero-screen-interface",
+      "landingSlug": "kaiten-task-tracker",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-08-10T13:05:26.581Z"
     }
   ]
 }

@@ -1,0 +1,241 @@
+/**
+ * Тёмная схема лендинга — активируется, когда spec.theme = "dark".
+ *
+ * Рендер (render-spec-react / render-landing) оборачивает страницу в
+ * `.landing-theme-dark`. Компоненты завода читают семантические токены
+ * (`--color-*`) и кнопочные токены — здесь мы переопределяем их на тёмную
+ * палитру, и вся token-based вёрстка (Hero, FeatureGrid, MediaCopy, Timeline,
+ * SpeakerCard, RegistrationCta/Form, StatStrip, LogoCloud, шапка/подвал…)
+ * переворачивается без правок самих компонентов.
+ *
+ * Продуктовые mock'и (скриншоты интерфейса) держат СВОЮ светлую палитру и
+ * остаются светлыми — светлые карточки на тёмном фоне, как на старом лендинге
+ * конференции. Единственный chrome-компонент с локальной палитрой —
+ * FAQAccordion (`.faq-mock`), его переопределяем адресно ниже.
+ */
+
+.landing-theme-dark {
+  /* ─── Семантические токены ──────────────────────────────────────── */
+  --color-text-primary: #f4f2fb;
+  --color-text-secondary: #a89fc4;
+  --color-text-inverse: #ffffff;
+  --color-text-accent: #b79cf2;
+  --color-surface-page: #0d0b14;
+  --color-surface-section: #15101f;
+  --color-surface-card: #1a1527;
+  --color-border-default: #2a2339;
+  --color-action-primary: #8b5cf0;
+  --color-action-primary-hover: #9d74f4;
+  --color-action-primary-soft: rgba(125, 76, 207, 0.22);
+
+  /* ─── Кнопки ────────────────────────────────────────────────────── */
+  --button-fill-bg: #8b5cf0;
+  --button-fill-bg-hover: #9d74f4;
+  --button-fill-text: #ffffff;
+  --button-outline-bg: transparent;
+  --button-outline-bg-hover: rgba(139, 92, 240, 0.16);
+  --button-outline-border: rgba(255, 255, 255, 0.18);
+  --button-outline-border-hover: rgba(139, 92, 240, 0.6);
+  --button-outline-text: #cbb6f7;
+  --button-outline-text-hover: #e0d3fb;
+}
+
+/* ─── Крупный тег-eyebrow в hero (больше кегль и подложка) ──────────── */
+.landing-theme-dark [data-comp="hero.eyebrow"] > span {
+  padding: 0.5rem 1.125rem;
+  font-size: 0.9375rem;
+}
+@media (min-width: 768px) {
+  .landing-theme-dark [data-comp="hero.eyebrow"] > span {
+    padding: 0.625rem 1.375rem;
+    font-size: 1.0625rem;
+  }
+}
+
+/* ─── Отступ под липкую шапку при переходе по якорям навигации ──────── */
+.landing-theme-dark > div[data-comp] {
+  scroll-margin-top: 88px;
+}
+
+/* ─── Плавный скролл к якорям (кнопки CTA → форма) ─────────────────────
+   Ставим на корень (скроллится документ), но только когда на странице есть
+   тёмный лендинг (:has), чтобы не менять поведение остального сайта.
+   Уважаем prefers-reduced-motion — для таких пользователей резкий переход. */
+@media (prefers-reduced-motion: no-preference) {
+  :root:has(.landing-theme-dark) {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ─── Градиентный текст (фиолет → циан, цвета из hero-мотива) ───────── */
+/* Заголовки секций (h2) и акцентное слово в hero заливаются градиентом —
+   единый яркий приём по всей странице. Тело текста не трогаем (читаемость). */
+.landing-theme-dark [data-comp="hero.title"] span,
+.landing-theme-dark h2 {
+  background-image: linear-gradient(
+    90deg,
+    var(--h2-from, #8b5cf0) 0%,
+    var(--h2-mid, #a78bfa) 45%,
+    var(--h2-to, #6fe5ff) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Reveal-on-scroll: секции мягко проявляются при въезде во вьюпорт ─ */
+/* CSS scroll-driven (без JS) — работает и в статичной выгрузке. Там, где
+   animation-timeline не поддержан, срабатывает фолбэк ниже (проявление на
+   загрузке), контент не остаётся скрытым. */
+@keyframes landing-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.landing-theme-dark .reveal-section {
+  animation: landing-reveal both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 22%;
+}
+@supports not (animation-timeline: view()) {
+  .landing-theme-dark .reveal-section {
+    animation: landing-reveal 0.6s ease-out both;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-theme-dark .reveal-section {
+    animation: none;
+  }
+}
+
+/* ─── Аврора-фон: статичные градиентные пятна ──────────────────────────
+   Шаг 1 оптимизации скролла. Раньше был `background-attachment: fixed` +
+   parallax позиции по scroll-timeline — фиксированный фон и анимация
+   background-position заставляли браузер перерисовывать фон на КАЖДЫЙ кадр
+   скролла (главный источник джанка). Теперь статичный градиент: прокручивается
+   вместе со страницей, композитится один раз. Пятна те же. */
+.landing-theme-dark {
+  background-image:
+    radial-gradient(38% 40% at 18% 22%, rgba(139, 92, 240, 0.20), transparent 60%),
+    radial-gradient(34% 36% at 82% 16%, rgba(111, 229, 255, 0.14), transparent 60%),
+    radial-gradient(46% 46% at 62% 88%, rgba(139, 92, 240, 0.16), transparent 62%);
+  background-repeat: no-repeat;
+  background-size: 160% 160%, 150% 150%, 170% 170%;
+}
+
+/* ─── Стекло только на шапке (карточки — сплошные, без backdrop-blur) ───
+   Шаги 2–3 скролл-оптимизации. Убраны два самых тяжёлых при скролле приёма:
+   1) полноэкранный шум-оверлей (`::after` fixed + mix-blend-mode) — блендил
+      весь вьюпорт на каждый кадр;
+   2) backdrop-blur у ~31 карточки — каждое размытие пересчитывалось на каждый
+      кадр, пока фон за карточкой едет.
+   Карточки теперь на своих непрозрачных токенах surface-section/surface-card.
+   Матовое стекло оставлено ТОЛЬКО у липкой шапки — там оно реально читается на
+   фоне уезжающего контента, а стоит ровно один слой. */
+/* Шапка: закреплена наверху (fixed), сплошная тёмная, без стекла.
+   fixed (а не sticky) — потому что sticky ограничен своей короткой обёрткой-
+   секцией и по странице не держится. Стекло убрано (это был самый тяжёлый при
+   скролле слой — размывался каждый кадр). Контент компенсируем padding-top. */
+.landing-theme-dark header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+}
+.landing-theme-dark header > div {
+  background-color: var(--color-surface-page) !important;
+}
+/* Отступ под фиксированную шапку (высота ≈ 65px), чтобы hero не прятался. */
+.landing-theme-dark {
+  padding-top: 65px;
+}
+
+/* ─── Единый вертикальный ритм секций (DS: секция 48/64/96) ─────────
+   Приём «верхний отступ = зазор, нижний = 0» → зазор между любыми двумя
+   секциями ровно один секционный шаг (96 на десктопе), а не удвоенный.
+   Финальный CTA (registration_cta) не трогаем — у него свой акцентный
+   отступ по правилу завода. Скоуп — только тёмный лендинг. */
+.landing-theme-dark [data-comp="speaker_grid"] > section,
+.landing-theme-dark [data-comp="stats"] > section,
+.landing-theme-dark [data-comp="timeline_roadmap"] > section,
+.landing-theme-dark [data-comp="social_proof"] > section,
+.landing-theme-dark [data-comp="features"] > section,
+.landing-theme-dark [data-comp="logo_cloud"] > section,
+.landing-theme-dark [data-comp="video_gallery"] > section,
+.landing-theme-dark [data-comp="cta_banner"] > section {
+  padding-top: 48px;
+  padding-bottom: 0;
+}
+@media (min-width: 768px) {
+  .landing-theme-dark [data-comp="speaker_grid"] > section,
+  .landing-theme-dark [data-comp="stats"] > section,
+  .landing-theme-dark [data-comp="timeline_roadmap"] > section,
+  .landing-theme-dark [data-comp="social_proof"] > section,
+  .landing-theme-dark [data-comp="features"] > section,
+  .landing-theme-dark [data-comp="logo_cloud"] > section,
+  .landing-theme-dark [data-comp="video_gallery"] > section,
+  .landing-theme-dark [data-comp="cta_banner"] > section {
+    padding-top: 64px;
+  }
+}
+@media (min-width: 1024px) {
+  .landing-theme-dark [data-comp="speaker_grid"] > section,
+  .landing-theme-dark [data-comp="stats"] > section,
+  .landing-theme-dark [data-comp="timeline_roadmap"] > section,
+  .landing-theme-dark [data-comp="social_proof"] > section,
+  .landing-theme-dark [data-comp="features"] > section,
+  .landing-theme-dark [data-comp="logo_cloud"] > section,
+  .landing-theme-dark [data-comp="video_gallery"] > section,
+  .landing-theme-dark [data-comp="cta_banner"] > section {
+    padding-top: 96px;
+  }
+}
+
+/* ─── Форма регистрации: белые поля на градиентной панели (как на апрельском) ── */
+.landing-theme-dark form input[type="text"],
+.landing-theme-dark form input[type="email"],
+.landing-theme-dark form input[type="tel"],
+.landing-theme-dark form select {
+  background-color: #ffffff !important;
+  color: #221a2e;
+  border-color: transparent;
+}
+.landing-theme-dark form input::placeholder {
+  color: #8b8b9a;
+}
+.landing-theme-dark form select {
+  color: #5a5a68;
+}
+
+/* Заголовок финального блока: «Регистрация» белым, дата — градиентом (1-в-1 апрель) */
+.landing-theme-dark h2.reg-heading {
+  -webkit-text-fill-color: #f4f2fb;
+  color: #f4f2fb;
+  background: none;
+}
+.landing-theme-dark h2.reg-heading .reg-accent {
+  background-image: linear-gradient(90deg, #8b5cf0 0%, #a78bfa 45%, #6fe5ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─── FAQAccordion: собственная светлая палитра → тёмная ───────────── */
+.landing-theme-dark .faq-mock {
+  --surface-section: #0d0b14;
+  --text-title: #f4f2fb;
+  --icon: #a89fc4;
+  --brand-100: #b79cf2;
+  --border-hover: rgba(139, 92, 240, 0.6);
+}
+.landing-theme-dark .faq-mock .faq-item {
+  background: #1a1527;
+}

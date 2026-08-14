@@ -1,50 +1,33 @@
+import { Icon } from '../primitives/Icon';
 import { cn } from '../primitives/cn';
 import { FormConsent } from './FormConsent';
 import { FormMessengers } from './FormMessengers';
+import { NonNativeSelect } from './NonNativeSelect';
 
 export interface RegistrationFormProps {
-  /** Заголовок карточки. Опционален: в первом экране форма идёт без своего заголовка. */
   title?: string;
   description?: string;
   submitLabel: string;
-  /** Мягкая строка под кнопкой (напр. обещание сопровождения после вебинара). */
   note?: string;
-  /**
-   * Якорь формы — на него ведут кнопки «Занять место». Он же префикс `id` полей,
-   * поэтому на странице с двумя формами якоря ОБЯЗАНЫ различаться: иначе `id`
-   * полей совпадут и `<label>` второй формы будет фокусировать поле первой.
-   */
   anchorId?: string;
-  /**
-   * Куда форма POST-ится. Верстальщик подменит на реальный endpoint.
-   * По умолчанию `#` — заглушка.
-   */
   action?: string;
-  /**
-   * Ссылка на регистрацию через Telegram-бота (deep-link `https://t.me/<bot>?start=…`).
-   * Верстальщик подменит на реальный бот. `undefined` → кнопка не рендерится.
-   */
   telegramHref?: string;
-  /**
-   * Ссылка на регистрацию через бота в MAX. `undefined` → кнопка не рендерится.
-   */
   maxHref?: string;
-  /** Сделать согласие на рассылку тоже обязательным (по умолчанию оно опционально). */
   newsletterRequired?: boolean;
-  /** @deprecated Ссылки согласий теперь фиксированы в компоненте (юр-ссылки Кайтен). Поле оставлено для совместимости со спеком. */
+  /** @deprecated ссылки согласий фиксированы в компоненте. */
   dataConsentHref?: string;
+  /**
+   * 'default' — имя/email/телефон (эталон вебинара). 'conference' — форма 1-в-1
+   * с конференции kaiten-conf-ai: белые поля с иконками, «Имя» на всю ширину,
+   * «Телефон» + «E-mail» в строку, селект «Являюсь действующим клиентом Кайтена».
+   */
+  variant?: 'default' | 'conference';
 }
 
 /**
- * Форма регистрации на вебинар. Поля и логика по ТЗ: имя и email обязательные,
- * телефон опциональный (чтобы не отпугнуть на входе), согласие на обработку
- * данных по 152-ФЗ обязательно. Поле «Компания / роль» из ТЗ убрано по решению
- * команды (18.07.2026) — квалификация лида по компании больше не собирается.
- * Все проверки браузерные, JS не нужен: обработчик настраивает верстальщик
- * через `action`.
- *
- * Карточка используется дважды — в правой колонке первого экрана и в финальном
- * блоке, — поэтому у неё нет собственной секционной обёртки и отступов.
+ * Форма регистрации на событие. Поля браузерно-валидируемые (JS не нужен —
+ * обработчик настраивает верстальщик через `action`). Карточка используется
+ * дважды (первый экран и финал), поэтому без своей секционной обёртки.
  */
 export function RegistrationForm({
   title,
@@ -56,10 +39,10 @@ export function RegistrationForm({
   telegramHref,
   maxHref,
   newsletterRequired,
+  variant = 'default',
 }: RegistrationFormProps) {
-  // Префикс id полей — от якоря: форма рендерится дважды (первый экран и финал),
-  // и с общим префиксом id полей дублировались бы на одной странице.
   const fid = (name: string) => `${anchorId ?? 'reg'}-${name}`;
+  const isConf = variant === 'conference';
 
   return (
     <form
@@ -67,9 +50,10 @@ export function RegistrationForm({
       action={action}
       method="post"
       className={cn(
-        'w-full scroll-mt-24 rounded-(--radius-xl) lg:rounded-(--radius-2xl)',
-        'border border-(--color-border-default) bg-(--color-surface-card) p-6 md:p-8',
-        'text-(--color-text-primary) shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]',
+        'w-full scroll-mt-24',
+        !isConf &&
+          'rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-card) p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)] md:p-8 lg:rounded-(--radius-2xl)',
+        'text-(--color-text-primary)',
       )}
     >
       {title && <h2 className="text-xl font-semibold md:text-2xl">{title}</h2>}
@@ -79,28 +63,75 @@ export function RegistrationForm({
         </p>
       )}
 
-      <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
-        <Field id={fid('name')} name="name" type="text" label="Имя" required autoComplete="name" />
-        <Field
-          id={fid('email')}
-          name="email"
-          type="email"
-          label="Email"
-          required
-          placeholder="name@company.ru"
-          autoComplete="email"
-        />
-        <Field
-          id={fid('phone')}
-          name="phone"
-          type="tel"
-          label="Телефон"
-          placeholder="+7 999 000-00-00"
-          autoComplete="tel"
-        />
-      </div>
-
-      <FormConsent idPrefix={anchorId ?? 'reg'} newsletterRequired={newsletterRequired} />
+      {isConf ? (
+        <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
+          <Field
+            id={fid('name')}
+            name="name"
+            type="text"
+            label="Имя"
+            placeholder="Имя"
+            labelHidden
+            required
+            autoComplete="name"
+            icon="User"
+          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field
+              id={fid('phone')}
+              name="phone"
+              type="tel"
+              label="Телефон"
+              placeholder="Телефон"
+              labelHidden
+              autoComplete="tel"
+              icon="Phone"
+            />
+            <Field
+              id={fid('email')}
+              name="email"
+              type="email"
+              label="E-mail"
+              placeholder="E-mail"
+              labelHidden
+              required
+              autoComplete="email"
+              icon="Mail"
+            />
+          </div>
+          <NonNativeSelect
+            id={fid('is_client')}
+            name="is_client"
+            icon="Globe"
+            placeholder="Являюсь действующим клиентом Кайтена"
+            options={[
+              { value: 'yes', label: 'Да' },
+              { value: 'no', label: 'Еще нет' },
+            ]}
+          />
+        </div>
+      ) : (
+        <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
+          <Field id={fid('name')} name="name" type="text" label="Имя" required autoComplete="name" />
+          <Field
+            id={fid('email')}
+            name="email"
+            type="email"
+            label="Email"
+            required
+            placeholder="name@company.ru"
+            autoComplete="email"
+          />
+          <Field
+            id={fid('phone')}
+            name="phone"
+            type="tel"
+            label="Телефон"
+            placeholder="+7 999 000-00-00"
+            autoComplete="tel"
+          />
+        </div>
+      )}
 
       <button
         type="submit"
@@ -114,11 +145,11 @@ export function RegistrationForm({
         {submitLabel}
       </button>
 
+      <FormConsent idPrefix={anchorId ?? 'reg'} newsletterRequired={newsletterRequired} />
+
       <FormMessengers telegramHref={telegramHref} maxHref={maxHref} />
 
-      {note && (
-        <p className="mt-4 text-center text-sm text-(--color-text-secondary)">{note}</p>
-      )}
+      {note && <p className="mt-4 text-center text-sm text-(--color-text-secondary)">{note}</p>}
     </form>
   );
 }
@@ -131,33 +162,61 @@ interface FieldProps {
   required?: boolean;
   placeholder?: string;
   autoComplete?: string;
+  /** lucide-иконка слева внутри поля (вариант 'conference'). Только для белых полей → серая. */
+  icon?: string;
+  /** Скрыть подпись визуально (остаётся для скринридеров) — placeholder-only, как на апрельской форме. */
+  labelHidden?: boolean;
 }
 
-function Field({ id, name, type, label, required, placeholder, autoComplete }: FieldProps) {
+function Field({
+  id,
+  name,
+  type,
+  label,
+  required,
+  placeholder,
+  autoComplete,
+  icon,
+  labelHidden,
+}: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-(--color-text-primary)">
+      <label
+        htmlFor={id}
+        className={cn('text-sm font-medium text-(--color-text-primary)', labelHidden && 'sr-only')}
+      >
         {label}
-        {required && (
+        {required && !labelHidden && (
           <span aria-hidden className="ml-0.5 text-(--color-action-primary)">
             *
           </span>
         )}
       </label>
-      <input
-        id={id}
-        name={name}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        className={cn(
-          'h-11 w-full rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page)',
-          'px-3.5 text-base text-(--color-text-primary) placeholder:text-(--color-text-secondary)',
-          'transition focus:border-(--color-action-primary) focus:outline-none focus:ring-2',
-          'focus:ring-(--color-action-primary)/30',
+      <div className="relative">
+        {icon && (
+          <Icon
+            name={icon}
+            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8b8b9a]"
+            strokeWidth={2}
+          />
         )}
-      />
+        <input
+          id={id}
+          name={name}
+          type={type}
+          required={required}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
+          className={cn(
+            'h-11 w-full rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page)',
+            'text-base text-(--color-text-primary) placeholder:text-(--color-text-secondary)',
+            icon ? 'pl-10 pr-3.5' : 'px-3.5',
+            'transition focus:border-(--color-action-primary) focus:outline-none focus:ring-2',
+            'focus:ring-(--color-action-primary)/30',
+          )}
+        />
+      </div>
     </div>
   );
 }
+

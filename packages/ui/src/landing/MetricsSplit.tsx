@@ -36,7 +36,7 @@ export function MetricsSplit({
       <div
         className={cn(
           'mx-auto w-full max-w-(--container-kaiten)',
-          'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+          'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
         )}
       >
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
@@ -44,7 +44,7 @@ export function MetricsSplit({
             {eyebrow && (
               <p
                 data-comp="metrics_split.eyebrow"
-                className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+                className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
               >
                 {eyebrow}
               </p>
@@ -102,7 +102,7 @@ export function MetricsSplit({
         </div>
 
         {bullets && bullets.length > 0 && (
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
             {bullets.map((b, i) => (
               <Inspect
                 as="article"

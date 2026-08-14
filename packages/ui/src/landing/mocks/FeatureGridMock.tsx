@@ -53,7 +53,7 @@ const STYLE = `
 .fg-mock{
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-16:64px; --sp-24:96px;
   --radius-2xl:16px;
-  --fw-reg:400; --fw-med:500; --fw-semi:600; --ls:-0.2px;
+  --fw-reg:400; --fw-med:500; --fw-semi:600; --ls:0;
   --brand-100:#7d4ccf; --brand-12:#efe9f9; --brand-48k:rgba(125,76,207,.48);
   --text-title:#2d2d2d; --text-secondary:#757575; --border-default:#e0e0e0;
   --surface-page:#ffffff; --surface-section:#f5f5f5;

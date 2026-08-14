@@ -57,22 +57,22 @@ export function ReconciliationMatrixMock() {
       <div className="p-4 md:p-5">
         <div className="mb-3 grid grid-cols-3 gap-2">
           <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page) p-3 text-center">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Совпало</div>
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">Совпало</div>
             <div className="mt-1 text-2xl font-semibold tabular-nums text-green-700">40%</div>
           </div>
           <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-page) p-3 text-center">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Расхождений</div>
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">Расхождений</div>
             <div className="mt-1 text-2xl font-semibold tabular-nums text-amber-800">20%</div>
           </div>
           <div className="rounded-(--radius-lg) border border-(--color-red-100)/40 bg-(--color-red-12)/30 p-3 text-center">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">Пропусков</div>
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">Пропусков</div>
             <div className="mt-1 text-2xl font-semibold tabular-nums text-red-700">40%</div>
           </div>
         </div>
         <div className="overflow-hidden rounded-(--radius-xl) border border-(--color-border-default)">
           <table className="w-full text-left text-[11px]">
             <thead>
-              <tr className="border-b border-(--color-border-default) bg-(--color-surface-section) text-[9px] uppercase tracking-wide text-(--color-text-secondary)">
+              <tr className="border-b border-(--color-border-default) bg-(--color-surface-section) text-[9px] uppercase text-(--color-text-secondary)">
                 <th className="px-3 py-2">Дата</th>
                 <th className="px-3 py-2">Операция</th>
                 <th className="px-3 py-2 text-right">Банк</th>

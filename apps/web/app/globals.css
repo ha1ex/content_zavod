@@ -1,8 +1,20 @@
 @import "tailwindcss";
 @import "../../../packages/ui/src/tokens.css";
+@import "../../../packages/ui/src/theme-dark.css";
 
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 @source "../../../packages/harness/src/**/*.{ts,tsx}";
+
+/*
+ * Roboto подключается через next/font (см. app/layout.tsx) и живёт под
+ * сгенерированным именем семейства в `--font-roboto`. Токен `--font-sans`
+ * из tokens.css указывает на литеральное «Roboto», которое разрешалось бы
+ * только на машине с установленным шрифтом, — поэтому направляем токен
+ * на реально загруженное семейство, оставив литерал запасным вариантом.
+ */
+:root {
+  --font-sans: var(--font-roboto), "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 
 html {
   background: var(--color-surface-page);

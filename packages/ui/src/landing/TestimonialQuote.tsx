@@ -29,7 +29,7 @@ export function TestimonialQuote({
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-8 md:px-6 md:py-12 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
       <div
@@ -47,7 +47,7 @@ export function TestimonialQuote({
           {eyebrow && (
             <p
               data-comp="testimonial_quote.eyebrow"
-              className="mb-4 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              className="mb-4 text-sm font-medium uppercase text-(--color-text-accent)"
             >
               {eyebrow}
             </p>

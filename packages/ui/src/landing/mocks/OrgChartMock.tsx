@@ -58,7 +58,7 @@ export function OrgChartMock() {
           <div className="inline-flex items-center gap-3 rounded-(--radius-xl) border border-(--color-action-primary)/40 bg-(--color-action-primary-soft)/40 px-4 py-2.5 shadow-sm">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-(--color-action-primary) text-[12px] font-semibold text-white">ДО</span>
             <div className="min-w-0">
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">CTO</div>
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">CTO</div>
               <div className="text-[12.5px] font-semibold text-(--color-text-primary)">Дмитрий Орлов</div>
             </div>
             <div className="ml-2 border-l border-(--color-border-default) pl-3 text-[10px] text-(--color-text-secondary)">

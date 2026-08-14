@@ -247,7 +247,64 @@ export async function buildStaticHandoff(
     '[".kct-table","--kct-bg-top",".kct-hcell--label"]].forEach(function(c){' +
     'document.querySelectorAll(c[0]).forEach(function(t){var h=t.querySelector(c[2]);' +
     't.style.setProperty(c[1],(window.innerWidth<768&&h?h.offsetHeight:0)+"px");});});}' +
-    'function adapt(){fit();band();}' +
+    // 4) revx — ширина карточек отзыва: в окно должно попадать целое число,
+    //    иначе крайняя режется. Повторяет fitCards из ReviewSlider (там это
+    //    делает React, в статике его нет).
+    'function revx(){document.querySelectorAll(".revx__track").forEach(function(track){' +
+    'var wrap=track.parentElement;if(!wrap||!wrap.clientWidth)return;' +
+    // В статике листалки нет, а в разметку мог запечься сдвиг с момента съёмки —
+    // возвращаем трек в начало, иначе первая карточка уезжает за левый край.
+    'track.style.transform="translateX(0px)";' +
+    // Ширина карточки задана в CSS; снятый снимок мог принести инлайновую
+    // переменную с момента съёмки — снимаем её, чтобы не перебивала стиль.
+    'track.style.removeProperty("--otz-w");' +
+    'var gap=parseFloat(getComputedStyle(track).columnGap)||16;' +
+    'pager(track,wrap,gap);});}' +
+    // Листалка: в снятой разметке её может не быть (на широком экране React
+    // её не рисует), поэтому собираем сами и listaem треком — иначе часть
+    // отзывов в статике была бы недоступна.
+    'function arrow(d){return \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="\'+d+\'"/></svg>\';}' +
+    'function pager(track,wrap,gap){var k=track.children,total=0;' +
+    'for(var i=0;i<k.length;i++)total+=k[i].getBoundingClientRect().width;' +
+    'total+=gap*(k.length-1);' +
+    'var step=k.length>1?k[1].getBoundingClientRect().left-k[0].getBoundingClientRect().left:0;' +
+    // Целиком влезающие карточки — floor, а не round: округление вверх делало
+    // вид, будто влезает больше, и листалка пропадала. Внутренние отступы
+    // трека (лента выходит в края экрана) в ширину карточек не идут.
+    'var ts=getComputedStyle(track);' +
+    'var inner=wrap.clientWidth-parseFloat(ts.paddingLeft)-parseFloat(ts.paddingRight);' +
+    'var vis=step?Math.max(1,Math.floor((inner+gap)/step)):k.length;' +
+    'var max=Math.max(0,k.length-vis);' +
+    'var sec=wrap.closest(".revx-mock"),host=wrap.parentElement;' +
+    'var nav=sec?sec.querySelector(".revx__nav"):null;' +
+    'if(!max){if(nav)nav.style.display="none";if(sec)sec.classList.add("revx--nopager");' +
+    'track.classList.add("revx__track--single");track.style.transform="translateX(0px)";return;}' +
+    'if(sec)sec.classList.remove("revx--nopager");track.classList.remove("revx__track--single");' +
+    'if(!nav){nav=document.createElement("div");nav.className="revx__nav";' +
+    'nav.innerHTML=\'<button class="revx__navbtn" data-rev="-1" aria-label="Предыдущий отзыв">\'+arrow("m15 18-6-6 6-6")+\'</button>\'' +
+    '+\'<span class="revx__count"><b>1</b> / \'+k.length+\'</span>\'' +
+    '+\'<button class="revx__navbtn" data-rev="1" aria-label="Следующий отзыв">\'+arrow("m9 18 6-6-6-6")+\'</button>\';' +
+    'host.appendChild(nav);' +
+    'nav.addEventListener("click",function(e){var btn=e.target.closest("[data-rev]");if(!btn)return;' +
+    'var cur=+(track.getAttribute("data-i")||0)+ +btn.getAttribute("data-rev");' +
+    'track.setAttribute("data-i",cur);pager(track,track.parentElement,gap);});}' +
+    'nav.style.display="";' +
+    'var idx=Math.min(Math.max(0,+(track.getAttribute("data-i")||0)),max);' +
+    'track.setAttribute("data-i",idx);' +
+    // scrollWidth теряет правый внутренний отступ трека при переполнении —
+    // добавляем его, иначе последняя карточка встаёт вплотную к краю экрана.
+    'var tail=Math.max(0,track.scrollWidth+parseFloat(ts.paddingRight)-wrap.clientWidth);' +
+    'track.style.transform="translateX(-"+Math.min(idx*step,tail)+"px)";' +
+    'var b=nav.querySelector("b");if(b)b.textContent=Math.min(idx+1,k.length);' +
+    'var btns=nav.querySelectorAll("[data-rev]");' +
+    'btns[0].disabled=idx<=0;btns[1].disabled=idx>=max;}' +
+    // 5) board — масштаб доски первого экрана. В живом лендинге его считает
+    //    React от ширины слота (доска нарисована на 1360, потолок 1216), в
+    //    статике без этого оставались ступени по брейкпоинтам из CSS.
+    'function board(){document.querySelectorAll(".hsi-screen__visual .hsi").forEach(function(el){' +
+    'var slot=el.parentElement;if(!slot||!slot.clientWidth)return;' +
+    'el.style.zoom=Math.min(1216,slot.clientWidth)/1360;});}' +
+    'function adapt(){fit();band();revx();board();}' +
     'tabs();adapt();window.addEventListener("resize",adapt);' +
     'window.addEventListener("load",adapt);setTimeout(adapt,300);' +
     '})();</script>';

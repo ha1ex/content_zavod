@@ -274,4 +274,119 @@ Append-only хроника операций harness'а. Формат запис�
 
 ## [2026-07-31 19:52] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
 
+## [2026-08-05 10:07] generate | kaiten-task-tracker | fail | agent-ingest archetype=saas_landing sections=13 errors=2 audienceScore=0/70
+
+## [2026-08-05 10:07] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 10:18] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 10:18] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 10:20] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 10:44] lint | — | fail | scope=all files=98 errors=9 warnings=87
+
+## [2026-08-05 10:45] lint | — | fail | scope=all files=98 errors=9 warnings=87
+
+## [2026-08-05 11:14] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 11:17] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 15:03] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 15:09] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 15:16] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 16:09] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 16:17] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 16:27] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 16:32] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 16:51] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 16:58] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 17:09] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 18:27] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 18:51] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 19:00] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 19:09] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-05 19:18] wiki-sync | — | ok | written=8 unchanged=0 missing=0
+
+## [2026-08-06 11:49] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 12:21] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:01] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:10] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:25] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:29] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:30] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:32] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:37] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=11 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:52] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 13:59] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 14:01] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 14:11] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 14:29] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 15:12] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 15:17] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 15:18] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-06 16:45] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-07 14:16] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-07 15:18] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-07 15:32] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
 ## [2026-08-07 17:45] generate | kaiten-ganttpro | ok | agent-ingest archetype=saas_landing sections=13 errors=0 audienceScore=76.33/70
+
+## [2026-08-07 19:02] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-07 23:35] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-07 23:38] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-08 00:56] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 10:43] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 10:52] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 11:01] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 11:08] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 11:29] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 11:55] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 15:46] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 15:51] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70
+
+## [2026-08-10 16:05] generate | kaiten-task-tracker | ok | agent-ingest archetype=saas_landing sections=12 errors=0 audienceScore=88.43/70

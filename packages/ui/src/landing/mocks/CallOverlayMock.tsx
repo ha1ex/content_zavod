@@ -115,7 +115,7 @@ export function CallOverlayMock() {
             </div>
 
             <div className="mt-3 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section) p-2">
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">
                 Запись разговора
               </div>
               <div className="mt-1.5 flex items-center gap-2">
@@ -131,7 +131,7 @@ export function CallOverlayMock() {
           {/* right: script */}
           <div className="rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-4">
             <div className="flex items-center justify-between">
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">
                 Скрипт продаж
               </div>
               <span className="inline-flex h-4 items-center rounded-full bg-(--color-action-primary-soft) px-1.5 text-[9px] font-medium text-(--color-text-accent)">
@@ -175,7 +175,7 @@ export function CallOverlayMock() {
               ))}
             </div>
             <div className="mt-3 border-t border-(--color-border-default) pt-2">
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">
                 Заметка после разговора
               </div>
               <div className="mt-1 rounded-(--radius-lg) border border-dashed border-(--color-border-default) bg-(--color-surface-section) p-2 text-[10px] text-(--color-text-secondary)">

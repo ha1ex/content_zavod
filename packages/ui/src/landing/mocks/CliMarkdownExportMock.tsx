@@ -58,7 +58,7 @@ function MarkdownFile() {
         <div className="rounded-lg border-l-2 border-(--color-action-primary) bg-(--color-surface-page) px-3 py-2 text-[11px] leading-snug text-(--color-text-secondary)">
           Порядок переноса досок, задач и участников из прежней системы в Kaiten.
         </div>
-        <div className="mt-3 text-[10px] font-medium uppercase tracking-wide text-(--color-text-tertiary)">
+        <div className="mt-3 text-[10px] font-medium uppercase text-(--color-text-tertiary)">
           Содержание
         </div>
         <ul className="mt-1.5 space-y-1">

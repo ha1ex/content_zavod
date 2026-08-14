@@ -49,8 +49,8 @@ const CSS = `
   --_brand-48k:var(--brand-48k,rgba(125,76,207,.48));
   --_border:var(--border-default,#e0e0e0);
   --_ink:var(--text-title,#2d2d2d);
-  --_font:var(--font-sans,'Roboto','Inter',system-ui,-apple-system,'Segoe UI',sans-serif);
-  --_ls:var(--ls,-0.2px);
+  --_font:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);
+  --_ls:var(--ls,0);
   position:relative;
   padding:var(--sp-12,48px) 0 var(--sp-20,80px);
   overflow:hidden;
@@ -86,7 +86,7 @@ const CSS = `
 }
 .k-hero__title{
   font-size:var(--fs-5xl,48px);line-height:var(--lh-5xl,52px);
-  font-weight:var(--fw-semi,600);letter-spacing:-1px;
+  font-weight:var(--fw-semi,600);letter-spacing:0;
   margin:var(--sp-4,16px) 0 var(--sp-5,20px);
 }
 .k-hero__sub{

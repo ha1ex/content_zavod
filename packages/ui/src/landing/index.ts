@@ -35,6 +35,10 @@ export { CtaBanner } from './CtaBanner';
 export type { CtaBannerProps, CtaBannerCtaProps } from './CtaBanner';
 export { CtaButtons } from './CtaButtons';
 export type { CtaButtonsProps, CtaButtonsCtaProps } from './CtaButtons';
+export { CtaProduct } from './CtaProduct';
+export { FeatureRows } from './FeatureRows';
+export type { FeatureRowsProps, FeatureRowProps } from './FeatureRows';
+export type { CtaProductProps } from './CtaProduct';
 
 export { MediaCopy } from './MediaCopy';
 export type { MediaCopyProps, MediaCopyCheckItemProps, MediaCopyCtaProps } from './MediaCopy';
@@ -116,6 +120,15 @@ export type { PainBubblesProps, PainBubbleProps } from './PainBubbles';
 
 export { SpeakerCard } from './SpeakerCard';
 export type { SpeakerCardProps } from './SpeakerCard';
+export { SpeakerGrid } from './SpeakerGrid';
+export type { SpeakerGridProps, SpeakerItemProps } from './SpeakerGrid';
+export { ChaosOrderMotif } from './ChaosOrderMotif';
+export { ThreadsMotif } from './ThreadsMotif';
+export { NonNativeSelect } from './NonNativeSelect';
+export { EventHeader } from './EventHeader';
+export { VideoGallery } from './VideoGallery';
+export { TrackVisual } from './TrackVisual';
+export type { TrackVisualProps } from './TrackVisual';
 
 export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';

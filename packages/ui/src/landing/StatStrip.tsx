@@ -23,15 +23,15 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-12 md:px-6 xl:px-0 lg:py-16',
+        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
       )}
     >
       {(eyebrow || title || description) && (
-        <div className="mb-10 max-w-2xl">
+        <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:text-center lg:mb-12 lg:max-w-4xl">
           {eyebrow && (
             <p
               data-comp="stats.eyebrow"
-              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+              className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)"
             >
               {eyebrow}
             </p>
@@ -51,7 +51,7 @@ export function StatStrip({ eyebrow, title, description, stats }: StatStripProps
 
       <div
         className={cn(
-          'grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6',
+          'grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6 lg:gap-8',
           stats.length === 3 && 'md:grid-cols-3',
           stats.length === 5 && 'md:grid-cols-5',
         )}

@@ -60,7 +60,7 @@ export function MobileDocReaderMock() {
 
         {/* checklist */}
         <div className="space-y-1.5 rounded-(--radius-lg) border border-(--color-action-primary)/20 bg-(--color-action-primary-soft)/30 p-2.5">
-          <div className="text-[8.5px] font-semibold uppercase tracking-wide text-(--color-text-accent)">
+          <div className="text-[8.5px] font-semibold uppercase text-(--color-text-accent)">
             Что сделать
           </div>
           {[

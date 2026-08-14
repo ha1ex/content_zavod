@@ -169,7 +169,7 @@ function KanbanBoard() {
             const column = (
               <div key={col.title} className="flex flex-1 flex-col rounded-(--radius-lg) bg-(--color-surface-section) px-1.5">
                 <div className="mb-2 flex items-center gap-1.5 px-1">
-                  <span className="text-[12px] font-semibold uppercase tracking-wide text-(--color-text-secondary)">
+                  <span className="text-[12px] font-semibold uppercase text-(--color-text-secondary)">
                     {col.title}
                   </span>
                   <span className="ml-auto inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-(--color-border-default) px-1 text-[11px] font-semibold text-(--color-text-secondary)">

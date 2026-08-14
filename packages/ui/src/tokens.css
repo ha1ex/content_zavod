@@ -55,7 +55,7 @@
   --color-action-primary-soft: var(--color-violet-12);
 
   /* ─── Typography ──────────────────────────────────────────────────── */
-  --font-sans: "Roboto", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --text-xs: 12px;
   --text-xs--line-height: 16px;

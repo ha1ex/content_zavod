@@ -48,7 +48,7 @@ export function DocTemplateMock() {
         {/* sidebar — template + status */}
         <div className="space-y-3">
           <div className="rounded-(--radius-xl) border border-(--color-border-default) bg-(--color-surface-section) p-3">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">
               Шаблон
             </div>
             <div className="mt-1 text-[11.5px] font-semibold text-(--color-text-primary)">
@@ -61,7 +61,7 @@ export function DocTemplateMock() {
           </div>
 
           <div className="space-y-1.5">
-            <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+            <div className="text-[10px] uppercase text-(--color-text-secondary)">
               Статус
             </div>
             {[
@@ -115,7 +115,7 @@ export function DocTemplateMock() {
         <div className="rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-4">
           <div className="flex items-start justify-between border-b border-(--color-border-default) pb-2.5">
             <div>
-              <div className="text-[10px] uppercase tracking-wide text-(--color-text-secondary)">
+              <div className="text-[10px] uppercase text-(--color-text-secondary)">
                 Счёт на оплату
               </div>
               <div className="mt-0.5 text-[14px] font-semibold text-(--color-text-primary)">
@@ -140,7 +140,7 @@ export function DocTemplateMock() {
                     : 'border-(--color-border-default)',
                 )}
               >
-                <div className="text-[9px] uppercase tracking-wide text-(--color-text-secondary)">
+                <div className="text-[9px] uppercase text-(--color-text-secondary)">
                   {f.label}
                 </div>
                 <div
@@ -157,7 +157,7 @@ export function DocTemplateMock() {
 
           {/* line items */}
           <div className="mt-3 space-y-1">
-            <div className="grid grid-cols-[28px_1fr_80px] gap-2 border-b border-(--color-border-default) pb-1 text-[9px] uppercase tracking-wide text-(--color-text-secondary)">
+            <div className="grid grid-cols-[28px_1fr_80px] gap-2 border-b border-(--color-border-default) pb-1 text-[9px] uppercase text-(--color-text-secondary)">
               <span>Кол-во</span>
               <span>Наименование</span>
               <span className="text-right">Сумма</span>

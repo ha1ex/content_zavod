@@ -109,7 +109,7 @@ export function MeetingRoomMock() {
 
           {/* transcript line */}
           <div className="mt-2.5 rounded-(--radius-lg) border border-white/10 bg-neutral-900 p-2">
-            <div className="text-[11px] uppercase tracking-wide text-neutral-500">Транскрипт</div>
+            <div className="text-[11px] uppercase text-neutral-500">Транскрипт</div>
             <p className="mt-1 text-[12px] leading-snug text-neutral-400">
               <span className="font-medium text-neutral-200">Анна:</span> давайте перенесём релиз на пятницу и закроем регресс…
             </p>
@@ -126,7 +126,7 @@ export function MeetingRoomMock() {
                   <Icon name={a.icon} className="h-2.5 w-2.5" strokeWidth={2} />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-[11px] font-semibold uppercase tracking-wide text-(--color-action-primary)">
+                  <div className="text-[11px] font-semibold uppercase text-(--color-action-primary)">
                     {a.kind}
                   </div>
                   <div className="truncate text-[12px] leading-tight text-neutral-100">{a.text}</div>

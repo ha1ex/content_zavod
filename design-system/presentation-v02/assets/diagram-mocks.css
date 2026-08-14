@@ -1,0 +1,45 @@
+/* Диаграммы контент-завода. Источник — packages/ui/src/landing/mocks/Diagram.tsx,
+   константа STYLE. Скопировано без изменений: правки вносить в источник.
+   Все правила лежат под .diagrams-mock, поэтому с классами презентации
+   не сталкиваются. */
+
+.diagrams-mock{
+  --sp-1:4px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-12:48px;
+  --radius-2xl:16px;
+  --fw-semi:600; --fw-reg:400;
+  --brand-100:#7d4ccf; --brand-12:#efe9f9; --brand-hover:#6b3fbf;
+  --text-title:#2d2d2d; --text-secondary:#757575; --border:#e0e0e0;
+  font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
+  display:block; width:100%; padding:48px var(--sp-4); box-sizing:border-box;
+}
+.diagrams-mock, .diagrams-mock *{box-sizing:border-box;}
+.diagrams-mock .s-head{display:flex; flex-direction:column; gap:var(--sp-4); align-items:center; text-align:center; margin:0 auto var(--sp-12); max-width:760px;}
+.diagrams-mock .sh__heading{font-size:36px; line-height:40px; font-weight:var(--fw-semi); color:var(--text-title); margin:0;}
+.diagrams-mock .sh__desc{font-size:16px; line-height:24px; font-weight:var(--fw-reg); color:#2d2d2d; margin:0;}
+
+.diagrams-mock .repts{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-6);}
+@media(min-width:1280px){.diagrams-mock .repts{gap:var(--sp-8);}}
+.diagrams-mock .rept{background:#fff; border:1px solid var(--border); border-radius:var(--radius-2xl); padding:var(--sp-6) var(--sp-6) var(--sp-5); display:flex; flex-direction:column;}
+.diagrams-mock .rept__t{font-size:15px; line-height:20px; font-weight:var(--fw-semi); color:var(--text-title); margin-bottom:var(--sp-1);}
+.diagrams-mock .rept svg{display:block; width:100%; height:auto;}
+.diagrams-mock .rept__lg{display:flex; flex-wrap:wrap; gap:5px 16px; margin-top:auto; padding-top:12px;}
+.diagrams-mock .rept__lg span{display:inline-flex; align-items:center; gap:4px; flex:none; white-space:nowrap; font-size:11px; line-height:1; color:var(--text-secondary);}
+
+.diagrams-mock .repts__nav{display:none; justify-content:center; gap:14px; margin-top:var(--sp-5);}
+.diagrams-mock .repts__navbtn{width:48px; height:48px; border-radius:9999px; border:1px solid var(--border); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s;}
+.diagrams-mock .repts__navbtn:hover:not(:disabled){background:var(--brand-12); border-color:#c9b8ec; color:var(--brand-hover);}
+.diagrams-mock .repts__navbtn:disabled{color:var(--border); cursor:default;}
+.diagrams-mock .repts__navbtn svg{width:24px; height:24px;}
+
+@media(max-width:900px){
+  .diagrams-mock .repts{display:flex; grid-template-columns:none; overflow-x:auto; gap:var(--sp-4); scroll-snap-type:x mandatory; padding-bottom:12px; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
+  .diagrams-mock .repts::-webkit-scrollbar{display:none;}
+  .diagrams-mock .repts > .rept{flex:0 0 auto; width:clamp(308px,90%,360px); scroll-snap-align:start;}
+  .diagrams-mock .repts__nav{display:flex;}
+}
+@media(max-width:767px){
+  .diagrams-mock{padding:32px var(--sp-4);}
+  .diagrams-mock .s-head{align-items:flex-start; text-align:left; margin:0 0 var(--sp-6);}
+  .diagrams-mock .sh__heading{font-size:24px; line-height:32px;}
+}
+

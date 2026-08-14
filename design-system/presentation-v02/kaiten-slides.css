@@ -122,6 +122,12 @@ body:has(#s19:target) .nav-row[data-for="s19"] { display:flex; }
 body:has(#s21:target) .nav-row[data-for="s21"] { display:flex; }
 body:has(#s22:target) .nav-row[data-for="s22"] { display:flex; }
 body:has(#s23:target) .nav-row[data-for="s23"] { display:flex; }
+body:has(#s25:target) .nav-row[data-for="s25"] { display:flex; }
+body:has(#s27:target) .nav-row[data-for="s27"] { display:flex; }
+body:has(#s29:target) .nav-row[data-for="s29"] { display:flex; }
+body:has(#s28:target) .nav-row[data-for="s28"] { display:flex; }
+body:has(#s26:target) .nav-row[data-for="s26"] { display:flex; }
+body:has(#s24:target) .nav-row[data-for="s24"] { display:flex; }
 body:has(#s20:target) .nav-row[data-for="s20"] { display:flex; }
 body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
@@ -146,7 +152,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:600; margin:0 0 1.667cqw; }              /* 30/36, отступ снизу 32 */
 .h3      { font-size:1.25cqw;   line-height:1.333; font-weight:600; margin:0 0 .5cqw; }                 /* 24/32 */
 .body    { font-size:1.0417cqw; line-height:1.4;   font-weight:400; margin:0; }                         /* 20/28 */
-.muted   { color: var(--text-secondary); }
+.muted   { color: var(--text-primary); }
 .accent  { color: var(--text-accent); }
 .mono    { font-family: var(--font-mono); }
 
@@ -529,9 +535,9 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
   padding:1.6cqw; display:flex; flex-direction:column; gap:1.2cqw;
 }
 .case .case-tag {
-  align-self:flex-start; background:var(--surface-page); color:var(--text-secondary);
+  align-self:flex-start; background:var(--surface-page); color:var(--text-primary);
   font-size:.83cqw; letter-spacing:.08em; text-transform:uppercase;
-  padding:.4cqw .9cqw; border-radius:.42cqw;
+  padding:.4cqw .9cqw; border-radius:999px;
 }
 .case .case-text { font-size:1.0417cqw; line-height:1.4; margin:0; flex:1; }
 .case .case-text b { font-weight:600; }
@@ -658,11 +664,11 @@ code {
 .features .feature-icon {
   width:2.5cqw; height:2.5cqw; border-radius:.625cqw; flex:none;
   display:flex; align-items:center; justify-content:center;
-  background:var(--surface-page); color:var(--action-primary);
+  background:var(--violet-12); color:var(--violet-100);
 }
 .features .feature-icon svg { width:1.25cqw; height:1.25cqw; }
 .features .feature-title { font-size:1.0417cqw; line-height:1.4; font-weight:600; margin:0; }
-.features .feature-text  { font-size:1.0417cqw; line-height:1.4; font-weight:400; margin:.1cqw 0 0; color:var(--text-secondary); }
+.features .feature-text  { font-size:1.0417cqw; line-height:1.4; font-weight:400; margin:.1cqw 0 0; color:var(--text-primary); }
 .features .feature.is-accent .feature-icon { background:var(--action-primary); color:#ffffff; }
 .features .feature.is-accent .feature-title { color:var(--text-accent); }
 
@@ -722,17 +728,17 @@ code {
    .is-fail красный, .is-idle светлый. Заливка яркая только у первого и
    последнего шага (.is-strong), остальные — тонированные 12%.
    -------------------------------------------------------------------------- */
-.steps { display:grid; gap:1.1cqw; align-content:start; }
-.steps .step { display:grid; grid-template-columns:1.667cqw 1fr; gap:.9cqw; align-items:start; }
+.steps { display:grid; gap:1.45cqw; align-content:start; }
+.steps .step { display:grid; grid-template-columns:2.4cqw 1fr; gap:1.04cqw; align-items:start; }
 .steps .step-num {
-  width:1.667cqw; height:1.667cqw; border-radius:50%; flex:none;
+  width:2.4cqw; height:2.4cqw; border-radius:50%; flex:none;
   display:flex; align-items:center; justify-content:center;
-  font-size:.83cqw; font-weight:600; line-height:1;
+  font-size:1.15cqw; font-weight:600; line-height:1;
   background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
 }
 .steps .step.is-strong .step-num { background:var(--c-100, var(--action-primary)); color:#fff; }
-.steps .step-title { font-size:.94cqw; line-height:1.35; font-weight:600; margin:0; }
-.steps .step-text  { font-size:.94cqw; line-height:1.35; margin:.05cqw 0 0; color:var(--text-secondary); }
+.steps .step-title { font-size:1.4583cqw; line-height:1.35; font-weight:600; margin:0; }
+.steps .step-text  { font-size:1.25cqw; line-height:1.35; margin:.05cqw 0 0; color:var(--text-secondary); }
 
 /* --- Сгруппированные карточки, макет 213-2212 -------------------------------
    Тонированный фрейм группы, внутри белые карточки. Тон задается парой
@@ -767,8 +773,18 @@ code {
 .quarters { display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--gap); align-items:start; }
 .quarters .q-head {
   background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
-  border-radius:var(--radius-tile); padding:.9cqw 1cqw; margin-bottom:1cqw;
+  padding:.9cqw 1.6cqw; margin-bottom:1cqw; margin-inline:calc(var(--gap) / -2 + .104cqw);
   font-size:1.25cqw; line-height:1.2; font-weight:600; text-align:center;
+  clip-path: polygon(0 0, calc(100% - 1.046cqw) 0, 100% 50%, calc(100% - 1.046cqw) 100%, 0 100%, 1.046cqw 50%);
+  border-radius:.31cqw;
+}
+.quarters > div:first-child .q-head {
+  clip-path: polygon(0 0, calc(100% - 1.046cqw) 0, 100% 50%, calc(100% - 1.046cqw) 100%, 0 100%);
+  border-radius:.625cqw 0 0 .625cqw;
+}
+.quarters > div:last-child .q-head {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 1.046cqw 50%);
+  border-radius:0 .625cqw .625cqw 0;
 }
 .quarters .q-items { display:grid; gap:.63cqw; }
 .quarters .q-item {
@@ -783,6 +799,7 @@ code {
    -------------------------------------------------------------------------- */
 .chart-row { display:grid; grid-template-columns:auto 1fr; gap:1.6cqw; align-items:center; margin-top:.8cqw; }
 .donut { width:19cqw; }
+.donut .donut-hole { fill:var(--surface-frame); }
 .donut svg, .area svg { width:100%; height:auto; display:block; }
 .area { margin-top:1.25cqw; }
 .legend { list-style:none; margin:0; padding:0; display:grid; gap:.7cqw; }
@@ -805,13 +822,58 @@ code {
   border-left:.208cqw solid var(--c-100, var(--action-primary));
   border-radius:.833cqw; padding:.42cqw .63cqw; display:flex; flex-direction:column; justify-content:center; gap:.52cqw;
 }
-.flow-map .fl-title { margin:0; font-size:.94cqw; line-height:1.2; font-weight:600; color:var(--c-100, var(--text-accent)); }
+.flow-map .fl-title { margin:0; font-size:1.25cqw; line-height:1.2; font-weight:600; color:var(--c-100, var(--text-accent)); }
 .flow-map .fl-path {
-  margin:0; font-size:.78cqw; line-height:1.2; color:var(--text-secondary);
+  margin:0; font-size:1.04cqw; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-primary);
   background:var(--surface-page); border-radius:.26cqw; padding:.21cqw .42cqw;
 }
 .flow-map .fl-cap {
   position:absolute; transform:translate(-50%, -50%);
-  background:var(--border-default); color:var(--text-secondary);
+  background:var(--surface-frame); color:var(--text-secondary);
+  border:.078cqw solid var(--border-default);
   border-radius:999px; padding:.31cqw .83cqw; font-size:.94cqw; line-height:1.2; white-space:nowrap;
 }
+
+/* Диаграмма вписывается в плашку слайда, сохраняя свои пропорции. */
+.diagrams-mock { width:100%; display:flex !important; padding:0 !important; }
+.diagrams-mock .rept { padding-top:0; padding-bottom:0; flex:1; min-width:0; }
+.diagrams-mock .rept__t { margin-top:0; }
+.diagrams-mock .rept__lg { padding-top:.21cqw; padding-bottom:0; }
+.diagrams-mock svg { width:100%; height:auto; display:block; }
+
+/* --- Роадмап-сетка кварталов -----------------------------------------------
+   Четыре колонки с прямоугольной шапкой и вертикальным разделителем.
+   Пункты стоят на явных строках (grid-row), поэтому между ними остаются
+   пропуски — как в исходной схеме, где связи идут по диагонали.
+   -------------------------------------------------------------------------- */
+.rm-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:0; margin-top:1.25cqw; }
+.rm-col { display:grid; grid-template-rows:auto repeat(5, 1fr); gap:.83cqw; padding:0 .83cqw; position:relative; }
+.rm-col + .rm-col::before {
+  content:""; position:absolute; left:0; top:0; bottom:0;
+  width:.078cqw; background:var(--border-default);
+}
+.rm-head {
+  background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
+  border-radius:var(--radius-tile); padding:.83cqw;
+  font-size:1.4583cqw; line-height:1.2; font-weight:600; text-align:center;
+}
+.rm-item {
+  background:var(--c-12, var(--surface-accent)); border-left:.208cqw solid var(--c-100, var(--action-primary));
+  border-radius:.42cqw; padding:.63cqw .83cqw;
+  font-size:1.0417cqw; line-height:1.3; align-self:center;
+}
+
+/* Мокап проекта вписывается в половину слайда, сохраняя пропорции. */
+.mod-shot { container-type:inline-size; width:100%; }
+.mod-shot .mod {
+  border:none !important; box-shadow:none !important;
+  padding-top:0 !important; padding-bottom:0 !important;
+  border-radius:1.04cqw !important; overflow:hidden !important;
+}
+.mod-shot .mpa { padding:0 !important; }
+.mod-shot *, .mod-shot *::before, .mod-shot *::after {
+  animation:none !important; transition:none !important;
+}
+.mod-shot .mpa { zoom:calc(100cqi / 1360px); }
+
+.nav .mono { white-space:nowrap; }

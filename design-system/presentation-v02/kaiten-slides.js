@@ -13,15 +13,19 @@
   nav.className = 'nav';
   nav.setAttribute('aria-label', 'Навигация по слайдам');
   nav.innerHTML =
+    '<button data-first aria-label="В начало">«</button>' +
     '<button data-prev aria-label="Предыдущий слайд">←</button>' +
     '<div class="dots"></div>' +
     '<button data-next aria-label="Следующий слайд">→</button>' +
+    '<button data-last aria-label="В конец">»</button>' +
     '<span data-counter class="mono"></span>';
   document.body.appendChild(nav);
 
   var dotsBox = nav.querySelector('.dots');
   var counter = nav.querySelector('[data-counter]');
   var prevBtn = nav.querySelector('[data-prev]');
+  var firstBtn = nav.querySelector('[data-first]');
+  var lastBtn = nav.querySelector('[data-last]');
   var nextBtn = nav.querySelector('[data-next]');
   var index = 0;
 
@@ -40,12 +44,16 @@
     dots.forEach(function (d, i) { d.setAttribute('aria-current', String(i === index)); });
     counter.textContent = (index + 1) + ' / ' + slides.length;
     prevBtn.disabled = index === 0;
+    firstBtn.disabled = index === 0;
     nextBtn.disabled = index === slides.length - 1;
-    location.hash = 's' + (index + 1);
+    lastBtn.disabled = index === slides.length - 1;
+    location.hash = slides[index].id;
   }
 
+  firstBtn.addEventListener('click', function () { go(0); });
   prevBtn.addEventListener('click', function () { go(index - 1); });
   nextBtn.addEventListener('click', function () { go(index + 1); });
+  lastBtn.addEventListener('click', function () { go(slides.length - 1); });
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(index + 1); }

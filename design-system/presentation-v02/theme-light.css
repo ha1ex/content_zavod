@@ -40,7 +40,7 @@
   /* --- роли --- */
   --stage-bg:var(--neutral-200);        /* поле вокруг слайда */
   --surface-page:var(--neutral-000);
-  --surface-frame:#f2f2f2;              /* фрейм в шаблоне именно такой */
+  --surface-frame:var(--neutral-100);   /* #F5F5F5 — между шаблонным #F2F2F2 и #FAFAFA */
   --surface-accent:var(--violet-12);
   --border-default:var(--neutral-300);
   --table-line:#D1D5DB;                 /* разделители строк в таблице сравнения */
@@ -51,10 +51,12 @@
   --text-accent:var(--violet-100);
   --frame-accent-fg:var(--violet-100);  /* заголовок на акцентном фрейме */
 
-  --badge-bg:var(--surface-frame);      /* бейдж на обложке */
+  --badge-bg:var(--surface-accent);     /* бейдж на обложке — светло-сиреневый #EFE9F9 */
   --chevron-bg:var(--surface-accent);   /* сегмент шеврон-ленты */
 
   --tile-bg:var(--violet-12);           /* иконочная плашка */
+  --bar-rest-bg:rgba(45,45,45,.06);     /* непокрытый остаток столбика */
+  --case-bg:#f2f2f2;                    /* карточка кейса темнее обычного фрейма */
   --tile-fg:var(--violet-100);
 
   /* В светлой теме темных плашек не используем: командная строка тоже светлая */

@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../kaiten-slides.css" />
 <link rel="stylesheet" href="../theme-light.css" />
+  <link rel="stylesheet" href="../assets/feature-mocks.css" />
 <link rel="stylesheet" href="../theme-dark.css" />
 <link rel="stylesheet" href="../theme-comparison.css" />
 <style>
@@ -219,7 +220,7 @@
         <div style="display:flex; flex-direction:column; min-height:0">
           <h3 class="h2">Доменов покрыто</h3>
           <div class="bars" style="flex:1; padding-top:2cqw">
-            <div class="bar-col c-blue"><div class="bar" style="--h:45%">4</div><div class="bar-label">было</div></div>
+            <div class="bar-col c-blue"><div class="bar-rest" style="flex:none; height:45%"></div><div class="bar" style="--h:45%">4</div><div class="bar-label">было</div></div>
             <div class="bar-col c-violet"><div class="bar-delta">+100%</div><div class="bar" style="--h:90%">8</div><div class="bar-label">сейчас</div></div>
           </div>
         </div>
@@ -312,7 +313,7 @@
         </div>
 
         <!-- ЗАГЛУШКА: заменить на скриншот страницы согласования -->
-        <div style="display:flex; align-items:center"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.833cqw" /></div>
+        <div style="display:flex; align-items:center"><img src="../assets/kaiten-board.png" alt="" style="position:absolute; right:3cqw; top:-6.5cqw; width:29.85cqw; height:auto; display:block; border-radius:.833cqw" /></div>
       </div>
     </section>
 
@@ -323,11 +324,47 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-4">
-        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Реестр компонентов</h3><p class="body muted">22 секционных компонента. Ничего кроме них конвейер вставить не может.</p></div>
-        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Макеты интерфейса</h3><p class="body muted">27 макетов по восьми доменам. Чужой домен заблокирован.</p></div>
-        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Сценарии страницы</h3><p class="body muted">10 плейбуков под разные уровни осведомленности аудитории.</p></div>
-        <div class="frame is-accent" style="padding:1.4cqw"><img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.63cqw; margin-bottom:1.2cqw" /><h3 class="h3">Проверки</h3><p class="body">12 валидаторов на каждом прогоне: бренд, домен, доступность, бизнес-правила.</p></div>
+      <div class="s-body grid-4x2">
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="kbsh"><div class="kbside" style="gap:5px;justify-content:center"><span class="hd"></span><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="pj"><i></i><b>Проект</b></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div></div><div class="kbmain"><div class="vtb"><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi act"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1.5" y="2" width="3.4" height="12" rx="1"/><rect x="6.3" y="2" width="3.4" height="8" rx="1"/><rect x="11.1" y="2" width="3.4" height="10" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><line x1="1.5" y1="6.2" x2="14.5" y2="6.2"/><line x1="1.5" y1="9.9" x2="14.5" y2="9.9"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="12" height="2" rx="1"/><rect x="2" y="7" width="8.5" height="2" rx="1"/><rect x="2" y="11" width="5" height="2" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="3" width="12.4" height="11" rx="2"/><line x1="1.8" y1="6.5" x2="14.2" y2="6.5"/><line x1="5" y1="1.6" x2="5" y2="4"/><line x1="11" y1="1.6" x2="11" y2="4"/></svg></span></div><div class="bttl">Делопроизводство</div><div class="kboard"><div class="kcol"><div class="kh">Очередь</div><span class="kk r" style="height:17px"></span><span class="kk g" style="height:24px"></span><span class="kk n" style="height:23px"></span></div><div class="kcol"><div class="kh">В работе</div><span class="kk o" style="height:24px"></span><span class="kk r" style="height:26px"></span><span class="kk g" style="height:24px"></span></div><div class="kcol"><div class="kh">Согласо…</div><span class="kk g" style="height:17px"></span><span class="kk o" style="height:24px"></span><span class="kk r" style="height:23px"></span></div><div class="kcol"><div class="kh">Готово</div><span class="kk r" style="height:17px"></span><span class="kk g" style="height:24px"></span><span class="kk fg" style="height:22px"></span></div></div></div></div></div></div></div>
+          <h3 class="h3">Реестр компонентов</h3>
+          <p class="body muted">22 секционных компонента. Ничего кроме них конвейер вставить не может.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="kbsh"><div class="kbside"><span class="hd"></span><div class="kbrow"><span class="dot"></span><span class="ln" style="width:70%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:55%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:70%"></span></div><div class="pj"><i></i><b>Проект</b></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:72%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:55%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:68%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:72%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:58%"></span></div></div><div class="kbmain"><div class="vtb"><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1.5" y="2" width="3.4" height="12" rx="1"/><rect x="6.3" y="2" width="3.4" height="8" rx="1"/><rect x="11.1" y="2" width="3.4" height="10" rx="1"/></svg></span><span class="vi act"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="3.5" height="3.5" rx=".8"/><rect x="6.25" y="1" width="3.5" height="3.5" rx=".8"/><rect x="11.5" y="1" width="3.5" height="3.5" rx=".8"/><rect x="1" y="6.25" width="3.5" height="3.5" rx=".8"/><rect x="6.25" y="6.25" width="3.5" height="3.5" rx=".8"/><rect x="11.5" y="6.25" width="3.5" height="3.5" rx=".8"/><rect x="1" y="11.5" width="3.5" height="3.5" rx=".8"/><rect x="6.25" y="11.5" width="3.5" height="3.5" rx=".8"/><rect x="11.5" y="11.5" width="3.5" height="3.5" rx=".8"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="12" height="2" rx="1"/><rect x="2" y="7" width="8.5" height="2" rx="1"/><rect x="2" y="11" width="5" height="2" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="3" width="12.4" height="11" rx="2"/><line x1="1.8" y1="6.5" x2="14.2" y2="6.5"/><line x1="5" y1="1.6" x2="5" y2="4"/><line x1="11" y1="1.6" x2="11" y2="4"/></svg></span></div><div style="border:1px solid #ececec;border-radius:5px;overflow:hidden"><div class="row" style="gap:0;background:#f3f3f3;border-bottom:1px solid #ececec"><span class="lab" style="flex:0 0 34.5%;min-width:0;font-weight:600;padding:3px 5px;border-right:1px solid #ececec">Название</span><span class="lab" style="flex:0 0 17.2%;min-width:0;padding:3px 5px;border-right:1px solid #ececec">ID</span><span class="lab" style="flex:0 0 24.1%;min-width:0;padding:3px 2px;border-right:1px solid #ececec">Заказчик</span><span class="lab" style="flex:0 0 24.1%;min-width:0;padding:3px 5px">Ответст…</span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px;border-right:1px solid #f2f2f2"><span style="color:var(--t2);font-size:7px;flex:none">▾</span><span style="height:6px;border-radius:3px;background:var(--violet-12);width:62%"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.2%;min-width:0"></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;display:flex;align-items:center;padding:0 4px;border-right:1px solid #f2f2f2"><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--green);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--red);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--green);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px;border-right:1px solid #f2f2f2"><span style="color:var(--t2);font-size:7px;flex:none">▾</span><span style="height:6px;border-radius:3px;background:var(--violet-12);width:68%"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.2%;min-width:0"></span></div><div class="row" style="gap:0"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div></div></div></div></div></div></div>
+          <h3 class="h3">Макеты интерфейса</h3>
+          <p class="body muted">27 макетов по восьми доменам. Чужой домен заблокирован.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="padding:0"><div style="position:relative;width:100%;height:100%"><span style="position:absolute;left:12px;top:12px;width:47px;height:151px;background:#f3f3f4;border-radius:6px 3px 3px 6px"></span><span style="position:absolute;left:19px;top:15px;font-size:7.5px;line-height:9px;font-weight:700;color:#2d2d2d">Проекты</span><span style="position:absolute;left:85px;top:15px;transform:translateX(-50%);font-size:7.5px;line-height:9px;color:#898989">Июнь</span><span style="position:absolute;left:145px;top:15px;transform:translateX(-50%);font-size:7.5px;line-height:9px;color:#898989">Июль</span><span style="position:absolute;left:204px;top:15px;transform:translateX(-50%);font-size:7.5px;line-height:9px;color:#898989">Август</span><i style="position:absolute;left:12px;top:28px;width:219px;height:1px;background:#e5e5e5"></i><i style="position:absolute;left:12px;top:46px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:65px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:84px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:105px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:125px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:144px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:114.5px;top:15px;width:1px;height:147px;background:#e6e6e6"></i><i style="position:absolute;left:175px;top:15px;width:1px;height:147px;background:#e6e6e6"></i><span style="position:absolute;left:18px;top:34.5px;width:5px;height:5px;border-radius:50%;background:#e84033"></span><span style="position:absolute;left:27px;top:35px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:53.5px;width:5px;height:5px;border-radius:50%;background:#ab47bd"></span><span style="position:absolute;left:27px;top:54px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:73px;width:5px;height:5px;border-radius:50%;background:#2196f3"></span><span style="position:absolute;left:27px;top:73.5px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:92px;width:5px;height:5px;border-radius:50%;background:#4caf51"></span><span style="position:absolute;left:27px;top:92.5px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:112.5px;width:5px;height:5px;border-radius:50%;background:#a5ca00"></span><span style="position:absolute;left:27px;top:113px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:131.5px;width:5px;height:5px;border-radius:50%;background:#ffa100"></span><span style="position:absolute;left:27px;top:132px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:150.5px;width:5px;height:5px;border-radius:50%;background:#7d4ccf"></span><span style="position:absolute;left:27px;top:151px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:64px;top:31.5px;width:62px;height:10px;border-radius:3px;background:rgba(244,67,54,.12)"></span><span style="position:absolute;left:115px;top:50.5px;width:55px;height:10px;border-radius:3px;background:rgba(171,71,189,.12)"></span><span style="position:absolute;left:192px;top:50.5px;width:21px;height:10px;border-radius:3px;background:rgba(171,71,189,.12)"></span><span style="position:absolute;left:60px;top:69.5px;width:46px;height:10px;border-radius:3px;background:rgba(33,150,243,.12)"></span><span style="position:absolute;left:158px;top:69.5px;width:52px;height:10px;border-radius:3px;background:rgba(33,150,243,.12)"></span><span style="position:absolute;left:82.5px;top:89.5px;width:32px;height:10px;border-radius:3px;background:rgba(76,175,81,.12)"></span><span style="position:absolute;left:199px;top:89.5px;width:32px;height:10px;border-radius:3px;background:rgba(76,175,81,.12)"></span><span style="position:absolute;left:105px;top:110px;width:53px;height:10px;border-radius:3px;background:rgba(165,202,0,.24)"></span><span style="position:absolute;left:192px;top:110px;width:39px;height:10px;border-radius:3px;background:rgba(165,202,0,.24)"></span><span style="position:absolute;left:75px;top:129.5px;width:60px;height:10px;border-radius:3px;background:rgba(255,161,0,.12)"></span><span style="position:absolute;left:158px;top:129.5px;width:34px;height:10px;border-radius:3px;background:rgba(255,161,0,.12)"></span><span style="position:absolute;left:134px;top:149px;width:98px;height:10px;border-radius:3px;background:rgba(125,76,207,.12)"></span><svg style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 240 176" fill="none"><defs><marker id="rmArr" markerWidth="5" markerHeight="5" refX="3" refY="1.75" orient="auto"><path d="M0 0L3.5 1.75L0 3.5Z" fill="#b3b3b3"/></marker></defs><path d="M126 36.5C135 36.5 103 55.5 112 55.5" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/><path d="M170 55.5C179 55.5 146 74.5 155 74.5" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/><path d="M210 74.5C219 74.5 187 94.5 196 94.5" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/><path d="M114 94.5C123 94.5 93 115 102 115" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/></svg></div></div></div></div>
+          <h3 class="h3">Сценарии страницы</h3>
+          <p class="body muted">10 плейбуков под разные уровни осведомленности аудитории.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="row" style="gap:6px;margin-bottom:8px"><span class="av" style="width:16px;height:16px;border-radius:5px;background:transparent;flex:none"><svg width="16" height="16" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="aiBgA" x1="14" y1="24" x2="14" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#AB47BD"/><stop offset=".5" stop-color="#2196F3"/><stop offset="1" stop-color="#00BCD4"/></linearGradient></defs><path d="M2.5 9C2.5 6.23858 4.73858 4 7.5 4H19.8333C20.9152 4 21.9679 4.35089 22.8333 5L23.9 5.8C24.9072 6.55542 25.5 7.74097 25.5 9V19C25.5 20.259 24.9072 21.4446 23.9 22.2L22.8333 23C21.9679 23.6491 20.9152 24 19.8333 24H7.5C4.73858 24 2.5 21.7614 2.5 19V9Z" fill="url(#aiBgA)"/><rect x="4.5" y="6" width="16" height="16" rx="3" fill="#121212"/><rect x="7.3" y="9.8" width="4" height="4.2" rx="1.2" fill="#4CAF51"/><rect x="13.3" y="9.8" width="4" height="4.2" rx="1.2" fill="#4CAF51"/><path d="M8.5 17.3Q12.5 20.6 16.5 17.3" stroke="#4CAF51" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="val">Автоматизация</span></div><div class="tabs"><span class="a">СОБЫТИЯ</span><span>СРОКИ</span><span>КНОПКИ</span><span>ЧЕК-ЛИСТЫ</span></div><div style="display:flex;gap:8px"><div style="flex:0 0 92px;min-width:0"><div class="lab" style="margin-bottom:4px">Когда</div><div class="field row" style="margin-bottom:7px"><span class="val" style="font-weight:400;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Карточка перемещена</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div><div class="lab" style="margin-bottom:4px">Условие</div><div class="field row"><span class="val" style="font-weight:400;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Метка карточки</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div></div><div style="flex:1"><div class="lab" style="margin-bottom:4px">Выполнить</div><div class="field row" style="margin-bottom:7px"><span class="val" style="font-weight:400;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Назначить ответ…</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div><div class="row" style="gap:5px;margin-bottom:4px"><span class="rb"></span><span class="lab">Автор события</span></div><div class="row" style="gap:5px;margin-bottom:4px"><span class="rb on"></span><span class="val" style="font-size:8px">Заказчик карточки</span></div><div class="row" style="gap:5px"><span class="rb"></span><span class="lab">Случайный польз…</span></div></div></div></div></div></div>
+          <h3 class="h3">Проверки</h3>
+          <p class="body muted">12 валидаторов на каждом прогоне: бренд, домен, доступность.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="padding:0;display:flex"><div style="width:96px;flex:none;background:#fff;border-right:1px solid var(--bd);padding:10px 9px;display:flex;flex-direction:column;gap:7px"><div class="row" style="gap:4px"><span style="font-size:8px">📁</span><span style="font-size:7px;color:var(--t3)">⌄</span><span class="val">Поддержка</span></div><div class="row" style="gap:4px;padding-left:10px"><span style="font-size:8px">📌</span><span class="lab">Акты</span></div><div class="row" style="gap:4px;padding-left:10px"><span style="font-size:8px">📖</span><span class="lab">Правила</span></div><div class="row" style="gap:4px;background:var(--violet-12);border-radius:6px 0 0 6px;margin:0 -9px 0 -2px;padding:3px 4px 3px 12px"><span style="font-size:8px">🚀</span><span class="val" style="color:var(--violet)">Полезные…</span></div><div class="row" style="gap:4px"><svg width="9" height="9" viewBox="0 0 16 16" fill="#9e9e9e"><rect x="2" y="2" width="12" height="12" rx="2.2"/><rect x="4.5" y="5" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="7.6" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="10.2" width="4.5" height="1.3" rx=".65" fill="#fff"/></svg><span class="lab">Регламенты</span></div><div class="row" style="gap:4px"><svg width="9" height="9" viewBox="0 0 16 16" fill="#9e9e9e"><rect x="2" y="2" width="12" height="12" rx="2.2"/><rect x="4.5" y="5" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="7.6" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="10.2" width="4.5" height="1.3" rx=".65" fill="#fff"/></svg><span class="lab">Документы</span></div></div><div style="flex:1;padding:11px 11px 10px"><div class="val" style="margin-bottom:8px;font-weight:700">Новые цели Q3</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px"><div style="background:#fde8e6;border-radius:6px;height:33px;display:flex;align-items:center;justify-content:center;color:#f44336;font-weight:600;font-size:12px">1</div><div style="background:#fbfae0;border-radius:6px;height:33px;display:flex;align-items:center;justify-content:center;color:#c8b900;font-weight:600;font-size:12px">2</div><div style="background:#fff2e0;border-radius:6px;height:33px;display:flex;align-items:center;justify-content:center;color:#f57c00;font-weight:600;font-size:12px">3</div><div style="background:#e9f5ea;border-radius:6px;height:33px;display:flex;align-items:center;justify-content:center;color:#4caf51;font-weight:600;font-size:12px">4</div></div><div style="display:flex;flex-direction:column;gap:6px"><span class="line" style="height:5px"></span><span class="line" style="height:5px;width:88%"></span><span class="line" style="height:5px"></span><span class="line" style="height:5px;width:88%"></span><span class="line" style="height:5px;width:64%"></span></div></div></div></div></div>
+          <h3 class="h3">Тексты и тон</h3>
+          <p class="body muted">Редполитика в машиночитаемом виде: запреты, термины, формулировки.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="val" style="border-bottom:1px solid #eee;padding-bottom:6px;margin-bottom:7px;font-weight:700">Название задачи</div><div style="position:relative;flex:1;min-height:0"><div style="display:flex;flex-direction:column;gap:7px"><div class="row"><span class="lab" style="flex:0 0 68px">Задача №</span><span class="val">Заказчик</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Расположение</span><span class="val">Доска/Статус</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Тип</span><span class="lab">…</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Участник</span><span class="lab">…</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Срок</span><span class="lab">…</span></div></div><div style="position:absolute;top:-14px;right:0;display:flex;gap:4px"><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span></div><div style="position:absolute;right:6px;top:30px;width:108px;background:#fff;border:1px solid #d9d9d9;border-radius:8px;box-shadow:0 8px 20px -8px rgba(0,0,0,.22);padding:5px"><div class="row" style="gap:5px;background:#fff0d9;border-radius:5px;padding:3px 5px;margin-bottom:2px"><span style="font-size:9px;line-height:1">📌</span><span class="val" style="color:#b87400">Заявка</span></div><div class="row" style="gap:5px;padding:3px 5px;margin-bottom:1px"><span style="font-size:9px;line-height:1">💵</span><span class="val" style="font-weight:400">Платеж</span></div><div class="row" style="gap:5px;padding:3px 5px;margin-bottom:1px"><span style="font-size:9px;line-height:1">📄</span><span class="val" style="font-weight:400">Отчетность</span></div><div class="row" style="gap:5px;padding:3px 5px"><span style="font-size:9px;line-height:1">🔍</span><span class="val" style="font-weight:400">Акт сверки</span></div></div></div><div class="row" style="gap:5px;border-top:1px solid #eee;padding-top:6px;margin-top:5px;margin-bottom:6px"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#757575" stroke-width="1.3"><circle cx="4" cy="8" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><path d="M5.7 7l4.6-2.3M5.7 9l4.6 2.3"/></svg><span class="lab">Связи</span></div><div style="border:1px solid #eee;border-radius:6px;padding:5px 7px"><div class="row" style="gap:6px"><span class="lab" style="flex:0 0 36px">Задача 1</span><span class="row" style="flex:1;gap:4px"><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span></span><span style="width:13px;height:13px;border-radius:50%;background:#ededed;flex:none"></span><span style="flex:0 0 26px;height:5px;border-radius:3px;background:#ededed"></span></div></div></div></div></div>
+          <h3 class="h3">Поля брифа</h3>
+          <p class="body muted">Аудитория, обещание, ограничения — то, без чего прогон не стартует.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="ttl">Скорость команды по спринтам</div><svg viewBox="0 0 256 96" style="width:100%;height:104px"><line x1="6" y1="86" x2="250" y2="86" stroke="#e6e6e6"/><g><rect x="14" y="60" width="9" height="26" fill="var(--blue)"/><rect x="24" y="66" width="9" height="20" fill="#2d2d2d"/><rect x="54" y="40" width="9" height="46" fill="var(--blue)"/><rect x="64" y="48" width="9" height="38" fill="#2d2d2d"/><rect x="94" y="52" width="9" height="34" fill="var(--blue)"/><rect x="104" y="58" width="9" height="28" fill="#2d2d2d"/><rect x="134" y="22" width="9" height="64" fill="var(--blue)"/><rect x="144" y="34" width="9" height="52" fill="#2d2d2d"/><rect x="174" y="50" width="9" height="36" fill="var(--blue)"/><rect x="184" y="44" width="9" height="42" fill="#2d2d2d"/><rect x="214" y="62" width="9" height="24" fill="var(--blue)"/><rect x="224" y="56" width="9" height="30" fill="#2d2d2d"/></g></svg><div class="row" style="gap:12px;margin-top:4px"><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:var(--blue)"></i><span class="lab">Взято в спринт</span></span><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#2d2d2d"></i><span class="lab">Выполнено</span></span></div></div></div></div>
+          <h3 class="h3">Отчет о прогоне</h3>
+          <p class="body muted">Что прошло, что чинилось и сколько попыток ушло на фазу.</p>
+        </div>
+        <div class="frame" style="padding:1.4cqw">
+          <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="position:relative;overflow:hidden"><div style="position:absolute;left:12px;top:0;bottom:0;width:120px;display:flex;flex-direction:column;justify-content:center"><div class="row" style="gap:7px;margin-bottom:11px"><span style="width:24px;height:24px;border-radius:50%;background:#e6e6e6;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden"><svg width="15" height="15" viewBox="0 0.75 24 24" fill="#b3b3b3"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span><div><div class="val">@nickname</div><div class="lab">Комментатор</div></div></div><div class="lab" style="margin-bottom:8px">Роль</div><div class="row" style="gap:7px;margin-bottom:8px"><span class="rb"></span><span class="val" style="font-weight:400">администратор</span></div><div class="row" style="gap:7px;margin-bottom:8px"><span class="rb"></span><span class="val" style="font-weight:400">редактор</span></div><div class="row" style="gap:7px"><span class="rb on"></span><span class="val">комментатор</span></div></div><svg width="104" height="118" viewBox="0 0 58 66" style="position:absolute;right:2px;top:50%;transform:translateY(-50%)"><defs><filter id="shieldInner" x="-25%" y="-25%" width="150%" height="150%"><feOffset dy="0"/><feGaussianBlur stdDeviation="2" result="ib"/><feComposite operator="out" in="SourceGraphic" in2="ib" result="inv"/><feFlood flood-color="#000000" flood-opacity="0.15" result="col"/><feComposite operator="in" in="col" in2="inv" result="sh"/><feComposite operator="over" in="sh" in2="SourceGraphic"/></filter></defs><path d="M29 3 L54 13 V32 C54 49 43 60 29 64 C15 60 4 49 4 32 V13 Z" fill="#efe9f9" filter="url(#shieldInner)"/><rect x="20" y="31" width="18" height="15" rx="2.5" fill="#fff"/><path d="M23 31 V26 a6 6 0 0 1 12 0 V31" fill="none" stroke="#fff" stroke-width="2.5"/><rect x="27.5" y="36.5" width="3" height="5" rx="1.5" fill="#efe9f9"/></svg></div></div></div>
+          <h3 class="h3">Кто что меняет</h3>
+          <p class="body muted">Реестр правит дизайн-система, брифы — маркетинг, код — никто вручную.</p>
+        </div>
       </div>
     </section>
 
@@ -338,14 +375,15 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body">
-        <div class="frame is-accent" style="display:grid; grid-template-columns:1.3fr 1fr; gap:2cqw; align-items:center">
+      <div class="s-body" style="display:flex; flex-direction:column; min-height:0">
+        <h3 class="h2" style="margin-bottom:1.1cqw">Восемь доменов, один конвейер</h3>
+        <div class="frame is-accent" style="position:relative; height:16.35cqw; padding:2.08cqw; padding-right:32cqw; overflow:visible; display:flex; align-items:center">
           <p class="body">Конвейер собрал страницы для разных доменов — от продуктовых до сравнений с конкурентами. Каждая прошла те же проверки и ушла в вeрстку обычным пул-реквестом.</p>
-          <img src="../assets/kaiten-board.png" alt="" style="width:100%; height:auto; display:block; border-radius:.833cqw" />
+          <img src="../assets/kaiten-board.png" alt="" style="position:absolute; right:.6cqw; top:-2.81cqw; width:29.85cqw; height:auto; display:block; border-radius:.833cqw" />
         </div>
 
         <!-- ЗАГЛУШКА: вместо названий подставить логотипы клиентов -->
-        <div class="cases" style="margin-top:var(--gap)">
+        <div class="cases" style="margin-top:var(--gap); flex:1; min-height:0">
           <div class="case">
             <span class="case-tag">кейс</span>
             <p class="case-text">Страница <b>сравнения с конкурентом</b> собрана из брифа за один прогон</p>
@@ -365,8 +403,439 @@
       </div>
     </section>
 
+    <!-- ============================== ручная сборка против конвейера === -->
+    <section class="slide" id="s11">
+      <div class="s-head">
+        <h2 class="s-title">Что дает конвейер на каждом шаге</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div class="frame">
+          <h3 class="h2">Ручная сборка</h3>
+          <h4 class="h3">Каждая страница — отдельный проект</h4>
+          <p class="body muted">Задача проходит через дизайн, фронтенд и ревью последовательно. Сроки складываются из очередей, а качество держится на внимательности исполнителя.</p>
+          <div class="features">
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Сроки</p><p class="feature-text">Несколько дней на страницу, из них большая часть — ожидание в очереди</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Компоненты</p><p class="feature-text">Блоки собираются вручную, чужой блок никто не остановит</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Тон бренда</p><p class="feature-text">Проверяется глазами на финальном ревью, когда переделывать дорого</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Повторяемость</p><p class="feature-text">Каждый следующий запуск начинается с нуля</p></div></div>
+          </div>
+        </div>
+
+        <div class="frame is-accent">
+          <h3 class="h2">Контент-завод</h3>
+          <h4 class="h3">Каждая страница — прогон конвейера</h4>
+          <p class="body">Бриф проходит девять фаз с проверкой на каждой. Не прошло — конвейер чинит сам и пробует снова, до трех раз.</p>
+          <div class="features">
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Сроки</p><p class="feature-text">Минута от брифа до готовой страницы на наших компонентах</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Компоненты</p><p class="feature-text">Доступны только 22 секционных компонента из реестра</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Тон бренда</p><p class="feature-text">12 валидаторов на каждом прогоне: бренд, домен, доступность</p></div></div>
+            <div class="feature is-accent"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Повторяемость</p><p class="feature-text">Перезапуск безопасен: готовые фазы пропускаются</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================== что получает команда === -->
+    <section class="slide" id="s12">
+      <div class="s-head">
+        <h2 class="s-title">Что команда получает на выходе</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <h3 class="h2">Не макет, а <span class="accent">готовая страница</span> в репозитории</h3>
+
+          <h4 class="h3" style="margin-top:1.25cqw">Верстка, а не картинка</h4>
+          <p class="body muted">Конвейер отдает обычный TSX на компонентах реестра. Он проходит проверку кода, типизацию и визуальные тесты наравне с любым пул-реквестом — отдельного маршрута для машинного кода нет.</p>
+
+          <h4 class="h3" style="margin-top:1.25cqw">Черновик, который не стыдно показать</h4>
+          <p class="body muted">Тексты, порядок секций и тон бренда проверены до того, как страницу увидел человек. Правки идут по существу, а не по опечаткам и англицизмам.</p>
+
+          <div class="tiles" style="grid-template-columns:repeat(3, 1fr); margin-top:auto; margin-bottom:7.76cqw; padding-top:1.6cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Одна команда</p>
+              <p class="tile-text">Единственная точка входа — agent build. Руками в generated/ не ходим.</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Одна минута</p>
+              <p class="tile-text">От брифа до страницы. Раньше на это уходило несколько дней.</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+              <p class="tile-title">Без потерь</p>
+              <p class="tile-text">Перезапуск пропускает готовые фазы и не переписывает сделанное.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2x2">
+          <div class="frame"></div>
+          <div class="frame"></div>
+          <div class="frame"></div>
+          <div class="frame is-accent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== что проверяет конвейер === -->
+    <section class="slide" id="s13">
+      <div class="s-head">
+        <h2 class="s-title">Двенадцать проверок на каждом прогоне</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body grid-2x2">
+          <div class="frame" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180" style="position:relative;overflow:hidden"><div style="position:absolute;left:12px;top:0;bottom:0;width:120px;display:flex;flex-direction:column;justify-content:center"><div class="row" style="gap:7px;margin-bottom:11px"><span style="width:24px;height:24px;border-radius:50%;background:#e6e6e6;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden"><svg width="15" height="15" viewBox="0 0.75 24 24" fill="#b3b3b3"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span><div><div class="val">@nickname</div><div class="lab">Комментатор</div></div></div><div class="lab" style="margin-bottom:8px">Роль</div><div class="row" style="gap:7px;margin-bottom:8px"><span class="rb"></span><span class="val" style="font-weight:400">администратор</span></div><div class="row" style="gap:7px;margin-bottom:8px"><span class="rb"></span><span class="val" style="font-weight:400">редактор</span></div><div class="row" style="gap:7px"><span class="rb on"></span><span class="val">комментатор</span></div></div><svg width="104" height="118" viewBox="0 0 58 66" style="position:absolute;right:2px;top:50%;transform:translateY(-50%)"><defs><filter id="shieldInner" x="-25%" y="-25%" width="150%" height="150%"><feOffset dy="0"/><feGaussianBlur stdDeviation="2" result="ib"/><feComposite operator="out" in="SourceGraphic" in2="ib" result="inv"/><feFlood flood-color="#000000" flood-opacity="0.15" result="col"/><feComposite operator="in" in="col" in2="inv" result="sh"/><feComposite operator="over" in="sh" in2="SourceGraphic"/></filter></defs><path d="M29 3 L54 13 V32 C54 49 43 60 29 64 C15 60 4 49 4 32 V13 Z" fill="#efe9f9" filter="url(#shieldInner)"/><rect x="20" y="31" width="18" height="15" rx="2.5" fill="#fff"/><path d="M23 31 V26 a6 6 0 0 1 12 0 V31" fill="none" stroke="#fff" stroke-width="2.5"/><rect x="27.5" y="36.5" width="3" height="5" rx="1.5" fill="#efe9f9"/></svg></div></div></div>
+            <div>
+              <h3 class="h3">Бренд</h3>
+              <p class="body muted">Тон голоса, запрещенные англицизмы, обещания, которых продукт не дает. Сюда же попадает буква «е» вместо «ё» и прочая редполитика — то, что раньше ловилось глазами на финальном ревью.</p>
+            </div>
+          </div>
+          <div class="frame" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="val" style="border-bottom:1px solid #eee;padding-bottom:6px;margin-bottom:7px;font-weight:700">Название задачи</div><div style="position:relative;flex:1;min-height:0"><div style="display:flex;flex-direction:column;gap:7px"><div class="row"><span class="lab" style="flex:0 0 68px">Задача №</span><span class="val">Заказчик</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Расположение</span><span class="val">Доска/Статус</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Тип</span><span class="lab">…</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Участник</span><span class="lab">…</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Срок</span><span class="lab">…</span></div></div><div style="position:absolute;top:-14px;right:0;display:flex;gap:4px"><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span></div><div style="position:absolute;right:6px;top:30px;width:108px;background:#fff;border:1px solid #d9d9d9;border-radius:8px;box-shadow:0 8px 20px -8px rgba(0,0,0,.22);padding:5px"><div class="row" style="gap:5px;background:#fff0d9;border-radius:5px;padding:3px 5px;margin-bottom:2px"><span style="font-size:9px;line-height:1">📌</span><span class="val" style="color:#b87400">Заявка</span></div><div class="row" style="gap:5px;padding:3px 5px;margin-bottom:1px"><span style="font-size:9px;line-height:1">💵</span><span class="val" style="font-weight:400">Платеж</span></div><div class="row" style="gap:5px;padding:3px 5px;margin-bottom:1px"><span style="font-size:9px;line-height:1">📄</span><span class="val" style="font-weight:400">Отчетность</span></div><div class="row" style="gap:5px;padding:3px 5px"><span style="font-size:9px;line-height:1">🔍</span><span class="val" style="font-weight:400">Акт сверки</span></div></div></div><div class="row" style="gap:5px;border-top:1px solid #eee;padding-top:6px;margin-top:5px;margin-bottom:6px"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#757575" stroke-width="1.3"><circle cx="4" cy="8" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><path d="M5.7 7l4.6-2.3M5.7 9l4.6 2.3"/></svg><span class="lab">Связи</span></div><div style="border:1px solid #eee;border-radius:6px;padding:5px 7px"><div class="row" style="gap:6px"><span class="lab" style="flex:0 0 36px">Задача 1</span><span class="row" style="flex:1;gap:4px"><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span></span><span style="width:13px;height:13px;border-radius:50%;background:#ededed;flex:none"></span><span style="flex:0 0 26px;height:5px;border-radius:3px;background:#ededed"></span></div></div></div></div></div>
+            <div>
+              <h3 class="h3">Домен</h3>
+              <p class="body muted">Страница собирается только из макетов своего домена. Повтор чужого макета конвейер блокирует: восемь доменов не перемешиваются между собой даже при похожих брифах.</p>
+            </div>
+          </div>
+          <div class="frame" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="val" style="margin-bottom:9px;font-weight:700">Заявки в нарушении SLA</div><div class="row" style="gap:0;border-bottom:1px solid var(--bd);padding-bottom:4px;margin-bottom:6px"><span class="lab" style="flex:0.9">Название</span><span class="lab" style="flex:1.4">Выполнение</span><span class="lab" style="flex:1.2">Реакция</span><span class="lab" style="flex:0 0 14px;text-align:center">+</span></div><div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly"><div class="row" style="gap:0;padding-bottom:4px;border-bottom:1px solid var(--bd)"><span class="row" style="flex:0.9;gap:4px"><i style="width:5px;height:5px;border-radius:50%;background:var(--violet);flex:none"></i><span class="val" style="font-weight:400">Тема 1</span></span><span style="flex:1.4;font-size:8px;color:var(--t1)">16ч 0м <span style="color:var(--red)">(10ч 0м)</span></span><span style="flex:1.2;font-size:8px;color:var(--t1)">8ч 0м <span style="color:var(--red)">(7ч 0м)</span></span><span style="flex:0 0 14px"></span></div><div class="row" style="gap:0;padding-bottom:4px;border-bottom:1px solid var(--bd)"><span class="row" style="flex:0.9;gap:4px"><i style="width:5px;height:5px;border-radius:50%;background:var(--violet);flex:none"></i><span class="val" style="font-weight:400">Тема 2</span></span><span style="flex:1.4;font-size:8px;color:var(--t1)">8ч 56м <span style="color:var(--red)">(2ч 56м)</span></span><span style="flex:1.2;font-size:8px;color:var(--t1)">7ч 36м <span style="color:var(--red)">(6ч 36м)</span></span><span style="flex:0 0 14px"></span></div><div class="row" style="gap:0;padding-bottom:4px;border-bottom:1px solid var(--bd)"><span class="row" style="flex:0.9;gap:4px"><i style="width:5px;height:5px;border-radius:50%;background:var(--violet);flex:none"></i><span class="val" style="font-weight:400">Тема 3</span></span><span style="flex:1.4;font-size:8px;color:var(--t1)">16ч 0м <span style="color:var(--red)">(10ч 0м)</span></span><span style="flex:1.2;font-size:8px;color:var(--t1)">8ч 0м <span style="color:var(--red)">(7ч 0м)</span></span><span style="flex:0 0 14px"></span></div><div class="row" style="gap:0;padding-bottom:4px;border-bottom:1px solid var(--bd)"><span class="row" style="flex:0.9;gap:4px"><i style="width:5px;height:5px;border-radius:50%;background:var(--violet);flex:none"></i><span class="val" style="font-weight:400">Тема 4</span></span><span style="flex:1.4;font-size:8px;color:var(--t1)">8ч 56м <span style="color:var(--red)">(2ч 56м)</span></span><span style="flex:1.2;font-size:8px;color:var(--t1)">7ч 36м <span style="color:var(--red)">(6ч 36м)</span></span><span style="flex:0 0 14px"></span></div><div class="row" style="gap:0"><span class="row" style="flex:0.9;gap:4px"><i style="width:5px;height:5px;border-radius:50%;background:var(--violet);flex:none"></i><span class="val" style="font-weight:400">Тема 5</span></span><span style="flex:1.4;font-size:8px;color:var(--t1)">16ч 0м <span style="color:var(--red)">(10ч 0м)</span></span><span style="flex:1.2;font-size:8px;color:var(--t1)">8ч 0м <span style="color:var(--red)">(7ч 0м)</span></span><span style="flex:0 0 14px"></span></div></div><div class="row" style="border-top:1px solid var(--bd);padding-top:6px"><span class="lab">Всего задач: 110</span></div></div></div></div>
+            <div>
+              <h3 class="h3">Доступность</h3>
+              <p class="body muted">Контраст, порядок заголовков, альтернативные подписи, фокус с клавиатуры. Проверка идет до передачи в верстку, а не после жалобы пользователя.</p>
+            </div>
+          </div>
+          <div class="frame is-accent" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180"><svg viewBox="0 0 216 152" style="width:100%;height:100%;display:block"><rect x="100" y="50" width="100" height="88" rx="6" fill="none" stroke="#d9d9d9" stroke-width="1.3"/><line x1="30" y1="64" x2="30" y2="88" stroke="#d9d9d9" stroke-width="1.3"/><line x1="54" y1="100" x2="100" y2="100" stroke="#d9d9d9" stroke-width="1.3"/><line x1="68" y1="28" x2="68" y2="100" stroke="#c4c4c4" stroke-width="1.3" stroke-dasharray="2 2.5"/><g fill="#ededed" stroke="#dcdcdc" stroke-width="0.8"><rect x="23.5" y="73.2" width="13" height="5.6" rx="2.8"/><rect x="61.5" y="97.2" width="13" height="5.6" rx="2.8"/><rect x="93.5" y="47.2" width="13" height="5.6" rx="2.8"/><rect x="193.5" y="47.2" width="13" height="5.6" rx="2.8"/><rect x="193.5" y="135.2" width="13" height="5.6" rx="2.8"/><rect x="93.5" y="135.2" width="13" height="5.6" rx="2.8"/></g><g font-size="8.5" font-weight="600" text-anchor="middle" dominant-baseline="central"><rect x="40" y="8" width="56" height="20" rx="6" fill="#f4f4f5" stroke="#e4e4e6"/><text x="68" y="18" fill="#555">+ Добавить</text><rect x="6" y="40" width="48" height="24" rx="7" fill="var(--violet-12)" stroke="var(--violet)"/><text x="30" y="52" fill="var(--violet)">Очередь</text><rect x="6" y="88" width="48" height="24" rx="7" fill="var(--orange-12)" stroke="var(--orange)"/><text x="30" y="100" fill="#b87400">В работе</text><rect x="80" y="88" width="68" height="24" rx="7" fill="var(--orange-12)" stroke="var(--orange)"/><text x="114" y="100" fill="#b87400">Согласование</text><rect x="126" y="38" width="48" height="24" rx="7" fill="var(--red-12)" stroke="var(--red)"/><text x="150" y="50" fill="var(--red)">Правки</text><rect x="168" y="88" width="46" height="24" rx="7" fill="var(--violet-12)" stroke="var(--violet)"/><text x="191" y="100" fill="var(--violet)">Готово</text><rect x="126" y="126" width="48" height="24" rx="7" fill="var(--green-12)" stroke="var(--green)"/><text x="150" y="138" fill="#2f7d33">Готово</text></g></svg></div></div></div>
+            <div>
+              <h3 class="h3">Бизнес-правила</h3>
+              <p class="body">Обязательные секции сценария, тарифы, юридические сноски. Не прошло — конвейер получает список ошибок и чинит сам, до трех попыток, потом зовет человека.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- ========================================= что происходит за минуту === -->
+    <section class="slide" id="s14">
+      <div class="s-head">
+        <h2 class="s-title">Что происходит за одну минуту</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body grid-2x2">
+          <div class="frame" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180"><div class="row" style="gap:5px;margin-bottom:8px"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="var(--violet)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5l2.2 2.5L8 5"/><path d="M8 8.5l2.2 2.5L14 5"/></svg><span class="val">Чек-лист</span></div><div class="row" style="gap:6px;margin-bottom:7px"><span class="lab">50%</span><span style="flex:1;height:6px;border-radius:3px;background:var(--violet-12);position:relative;overflow:hidden"><span style="position:absolute;left:0;top:0;bottom:0;width:50%;background:var(--violet);border-radius:3px"></span></span><span class="lab"><b style="color:#4caf51;font-weight:600">3</b>/6</span></div><div style="display:flex;flex-direction:column;gap:6px"><div class="row" style="gap:6px"><span class="cb on"></span><span class="val" style="font-weight:400;flex:1">1. Подзадача номер 1</span><span class="chip solid-g">30 марта</span><span style="width:14px;height:14px;border-radius:50%;background:#e9e9eb;display:flex;align-items:center;justify-content:center;flex:none"><svg width="9" height="9" viewBox="0 0.75 24 24" fill="#b4b4b6"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div><div class="row" style="gap:6px"><span class="cb"></span><span class="lab" style="flex:1">2. Подзадача номер 2</span><span style="width:14px;height:14px;border-radius:50%;background:#e9e9eb;display:flex;align-items:center;justify-content:center;flex:none"><svg width="9" height="9" viewBox="0 0.75 24 24" fill="#b4b4b6"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div><div class="row" style="gap:6px"><span class="cb on"></span><span class="val" style="font-weight:400;flex:1">3. Подзадача номер 3</span><span class="chip solid-o">2 апреля</span><span style="width:14px;height:14px;border-radius:50%;background:#e9e9eb;display:flex;align-items:center;justify-content:center;flex:none"><svg width="9" height="9" viewBox="0 0.75 24 24" fill="#b4b4b6"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div><div class="row" style="gap:6px"><span class="cb"></span><span class="lab" style="flex:1">4. Подзадача номер 4</span><span style="width:14px;height:14px;border-radius:50%;background:#e9e9eb;display:flex;align-items:center;justify-content:center;flex:none"><svg width="9" height="9" viewBox="0 0.75 24 24" fill="#b4b4b6"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div><div class="row" style="gap:6px"><span class="cb on"></span><span class="val" style="font-weight:400;flex:1">5. Подзадача номер 5</span><span class="chip solid-r">3 апреля</span><span style="width:14px;height:14px;border-radius:50%;background:#e9e9eb;display:flex;align-items:center;justify-content:center;flex:none"><svg width="9" height="9" viewBox="0 0.75 24 24" fill="#b4b4b6"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div><div class="row" style="gap:6px"><span class="cb"></span><span class="lab" style="flex:1">6. Подзадача номер 6</span><span style="width:14px;height:14px;border-radius:50%;background:#e9e9eb;display:flex;align-items:center;justify-content:center;flex:none"><svg width="9" height="9" viewBox="0 0.75 24 24" fill="#b4b4b6"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div></div></div></div></div>
+            <div>
+              <h3 class="h3">Бриф разбирается на факты</h3>
+              <p class="body muted">Конвейер вытаскивает из брифа аудиторию, обещание и ограничения. Все, чего в брифе нет, он не додумывает, а выносит в список вопросов к команде.</p>
+            </div>
+          </div>
+          <div class="frame" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180" style="padding:0"><div style="position:relative;width:100%;height:100%"><span style="position:absolute;left:12px;top:12px;width:47px;height:151px;background:#f3f3f4;border-radius:6px 3px 3px 6px"></span><span style="position:absolute;left:19px;top:15px;font-size:7.5px;line-height:9px;font-weight:700;color:#2d2d2d">Проекты</span><span style="position:absolute;left:85px;top:15px;transform:translateX(-50%);font-size:7.5px;line-height:9px;color:#898989">Июнь</span><span style="position:absolute;left:145px;top:15px;transform:translateX(-50%);font-size:7.5px;line-height:9px;color:#898989">Июль</span><span style="position:absolute;left:204px;top:15px;transform:translateX(-50%);font-size:7.5px;line-height:9px;color:#898989">Август</span><i style="position:absolute;left:12px;top:28px;width:219px;height:1px;background:#e5e5e5"></i><i style="position:absolute;left:12px;top:46px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:65px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:84px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:105px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:125px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:12px;top:144px;width:219px;height:1px;background:#f0f0f0"></i><i style="position:absolute;left:114.5px;top:15px;width:1px;height:147px;background:#e6e6e6"></i><i style="position:absolute;left:175px;top:15px;width:1px;height:147px;background:#e6e6e6"></i><span style="position:absolute;left:18px;top:34.5px;width:5px;height:5px;border-radius:50%;background:#e84033"></span><span style="position:absolute;left:27px;top:35px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:53.5px;width:5px;height:5px;border-radius:50%;background:#ab47bd"></span><span style="position:absolute;left:27px;top:54px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:73px;width:5px;height:5px;border-radius:50%;background:#2196f3"></span><span style="position:absolute;left:27px;top:73.5px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:92px;width:5px;height:5px;border-radius:50%;background:#4caf51"></span><span style="position:absolute;left:27px;top:92.5px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:112.5px;width:5px;height:5px;border-radius:50%;background:#a5ca00"></span><span style="position:absolute;left:27px;top:113px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:131.5px;width:5px;height:5px;border-radius:50%;background:#ffa100"></span><span style="position:absolute;left:27px;top:132px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:18px;top:150.5px;width:5px;height:5px;border-radius:50%;background:#7d4ccf"></span><span style="position:absolute;left:27px;top:151px;width:24px;height:4px;border-radius:2px;background:#e2e2e4"></span><span style="position:absolute;left:64px;top:31.5px;width:62px;height:10px;border-radius:3px;background:rgba(244,67,54,.12)"></span><span style="position:absolute;left:115px;top:50.5px;width:55px;height:10px;border-radius:3px;background:rgba(171,71,189,.12)"></span><span style="position:absolute;left:192px;top:50.5px;width:21px;height:10px;border-radius:3px;background:rgba(171,71,189,.12)"></span><span style="position:absolute;left:60px;top:69.5px;width:46px;height:10px;border-radius:3px;background:rgba(33,150,243,.12)"></span><span style="position:absolute;left:158px;top:69.5px;width:52px;height:10px;border-radius:3px;background:rgba(33,150,243,.12)"></span><span style="position:absolute;left:82.5px;top:89.5px;width:32px;height:10px;border-radius:3px;background:rgba(76,175,81,.12)"></span><span style="position:absolute;left:199px;top:89.5px;width:32px;height:10px;border-radius:3px;background:rgba(76,175,81,.12)"></span><span style="position:absolute;left:105px;top:110px;width:53px;height:10px;border-radius:3px;background:rgba(165,202,0,.24)"></span><span style="position:absolute;left:192px;top:110px;width:39px;height:10px;border-radius:3px;background:rgba(165,202,0,.24)"></span><span style="position:absolute;left:75px;top:129.5px;width:60px;height:10px;border-radius:3px;background:rgba(255,161,0,.12)"></span><span style="position:absolute;left:158px;top:129.5px;width:34px;height:10px;border-radius:3px;background:rgba(255,161,0,.12)"></span><span style="position:absolute;left:134px;top:149px;width:98px;height:10px;border-radius:3px;background:rgba(125,76,207,.12)"></span><svg style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 240 176" fill="none"><defs><marker id="rmArr" markerWidth="5" markerHeight="5" refX="3" refY="1.75" orient="auto"><path d="M0 0L3.5 1.75L0 3.5Z" fill="#b3b3b3"/></marker></defs><path d="M126 36.5C135 36.5 103 55.5 112 55.5" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/><path d="M170 55.5C179 55.5 146 74.5 155 74.5" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/><path d="M210 74.5C219 74.5 187 94.5 196 94.5" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/><path d="M114 94.5C123 94.5 93 115 102 115" stroke="#b3b3b3" stroke-width="0.9" marker-end="url(#rmArr)"/></svg></div></div></div></div>
+            <div>
+              <h3 class="h3">Сценарий выбирает раскладку</h3>
+              <p class="body muted">Под уровень осведомленности аудитории подбирается один из десяти плейбуков. Он задает набор секций и порядок аргументов — дальше конвейер идет по нему.</p>
+            </div>
+          </div>
+          <div class="frame" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180"><div class="kbsh"><div class="kbside" style="gap:5px;justify-content:center"><span class="hd"></span><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="pj"><i></i><b>Бухгал.</b></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div></div><div class="kbmain"><div class="swhdr">Оплата</div><div class="kboard" style="margin-bottom:6px"><div class="kcol"><div class="kh">Очередь</div><span class="kk g" style="height:18px"></span><span class="kk n" style="height:15px"></span></div><div class="kcol"><div class="kh">В работе</div><span class="kk o" style="height:20px"></span><span class="kk r" style="height:15px"></span></div><div class="kcol"><div class="kh">Соглас…</div><span class="kk g" style="height:15px"></span><span class="kk o" style="height:18px"></span></div><div class="kcol"><div class="kh">Готово</div><span class="kk r" style="height:15px"></span><span class="kk g" style="height:18px"></span></div></div><div class="swlane">Платежи клиентов</div><div class="swlane">Отчётность</div><div class="swlane">Еженедельные задачи</div><div class="swlane dim">Рабочие вопросы</div></div></div></div></div></div>
+            <div>
+              <h3 class="h3">Секции собираются из реестра</h3>
+              <p class="body muted">Каждая секция берется из 22 готовых компонентов и наполняется макетами своего домена. Придумать новый блок на ходу конвейер не может.</p>
+            </div>
+          </div>
+          <div class="frame is-accent" style="display:grid; grid-template-columns:17.5cqw 1fr; gap:2.29cqw; align-items:start; padding:2.29cqw">
+            <div class="fm-shot"><div class="fm"><div class="card h180"><div class="ttl">Скорость команды по спринтам</div><svg viewBox="0 0 256 96" style="width:100%;height:104px"><line x1="6" y1="86" x2="250" y2="86" stroke="#e6e6e6"/><g><rect x="14" y="60" width="9" height="26" fill="var(--blue)"/><rect x="24" y="66" width="9" height="20" fill="#2d2d2d"/><rect x="54" y="40" width="9" height="46" fill="var(--blue)"/><rect x="64" y="48" width="9" height="38" fill="#2d2d2d"/><rect x="94" y="52" width="9" height="34" fill="var(--blue)"/><rect x="104" y="58" width="9" height="28" fill="#2d2d2d"/><rect x="134" y="22" width="9" height="64" fill="var(--blue)"/><rect x="144" y="34" width="9" height="52" fill="#2d2d2d"/><rect x="174" y="50" width="9" height="36" fill="var(--blue)"/><rect x="184" y="44" width="9" height="42" fill="#2d2d2d"/><rect x="214" y="62" width="9" height="24" fill="var(--blue)"/><rect x="224" y="56" width="9" height="30" fill="#2d2d2d"/></g></svg><div class="row" style="gap:12px;margin-top:4px"><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:var(--blue)"></i><span class="lab">Взято в спринт</span></span><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#2d2d2d"></i><span class="lab">Выполнено</span></span></div></div></div></div>
+            <div>
+              <h3 class="h3">Проверка и починка на месте</h3>
+              <p class="body">Двенадцать валидаторов идут после каждой фазы. Не прошло — конвейер получает список ошибок и правит сам, до трех попыток, и только потом зовет человека.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- ============================== от ручной сборки к конвейеру === -->
+    <section class="slide" id="s15">
+      <div class="s-head">
+        <h2 class="s-title">Переход на конвейер</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <h3 class="h2">Меняется не инструмент, а способ работы</h3>
+
+        <div class="frame is-accent" style="display:grid; grid-template-columns:24.3cqw 1fr; align-items:center; height:11.15cqw; padding:0 2.6cqw">
+          <div class="swap">
+            <div class="swap-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12h14"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <div class="swap-mark is-to"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div>
+          </div>
+          <div>
+            <p class="body">Команды, которые переходят на завод, ищут не способ печатать страницы быстрее, а способ не собирать их вручную.</p>
+            <p class="body" style="margin-top:.8cqw"><span class="accent">Конвейер</span> не копирует ручную сборку, а снимает с нее рутину.</p>
+          </div>
+        </div>
+
+        <!-- ЗАГЛУШКА: вместо названия домена подставить логотип клиента -->
+        <div class="cases" style="grid-template-columns:1fr 1fr; margin-top:var(--gap)">
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-title">Кейс перехода на конвейер</p>
+            <p class="case-text">Страница сравнения с конкурентом собрана из брифа за один прогон и ушла в верстку тем же днем</p>
+            <div class="case-logos"><span class="client">Сравнение</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+          <div class="case">
+            <span class="case-tag">кейс</span>
+            <p class="case-title">Кейс перехода на конвейер</p>
+            <p class="case-text">Продуктовая страница прошла восемь фаз без единой ручной правки в сгенерированном коде</p>
+            <div class="case-logos"><span class="client">Продукт</span><span class="plus">+</span><img src="../assets/kaiten-logo.svg" alt="Кайтен" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================= как команда смотрит результат === -->
+    <section class="slide" id="s16">
+      <div class="s-head">
+        <h2 class="s-title">Результат смотрят там же, где работают</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <h3 class="h2">Страница приходит на ревью <span class="accent">собранной</span></h3>
+          <p class="body muted">Конвейер выкладывает готовую страницу на внутренний адрес и открывает пул-реквест. Смотреть черновик можно в браузере, а замечания оставлять там же, где команда обсуждает остальные задачи, — отдельного маршрута для машинной сборки нет.</p>
+
+          <div class="features" style="grid-template-columns:1fr 1fr; column-gap:1.6cqw">
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Превью в браузере</p><p class="feature-text">Страница открывается по адресу /approve и выглядит ровно так, как уйдет в верстку</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Замечания в задаче</p><p class="feature-text">Комментарии остаются в карточке Кайтена, а не расходятся по чатам</p></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Список проверок</p><p class="feature-text">К черновику приложен отчет: что прошло, что чинилось и сколько было попыток</p></div></div>
+            <div class="feature is-accent"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/></svg></div><div><p class="feature-title">Согласование кнопкой</p><p class="feature-text">Принятая страница уходит в пул-реквест архивом, без ручной пересборки</p></div></div>
+          </div>
+        </div>
+
+        <div class="fm-shot" style="align-self:center">
+          <div class="fm"><div class="card h180" style="padding:0;display:flex"><div style="width:84px;flex:none;background:#fff;border-right:1px solid var(--bd);padding:10px 9px;display:flex;flex-direction:column;gap:8px"><div class="row" style="gap:4px"><svg width="9" height="9" viewBox="0 0 16 16" fill="#9e9e9e"><path d="M2 4.2a1.4 1.4 0 0 1 1.4-1.4h2.6l1.4 1.4h5.2a1.4 1.4 0 0 1 1.4 1.4v6a1.4 1.4 0 0 1-1.4 1.4H3.4A1.4 1.4 0 0 1 2 11.6z"/></svg><svg width="6" height="6" viewBox="0 0 12 12" fill="#9e9e9e"><path d="M2 4l4 4 4-4z"/></svg><span class="val">Дизайн</span></div><div class="row" style="gap:4px;padding-left:10px"><span style="font-size:8px">📌</span><span class="lab">Макеты</span></div><div class="row" style="gap:4px;padding-left:10px"><span style="font-size:8px">📖</span><span class="lab">Гайдлайны</span></div><div class="row" style="gap:4px;background:var(--violet-12);border-radius:6px 0 0 6px;margin:0 -9px 0 -2px;padding:3px 4px 3px 12px"><span style="font-size:8px">🚀</span><span class="val" style="color:var(--violet)">Полезные…</span></div><div class="row" style="gap:4px"><svg width="9" height="9" viewBox="0 0 16 16" fill="#9e9e9e"><rect x="2" y="2" width="12" height="12" rx="2.2"/><rect x="4.5" y="5" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="7.6" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="10.2" width="4.5" height="1.3" rx=".65" fill="#fff"/></svg><span class="lab">Регламенты</span></div><div class="row" style="gap:4px"><svg width="9" height="9" viewBox="0 0 16 16" fill="#9e9e9e"><rect x="2" y="2" width="12" height="12" rx="2.2"/><rect x="4.5" y="5" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="7.6" width="7" height="1.3" rx=".65" fill="#fff"/><rect x="4.5" y="10.2" width="4.5" height="1.3" rx=".65" fill="#fff"/></svg><span class="lab">Документы</span></div></div><div style="flex:1;min-width:0;padding:9px 10px;position:relative"><div class="val" style="margin-bottom:6px">Документ из базы знаний</div><div style="background:#e4f2fd;border-radius:3px;padding:5px 6px;margin-bottom:6px"><span style="display:block;height:3px;border-radius:2px;background:#c4ddf5;margin-bottom:3px"></span><span style="display:block;height:3px;border-radius:2px;background:#c4ddf5;width:55%"></span></div><div style="display:flex;gap:5px;margin-bottom:6px"><div style="flex:1;height:16px;border-radius:3px;background:#fde8e6;display:flex;align-items:center;justify-content:center;color:#f44336;font-size:10px;font-weight:600">1</div><div style="flex:1;height:16px;border-radius:3px;background:#fbfae0;display:flex;align-items:center;justify-content:center;color:#c8b900;font-size:10px;font-weight:600">2</div><div style="flex:1;height:16px;border-radius:3px;background:#fff2e0;display:flex;align-items:center;justify-content:center;color:#f57c00;font-size:10px;font-weight:600">3</div><div style="flex:1;height:16px;border-radius:3px;background:#e9f5ea;display:flex;align-items:center;justify-content:center;color:#4caf51;font-size:10px;font-weight:600">4</div></div><div style="border:1px solid #e6e6e6;border-radius:3px;overflow:hidden;margin-bottom:6px"><div style="background:#f5f5f5;display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid #ededed"><span style="height:3px;margin:4px;border-radius:2px;background:#e2e2e2"></span><span style="height:3px;margin:4px;border-radius:2px;background:#e2e2e2"></span><span style="height:3px;margin:4px;border-radius:2px;background:#e2e2e2"></span><span style="height:3px;margin:4px;border-radius:2px;background:#e2e2e2"></span><span style="height:3px;margin:4px;border-radius:2px;background:#e2e2e2"></span></div><div style="display:grid;grid-template-columns:repeat(5,1fr)"><div style="padding:4px;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;gap:3px"><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span></div><div style="padding:4px;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;gap:3px"><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span></div><div style="padding:4px;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;gap:3px"><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span></div><div style="padding:4px;border-right:1px solid #f0f0f0;display:flex;flex-direction:column;gap:3px"><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span></div><div style="padding:4px;display:flex;flex-direction:column;gap:3px"><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:90%"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:70%"></span></div></div></div><div style="display:flex;flex-direction:column;gap:4px"><span style="height:3px;border-radius:2px;background:#eaeaea"></span><span style="height:3px;border-radius:2px;background:#eaeaea;width:88%"></span><span style="height:3px;border-radius:2px;background:#eaeaea"></span></div><div style="position:absolute;left:26px;top:80px;background:#fff;border-radius:5px;box-shadow:0 3px 10px -3px rgba(0,0,0,.28);padding:3px 6px;display:flex;align-items:center;gap:6px;font-size:8px;font-weight:600;color:#2d2d2d"><span>B</span><span style="font-style:italic">I</span><span style="text-decoration:underline">U</span><span style="text-decoration:line-through">S</span><span>A<span style="font-size:5px">▾</span></span><span style="color:#9e9e9e">&lt;/&gt;</span><svg width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#9e9e9e" stroke-width="1.5" stroke-linecap="round"><path d="M6 6.5l-2 2a2.1 2.1 0 0 0 3 3l2-2M10 9.5l2-2a2.1 2.1 0 0 0-3-3l-2 2"/></svg><svg width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#9e9e9e" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 3.5h11v8h-7l-4 3z"/></svg></div><div style="position:absolute;right:14px;bottom:12px;background:#fff;border-radius:5px;box-shadow:0 3px 12px -3px rgba(0,0,0,.3);padding:4px;display:flex;gap:6px"><div style="display:grid;grid-template-columns:repeat(4,8px);gap:2px"><span style="width:8px;height:8px;border:1px solid #2d2d2d;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#2d2d2d;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#757575;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#4caf51;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#00bcd4;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#2196f3;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#f44336;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#ff9800;line-height:1">A</span><span style="width:8px;height:8px;border:1px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#c8b900;line-height:1">A</span></div><div style="display:grid;grid-template-columns:repeat(4,8px);gap:2px"><span style="width:8px;height:8px;border-radius:2px;border:1px solid #2d2d2d;background:#fff"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #e0e0e0;background:#ededed"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #d6ecd8;background:#e9f5ea"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #c7ecf2;background:#d6f3f7"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #5e84fc;background:#e6f1fb"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #f5cfcc;background:#fde8e6"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #f5e0bf;background:#fff2e0"></span><span style="width:8px;height:8px;border-radius:2px;border:1px solid #ece9bf;background:#fbfae0"></span></div></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ фазы прогона по шагам === -->
+    <section class="slide" id="s17">
+      <div class="s-head">
+        <h2 class="s-title">Прогон по фазам, шаг за шагом</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Что делает конвейер</h3>
+          <div class="steps">
+            <div class="step is-strong c-violet"><div class="step-num">1</div><div><p class="step-title">Бриф принят</p><p class="step-text">Факты разобраны, пробелы вынесены в вопросы к команде</p></div></div>
+            <div class="step c-violet"><div class="step-num">2</div><div><p class="step-title">Сценарий выбран</p><p class="step-text">Один из десяти плейбуков задает набор и порядок секций</p></div></div>
+            <div class="step c-violet"><div class="step-num">3</div><div><p class="step-title">Гейт домена</p><p class="step-text">Доступны только макеты своего домена из восьми</p></div></div>
+            <div class="step c-violet"><div class="step-num">4</div><div><p class="step-title">Секции собраны</p><p class="step-text">Каждая — из 22 компонентов реестра, новых не появляется</p></div></div>
+            <div class="step c-red"><div class="step-num">5</div><div><p class="step-title">Проверка не прошла</p><p class="step-text">Конвейер получает список ошибок и прошлый ответ</p></div></div>
+            <div class="step c-green"><div class="step-num">6</div><div><p class="step-title">Починка удалась</p><p class="step-text">Правка внесена, фаза перезапущена, до трех попыток</p></div></div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="h2">Что видит команда</h3>
+          <div class="steps">
+            <div class="step is-strong c-violet"><div class="step-num">1</div><div><p class="step-title">Задача в Кайтене</p><p class="step-text">Прогон заводится карточкой, статус меняется по фазам</p></div></div>
+            <div class="step c-violet"><div class="step-num">2</div><div><p class="step-title">ТЗ на согласование</p><p class="step-text">Человекочитаемое ТЗ приходит раньше кода</p></div></div>
+            <div class="step c-gray"><div class="step-num">3</div><div><p class="step-title">Ожидание</p><p class="step-text">Пока идут фазы, от команды ничего не требуется</p></div></div>
+            <div class="step c-violet"><div class="step-num">4</div><div><p class="step-title">Превью страницы</p><p class="step-text">Черновик открывается в браузере по адресу /approve</p></div></div>
+            <div class="step c-violet"><div class="step-num">5</div><div><p class="step-title">Замечания</p><p class="step-text">Комментарии остаются в карточке, а не расходятся по чатам</p></div></div>
+            <div class="step is-strong c-violet"><div class="step-num">6</div><div><p class="step-title">Передача в верстку</p><p class="step-text">Пул-реквест или архив — на выбор команды</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================= что завод делает и чего не делает === -->
+    <section class="slide" id="s18">
+      <div class="s-head">
+        <h2 class="s-title">Границы конвейера</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body grid-4x3">
+        <div class="group c-violet span-2 rows-2">
+          <p class="group-title">Делает сам</p>
+          <div class="group-items">
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Разбор брифа</p><p class="g-text">Аудитория, обещание и ограничения вынимаются из текста</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Сборка секций</p><p class="g-text">Только из 22 компонентов реестра, новых не появляется</p></div></div>
+            <div class="g-item is-accent"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Проверка и починка</p><p class="g-text">Двенадцать валидаторов, до трех попыток на фазу</p></div></div>
+          </div>
+        </div>
+
+        <div class="group c-blue span-2">
+          <p class="group-title">Показывает</p>
+          <div class="group-items">
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Превью в браузере</p><p class="g-text">Страница по адресу /approve</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Отчет о проверках</p><p class="g-text">Что прошло и что чинилось</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Список вопросов</p><p class="g-text">Чего не хватило в брифе</p></div></div>
+          </div>
+        </div>
+
+        <div class="group c-gray span-2">
+          <p class="group-title">Оставляет человеку</p>
+          <div class="group-items">
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Постановку задачи</p><p class="g-text">Бриф пишет команда</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Оценку смысла</p><p class="g-text">Довод убедителен или нет</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Финальное слово</p><p class="g-text">Публикует человек</p></div></div>
+          </div>
+        </div>
+
+        <div class="group c-green span-2">
+          <p class="group-title">Ускоряет</p>
+          <div class="group-items">
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Черновик</p><p class="g-text">Минута вместо нескольких дней</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Тон бренда</p><p class="g-text">Проверяется до ревью</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Перезапуск</p><p class="g-text">Готовые фазы пропускаются</p></div></div>
+          </div>
+        </div>
+
+        <div class="group c-red span-2">
+          <p class="group-title">Не делает</p>
+          <div class="group-items">
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Новые компоненты</p><p class="g-text">Блок на ходу не придумает</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Чужой домен</p><p class="g-text">Макеты не перемешиваются</p></div></div>
+            <div class="g-item"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><p class="g-title">Догадки</p><p class="g-text">Пробел уходит в вопросы</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="slide" id="s20">
+      <div class="s-head">
+        <h2 class="s-title">Куда конвейер идет дальше</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="quarters">
+        <div class="c-orange">
+          <div class="q-head">Q1 2026</div>
+          <div class="q-items">
+            <div class="q-item">Девятая фаза: тексты под SEO</div>
+            <div class="q-item">Свой домен для отраслевых страниц</div>
+            <div class="q-item">Отчет о прогоне в карточке</div>
+          </div>
+        </div>
+
+        <div class="c-green">
+          <div class="q-head">Q2 2026</div>
+          <div class="q-items">
+            <div class="q-item">Сборка нескольких страниц за прогон</div>
+            <div class="q-item">Реестр компонентов версии 2</div>
+            <div class="q-item">Правки голосом в превью</div>
+          </div>
+        </div>
+
+        <div class="c-blue">
+          <div class="q-head">Q3 2026</div>
+          <div class="q-items">
+            <div class="q-item">Автоперевод страниц</div>
+            <div class="q-item">A/B-варианты одной секции</div>
+            <div class="q-item">Гейт доступности строже</div>
+          </div>
+        </div>
+
+        <div class="c-violet">
+          <div class="q-head">Q4 2026</div>
+          <div class="q-items">
+            <div class="q-item">Конвейер для презентаций</div>
+            <div class="q-item">Общий реестр с продуктом</div>
+            <div class="q-item">Публикация без участия верстки</div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================== диаграммы по прогонам === -->
+    <section class="slide" id="s21">
+      <div class="s-head">
+        <h2 class="s-title">Что конвейер собрал за год</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0">
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <h3 class="h2">Страницы по типам</h3>
+          <div class="chart-row">
+            <div class="donut"><svg viewBox="0 0 200 200" role="img" aria-label="Распределение страниц по типам"><circle cx="100" cy="100" r="70" fill="none" stroke="var(--violet-12)" stroke-width="40" stroke-dasharray="145.14 294.68" stroke-dashoffset="0.00" transform="rotate(-90 100 100)"/><circle cx="100" cy="100" r="70" fill="none" stroke="var(--blue-12)" stroke-width="40" stroke-dasharray="105.56 334.27" stroke-dashoffset="-145.14" transform="rotate(-90 100 100)"/><circle cx="100" cy="100" r="70" fill="none" stroke="var(--green-12)" stroke-width="40" stroke-dasharray="79.17 360.65" stroke-dashoffset="-250.70" transform="rotate(-90 100 100)"/><circle cx="100" cy="100" r="70" fill="none" stroke="var(--orange-12)" stroke-width="40" stroke-dasharray="61.58 378.25" stroke-dashoffset="-329.87" transform="rotate(-90 100 100)"/><circle cx="100" cy="100" r="70" fill="none" stroke="var(--red-12)" stroke-width="40" stroke-dasharray="48.38 391.44" stroke-dashoffset="-391.44" transform="rotate(-90 100 100)"/><circle cx="100" cy="100" r="34" fill="var(--surface-page)"/><circle cx="100" cy="100" r="34" fill="var(--surface-frame)"/><path d="M88 110 L100 96 L106 102 L114 90" fill="none" stroke="var(--violet-100)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M107 90 H114 V97" fill="none" stroke="var(--violet-100)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="160.3" y="68.4" text-anchor="middle" fill="var(--violet-100)" font-size="13" font-weight="600">33%</text><text x="121.6" y="170.6" text-anchor="middle" fill="var(--blue-100)" font-size="13" font-weight="600">24%</text><text x="40.9" y="141.5" text-anchor="middle" fill="var(--green-100)" font-size="13" font-weight="600">18%</text><text x="36.7" y="74.2" text-anchor="middle" fill="var(--orange-100)" font-size="13" font-weight="600">14%</text><text x="76.3" y="38.1" text-anchor="middle" fill="var(--red-100)" font-size="13" font-weight="600">11%</text></svg></div>
+            <ul class="legend"><li class="lg-item c-violet"><span class="lg-dot"></span>продуктовые — <b>33%</b></li><li class="lg-item c-blue"><span class="lg-dot"></span>сравнения — <b>24%</b></li><li class="lg-item c-green"><span class="lg-dot"></span>вебинары — <b>18%</b></li><li class="lg-item c-orange"><span class="lg-dot"></span>отраслевые — <b>14%</b></li><li class="lg-item c-red"><span class="lg-dot"></span>прочее — <b>11%</b></li></ul>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <div class="area"><svg viewBox="0 0 460 190" role="img" aria-label="Доля ручных правок и доля прогонов без правок"><defs><linearGradient id="gv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--violet-100)" stop-opacity=".28"/><stop offset="100%" stop-color="var(--violet-100)" stop-opacity="0"/></linearGradient><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--blue-100)" stop-opacity=".22"/><stop offset="100%" stop-color="var(--blue-100)" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="45" x2="460" y2="45" stroke="var(--table-line)" stroke-width="1"/><line x1="0" y1="90" x2="460" y2="90" stroke="var(--table-line)" stroke-width="1"/><line x1="0" y1="135" x2="460" y2="135" stroke="var(--table-line)" stroke-width="1"/><path d="M0 140 C 70 120, 110 70, 180 78 S 300 120, 360 96 S 430 70, 460 62" fill="none" stroke="var(--blue-100)" stroke-width="3"/><path d="M0 140 C 70 120, 110 70, 180 78 S 300 120, 360 96 S 430 70, 460 62 L460 190 L0 190 Z" fill="url(#gb)"/><path d="M0 165 C 80 160, 120 150, 190 120 S 300 128, 360 70 S 430 40, 460 22" fill="none" stroke="var(--violet-100)" stroke-width="3"/><path d="M0 165 C 80 160, 120 150, 190 120 S 300 128, 360 70 S 430 40, 460 22 L460 190 L0 190 Z" fill="url(#gv)"/><circle cx="460" cy="22" r="5" fill="var(--surface-page)" stroke="var(--violet-100)" stroke-width="3"/><circle cx="360" cy="96" r="5" fill="var(--surface-page)" stroke="var(--blue-100)" stroke-width="3"/></svg></div>
+          <ul class="legend is-row">
+            <li class="lg-item c-violet"><span class="lg-dot"></span>прогонов за месяц</li>
+            <li class="lg-item c-blue"><span class="lg-dot"></span>доля без ручных правок</li>
+          </ul>
+        </div>
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <h3 class="h2">Рост по годам</h3>
+          <div class="bars" style="flex:1; padding-top:2cqw">
+          <div class="bar-col c-red"><div class="bar" style="--h:18%">1,5</div><div class="bar-label">2024</div></div>
+          <div class="bar-col c-green"><div class="bar-delta">+233%</div><div class="bar" style="--h:45%">5</div><div class="bar-label">2025</div></div>
+          <div class="bar-col c-violet"><div class="bar-delta">+140%</div><div class="bar" style="--h:88%">12</div><div class="bar-label">2026</div></div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; min-height:0">
+          <h3 class="h2">Откуда приходят брифы</h3>
+          <div class="bars" style="flex:1; padding-top:2cqw">
+          <div class="bar-col c-violet"><div class="bar" style="--h:62%">33%</div><div class="bar-label">продукт</div></div>
+          <div class="bar-col c-blue"><div class="bar" style="--h:46%">24%</div><div class="bar-label">сравнения</div></div>
+          <div class="bar-col c-green"><div class="bar" style="--h:34%">18%</div><div class="bar-label">вебинары</div></div>
+          <div class="bar-col c-orange"><div class="bar" style="--h:28%">14%</div><div class="bar-label">отрасли</div></div>
+          <div class="bar-col c-gray"><div class="bar" style="--h:22%">11%</div><div class="bar-label">прочее</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== схема статусов === -->
+    <section class="slide" id="s22">
+      <div class="s-head">
+        <h2 class="s-title">Как задача идет по доске</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <h3 class="h2">Один прогон — одна карточка</h3>
+        <div class="flow-map">
+          <svg class="fl-links" viewBox="397 110 973 210" aria-hidden="true"><defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--border-default)"/></marker></defs><path d="M466 168 L466 211 Q466 219 474 219 L527 219" fill="none" stroke="var(--border-default)" stroke-width="2" stroke-linecap="round" marker-end="url(#ar)"/><path d="M661 219 H789" fill="none" stroke="var(--border-default)" stroke-width="2" stroke-linecap="round" marker-end="url(#ar)"/><path d="M868 191 L868 147 Q868 139 876 139 L983 139" fill="none" stroke="var(--border-default)" stroke-width="2" stroke-linecap="round" marker-end="url(#ar)"/><path d="M868 247 L868 283 Q868 291 876 291 L983 291" fill="none" stroke="var(--border-default)" stroke-width="2" stroke-linecap="round" marker-end="url(#ar)"/><path d="M1062 168 V262" fill="none" stroke="var(--border-default)" stroke-width="2" stroke-linecap="round" marker-end="url(#ar)"/><path d="M1141 291 L1277 291 Q1285 291 1285 283 L1285 168" fill="none" stroke="var(--border-default)" stroke-width="2" stroke-linecap="round" marker-end="url(#ar)"/></svg>
+        <div class="fl-node c-violet" style="left:0.00%; top:0.00%; width:14.11%; height:27.62%"><p class="fl-title">Очередь</p><p class="fl-path">Бриф принят</p></div>
+        <div class="fl-node c-orange" style="left:13.36%; top:38.57%; width:13.75%; height:26.67%"><p class="fl-title">В работе</p><p class="fl-path">Фазы P0–P8</p></div>
+        <div class="fl-node c-orange" style="left:40.29%; top:38.57%; width:16.19%; height:26.67%"><p class="fl-title">Согласование</p><p class="fl-path">Превью на /approve</p></div>
+        <div class="fl-node c-red" style="left:60.23%; top:0.00%; width:16.28%; height:27.62%"><p class="fl-title">Правки</p><p class="fl-path">Замечания в карточке</p></div>
+        <div class="fl-node c-green" style="left:60.23%; top:72.38%; width:16.28%; height:27.62%"><p class="fl-title">Готово</p><p class="fl-path">Проверки пройдены</p></div>
+        <div class="fl-node c-violet" style="left:84.38%; top:0.00%; width:13.75%; height:27.62%"><p class="fl-title">В верстку</p><p class="fl-path">Пул-реквест или архив</p></div>
+        <span class="fl-cap" style="left:7.09%; top:51.90%">в работу</span>
+        <span class="fl-cap" style="left:33.71%; top:51.90%">на согласование</span>
+        <span class="fl-cap" style="left:54.78%; top:13.81%">правки</span>
+        <span class="fl-cap" style="left:54.78%; top:86.19%">готово</span>
+        <span class="fl-cap" style="left:68.35%; top:51.43%">правки внесены</span>
+        <span class="fl-cap" style="left:91.26%; top:86.19%">принято</span>
+        </div>
+        <p class="body muted" style="margin-top:2cqw; max-width:52cqw">Статусы совпадают с обычной доской команды. Конвейер двигает карточку сам, человек вмешивается только на согласовании — и только если есть замечания.</p>
+      </div>
+    </section>
+
     <!-- ================================================ контактный === -->
-    <section class="slide contact" id="s11">
+    <section class="slide contact" id="s23">
       <div class="contact-card">
         <div class="contact-brand">
           <img src="../assets/kaiten-logo-latin.svg" alt="Kaiten" />
@@ -394,17 +863,28 @@
 </div>
 
 <nav class="nav-fallback" aria-label="Слайды">
-  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 11</span><a href="#s2">→</a></div>
-  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 11</span><a href="#s3">→</a></div>
-  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 11</span><a href="#s4">→</a></div>
-  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 11</span><a href="#s5">→</a></div>
-  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 11</span><a href="#s6">→</a></div>
-  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 11</span><a href="#s7">→</a></div>
-  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 11</span><a href="#s8">→</a></div>
-  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 11</span><a href="#s9">→</a></div>
-  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 11</span><a href="#s10">→</a></div>
-  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 11</span><a href="#s11">→</a></div>
-  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 11</span><a class="is-off">→</a></div>
+  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 22</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 22</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 22</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 22</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 22</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 22</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 22</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 22</span><a href="#s9">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 22</span><a href="#s10">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 22</span><a href="#s11">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 22</span><a href="#s12">→</a></div>
+  <div class="nav-row" data-for="s12"><a href="#s11">←</a><span class="counter">12 / 22</span><a href="#s13">→</a></div>
+  <div class="nav-row" data-for="s13"><a href="#s12">←</a><span class="counter">13 / 22</span><a href="#s14">→</a></div>
+  <div class="nav-row" data-for="s14"><a href="#s13">←</a><span class="counter">14 / 22</span><a href="#s15">→</a></div>
+  <div class="nav-row" data-for="s15"><a href="#s14">←</a><span class="counter">15 / 22</span><a href="#s16">→</a></div>
+  <div class="nav-row" data-for="s16"><a href="#s15">←</a><span class="counter">16 / 22</span><a href="#s17">→</a></div>
+  <div class="nav-row" data-for="s17"><a href="#s16">←</a><span class="counter">17 / 22</span><a href="#s18">→</a></div>
+  <div class="nav-row" data-for="s18"><a href="#s17">←</a><span class="counter">18 / 22</span><a href="#s20">→</a></div>
+  <div class="nav-row" data-for="s20"><a href="#s18">←</a><span class="counter">19 / 22</span><a href="#s21">→</a></div>
+  <div class="nav-row" data-for="s21"><a href="#s20">←</a><span class="counter">20 / 22</span><a href="#s22">→</a></div>
+  <div class="nav-row" data-for="s22"><a href="#s21">←</a><span class="counter">21 / 22</span><a href="#s23">→</a></div>
+  <div class="nav-row" data-for="s23"><a href="#s22">←</a><span class="counter">22 / 22</span><a class="is-off">→</a></div>
 </nav>
 
 <script src="../kaiten-slides.js"></script>

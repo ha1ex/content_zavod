@@ -53,6 +53,8 @@
   --chevron-bg:var(--violet-12);
 
   --tile-bg:var(--violet-100);           /* в темной теме плашка залитая */
+  --bar-rest-bg:rgba(255,255,255,.12);   /* остаток столбика — белый под 12% */
+  --case-bg:rgba(255,255,255,.08);       /* карточка кейса на темном */
   --tile-fg:#ffffff;
 
   --contact-row-bg:rgba(255,255,255,.06);
@@ -97,6 +99,18 @@
 [data-theme="dark"] .mark { content: url("assets/kaiten-logo-on-dark.svg"); }
 /* То же на контактном слайде — там лого латиницей */
 [data-theme="dark"] .contact-brand img { content: url("assets/kaiten-logo-latin-on-dark.svg"); }
+/* Лого рядом с названием клиента в карточке кейса — тоже с белой надписью */
+[data-theme="dark"] .case-logos img { content: url("assets/kaiten-logo-on-dark.svg"); }
+
+/* Пилюля пути в схеме статусов остается белой: на темном полотне
+   подложка цвета фона сливается с самим узлом. */
+[data-theme="dark"] .flow-map .fl-path { background:rgba(255,255,255,.88); color:var(--neutral-900); }
+
+[data-theme="dark"] .flow-map .fl-links path { stroke:#3e354b; }
+[data-theme="dark"] .flow-map .fl-links marker path { fill:#3e354b; stroke:none; }
+
+[data-theme="dark"] .flow-map .fl-cap { background:#3e354b; color:rgba(255,255,255,.8); }
+
 /* Разделитель в лого-блоке на темном тоже светлеет */
 [data-theme="dark"] .contact-brand .divider { background: rgba(255,255,255,.22); }
 
@@ -126,12 +140,20 @@
    подложке под 24% почти не читается. */
 [data-theme="dark"] .chevron { color:#ffffff; }
 
-/* Акцентное слово в шапке таблицы — брендовый сиреневый, а не осветленный */
-[data-theme="dark"] .cmp-head .accent { color:var(--violet-100); }
+/* Акцентное слово в тексте и заголовках — брендовый сиреневый, а не
+   осветленный #c4a6f5: тот оттенок в палитре Кайтена не существует, он был
+   подобран на глаз. Правило общее для всех .accent, включая шапку таблицы.
+   Токен --text-accent при этом не трогаем: он же красит подписи на плашках
+   под 12-24%, где брендовый сиреневый на сиреневом не читается. */
+[data-theme="dark"] .accent { color:var(--violet-100); }
 
 /* Заголовок контактной карточки на темном — белый: сиреневый на почти
    черной подложке читается тяжело. */
 [data-theme="dark"] .contact-title { color:#ffffff; }
+
+/* Плашка под иконкой в списке возможностей на темном — белая: цвет полотна
+   на акцентном фрейме сливается, а иконка пропадает. */
+[data-theme="dark"] .features .feature-icon { background:#ffffff; }
 
 /* Серые буллиты списка «было/стало» на темном полотне читаются хуже —
    поднимаем до полупрозрачного белого. */
@@ -142,6 +164,7 @@
    вполсилы. Иначе залитая плашка на залитом фрейме сливается. */
 [data-theme="dark"] .frame.is-accent .tile { background: var(--violet-tint); color: var(--violet-100); }
 [data-theme="dark"] .frame.is-accent .tile-title { color: #ffffff; }
+[data-theme="dark"] .frame.is-accent .h3 { color: #ffffff; }
 [data-theme="dark"] .frame.is-accent .tile-text,
 [data-theme="dark"] .frame.is-accent .body.muted { color: rgba(255,255,255,.72); }
 

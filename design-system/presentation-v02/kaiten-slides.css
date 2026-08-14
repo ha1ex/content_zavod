@@ -14,7 +14,7 @@
 
 :root {
   --font: "Roboto", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-mono: "Roboto", "Inter", system-ui, sans-serif;   /* в презентациях один шрифт — Roboto */
 
   /* --- Модульная сетка (слайд «Модульная сетка», node 218-2366;
          проверена на 166-2832, 163-1748, 164-2258) ---
@@ -113,6 +113,17 @@ body:has(#s9:target) .nav-row[data-for="s9"] { display:flex; }
 body:has(#s10:target) .nav-row[data-for="s10"] { display:flex; }
 body:has(#s12:target) .nav-row[data-for="s12"] { display:flex; }
 body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
+body:has(#s13:target) .nav-row[data-for="s13"] { display:flex; }
+body:has(#s14:target) .nav-row[data-for="s14"] { display:flex; }
+body:has(#s15:target) .nav-row[data-for="s15"] { display:flex; }
+body:has(#s16:target) .nav-row[data-for="s16"] { display:flex; }
+body:has(#s17:target) .nav-row[data-for="s17"] { display:flex; }
+body:has(#s19:target) .nav-row[data-for="s19"] { display:flex; }
+body:has(#s21:target) .nav-row[data-for="s21"] { display:flex; }
+body:has(#s22:target) .nav-row[data-for="s22"] { display:flex; }
+body:has(#s23:target) .nav-row[data-for="s23"] { display:flex; }
+body:has(#s20:target) .nav-row[data-for="s20"] { display:flex; }
+body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
 
 /* Размытая полоса по низу. В макете это прямоугольник шириной 2005.5,
@@ -132,7 +143,7 @@ body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
 /* ----------------------------------------------------------- типографика --- */
 
 .s-title { font-size:2.5cqw;    line-height:1.083; font-weight:600; letter-spacing:-.01em; margin:0; }  /* 48/52 */
-.h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:600; margin:0 0 .8cqw; }                 /* 30/36 */
+.h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:600; margin:0 0 1.667cqw; }              /* 30/36, отступ снизу 32 */
 .h3      { font-size:1.25cqw;   line-height:1.333; font-weight:600; margin:0 0 .5cqw; }                 /* 24/32 */
 .body    { font-size:1.0417cqw; line-height:1.4;   font-weight:400; margin:0; }                         /* 20/28 */
 .muted   { color: var(--text-secondary); }
@@ -183,7 +194,7 @@ body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
 }
 .frame.is-accent { background: var(--surface-accent); }
 .frame.is-accent .h2,
-.frame.is-accent .h3 { color: var(--frame-accent-fg); }
+.frame.is-accent .h3 { color: var(--text-primary); }
 .frame.is-center { display:flex; align-items:center; justify-content:center; text-align:center; }
 
 /* Пункт с иконочной плашкой */
@@ -214,7 +225,7 @@ body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
 }
 .checks li + li { margin-top:1.55cqw; }
 .checks li::before {
-  content:""; position:absolute; left:0; top:.05em;
+  content:""; position:absolute; left:0; top:calc((1.4em - 1.25cqw) / 2);
   width:1.25cqw; height:1.25cqw; border-radius:50%;
   background: var(--action-primary) no-repeat center/62%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E");
@@ -330,7 +341,10 @@ body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
    в работе; голубой — информация. Раскрашиваем только те шаги, где статус
    есть на самом деле, остальные оставляем сиреневыми. */
 
-.chevrons { display:flex; gap:.208cqw; }   /* 4px */
+/* Сегменты не расставлены, а заходят друг на друга на 4px — как в макете,
+   где шаг между вершинами меньше длины сегмента. */
+.chevrons { display:flex; gap:.208cqw; }   /* 4px между сегментами */
+   /* −4px */
 .chevron {
   flex:1; height:2.5cqw;                  /* 48px */
   display:flex; align-items:center; justify-content:center;
@@ -427,7 +441,8 @@ body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
 .bars .bar-label { font-size:1.0417cqw; color:var(--text-secondary); text-align:center; margin-top:.8cqw; }
 /* Серая плашка над столбиком — остаток до полного покрытия. Ставится
    перед .bar и занимает всю свободную высоту колонки. */
-.bars .bar-rest { flex:1; min-height:0; border-radius:.63cqw .63cqw 0 0; background:var(--surface-frame); }
+.bars .bar-rest { flex:1; min-height:0; border-radius:.63cqw; background:var(--bar-rest-bg);
+  margin-bottom:1.2cqw; }
 
 /* Узел схемы: заголовок цветом пары, под ним путь или пояснение */
 .node {
@@ -510,7 +525,7 @@ body:has(#s11:target) .nav-row[data-for="s11"] { display:flex; }
    «клиент + Кайтен» через разделитель-плюс. */
 .cases { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); }
 .case {
-  background:var(--surface-frame); border-radius:var(--radius-frame);
+  background:var(--case-bg); border-radius:var(--radius-frame);
   padding:1.6cqw; display:flex; flex-direction:column; gap:1.2cqw;
 }
 .case .case-tag {
@@ -549,7 +564,7 @@ code {
 
 .cmd {
   background:var(--cmd-bg); color:var(--cmd-fg); border-radius:var(--radius-tile);
-  padding:1.2cqw 1.5cqw; font-family:var(--font-mono); font-size:1.0417cqw;
+  padding:1.6cqw 1.5cqw; font-family:var(--font-mono); font-size:1.0417cqw;
 }
 .cmd .prompt { color:var(--neutral-500); margin-right:.6em; }
 .cmd code { background:none; color:inherit; padding:0; font-size:inherit; }
@@ -636,3 +651,167 @@ code {
   .is-print .slide { display:flex !important; position:relative; page-break-after:always; break-after:page; }
 }
 @page { size: 297mm 167mm; margin: 0; }
+
+/* --- Список возможностей (иконка слева, текст справа), макет 3-2218 --- */
+.features { display:grid; gap:1.25cqw; margin-top:2.08cqw; }   /* 40 — список отбит от абзаца сильнее */
+.features .feature { display:grid; grid-template-columns:2.5cqw 1fr; gap:1.04cqw; align-items:start; }
+.features .feature-icon {
+  width:2.5cqw; height:2.5cqw; border-radius:.625cqw; flex:none;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--surface-page); color:var(--action-primary);
+}
+.features .feature-icon svg { width:1.25cqw; height:1.25cqw; }
+.features .feature-title { font-size:1.0417cqw; line-height:1.4; font-weight:600; margin:0; }
+.features .feature-text  { font-size:1.0417cqw; line-height:1.4; font-weight:400; margin:.1cqw 0 0; color:var(--text-secondary); }
+.features .feature.is-accent .feature-icon { background:var(--action-primary); color:#ffffff; }
+.features .feature.is-accent .feature-title { color:var(--text-accent); }
+
+/* --- Пара знаков «откуда — куда», макет 218-2189 --------------------------- */
+.swap { display:flex; align-items:center; gap:1.66cqw; }
+.swap .swap-mark {
+  width:5.2cqw; height:5.2cqw; border-radius:1.04cqw; flex:none;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--surface-page); color:var(--text-secondary);
+}
+.swap .swap-mark svg { width:2.5cqw; height:2.5cqw; }
+.swap .swap-mark.is-to { background:var(--action-primary); color:#ffffff; }
+.swap .swap-arrow { font-size:2.08cqw; line-height:1; color:var(--text-secondary); }
+
+/* Заголовок кейса — та же строка, что и текст, но полужирная. */
+.cases .case-title { font-size:1.0417cqw; line-height:1.4; font-weight:600; margin:1.25cqw 0 .6cqw; }
+
+/* --- Кадр для мокапа интерфейса ------------------------------------------- */
+.shot { position:relative; overflow:hidden; border-radius:.63cqw; aspect-ratio:4 / 3; background:var(--surface-page); }
+.shot img { position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:var(--focus, 50% 50%);
+  transform:scale(var(--zoom, 1.6)); transform-origin:var(--focus, 50% 50%); }
+
+/* --- Кадр для упрощенной иллюстрации фичи (FeatureMocksV01) --------------- */
+.fm-shot.is-sm { width:78%; margin-inline:auto; }
+.fm-shot { container-type:inline-size; border-radius:.63cqw; margin-bottom:1.2cqw; }
+.fm-shot .fm { zoom:calc(100cqi / 240px); background:none; padding:0; margin:0; }
+
+/* --- Раскладки 4x3 и 6x3, макет 218-2390 -----------------------------------
+   Ряды делят контентную зону 864 на три: (864 - 2*28) / 3 = 269.33 = 14.03cqw.
+   Колонки в 6x3 узкие: (1800 - 5*28) / 6 = 276.67 = 14.41cqw.
+   Соседние модули можно объединять в один — модификаторами .span-* и .rows-*.
+   Это и есть штатный способ подогнать раскладку под объем контента:
+   не менять размер модуля, а занять соседний.
+   -------------------------------------------------------------------------- */
+.grid-4x3 {
+  display:grid; grid-template-columns:repeat(4, 1fr); grid-template-rows:repeat(3, 1fr);
+  gap:var(--gap); min-height:0; height:100%;
+}
+.grid-6x3 {
+  display:grid; grid-template-columns:repeat(6, 1fr); grid-template-rows:repeat(3, 1fr);
+  gap:var(--gap); min-height:0; height:100%;
+}
+
+/* Объединение соседних модулей. .span-N — по горизонтали, .rows-N — по вертикали.
+   Работают в любой из сеток, включая 4x2 и 2x2. */
+.span-2 { grid-column:span 2; }
+.span-3 { grid-column:span 3; }
+.span-4 { grid-column:span 4; }
+.span-6 { grid-column:span 6; }
+.rows-2 { grid-row:span 2; }
+.rows-3 { grid-row:span 3; }
+
+/* --- Нумерованные шаги, макет 220-2378 -------------------------------------
+   Кружок 32 с номером, справа заголовок 20/28 semibold и пояснение.
+   Цвет кружка — статус шага: по умолчанию сиреневый, .is-done зеленый,
+   .is-fail красный, .is-idle светлый. Заливка яркая только у первого и
+   последнего шага (.is-strong), остальные — тонированные 12%.
+   -------------------------------------------------------------------------- */
+.steps { display:grid; gap:1.1cqw; align-content:start; }
+.steps .step { display:grid; grid-template-columns:1.667cqw 1fr; gap:.9cqw; align-items:start; }
+.steps .step-num {
+  width:1.667cqw; height:1.667cqw; border-radius:50%; flex:none;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.83cqw; font-weight:600; line-height:1;
+  background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
+}
+.steps .step.is-strong .step-num { background:var(--c-100, var(--action-primary)); color:#fff; }
+.steps .step-title { font-size:.94cqw; line-height:1.35; font-weight:600; margin:0; }
+.steps .step-text  { font-size:.94cqw; line-height:1.35; margin:.05cqw 0 0; color:var(--text-secondary); }
+
+/* --- Сгруппированные карточки, макет 213-2212 -------------------------------
+   Тонированный фрейм группы, внутри белые карточки. Тон задается парой
+   100/12 через модификаторы .c-*: заголовок группы берет 100, фон — 12.
+   -------------------------------------------------------------------------- */
+.group {
+  background:var(--c-12, var(--surface-frame)); border-radius:var(--radius-frame);
+  padding:1.4cqw; display:flex; flex-direction:column; gap:1cqw; min-height:0;
+}
+.group .group-title { font-size:1.25cqw; line-height:1.2; font-weight:600; margin:0; color:var(--c-100, var(--text-primary)); }
+.group .group-items { display:grid; gap:.83cqw; align-content:start; }
+.group .g-item {
+  background:var(--surface-page); border-radius:var(--radius-tile);
+  padding:.9cqw 1cqw; display:grid; grid-template-columns:1.875cqw 1fr; gap:.83cqw; align-items:center;
+}
+.group .g-icon {
+  width:1.875cqw; height:1.875cqw; border-radius:.42cqw;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
+}
+.group .g-icon svg { width:1.04cqw; height:1.04cqw; }
+.group .g-title { font-size:.94cqw; line-height:1.3; font-weight:600; margin:0; }
+.group .g-text  { font-size:.83cqw; line-height:1.3; margin:.1cqw 0 0; color:var(--text-secondary); }
+/* Один акцентный пункт на группу: плашка залита, заголовок сиреневый. */
+.group .g-item.is-accent .g-icon { background:var(--action-primary); color:#fff; }
+.group .g-item.is-accent .g-title { color:var(--text-accent); }
+
+/* --- Роадмап по кварталам, макет 373-2787 -----------------------------------
+   Колонка квартала: тонированная шапка с названием и ниже пилюли пунктов
+   того же тона. Тон задается парой 100/12 через .c-*.
+   -------------------------------------------------------------------------- */
+.quarters { display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--gap); align-items:start; }
+.quarters .q-head {
+  background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
+  border-radius:var(--radius-tile); padding:.9cqw 1cqw; margin-bottom:1cqw;
+  font-size:1.25cqw; line-height:1.2; font-weight:600; text-align:center;
+}
+.quarters .q-items { display:grid; gap:.63cqw; }
+.quarters .q-item {
+  background:var(--c-12, var(--surface-accent)); border-radius:.42cqw;
+  padding:.6cqw .8cqw; font-size:.83cqw; line-height:1.3;
+  border-left:.156cqw solid var(--c-100, var(--action-primary));
+}
+
+/* --- Диаграммы, макет 373-2476 ---------------------------------------------
+   Кольцевая и график рисуются SVG и тянутся за шириной блока. Цвета берутся
+   из пар 100/12: заливка сегмента 12, подпись и линия 100.
+   -------------------------------------------------------------------------- */
+.chart-row { display:grid; grid-template-columns:auto 1fr; gap:1.6cqw; align-items:center; margin-top:.8cqw; }
+.donut { width:19cqw; }
+.donut svg, .area svg { width:100%; height:auto; display:block; }
+.area { margin-top:1.25cqw; }
+.legend { list-style:none; margin:0; padding:0; display:grid; gap:.7cqw; }
+.legend.is-row { grid-auto-flow:column; justify-content:start; gap:1.6cqw; margin-top:1cqw; }
+.legend .lg-item { display:flex; align-items:center; gap:.6cqw; font-size:.94cqw; line-height:1.3; color:var(--text-secondary); }
+.legend .lg-item b { color:var(--text-primary); font-weight:600; }
+.legend .lg-dot { width:.63cqw; height:.63cqw; border-radius:50%; flex:none; background:var(--c-100, var(--action-primary)); }
+
+
+/* --- Схема статусов со связями, макет 373-2787 -----------------------------
+   Рамка держит пропорции макета (973x210), внутри узлы стоят в процентах,
+   а связи рисует SVG в тех же координатах. Поэтому схема масштабируется
+   целиком и линии не разъезжаются с блоками.
+   -------------------------------------------------------------------------- */
+.flow-map { position:relative; width:100%; aspect-ratio:973 / 210; margin-top:1.25cqw; }
+.flow-map .fl-links { position:absolute; inset:0; width:100%; height:100%; }
+.flow-map .fl-node {
+  position:absolute; box-sizing:border-box;
+  background:var(--c-12, var(--surface-accent));
+  border-left:.208cqw solid var(--c-100, var(--action-primary));
+  border-radius:.833cqw; padding:.42cqw .63cqw; display:flex; flex-direction:column; justify-content:center; gap:.52cqw;
+}
+.flow-map .fl-title { margin:0; font-size:.94cqw; line-height:1.2; font-weight:600; color:var(--c-100, var(--text-accent)); }
+.flow-map .fl-path {
+  margin:0; font-size:.78cqw; line-height:1.2; color:var(--text-secondary);
+  background:var(--surface-page); border-radius:.26cqw; padding:.21cqw .42cqw;
+}
+.flow-map .fl-cap {
+  position:absolute; transform:translate(-50%, -50%);
+  background:var(--border-default); color:var(--text-secondary);
+  border-radius:999px; padding:.31cqw .83cqw; font-size:.94cqw; line-height:1.2; white-space:nowrap;
+}

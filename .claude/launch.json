@@ -9,6 +9,13 @@
       "autoPort": true
     },
     {
+      "name": "presentation",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["design-system/presentation-v02/serve.mjs"],
+      "port": 4180,
+      "autoPort": true
+    },
+    {
       "name": "storybook",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "packages/ui", "run", "storybook"],

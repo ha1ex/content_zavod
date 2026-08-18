@@ -1,0 +1,226 @@
+{
+  "pageType": "event_landing",
+  "goal": "waitlist",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Бесплатный вебинар · 3 сентября, 16:00 МСК · онлайн",
+        "title": "Переезд на Кайтен: как уйти с Jira, Trello и Notion, ничего не потеряв",
+        "accentWord": "ничего не потеряв",
+        "accentPill": false,
+        "subtitle": "Онлайн-вебинар для тех, кто решил сменить трекер задач, но боится потерять данные, связи задач и время команды",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "visualPosition": "side",
+        "bullets": [
+          "Дата: 3 сентября",
+          "Время: 16:00 по Москве",
+          "Формат: онлайн, участие бесплатное"
+        ],
+        "form": {
+          "anchorId": "registration-top",
+          "action": "#",
+          "dataConsentHref": "/privacy",
+          "newsletterRequired": true
+        },
+        "speaker": {
+          "name": "Юра Юрков",
+          "role": "Менеджер по внедрению Кайтена",
+          "initials": "ЮЮ"
+        },
+        "flush": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Зачем прийти",
+        "description": "Переезд с одного трекера на другой пугает. Кажется, что при переносе потеряются задачи, история и связи между ними. Что команда встанет на неделю и в итоге вернётся в старый инструмент.",
+        "checklist": [
+          {
+            "text": "Разберём, как переехать без потерь и простоя"
+          },
+          {
+            "text": "Покажем, что переносится, а что нет"
+          },
+          {
+            "text": "Расскажем, как сохранить главное — задачи, историю и связи между ними"
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "kanban-minimal-animated"
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Кому подойдёт",
+        "items": [
+          {
+            "icon": "Building2",
+            "title": "Руководителям",
+            "description": "Тем, кто уходит с Jira, Trello или Notion и хочет собрать работу в одной системе.",
+            "mockVariant": "mini-org-management"
+          },
+          {
+            "icon": "Server",
+            "title": "ИТ-директорам",
+            "description": "Тем, кому нужен план миграции без остановки процессов.",
+            "mockVariant": "mini-org-it"
+          },
+          {
+            "icon": "Users",
+            "title": "Командам",
+            "description": "Тем, кто упёрся в лимиты тарифа или неудобство текущего инструмента.",
+            "mockVariant": "mini-org-legal"
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "title": "Что вы узнаете",
+        "milestones": [
+          {
+            "title": "Почему компании меняют трекер",
+            "description": "Разберём мотивы перехода с Jira, Trello и Notion — и когда переезд действительно оправдан."
+          },
+          {
+            "title": "Что переносится, а что нет",
+            "description": "Честно покажем, какие данные мигрируют, а какие теряются. Расскажем, как сохранить связи задач, историю и вложения."
+          },
+          {
+            "title": "Как переехать без остановки работы",
+            "description": "Порядок переноса, параллельная работа на время перехода, старт с одной команды."
+          },
+          {
+            "title": "Что вы получаете после переезда",
+            "description": "Единая среда вместо нескольких инструментов, наличие в реестре Минцифры, коробочная и облачная версии."
+          },
+          {
+            "title": "Живой перенос данных",
+            "description": "Покажем на экране, как выглядит импорт и перенесённые задачи со связями."
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Что заберёте с собой",
+        "description": "Чек-лист «Подготовка к переезду». Останется у вас после вебинара.",
+        "checklist": [
+          {
+            "text": "Что проверить заранее"
+          },
+          {
+            "text": "В каком порядке переносить данные"
+          }
+        ],
+        "mediaVariant": "none"
+      }
+    },
+    {
+      "id": "speaker",
+      "component": "SpeakerCard",
+      "props": {
+        "name": "Юра Юрков",
+        "role": "Менеджер по внедрению Кайтена",
+        "initials": "ЮЮ",
+        "title": "Ведущий",
+        "bio": "Помогает командам переходить на Кайтен с других сервисов и доводить переезд до рабочего состояния."
+      }
+    },
+    {
+      "id": "stats",
+      "component": "StatStrip",
+      "props": {
+        "title": "Рынок уже сменил курс",
+        "description": "Переход на российские решения — уже массовое движение, а не единичные случаи. Данные Naumen, 2024.",
+        "stats": [
+          {
+            "value": "25%",
+            "label": "в 2020 году",
+            "description": "доля отечественных трекеров задач в России"
+          },
+          {
+            "value": "73%",
+            "label": "в 2024 году",
+            "description": "доля выросла почти втрое за четыре года"
+          }
+        ]
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "registration",
+        "action": "#",
+        "dataConsentHref": "/privacy",
+        "newsletterRequired": true,
+        "title": "Зарегистрироваться на вебинар 3 сентября",
+        "description": "3 сентября, 16:00 по Москве. Формат: онлайн, участие бесплатное.",
+        "submitLabel": "Зарегистрироваться"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Вебинар «Переезд на Кайтен»: уйти с Jira, Trello, Notion",
+    "description": "3 сентября в 16:00 МСК разбираем переезд на Кайтен: что переносится из Jira, Trello и Notion, а что нет и как перейти без остановки работы."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/event_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-08-18T10:25:58.661Z",
+    "generator": "host-agent",
+    "archetype": "event_landing",
+    "tokenEstimate": 48508,
+    "domain": "pm"
+  }
+}

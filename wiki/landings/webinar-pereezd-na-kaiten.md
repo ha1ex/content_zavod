@@ -93,7 +93,7 @@ stale: false
 ### hero (HeroSection)
 
 - **title:** "Миграция без потерь: как перевести команду с Jira и Asana на Кайтен"
-- **subtitle:** "И как подключить внешних ИТ-специалистов, не открывая им лишнего. Онлайн-вебинар для тех, кто уходит с Jira или Asana и работает не только своими силами" _(152/200 chars)_
+- **subtitle:** "И как вести гибридную команду — штат и подрядчиков — в одном пространстве. Онлайн-вебинар для тех, кто уходит с Jira или Asana и не хочет останавливать разработку" _(162/200 chars)_
 - **primaryCta:** "Зарегистрироваться" → `#registration`
 
 ### media_copy (MediaCopy)
@@ -109,7 +109,7 @@ stale: false
   1. `Building2` · "Руководителям" — 72 chars
   2. `Server` · "ИТ-директорам" — 54 chars
   3. `Users` · "Командам" — 68 chars
-  4. `UserPlus` · "Компаниям с подрядчиками" — 82 chars
+  4. `UserPlus` · "Гибридным командам" — 68 chars
 
 ### timeline_roadmap (TimelineRoadmap)
 
@@ -134,7 +134,7 @@ stale: false
 - **Score:** 65.96 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T10:45:24.083Z
+- **Generated:** 2026-08-20T10:49:30.513Z
 
 ## Breakdown
 

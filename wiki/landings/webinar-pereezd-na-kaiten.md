@@ -131,18 +131,18 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `webinar-pereezd-na-kaiten`
 
-- **Score:** 61.84 / 100 (threshold 70) — ❌ fail
+- **Score:** 65.96 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T10:26:55.552Z
+- **Generated:** 2026-08-20T10:45:24.083Z
 
 ## Breakdown
 
 | ID | Subscore | Raw | Weight | Weighted | Detail |
 |---|---|---|---|---|---|
-| S1 | Story coverage | 46.28 | 0.4 | 18.51 | top-6 stories: compare(w=0.98, c=0.47), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=0.30), ux-check(w=0.71, c=0.30), sandbox(w=0.62, c=0.30), security(w=0.53, c=0.17) |
+| S1 | Story coverage | 48.24 | 0.4 | 19.29 | top-6 stories: compare(w=0.98, c=0.47), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=0.30), ux-check(w=0.71, c=0.30), sandbox(w=0.62, c=0.30), security(w=0.53, c=0.35) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
-| S3 | Role addressability | 16.67 | 0.2 | 3.33 | PM=0.33, DM=0.00 |
+| S3 | Role addressability | 33.33 | 0.2 | 6.67 | PM=0.67, DM=0.00 |
 | S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial], match=1/1 |
 
 ## Story coverage (top-N)
@@ -154,12 +154,12 @@ stale: false
 | fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | ux-check — Хочу проверить UX до решения | 0.71 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | sandbox — Хочу проверить, не сломаем ли мы всё | 0.62 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
-| security — Хочу понять ограничения и безопасность | 0.53 | 0.18 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
+| security — Хочу понять ограничения и безопасность | 0.53 | 0.35 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 
 ## Issues
 
-- **score-below-threshold**: Audience-score 61.84 ниже порога 70.
-  - _suggestion:_ Слабее всего S3 (Role addressability=16.67): PM=0.33, DM=0.00. Не покрыты stories: compare (Хочу сравнить с тем, что уже есть); fast-check (Хочу быстро проверить, подойдёт ли нам); ux-check (Хочу проверить UX до решения). Добавь соответствующие секции или ключевые слова.
+- **score-below-threshold**: Audience-score 65.96 ниже порога 70.
+  - _suggestion:_ Слабее всего S3 (Role addressability=33.33): PM=0.67, DM=0.00. Не покрыты stories: compare (Хочу сравнить с тем, что уже есть); fast-check (Хочу быстро проверить, подойдёт ли нам); ux-check (Хочу проверить UX до решения). Добавь соответствующие секции или ключевые слова.
 
 <!-- /gen:audience-score -->
 

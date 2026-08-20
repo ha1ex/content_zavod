@@ -80,14 +80,14 @@
             "description": "выросла почти втрое за четыре года. Данные Naumen, 2024"
           },
           {
-            "value": "100 000+",
-            "label": "компаний работают в Кайтене",
-            "description": "среди них Сбер, S7 Airlines, X5 Group, Ростелеком, Норникель"
+            "value": "с 2018 года",
+            "label": "Кайтен на рынке",
+            "description": "российская разработка, данные хранятся в России"
           },
           {
-            "value": "5 сервисов",
-            "label": "переносятся автоматически",
-            "description": "Trello, Jira, Asana, Notion и ClickUp, плюс импорт через CSV и JSON"
+            "value": "100 000+",
+            "label": "компаний работают в Кайтене",
+            "description": "среди них Сбер, S7 Airlines, X5 Group, Ростелеком"
           }
         ]
       }
@@ -224,7 +224,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-20T09:24:10.907Z",
+    "generatedAt": "2026-08-20T09:33:13.095Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "tokenEstimate": 48508,

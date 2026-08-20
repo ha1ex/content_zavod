@@ -133,7 +133,7 @@ stale: false
 - **Score:** 62.51 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T09:24:10.880Z
+- **Generated:** 2026-08-20T09:33:13.081Z
 
 ## Breakdown
 

@@ -81,7 +81,7 @@
           {
             "icon": "ClipboardList",
             "title": "Менеджерам проектов",
-            "description": "Тем, кому важно сохранить структуру проектов и не сорвать сроки на переезде."
+            "description": "Тем, кому важно сохранить структуру проектов и не сорвать сроки."
           },
           {
             "icon": "UserPlus",
@@ -198,7 +198,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-20T11:12:19.959Z",
+    "generatedAt": "2026-08-20T11:18:06.738Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "tokenEstimate": 48508,

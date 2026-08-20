@@ -104,7 +104,7 @@ stale: false
 - **columns:** 4 · **items:** 4
   1. `Building2` · "Руководителям" — 72 chars
   2. `Server` · "ИТ-директорам" — 54 chars
-  3. `ClipboardList` · "Менеджерам проектов" — 76 chars
+  3. `ClipboardList` · "Менеджерам проектов" — 64 chars
   4. `UserPlus` · "Гибридным командам" — 68 chars
 
 ### timeline_roadmap (TimelineRoadmap)
@@ -130,7 +130,7 @@ stale: false
 - **Score:** 65.96 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T11:12:19.948Z
+- **Generated:** 2026-08-20T11:18:06.726Z
 
 ## Breakdown
 

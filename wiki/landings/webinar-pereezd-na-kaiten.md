@@ -52,7 +52,7 @@ stale: false
 
 <!-- gen:spec-meta -->
 - **slug:** `webinar-pereezd-na-kaiten`
-- **brief:** `content/briefs/webinar-pereezd-na-kaiten.json`
+- **brief:** `content/briefs/webinar-pereezd-na-kaiten-v2.json`
 - **archetype:** `event_landing`
 - **goal:** `waitlist` (brief.cta = "Зарегистрироваться")
 - **sections used:** `site_header, hero, media_copy, stats, features, timeline_roadmap, media_copy, speaker, registration_cta, kaiten_footer`
@@ -92,8 +92,8 @@ stale: false
 
 ### hero (HeroSection)
 
-- **title:** "Переезд на Кайтен: как уйти с Jira, Trello и Notion, ничего не потеряв"
-- **subtitle:** "Онлайн-вебинар для тех, кто решил сменить трекер задач, но боится потерять данные, связи задач и время команды" _(110/200 chars)_
+- **title:** "Миграция без потерь: как перевести команду с Jira и Asana на Кайтен"
+- **subtitle:** "И как подключить внешних ИТ-специалистов, не открывая им лишнего. Онлайн-вебинар для тех, кто уходит с Jira или Asana и работает не только своими силами" _(152/200 chars)_
 - **primaryCta:** "Зарегистрироваться" → `#registration`
 
 ### media_copy (MediaCopy)
@@ -105,10 +105,11 @@ stale: false
 ### features (FeatureGrid)
 
 - **title:** "Кому подойдёт"
-- **columns:** 3 · **items:** 3
-  1. `Building2` · "Руководителям" — 81 chars
+- **columns:** 4 · **items:** 4
+  1. `Building2` · "Руководителям" — 72 chars
   2. `Server` · "ИТ-директорам" — 54 chars
   3. `Users` · "Командам" — 68 chars
+  4. `UserPlus` · "Компаниям с подрядчиками" — 82 chars
 
 ### timeline_roadmap (TimelineRoadmap)
 
@@ -130,16 +131,16 @@ stale: false
 <!-- gen:audience-score -->
 # Audience score — `webinar-pereezd-na-kaiten`
 
-- **Score:** 62.51 / 100 (threshold 70) — ❌ fail
+- **Score:** 61.84 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T09:33:13.081Z
+- **Generated:** 2026-08-20T10:26:55.552Z
 
 ## Breakdown
 
 | ID | Subscore | Raw | Weight | Weighted | Detail |
 |---|---|---|---|---|---|
-| S1 | Story coverage | 47.95 | 0.4 | 19.18 | top-6 stories: compare(w=0.98, c=0.65), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=0.30), ux-check(w=0.71, c=0.30), sandbox(w=0.62, c=0.30), security(w=0.53, c=0.00) |
+| S1 | Story coverage | 46.28 | 0.4 | 18.51 | top-6 stories: compare(w=0.98, c=0.47), migrate-jira(w=0.95, c=1.00), fast-check(w=0.94, c=0.30), ux-check(w=0.71, c=0.30), sandbox(w=0.62, c=0.30), security(w=0.53, c=0.17) |
 | S2 | Segment fit | 100 | 0.3 | 30 | mentioned=1/1 [IT] |
 | S3 | Role addressability | 16.67 | 0.2 | 3.33 | PM=0.33, DM=0.00 |
 | S4 | CTA alignment | 100 | 0.1 | 10 | cta-types=[Trial], match=1/1 |
@@ -148,17 +149,17 @@ stale: false
 
 | Story | Weight | Covered | Status |
 |---|---|---|---|
-| compare — Хочу сравнить с тем, что уже есть | 0.98 | 0.65 | ✅ covered |
+| compare — Хочу сравнить с тем, что уже есть | 0.98 | 0.48 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | migrate-jira — Хочу понять, стоит ли переезжать с Jira | 0.95 | 1 | ✅ covered |
 | fast-check — Хочу быстро проверить, подойдёт ли нам | 0.94 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | ux-check — Хочу проверить UX до решения | 0.71 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 | sandbox — Хочу проверить, не сломаем ли мы всё | 0.62 | 0.3 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
-| security — Хочу понять ограничения и безопасность | 0.53 | 0 | ❌ not covered — добавь секцию/копи для "Хочу понять ограничения и безопасность" (keywords: безопасн, on-prem, on prem) |
+| security — Хочу понять ограничения и безопасность | 0.53 | 0.18 | 🟡 partial — добавь ключевые слова или CTA story в копирайт |
 
 ## Issues
 
-- **score-below-threshold**: Audience-score 62.51 ниже порога 70.
-  - _suggestion:_ Слабее всего S3 (Role addressability=16.67): PM=0.33, DM=0.00. Не покрыты stories: fast-check (Хочу быстро проверить, подойдёт ли нам); ux-check (Хочу проверить UX до решения); sandbox (Хочу проверить, не сломаем ли мы всё). Добавь соответствующие секции или ключевые слова.
+- **score-below-threshold**: Audience-score 61.84 ниже порога 70.
+  - _suggestion:_ Слабее всего S3 (Role addressability=16.67): PM=0.33, DM=0.00. Не покрыты stories: compare (Хочу сравнить с тем, что уже есть); fast-check (Хочу быстро проверить, подойдёт ли нам); ux-check (Хочу проверить UX до решения). Добавь соответствующие секции или ключевые слова.
 
 <!-- /gen:audience-score -->
 

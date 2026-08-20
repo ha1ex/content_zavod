@@ -63,36 +63,6 @@
       }
     },
     {
-      "id": "stats",
-      "component": "StatStrip",
-      "props": {
-        "title": "Рынок уже сменил курс",
-        "description": "Переход на российские решения — уже массовое движение, а не единичные случаи.",
-        "stats": [
-          {
-            "value": "25%",
-            "label": "в 2020 году",
-            "description": "доля отечественных трекеров задач в России"
-          },
-          {
-            "value": "73%",
-            "label": "в 2024 году",
-            "description": "выросла почти втрое за четыре года. Данные Naumen, 2024"
-          },
-          {
-            "value": "с 2018 года",
-            "label": "Кайтен на рынке",
-            "description": "российская разработка, данные хранятся в России"
-          },
-          {
-            "value": "100 000+",
-            "label": "компаний работают в Кайтене",
-            "description": "среди них Сбер, S7 Airlines, X5 Group, Ростелеком"
-          }
-        ]
-      }
-    },
-    {
       "id": "features",
       "component": "FeatureGrid",
       "props": {
@@ -228,7 +198,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-20T11:01:10.335Z",
+    "generatedAt": "2026-08-20T11:03:48.980Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "tokenEstimate": 48508,

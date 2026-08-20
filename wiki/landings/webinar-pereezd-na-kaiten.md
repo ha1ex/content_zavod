@@ -33,11 +33,11 @@ sections:
   - site_header
   - hero
   - media_copy
+  - stats
   - features
   - timeline_roadmap
   - media_copy
   - speaker
-  - stats
   - registration_cta
   - kaiten_footer
 generator: host-agent
@@ -55,7 +55,7 @@ stale: false
 - **brief:** `content/briefs/webinar-pereezd-na-kaiten.json`
 - **archetype:** `event_landing`
 - **goal:** `waitlist` (brief.cta = "Зарегистрироваться")
-- **sections used:** `site_header, hero, media_copy, features, timeline_roadmap, media_copy, speaker, stats, registration_cta, kaiten_footer`
+- **sections used:** `site_header, hero, media_copy, stats, features, timeline_roadmap, media_copy, speaker, registration_cta, kaiten_footer`
 - **token estimate:** `48508`
 - **generation duration:** `0ms`
 - **generator:** `host-agent`
@@ -99,6 +99,9 @@ stale: false
 ### media_copy (MediaCopy)
 
 
+### stats (StatStrip)
+
+
 ### features (FeatureGrid)
 
 - **title:** "Кому подойдёт"
@@ -116,9 +119,6 @@ stale: false
 ### speaker (SpeakerCard)
 
 
-### stats (StatStrip)
-
-
 ### registration_cta (RegistrationCta)
 
 
@@ -133,7 +133,7 @@ stale: false
 - **Score:** 62.51 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T09:04:01.027Z
+- **Generated:** 2026-08-20T09:24:10.880Z
 
 ## Breakdown
 

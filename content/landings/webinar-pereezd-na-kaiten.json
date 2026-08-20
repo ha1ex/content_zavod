@@ -63,6 +63,36 @@
       }
     },
     {
+      "id": "stats",
+      "component": "StatStrip",
+      "props": {
+        "title": "Рынок уже сменил курс",
+        "description": "Переход на российские решения — уже массовое движение, а не единичные случаи.",
+        "stats": [
+          {
+            "value": "25%",
+            "label": "в 2020 году",
+            "description": "доля отечественных трекеров задач в России"
+          },
+          {
+            "value": "73%",
+            "label": "в 2024 году",
+            "description": "выросла почти втрое за четыре года. Данные Naumen, 2024"
+          },
+          {
+            "value": "100 000+",
+            "label": "компаний работают в Кайтене",
+            "description": "среди них Сбер, S7 Airlines, X5 Group, Ростелеком, Норникель"
+          },
+          {
+            "value": "5 сервисов",
+            "label": "переносятся автоматически",
+            "description": "Trello, Jira, Asana, Notion и ClickUp, плюс импорт через CSV и JSON"
+          }
+        ]
+      }
+    },
+    {
       "id": "features",
       "component": "FeatureGrid",
       "props": {
@@ -147,26 +177,6 @@
       }
     },
     {
-      "id": "stats",
-      "component": "StatStrip",
-      "props": {
-        "title": "Рынок уже сменил курс",
-        "description": "Переход на российские решения — уже массовое движение, а не единичные случаи. Данные Naumen, 2024.",
-        "stats": [
-          {
-            "value": "25%",
-            "label": "в 2020 году",
-            "description": "доля отечественных трекеров задач в России"
-          },
-          {
-            "value": "73%",
-            "label": "в 2024 году",
-            "description": "доля выросла почти втрое за четыре года"
-          }
-        ]
-      }
-    },
-    {
       "id": "registration_cta",
       "component": "RegistrationCta",
       "props": {
@@ -214,7 +224,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-20T09:04:01.052Z",
+    "generatedAt": "2026-08-20T09:24:10.907Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "tokenEstimate": 48508,

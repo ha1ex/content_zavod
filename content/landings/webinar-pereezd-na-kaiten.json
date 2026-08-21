@@ -35,7 +35,7 @@
         },
         "speaker": {
           "name": "Юрий Юрков",
-          "role": "Kanban Coach & Delivery Manager в Kaiten",
+          "role": "Канбан-коуч и Delivery Manager в Kaiten",
           "photoSrc": "/landings/webinar-pereezd-na-kaiten/yuriy-yurkov.png",
           "photoAlt": "Юрий Юрков, Kaiten",
           "initials": "ЮЮ"
@@ -146,7 +146,7 @@
       "component": "SpeakerCard",
       "props": {
         "name": "Юрий Юрков",
-        "role": "Kanban Coach & Delivery Manager в Kaiten",
+        "role": "Канбан-коуч и Delivery Manager в Kaiten",
         "photoSrc": "/landings/webinar-pereezd-na-kaiten/yuriy-yurkov.png",
         "photoAlt": "Юрий Юрков, Kaiten",
         "initials": "ЮЮ",
@@ -202,7 +202,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-21T10:14:59.546Z",
+    "generatedAt": "2026-08-21T10:19:16.111Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "tokenEstimate": 48508,

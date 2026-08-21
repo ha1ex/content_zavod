@@ -2,7 +2,7 @@
 slug: webinar-pereezd-na-kaiten
 type: landing
 created: 2026-08-18
-updated: 2026-08-20
+updated: 2026-08-21
 status: draft
 brief: content/briefs/webinar-pereezd-na-kaiten.json
 archetype: event_landing
@@ -130,7 +130,7 @@ stale: false
 - **Score:** 65.96 / 100 (threshold 70) — ❌ fail
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-08-20T11:18:06.726Z
+- **Generated:** 2026-08-21T10:14:59.534Z
 
 ## Breakdown
 

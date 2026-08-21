@@ -35,7 +35,9 @@
         },
         "speaker": {
           "name": "Юрий Юрков",
-          "role": "Пресейл-инженер Kaiten",
+          "role": "Kanban Coach & Delivery Manager в Kaiten",
+          "photoSrc": "/landings/webinar-pereezd-na-kaiten/yuriy-yurkov.png",
+          "photoAlt": "Юрий Юрков, Kaiten",
           "initials": "ЮЮ"
         },
         "flush": true
@@ -144,10 +146,12 @@
       "component": "SpeakerCard",
       "props": {
         "name": "Юрий Юрков",
-        "role": "Пресейл-инженер и специалист по настройке Kaiten",
+        "role": "Kanban Coach & Delivery Manager в Kaiten",
+        "photoSrc": "/landings/webinar-pereezd-na-kaiten/yuriy-yurkov.png",
+        "photoAlt": "Юрий Юрков, Kaiten",
         "initials": "ЮЮ",
         "title": "Ведущий",
-        "bio": "Настраивает Кайтен под процессы команд и помогает перенести работу из других сервисов."
+        "bio": "Сертифицированный Канбан-коуч в Kanban University. Более 10 лет успешно управлял командами и процессами как в российских, так и в зарубежных компаниях."
       }
     },
     {
@@ -198,7 +202,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-08-20T11:18:06.738Z",
+    "generatedAt": "2026-08-21T10:14:59.546Z",
     "generator": "host-agent",
     "archetype": "event_landing",
     "tokenEstimate": 48508,

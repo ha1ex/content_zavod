@@ -118,7 +118,12 @@
 
 /* Хром вокруг слайда — навигация и панель стилей — тоже темнеет,
    иначе белые пилюли режут глаз на темном полотне. */
-[data-theme="dark"] .nav,
+[data-theme="dark"] .nav {
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.14);
+  color:rgba(255,255,255,.7);
+  box-shadow:none;
+}
 [data-theme="dark"] .theme-bar {
   background:rgba(255,255,255,.07);
   border-color:rgba(255,255,255,.14);
@@ -128,7 +133,7 @@
 [data-theme="dark"] .nav button,
 [data-theme="dark"] .theme-bar button { color:rgba(255,255,255,.72); }
 [data-theme="dark"] .nav button:hover,
-[data-theme="dark"] .theme-bar button:hover { background:rgba(255,255,255,.12); color:#fff; }
+[data-theme="dark"] .theme-bar button:hover { background:var(--violet-12); color:#fff; }
 [data-theme="dark"] .nav button:disabled { color:rgba(255,255,255,.26); background:none; }
 [data-theme="dark"] .nav .dot { background:rgba(255,255,255,.26); }
 [data-theme="dark"] .nav .dot[aria-current="true"] { background:var(--violet-100); }

@@ -13,11 +13,11 @@
   nav.className = 'nav';
   nav.setAttribute('aria-label', 'Навигация по слайдам');
   nav.innerHTML =
-    '<button data-first aria-label="В начало">«</button>' +
-    '<button data-prev aria-label="Предыдущий слайд">←</button>' +
+    '<button data-first aria-label="В начало"><svg viewBox='0 0 12 10' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M11 9L7 5L11 1M5 9L1 5L5 1'/></svg></button>' +
+    '<button data-prev aria-label="Предыдущий слайд"><svg viewBox='0 0 16 14' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M15 7H1M7 1L1 7L7 13'/></svg></button>' +
     '<div class="dots"></div>' +
-    '<button data-next aria-label="Следующий слайд">→</button>' +
-    '<button data-last aria-label="В конец">»</button>' +
+    '<button data-next aria-label="Следующий слайд"><svg viewBox='0 0 16 14' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M1 7H15M9 13L15 7L9 1'/></svg></button>' +
+    '<button data-last aria-label="В конец"><svg viewBox='0 0 12 10' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 1L11 5L7 9M1 1L5 5L1 9'/></svg></button>' +
     '<span data-counter class="mono"></span>';
   document.body.appendChild(nav);
 
@@ -115,7 +115,9 @@
       try { localStorage.setItem('kaiten-slides-theme', name); } catch (err) {}
     }
 
-    document.body.appendChild(bar);
+    document.body.appendChild(bar); else {
+      document.body.appendChild(bar);
+    }
 
     var saved;
     try { saved = localStorage.getItem('kaiten-slides-theme'); } catch (err) {}

@@ -1,0 +1,211 @@
+{
+  "pageType": "event_landing",
+  "goal": "waitlist",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Kaiten и SkillStaff · совместный вебинар · 3 сентября, 16:00 МСК",
+        "title": "Миграция без потерь: как перевести команду с Jira и Asana на Кайтен",
+        "accentWord": "без потерь",
+        "accentPill": false,
+        "subtitle": "И как вести гибридную команду — штат и подрядчиков — в одном пространстве. Онлайн-вебинар для тех, кто уходит с Jira или Asana и не хочет останавливать разработку",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "#registration"
+        },
+        "secondaryCta": null,
+        "visualPosition": "side",
+        "bullets": [
+          "Дата: 3 сентября",
+          "Время: 16:00 по Москве",
+          "Формат: онлайн, участие бесплатное"
+        ],
+        "form": {
+          "anchorId": "registration-top",
+          "action": "#",
+          "dataConsentHref": "/privacy",
+          "newsletterRequired": true
+        },
+        "speaker": {
+          "name": "Юрий Юрков",
+          "role": "Канбан-коуч и Delivery Manager в Kaiten",
+          "photoSrc": "/landings/webinar-pereezd-na-kaiten/yuriy-yurkov.png",
+          "photoAlt": "Юрий Юрков, Kaiten",
+          "initials": "ЮЮ"
+        },
+        "flush": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "О чём вебинар",
+        "description": "Переезд с одного инструмента на другой пугает. Кажется, что при переносе потеряются задачи, базы знаний и связи между ними. Что разработка встанет на неделю и команда в итоге вернётся в старый инструмент. А если часть работы делают подрядчики, добавляется второй вопрос — что именно им открывать.",
+        "checklist": [
+          {
+            "text": "Разберём порядок переноса, при котором разработка не останавливается"
+          },
+          {
+            "text": "Покажем, как сохранить спринты, канбан и оценку задач на новом месте"
+          },
+          {
+            "text": "Расскажем, как вести штат и подрядчиков в одном пространстве и видеть, где работа встаёт"
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "kanban-minimal-animated"
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Кому подойдёт",
+        "items": [
+          {
+            "icon": "Building2",
+            "title": "Руководителям",
+            "description": "Тем, кто уходит с Jira или Asana и хочет собрать работу в одной системе."
+          },
+          {
+            "icon": "Server",
+            "title": "ИТ-директорам",
+            "description": "Тем, кому нужен план миграции без остановки процессов."
+          },
+          {
+            "icon": "ClipboardList",
+            "title": "Менеджерам проектов",
+            "description": "Тем, кому важно сохранить структуру проектов и не сорвать сроки."
+          },
+          {
+            "icon": "UserPlus",
+            "title": "Гибридным командам",
+            "description": "Тем, у кого над продуктом работают и штат, и внешние ИТ-специалисты."
+          }
+        ],
+        "columns": 4
+      }
+    },
+    {
+      "id": "timeline_roadmap",
+      "component": "TimelineRoadmap",
+      "props": {
+        "title": "Что вы узнаете",
+        "milestones": [
+          {
+            "title": "Пошаговый перенос задач и баз знаний в Кайтен",
+            "description": "Порядок переноса, при котором разработка не останавливается: с чего начать, как идти волнами и работать параллельно на время перехода."
+          },
+          {
+            "title": "Сохранение рабочих процессов на новой платформе",
+            "description": "Спринты, канбан и оценка задач переезжают вместе с работой — покажем, как собрать привычный процесс на досках Кайтена."
+          },
+          {
+            "title": "Управление гибридной командой",
+            "description": "Штат и подрядчики SkillStaff в одном рабочем пространстве: роли и права доступа, кто что видит, где идёт общая работа."
+          },
+          {
+            "title": "Аналитика в Кайтене",
+            "description": "Отслеживание времени выполнения и простоев задач у внешних экспертов — видно, где работа встаёт и почему."
+          }
+        ],
+        "orientation": "vertical",
+        "numbered": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Что заберёте с собой",
+        "description": "Чек-лист «Подготовка к переезду». Останется у вас после вебинара.",
+        "checklist": [
+          {
+            "text": "Что проверить заранее"
+          },
+          {
+            "text": "В каком порядке переносить задачи и базы знаний"
+          },
+          {
+            "text": "Какие доступы выдать внешним специалистам"
+          }
+        ],
+        "mediaVariant": "none"
+      }
+    },
+    {
+      "id": "speaker",
+      "component": "SpeakerCard",
+      "props": {
+        "name": "Юрий Юрков",
+        "role": "Канбан-коуч и Delivery Manager в Kaiten",
+        "photoSrc": "/landings/webinar-pereezd-na-kaiten/yuriy-yurkov.png",
+        "photoAlt": "Юрий Юрков, Kaiten",
+        "initials": "ЮЮ",
+        "title": "Ведущий",
+        "bio": "Сертифицированный Канбан-коуч в Kanban University. Более 10 лет успешно управлял командами и процессами как в российских, так и в зарубежных компаниях."
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "registration",
+        "action": "#",
+        "dataConsentHref": "/privacy",
+        "newsletterRequired": true,
+        "title": "Зарегистрироваться на вебинар 3 сентября",
+        "description": "3 сентября, 16:00 по Москве. Формат: онлайн, участие бесплатное.",
+        "submitLabel": "Зарегистрироваться"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Вебинар «Миграция без потерь»: с Jira и Asana на Кайтен",
+    "description": "3 сентября в 16:00 МСК: перенос задач и баз знаний с Jira и Asana на Кайтен без остановки разработки и работа гибридной команды — штата и подрядчиков."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/event_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-08-21T10:19:16.111Z",
+    "generator": "host-agent",
+    "archetype": "event_landing",
+    "tokenEstimate": 48508,
+    "domain": "pm"
+  }
+}

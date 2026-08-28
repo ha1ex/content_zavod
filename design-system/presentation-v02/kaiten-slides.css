@@ -125,6 +125,8 @@ body:has(#s23:target) .nav-row[data-for="s23"] { display:flex; }
 body:has(#s25:target) .nav-row[data-for="s25"] { display:flex; }
 body:has(#s27:target) .nav-row[data-for="s27"] { display:flex; }
 body:has(#s29:target) .nav-row[data-for="s29"] { display:flex; }
+body:has(#s30:target) .nav-row[data-for="s30"] { display:flex; }
+body:has(#s31:target) .nav-row[data-for="s31"] { display:flex; }
 body:has(#s28:target) .nav-row[data-for="s28"] { display:flex; }
 body:has(#s26:target) .nav-row[data-for="s26"] { display:flex; }
 body:has(#s24:target) .nav-row[data-for="s24"] { display:flex; }
@@ -532,16 +534,17 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .cases { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); }
 .case {
   background:var(--case-bg); border-radius:var(--radius-frame);
-  padding:1.6cqw; display:flex; flex-direction:column; gap:1.2cqw;
+  padding:2.5cqw 2.29cqw 2.29cqw; min-height:22.2cqw;
+  display:flex; flex-direction:column; gap:1.25cqw;
 }
 .case .case-tag {
   align-self:flex-start; background:var(--surface-page); color:var(--text-primary);
   font-size:.83cqw; letter-spacing:.08em; text-transform:uppercase;
-  padding:.4cqw .9cqw; border-radius:999px;
+  padding:.52cqw 1.04cqw; border-radius:999px;
 }
-.case .case-text { font-size:1.0417cqw; line-height:1.4; margin:0; flex:1; }
+.case .case-text { font-size:1.25cqw; line-height:1.4; margin:0; flex:1; }
 .case .case-text b { font-weight:600; }
-.case .case-logos { display:flex; align-items:center; gap:1.2cqw; }
+.case .case-logos { display:flex; align-items:center; gap:1.04cqw; margin-top:auto; }
 .case .case-logos img { height:1.6cqw; width:auto; display:block; }
 .case .case-logos .client { font-size:1.15cqw; font-weight:600; }
 .case .case-logos .plus { color:var(--neutral-400); font-size:1.15cqw; }
@@ -681,10 +684,11 @@ code {
 }
 .swap .swap-mark svg { width:2.5cqw; height:2.5cqw; }
 .swap .swap-mark.is-to { background:var(--action-primary); color:#ffffff; }
-.swap .swap-arrow { font-size:2.08cqw; line-height:1; color:var(--text-secondary); }
+.swap .swap-arrow { display:flex; align-items:center; color:var(--text-secondary); }
+.swap .swap-arrow svg { width:1.67cqw; height:1.46cqw; display:block; }
 
 /* Заголовок кейса — та же строка, что и текст, но полужирная. */
-.cases .case-title { font-size:1.0417cqw; line-height:1.4; font-weight:600; margin:1.25cqw 0 .6cqw; }
+.cases .case-title { font-size:1.25cqw; line-height:1.3; font-weight:600; margin:0; }
 
 /* --- Кадр для мокапа интерфейса ------------------------------------------- */
 .shot { position:relative; overflow:hidden; border-radius:.63cqw; aspect-ratio:4 / 3; background:var(--surface-page); }
@@ -870,7 +874,9 @@ code {
   padding-top:0 !important; padding-bottom:0 !important;
   border-radius:1.04cqw !important; overflow:hidden !important;
 }
-.mod-shot .mpa { padding:0 !important; }
+/* Скругление держится на .mpa: у нее своя серая подложка, и без радиуса
+   она торчит квадратными углами из-под скругленного .mod. */
+.mod-shot .mpa { padding:0 !important; border-radius:1.04cqw; overflow:hidden; }
 .mod-shot *, .mod-shot *::before, .mod-shot *::after {
   animation:none !important; transition:none !important;
 }
@@ -891,3 +897,74 @@ code {
 .nav-fallback a[aria-label="В начало"] svg,
 .nav-fallback a[aria-label="В конец"] svg { width:10px; height:8px; }
 .nav-fallback a.is-off svg { opacity:.45; }
+
+/* Пара знаков «откуда — куда» из макета 218-2306: натуральные 355x96. */
+.swap-img { width:18.49cqw; height:5cqw; display:block; }
+
+/* --- Список материалов, макет 157-1025 --------------------------------------
+   Акцентный фрейм на всю ширину, внутри сетка 2x2 белых карточек.
+   В карточке пара знаков слева и подчеркнутая ссылка справа.
+   -------------------------------------------------------------------------- */
+.links-frame { background:var(--surface-accent); border-radius:var(--radius-frame); padding:1.46cqw; width:100%; }
+.links-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw; }
+.link-card {
+  background:var(--surface-page); border-radius:.83cqw;
+  min-height:7cqw; padding:0 1.56cqw;
+  display:flex; align-items:center; gap:1.46cqw;
+}
+.link-icons { display:flex; align-items:center; gap:.83cqw; flex:none; color:var(--text-secondary); }
+.link-icons svg { width:1.98cqw; height:1.98cqw; display:block; }
+.link-icons img { height:1.98cqw; width:auto; display:block; }
+.link-text { font-size:1.25cqw; line-height:1.3; text-decoration:underline; text-underline-offset:.21cqw; }
+
+/* Мокап платформы: вписан по высоте зоны, пропорции сохранены. */
+.platform-shot { width:100%; height:100%; object-fit:contain; display:block; }
+
+/* --- Засвет за иллюстрацией -------------------------------------------------
+   Размытое пятно тем же градиентом, что и полоса по нижнему краю слайда.
+   Лежит под картинкой, поэтому не трогает ее собственные цвета.
+   -------------------------------------------------------------------------- */
+.shot-glow { position:absolute; right:3cqw; top:50%; transform:translateY(-50%); display:block; }
+.shot-glow::before {
+  content:""; position:absolute; z-index:0; pointer-events:none;
+  left:50%; top:50%; transform:translate(-50%, -50%);
+  width:115%; height:115%; border-radius:50%;
+  background:var(--glow-gradient); opacity:var(--glow-opacity);
+  filter:blur(3.5cqw);
+}
+.shot-glow img { position:relative; z-index:1; }
+
+/* ─── Мокапы модулей ────────────────────────────────────────────────────
+   Разметка отрисована из packages/ui/src/landing/mocks (Gantt, Table, Scrum,
+   CRM, Portfolio, Flow, KnowledgeBase, USM), стили — assets/module-mocks.css,
+   все под классом .mkp.
+
+   Ширина .mkp задана в пикселях — той, на которой мокап нарисован. Растянуть
+   его по колонке нельзя: внутри резиновая верстка, и на другой ширине она
+   перетекает — меняются переносы, высота строк и высота всего мокапа. Поэтому
+   макет считается на своей ширине, а в слот вписывается целиком через zoom
+   (не transform: высота обертки должна считаться по масштабированному
+   содержимому). Масштаб один на обе оси, пропорции не трогаем.
+
+   Слоты — по модульной сетке шаблона: 1800 = 4×429 + 3×28. На всю полосу
+   идет 1800, в паре с текстом — 3 модуля (1343) против одного (429).
+
+   Мокапы остаются светлыми и в темной теме — это снимки интерфейса. */
+.mm-shot {
+  container-type: inline-size;
+  width: 100%;
+  border-radius: 1.04cqw;
+  overflow: hidden;
+  background: var(--neutral-000);
+  box-shadow: 0 .1cqw .63cqw rgba(45, 45, 45, .08);
+}
+.mm-shot .mkp { display: block; }
+
+.mm-gantt     .mkp { width: 1053px; zoom: calc(100cqi / 1053px); }
+.mm-table     .mkp { width: 1500px; zoom: calc(100cqi / 1500px); }
+.mm-scrum     .mkp { width: 1832px; zoom: calc(100cqi / 1832px); }
+.mm-crm       .mkp { width: 1532px; zoom: calc(100cqi / 1532px); }
+.mm-portfolio .mkp { width: 1360px; zoom: calc(100cqi / 1360px); }
+.mm-flow      .mkp { width: 951px; zoom: calc(100cqi / 951px); }
+.mm-knowledge .mkp { width: 1320px; zoom: calc(100cqi / 1320px); }
+.mm-usm       .mkp { width: 1435px; zoom: calc(100cqi / 1435px); }

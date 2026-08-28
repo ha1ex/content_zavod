@@ -38,7 +38,7 @@
   --lime-100:#a5ca00;   --lime-12:#f4f8e0;
 
   /* --- роли --- */
-  --stage-bg:var(--neutral-200);        /* поле вокруг слайда */
+  --stage-bg:var(--neutral-000);        /* поле вокруг слайда — белое */
   --surface-page:var(--neutral-000);
   --surface-frame:var(--neutral-100);   /* #F5F5F5 — между шаблонным #F2F2F2 и #FAFAFA */
   --surface-accent:var(--violet-12);

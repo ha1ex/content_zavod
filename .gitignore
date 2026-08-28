@@ -45,3 +45,6 @@ yarn-debug.log*
 # intake raw inputs (рабочие материалы фабрики ТЗ)
 inputs/
 .vercel
+
+# сгенерированное превью дека (собирается tools/deck-preview/build.js)
+design-system/presentation-v02/examples/preview.html

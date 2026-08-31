@@ -82,7 +82,7 @@
   --cover-glow-left: 58.646cqw;   /* 1126px */
   --cover-glow-top: 14.583cqw;    /* 280px */
   --cover-glow-size: 29.375cqw;   /* 564px */
-  --cover-glow-opacity: 1;
+  --cover-glow-opacity: .48;      /* в макете 1; убавлено — засвет уходит на задний план и не спорит с текстом и снимком */
   --glow-blur-cover: 10.417cqw;   /* stdDeviation 200 */
 }
 

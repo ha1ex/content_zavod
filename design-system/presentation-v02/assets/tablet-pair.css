@@ -1,0 +1,246 @@
+/* ============================================================================
+   Начинка пары планшетов — макет 407-2519 «Шаблон презентации V02».
+
+   Два упрощенных мокапа интерфейса, каждый нарисован на своей фиксированной
+   ширине и вписывается в экран планшета через zoom (см. .tablet-pair
+   в kaiten-slides.css). Высота задана явно, чтобы мокап заполнял экран
+   целиком и не оставлял полосу снизу.
+
+     .tpr — сторонний сервис (задний план)
+     .tpk — Кайтен (передний план)
+
+   Это снимки интерфейса: цвета захардкожены и в темной теме не меняются,
+   как у .mkp и .mpa. Все правила под своим префиксом, с классами
+   презентации не пересекаются.
+   ============================================================================ */
+
+.tpr, .tpk {
+  font-family: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow: hidden;
+  flex: none;
+}
+.tpr *, .tpk * { box-sizing: border-box; }
+
+/* ─────────────────────────────────────────────── сторонний сервис (задний) ── */
+
+.tpr {
+  width: 1000px; height: 716px;
+  display: flex; flex-direction: column;
+  background: #e9edf1; color: #2b3947;
+  font-size: 13px;
+}
+
+/* верхняя темная панель */
+.tpr .r-top {
+  height: 52px; flex: none; display: flex; align-items: center; gap: 14px;
+  padding: 0 16px; background: #21313f; color: #cfd8e0;
+}
+.tpr .r-burger { display: grid; gap: 3px; }
+.tpr .r-burger i { display: block; width: 15px; height: 2px; border-radius: 1px; background: #8fa1b1; }
+.tpr .r-brand { display: flex; align-items: baseline; gap: 5px; font-weight: 600; font-size: 17px; color: #fff; }
+.tpr .r-brand b { color: #4fc3f7; font-weight: 600; }
+.tpr .r-search {
+  flex: 1; max-width: 300px; height: 26px; border-radius: 4px;
+  background: #2e4152; display: flex; align-items: center; padding: 0 10px;
+  font-size: 12px; color: #7d90a1;
+}
+.tpr .r-clock { font-size: 18px; font-weight: 500; color: #fff; letter-spacing: .5px; }
+.tpr .r-status { font-size: 11px; color: #8fa1b1; text-transform: uppercase; letter-spacing: .4px; }
+.tpr .r-user { display: flex; align-items: center; gap: 7px; margin-left: auto; font-size: 12px; color: #dfe7ee; }
+.tpr .r-btn {
+  height: 26px; border-radius: 4px; padding: 0 12px; display: flex; align-items: center;
+  font-size: 12px; font-weight: 500; color: #fff; background: #2f8fd8;
+}
+.tpr .r-btn.is-ghost { background: #35485a; color: #cfd8e0; }
+
+/* строка разделов */
+.tpr .r-tabs {
+  height: 36px; flex: none; display: flex; align-items: center; gap: 22px;
+  /* Строка разделов идет во всю ширину, а рельс начинается только
+     в .r-main под ней — поэтому первые 46px (ширина рельса) закрашиваем
+     его цветом, иначе слева торчит белая полоска над темной колонкой. */
+  padding: 0 16px 0 62px;
+  background: linear-gradient(90deg, #21313f 0 46px, #fff 46px);
+  font-size: 12.5px; color: #55697c;
+}
+.tpr .r-tabs .is-on { color: #2b3947; font-weight: 500; box-shadow: inset 0 -2px 0 #2f8fd8; padding-bottom: 9px; }
+
+.tpr .r-main { flex: 1; display: flex; min-height: 0; }
+
+/* левый рельс с иконками */
+.tpr .r-rail {
+  width: 46px; flex: none; background: #21313f; padding: 10px 0;
+  display: flex; flex-direction: column; align-items: center; gap: 13px;
+}
+.tpr .r-rail i { display: block; width: 18px; height: 18px; border-radius: 4px; background: #3c5062; }
+.tpr .r-rail i:nth-child(3) { background: #4fc3f7; }
+/* обои рабочего стола, видные из-под окна */
+.tpr .r-rail::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 46px; height: 150px;
+  background: linear-gradient(180deg, #21313f 0%, #3b5a6d 45%, #86a5a0 100%);
+}
+
+.tpr .r-work { flex: 1; min-width: 0; padding: 12px 14px 0; display: flex; flex-direction: column; }
+
+.tpr .r-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.tpr .r-h1 { font-size: 19px; font-weight: 600; color: #2b3947; }
+.tpr .r-chip {
+  height: 22px; border-radius: 4px; padding: 0 9px; display: inline-flex; align-items: center;
+  font-size: 11.5px; background: #dde4ea; color: #55697c;
+}
+.tpr .r-chip.is-primary { background: #2f8fd8; border-color: #2f8fd8; color: #fff; }
+.tpr .r-head .r-right { margin-left: auto; display: flex; gap: 7px; }
+
+/* канбан */
+/* Колонки обрезаются нижней кромкой экрана: карточек намеренно больше,
+   чем помещается, доска должна читаться как продолжающаяся за обрез. */
+.tpr .r-cols { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; min-height: 0; }
+.tpr .r-col { display: flex; flex-direction: column; gap: 7px; min-width: 0; min-height: 0; overflow: hidden; }
+.tpr .r-card { flex: none; }
+.tpr .r-colhead {
+  height: 22px; flex: none; border-radius: 3px; display: flex; align-items: center;
+  padding: 0 8px; font-size: 10.5px; font-weight: 500; color: #fff; text-transform: uppercase;
+  letter-spacing: .3px; white-space: nowrap; overflow: hidden;
+}
+.tpr .c1 .r-colhead { background: #4a90d9; }
+.tpr .c2 .r-colhead { background: #5aa8c7; }
+.tpr .c3 .r-colhead { background: #6aab8f; }
+.tpr .c4 .r-colhead { background: #e0a341; }
+.tpr .c5 .r-colhead { background: #d97b5a; }
+.tpr .r-sum { font-size: 15px; font-weight: 600; color: #2b3947; padding: 0 2px; }
+.tpr .r-add { font-size: 11px; color: #2f8fd8; padding: 0 2px 2px; }
+
+.tpr .r-card {
+  background: #fff; border-radius: 3px; padding: 7px 8px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.tpr .r-card .t { font-size: 11px; line-height: 1.25; color: #2b3947; }
+.tpr .r-card .m { font-size: 9.5px; color: #8a99a8; }
+.tpr .r-card .p { font-size: 11px; font-weight: 600; color: #2b3947; }
+.tpr .r-card .who { display: flex; align-items: center; gap: 4px; font-size: 9.5px; color: #4a90d9; }
+.tpr .r-av { width: 12px; height: 12px; border-radius: 50%; background: #c8a2c8; flex: none; }
+.tpr .r-foot { display: flex; align-items: center; gap: 5px; padding-top: 3px; }
+.tpr .r-foot .lbl { font-size: 9.5px; color: #8a99a8; }
+.tpr .r-badge {
+  width: 12px; height: 12px; border-radius: 50%; background: #e0574a; color: #fff;
+  font-size: 8px; display: flex; align-items: center; justify-content: center;
+}
+.tpr .r-plan { margin-left: auto; font-size: 9.5px; color: #e0a341; }
+
+/* ────────────────────────────────────────────────────── Кайтен (передний) ── */
+
+.tpk {
+  width: 1360px; height: 917px;
+  display: flex; background: #fff; color: #2d2d2d; font-size: 15px;
+}
+
+/* боковое меню */
+.tpk .k-side {
+  width: 258px; flex: none; background: #fafafa;
+  display: flex; flex-direction: column; padding: 14px 12px; gap: 10px;
+}
+.tpk .k-logo { display: flex; align-items: center; gap: 9px; padding: 0 4px 2px; }
+.tpk .k-logo .mark { width: 24px; height: 24px; flex: none; }
+.tpk .k-logo .nm { font-size: 20px; font-weight: 500; letter-spacing: -.2px; }
+.tpk .k-find { display: flex; align-items: center; gap: 8px; }
+.tpk .k-field {
+  flex: 1; height: 34px; background: #f0f0f0; border-radius: 6px;
+  display: flex; align-items: center; gap: 8px; padding: 0 10px; color: #9e9e9e; font-size: 14px;
+}
+.tpk .k-plus { width: 20px; height: 20px; flex: none; color: #757575; }
+.tpk .k-nav { display: flex; flex-direction: column; gap: 1px; }
+.tpk .k-item {
+  height: 32px; border-radius: 6px; display: flex; align-items: center; gap: 10px;
+  padding: 0 10px; font-size: 14.5px; color: #2d2d2d; white-space: nowrap;
+}
+.tpk .k-item .ic { width: 17px; height: 17px; flex: none; color: #757575; }
+.tpk .k-item.is-on { background: #efe9f9; }
+.tpk .k-item.is-on .ic { color: #7d4ccf; }
+.tpk .k-item .cnt { color: #9e9e9e; }
+.tpk .k-gap { height: 8px; }
+
+/* рабочая область */
+.tpk .k-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.tpk .k-bar {
+  height: 54px; flex: none; display: flex; align-items: center; gap: 8px;
+  padding: 0 14px;
+}
+.tpk .k-views { display: flex; align-items: center; gap: 2px; }
+.tpk .k-view {
+  height: 30px; border-radius: 6px; padding: 0 9px; display: flex; align-items: center; gap: 6px;
+  color: #757575;
+}
+.tpk .k-view .ic { width: 18px; height: 18px; }
+.tpk .k-view.is-on { background: #efe9f9; color: #7d4ccf; font-size: 13px; font-weight: 500; letter-spacing: .4px; }
+.tpk .k-cta {
+  height: 32px; border-radius: 6px; padding: 0 14px; margin-left: 10px;
+  display: flex; align-items: center; background: #efe9f9; color: #7d4ccf;
+  font-size: 13px; font-weight: 500; letter-spacing: .5px;
+}
+.tpk .k-eq {
+  height: 32px; width: 34px; border-radius: 6px; display: flex; align-items: center;
+  justify-content: center; background: #efe9f9; color: #7d4ccf;
+}
+.tpk .k-sep { width: 8px; margin: 0; }
+.tpk .k-icons { margin-left: auto; display: flex; align-items: center; gap: 12px; color: #757575; }
+.tpk .k-icons .ic { width: 20px; height: 20px; }
+.tpk .k-me { width: 28px; height: 28px; border-radius: 50%; background: #c8a2c8; flex: none; }
+
+.tpk .k-board { flex: 1; min-height: 0; display: flex; }
+.tpk .k-canvas { flex: 1; min-width: 0; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 14px; }
+
+.tpk .k-lane { background: #f5f5f5; border-radius: 8px; overflow: hidden; }
+.tpk .k-lanehead {
+  display: flex; align-items: center; gap: 9px; padding: 11px 14px;
+  font-size: 13px; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; color: #2d2d2d;
+}
+.tpk .k-grip { display: grid; grid-template-columns: repeat(2, 3px); gap: 3px; flex: none; }
+.tpk .k-grip i { display: block; width: 3px; height: 3px; border-radius: 50%; background: #bdbdbd; }
+.tpk .k-cols { display: grid; grid-template-columns: repeat(3, 1fr); }
+.tpk .k-col { padding: 12px; min-width: 0; }
+
+.tpk .k-colhead { display: flex; align-items: center; gap: 7px; margin-bottom: 11px; }
+.tpk .k-colhead .t { font-size: 15px; font-weight: 500; }
+.tpk .k-colhead .ok { color: #4caf51; display: flex; }
+.tpk .k-colhead .n {
+  margin-left: auto; min-width: 20px; height: 20px; border-radius: 5px; padding: 0 6px;
+  background: #f5f5f5; color: #757575; font-size: 12px; display: flex;
+  align-items: center; justify-content: center;
+}
+.tpk .k-card {
+  border-radius: 8px; padding: 11px 12px;
+  display: flex; flex-direction: column; gap: 9px; background: #fff;
+}
+.tpk .k-card + .k-card { margin-top: 10px; }
+.tpk .k-card .t { font-size: 14.5px; line-height: 1.35; }
+.tpk .k-card .lnk { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: #757575; }
+.tpk .k-card .lnk .dot { width: 12px; height: 12px; border-radius: 50%; border: 3px solid #7d4ccf; flex: none; }
+.tpk .k-bar-line { height: 4px; border-radius: 2px; background: #ffd54f; }
+.tpk .k-bar-line.is-top { margin-bottom: 2px; }
+.tpk .k-chk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #757575; }
+.tpk .k-chk .track { flex: 1; height: 4px; border-radius: 2px; background: #eeeeee; }
+.tpk .k-chk .track i { display: block; height: 100%; width: 33%; border-radius: 2px; background: #bdbdbd; }
+.tpk .k-steps { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #757575; }
+.tpk .k-steps .pill { background: #e4f2fd; color: #2196f3; border-radius: 4px; padding: 1px 7px; font-size: 12.5px; }
+.tpk .k-foot { display: flex; align-items: center; gap: 8px; }
+.tpk .k-av { width: 26px; height: 26px; border-radius: 50%; background: #c8a2c8; flex: none; }
+.tpk .k-tag {
+  margin-left: auto; border-radius: 5px; padding: 3px 9px; font-size: 12.5px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+}
+.tpk .k-tag.is-urgent { background: #fde8e6; color: #f44336; }
+.tpk .k-tag.is-date { background: #fde8e6; color: #d84315; }
+.tpk .k-note {
+  border-radius: 6px; background: #fff3e0; color: #8a6a00; padding: 9px 11px;
+  font-size: 13.5px; display: flex; align-items: center; gap: 7px;
+}
+
+/* правый рельс */
+.tpk .k-rail {
+  width: 52px; flex: none; background: #fafafa; padding: 12px 0;
+  display: flex; flex-direction: column; align-items: center; gap: 18px; color: #757575;
+}
+.tpk .k-rail .ic { width: 20px; height: 20px; }

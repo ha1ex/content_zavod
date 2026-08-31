@@ -968,3 +968,69 @@ code {
 .mm-flow      .mkp { width: 951px; zoom: calc(100cqi / 951px); }
 .mm-knowledge .mkp { width: 1320px; zoom: calc(100cqi / 1320px); }
 .mm-usm       .mkp { width: 1435px; zoom: calc(100cqi / 1435px); }
+
+/* ─── Пара планшетов, макет 407-2519 ─────────────────────────────────────
+   Два экрана внахлест: сзади сторонний сервис, спереди Кайтен со сдвигом
+   вправо и вверх. Пропорции блока — 1800×717 из макета, поэтому раскладка
+   задана в процентах и держится на любой ширине слота.
+
+   Начинка экранов — assets/tablet-pair.css, классы .tpr и .tpk. Каждый
+   мокап нарисован на своей ширине в px и вписывается в экран через zoom,
+   как мокапы модулей: резиновая верстка внутри на другой ширине перетекает.
+
+   Мокапы остаются светлыми и в темной теме — это снимки интерфейса.
+   -------------------------------------------------------------------------- */
+.tablet-pair { position:relative; width:100%; aspect-ratio:1800 / 717; }
+
+/* Каждый планшет — свой контекст наложения. Без z-index у .tp его ::after
+   с z-index:3 всплывал в контекст .s-body и ложился поверх соседнего
+   планшета: свечение кромки заднего перекрывало передний. */
+.tablet-pair .tp {
+  position:absolute; background:var(--neutral-000); overflow:hidden;
+}
+.tablet-pair .tp-back  { z-index:1; }
+.tablet-pair .tp-front { z-index:2; }
+.tablet-pair .tp-screen {
+  container-type:inline-size;
+  width:100%; height:100%; overflow:hidden; background:var(--neutral-000);
+}
+
+/* задний — меньше, левее и ниже, тень мягче: он вторым планом.
+   Экран приглушен: насыщенность и контраст ниже, светлее на пару процентов.
+   Чужой сервис не должен спорить с Кайтеном за внимание, а фильтр на .tpr
+   оставляет кромку корпуса нетронутой. */
+.tablet-pair .tp-back {
+  left:2%; top:11%; width:42.1%; height:76.3%;
+  border-radius:1.25cqw; padding:.42cqw;
+  box-shadow:0 .63cqw 1.56cqw -.42cqw rgba(45,45,45,.14);
+}
+.tablet-pair .tp-back .tp-screen { border-radius:.94cqw; }
+.tablet-pair .tp-back .tpr {
+  zoom:calc(100cqi / 1000px);
+  filter:saturate(.42) contrast(.88) brightness(1.08) blur(.055cqw);
+}
+
+/* передний — крупнее и с более глубокой тенью, чтобы отделиться от заднего */
+.tablet-pair .tp-front {
+  left:42.5%; top:1%; width:57.2%; height:97.9%;
+  border-radius:1.56cqw; padding:.63cqw;
+  box-shadow:0 .94cqw 2.24cqw -.68cqw rgba(45,45,45,.19);
+}
+.tablet-pair .tp-front .tp-screen { border-radius:1.04cqw; }
+.tablet-pair .tp-front .tpk { zoom:calc(100cqi / 1360px); }
+
+/* Кромка корпуса. Белый планшет на белом полотне растворялся бы в фоне,
+   поэтому по границе идет тонкий контур и мягкий спад внутрь. Отдельным
+   слоем поверх содержимого: inset у box-shadow рисуется под содержимым
+   элемента, и мокап бы его перекрыл. Радиус наследуется от корпуса. */
+.tablet-pair .tp::after {
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  border-radius:inherit;
+  /* Спад набран несколькими тенями с растущим радиусом: одна тень дает
+     заметную границу размытия, а сложенные — плавный градиент от кромки
+     внутрь. Контур по краю ослаблен, чтобы не читался как обводка. */
+  box-shadow:inset 0 0 0 .04cqw rgba(45,45,45,.07),
+             inset 0 0 .35cqw rgba(45,45,45,.045),
+             inset 0 0 .9cqw  rgba(45,45,45,.035),
+             inset 0 0 1.8cqw rgba(45,45,45,.03);
+}

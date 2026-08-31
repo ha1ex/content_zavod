@@ -5,6 +5,8 @@ import { ButtonLink } from '../primitives/ButtonLink';
 import { Icon } from '../primitives/Icon';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
+import { AccentText } from '../primitives/AccentText';
+import { MockFit } from '../primitives/MockFit';
 import { MockVisual, type MockVariant } from './mocks';
 
 export interface TabbedFeatureTabProps {
@@ -13,6 +15,8 @@ export interface TabbedFeatureTabProps {
   icon?: string;
   eyebrow?: string;
   title: string;
+  /** Кусок заголовка фирменным фиолетовым, напр. «более 300 сценариев». */
+  accentWord?: string;
   description?: string;
   checklist?: { icon?: string; text: string }[];
   primaryCta?: { label: string; href: string };
@@ -22,6 +26,8 @@ export interface TabbedFeatureTabProps {
 export interface TabbedFeatureSectionProps {
   eyebrow?: string;
   title: string;
+  /** Кусок заголовка фирменным фиолетовым, напр. «более 300 сценариев». */
+  accentWord?: string;
   description?: string;
   tabs: TabbedFeatureTabProps[];
   /**
@@ -31,6 +37,12 @@ export interface TabbedFeatureSectionProps {
    * настоящий таб-виджет. Обычный (React) режим остаётся дефолтом.
    */
   staticTabs?: boolean;
+  /**
+   * 'tabs' (дефолт) — переключаемые вкладки. 'list' — раскрытый список:
+   * все сценарии показаны сразу, друг под другом, с чередованием стороны
+   * мока. Нужен, когда содержимое читают целиком, а не выбирают.
+   */
+  variant?: 'tabs' | 'list';
 }
 
 /**
@@ -43,9 +55,11 @@ export interface TabbedFeatureSectionProps {
 export function TabbedFeatureSection({
   eyebrow,
   title,
+  accentWord,
   description,
   tabs,
   staticTabs = false,
+  variant = 'tabs',
 }: TabbedFeatureSectionProps) {
   const [activeId, setActiveId] = useState(tabs[0]?.id ?? '');
   const activeIndex = Math.max(
@@ -59,6 +73,115 @@ export function TabbedFeatureSection({
   // data-атрибутами; переключение делает крошечный ванильный скрипт, который
   // static-handoff впрыскивает перед </body>. Активная вкладка — [data-active],
   // скрытые панели — inline display:none (панель 0 видна сразу, без вспышки).
+  // Раскрытый список: все сценарии сразу, друг под другом. Мок чередует
+  // сторону, чтобы вертикаль не читалась как одинаковые полосы.
+  if (variant === 'list') {
+    return (
+      <section
+        className={cn(
+          'mx-auto w-full max-w-(--container-kaiten)',
+          'px-4 py-8 pt-12 md:px-6 md:py-12 xl:px-0 lg:py-16',
+        )}
+      >
+        <div className="mb-10 md:mb-8 md:text-center lg:mb-12">
+          {eyebrow && (
+            <p
+              data-comp="tabbed_feature.eyebrow"
+              className="mb-3 text-sm font-medium uppercase tracking-wide text-(--color-text-accent)"
+            >
+              {eyebrow}
+            </p>
+          )}
+          <h2
+            data-comp="tabbed_feature.title"
+            className="text-3xl font-semibold leading-tight md:text-4xl lg:whitespace-nowrap"
+          >
+            <AccentText text={title} accentWord={accentWord} />
+          </h2>
+          {description && (
+            <p
+              data-comp="tabbed_feature.description"
+              className="mx-auto mt-4 max-w-2xl text-lg text-(--color-text-primary)"
+            >
+              {description}
+            </p>
+          )}
+        </div>
+
+        <div className="space-y-16 lg:space-y-24">
+          {tabs.map((t, idx) => (
+            <div
+              key={t.id}
+              className={cn(
+                'grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center lg:gap-16',
+                idx % 2 === 1 && 'md:[&>div:first-child]:order-2',
+              )}
+            >
+              <div>
+                {/* в списке заголовком служит label вкладки, а её title — подзаголовком */}
+                <h3
+                  data-comp={`tabbed_feature.tabs[${idx}].label`}
+                  className="text-xl font-semibold leading-tight md:text-2xl"
+                >
+                  {t.label}
+                </h3>
+                <p
+                  data-comp={`tabbed_feature.tabs[${idx}].title`}
+                  className="mt-3 text-base leading-snug text-(--color-text-primary)"
+                >
+                  {t.title}
+                </p>
+                {t.description && (
+                  <p
+                    data-comp={`tabbed_feature.tabs[${idx}].description`}
+                    className="mt-4 text-lg leading-relaxed text-(--color-text-primary)"
+                  >
+                    {t.description}
+                  </p>
+                )}
+                {t.checklist && t.checklist.length > 0 && (
+                  <ul className="mt-6 space-y-3 lg:max-w-[92%]">
+                    {t.checklist.map((item, i) => (
+                      <Inspect
+                        as="li"
+                        key={i}
+                        name={`tabbed_feature.tabs[${idx}].checklist[${i}]`}
+                        className="flex items-start gap-3"
+                      >
+                        <span
+                          className={cn(
+                            'mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full',
+                            'bg-(--color-action-primary-soft) text-(--color-text-accent)',
+                          )}
+                        >
+                          <Icon name={item.icon ?? 'Check'} className="h-3.5 w-3.5" strokeWidth={2.5} />
+                        </span>
+                        <span className="text-base leading-relaxed text-(--color-text-primary)">
+                          {item.text}
+                        </span>
+                      </Inspect>
+                    ))}
+                  </ul>
+                )}
+                {t.primaryCta && (
+                  <div className="mt-8">
+                    <ButtonLink size="lg" href={t.primaryCta.href}>
+                      {t.primaryCta.label}
+                    </ButtonLink>
+                  </div>
+                )}
+              </div>
+              <Inspect as="div" name={`tabbed_feature.tabs[${idx}].mock`}>
+                <MockFit>
+                  <MockVisual variant={t.mockVariant} />
+                </MockFit>
+              </Inspect>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
   if (staticTabs) {
     const ns = `kt-${(tabs[0]?.id ?? 'x').replace(/[^a-zA-Z0-9_-]/g, '')}`;
     const css =
@@ -87,7 +210,9 @@ export function TabbedFeatureSection({
               {eyebrow}
             </p>
           )}
-          <h2 className="text-3xl font-semibold leading-tight md:text-4xl">{title}</h2>
+          <h2 className="text-3xl font-semibold leading-tight md:text-4xl">
+            <AccentText text={title} accentWord={accentWord} />
+          </h2>
           {description && (
             <p className="mt-4 text-lg text-(--color-text-primary)">{description}</p>
           )}
@@ -192,14 +317,14 @@ export function TabbedFeatureSection({
         )}
         <h2
           data-comp="tabbed_feature.title"
-          className="text-3xl font-semibold leading-tight md:text-4xl"
+          className="text-3xl font-semibold leading-tight md:text-4xl lg:whitespace-nowrap"
         >
-          {title}
+          <AccentText text={title} accentWord={accentWord} />
         </h2>
         {description && (
           <p
             data-comp="tabbed_feature.description"
-            className="mt-4 text-lg text-(--color-text-primary)"
+            className="mx-auto mt-4 max-w-2xl text-lg text-(--color-text-primary)"
           >
             {description}
           </p>

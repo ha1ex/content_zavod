@@ -10,6 +10,8 @@ export interface CtaButtonsCtaProps {
 export interface CtaButtonsProps {
   primaryCta: CtaButtonsCtaProps;
   secondaryCta?: CtaButtonsCtaProps | null;
+  /** Убрать верхний отступ секции — когда кнопки идут сразу за предыдущим блоком. */
+  flushTop?: boolean;
 }
 
 /**
@@ -17,7 +19,7 @@ export interface CtaButtonsProps {
  * заголовка и фона. Для ТЗ, где между блоками стоит просто центрированная
  * кнопка «Попробовать бесплатно». Для баннера с заголовком/подложкой — CtaBanner.
  */
-export function CtaButtons({ primaryCta, secondaryCta }: CtaButtonsProps) {
+export function CtaButtons({ primaryCta, secondaryCta, flushTop }: CtaButtonsProps) {
   return (
     <section
       className={cn(

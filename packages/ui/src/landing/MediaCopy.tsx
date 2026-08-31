@@ -1,6 +1,8 @@
+import { AccentText } from '../primitives/AccentText';
 import { ButtonLink } from '../primitives/ButtonLink';
 import { Icon } from '../primitives/Icon';
 import { Inspect } from '../primitives/Inspect';
+import { MockFit } from '../primitives/MockFit';
 import { cn } from '../primitives/cn';
 import { MockVisual, type MockVariant } from './mocks';
 
@@ -20,11 +22,45 @@ export type MediaCopyVariant = 'default' | 'none' | MockVariant;
 export interface MediaCopyProps {
   eyebrow?: string;
   title: string;
+  /** Кусок заголовка фирменным фиолетовым, напр. «Шаг 1.». */
+  accentWord?: string;
   description?: string;
   checklist?: MediaCopyCheckItemProps[];
-  mediaPosition?: 'left' | 'right';
+  /**
+   * 'left' / 'right' — две колонки (текст и визуал рядом).
+   * 'below' — одна колонка: заголовок с подзаголовком сверху, визуал под ними
+   * во всю ширину контейнера. Для широких визуалов (карта платформы, схемы),
+   * которые в половине колонки нечитаемы.
+   */
+  mediaPosition?: 'left' | 'right' | 'below';
   mediaPlaceholder?: string;
+  /**
+   * 'left' (дефолт) — текст по левому краю.
+   * 'center' — на планшете и десктопе блок центрируется. Для текстовых шапок
+   * разделов (`mediaVariant: 'none'`), которые открывают группу секций.
+   */
+  align?: 'left' | 'center';
+  /**
+   * 'default' — H2 уровня раздела. 'small' — уменьшенный заголовок для секций,
+   * подчинённых общей шапке раздела (напр. «Шаг 1» и «Шаг 2» под одним
+   * заголовком), чтобы иерархия читалась.
+   */
+  titleSize?: 'default' | 'small';
+  /**
+   * Убрать верхний отступ секции. Нужно, когда блок идёт сразу под текстовой
+   * шапкой раздела: иначе складываются нижний отступ шапки и верхний этого
+   * блока, и между ними зияет двойной интервал.
+   */
+  flushTop?: boolean;
   mediaVariant?: MediaCopyVariant;
+  /**
+   * Растровая картинка вместо mock-компонента (напр. /brand/platform.png).
+   * Когда задана — рендерится `<img>` во всю ширину слота, `mediaVariant`
+   * игнорируется.
+   */
+  mediaSrc?: string;
+  /** Alt для `mediaSrc`. */
+  mediaAlt?: string;
   primaryCta?: MediaCopyCtaProps;
   secondaryCta?: MediaCopyCtaProps | null;
   /**
@@ -42,15 +78,22 @@ export interface MediaCopyProps {
 export function MediaCopy({
   eyebrow,
   title,
+  accentWord,
   description,
   checklist,
   mediaPosition = 'right',
   mediaPlaceholder = 'product UI',
+  align = 'left',
+  titleSize = 'default',
+  flushTop = false,
   mediaVariant = 'default',
+  mediaSrc,
+  mediaAlt,
   primaryCta,
   secondaryCta,
 }: MediaCopyProps) {
-  const hideMedia = mediaVariant === 'none';
+  const hideMedia = mediaVariant === 'none' && !mediaSrc;
+  const isStacked = mediaPosition === 'below';
   return (
     <section
       className={cn(
@@ -61,12 +104,25 @@ export function MediaCopy({
       <div
         className={cn(
           hideMedia
-            ? 'max-w-2xl'
-            : 'grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center',
-          !hideMedia && mediaPosition === 'left' && 'lg:[&>div:first-child]:order-2',
+            ? cn(
+                'max-w-2xl',
+                // Центрированной шапке даём больше ширины: в 672px заголовок
+                // раздела ломался на три строки.
+                align === 'center' && 'md:mx-auto md:max-w-4xl md:text-center lg:max-w-5xl',
+              )
+            : isStacked
+              ? 'flex flex-col gap-10'
+              : 'grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center lg:gap-16',
+          !hideMedia && mediaPosition === 'left' && 'md:[&>div:first-child]:order-2',
         )}
       >
-        <div>
+        {/*
+          В раскладке 'below' текстовый блок центрируется от планшета и шире —
+          так он совпадает по ритму с центрированными заголовками LogoMarquee
+          и FinalCta. На мобилке остаётся выключка влево: центр на узкой колонке
+          рвёт чтение длинного подзаголовка.
+        */}
+        <div className={cn(isStacked && 'max-w-3xl md:mx-auto md:text-center lg:max-w-6xl')}>
           {eyebrow && (
             <p
               data-comp="media_copy.eyebrow"
@@ -77,9 +133,26 @@ export function MediaCopy({
           )}
           <h2
             data-comp="media_copy.title"
-            className="text-3xl font-semibold leading-tight md:text-4xl"
+            className={cn(
+              'font-semibold leading-tight',
+              titleSize === 'small' ? 'text-xl md:text-2xl lg:text-3xl' : 'text-2xl md:text-4xl',
+            )}
           >
-            {title}
+            {/*
+              Акцент в начале заголовка — это метка-нумератор («Шаг 1»), а не
+              выделенное слово внутри фразы: отбиваем его от остального текста,
+              чтобы номер читался отдельным элементом.
+            */}
+            {accentWord && title.startsWith(accentWord) ? (
+              <>
+                <span className="mr-2 text-(--color-text-accent)">{accentWord}</span>
+                {/* Пробел оставляем в тексте: без него заголовок копируется
+                    и озвучивается как «Шаг 1Выбираете». Отбивку даёт mr-2. */}
+                {title.slice(accentWord.length)}
+              </>
+            ) : (
+              <AccentText text={title} accentWord={accentWord} />
+            )}
           </h2>
           {description && (
             <p
@@ -139,8 +212,13 @@ export function MediaCopy({
         </div>
 
         {!hideMedia && (
-          <Inspect as="div" name="media_copy.media">
-            <MediaCopyVisual variant={mediaVariant} placeholder={mediaPlaceholder} />
+          <Inspect as="div" name="media_copy.media" className={cn(isStacked && 'w-full')}>
+            <MediaCopyVisual
+              variant={mediaVariant}
+              placeholder={mediaPlaceholder}
+              src={mediaSrc}
+              alt={mediaAlt}
+            />
           </Inspect>
         )}
       </div>
@@ -151,12 +229,31 @@ export function MediaCopy({
 function MediaCopyVisual({
   variant,
   placeholder,
+  src,
+  alt,
 }: {
   variant: MediaCopyVariant;
   placeholder: string;
+  src?: string;
+  alt?: string;
 }) {
+  // Растровая картинка выигрывает у mock-компонента: её задают явно под блок.
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt={alt ?? ''}
+        loading="lazy"
+        className="block h-auto w-full rounded-(--radius-xl) lg:rounded-(--radius-2xl)"
+      />
+    );
+  }
   if (variant === 'default') return <ProductMock label={placeholder} />;
-  const rendered = <MockVisual variant={variant} />;
+  const rendered = (
+    <MockFit>
+      <MockVisual variant={variant} />
+    </MockFit>
+  );
   return rendered ?? <ProductMock label={placeholder} />;
 }
 

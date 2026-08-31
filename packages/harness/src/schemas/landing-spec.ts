@@ -80,6 +80,14 @@ export const AssetRefSchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      // Автоматизации (модуль Kaiten)
+      'automation-rule-trigger',
+      'automation-rule-action',
+      'automation-rules-list',
+      'automation-deadline',
+      'automation-checklist-done',
+      'automation-card-flow',
+      'platform-kaiten',
       'cli-terminal-hero',
       'cli-terminal-hero-animated',
       'cli-terminal-final-animated',
@@ -92,6 +100,7 @@ export const AssetRefSchema = z.object({
       'cli-safe-mode',
       'cli-install',
       'hero-screen-interface',
+      'hero-screen-video',
       'generic',
     ])
     .optional(),
@@ -204,6 +213,11 @@ const HeroSectionSchema = z.object({
     board: HeroBoardSchema.optional(),
     /** Короткие буллеты под подзаголовком («что заберёте»). Только layout 'side'. */
     bullets: z.array(z.string().min(2).max(160)).max(4).optional(),
+    trust: z
+      .array(z.object({ icon: z.string().max(40).optional(), label: z.string().min(2).max(60) }))
+      .max(4)
+      .optional()
+      .describe('строка доверия под видео: пункты с фиолетовыми иконками'),
     /**
      * Карточка формы регистрации в правой колонке вместо `visual` — для лендингов,
      * где целевое действие это заполнить форму, а не перейти по кнопке. Подпись
@@ -243,6 +257,7 @@ const FeatureGridSchema = z.object({
             .describe('опциональное компактное мок-превью внутри карточки'),
           featureTile: z
             .string()
+            .max(80)
             .optional()
             .describe(
               'подпись плитки из галереи мини-мокапов фич (FeatureMocksV01), напр. «Канбан-доски»',
@@ -270,6 +285,10 @@ const FeatureGridSchema = z.object({
     slider: z.boolean().optional(),
     /** Убрать верхний отступ секции (когда блок сверху уже несёт свою шкалу). */
     flushTop: z.boolean().optional(),
+    variant: z
+      .enum(['cards', 'mock'])
+      .optional()
+      .describe("'cards' (дефолт) — сетка карточек с иконкой; 'mock' — эталонный FeatureGridMock: 3 колонки на десктопе, карусель на планшете и мобилке, мини-мокапы фич в карточках"),
   }),
 });
 
@@ -328,13 +347,18 @@ const FinalCtaSchema = z.object({
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
     variant: z
-      .enum(['solid', 'gradient', 'dark'])
+      .enum(['solid', 'gradient', 'dark', 'product'])
       .optional()
-      .describe("'solid' (дефолт) — сплошная заливка (старые лендинги); 'gradient' — блок CTAsecondaryMock (ритейл и новые); 'dark' — тёмный CTAdark (текст + терминал), для CLI-лендингов"),
+      .describe("'solid' (дефолт) — сплошная заливка (старые лендинги); 'gradient' — блок CTAsecondaryMock (ритейл и новые); 'dark' — тёмный CTAdark (текст + терминал), для CLI-лендингов; 'product' — блок CTAproduct: текст слева, иллюстрация платформы справа, градиент лаванда → голубой"),
     visualVariant: z
       .string()
       .optional()
       .describe('интерфейс справа для variant=gradient под тематику лендинга (напр. retail-portfolio-animated, pm-board-1)'),
+    visualSrc: z
+      .string()
+      .optional()
+      .describe("иллюстрация справа для variant=product; по умолчанию общая картинка платформы Kaiten (/brand/cta-product.png)"),
+    visualAlt: z.string().max(160).optional().describe('alt для visualSrc'),
   }),
 });
 
@@ -376,12 +400,27 @@ const ReviewSliderSchema = z.object({
           metric: z.string().max(80).optional(),
           /** Высота логотипа в px (дефолт 40) — вертикальным знакам нужно больше. */
           logoHeight: z.number().min(16).max(96).optional(),
+          logoScale: z
+            .number()
+            .min(0.4)
+            .max(1)
+            .optional()
+            .describe('множитель высоты логотипа (1 = базовые 60px); для знаков разной плотности'),
           quote: z.string().min(10).max(600),
           name: z.string().min(2).max(80),
-          role: z.string().min(2).max(120),
+          role: z
+            .string()
+            .min(2)
+            .max(120)
+            .optional()
+            .describe('должность автора; необязательна (отзыв от команды) — перевод строки \\n разбивает должность и компанию на две строки'),
           avatar: z.string().optional(),
           avatarInitial: z.string().max(4).optional(),
           avatarBg: z.string().max(30).optional(),
+          avatarWide: z
+            .boolean()
+            .optional()
+            .describe('широкое фото вместо круглого аватара — для командных снимков с несколькими людьми в кадре'),
           caseUrl: z.string().optional(),
           caseLabel: z.string().max(40).optional(),
         }),
@@ -419,13 +458,42 @@ const CtaBannerSchema = z.object({
   id: z.literal('cta_banner'),
   component: z.literal('CtaBanner'),
   props: z.object({
-    title: z.string().min(4).max(120),
+    title: z.string().min(4).max(120).optional(),
     description: z.string().max(280).optional(),
-    primaryCta: CtaSchema,
+    primaryCta: CtaSchema.optional(),
     secondaryCta: CtaSchema.nullable().optional(),
+    cards: z
+      .array(
+        z.object({
+          icon: z.string().max(40).optional(),
+          title: z.string().min(4).max(120),
+          description: z.string().max(400).optional(),
+          cta: CtaSchema,
+          tone: z.enum(['violet', 'gray']).optional(),
+        }),
+      )
+      .min(2)
+      .max(3)
+      .optional()
+      .describe('пара карточек в строку вместо широкого баннера: иконка, заголовок, описание, ссылка'),
+    featureTile: z
+      .string()
+      .max(80)
+      .optional()
+      .describe('подпись плитки из галереи мини-мокапов фич — визуал у правого края баннера; кнопка при этом уходит под текст'),
     /** Градиентный вид (подложка GradientPanel). Opt-in, старые лендинги без него. */
     gradient: z.boolean().optional(),
   }),
+}).superRefine((section, ctx) => {
+  // Секция рисует либо широкий баннер, либо пару карточек — что-то одно должно быть заполнено.
+  const { title, primaryCta, cards } = section.props;
+  if (!cards && !(title && primaryCta)) {
+    ctx.addIssue({
+      code: 'custom',
+      path: ['props'],
+      message: 'cta_banner: нужен либо title + primaryCta, либо cards',
+    });
+  }
 });
 
 /* ─── CtaButtons (одиночная/парная кнопка по центру, без карточки) ──── */
@@ -435,6 +503,10 @@ const CtaButtonsSchema = z.object({
   props: z.object({
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
+    flushTop: z
+      .boolean()
+      .optional()
+      .describe('убрать верхний отступ секции — когда кнопки идут сразу за предыдущим блоком'),
   }),
 });
 
@@ -486,6 +558,11 @@ const MediaCopySchema = z.object({
   props: z.object({
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(120),
+    accentWord: z
+      .string()
+      .max(40)
+      .optional()
+      .describe('кусок заголовка фирменным фиолетовым, напр. «Шаг 1.»'),
     description: z.string().max(400).optional(),
     checklist: z
       .array(
@@ -496,8 +573,28 @@ const MediaCopySchema = z.object({
       )
       .max(8)
       .optional(),
-    mediaPosition: z.enum(['left', 'right']).optional(),
+    mediaPosition: z
+      .enum(['left', 'right', 'below'])
+      .optional()
+      .describe("'left'/'right' — две колонки; 'below' — текст сверху, визуал под ним во всю ширину (для широких схем)"),
     mediaPlaceholder: z.string().max(80).optional(),
+    align: z
+      .enum(['left', 'center'])
+      .optional()
+      .describe("'left' (дефолт); 'center' — блок центрируется от планшета (для текстовых шапок разделов)"),
+    flushTop: z
+      .boolean()
+      .optional()
+      .describe('убрать верхний отступ секции — когда блок идёт сразу под текстовой шапкой раздела'),
+    titleSize: z
+      .enum(['default', 'small'])
+      .optional()
+      .describe("'default' — H2 раздела; 'small' — уменьшенный заголовок для секций под общей шапкой (напр. «Шаг 1»/«Шаг 2»)"),
+    mediaSrc: z
+      .string()
+      .optional()
+      .describe('растровая картинка вместо мока (напр. /brand/platform.png); отменяет mediaVariant'),
+    mediaAlt: z.string().max(160).optional().describe('alt для mediaSrc'),
     mediaVariant: z
       .enum([
         'default',
@@ -564,6 +661,14 @@ const MediaCopySchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      // Автоматизации (модуль Kaiten)
+      'automation-rule-trigger',
+      'automation-rule-action',
+      'automation-rules-list',
+      'automation-deadline',
+      'automation-checklist-done',
+      'automation-card-flow',
+      'platform-kaiten',
       'cli-terminal-hero',
       'cli-terminal-hero-animated',
       'cli-terminal-final-animated',
@@ -958,6 +1063,14 @@ export const MockVariantSchema = z.enum([
 'retail-report-bottlenecks',
 'retail-report-ai',
 'gantt-chart',
+// Автоматизации (модуль Kaiten)
+'automation-rule-trigger',
+'automation-rule-action',
+'automation-rules-list',
+'automation-deadline',
+'automation-checklist-done',
+'automation-card-flow',
+'platform-kaiten',
 // Window-моки планирования (эталон — лендинг сравнения с MS Project)
 'window-links',
 'window-resource',
@@ -983,6 +1096,15 @@ const TabbedFeatureSectionSchema = z.object({
   props: z.object({
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(120),
+    variant: z
+      .enum(['tabs', 'list'])
+      .optional()
+      .describe("'tabs' (дефолт) — переключаемые вкладки; 'list' — раскрытый список: все сценарии сразу, друг под другом"),
+    accentWord: z
+      .string()
+      .max(40)
+      .optional()
+      .describe('кусок заголовка фирменным фиолетовым, напр. «более 300 сценариев»'),
     description: z.string().max(280).optional(),
     tabs: z
       .array(

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-10T13:05:26.581Z",
+  "updatedAt": "2026-08-25T09:22:31.065Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -427,6 +427,15 @@
     },
     {
       "kind": "mock-use",
+      "variant": "kanban-minimal-animated",
+      "landingSlug": "kaiten-task-tracker",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-07-31T16:52:02.981Z"
+    },
+    {
+      "kind": "mock-use",
       "variant": "hero-screen-interface",
       "landingSlug": "kaiten-ganttpro",
       "sectionId": "hero",
@@ -478,6 +487,69 @@
       "sectionIdx": 1,
       "domain": "pm",
       "recordedAt": "2026-08-10T13:05:26.581Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "hero-screen-video",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:30.998Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "none",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:31.008Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "automation-rule-trigger",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "media_copy",
+      "sectionIdx": 5,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:31.021Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "automation-rule-action",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:31.032Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "automation-rules-list",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 8,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:31.041Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "automation-checklist-done",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 8,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:31.054Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "automation-deadline",
+      "landingSlug": "kaiten-automation",
+      "sectionId": "tabbed_feature",
+      "sectionIdx": 8,
+      "domain": "pm",
+      "recordedAt": "2026-08-25T09:22:31.065Z"
     }
   ]
 }

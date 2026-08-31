@@ -216,7 +216,13 @@ export async function allocateIllustrations(
           customIdHint: customId,
           rationale: 'customIllustrationId уже задан — генерируем SVG по spec.',
         });
-      } else if (v && v !== 'generic' && v !== 'hero-screen-interface' && allowedVariants.has(v)) {
+      } else if (
+        v &&
+        v !== 'generic' &&
+        v !== 'hero-screen-interface' &&
+        v !== 'hero-screen-video' &&
+        allowedVariants.has(v)
+      ) {
         decisions.push({
           sectionIdx: idx,
           sectionId: section.id,

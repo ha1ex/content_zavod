@@ -48,8 +48,8 @@ const css = `
   background:linear-gradient(90deg,#ece0ff,#cdecff);
   font-family:'Roboto',system-ui,sans-serif;color:#2d2d2d}
 .ctp__copy{position:relative;z-index:1}
-.ctp__copy h2{font-size:30px;line-height:36px;font-weight:600;color:#2d2d2d;margin:0}
-@media(min-width:1280px){.ctp__copy h2{font-size:36px;line-height:40px}}
+.ctp__copy h2{font-size:24px;line-height:32px;font-weight:600;color:#2d2d2d;margin:0}
+@media(min-width:1280px){.ctp__copy h2{font-size:30px;line-height:36px}}
 .ctp__copy p{font-size:16px;line-height:24px;color:#424242;margin:16px 0 0}
 /* Кнопки в один ряд; в столбик уходят только на самых узких экранах,
    где две штуки физически не помещаются по ширине. */

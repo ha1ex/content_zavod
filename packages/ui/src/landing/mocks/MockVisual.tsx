@@ -16,6 +16,7 @@ import {
   EmailSequenceMock,
   HiringPipelineMock,
   IntegrationsConsoleMock,
+  IntegrationsHubMock,
   InventoryGridMock,
   InvoiceStatusMock,
   KnowledgeBaseMock,
@@ -66,6 +67,13 @@ import {
   RetailDocMiniMock,
   RetailReportMiniMock,
   GanttChartMock,
+  ModulePlatformKaiten,
+  AutomationRuleTriggerMock,
+  AutomationRuleActionMock,
+  AutomationRulesListMock,
+  AutomationDeadlineMock,
+  AutomationChecklistDoneMock,
+  AutomationCardFlowMock,
   WindowLinksMock,
   WindowResourceMock,
   WindowReportsMock,
@@ -95,6 +103,7 @@ export type MockVariant =
   | 'mcp-agent-board-animated'
   | 'analytics-kpi'
   | 'integrations-console'
+  | 'integrations-hub'
   | 'modules-matrix'
   // Support
   | 'support-board'
@@ -181,6 +190,14 @@ export type MockVariant =
   | 'retail-report-bottlenecks'
   | 'retail-report-ai'
   | 'gantt-chart'
+  // Автоматизации (модуль Kaiten): конструктор правила «если — то» и сценарии
+  | 'automation-rule-trigger'
+  | 'automation-rule-action'
+  | 'automation-rules-list'
+  | 'automation-deadline'
+  | 'automation-checklist-done'
+  | 'automation-card-flow'
+  | 'platform-kaiten'
   // Window-моки планирования (эталон — лендинг сравнения с MS Project)
   | 'window-links'
   | 'window-resource'
@@ -218,6 +235,15 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <AnalyticsKpiMock />;
     case 'integrations-console':
       return <IntegrationsConsoleMock />;
+    // Карта интеграций фикс. ширины 1440px — в узких слотах масштабируется.
+    case 'integrations-hub':
+      return (
+        <div className="w-full overflow-hidden">
+          <ScaleToFit designWidth={1440}>
+            <IntegrationsHubMock />
+          </ScaleToFit>
+        </div>
+      );
     case 'modules-matrix':
       return <ModulesMatrixMock />;
     case 'sales-funnel':
@@ -375,6 +401,26 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
         <div className="w-full overflow-hidden">
           <ScaleToFit designWidth={1040}>
             <GanttChartMock />
+          </ScaleToFit>
+        </div>
+      );
+    case 'automation-rule-trigger':
+      return <AutomationRuleTriggerMock />;
+    case 'automation-rule-action':
+      return <AutomationRuleActionMock />;
+    case 'automation-rules-list':
+      return <AutomationRulesListMock />;
+    case 'automation-deadline':
+      return <AutomationDeadlineMock />;
+    case 'automation-checklist-done':
+      return <AutomationChecklistDoneMock />;
+    case 'automation-card-flow':
+      return <AutomationCardFlowMock />;
+    case 'platform-kaiten':
+      return (
+        <div className="w-full overflow-hidden">
+          <ScaleToFit designWidth={2000}>
+            <ModulePlatformKaiten />
           </ScaleToFit>
         </div>
       );

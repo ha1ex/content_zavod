@@ -1,3 +1,4 @@
+import { AccentText } from '../primitives/AccentText';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { LogoMarqueeMock } from './mocks/LogoMarqueeMock';
@@ -59,15 +60,20 @@ export function LogoMarquee({
           {title && (
             <h2
               data-comp="logo_marquee.title"
-              className="text-2xl font-semibold leading-tight md:text-4xl"
+              /*
+                Заголовок держим в одну строку на десктопе: на широком экране
+                перенос рвал фразу «эффективнее с Кайтен» и ломал ритм блока.
+                На узких экранах перенос возвращается — иначе текст не помещается.
+              */
+              className="text-2xl font-semibold leading-tight md:text-4xl lg:whitespace-nowrap"
             >
-              <AccentTitle title={title} accentWord={accentWord} />
+              <AccentText text={title} accentWord={accentWord} />
             </h2>
           )}
           {description && (
             <p
               data-comp="logo_marquee.description"
-              className="mt-3 text-base text-(--color-text-primary) md:text-lg"
+              className="mx-auto mt-3 max-w-3xl text-base text-(--color-text-primary) md:text-lg"
             >
               {description}
             </p>
@@ -87,15 +93,3 @@ export function LogoMarquee({
 }
 
 /** Заголовок с одним акцентным словом в фирменном фиолетовом. */
-function AccentTitle({ title, accentWord }: { title: string; accentWord?: string }) {
-  if (!accentWord) return <>{title}</>;
-  const at = title.indexOf(accentWord);
-  if (at < 0) return <>{title}</>;
-  return (
-    <>
-      {title.slice(0, at)}
-      <span className="text-(--color-text-accent)">{accentWord}</span>
-      {title.slice(at + accentWord.length)}
-    </>
-  );
-}

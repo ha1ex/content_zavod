@@ -1,0 +1,400 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Модуль «Автоматизации»",
+        "title": "Избавьтесь от рутины и сократите количество ручной работы",
+        "subtitle": "Настройте правило один раз — Кайтен сам назначит ответственных, переместит карточки, напомнит о задаче, добавит чек-лист и не только",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-automation-video",
+          "src": "https://kaiten.ru/assets/video/products/automation_preview.mp4",
+          "alt": "Видео: как настроить автоматизацию в Кайтене",
+          "variant": "hero-screen-video"
+        },
+        "visualPosition": "below",
+        "bullets": [
+          "300 + готовых сценариев"
+        ],
+        "trust": [
+          {
+            "icon": "settings",
+            "label": "300 + сценариев"
+          },
+          {
+            "icon": "mouse-pointer-click",
+            "label": "Без кода"
+          },
+          {
+            "icon": "clock",
+            "label": "Настройка за 5 минут"
+          },
+          {
+            "icon": "square-kanban",
+            "label": "Не меняет структуру досок"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reviews",
+      "component": "ReviewSlider",
+      "props": {
+        "reviews": [
+          {
+            "logo": "/brand/reviews/tehnologii-logo.png",
+            "quote": "«Мы убрали всю рутину из менеджерских процессов. Техническая настройка таких автоматизаций в Кайтен устроена довольно просто. Самое сложное — это спроектировать сами процессы и понять, что за чем должно следовать»",
+            "name": "Команда группы компаний",
+            "role": "«Технологии Надежности»",
+            "avatar": "/brand/reviews/tehnologii-avatar.png",
+            "avatarInitial": "ТН",
+            "avatarWide": true,
+            "caseUrl": "https://kaiten.ru/blog/tag/case/",
+            "caseLabel": "Читать кейс"
+          },
+          {
+            "logo": "/brand/reviews/buzzolls-logo.png",
+            "logoScale": 0.78,
+            "quote": "«После перехода на Кайтен в Buzzolls заметно повысили эффективность: сократили промежутки между релизами с месяцев до дней. Это стало возможно благодаря визуализации процессов и автоматизации задач. Кайтен помог и улучшить координацию между отделами»",
+            "name": "Владимир Фаст",
+            "role": "руководитель ИТ-отдела\nBuzzolls",
+            "avatar": "/brand/reviews/buzzolls-avatar.png",
+            "avatarInitial": "ВФ",
+            "caseUrl": "https://kaiten.ru/blog/tag/case/",
+            "caseLabel": "Читать кейс"
+          },
+          {
+            "logo": "/brand/reviews/proctoredu-logo.png",
+            "quote": "«Настроенный в Кайтен процесс обеспечивает необходимую прозрачность и измеримость, при этом значительная часть рутинных операций автоматизирована. Опросы показывают высокий уровень удовлетворенности сотрудников новой системой, что подтверждает правильность подхода»",
+            "name": "Марат Закиров",
+            "role": "руководитель отдела развития ProctorEdu",
+            "avatar": "/brand/reviews/proctoredu-avatar.png",
+            "avatarInitial": "МЗ",
+            "caseUrl": "https://kaiten.ru/blog/tag/case/",
+            "caseLabel": "Читать кейс"
+          }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Кайтен берет рутину на себя",
+        "items": [
+          {
+            "icon": "UserPlus",
+            "title": "Назначает ответственных",
+            "description": "Новая задача сразу получает исполнителя — без ручного распределения",
+            "featureTile": "Карточка задачи и связи"
+          },
+          {
+            "icon": "ListChecks",
+            "title": "Добавляет чек-листы и поля",
+            "description": "При переходе на новый этап карточка сразу получает критерии приемки и нужные поля",
+            "featureTile": "Чек-листы в задаче"
+          },
+          {
+            "icon": "AlarmClock",
+            "title": "Следит за сроками",
+            "description": "Если дедлайн подошел, а задача не двигается — Кайтен сообщит об этом сам",
+            "featureTile": "Прогноз сроков"
+          }
+        ],
+        "columns": 3,
+        "variant": "mock"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Настраивайте автоматизацию в несколько кликов без помощи программиста",
+        "description": "Каждое правило — это связка «если — то». Вы не пишете код, а собираете правило из двух шагов прямо в интерфейсе",
+        "align": "center",
+        "mediaVariant": "none",
+        "flushTop": true,
+        "accentWord": "без помощи программиста"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Шаг 1 Выбираете событие-триггер",
+        "accentWord": "Шаг 1",
+        "description": "Что должно произойти, чтобы правило сработало: карточка переместилась в колонку, заполнено поле, наступил срок, появилась блокировка",
+        "mediaPosition": "right",
+        "flushTop": true,
+        "titleSize": "small",
+        "mediaVariant": "automation-rule-trigger"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Шаг 2 Назначаете действие",
+        "accentWord": "Шаг 2",
+        "description": "Что в ответ сделает Кайтен: переместит карточку, добавит чек-лист, создаст дочернюю задачу — можно задать сразу несколько действий на одно событие",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "titleSize": "small",
+        "mediaVariant": "automation-rule-action"
+      }
+    },
+    {
+      "id": "cta_buttons",
+      "component": "CtaButtons",
+      "props": {
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "secondaryCta": {
+          "label": "Подключить модуль",
+          "href": "https://kaiten.ru/features/automation/"
+        },
+        "flushTop": true
+      }
+    },
+    {
+      "id": "tabbed_feature",
+      "component": "TabbedFeatureSection",
+      "props": {
+        "title": "И еще более 300 сценариев автоматизации задач",
+        "variant": "list",
+        "accentWord": "более 300 сценариев",
+        "tabs": [
+          {
+            "id": "flow",
+            "label": "Управление потоком задач",
+            "icon": "GitBranch",
+            "title": "Карточки идут по процессу сами",
+            "checklist": [
+              {
+                "text": "Карточка автоматически переносится в «Готово», когда чек-лист закрыт"
+              },
+              {
+                "text": "Родительская карточка сама двигается по доске, когда меняется статус дочерних задач"
+              },
+              {
+                "text": "Карточка заблокирована → автоматически меняется ее статус, чтобы команда сразу видела затор"
+              }
+            ],
+            "mockVariant": "automation-card-flow"
+          },
+          {
+            "id": "routine",
+            "label": "Освобождение от рутины",
+            "icon": "Zap",
+            "title": "Рутина уходит — сотрудники работают",
+            "checklist": [
+              {
+                "text": "Карточка попала в колонку «В работе» → автоматически назначается ответственный"
+              },
+              {
+                "text": "Все пункты чек-листа закрыты → создается дочерняя карточка для следующего этапа (например, тестирования)"
+              },
+              {
+                "text": "Изменилось поле в карточке → значение автоматически подставляется в связанные дочерние карточки"
+              }
+            ],
+            "mockVariant": "automation-checklist-done"
+          },
+          {
+            "id": "deadlines",
+            "label": "Контроль сроков",
+            "icon": "AlarmClock",
+            "title": "Ни один дедлайн не пройдет незаметно",
+            "checklist": [
+              {
+                "text": "Установлен срок → приходит напоминание за нужное время до дедлайна"
+              },
+              {
+                "text": "Срок изменен → автоматически пересчитывается напоминание"
+              },
+              {
+                "text": "Карточка заблокирована дольше нормы → срабатывает уведомление ответственному и руководителю"
+              }
+            ],
+            "mockVariant": "automation-deadline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "cards": [
+          {
+            "icon": "zap",
+            "title": "Передайте рутину Кайтен",
+            "description": "Настройте первую автоматизацию за 5 минут",
+            "cta": {
+              "label": "Попробовать Кайтен бесплатно",
+              "href": "https://kaiten.ru/signup"
+            }
+          },
+          {
+            "icon": "settings",
+            "title": "Уже ведете задачи в Кайтен?",
+            "description": "Подключите модуль «Автоматизации» — и настройте первое правило за пару минут. Выберите триггер и действие, и рутинные шаги начнут выполняться сами, без изменений в структуре ваших досок",
+            "cta": {
+              "label": "Открыть инструкцию",
+              "href": "https://faq-ru.kaiten.site/"
+            },
+            "tone": "gray"
+          }
+        ]
+      }
+    },
+    {
+      "id": "logo_marquee",
+      "component": "LogoMarquee",
+      "props": {
+        "title": "Более 200 тысяч компаний работают эффективнее с Кайтен",
+        "accentWord": "Более 200 тысяч",
+        "description": "в ИТ, ритейле, производстве, строительстве, образовании и других отраслях",
+        "items": [
+          {
+            "brand": "Эксмо",
+            "logoSrc": "/brand/client-logos/wrap-3.png"
+          },
+          {
+            "brand": "Самолет",
+            "logoSrc": "/brand/client-logos/wrap-4.png"
+          },
+          {
+            "brand": "Tele2",
+            "logoSrc": "/brand/client-logos/wrap-5.png"
+          },
+          {
+            "brand": "DNS",
+            "logoSrc": "/brand/client-logos/wrap-6.png"
+          },
+          {
+            "brand": "РусГидро",
+            "logoSrc": "/brand/client-logos/wrap-1.png"
+          },
+          {
+            "brand": "Сибагро",
+            "logoSrc": "/brand/client-logos/wrap-2.png"
+          },
+          {
+            "brand": "Сколково",
+            "logoSrc": "/brand/client-logos/wrap-11.png"
+          },
+          {
+            "brand": "X5 Tech",
+            "logoSrc": "/brand/client-logos/wrap-12.png"
+          },
+          {
+            "brand": "Норникель",
+            "logoSrc": "/brand/client-logos/wrap-13.png"
+          },
+          {
+            "brand": "Whoosh",
+            "logoSrc": "/brand/client-logos/wrap-7.png"
+          },
+          {
+            "brand": "S7 Airlines",
+            "logoSrc": "/brand/client-logos/wrap-8.png"
+          },
+          {
+            "brand": "АТОЛ",
+            "logoSrc": "/brand/client-logos/wrap-9.png"
+          },
+          {
+            "brand": "Альфа-Банк",
+            "logoSrc": "/brand/client-logos/wrap-10.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Единая рабочая среда для всей компании",
+        "description": "Кайтен — это не только задачи и автоматизации. Здесь могут работать все отделы компании: от бухгалтерии до разработки. Вы не теряете контекст между командами и не платите за десяток разных сервисов",
+        "mediaPosition": "below",
+        "mediaSrc": "/brand/platform.png",
+        "mediaAlt": "Карта продукта Кайтен: ядро платформы, инструменты и модули, сквозной ИИ",
+        "flushTop": true
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Переводите все процессы в Кайтен",
+        "description": "Зарегистрируйтесь и получите 14 дней полного доступа ко всем функциям, включая автоматизации. После — сможете остаться на бесплатном тарифе или выбрать план с нужными модулями",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "variant": "product",
+        "visualSrc": "/brand/cta-relocation.png",
+        "visualAlt": "Задачи из других сервисов переезжают в карточку Кайтена"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Автоматизации Kaiten: правила «если — то» для задач команды",
+    "description": "Правило «если — то» настраивается без кода: Кайтен сам назначит ответственного, перенесет карточку и напомнит о сроке. Более 300 сценариев, 14 дней бесплатно."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-08-25T09:22:30.980Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "single-module-deep-dive",
+    "tokenEstimate": 48147,
+    "domain": "pm"
+  }
+}

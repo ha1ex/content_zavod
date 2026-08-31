@@ -51,7 +51,7 @@ export interface FeatureGridMockProps {
 
 const STYLE = `
 .fg-mock{
-  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-16:64px; --sp-24:96px;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-16:64px; --sp-24:96px; --sp-32:128px;
   --radius-2xl:16px;
   --fw-reg:400; --fw-med:500; --fw-semi:600; --ls:0;
   --brand-100:#7d4ccf; --brand-12:#efe9f9; --brand-48k:rgba(125,76,207,.48);
@@ -60,10 +60,10 @@ const STYLE = `
   --ease-ui:cubic-bezier(.2,0,.2,1);
   font-family:inherit; color:var(--text-title);
   display:block; width:100%; background:var(--surface-page);
-  padding:var(--sp-24) 0; box-sizing:border-box; overflow:hidden;
+  padding:var(--sp-24) 0 var(--sp-32); box-sizing:border-box; overflow:hidden;
 }
 .fg-mock, .fg-mock *{ box-sizing:border-box; }
-.fg-inner{ max-width:1216px; margin:0 auto; padding:0 var(--sp-4); }
+.fg-inner{ max-width:calc(1216px + 2 * var(--sp-4)); margin:0 auto; padding:0 var(--sp-4); }
 
 .fg-head{ display:flex; flex-direction:column; align-items:center; text-align:center; margin:0 auto var(--sp-12); max-width:820px; }
 .fg-heading{ font-size:36px; line-height:40px; font-weight:var(--fw-semi); letter-spacing:0; margin:0; }
@@ -71,8 +71,8 @@ const STYLE = `
 
 .fg-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-8); }
 .fg-card{ background:var(--surface-section); border-radius:var(--radius-2xl); padding:var(--sp-4) var(--sp-6) var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-3); }
-.fg-illus{ width:100%; max-width:260px; margin:var(--sp-3) auto; }
-.fg-illus .ph{ width:100%; aspect-ratio:240/176; border-radius:12px; background:#e9e9ec; display:flex; align-items:center; justify-content:center; color:#bdbdbd; }
+.fg-illus{ display:flex; justify-content:center; width:100%; max-width:260px; margin:var(--sp-3) auto; }
+.fg-illus .ph{ flex:1; width:100%; aspect-ratio:240/176; border-radius:12px; background:#e9e9ec; display:flex; align-items:center; justify-content:center; color:#bdbdbd; }
 .fg-illus .ph svg{ width:36px; height:36px; }
 .fg-card h3{ font-size:20px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title); margin:0; }
 .fg-card p{ font-size:16px; line-height:24px; color:var(--text-secondary); margin:0; }
@@ -87,13 +87,16 @@ const STYLE = `
 
 /* планшет + мобилка: сетка → карусель во всю ширину экрана */
 @media(max-width:1279px){
-  .fg-mock{ padding:var(--sp-16) 0; }
-  .fg-inner{ padding:0 var(--sp-6); }
+  .fg-mock{ padding:var(--sp-16) 0 var(--sp-24); }
+  .fg-inner{ max-width:calc(1216px + 2 * var(--sp-6)); padding:0 var(--sp-6); }
   .fg-head{ margin-bottom:var(--sp-8); }
   .fg-grid{
     display:flex; grid-template-columns:none; overflow-x:auto; scroll-snap-type:x proximity;
     gap:var(--sp-6); scrollbar-width:none; -ms-overflow-style:none; padding-bottom:4px;
     margin-inline:calc(-1 * var(--sp-6)); padding-left:var(--sp-6); scroll-padding-left:var(--sp-6);
+    /* пока карточки помещаются — держим их по центру; как только лента шире экрана,
+       safe откатывает на flex-start, чтобы левый край не уезжал за пределы прокрутки */
+    justify-content:safe center;
   }
   .fg-grid::-webkit-scrollbar{ display:none; }
   .fg-card{ flex:0 0 340px; max-width:340px; scroll-snap-align:start; }
@@ -101,14 +104,16 @@ const STYLE = `
   .fg-nav{ display:flex; }
 }
 @media(max-width:767px){
-  .fg-mock{ padding:var(--sp-12) 0; }
+  .fg-mock{ padding:var(--sp-12) 0 var(--sp-16); }
   .fg-inner{ padding:0 var(--sp-4); }
   .fg-head{ align-items:flex-start; text-align:left; margin-bottom:var(--sp-6); }
   .fg-heading{ font-size:24px; line-height:32px; }
   .fg-grid{ gap:var(--sp-4); margin-inline:calc(-1 * var(--sp-4)); padding-left:var(--sp-4); scroll-padding-left:var(--sp-4); }
-  .fg-card{ flex:0 0 86%; max-width:none; }
+  .fg-card{ flex:0 0 318px; max-width:318px; }
   .fg-grid > .fg-card:last-child{ margin-right:var(--sp-4); }
 }
+/* планшет: та же карточка 318, что и на мобилке */
+@media(min-width:768px) and (max-width:1023px){ .fg-card{ flex:0 0 318px; max-width:318px; } }
 @media(prefers-reduced-motion:reduce){ .fg-grid{ scroll-behavior:auto; } }
 `;
 

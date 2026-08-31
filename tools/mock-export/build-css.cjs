@@ -9,8 +9,28 @@ const fs = require('fs');
 const SCOPE = '.mkp';
 const from = 'tools/mock-export/entry.css';
 
+/* Делим только по запятым верхнего уровня. В именах классов Tailwind
+   запятая встречается экранированной — shadow-[0_0_44px_-16px_rgba(45,45,45,0.38)] —
+   и наивный split ломал такой селектор на куски, каждый из которых получал
+   свой .mkp. Правило оставалось в файле, но не совпадало ни с чем: так
+   пропадали тени у мокапов гаджетов. */
+const splitTop = (sel) => {
+  const out = [];
+  let buf = '', depth = 0, esc = false;
+  for (const ch of sel) {
+    if (esc) { buf += ch; esc = false; continue; }
+    if (ch === String.fromCharCode(92)) { buf += ch; esc = true; continue; }
+    if (ch === '(' || ch === '[') depth++;
+    if (ch === ')' || ch === ']') depth--;
+    if (ch === ',' && depth === 0) { out.push(buf); buf = ''; continue; }
+    buf += ch;
+  }
+  out.push(buf);
+  return out;
+};
+
 const scope = (sel) =>
-  sel.split(',').map((s) => {
+  splitTop(sel).map((s) => {
     s = s.trim();
     if (s === ':root' || s === ':host' || s === '*') return SCOPE;
     if (s.startsWith('&')) return s;

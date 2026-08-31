@@ -956,9 +956,15 @@ code {
   border-radius: 1.04cqw;
   overflow: hidden;
   background: var(--neutral-000);
-  box-shadow: 0 .1cqw .63cqw rgba(45, 45, 45, .08);
+  /* Снимок отделяется от полотна тенью, а не рамкой: у самого мокапа
+     контур уже есть, и вместе с рамкой обертки читалась двойная линия. */
+  box-shadow: 0 .42cqw 1.35cqw -.21cqw rgba(45, 45, 45, .16);
 }
 .mm-shot .mkp { display: block; }
+/* Внешний контур мокапа гасим — только у корневого блока, внутренние рамки
+   карточек и колонок остаются. Цвет, а не border:0, чтобы не съехала
+   раскладка на этот один пиксель. */
+.mm-shot:not(.is-bare) .mkp > div { border-color: transparent; }
 
 .mm-gantt     .mkp { width: 1053px; zoom: calc(100cqi / 1053px); }
 .mm-table     .mkp { width: 1500px; zoom: calc(100cqi / 1500px); }
@@ -968,6 +974,16 @@ code {
 .mm-flow      .mkp { width: 951px; zoom: calc(100cqi / 951px); }
 .mm-knowledge .mkp { width: 1320px; zoom: calc(100cqi / 1320px); }
 .mm-usm       .mkp { width: 1435px; zoom: calc(100cqi / 1435px); }
+
+/* Гаджеты: ноутбук, планшет, телефон. Ширина — вместе с корпусом, а не
+   по экрану: у ноутбука в габарит входит подставка, у остальных — рамка. */
+.mm-gd-laptop .mkp { width: 880px; zoom: calc(100cqi / 880px); }
+.mm-gd-tablet .mkp { width: 720px; zoom: calc(100cqi / 720px); }
+.mm-gd-mobile .mkp { width: 280px; zoom: calc(100cqi / 280px); }
+
+/* Корпус гаджета уже нарисован в мокапе и отбрасывает свою тень — обертке
+   ни фона, ни тени, ни обрезки не нужно, иначе получается рамка в рамке. */
+.mm-shot.is-bare { background: none; box-shadow: none; overflow: visible; border-radius: 0; }
 
 /* ─── Пара планшетов, макет 407-2519 ─────────────────────────────────────
    Два экрана внахлест: сзади сторонний сервис, спереди Кайтен со сдвигом

@@ -11,6 +11,13 @@ import { ModulePortfolioMock } from '../../packages/ui/src/landing/mocks/ModuleP
 import { ModuleFlowHorizontal } from '../../packages/ui/src/landing/mocks/ModuleFlowHorizontal';
 import { ModuleKnowledgeBaseMock } from '../../packages/ui/src/landing/mocks/ModuleKnowledgeBaseMock1';
 import { ModuleUsmMock } from '../../packages/ui/src/landing/mocks/ModuleUsmMock';
+import { LaptopKanbanMock } from '../../packages/ui/src/landing/mocks/GadgetLaptopKanbanMock';
+import { LaptopBoardTreeMock } from '../../packages/ui/src/landing/mocks/GadgetLaptopBoardTreeMock';
+import { LaptopDocEditorMock } from '../../packages/ui/src/landing/mocks/GadgetLaptopDocEditorMock';
+import { TabletKanbanMock } from '../../packages/ui/src/landing/mocks/GadgetTabletKanbanMock';
+import { MobileKanbanMock } from '../../packages/ui/src/landing/mocks/GadgetMobileKanbanMock';
+import { MobileCrmMock } from '../../packages/ui/src/landing/mocks/GadgetMobileCrmMock';
+import { MobileDocReaderMock } from '../../packages/ui/src/landing/mocks/GadgetMobileDocReaderMock';
 
 const items: [string, () => JSX.Element][] = [
   ['gantt', GanttChartMock as any],
@@ -21,6 +28,13 @@ const items: [string, () => JSX.Element][] = [
   ['flow', ModuleFlowHorizontal as any],
   ['knowledge', ModuleKnowledgeBaseMock as any],
   ['usm', ModuleUsmMock as any],
+  ['gd-laptop-kanban', LaptopKanbanMock as any],
+  ['gd-laptop-tree', LaptopBoardTreeMock as any],
+  ['gd-laptop-doc', LaptopDocEditorMock as any],
+  ['gd-tablet-kanban', TabletKanbanMock as any],
+  ['gd-mobile-kanban', MobileKanbanMock as any],
+  ['gd-mobile-crm', MobileCrmMock as any],
+  ['gd-mobile-doc', MobileDocReaderMock as any],
 ];
 
 mkdirSync('tools/mock-export/out', { recursive: true });

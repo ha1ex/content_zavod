@@ -19,6 +19,22 @@ export interface SpeakerItemProps {
   photoAlt?: string;
   /** Инициалы для заглушки, когда фото ещё нет. */
   initials?: string;
+  /**
+   * Двойной блок — один доклад двух спикеров (как live-сессия «Бындю ·
+   * Халезов» на прошлой конференции). Карточка растягивается на всю ширину
+   * ряда: сверху общий тег и название доклада, ниже — по строке на каждого
+   * спикера (портрет + имя + роль). Заполнено → рендерится вместо одиночной.
+   */
+  people?: SpeakerPersonProps[];
+}
+
+/** Один человек в двойном блоке (доклад двух спикеров). */
+export interface SpeakerPersonProps {
+  name: string;
+  role?: string;
+  photoSrc?: string;
+  photoAlt?: string;
+  initials?: string;
 }
 
 export interface SpeakerGridProps {
@@ -125,65 +141,13 @@ export function SpeakerGrid({
             columns === 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2',
           )}
         >
-          {speakers.map((s, i) => (
-            <Inspect as="article" key={i} name={`speaker_grid.speakers[${i}]`}>
-              <div
-                className={cn(
-                  'group flex h-full flex-col gap-5 sm:flex-row sm:items-start sm:gap-6',
-                  'rounded-(--radius-2xl) border border-(--color-border-default)',
-                  'bg-(--color-surface-section) p-5 md:p-6',
-                  'transition duration-500 ease-out hover:-translate-y-0.5',
-                  'hover:border-[color-mix(in_srgb,var(--color-action-primary)_45%,transparent)]',
-                  'hover:shadow-[0_6px_24px_color-mix(in_srgb,var(--color-action-primary)_16%,transparent)]',
-                )}
-              >
-                <Portrait src={s.photoSrc} alt={s.photoAlt} name={s.name} initials={s.initials} />
-                <div className="flex min-w-0 flex-1 flex-col">
-                  {(s.time || s.tag) && (
-                    <div className="flex flex-wrap items-center gap-2">
-                      {s.time && (
-                        <span className="inline-flex items-center rounded-(--radius-full) border border-(--color-border-default) px-3 py-1 text-sm font-medium text-(--color-text-primary)">
-                          {s.time}
-                        </span>
-                      )}
-                      {s.tag && (
-                        <span className="inline-flex items-center rounded-(--radius-full) bg-(--color-action-primary-soft) px-3 py-1 text-sm font-medium text-(--color-text-accent)">
-                          {s.tag}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                  {s.talkTitle && (
-                    <p
-                      data-comp={`speaker_grid.speakers[${i}].talkTitle`}
-                      className={cn(
-                        'text-lg font-semibold leading-snug text-(--color-text-primary) md:text-xl',
-                        (s.time || s.tag) && 'mt-4',
-                      )}
-                    >
-                      {s.talkTitle}
-                    </p>
-                  )}
-                  <div className={cn('flex flex-col gap-1', (s.talkTitle || s.time || s.tag) && 'mt-4')}>
-                    <p
-                      data-comp={`speaker_grid.speakers[${i}].name`}
-                      className="text-base font-semibold text-(--color-text-primary)"
-                    >
-                      {s.name}
-                    </p>
-                    {s.role && (
-                      <p
-                        data-comp={`speaker_grid.speakers[${i}].role`}
-                        className="text-sm leading-relaxed text-(--color-text-secondary)"
-                      >
-                        {s.role}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Inspect>
-          ))}
+          {speakers.map((s, i) =>
+            s.people && s.people.length > 0 ? (
+              <PairCard key={i} s={s} index={i} />
+            ) : (
+              <SoloCard key={i} s={s} index={i} />
+            ),
+          )}
         </div>
 
         {cta && (
@@ -203,22 +167,173 @@ export function SpeakerGrid({
   );
 }
 
+const CARD = cn(
+  'group flex h-full flex-col gap-5 sm:flex-row sm:items-start sm:gap-6',
+  'rounded-(--radius-2xl) border border-(--color-border-default)',
+  'bg-(--color-surface-section) p-5 md:p-6',
+  'transition duration-500 ease-out hover:-translate-y-0.5',
+  'hover:border-[color-mix(in_srgb,var(--color-action-primary)_45%,transparent)]',
+  'hover:shadow-[0_6px_24px_color-mix(in_srgb,var(--color-action-primary)_16%,transparent)]',
+);
+
+/** Плашки тайминга и темы над докладом. */
+function Tags({ time, tag }: { time?: string; tag?: string }) {
+  if (!time && !tag) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {time && (
+        <span className="inline-flex items-center rounded-(--radius-full) border border-(--color-border-default) px-3 py-1 text-sm font-medium text-(--color-text-primary)">
+          {time}
+        </span>
+      )}
+      {tag && (
+        <span className="inline-flex items-center rounded-(--radius-full) bg-(--color-action-primary-soft) px-3 py-1 text-sm font-medium text-(--color-text-accent)">
+          {tag}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/** Одиночная карточка доклада: портрет слева, тема/спикер справа. */
+function SoloCard({ s, index }: { s: SpeakerItemProps; index: number }) {
+  return (
+    <Inspect as="article" name={`speaker_grid.speakers[${index}]`}>
+      <div className={CARD}>
+        <Portrait src={s.photoSrc} alt={s.photoAlt} name={s.name} initials={s.initials} />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <Tags time={s.time} tag={s.tag} />
+          {s.talkTitle && (
+            <p
+              data-comp={`speaker_grid.speakers[${index}].talkTitle`}
+              className={cn(
+                'text-lg font-semibold leading-snug text-(--color-text-primary) md:text-xl',
+                (s.time || s.tag) && 'mt-4',
+              )}
+            >
+              {s.talkTitle}
+            </p>
+          )}
+          <div className={cn('flex flex-col gap-1', (s.talkTitle || s.time || s.tag) && 'mt-4')}>
+            <p
+              data-comp={`speaker_grid.speakers[${index}].name`}
+              className="text-base font-semibold text-(--color-text-primary)"
+            >
+              {s.name}
+            </p>
+            {s.role && (
+              <p
+                data-comp={`speaker_grid.speakers[${index}].role`}
+                className="text-sm leading-relaxed text-(--color-text-secondary)"
+              >
+                {s.role}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </Inspect>
+  );
+}
+
+/**
+ * Двойной блок — один доклад двух спикеров (live-сессия). Растягивается на всю
+ * ширину ряда: сверху общий тег и название доклада, ниже — по строке на
+ * каждого спикера (портрет + имя + роль). Повторяет блок «Бындю · Халезов»
+ * с прошлой конференции.
+ */
+function PairCard({ s, index }: { s: SpeakerItemProps; index: number }) {
+  const people = s.people ?? [];
+  return (
+    <Inspect as="article" name={`speaker_grid.speakers[${index}]`}>
+      <div className={CARD}>
+        {s.photoSrc ? (
+          /* одно общее фото на двоих (совместный портрет) */
+          <Portrait src={s.photoSrc} alt={s.photoAlt} name={s.name} initials={s.initials} />
+        ) : (
+          /* нет общего фото — два портрета стопкой (на мобиле в ряд) */
+          <div className="flex shrink-0 gap-3 sm:flex-col sm:gap-3">
+            {people.map((p, j) => (
+              <Inspect
+                as="div"
+                key={j}
+                name={`speaker_grid.speakers[${index}].people[${j}].photo`}
+              >
+                <Portrait
+                  src={p.photoSrc}
+                  alt={p.photoAlt}
+                  name={p.name}
+                  initials={p.initials}
+                  size="md"
+                />
+              </Inspect>
+            ))}
+          </div>
+        )}
+        <div className="flex min-w-0 flex-1 flex-col">
+          <Tags time={s.time} tag={s.tag} />
+          {s.talkTitle && (
+            <p
+              data-comp={`speaker_grid.speakers[${index}].talkTitle`}
+              className={cn(
+                'text-lg font-semibold leading-snug text-(--color-text-primary) md:text-xl',
+                (s.time || s.tag) && 'mt-4',
+              )}
+            >
+              {s.talkTitle}
+            </p>
+          )}
+          <div className={cn('flex flex-col gap-3', (s.talkTitle || s.time || s.tag) && 'mt-4')}>
+            {people.map((p, j) => (
+              <Inspect
+                as="div"
+                key={j}
+                name={`speaker_grid.speakers[${index}].people[${j}]`}
+                className="flex min-w-0 flex-col gap-1"
+              >
+                <p
+                  data-comp={`speaker_grid.speakers[${index}].people[${j}].name`}
+                  className="text-base font-semibold text-(--color-text-primary)"
+                >
+                  {p.name}
+                </p>
+                {p.role && (
+                  <p
+                    data-comp={`speaker_grid.speakers[${index}].people[${j}].role`}
+                    className="text-sm leading-relaxed text-(--color-text-secondary)"
+                  >
+                    {p.role}
+                  </p>
+                )}
+              </Inspect>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Inspect>
+  );
+}
+
 /** Квадратный портрет спикера. Нет фото — заглушка с инициалами или иконкой. */
 function Portrait({
   src,
   alt,
   name,
   initials,
+  size = 'lg',
 }: {
   src?: string;
   alt?: string;
   name: string;
   initials?: string;
+  /** 'lg' — одиночная карточка; 'md' — компактный портрет в двойном блоке. */
+  size?: 'lg' | 'md';
 }) {
   return (
     <div
       className={cn(
-        'aspect-square w-full shrink-0 overflow-hidden sm:w-36 md:w-44',
+        'aspect-square shrink-0 overflow-hidden',
+        size === 'md' ? 'w-20 sm:w-24 md:w-28' : 'w-full sm:w-36 md:w-44',
         'flex items-center justify-center rounded-(--radius-xl)',
         'bg-(--color-action-primary-soft) text-(--color-text-accent)',
       )}

@@ -1616,7 +1616,7 @@ const SpeakerGridSchema = z.object({
         z.object({
           name: z.string().min(2).max(80),
           /** Роль / компания спикера (1–2 строки). */
-          role: z.string().max(160).optional(),
+          role: z.string().max(200).optional(),
           /** Название доклада. */
           talkTitle: z.string().max(160).optional(),
           /** Тайминг и длительность, напр. «16:00 / 30 мин». */
@@ -1627,6 +1627,23 @@ const SpeakerGridSchema = z.object({
           photoSrc: z.string().optional(),
           photoAlt: z.string().max(160).optional(),
           initials: z.string().max(4).optional(),
+          /**
+           * Двойной блок — доклад двух спикеров (live-сессия): карточка на всю
+           * ширину ряда, сверху общий доклад, ниже по строке на каждого.
+           */
+          people: z
+            .array(
+              z.object({
+                name: z.string().min(2).max(80),
+                role: z.string().max(200).optional(),
+                photoSrc: z.string().optional(),
+                photoAlt: z.string().max(160).optional(),
+                initials: z.string().max(4).optional(),
+              }),
+            )
+            .min(2)
+            .max(2)
+            .optional(),
         }),
       )
       .min(1)

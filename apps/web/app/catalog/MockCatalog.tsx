@@ -61,7 +61,7 @@ const DOMAIN_GROUPS: Array<{ domain: string; variants: MockVariant[] }> = [
   },
   {
     domain: 'On-premise',
-    variants: ['closed-perimeter'],
+    variants: ['on-premise'],
   },
 ];
 

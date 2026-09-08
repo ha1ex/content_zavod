@@ -1,4 +1,5 @@
 import { ScaleToFit } from './ScaleToFit';
+import ClosedPerimeter from './ClosedPerimeter';
 import {
   AbTestResultsMock,
   AnalyticsKpiMock,
@@ -239,7 +240,9 @@ export type MockVariant =
   | 'help-center-email'
   | 'help-center-template'
   | 'help-center-setup'
-  | 'help-center-portal-compact';
+  | 'help-center-portal-compact'
+  // On-premise
+  | 'closed-perimeter';
 
 /**
  * Обёртка-хук для темы. `display:contents` не создаёт бокс — раскладка мока не
@@ -518,6 +521,8 @@ function MockVisualSwitch({ variant }: { variant: MockVariant | undefined }) {
       return <HelpCenterSetupMock />;
     case 'help-center-portal-compact':
       return <HelpCenterPortalMock variant="compact" />;
+    case 'closed-perimeter':
+      return <ClosedPerimeter />;
     default:
       return null;
   }

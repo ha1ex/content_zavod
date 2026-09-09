@@ -125,6 +125,8 @@ body:has(#s23:target) .nav-row[data-for="s23"] { display:flex; }
 body:has(#s25:target) .nav-row[data-for="s25"] { display:flex; }
 body:has(#s27:target) .nav-row[data-for="s27"] { display:flex; }
 body:has(#s29:target) .nav-row[data-for="s29"] { display:flex; }
+body:has(#s30:target) .nav-row[data-for="s30"] { display:flex; }
+body:has(#s31:target) .nav-row[data-for="s31"] { display:flex; }
 body:has(#s28:target) .nav-row[data-for="s28"] { display:flex; }
 body:has(#s26:target) .nav-row[data-for="s26"] { display:flex; }
 body:has(#s24:target) .nav-row[data-for="s24"] { display:flex; }
@@ -532,16 +534,17 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .cases { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); }
 .case {
   background:var(--case-bg); border-radius:var(--radius-frame);
-  padding:1.6cqw; display:flex; flex-direction:column; gap:1.2cqw;
+  padding:2.5cqw 2.29cqw 2.29cqw; min-height:22.2cqw;
+  display:flex; flex-direction:column; gap:1.25cqw;
 }
 .case .case-tag {
   align-self:flex-start; background:var(--surface-page); color:var(--text-primary);
   font-size:.83cqw; letter-spacing:.08em; text-transform:uppercase;
-  padding:.4cqw .9cqw; border-radius:999px;
+  padding:.52cqw 1.04cqw; border-radius:999px;
 }
-.case .case-text { font-size:1.0417cqw; line-height:1.4; margin:0; flex:1; }
+.case .case-text { font-size:1.25cqw; line-height:1.4; margin:0; flex:1; }
 .case .case-text b { font-weight:600; }
-.case .case-logos { display:flex; align-items:center; gap:1.2cqw; }
+.case .case-logos { display:flex; align-items:center; gap:1.04cqw; margin-top:auto; }
 .case .case-logos img { height:1.6cqw; width:auto; display:block; }
 .case .case-logos .client { font-size:1.15cqw; font-weight:600; }
 .case .case-logos .plus { color:var(--neutral-400); font-size:1.15cqw; }
@@ -683,10 +686,11 @@ code {
 }
 .swap .swap-mark svg { width:2.5cqw; height:2.5cqw; }
 .swap .swap-mark.is-to { background:var(--action-primary); color:#ffffff; }
-.swap .swap-arrow { font-size:2.08cqw; line-height:1; color:var(--text-secondary); }
+.swap .swap-arrow { display:flex; align-items:center; color:var(--text-secondary); }
+.swap .swap-arrow svg { width:1.67cqw; height:1.46cqw; display:block; }
 
 /* Заголовок кейса — та же строка, что и текст, но полужирная. */
-.cases .case-title { font-size:1.0417cqw; line-height:1.4; font-weight:600; margin:1.25cqw 0 .6cqw; }
+.cases .case-title { font-size:1.25cqw; line-height:1.3; font-weight:600; margin:0; }
 
 /* --- Кадр для мокапа интерфейса ------------------------------------------- */
 .shot { position:relative; overflow:hidden; border-radius:.63cqw; aspect-ratio:4 / 3; background:var(--surface-page); }
@@ -872,7 +876,9 @@ code {
   padding-top:0 !important; padding-bottom:0 !important;
   border-radius:1.04cqw !important; overflow:hidden !important;
 }
-.mod-shot .mpa { padding:0 !important; }
+/* Скругление держится на .mpa: у нее своя серая подложка, и без радиуса
+   она торчит квадратными углами из-под скругленного .mod. */
+.mod-shot .mpa { padding:0 !important; border-radius:1.04cqw; overflow:hidden; }
 .mod-shot *, .mod-shot *::before, .mod-shot *::after {
   animation:none !important; transition:none !important;
 }
@@ -893,3 +899,156 @@ code {
 .nav-fallback a[aria-label="В начало"] svg,
 .nav-fallback a[aria-label="В конец"] svg { width:10px; height:8px; }
 .nav-fallback a.is-off svg { opacity:.45; }
+
+/* Пара знаков «откуда — куда» из макета 218-2306: натуральные 355x96. */
+.swap-img { width:18.49cqw; height:5cqw; display:block; }
+
+/* --- Список материалов, макет 157-1025 --------------------------------------
+   Акцентный фрейм на всю ширину, внутри сетка 2x2 белых карточек.
+   В карточке пара знаков слева и подчеркнутая ссылка справа.
+   -------------------------------------------------------------------------- */
+.links-frame { background:var(--surface-accent); border-radius:var(--radius-frame); padding:1.46cqw; width:100%; }
+.links-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw; }
+.link-card {
+  background:var(--surface-page); border-radius:.83cqw;
+  min-height:7cqw; padding:0 1.56cqw;
+  display:flex; align-items:center; gap:1.46cqw;
+}
+.link-icons { display:flex; align-items:center; gap:.83cqw; flex:none; color:var(--text-secondary); }
+.link-icons svg { width:1.98cqw; height:1.98cqw; display:block; }
+.link-icons img { height:1.98cqw; width:auto; display:block; }
+.link-text { font-size:1.25cqw; line-height:1.3; text-decoration:underline; text-underline-offset:.21cqw; }
+
+/* Мокап платформы: вписан по высоте зоны, пропорции сохранены. */
+.platform-shot { width:100%; height:100%; object-fit:contain; display:block; }
+
+/* --- Засвет за иллюстрацией -------------------------------------------------
+   Размытое пятно тем же градиентом, что и полоса по нижнему краю слайда.
+   Лежит под картинкой, поэтому не трогает ее собственные цвета.
+   -------------------------------------------------------------------------- */
+.shot-glow { position:absolute; right:3cqw; top:50%; transform:translateY(-50%); display:block; }
+.shot-glow::before {
+  content:""; position:absolute; z-index:0; pointer-events:none;
+  left:50%; top:50%; transform:translate(-50%, -50%);
+  width:115%; height:115%; border-radius:50%;
+  background:var(--glow-gradient); opacity:var(--glow-opacity);
+  filter:blur(3.5cqw);
+}
+.shot-glow img { position:relative; z-index:1; }
+
+/* ─── Мокапы модулей ────────────────────────────────────────────────────
+   Разметка отрисована из packages/ui/src/landing/mocks (Gantt, Table, Scrum,
+   CRM, Portfolio, Flow, KnowledgeBase, USM), стили — assets/module-mocks.css,
+   все под классом .mkp.
+
+   Ширина .mkp задана в пикселях — той, на которой мокап нарисован. Растянуть
+   его по колонке нельзя: внутри резиновая верстка, и на другой ширине она
+   перетекает — меняются переносы, высота строк и высота всего мокапа. Поэтому
+   макет считается на своей ширине, а в слот вписывается целиком через zoom
+   (не transform: высота обертки должна считаться по масштабированному
+   содержимому). Масштаб один на обе оси, пропорции не трогаем.
+
+   Слоты — по модульной сетке шаблона: 1800 = 4×429 + 3×28. На всю полосу
+   идет 1800, в паре с текстом — 3 модуля (1343) против одного (429).
+
+   Мокапы остаются светлыми и в темной теме — это снимки интерфейса. */
+.mm-shot {
+  container-type: inline-size;
+  width: 100%;
+  border-radius: 1.04cqw;
+  overflow: hidden;
+  background: var(--neutral-000);
+  /* Снимок отделяется от полотна тенью, а не рамкой: у самого мокапа
+     контур уже есть, и вместе с рамкой обертки читалась двойная линия. */
+  box-shadow: 0 .42cqw 1.35cqw -.21cqw rgba(45, 45, 45, .16);
+}
+.mm-shot .mkp { display: block; }
+/* Внешний контур мокапа гасим — только у корневого блока, внутренние рамки
+   карточек и колонок остаются. Цвет, а не border:0, чтобы не съехала
+   раскладка на этот один пиксель. */
+.mm-shot:not(.is-bare) .mkp > div { border-color: transparent; }
+
+.mm-gantt     .mkp { width: 1053px; zoom: calc(100cqi / 1053px); }
+.mm-table     .mkp { width: 1500px; zoom: calc(100cqi / 1500px); }
+.mm-scrum     .mkp { width: 1832px; zoom: calc(100cqi / 1832px); }
+.mm-crm       .mkp { width: 1532px; zoom: calc(100cqi / 1532px); }
+.mm-portfolio .mkp { width: 1360px; zoom: calc(100cqi / 1360px); }
+.mm-flow      .mkp { width: 951px; zoom: calc(100cqi / 951px); }
+.mm-knowledge .mkp { width: 1320px; zoom: calc(100cqi / 1320px); }
+.mm-usm       .mkp { width: 1435px; zoom: calc(100cqi / 1435px); }
+
+/* Гаджеты: ноутбук, планшет, телефон. Ширина — вместе с корпусом, а не
+   по экрану: у ноутбука в габарит входит подставка, у остальных — рамка. */
+.mm-gd-laptop .mkp { width: 880px; zoom: calc(100cqi / 880px); }
+.mm-gd-tablet .mkp { width: 720px; zoom: calc(100cqi / 720px); }
+.mm-gd-mobile .mkp { width: 280px; zoom: calc(100cqi / 280px); }
+
+/* Корпус гаджета уже нарисован в мокапе и отбрасывает свою тень — обертке
+   ни фона, ни тени, ни обрезки не нужно, иначе получается рамка в рамке. */
+.mm-shot.is-bare { background: none; box-shadow: none; overflow: visible; border-radius: 0; }
+
+/* ─── Пара планшетов, макет 407-2519 ─────────────────────────────────────
+   Два экрана внахлест: сзади сторонний сервис, спереди Кайтен со сдвигом
+   вправо и вверх. Пропорции блока — 1800×717 из макета, поэтому раскладка
+   задана в процентах и держится на любой ширине слота.
+
+   Начинка экранов — assets/tablet-pair.css, классы .tpr и .tpk. Каждый
+   мокап нарисован на своей ширине в px и вписывается в экран через zoom,
+   как мокапы модулей: резиновая верстка внутри на другой ширине перетекает.
+
+   Мокапы остаются светлыми и в темной теме — это снимки интерфейса.
+   -------------------------------------------------------------------------- */
+.tablet-pair { position:relative; width:100%; aspect-ratio:1800 / 717; }
+
+/* Каждый планшет — свой контекст наложения. Без z-index у .tp его ::after
+   с z-index:3 всплывал в контекст .s-body и ложился поверх соседнего
+   планшета: свечение кромки заднего перекрывало передний. */
+.tablet-pair .tp {
+  position:absolute; background:var(--neutral-000); overflow:hidden;
+}
+.tablet-pair .tp-back  { z-index:1; }
+.tablet-pair .tp-front { z-index:2; }
+.tablet-pair .tp-screen {
+  container-type:inline-size;
+  width:100%; height:100%; overflow:hidden; background:var(--neutral-000);
+}
+
+/* задний — меньше, левее и ниже, тень мягче: он вторым планом.
+   Экран приглушен: насыщенность и контраст ниже, светлее на пару процентов.
+   Чужой сервис не должен спорить с Кайтеном за внимание, а фильтр на .tpr
+   оставляет кромку корпуса нетронутой. */
+.tablet-pair .tp-back {
+  left:2%; top:11%; width:42.1%; height:76.3%;
+  border-radius:1.25cqw; padding:.42cqw;
+  box-shadow:0 .63cqw 1.56cqw -.42cqw rgba(45,45,45,.14);
+}
+.tablet-pair .tp-back .tp-screen { border-radius:.94cqw; }
+.tablet-pair .tp-back .tpr {
+  zoom:calc(100cqi / 1000px);
+  filter:saturate(.42) contrast(.88) brightness(1.08) blur(.055cqw);
+}
+
+/* передний — крупнее и с более глубокой тенью, чтобы отделиться от заднего */
+.tablet-pair .tp-front {
+  left:42.5%; top:1%; width:57.2%; height:97.9%;
+  border-radius:1.56cqw; padding:.63cqw;
+  box-shadow:0 .94cqw 2.24cqw -.68cqw rgba(45,45,45,.19);
+}
+.tablet-pair .tp-front .tp-screen { border-radius:1.04cqw; }
+.tablet-pair .tp-front .tpk { zoom:calc(100cqi / 1360px); }
+
+/* Кромка корпуса. Белый планшет на белом полотне растворялся бы в фоне,
+   поэтому по границе идет тонкий контур и мягкий спад внутрь. Отдельным
+   слоем поверх содержимого: inset у box-shadow рисуется под содержимым
+   элемента, и мокап бы его перекрыл. Радиус наследуется от корпуса. */
+.tablet-pair .tp::after {
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  border-radius:inherit;
+  /* Спад набран несколькими тенями с растущим радиусом: одна тень дает
+     заметную границу размытия, а сложенные — плавный градиент от кромки
+     внутрь. Контур по краю ослаблен, чтобы не читался как обводка. */
+  box-shadow:inset 0 0 0 .04cqw rgba(45,45,45,.07),
+             inset 0 0 .35cqw rgba(45,45,45,.045),
+             inset 0 0 .9cqw  rgba(45,45,45,.035),
+             inset 0 0 1.8cqw rgba(45,45,45,.03);
+}

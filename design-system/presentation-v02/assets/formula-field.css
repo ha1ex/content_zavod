@@ -1,0 +1,45 @@
+/* Диалог «Создать поле» с формулой — для слайда про коммерческие расчеты.
+   Правила заскоуплены под .ffield, чтобы не пересекаться с классами презентации.
+   Размеры в cqw от ширины слайда. */
+
+.ffield {
+  --ff-ink: #2d2d2d;
+  --ff-ink-2: #6b6b70;
+  --ff-ink-3: #9a9a9e;
+  --ff-line: #d9d9de;
+  --ff-violet: #7d4ccf;
+  --ff-violet-12: #efe9f9;
+  font-family: "Roboto", system-ui, sans-serif;
+  color: var(--ff-ink);
+  background: #fff;
+  border: .052cqw solid #e6e6ea;
+  border-radius: .83cqw;
+  box-shadow: 0 1.2cqw 3cqw rgba(40, 30, 70, .14);
+  padding: 1.45cqw 1.55cqw 1.25cqw;
+}
+.ffield * { box-sizing: border-box; margin: 0; padding: 0; }
+
+.ffield .ff-head { display: flex; align-items: center; gap: .84cqw; font-size: 1.0417cqw; font-weight: 500; }
+.ffield .ff-head svg { width: .94cqw; height: .94cqw; color: var(--ff-ink-2); flex: none; }
+
+.ffield .ff-box { position: relative; border: .052cqw solid var(--ff-line); border-radius: .42cqw; padding: .84cqw .84cqw .68cqw; margin-top: 1.35cqw; }
+.ffield .ff-box.is-active { border-color: var(--ff-violet); border-width: .104cqw; }
+.ffield .ff-cap { position: absolute; top: -.42cqw; left: .68cqw; background: #fff; padding: 0 .31cqw; font-size: .68cqw; color: var(--ff-ink-3); }
+.ffield .ff-box.is-active .ff-cap { color: var(--ff-violet); }
+.ffield .ff-value { display: flex; align-items: center; gap: .63cqw; font-size: .94cqw; line-height: 1.35; }
+.ffield .ff-sigma { font-size: 1.04cqw; color: var(--ff-ink-2); }
+.ffield .ff-caret { margin-left: auto; color: var(--ff-ink-3); font-size: .73cqw; }
+.ffield .ff-code { font-size: .89cqw; line-height: 1.4; word-break: break-word; }
+
+.ffield .ff-check { display: flex; align-items: center; gap: .73cqw; margin-top: 1.35cqw; font-size: .94cqw; }
+.ffield .ff-cb { width: 1.04cqw; height: 1.04cqw; border-radius: .21cqw; background: var(--ff-violet); position: relative; flex: none; }
+.ffield .ff-cb::after { content: ""; position: absolute; left: 50%; top: 46%; width: .24cqw; height: .47cqw; border: .104cqw solid #fff; border-top: 0; border-left: 0; transform: translate(-50%, -50%) rotate(45deg); }
+
+.ffield .ff-hint { margin-top: 1.25cqw; font-size: .73cqw; line-height: 1.4; color: var(--ff-ink-2); }
+.ffield .ff-note { margin-top: .52cqw; font-size: .73cqw; color: var(--ff-ink-3); }
+
+.ffield .ff-chips { display: flex; flex-wrap: wrap; gap: .42cqw; margin-top: 1.15cqw; }
+.ffield .ff-chip { border: .052cqw solid var(--ff-line); border-radius: 9999px; padding: .21cqw .63cqw; font-size: .68cqw; color: var(--ff-ink-2); white-space: nowrap; }
+.ffield .ff-chip.is-violet { border-color: var(--ff-violet); color: var(--ff-violet); }
+
+.ffield .ff-add { margin-top: 1.15cqw; text-align: right; font-size: .84cqw; font-weight: 500; color: var(--ff-violet); letter-spacing: .02em; }

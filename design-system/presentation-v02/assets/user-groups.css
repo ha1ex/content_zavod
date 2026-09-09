@@ -1,0 +1,41 @@
+/* Экран «Группы пользователей» для слайда про доступы.
+   Правила заскоуплены под .ugroups, размеры в cqw от ширины слайда. */
+
+.ugroups {
+  --ug-ink: #2d2d2d;
+  --ug-ink-2: #5b5b5b;
+  --ug-ink-3: #8a8a8a;
+  --ug-line: #e6e6ea;
+  --ug-violet: #7d4ccf;
+  font-family: "Roboto", system-ui, sans-serif;
+  color: var(--ug-ink);
+  background: #fff;
+  border: .052cqw solid var(--ug-line);
+  border-radius: .833cqw;
+  box-shadow: 0 1.2cqw 3cqw rgba(40, 30, 70, .14);
+  overflow: hidden;
+}
+.ugroups * { box-sizing: border-box; margin: 0; padding: 0; }
+
+.ugroups .ug-item { padding: 1.35cqw 1.65cqw; }
+.ugroups .ug-item + .ug-item { border-top: .052cqw solid var(--ug-line); }
+
+.ugroups .ug-head { display: flex; align-items: center; gap: .84cqw; }
+.ugroups .ug-title { font-size: 1.15cqw; line-height: 1.3; font-weight: 500; }
+.ugroups .ug-tools { margin-left: auto; display: flex; align-items: center; gap: .73cqw; color: var(--ug-ink-3); }
+.ugroups .ug-tools svg { width: 1cqw; height: 1cqw; display: block; }
+
+.ugroups .ug-note { font-size: .89cqw; line-height: 1.5; color: var(--ug-ink-2); margin-top: .63cqw; }
+.ugroups .ug-note.is-quiet { color: var(--ug-ink-3); }
+.ugroups .ug-spaces { font-size: .89cqw; line-height: 1.5; margin-top: .63cqw; }
+.ugroups .ug-spaces b { font-weight: 500; }
+.ugroups .ug-spaces span { color: var(--ug-ink-2); }
+
+.ugroups .ug-people { display: flex; flex-direction: column; gap: .52cqw; margin-top: .84cqw; }
+.ugroups .ug-person { display: flex; align-items: center; gap: .73cqw; font-size: .89cqw; color: var(--ug-ink-2); }
+.ugroups .ug-av {
+  width: 1.9cqw; height: 1.9cqw; border-radius: 50%; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .78cqw; font-weight: 500; color: #fff;
+}
+.ugroups .ug-mask { display: inline-block; width: 4.4cqw; height: .89cqw; border-radius: .21cqw; background: #d6d6da; vertical-align: -.1cqw; }

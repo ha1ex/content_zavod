@@ -1,0 +1,104 @@
+/* Карточка задачи Кайтена для слайда «Вся информация по задачам собрана в одном месте».
+   Все правила заскоуплены под .tcard, чтобы не пересекаться с классами презентации.
+   Размеры в cqw от ширины слайда — карточка тянется вместе с деком. */
+
+.tcard {
+  --tc-ink: #2d2d2d;
+  --tc-ink-2: #5b5b5b;
+  --tc-ink-3: #8a8a8a;
+  --tc-line: #e6e6ea;
+  --tc-line-2: #f0f0f3;
+  --tc-violet: #7d4ccf;
+  --tc-violet-12: #efe9f9;
+  --tc-orange-12: #fdece0;
+  --tc-grey: #f6f6f7;
+  font-family: "Roboto", system-ui, sans-serif;
+  color: var(--tc-ink);
+  background: #fff;
+  border: .052cqw solid var(--tc-line);
+  border-radius: .833cqw;
+  box-shadow: 0 1.2cqw 3cqw rgba(40, 30, 70, .14);
+  display: grid;
+  grid-template-columns: 1fr 15.6cqw;
+  overflow: hidden;
+  height: 100%;
+}
+.tcard * { box-sizing: border-box; margin: 0; padding: 0; }
+
+.tcard .tc-main { padding: 1cqw 1.15cqw; border-right: .052cqw solid var(--tc-line-2); overflow: hidden; }
+.tcard .tc-side { padding: 1.15cqw 1.05cqw; background: #fff; overflow: hidden; }
+
+.tcard .tc-h { font-size: 1.35cqw; line-height: 1.2; font-weight: 400; }
+.tcard .tc-sub { font-size: .63cqw; line-height: 1.4; color: var(--tc-ink-3); margin-top: .3cqw; }
+.tcard .tc-sub a { color: var(--tc-violet); border-bottom: .052cqw solid var(--tc-violet); }
+
+.tcard .tc-bar { display: flex; align-items: center; gap: .42cqw; margin: .8cqw 0 .85cqw; }
+.tcard .tc-plus { width: 1.66cqw; height: 1.66cqw; border-radius: 50%; background: var(--tc-violet); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.04cqw; line-height: 1; flex: none; }
+.tcard .tc-btn { height: 1.35cqw; border: .052cqw solid var(--tc-line); border-radius: .36cqw; background: #fff; display: flex; align-items: center; gap: .3cqw; padding: 0 .42cqw; font-size: .63cqw; color: var(--tc-ink-2); white-space: nowrap; }
+.tcard .tc-btn i { width: .47cqw; height: .47cqw; border-radius: .1cqw; background: var(--tc-violet); display: block; flex: none; }
+
+.tcard .tc-rows { display: grid; grid-template-columns: 6.2cqw 1fr; row-gap: .55cqw; align-items: center; font-size: .68cqw; }
+.tcard .tc-lab { color: var(--tc-ink-3); }
+.tcard .tc-val { color: var(--tc-ink); }
+.tcard .tc-link { color: var(--tc-violet); border-bottom: .052cqw solid var(--tc-violet); }
+.tcard .tc-chip { display: inline-flex; align-items: center; gap: .26cqw; border-radius: 9999px; padding: .16cqw .47cqw; font-size: .63cqw; }
+.tcard .tc-chip.is-violet { background: var(--tc-violet-12); color: var(--tc-ink); }
+.tcard .tc-chip.is-orange { background: var(--tc-orange-12); color: #a35a1b; }
+.tcard .tc-av { width: .84cqw; height: .84cqw; border-radius: 50%; background: #d8d3e4; color: var(--tc-ink-3); display: inline-flex; align-items: center; justify-content: center; font-size: .42cqw; flex: none; }
+
+.tcard .tc-sec { display: flex; align-items: center; gap: .42cqw; margin: .88cqw 0 .42cqw; font-size: .73cqw; font-weight: 500; }
+.tcard .tc-sec svg { width: .78cqw; height: .78cqw; color: var(--tc-ink-3); flex: none; }
+.tcard .tc-text { font-size: .68cqw; line-height: 1.45; color: var(--tc-ink); }
+
+.tcard .tc-file { display: flex; align-items: center; gap: .63cqw; margin-top: .42cqw; }
+.tcard .tc-thumb { width: 3.65cqw; height: 2.08cqw; border: .052cqw solid var(--tc-line); border-radius: .21cqw; background: repeating-linear-gradient(90deg, #eceaf3 0 .16cqw, #fff .16cqw .42cqw); flex: none; }
+.tcard .tc-fmeta { font-size: .58cqw; line-height: 1.45; color: var(--tc-ink-3); }
+
+.tcard .tc-prog { display: flex; align-items: center; gap: .52cqw; margin-top: .42cqw; font-size: .63cqw; color: var(--tc-ink-3); }
+.tcard .tc-track { flex: 1; height: .21cqw; border-radius: .16cqw; background: linear-gradient(90deg, var(--tc-violet) 0 50%, #e9e4f2 50% 100%); }
+
+.tcard .tc-step { display: flex; align-items: flex-start; gap: .52cqw; margin-top: .63cqw; font-size: .68cqw; }
+.tcard .tc-cb { width: .78cqw; height: .78cqw; border-radius: .16cqw; border: .078cqw solid #ccc; flex: none; margin-top: .1cqw; }
+.tcard .tc-cb.is-on { background: var(--tc-violet); border-color: var(--tc-violet); position: relative; }
+.tcard .tc-cb.is-on::after { content: ""; position: absolute; left: 50%; top: 46%; width: .18cqw; height: .34cqw; border: .078cqw solid #fff; border-top: 0; border-left: 0; transform: translate(-50%, -50%) rotate(45deg); }
+.tcard .tc-note { display: block; font-size: .58cqw; color: var(--tc-ink-3); margin-top: .1cqw; }
+.tcard .tc-date { margin-left: auto; display: flex; align-items: center; gap: .42cqw; flex: none; }
+
+.tcard .tc-side-h { display: flex; align-items: center; justify-content: space-between; font-size: .73cqw; font-weight: 500; }
+.tcard .tc-field { border: .052cqw solid var(--tc-line); border-radius: .31cqw; padding: .42cqw .52cqw; font-size: .63cqw; color: var(--tc-ink-3); margin-top: .63cqw; }
+.tcard .tc-cm { display: flex; gap: .52cqw; margin-top: .84cqw; }
+.tcard .tc-cm .tc-body { flex: 1; min-width: 0; }
+.tcard .tc-cm-top { display: flex; align-items: baseline; gap: .42cqw; font-size: .63cqw; }
+.tcard .tc-cm-name { font-weight: 500; }
+.tcard .tc-cm-time { color: var(--tc-ink-3); font-size: .58cqw; }
+.tcard .tc-cm-text { background: var(--tc-grey); border-radius: .31cqw; padding: .42cqw .52cqw; font-size: .63cqw; line-height: 1.45; margin-top: .31cqw; }
+.tcard .tc-cm-quote { color: var(--tc-violet); font-size: .58cqw; margin-top: .26cqw; display: inline-block; border-bottom: .052cqw solid var(--tc-violet); }
+
+/* Легенда слайда: подписи слева и справа от карточки с линиями-выносками.
+   Длина линии равна гаттеру между колонкой и карточкой (2cqw). */
+
+.tclegend { display: flex; flex-direction: column; justify-content: space-around; gap: 1cqw; min-width: 0; }
+.tclegend.is-left { align-items: flex-end; }
+.tclegend.is-right { align-items: flex-start; }
+.tclegend .tag {
+  position: relative;
+  border: .078cqw solid var(--border-default);
+  background: #fff;
+  border-radius: .73cqw;
+  padding: .75cqw 1.05cqw;
+  font-size: 1.0417cqw;
+  line-height: 1.35;
+  color: var(--text-primary);
+  box-shadow: 0 .1cqw .4cqw rgba(40, 30, 70, .04);
+  max-width: 17cqw;
+}
+.tclegend .tag::after,
+.tclegend .tag::before { content: ""; position: absolute; top: 50%; }
+.tclegend .tag::after { width: 2cqw; height: .078cqw; background: #d3c3f0; }
+.tclegend .tag::before { width: .42cqw; height: .42cqw; border-radius: 50%; background: var(--action-primary); }
+
+.tclegend.is-left .tag::after { left: 100%; transform: translateY(-50%); }
+.tclegend.is-left .tag::before { left: calc(100% + 2cqw); transform: translate(-50%, -50%); }
+
+.tclegend.is-right .tag::after { right: 100%; transform: translateY(-50%); }
+.tclegend.is-right .tag::before { right: calc(100% + 2cqw); transform: translate(50%, -50%); }

@@ -653,8 +653,10 @@ code {
   .is-print body { overflow:visible; background:#fff; }
   .is-print .stage { position:static; display:block; }
   .is-print .nav, .is-print .theme-bar { display:none; }
-  .is-print .deck { width:297mm; height:167mm; container-type:size; page-break-after:always; break-after:page; }
-  .is-print .slide { display:flex !important; position:relative; page-break-after:always; break-after:page; }
+  /* Контейнером для cqw на печати становится сам слайд: дек тянется по потоку,
+     иначе все слайды кроме первого срезает его overflow и в PDF уходит одна страница. */
+  .is-print .deck { width:297mm; height:auto; overflow:visible; container-type:normal; }
+  .is-print .slide { display:flex !important; position:relative; width:297mm; height:167mm; container-type:size; page-break-after:always; break-after:page; }
 }
 @page { size: 297mm 167mm; margin: 0; }
 

@@ -22,7 +22,7 @@
   <div class="deck" id="deck">
 
     <!-- ============================================ 1. обложка · T1 === -->
-    <section class="slide cover is-active" id="s1">
+    <section class="slide cover is-active" id="s1" style="--cover-glow-size:40cqw; --cover-glow-left:53.3cqw; --cover-glow-top:9.27cqw; --cover-glow-opacity:.52">
       <div class="cover-logo">
         <img src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
@@ -84,7 +84,7 @@
       </div>
 
       <div class="s-body" style="display:flex; flex-direction:column">
-        <p class="body" style="max-width:52cqw">Kaiten можно использовать на российской операционной системе семейства Linux «РЕД ОС», а также на операционной системе «РОСА»</p>
+        <p class="body" style="font-size:1.25cqw; max-width:64cqw">Kaiten можно использовать на российской операционной системе семейства Linux «РЕД ОС», а также на операционной системе «РОСА»</p>
 
         <div class="cols-2" style="margin-top:2.4cqw">
           <div class="frame">
@@ -194,14 +194,32 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body" style="display:grid; grid-template-columns:15cqw 1fr; gap:2cqw; align-items:center">
-        <div class="steps" style="gap:2.8cqw">
-          <div class="step" style="align-items:center"><div class="step-num">1</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Торговый зал</p></div></div>
-          <div class="step" style="align-items:center"><div class="step-num">2</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Товарный склад</p></div></div>
-          <div class="step" style="align-items:center"><div class="step-num">3</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Логистика</p></div></div>
-          <div class="step" style="align-items:center"><div class="step-num">4</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Финансовый отдел</p></div></div>
-          <div class="step" style="align-items:center"><div class="step-num">5</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Маркетинг и реклама</p></div></div>
-          <div class="step" style="align-items:center"><div class="step-num">6</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Кадры</p></div></div>
+      <div class="s-body" style="display:grid; grid-template-columns:15cqw 1fr; gap:2cqw; align-items:center; transform:translateY(-2.344cqw)">
+        <div class="features" style="gap:2.4cqw">
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v11H4z"/><path d="M3 9l1.6-5h14.8L21 9"/><path d="M9.5 20v-6h5v6"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Торговый зал</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4v8l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v8"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Товарный склад</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.8" r="1.7"/><circle cx="17.4" cy="17.8" r="1.7"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Логистика</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 17h.01M12 17h.01M15.5 17h.01"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Финансовый отдел</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l7 4V6l-7 4H4z"/><path d="M18 9.2a4 4 0 0 1 0 5.6"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Маркетинг и реклама</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Кадры</p></div>
+          </div>
         </div>
 
         <div style="display:flex; flex-direction:column; min-height:0; align-self:stretch; justify-content:center">
@@ -217,11 +235,11 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-2" style="align-items:center">
+      <div class="s-body cols-2" style="grid-template-columns:34cqw 1fr; align-items:center">
         <div style="align-self:start">
           <p class="body" style="font-size:1.25cqw">Создавайте задачи для разных процессов розничной торговли: продаж, инвентаризации, управления персоналом, маркетинговых кампаний, взаимоотношений с контрагентами. Назначайте исполнителей и устанавливайте сроки. Контролируйте выполнение с уведомлениями о дедлайнах и оповещениями о статусах задач</p>
 
-          <div class="features" style="max-width:36cqw; gap:1.9cqw">
+          <div class="features" style="gap:1.9cqw">
             <div class="feature" style="align-items:center">
               <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></div>
               <div><p class="feature-title" style="font-weight:400">Колонки обозначают этапы работ</p></div>
@@ -250,7 +268,7 @@
         </div>
 
         <div style="display:flex; align-items:center;">
-          <div class="fm-shot" style="width:74%; margin-inline:auto"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="val" style="border-bottom:1px solid #eee;padding-bottom:6px;margin-bottom:7px;font-weight:700">Название задачи</div><div style="position:relative"><div style="display:flex;flex-direction:column;gap:5px"><div class="row"><span class="lab" style="flex:0 0 68px">Задача №</span><span class="val">Заказчик</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Расположение</span><span class="val">Доска/Статус</span></div><div class="row"><span class="lab" style="flex:0 0 68px">Участник</span><span class="row" style="gap:4px"><span style="width:12px;height:12px;border-radius:50%;background:var(--violet-12);display:flex;align-items:center;justify-content:center;flex:none"><svg width="8" height="8" viewBox="0 0 24 24" fill="var(--violet)"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span><span class="val">Ответственный</span></span></div><div class="row"><span class="lab" style="flex:0 0 68px">Срок</span><span class="val">1 апреля</span></div></div><div style="position:absolute;top:-14px;right:0;display:flex;gap:4px"><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #d8d8da"></span></div><span style="position:absolute;right:-2px;bottom:8px;font-size:27px;line-height:1">🏗️</span></div><div class="row" style="gap:5px;border-top:1px solid #eee;padding-top:5px;margin-top:4px;margin-bottom:4px"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#757575" stroke-width="1.3"><circle cx="4" cy="8" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><path d="M5.7 7l4.6-2.3M5.7 9l4.6 2.3"/></svg><span class="lab">Связи</span><span class="val">Дочерние карточки</span></div><div style="border:1px solid #eee;border-radius:6px;overflow:hidden"><div class="row" style="gap:6px;padding:4px 7px"><span class="lab" style="flex:0 0 36px;white-space:nowrap">Задача 1</span><span class="row" style="flex:1;gap:4px"><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span><i style="width:4px;height:4px;border-radius:50%;background:#d6d6d8;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#ededed"></span></span><span style="width:13px;height:13px;border-radius:50%;background:#ededed;flex:none"></span><span style="flex:0 0 26px;height:5px;border-radius:3px;background:#ededed"></span></div></div></div></div></div>
+          <img src="../assets/mocks/card-window.png" alt="Карточка задачи в Кайтене" style="width:100%; height:auto; display:block" />
         </div>
       </div>
     </section>
@@ -263,25 +281,60 @@
       </div>
 
       <div class="s-body" style="display:flex; flex-direction:column">
-        <p class="body" style="max-width:62cqw">Карточка задачи — это универсальный инструмент для работы с проектами. Добавляйте нужное количество полей и подробно описывайте задание, указывайте исполнителя и дедлайн. В карточке сохраняются все этапы работ по задаче, коммуникации команды и вложенные файлы.</p>
+        <p class="body" style="font-size:1.25cqw; max-width:70cqw">Карточка задачи — это универсальный инструмент для работы с проектами. Добавляйте нужное количество полей и подробно описывайте задание, указывайте исполнителя и дедлайн. В карточке сохраняются все этапы работ по задаче, коммуникации команды и вложенные файлы.</p>
 
-        <div style="flex:1; min-height:0; display:grid; grid-template-columns:1fr auto 1fr; gap:2cqw; align-items:stretch; margin-top:1.6cqw">
-          <div class="tclegend is-left">
-            <div class="tag">Исполнителя и заказчика</div>
-            <div class="tag">Дедлайн</div>
-            <div class="tag">Метки и теги</div>
-            <div class="tag">Важные ссылки</div>
-            <div class="tag">Файлы и документы</div>
+        <div class="cols-2" style="grid-template-columns:31cqw 1fr; gap:2.4cqw; flex:1; min-height:0; align-items:center; margin-top:1.6cqw">
+          <div class="features" style="gap:1.15cqw">
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Исполнителя и заказчика</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Дедлайн</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 12.6 12 21.2 3.4 12.6V3.4h9.2z"/><circle cx="8.2" cy="8.2" r="1.3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Метки и теги</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Файлы и документы</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 1 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 1 0 5.7 5.7l1.5-1.5"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Важные ссылки</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Встроенный таймер</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="17.5" cy="17" r="1.6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Кастомные поля, созданные под конкретные задачи</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l2 2 3-3"/><path d="M4 13l2 2 3-3"/><path d="M4 20l2 2 3-3"/><path d="M13 7h7M13 14h7M13 21h7"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Чек-листы</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Чат с обсуждением</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Контакты</p></div>
+            </div>
           </div>
 
-          <div style="min-height:0; width:47cqw; display:flex; align-items:center"><div class="tcard">
+          <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0"><div class="tcard" style="height:auto">
             <div class="tc-main">
               <p class="tc-h">Анализ затрат на рекламу</p>
               <p class="tc-sub"><a>#30022876</a> Заказчик <a>Кушта Анастасия</a>, перемещена 2 часа назад</p>
 
               <div class="tc-bar">
                 <span class="tc-plus">+</span>
-                <span class="tc-btn"><i></i>0:23:44</span>
+                <span class="tc-btn" data-a="timer"><i></i>0:23:44</span>
                 <span class="tc-btn">→ ТЕСТИРО…</span>
                 <span class="tc-btn">⚑</span>
                 <span class="tc-btn">!</span>
@@ -292,16 +345,16 @@
               <div class="tc-rows">
                 <span class="tc-lab">Расположение</span><span class="tc-val"><span class="tc-link">Отдел маркетинга и рекламы / Согласование</span></span>
                 <span class="tc-lab">Тип</span><span><span class="tc-chip is-violet"><span class="tc-av">C</span>Card</span></span>
-                <span class="tc-lab">Участники</span><span><span class="tc-chip is-violet"><span class="tc-av">КА</span>Ответственный</span> <span class="tc-lab">+</span></span>
-                <span class="tc-lab">Срок</span><span class="tc-val"><span class="tc-link">24 мар.</span></span>
-                <span class="tc-lab">Размер</span><span class="tc-val"><span class="tc-link">5</span></span>
-                <span class="tc-lab">Метки</span><span><span class="tc-chip is-orange">ООО «Альфа»</span></span>
+                <span class="tc-lab" data-a="participants">Участники</span><span><span class="tc-chip is-violet"><span class="tc-av">КА</span>Ответственный</span> <span class="tc-lab">+</span></span>
+                <span class="tc-lab" data-a="due">Срок</span><span class="tc-val"><span class="tc-link">24 мар.</span></span>
+                <span class="tc-lab" data-a="size">Размер</span><span class="tc-val"><span class="tc-link">5</span></span>
+                <span class="tc-lab" data-a="labels">Метки</span><span><span class="tc-chip is-orange">ООО «Альфа»</span></span>
               </div>
 
               <p class="tc-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Описание</p>
               <p class="tc-text">Составить отчет на основании полученных данных.</p>
 
-              <p class="tc-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>Файлы</p>
+              <p class="tc-sec" data-a="files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>Файлы</p>
               <div class="tc-file">
                 <span class="tc-thumb"></span>
                 <span>
@@ -310,7 +363,7 @@
                 </span>
               </div>
 
-              <p class="tc-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l2.5 2.5L10 5M3 17l2.5 2.5L10 15M13 7h8M13 17h8"/></svg>Этапы работы</p>
+              <p class="tc-sec" data-a="steps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l2.5 2.5L10 5M3 17l2.5 2.5L10 15M13 7h8M13 17h8"/></svg>Этапы работы</p>
               <div class="tc-prog">
                 <span>50%</span><span class="tc-track"></span><span>1/2</span>
                 <span class="tc-btn">СКРЫТЬ ОТМЕЧЕННЫЕ</span>
@@ -325,14 +378,13 @@
                 <span style="flex:1; min-width:0">Систематизация данных.</span>
                 <span class="tc-date"><span class="tc-lab">7 мар.</span><span class="tc-av">КА</span></span>
               </div>
-              <div class="tc-step"><span class="tc-btn">ДОБАВИТЬ ПУНКТ</span></div>
 
-              <p class="tc-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6.5" r="2.4"/><circle cx="18" cy="17.5" r="2.4"/><path d="M8.1 10.9 15.9 7.6M8.1 13.1l7.8 3.3"/></svg>Связи</p>
+              <p class="tc-sec" data-a="links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6.5" r="2.4"/><circle cx="18" cy="17.5" r="2.4"/><path d="M8.1 10.9 15.9 7.6M8.1 13.1l7.8 3.3"/></svg>Связи</p>
               <p class="tc-text" style="font-weight:500">Родительские карточки</p>
             </div>
 
             <div class="tc-side">
-              <div class="tc-side-h"><span>Комментарии</span><span class="tc-lab" style="font-size:.63cqw">Все ▾</span></div>
+              <div class="tc-side-h" data-a="comments"><span>Комментарии</span><span class="tc-lab" style="font-size:.63cqw">Все ▾</span></div>
               <div class="tc-field">Напишите комментарий</div>
 
               <div class="tc-cm">
@@ -344,27 +396,17 @@
                 </span>
               </div>
 
-              <div class="tc-cm">
+              <div class="tc-cm" data-a="people">
                 <span class="tc-av">КА</span>
                 <span class="tc-body">
                   <span class="tc-cm-top"><span class="tc-cm-name">Кушта Анастасия</span><span class="tc-cm-time">12 минут назад</span></span>
                   <span class="tc-cm-text" style="display:block">Включить в отчет результаты дополнительных исследований.
-                    <span style="display:block; font-weight:500; margin-top:.42cqw">Прикрепленные файлы</span>
-                    <span style="display:flex; align-items:center; gap:.52cqw; margin-top:.42cqw"><span class="tc-thumb"></span><span class="tc-link">ООО «Альфа».png (…</span></span>
-                  </span>
+                    </span>
                   <span class="tc-cm-quote">цитировать</span>
                 </span>
               </div>
             </div>
           </div></div>
-
-          <div class="tclegend is-right">
-            <div class="tag">Чек-листы</div>
-            <div class="tag">Чат с обсуждением</div>
-            <div class="tag">Встроенный таймер</div>
-            <div class="tag">Контакты</div>
-            <div class="tag">Кастомные поля, созданные под конкретные задачи</div>
-          </div>
         </div>
       </div>
     </section>
@@ -380,9 +422,9 @@
         <p class="body" style="font-size:1.25cqw">Визуализируйте рабочий процесс предприятия</p>
 
         <div class="cols-3" style="margin-top:2cqw">
-          <div class="frame" style="padding:1.6cqw"><p class="body">Добавляйте доски разных процессов и подразделений в менеджерское пространство</p></div>
-          <div class="frame" style="padding:1.6cqw"><p class="body">Ставьте задачи определенным сотрудникам или их группам</p></div>
-          <div class="frame is-accent" style="padding:1.6cqw"><p class="body">Наблюдайте за актуальным состоянием задач по статусам выполнения: в процессе, готово, отмена</p></div>
+          <div class="frame" style="padding:1.6cqw"><div style="display:flex; align-items:center; gap:1.05cqw"><div class="feature-icon" style="background:#fff; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></div><p class="body">Добавляйте доски разных процессов и подразделений в менеджерское пространство</p></div></div>
+          <div class="frame" style="padding:1.6cqw"><div style="display:flex; align-items:center; gap:1.05cqw"><div class="feature-icon" style="background:#fff; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div><p class="body">Ставьте задачи определенным сотрудникам или их группам</p></div></div>
+          <div class="frame is-accent" style="padding:1.6cqw"><div style="display:flex; align-items:center; gap:1.05cqw"><div class="feature-icon" style="background:#fff; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l2 2 3-3"/><path d="M4 13l2 2 3-3"/><path d="M12 7h8M12 14h8M12 20h8"/></svg></div><p class="body">Наблюдайте за актуальным состоянием задач по статусам выполнения: в процессе, готово, отмена</p></div></div>
         </div>
 
         <div style="flex:1; min-height:0; overflow:hidden; margin-top:1.4cqw; margin-bottom:-2.552cqw">
@@ -433,7 +475,7 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body" style="display:grid; grid-template-columns:25.6cqw 1fr; gap:var(--gap); min-height:0; align-items:center; transform:translateY(-.781cqw)">
+      <div class="s-body" style="display:grid; grid-template-columns:25.6cqw 1fr; gap:var(--gap); min-height:0; align-items:center; transform:translateY(-3.07cqw)">
         <div style="display:flex; flex-direction:column; justify-content:center">
           <div class="features" style="gap:1.8cqw">
             <div class="feature">
@@ -468,7 +510,7 @@
         </div>
 
         <div style="display:flex; align-items:center;">
-          <img src="../assets/mocks/laptop-kanban.png" alt="Канбан-доска Кайтена на ноутбуке" style="width:100%; height:auto; display:block" />
+          <img src="../assets/mocks/laptop-kanban.png" alt="Канбан-доска Кайтена на ноутбуке" style="width:100%; height:auto; display:block; filter:drop-shadow(0 .84cqw 1.8cqw rgba(45,45,45,.20))" />
         </div>
       </div>
     </section>
@@ -480,7 +522,7 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body" style="display:grid; grid-template-columns:37cqw 1fr; gap:var(--gap); min-height:0">
+      <div class="s-body" style="display:grid; grid-template-columns:37cqw 1fr; gap:var(--gap); min-height:0; align-items:center">
         <div>
           <p class="body" style="font-size:1.25cqw">Объединяйте сотрудников в группы по отделам, задачам или событиям. Регулируйте доступы к информации и контролируйте безопасность данных</p>
 
@@ -519,7 +561,7 @@
                 <span class="ug-person"><span class="ug-av" style="background:#8a9bc9">A</span>Alex</span>
                 <span class="ug-person"><span class="ug-av" style="background:#c98a8a">E</span>Ekaterina</span>
               </div>
-              <p class="ug-note">Административный раздел «Метки», Административный раздел «Типы карточек», Административный раздел «Учет времени», Административный раздел «Пользователи», Административный раздел «Настройки», Административный раздел «Оплата», Административный раздел «Пространства», Административный раздел «Служба поддержки», Dump action (API), Приглашение пользователей на пространства, Создание пользовательских полей в карточке, Открыть общий доступ к карточке (поделиться карточкой)</p>
+              <p class="ug-note">Административный раздел «Метки», Административный раздел «Типы карточек», Административный раздел «Учет времени», Административный раздел «Пользователи», Dump action (API), Приглашение пользователей на пространства</p>
               <p class="ug-spaces"><b>Пространства:</b> <span>Work, Опергруппа, Разработка</span></p>
             </div>
 
@@ -545,7 +587,7 @@
       </div>
 
       <div class="s-body" style="display:grid; grid-template-columns:25.6cqw 1fr; gap:var(--gap); min-height:0; align-items:center">
-        <div style="align-self:start">
+        <div>
           <p class="body" style="font-size:1.25cqw">Инструмент поможет визуализировать информацию по текущим проектам, контролировать и менять сроки выполнения задач</p>
 
           <ul class="checks" style="margin-top:2.4cqw">
@@ -570,7 +612,7 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-2">
+      <div class="s-body cols-2" style="align-items:center; transform:translateY(-4.427cqw)">
         <div>
           <p class="body" style="font-size:1.25cqw">Пользовательское поле «Формулы» позволяет автоматизировать повторяющиеся вычисления и экономить время</p>
 
@@ -629,13 +671,13 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-2">
+      <div class="s-body cols-2" style="grid-template-columns:36cqw 1fr; align-items:center; transform:translateY(-3.073cqw)">
         <div style="display:flex; align-items:center;">
           <p class="body" style="font-size:1.25cqw">Справочник в Kaiten — это инструмент для учета информации о клиентах, товарах и услугах. Выносите данные справочника на фасад карточки задачи, чтобы они всегда были под рукой. Настраивайте фильтр и быстро делайте выборку по адресам, видам деятельности и другим признакам.</p>
         </div>
 
-        <div style="display:flex; align-items:center;">
-          <img src="../assets/mocks/help-center.png" alt="Справочный центр Кайтена" style="width:100%; height:auto; display:block" />
+        <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0; align-self:stretch">
+          <img src="../assets/mocks/help-center.png" alt="Справочный центр Кайтена" style="max-height:100%; max-width:100%; width:auto; height:auto; display:block" />
         </div>
       
       </div>
@@ -648,11 +690,12 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-2">
-        <div>
-          <p class="body" style="font-size:1.25cqw">Наблюдайте за показателями и динамикой бизнес-процессов с графиками и автоматической аналитикой. Если потребуется, вы сможете оперативно внести изменения в текущую стратегию. Настраивайте выборку с гибкой системой фильтров и выгружайте отчеты в форматах XLSX и PDF</p>
+      <div class="s-body" style="display:flex; flex-direction:column">
+          <p class="body" style="font-size:1.25cqw; max-width:66cqw">Наблюдайте за показателями и динамикой бизнес-процессов с графиками и автоматической аналитикой. Если потребуется, вы сможете оперативно внести изменения в текущую стратегию. Настраивайте выборку с гибкой системой фильтров и выгружайте отчеты в форматах XLSX и PDF</p>
 
-          <h3 class="h3" style="margin-top:2.2cqw">С аналитикой контролируйте все в одном месте:</h3>
+          <div class="cols-2" style="grid-template-columns:33.333cqw 1fr; margin-top:2.8cqw; flex:1; min-height:0; align-items:center">
+        <div>
+          <h3 class="h3" style="margin:0">С аналитикой контролируйте все в одном месте:</h3>
           <ul class="checks" style="margin-top:1.4cqw">
             <li>Выполнение задач</li>
             <li>Уровень продуктивности сотрудников</li>
@@ -695,7 +738,7 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-2">
+      <div class="s-body cols-2" style="grid-template-columns:42.3cqw 1fr; align-items:center">
         <div>
           <ul class="checks">
             <li>Получайте заявки через портал на сайте, почту или Телеграм</li>
@@ -707,7 +750,7 @@
         </div>
 
         <div style="display:flex; align-items:center;">
-          <img src="../assets/mocks/support-card.png" alt="Карточка обращения в службу поддержки" style="width:85%; height:auto; display:block; margin-inline:auto" />
+          <img src="../assets/mocks/support-card.png" alt="Карточка обращения в службу поддержки" style="width:82%; height:auto; display:block; margin-left:auto; margin-right:0" />
         </div>
       </div>
     </section>
@@ -719,7 +762,7 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body cols-2" style="grid-template-columns:20cqw 1fr; align-items:center">
+      <div class="s-body cols-2" style="grid-template-columns:24cqw 1fr; align-items:center; transform:translateY(-4.427cqw)">
         <div>
           <ul class="checks">
             <li>Получайте статистические данные для ваших систем аналитики и отчетов</li>
@@ -729,13 +772,35 @@
         </div>
 
         <div style="display:flex; align-items:center;">
-          <img src="../assets/mocks/integrations-hub.png" alt="Карта интеграций Кайтена" style="width:100%; height:auto; display:block" />
+          <img src="../assets/mocks/integrations-hub.png" alt="Карта интеграций Кайтена" style="width:92%; height:auto; display:block; margin-left:auto; margin-right:0" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 19. интеграции через API · дубль слайда 18 === -->
+    <section class="slide" id="s19">
+      <div class="s-head">
+        <h2 class="s-title">Настраивайте интеграции с любыми сторонними сервисами<br />через API</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2" style="grid-template-columns:31cqw 1fr; align-items:center">
+        <div>
+          <ul class="checks">
+            <li>Получайте статистические данные для ваших систем аналитики и отчетов</li>
+            <li>Создавайте вспомогательные утилиты</li>
+            <li>Интегрируйте с Kaiten свою CRM-систему и BI-систему</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0; align-self:stretch">
+          <img src="../assets/mocks/api-docs.png" alt="Справочник Kaiten API" style="width:100%; height:auto; display:block; filter:drop-shadow(0 .42cqw .84cqw rgba(45,45,45,.14))" />
         </div>
       </div>
     </section>
 
     <!-- =============================== 20. календарь · T2 === -->
-    <section class="slide" id="s19">
+    <section class="slide" id="s20">
       <div class="s-head">
         <h2 class="s-title">Интегрируйте Kaiten со своим календарем</h2>
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
@@ -755,7 +820,7 @@
     </section>
 
     <!-- ===================== 21. инструменты платформы · 4×3 === -->
-    <section class="slide" id="s20">
+    <section class="slide" id="s21">
       <div class="s-head">
         <h2 class="s-title">Развивайте ваш бизнес с эффективными инструментами платформы Kaiten</h2>
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
@@ -803,84 +868,45 @@
     </section>
 
     <!-- ======================= 22. мобильное приложение · T2 === -->
-    <section class="slide" id="s21">
+    <section class="slide" id="s22">
       <div class="s-head">
-        <h2 class="s-title">Установите наше мобильное приложение, управляйте задачами на ходу</h2>
+        <h2 class="s-title">Установите наше мобильное приложение Kaiten</h2>
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body" style="display:flex; align-items:center">
-        <div class="mcta">
+      <div class="s-body" style="display:flex; flex-direction:column; justify-content:center; gap:2.6cqw; transform:translateY(-4.22cqw)">
+        <div class="cols-3">
+          <div class="features" style="max-width:24cqw">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Работайте над задачами и документами с телефона в режиме реального времени</p></div>
+            </div>
+          </div>
+          <div class="features" style="max-width:24cqw">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Создавайте карточки и комментируйте задачи в Телеграме</p></div>
+            </div>
+          </div>
+          <div class="features" style="max-width:24cqw">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13 6 9z"/><path d="M10 18a2 2 0 0 0 4 0"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Получайте уведомления о событиях, чтобы быстро реагировать на изменения и эффективно управлять процессами</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mcta" style="--u:.0771cqw; width:93.75cqw; height:32.4cqw; margin-inline:auto">
           <div class="mcta-art">
-            <div class="mcta-menu">
-              <p class="mcta-menu-h">Основные возможности</p>
-              <ul>
-                <li><i>&#128193;</i>Рабочие пространства</li>
-                <li><i>&#9999;&#65039;</i>Доски</li>
-                <li><i>&#128221;</i>Задачи / карточки</li>
-                <li><i>&#128230;</i>Колонки, дорожки, ячейки</li>
-                <li class="is-on"><i>&#128196;</i>Документы</li>
-                <li><i>&#129520;</i>Модуль «Служба поддержки»</li>
-                <li><i>&#128197;</i>Диаграмма Ганта</li>
-                <li><i>&#9200;</i>Модуль «Учет времени»</li>
-              </ul>
-            </div>
-
-            <div class="mcta-phone">
-              <div class="mcta-top">
-                <img src="../assets/kaiten-mark.svg" alt="" />
-                <span class="mcta-brand">Kaiten</span>
-                <span class="sq"></span><span class="sq"></span><span class="sq"></span>
-              </div>
-
-              <p class="mcta-sec"><b>&#8942;&#8942;</b>Цели</p>
-              <div class="mcta-cols">
-                <div>
-                  <p class="mcta-col-h">Очередь <span>2</span></p>
-                  <div class="mcta-tile is-plain"></div>
-                  <div class="mcta-tile"><span class="bar"></span><span class="ln"></span><span class="ln w70"></span><span class="ln w50"></span></div>
-                </div>
-                <div>
-                  <p class="mcta-col-h">В работе</p>
-                  <div class="mcta-tile is-plain"></div>
-                </div>
-              </div>
-
-              <p class="mcta-sec"><b>&#8942;&#8942;</b>Текущие задачи</p>
-              <div class="mcta-cols">
-                <div>
-                  <p class="mcta-col-h">Очередь <span>1</span></p>
-                  <div class="mcta-tile is-alert"><i>&#9995;</i><span class="ln"></span></div>
-                  <div class="mcta-tile"><span class="bar is-green"></span><span class="ln"></span><span class="ln w70"></span></div>
-                </div>
-                <div>
-                  <p class="mcta-col-h">В работе</p>
-                  <div class="mcta-tile"><span class="bar is-amber"></span><span class="ln"></span><span class="ln w70"></span><span class="ln w50"></span></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mcta-card">
-              <span class="bar"></span>
-              <h4>Задача</h4>
-              <p>Квартальный отчет для акционеров</p>
-              <p class="meta">
-                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 17 5-5 4 4 3-3 4 4"/><circle cx="9" cy="9.5" r="1.2"/></svg>1</span>
-                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>1</span>
-              </p>
-              <div class="foot">
-                <span class="av">АК</span>
-                <span class="due">&#128293; 30 июня</span>
-              </div>
-            </div>
+            <img src="../assets/mocks/mobile-phones.png" alt="Мобильное приложение Кайтена" />
           </div>
 
           <div class="mcta-copy">
             <h3>Мобильное приложение<br />Kaiten <em>для iOS и Android</em></h3>
             <p>Все задачи, статусы, документы<br />и обсуждения в вашем телефоне</p>
             <div class="mcta-btns">
-              <span class="mcta-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.8-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.8 2.2 1.1 0 1.6-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.2 1.2-2.4 1.2-2.5 0 0-2.3-.9-2.3-3.6zM14.3 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/></svg>App Store</span>
-              <span class="mcta-btn"><svg viewBox="0 0 24 24"><path d="M4 3.2v17.6c0 .5.5.8.9.6l9.6-5.6-2.6-2.6zm0 0 7.9 7.9 2.6-2.6L4.9 2.6c-.4-.2-.9.1-.9.6z" fill="#EA4335"/><path d="M4 20.8 14.5 14.8l-2.6-2.6L4 20.1z" fill="#34A853"/><path d="m14.5 8.5-2.6 2.6 2.6 2.6 4-2.3c.6-.4.6-1.3 0-1.7z" fill="#FBBC04"/><path d="M11.9 11.1 4 3.2v17.6z" fill="#4285F4"/></svg>Google Play</span>
+              <a class="mcta-btn" href="https://apps.apple.com/us/app/kaiten/id6739029367?roistat_visit=3039529"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.8-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.8 2.2 1.1 0 1.6-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.2 1.2-2.4 1.2-2.5 0 0-2.3-.9-2.3-3.6zM14.3 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/></svg>App Store</a>
+              <a class="mcta-btn" href="https://play.google.com/store/apps/details?id=ru.kaiten.app&amp;hl=ru&amp;roistat_visit=3039529"><svg viewBox="0 0 24 24"><path d="M4 3.2v17.6c0 .5.5.8.9.6l9.6-5.6-2.6-2.6zm0 0 7.9 7.9 2.6-2.6L4.9 2.6c-.4-.2-.9.1-.9.6z" fill="#EA4335"/><path d="M4 20.8 14.5 14.8l-2.6-2.6L4 20.1z" fill="#34A853"/><path d="m14.5 8.5-2.6 2.6 2.6 2.6 4-2.3c.6-.4.6-1.3 0-1.7z" fill="#FBBC04"/><path d="M11.9 11.1 4 3.2v17.6z" fill="#4285F4"/></svg>Google Play</a>
             </div>
           </div>
         </div>
@@ -888,7 +914,7 @@
     </section>
 
     <!-- ==================================== 23. импорт · T6 === -->
-    <section class="slide" id="s22">
+    <section class="slide" id="s23">
       <div class="s-head">
         <h2 class="s-title">Импортируйте задачи из Trello и Jira в несколько кликов</h2>
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
@@ -901,14 +927,17 @@
           <div>
             <div style="border-radius:.833cqw; background:var(--surface-frame); padding:1.8cqw; height:34.6cqw; overflow:hidden">
               <h3 class="h2" style="margin-bottom:1.2cqw">Импорт задач в других сервисах</h3>
-              <p class="body" style="margin-bottom:1.2cqw">В ответе включено отображение всех дополнительных полей</p>
+              <p class="body" style="margin-bottom:2.6cqw">В ответе включено отображение всех дополнительных полей</p>
               <div style="background:#fff; border-radius:.63cqw; padding:1.2cqw 1.4cqw; font-family:var(--font-mono); font-size:.83cqw; line-height:1.45; color:#2d2d2d"><div style="min-height:1.1cqw">POST /v2/issues/_import</div><div style="min-height:1.1cqw">Host: https://api.tracker.yandex.net</div><div style="min-height:1.1cqw">Authorization: OAuth &lt;токен&gt;</div><div style="min-height:1.1cqw">X-Org-ID: &lt;идентификатор организации&gt;</div><div style="min-height:1.1cqw"></div><div style="min-height:1.1cqw">{</div><div style="min-height:1.1cqw">&nbsp;"queue": <span style="color:#c0392b">"TEST"</span>,</div><div style="min-height:1.1cqw">&nbsp;"summary": <span style="color:#c0392b">"Test"</span>,</div><div style="min-height:1.1cqw">&nbsp;"key": <span style="color:#c0392b">"TEST-1"</span>,</div><div style="min-height:1.1cqw">&nbsp;"createdAt": <span style="color:#c0392b">"2017-08-29T12:34:41.740+0000"</span>,</div><div style="min-height:1.1cqw">&nbsp;"createdBy": <span style="color:#2f6fb0">1110000000011111</span>,</div><div style="min-height:1.1cqw">&nbsp;"updatedAt": <span style="color:#c0392b">"2017-09-09T11:24:31.140+0000"</span>,</div><div style="min-height:1.1cqw">&nbsp;"resolvedAt": <span style="color:#c0392b">"2017-09-08T09:33:42.250+0000"</span>,</div><div style="min-height:1.1cqw">&nbsp;"status": <span style="color:#2f6fb0">17</span>,</div><div style="min-height:1.1cqw">&nbsp;"deadline": <span style="color:#c0392b">"2017-09-07"</span>,</div><div style="min-height:1.1cqw">&nbsp;"type": <span style="color:#2f6fb0">2</span>,</div><div style="min-height:1.1cqw">&nbsp;"description": <span style="color:#c0392b">"Test"</span>,</div></div>
             </div>
           </div>
 
           <div>
             <div style="border-radius:.833cqw; background:#efe9f9; padding:1.8cqw; height:34.6cqw; overflow:hidden; display:flex; flex-direction:column; gap:1.6cqw">
-              <h3 class="h2" style="margin:0">Импорт задач в Kaiten</h3>
+              <div>
+                <h3 class="h2" style="margin:0">Импорт задач в Kaiten</h3>
+                <p class="body" style="margin-top:.4cqw">Trello, Jira, Confluence и таблицы CSV и XLS</p>
+              </div>
               <div style="flex:1; display:flex; align-items:center; justify-content:center; min-height:0">
                 <img src="../assets/mocks/relocation.png" alt="Перенос задач из сторонних сервисов в Кайтен" style="width:100%; height:auto; display:block" />
               </div>
@@ -919,7 +948,7 @@
     </section>
 
     <!-- ========================= 24. почему выбирают · 4×3 === -->
-    <section class="slide" id="s23">
+    <section class="slide" id="s24">
       <div class="s-head">
         <h2 class="s-title">Почему ритейл-компании и другие направления бизнеса выбирают Kaiten</h2>
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
@@ -972,7 +1001,7 @@
     </section>
 
     <!-- ================================ 25. контакты · T7 === -->
-    <section class="slide contact" id="s24">
+    <section class="slide contact" id="s25">
       <div class="contact-card">
         <div class="contact-brand">
           <img src="../assets/kaiten-logo-latin.svg" alt="Kaiten" />
@@ -1000,30 +1029,31 @@
 </div>
 
 <nav class="nav-fallback" aria-label="Слайды">
-  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 24</span><a href="#s2">→</a></div>
-  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 24</span><a href="#s3">→</a></div>
-  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 24</span><a href="#s4">→</a></div>
-  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 24</span><a href="#s5">→</a></div>
-  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 24</span><a href="#s6">→</a></div>
-  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 24</span><a href="#s7">→</a></div>
-  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 24</span><a href="#s8">→</a></div>
-  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 24</span><a href="#s9">→</a></div>
-  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 24</span><a href="#s10">→</a></div>
-  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 24</span><a href="#s11">→</a></div>
-  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 24</span><a href="#s12">→</a></div>
-  <div class="nav-row" data-for="s12"><a href="#s11">←</a><span class="counter">12 / 24</span><a href="#s13">→</a></div>
-  <div class="nav-row" data-for="s13"><a href="#s12">←</a><span class="counter">13 / 24</span><a href="#s14">→</a></div>
-  <div class="nav-row" data-for="s14"><a href="#s13">←</a><span class="counter">14 / 24</span><a href="#s15">→</a></div>
-  <div class="nav-row" data-for="s15"><a href="#s14">←</a><span class="counter">15 / 24</span><a href="#s16">→</a></div>
-  <div class="nav-row" data-for="s16"><a href="#s15">←</a><span class="counter">16 / 24</span><a href="#s17">→</a></div>
-  <div class="nav-row" data-for="s17"><a href="#s16">←</a><span class="counter">17 / 24</span><a href="#s18">→</a></div>
-  <div class="nav-row" data-for="s18"><a href="#s17">←</a><span class="counter">18 / 24</span><a href="#s19">→</a></div>
-  <div class="nav-row" data-for="s19"><a href="#s18">←</a><span class="counter">19 / 24</span><a href="#s20">→</a></div>
-  <div class="nav-row" data-for="s20"><a href="#s19">←</a><span class="counter">20 / 24</span><a href="#s21">→</a></div>
-  <div class="nav-row" data-for="s21"><a href="#s20">←</a><span class="counter">21 / 24</span><a href="#s22">→</a></div>
-  <div class="nav-row" data-for="s22"><a href="#s21">←</a><span class="counter">22 / 24</span><a href="#s23">→</a></div>
-  <div class="nav-row" data-for="s23"><a href="#s22">←</a><span class="counter">23 / 24</span><a href="#s24">→</a></div>
-  <div class="nav-row" data-for="s24"><a href="#s23">←</a><span class="counter">24 / 24</span><a class="is-off">→</a></div>
+  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 25</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 25</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 25</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 25</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 25</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 25</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 25</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 25</span><a href="#s9">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 25</span><a href="#s10">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 25</span><a href="#s11">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 25</span><a href="#s12">→</a></div>
+  <div class="nav-row" data-for="s12"><a href="#s11">←</a><span class="counter">12 / 25</span><a href="#s13">→</a></div>
+  <div class="nav-row" data-for="s13"><a href="#s12">←</a><span class="counter">13 / 25</span><a href="#s14">→</a></div>
+  <div class="nav-row" data-for="s14"><a href="#s13">←</a><span class="counter">14 / 25</span><a href="#s15">→</a></div>
+  <div class="nav-row" data-for="s15"><a href="#s14">←</a><span class="counter">15 / 25</span><a href="#s16">→</a></div>
+  <div class="nav-row" data-for="s16"><a href="#s15">←</a><span class="counter">16 / 25</span><a href="#s17">→</a></div>
+  <div class="nav-row" data-for="s17"><a href="#s16">←</a><span class="counter">17 / 25</span><a href="#s18">→</a></div>
+  <div class="nav-row" data-for="s18"><a href="#s17">←</a><span class="counter">18 / 25</span><a href="#s19">→</a></div>
+  <div class="nav-row" data-for="s19"><a href="#s18">←</a><span class="counter">19 / 25</span><a href="#s20">→</a></div>
+  <div class="nav-row" data-for="s20"><a href="#s19">←</a><span class="counter">20 / 25</span><a href="#s21">→</a></div>
+  <div class="nav-row" data-for="s21"><a href="#s20">←</a><span class="counter">21 / 25</span><a href="#s22">→</a></div>
+  <div class="nav-row" data-for="s22"><a href="#s21">←</a><span class="counter">22 / 25</span><a href="#s23">→</a></div>
+  <div class="nav-row" data-for="s23"><a href="#s22">←</a><span class="counter">23 / 25</span><a href="#s24">→</a></div>
+  <div class="nav-row" data-for="s24"><a href="#s23">←</a><span class="counter">24 / 25</span><a href="#s25">→</a></div>
+  <div class="nav-row" data-for="s25"><a href="#s24">←</a><span class="counter">25 / 25</span><a class="is-off">→</a></div>
 </nav>
 
 <script src="../kaiten-slides.js"></script>

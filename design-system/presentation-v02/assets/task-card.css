@@ -77,7 +77,9 @@
 /* Легенда слайда: подписи слева и справа от карточки с линиями-выносками.
    Длина линии равна гаттеру между колонкой и карточкой (2cqw). */
 
-.tclegend { display: flex; flex-direction: column; justify-content: space-around; gap: 1cqw; min-width: 0; }
+/* Подписи стоят равномерно, но в порядке сущностей карточки сверху вниз;
+   к самой сущности от каждой ведет своя выноска — см. .tclines. */
+.tclegend { display: flex; flex-direction: column; justify-content: space-around; gap: 1cqw; min-width: 0; align-self: stretch; }
 .tclegend.is-left { align-items: flex-end; }
 .tclegend.is-right { align-items: flex-start; }
 .tclegend .tag {
@@ -92,13 +94,9 @@
   box-shadow: 0 .1cqw .4cqw rgba(40, 30, 70, .04);
   max-width: 17cqw;
 }
-.tclegend .tag::after,
-.tclegend .tag::before { content: ""; position: absolute; top: 50%; }
-.tclegend .tag::after { width: 2cqw; height: .078cqw; background: #d3c3f0; }
-.tclegend .tag::before { width: .42cqw; height: .42cqw; border-radius: 50%; background: var(--action-primary); }
-
-.tclegend.is-left .tag::after { left: 100%; transform: translateY(-50%); }
-.tclegend.is-left .tag::before { left: calc(100% + 2cqw); transform: translate(-50%, -50%); }
-
-.tclegend.is-right .tag::after { right: 100%; transform: translateY(-50%); }
-.tclegend.is-right .tag::before { right: calc(100% + 2cqw); transform: translate(50%, -50%); }
+/* Выноски рисуем одним SVG поверх ряда: подпись стоит на своем месте,
+   а линия уходит ровно к своей сущности в карточке. Координаты в системе
+   ряда на слайде 1920 и пересчитаны один раз — верстка карточки детерминирована. */
+.tclines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+.tclines path { fill: none; stroke: #d3c3f0; stroke-width: 1.5; }
+.tclines circle { fill: var(--action-primary); }

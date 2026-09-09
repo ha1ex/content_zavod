@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kaiten для банков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../kaiten-slides.css" />
+<link rel="stylesheet" href="../theme-light.css" />
+<link rel="stylesheet" href="../assets/feature-mocks.css" />
+<link rel="stylesheet" href="../assets/task-card.css" />
+<link rel="stylesheet" href="../assets/formula-field.css" />
+<link rel="stylesheet" href="../assets/user-groups.css" />
+<link rel="stylesheet" href="../assets/mobile-cta.css" />
+<link rel="stylesheet" href="../assets/time-report.css" />
+<link rel="stylesheet" href="../assets/bank-board.css" />
+<style>
+  /* Содержимое слайда стоит по центру вертикали, без ручных сдвигов.
+     Нижний отступ компенсирует перевес колонтитула: сверху зону поджимают
+     заголовок и зазор под ним, снизу — только поле слайда. Перевес — 119px
+     макета, отсюда 6.198cqw. Слайдам, где блок занимает зону целиком,
+     ставится .is-tall — иначе содержимому не хватает высоты. */
+  .s-body { display:flex; flex-direction:column; justify-content:center; padding-bottom:6.198cqw; }
+  .s-body.is-tall { padding-bottom:0; }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- ============================================ 1. обложка · T1 === -->
+    <section class="slide cover is-active" id="s1" style="--cover-glow-size:40cqw; --cover-glow-left:53.3cqw; --cover-glow-top:9.27cqw; --cover-glow-opacity:.52">
+      <div class="cover-logo">
+        <img src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="cover-text">
+        <h1>Единая рабочая среда<br /><span style="color:var(--text-accent)">для банка</span></h1>
+        <p class="sub">Российский сервис для прозрачных и управляемых рабочих процессов</p>
+        <ul class="badges" style="--badge-bg:var(--surface-frame)">
+          <li class="badge">проектами</li>
+          <li class="badge">задачами</li>
+          <li class="badge">командами</li>
+        </ul>
+      </div>
+
+      <div class="cover-shot" style="width:43cqw; right:3.5cqw">
+        <img src="../assets/mocks/cta-product.png" alt="Интерфейс Кайтена" />
+      </div>
+    </section>
+
+    <!-- ================================ 2. разработан в России · T12 === -->
+    <section class="slide" id="s2">
+      <div class="s-head">
+        <h2 class="s-title">Разработан в России</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="position:relative">
+        <img src="../assets/russia-map.svg" alt="" style="position:absolute; right:-1cqw; top:50%; transform:translateY(-50%); width:58cqw; z-index:0" />
+        <div style="position:relative">
+        <p class="body" style="max-width:44cqw">Kaiten представлен на рынке с 2014 года. Сервис работает на собственной инфраструктуре в России и не зависит от иностранных поставщиков — для банка это предсказуемая поддержка и понятная юрисдикция данных</p>
+
+        <div class="features" style="max-width:34cqw; margin-top:3cqw; gap:2.4cqw">
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Российское юридическое лицо ООО «КАЙТЕН СОФТВЕР»</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Входит в реестр аккредитованных IT-компаний РФ и имеет сертификаты безопасности Минцифры</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2"/><path d="M8 21l4-2 4 2z"/><path d="M9 8h6M9 12h4"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Внесен в Единый реестр российского ПО</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-5 6 5 6"/><path d="M16 6l5 6-5 6"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Создан на открытом и собственном коде, не зависит от иностранных поставщиков</p></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== 3. совместимость с российским ПО · T13 === -->
+    <section class="slide" id="s3">
+      <div class="s-head">
+        <h2 class="s-title">Совместимость с российским ПО</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body is-tall">
+        <p class="body" style="font-size:1.25cqw; max-width:64cqw">Kaiten работает на российских операционных системах семейства Linux «РЕД ОС» и «РОСА» — переход не требует замены парка рабочих станций банка</p>
+
+        <div class="cols-2" style="margin-top:2.4cqw">
+          <div class="frame">
+            <div style="display:flex; align-items:center; gap:1.2cqw">
+              <span style="width:3.33cqw; height:3.33cqw; border-radius:var(--radius-tile); background:var(--tile-bg); color:var(--tile-fg); display:flex; align-items:center; justify-content:center; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1.7cqw; height:1.7cqw; display:flex"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <h3 class="h3" style="margin:0"><a href="https://reestr.digital.gov.ru/reestr/870368/" style="color:var(--text-accent); text-decoration:underline; text-underline-position:from-font">В реестре российского ПО</a></h3>
+            </div>
+            <p class="body muted" style="margin-top:1.6cqw">Кайтен включен в Единый реестр российских программ для ЭВМ и баз данных.<br />ПО отвечает требованиям безопасности компаний, нормативам защиты данных и корпоративным политикам</p>
+            <p class="body" style="margin-top:1.6cqw">Реестровая запись <a href="https://reestr.digital.gov.ru/reestr/870368/" style="color:var(--text-accent); text-decoration:underline; text-underline-position:from-font">№14347</a></p>
+          </div>
+          <div class="frame">
+            <div style="display:flex; align-items:center; gap:1.2cqw">
+              <span style="width:3.33cqw; height:3.33cqw; border-radius:var(--radius-tile); background:var(--tile-bg); color:var(--tile-fg); display:flex; align-items:center; justify-content:center; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1.7cqw; height:1.7cqw; display:flex"><circle cx="12" cy="9" r="5.4"/><path d="M9.2 13.6 7.6 21l4.4-2.3 4.4 2.3-1.6-7.4"/></svg></span>
+              <h3 class="h3" style="margin:0">Аккредитованная ИТ-компания</h3>
+            </div>
+            <p class="body muted" style="margin-top:1.6cqw">ООО «Кайтен Софтвер» аккредитовано как ИТ-организация, осуществляющая деятельность в сфере разработки и сопровождения программного обеспечения</p>
+            <p class="body" style="margin-top:1.6cqw"><a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=EVM&amp;DocNumber=2022660451&amp;TypeFile=html" style="color:var(--text-accent); text-decoration:underline; text-underline-position:from-font">Свидетельство о регистрации программы для ЭВМ</a></p>
+          </div>
+        </div>
+        <div class="cols-4" style="margin-top:var(--gap)">
+          <div class="frame" style="padding:1.4cqw 1.4cqw 0; display:flex; flex-direction:column; gap:1cqw; overflow:hidden">
+            <p class="body">Сертификат совместимости с российской операционной системой <b style="font-weight:600">РЭД</b></p>
+            <div style="height:13cqw; background:#fff; border-radius:.63cqw .63cqw 0 0; overflow:hidden">
+              <img src="../assets/certs/red.png" alt="Сертификат совместимости с российской операционной системой РЭД" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block" />
+            </div>
+          </div>
+          <div class="frame" style="padding:1.4cqw 1.4cqw 0; display:flex; flex-direction:column; gap:1cqw; overflow:hidden">
+            <p class="body">Сертификат совместимости с российской операционной системой <b style="font-weight:600">РОСА</b></p>
+            <div style="height:13cqw; background:#fff; border-radius:.63cqw .63cqw 0 0; overflow:hidden">
+              <img src="../assets/certs/rosa.png" alt="Сертификат совместимости с российской операционной системой РОСА" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block" />
+            </div>
+          </div>
+          <div class="frame" style="padding:1.4cqw 1.4cqw 0; display:flex; flex-direction:column; gap:1cqw; overflow:hidden">
+            <p class="body">Сертификат соответствия требованиям безопасности <b style="font-weight:600">ГОСТ Р ИСО/МЭК 27001-2021</b></p>
+            <div style="height:13cqw; background:#fff; border-radius:.63cqw .63cqw 0 0; overflow:hidden">
+              <img src="../assets/certs/gost.png" alt="Сертификат соответствия требованиям безопасности ГОСТ Р ИСО/МЭК 27001-2021" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block" />
+            </div>
+          </div>
+          <div class="frame" style="padding:1.4cqw 1.4cqw 0; display:flex; flex-direction:column; gap:1cqw; overflow:hidden">
+            <p class="body">Сертификат совместимости с российской операционной системой <b style="font-weight:600">«Альт»</b></p>
+            <div style="height:13cqw; background:#fff; border-radius:.63cqw .63cqw 0 0; overflow:hidden">
+              <img src="../assets/certs/alt.png" alt="Сертификат совместимости с российской операционной системой «Альт»" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== 4. устанавливается на сервер банка · T2 === -->
+    <section class="slide" id="s4">
+      <div class="s-head">
+        <h2 class="s-title">Устанавливается на сервер банка</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:1fr 2fr; gap:var(--gap); align-items:center; min-height:0">
+        <div style="max-width:25cqw">
+          <p class="body" style="font-size:1.25cqw">Разместите Kaiten в закрытом контуре банка: данные о клиентах, сделках и внутренних процессах не покидают вашу инфраструктуру</p>
+
+          <ul class="checks" style="margin-top:2.4cqw">
+            <li>Полномасштабная коробочная версия. Работает автономно и не зависит от разработчика</li>
+            <li>Разворачивается в контуре банка и встает рядом с АБС, СЭД и корпоративной директорией</li>
+            <li>Приобретается бессрочно: лицензия оплачивается один раз, обновления приходят регулярно</li>
+            <li>Служба эксплуатации сама управляет обновлениями и бэкапами по регламенту банка</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center">
+          <img src="../assets/mocks/closed-loop.png" alt="Закрытый контур компании" style="width:100%; height:auto; display:block" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 5. лидеры отрасли · T14 4×3 === -->
+    <section class="slide" id="s5">
+      <div class="s-head">
+        <h2 class="s-title">С Kaiten работают лидеры отрасли</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body is-tall">
+        <p class="body" style="max-width:52cqw">Нам доверяют организацию рабочих процессов банки, страховые и платежные компании, а также крупные бизнесы других направлений. Требования к безопасности и объему данных у них сопоставимы с банковскими</p>
+
+        <div class="grid-4x3" style="margin-top:2cqw; height:auto; flex:1">
+          <div class="frame is-center"><div><img src="../assets/clients/alfabank.png" alt="Альфа-Банк" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">банк</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/sberbank.png" alt="СБЕР БАНК" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">банк</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/rosgosstrah.png" alt="РОСГОССТРАХ" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">страхование</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/atol.png" alt="АТОЛ" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">платежное и кассовое ПО</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/rostelecom.png" alt="Ростелеком" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">оператор связи</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/tele2.png" alt="Tele2" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">оператор связи</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/rzd.png" alt="РЖД" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">государственная компания</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/nornikel.png" alt="Норникель" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">промышленность</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/s7.png" alt="S7 Airlines" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">авиакомпания</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/x5tech.png" alt="X5 Tech" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">IT-компания</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/samolet.png" alt="Самолет" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">застройщик</p></div></div>
+          <div class="frame is-center"><div><img src="../assets/clients/metro.png" alt="METRO" style="height:3.2cqw; width:auto; max-width:82%; object-fit:contain; display:block; margin:0 auto 1cqw; mix-blend-mode:multiply" /><p class="body muted" style="color:var(--text-secondary)">торговая компания</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 6. так выглядит банк · T2 === -->
+    <section class="slide" id="s6">
+      <div class="s-head">
+        <h2 class="s-title">Так выглядит банк в Кайтене</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:16cqw 1fr; gap:2cqw; align-items:center">
+        <div class="features" style="gap:2.2cqw; margin-top:0">
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M5 10v9h14v-9"/><path d="M9 19v-5h6v5"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Розничный бизнес</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Корпоративный бизнес</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9.2A3 3 0 0 0 9.6 10c0 2.6 4.8 1.6 4.8 4.2a3 3 0 0 1-4.9.8"/><path d="M12 7v10"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Кредитование</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Комплаенс и риски</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-5 6 5 6"/><path d="M16 6l5 6-5 6"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">ИТ и разработка</p></div>
+          </div>
+          <div class="feature" style="align-items:center">
+            <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div>
+            <div><p class="feature-title" style="font-weight:400">Кадры</p></div>
+          </div>
+        </div>
+
+        <div class="bboard">
+          <div class="bb-top">
+            <span class="bb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
+            <span class="bb-name">Проекты</span>
+            <span class="bb-tab"><svg viewBox="0 0 24 24" fill="currentColor" style="width:.63cqw; height:.63cqw"><rect x="2" y="2" width="8.5" height="8.5" rx="2"/><rect x="13.5" y="2" width="8.5" height="8.5" rx="2"/><rect x="2" y="13.5" width="8.5" height="8.5" rx="2"/><rect x="13.5" y="13.5" width="8.5" height="8.5" rx="2"/></svg>ДОСКИ</span>
+            <span class="bb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h11M4 18h14"/></svg></span>
+            <span class="bb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span>
+            <span class="bb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v4M16 3v4"/></svg></span>
+            <span class="bb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l4.5-5 3.5 3.5L20 6"/></svg></span>
+            <span class="bb-add">ДОБАВИТЬ</span>
+            <span class="bb-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>ФИЛЬТРЫ</span>
+          </div>
+
+          <div class="bb-lane">
+            <div class="bb-lane-head">
+              <span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>
+              Кредитный конвейер
+            </div>
+
+            <div class="bb-cols">
+              <div class="bb-col">Заявка принята<span class="bb-badge">2</span></div>
+              <div class="bb-col">Проверка клиента<span class="bb-badge">2</span></div>
+              <div class="bb-col">Андеррайтинг<span class="bb-badge is-warm">1</span></div>
+              <div class="bb-col">Решение комитета<span class="bb-badge is-warm">1</span></div>
+              <div class="bb-col">Подписание и выдача<span class="bb-badge">2</span></div>
+            </div>
+
+            <div class="bb-swim">Первый приоритет</div>
+
+            <div class="bb-cards">
+              <div>
+                <div class="bb-card">
+                  <p class="bb-card-h">Кредит МСБ № 4412</p>
+                  <div class="bb-tags"><span class="bb-tag is-green">ООО «Вектор»</span></div>
+                  <div class="bb-tags"><span class="bb-tag is-violet">Лимит 12 млн ₽</span></div>
+                  <div class="bb-tags"><span class="bb-tag is-green">01.06.2026 — 26.09.2026</span></div>
+                  <div class="bb-check is-plain"><span>Чек-лист Документы</span><b>0/1</b></div>
+                  <div class="bb-avs"><i class="bb-av" style="background:#c98a8a"></i><i class="bb-av" style="background:#8a9bc9"></i></div>
+                  <div class="bb-progress"></div>
+                </div>
+              </div>
+              <div>
+                <div class="bb-card">
+                  <p class="bb-card-h">Ипотека № 2201</p>
+                  <div class="bb-tags"><span class="bb-tag is-green">Оценка залога</span></div>
+                  <div class="bb-tags"><span class="bb-tag is-green">10.07.2026 — 21.07.2026</span></div>
+                  <div class="bb-check"><span>Чек-лист Документы</span><b>4/4</b></div>
+                  <div class="bb-check"><span>Чек-лист Оценка</span><b>1/2</b></div>
+                  <div class="bb-avs"><i class="bb-av" style="background:#c98a8a"></i><i class="bb-av" style="background:#8a9bc9"></i></div>
+                </div>
+              </div>
+              <div>
+                <div class="bb-card">
+                  <p class="bb-card-h">Овердрафт для торговой сети</p>
+                  <div class="bb-tags"><span class="bb-tag is-green">ООО «Василек»</span></div>
+                  <div class="bb-tags"><span class="bb-tag is-green">21.08.2026 — 31.08.2026</span></div>
+                  <div class="bb-check"><span>Чек-лист Скоринг</span><b>3/3</b></div>
+                  <div class="bb-check"><span>Чек-лист Залог</span><b>1/2</b></div>
+                  <div class="bb-avs"><i class="bb-av" style="background:#c98a8a"></i><i class="bb-av" style="background:#8a9bc9"></i></div>
+                </div>
+              </div>
+              <div>
+                <div class="bb-card">
+                  <p class="bb-card-h">Банковская гарантия по 44-ФЗ</p>
+                  <div class="bb-tags"><span class="bb-tag is-violet">Комплаенс</span><span class="bb-tag is-green">Да</span></div>
+                  <div class="bb-tags"><span class="bb-tag is-orange">Ежедневно в 00:05</span></div>
+                  <div class="bb-tags"><span class="bb-tag is-green">21.08.2026 — 31.08.2026</span></div>
+                  <div class="bb-avs"><i class="bb-av" style="background:#c98a8a"></i><i class="bb-av" style="background:#8a9bc9"></i></div>
+                </div>
+              </div>
+              <div>
+                <div class="bb-card">
+                  <p class="bb-card-h">Зарплатный проект</p>
+                  <div class="bb-tags"><span class="bb-tag is-orange">Подписание</span></div>
+                  <div class="bb-avs"><i class="bb-av" style="background:#c98a8a"></i></div>
+                </div>
+                <div class="bb-card">
+                  <p class="bb-card-h">Кредит МСБ № 4390</p>
+                  <div class="bb-tags"><span class="bb-tag is-blue">Выдача средств</span></div>
+                  <div class="bb-avs"><i class="bb-av" style="background:#8a9bc9"></i><i class="bb-av" style="background:#8ac9a0"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bb-rows">
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Розничный бизнес<span class="bb-count">4 карточки</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Комплаенс и риски<span class="bb-count">6 карточек</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Корпоративный бизнес<span class="bb-count">4 карточки</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>ИТ и разработка<span class="bb-count">8 карточек</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Кадры<span class="bb-count">4 карточки</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Договоры<span class="bb-count">4 карточки</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Маркетинг<span class="bb-count">6 карточек</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+            <div class="bb-row"><span class="bb-grip"><svg viewBox="0 0 10 16" fill="currentColor"><circle cx="3" cy="3" r="1.3"/><circle cx="7" cy="3" r="1.3"/><circle cx="3" cy="8" r="1.3"/><circle cx="7" cy="8" r="1.3"/><circle cx="3" cy="13" r="1.3"/><circle cx="7" cy="13" r="1.3"/></svg></span>Обращения клиентов<span class="bb-count">5 карточек</span><span class="bb-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 7. как работает Kaiten · T2 === -->
+    <section class="slide" id="s7">
+      <div class="s-head">
+        <h2 class="s-title">Как работает Kaiten</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="grid-template-columns:34cqw 1fr; align-items:center">
+        <div>
+          <p class="body" style="font-size:1.25cqw">Разложите сложный процесс на простые этапы и следите за статусом каждой задачи: от заявки клиента до решения кредитного комитета. Назначайте исполнителей, ставьте сроки и получайте уведомления о дедлайнах и смене статусов</p>
+
+          <div class="features" style="gap:1.9cqw">
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Колонки обозначают этапы работ</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Указаны ответственные</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 12.6 12 21.2 3.4 12.6V3.4h9.2z"/><circle cx="8.2" cy="8.2" r="1.3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Метки и визуальные сигналы выделяют продукт, сегмент клиента и приоритет</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Видно срок по каждой заявке</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">В карточке собраны данные по задаче: описание, исполнитель, сроки</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l2 2 3-3"/><path d="M4 13l2 2 3-3"/><path d="M12 7h8M12 14h8M12 20h8"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">По каждой карточке виден прогресс</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center">
+          <img src="../assets/mocks/card-window.png" alt="Карточка задачи в Кайтене" style="width:100%; height:auto; display:block" />
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 8. вся информация по задачам · T2 === -->
+    <section class="slide" id="s8">
+      <div class="s-head">
+        <h2 class="s-title">Вся информация по задачам собрана в одном месте</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body is-tall">
+        <p class="body" style="font-size:1.25cqw; max-width:70cqw">Карточка задачи заменяет переписку по почте и в мессенджерах: этапы работы, документы клиента, согласования и обсуждения хранятся в одном месте и остаются в контуре банка</p>
+
+        <div class="cols-2" style="grid-template-columns:31cqw 1fr; gap:2.4cqw; flex:1; min-height:0; align-items:center; margin-top:1.6cqw">
+          <div class="features" style="gap:1.15cqw">
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Исполнителя и заказчика</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Срок по заявке</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 12.6 12 21.2 3.4 12.6V3.4h9.2z"/><circle cx="8.2" cy="8.2" r="1.3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Метки и теги</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Документы клиента и вложения</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 1 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 1 0 5.7 5.7l1.5-1.5"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Ссылки на записи в смежных системах</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Встроенный таймер</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="17.5" cy="17" r="1.6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Кастомные поля под продукты банка</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l2 2 3-3"/><path d="M4 13l2 2 3-3"/><path d="M4 20l2 2 3-3"/><path d="M13 7h7M13 14h7M13 21h7"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Чек-листы проверок</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Чат с обсуждением</p></div>
+            </div>
+            <div class="feature" style="align-items:center">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8 5 8-5"/><rect x="4" y="5" width="16" height="14" rx="2"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Контакты клиента и связанные задачи</p></div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0"><div class="tcard" style="height:auto">
+            <div class="tc-main">
+              <p class="tc-h">Проверка контрагента по заявке на кредит</p>
+              <p class="tc-sub"><a>#30022876</a> Заказчик <a>Смирнова Ольга</a>, перемещена 2 часа назад</p>
+
+              <div class="tc-bar">
+                <span class="tc-plus">+</span>
+                <span class="tc-btn" data-a="timer"><i></i>0:23:44</span>
+                <span class="tc-btn">→ АНДЕРРАЙ…</span>
+                <span class="tc-btn">⚑</span>
+                <span class="tc-btn">!</span>
+                <span class="tc-btn">↗</span>
+                <span class="tc-btn">⋮</span>
+              </div>
+
+              <div class="tc-rows">
+                <span class="tc-lab">Расположение</span><span class="tc-val"><span class="tc-link">Корпоративный бизнес / Проверка клиента</span></span>
+                <span class="tc-lab">Тип</span><span><span class="tc-chip is-violet"><span class="tc-av">C</span>Card</span></span>
+                <span class="tc-lab" data-a="participants">Участники</span><span><span class="tc-chip is-violet"><span class="tc-av">СО</span>Ответственный</span> <span class="tc-lab">+</span></span>
+                <span class="tc-lab" data-a="due">Срок</span><span class="tc-val"><span class="tc-link">24 мар.</span></span>
+                <span class="tc-lab" data-a="size">Размер</span><span class="tc-val"><span class="tc-link">5</span></span>
+                <span class="tc-lab" data-a="labels">Метки</span><span><span class="tc-chip is-orange">ООО «Вектор»</span></span>
+              </div>
+
+              <p class="tc-sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Описание</p>
+              <p class="tc-text">Подготовить заключение о финансовом состоянии заемщика для кредитного комитета.</p>
+
+              <p class="tc-sec" data-a="files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>Файлы</p>
+              <div class="tc-file">
+                <span class="tc-thumb"></span>
+                <span>
+                  <span class="tc-link" style="font-size:.68cqw">Выписка ЕГРЮЛ.pdf (309.36 KB)</span>
+                  <span class="tc-fmeta" style="display:block">Добавлен 12 минут назад <span class="tc-link">в комментарии</span>, Смирнова Ольга</span>
+                </span>
+              </div>
+
+              <p class="tc-sec" data-a="steps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l2.5 2.5L10 5M3 17l2.5 2.5L10 15M13 7h8M13 17h8"/></svg>Этапы работы</p>
+              <div class="tc-prog">
+                <span>50%</span><span class="tc-track"></span><span>1/2</span>
+                <span class="tc-btn">СКРЫТЬ ОТМЕЧЕННЫЕ</span>
+              </div>
+              <div class="tc-step">
+                <span class="tc-cb is-on"></span>
+                <span style="flex:1; min-width:0">Сбор документов и выписок по клиенту.<span class="tc-note">Отметил(а) Смирнова Ольга, 18 минут назад</span></span>
+                <span class="tc-date"><span class="tc-chip is-violet">5 мар.</span><span class="tc-av">СО</span></span>
+              </div>
+              <div class="tc-step">
+                <span class="tc-cb"></span>
+                <span style="flex:1; min-width:0">Проверка по спискам и внутренним политикам.</span>
+                <span class="tc-date"><span class="tc-lab">7 мар.</span><span class="tc-av">СО</span></span>
+              </div>
+
+              <p class="tc-sec" data-a="links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6.5" r="2.4"/><circle cx="18" cy="17.5" r="2.4"/><path d="M8.1 10.9 15.9 7.6M8.1 13.1l7.8 3.3"/></svg>Связи</p>
+              <p class="tc-text" style="font-weight:500">Родительские карточки</p>
+            </div>
+
+            <div class="tc-side">
+              <div class="tc-side-h" data-a="comments"><span>Комментарии</span><span class="tc-lab" style="font-size:.63cqw">Все ▾</span></div>
+              <div class="tc-field">Напишите комментарий</div>
+
+              <div class="tc-cm">
+                <span class="tc-av">СО</span>
+                <span class="tc-body">
+                  <span class="tc-cm-top"><span class="tc-cm-name">Смирнова Ольга</span><span class="tc-cm-time">6 минут назад</span></span>
+                  <span class="tc-cm-text" style="display:block">Приложила обновленную бухгалтерскую отчетность</span>
+                  <span class="tc-cm-quote">цитировать</span>
+                </span>
+              </div>
+
+              <div class="tc-cm" data-a="people">
+                <span class="tc-av">СО</span>
+                <span class="tc-body">
+                  <span class="tc-cm-top"><span class="tc-cm-name">Смирнова Ольга</span><span class="tc-cm-time">12 минут назад</span></span>
+                  <span class="tc-cm-text" style="display:block">Нужно заключение залоговой службы до заседания комитета.
+                    </span>
+                  <span class="tc-cm-quote">цитировать</span>
+                </span>
+              </div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 9. работа банка на одном экране · T3 + T2 === -->
+    <section class="slide" id="s9">
+      <div class="s-head">
+        <h2 class="s-title">Управляйте работой всего банка на одном экране</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body is-tall">
+        <p class="body" style="font-size:1.25cqw">Руководитель видит верхнеуровневые задачи всех подразделений, не погружаясь в рутину</p>
+
+        <div class="cols-3" style="margin-top:2cqw">
+          <div class="frame" style="padding:1.6cqw"><div style="display:flex; align-items:center; gap:1.05cqw"><div class="feature-icon" style="background:#fff; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></div><p class="body">Добавляйте доски розницы, корпоративного блока и ИТ в менеджерское пространство</p></div></div>
+          <div class="frame" style="padding:1.6cqw"><div style="display:flex; align-items:center; gap:1.05cqw"><div class="feature-icon" style="background:#fff; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div><p class="body">Ставьте задачи конкретным сотрудникам или их группам</p></div></div>
+          <div class="frame is-accent" style="padding:1.6cqw"><div style="display:flex; align-items:center; gap:1.05cqw"><div class="feature-icon" style="background:#fff; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l2 2 3-3"/><path d="M4 13l2 2 3-3"/><path d="M12 7h8M12 14h8M12 20h8"/></svg></div><p class="body">Наблюдайте за состоянием задач по статусам: в процессе, готово, отмена</p></div></div>
+        </div>
+
+        <div style="flex:1; min-height:0; overflow:hidden; margin-top:1.8cqw; display:flex; align-items:center">
+          <img src="../assets/mocks/pm-board-1.png" alt="Менеджерское пространство в Кайтене" style="width:100%; height:auto; display:block" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 10. трансформируйте вид · T10 (три) === -->
+    <section class="slide" id="s10">
+      <div class="s-head">
+        <h2 class="s-title">Трансформируйте вид рабочего пространства под свои задачи</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <p class="body" style="font-size:1.25cqw">В один клик настраивайте интерфейс под привычный формат работы: канбан-доски, списки, таблицы, timeline, календарь, отчеты</p>
+
+        <div class="cols-3" style="margin-top:2cqw">
+          <div class="frame" style="padding:1.4cqw">
+            <h3 class="h3">Таблицы</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Структурируйте информацию и скачивайте ее в виде таблицы формата XLSX</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="kbsh"><div class="kbside"><span class="hd"></span><div class="kbrow"><span class="dot"></span><span class="ln" style="width:70%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:55%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:70%"></span></div><div class="pj"><i></i><b>Проект</b></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:72%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:55%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:68%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:72%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:58%"></span></div></div><div class="kbmain"><div class="vtb"><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1.5" y="2" width="3.4" height="12" rx="1"/><rect x="6.3" y="2" width="3.4" height="8" rx="1"/><rect x="11.1" y="2" width="3.4" height="10" rx="1"/></svg></span><span class="vi act"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="3.5" height="3.5" rx=".8"/><rect x="6.25" y="1" width="3.5" height="3.5" rx=".8"/><rect x="11.5" y="1" width="3.5" height="3.5" rx=".8"/><rect x="1" y="6.25" width="3.5" height="3.5" rx=".8"/><rect x="6.25" y="6.25" width="3.5" height="3.5" rx=".8"/><rect x="11.5" y="6.25" width="3.5" height="3.5" rx=".8"/><rect x="1" y="11.5" width="3.5" height="3.5" rx=".8"/><rect x="6.25" y="11.5" width="3.5" height="3.5" rx=".8"/><rect x="11.5" y="11.5" width="3.5" height="3.5" rx=".8"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="12" height="2" rx="1"/><rect x="2" y="7" width="8.5" height="2" rx="1"/><rect x="2" y="11" width="5" height="2" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="3" width="12.4" height="11" rx="2"/><line x1="1.8" y1="6.5" x2="14.2" y2="6.5"/><line x1="5" y1="1.6" x2="5" y2="4"/><line x1="11" y1="1.6" x2="11" y2="4"/></svg></span></div><div style="border:1px solid #ececec;border-radius:5px;overflow:hidden"><div class="row" style="gap:0;background:#f3f3f3;border-bottom:1px solid #ececec"><span class="lab" style="flex:0 0 34.5%;min-width:0;font-weight:600;padding:3px 5px;border-right:1px solid #ececec">Название</span><span class="lab" style="flex:0 0 17.2%;min-width:0;padding:3px 5px;border-right:1px solid #ececec">ID</span><span class="lab" style="flex:0 0 24.1%;min-width:0;padding:3px 2px;border-right:1px solid #ececec">Заказчик</span><span class="lab" style="flex:0 0 24.1%;min-width:0;padding:3px 5px">Ответст…</span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px;border-right:1px solid #f2f2f2"><span style="color:var(--t2);font-size:7px;flex:none">▾</span><span style="height:6px;border-radius:3px;background:var(--violet-12);width:62%"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.2%;min-width:0"></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--blue);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;display:flex;align-items:center;padding:0 4px;border-right:1px solid #f2f2f2"><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--green);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--red);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--green);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0;border-bottom:1px solid #f2f2f2"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px;border-right:1px solid #f2f2f2"><span style="color:var(--t2);font-size:7px;flex:none">▾</span><span style="height:6px;border-radius:3px;background:var(--violet-12);width:68%"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.2%;min-width:0"></span></div><div class="row" style="gap:0"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div><div class="row" style="gap:0"><span style="flex:0 0 34.5%;min-width:0;display:flex;align-items:center;gap:4px;padding:3px 5px 3px 16px;border-right:1px solid #f2f2f2"><i style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#eef0f2"></span></span><span style="flex:0 0 17.2%;min-width:0;border-right:1px solid #f2f2f2"></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px;border-right:1px solid #f2f2f2"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span><span style="flex:0 0 24.1%;min-width:0;display:flex;align-items:center;gap:3px;padding:0 4px"><i style="width:4px;height:4px;border-radius:50%;background:#d4d4d6;flex:none"></i><span style="flex:1;height:5px;border-radius:3px;background:#f0f0f2"></span></span></div></div></div></div></div></div></div>
+          </div>
+          <div class="frame" style="padding:1.4cqw">
+            <h3 class="h3">Timeline</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Создавайте временные отрезки для задач, визуализируйте сроки и отмечайте взаимосвязи</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="lz" style="position:relative"><span style="position:absolute;left:calc(50% + 28px);top:0;bottom:0;width:1px;background:#f5f5f5;z-index:1"></span><div class="lzhead"><span class="nm">Сотрудник</span><span class="wk">Неделя 1</span><span class="wk">Неделя 2</span></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--green)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:2%;width:30%;background:var(--green-12)"></span><span class="lzbar" style="left:40%;width:12%;background:var(--green-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--violet)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:22%;width:48%;background:var(--violet-12)"></span><span class="lzbar" style="left:78%;width:18%;background:var(--violet-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--orange)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:2%;width:24%;background:var(--orange-12)"></span><span class="lzbar" style="left:54%;width:9%;background:var(--orange-12)"></span><span class="lzbar" style="left:68%;width:14%;background:var(--orange-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--blue)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:24%;width:20%;background:var(--blue-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--red)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:10%;width:32%;background:var(--red-12)"></span><span class="lzbar" style="left:52%;width:18%;background:var(--red-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--green)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:6%;width:28%;background:var(--green-12)"></span><span class="lzbar" style="left:46%;width:16%;background:var(--green-12)"></span></div></div><div class="lzrow" style="border-bottom:0"><div class="lzwho"><span class="d" style="background:var(--violet)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:20%;width:22%;background:var(--violet-12)"></span><span class="lzbar" style="left:56%;width:30%;background:var(--violet-12)"></span></div></div></div></div></div></div>
+          </div>
+          <div class="frame" style="padding:1.4cqw">
+            <h3 class="h3">Календарь</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Планируйте задачи с конкретными датами: платежи, отчетность, заседания комитетов</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="shell"><div class="side"><span class="sr"></span><span class="sr"></span><span class="sr"></span><div class="pr act"><i></i><b></b></div><span class="sr"></span><span class="sr"></span><span class="sr"></span></div><div class="main" style="position:relative"><div class="vtb"><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1.5" y="2" width="3.4" height="12" rx="1"/><rect x="6.3" y="2" width="3.4" height="8" rx="1"/><rect x="11.1" y="2" width="3.4" height="10" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><line x1="1.5" y1="6.2" x2="14.5" y2="6.2"/><line x1="1.5" y1="9.9" x2="14.5" y2="9.9"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="12" height="2" rx="1"/><rect x="2" y="7" width="8.5" height="2" rx="1"/><rect x="2" y="11" width="5" height="2" rx="1"/></svg></span><span class="vi act"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="3" width="12.4" height="11" rx="2"/><line x1="1.8" y1="6.5" x2="14.2" y2="6.5"/><line x1="5" y1="1.6" x2="5" y2="4"/><line x1="11" y1="1.6" x2="11" y2="4"/></svg></span></div><div class="row" style="justify-content:center;margin-bottom:5px"><span class="val">Июнь 2026</span></div><div class="cal"><span class="cd h">Пн</span><span class="cd h">Вт</span><span class="cd h">Ср</span><span class="cd h">Чт</span><span class="cd h">Пт</span><span class="cd h">Сб</span><span class="cd h">Вс</span><span class="cd d1">1</span><span class="cd">2</span><span class="cd">3</span><span class="cd">4</span><span class="cd">5</span><span class="cd">6</span><span class="cd">7</span><span class="cd">8</span><span class="cd">9</span><span class="cd">10</span><span class="cd">11</span><span class="cd">12</span><span class="cd">13</span><span class="cd">14</span><span class="cd">15</span><span class="cd">16</span><span class="cd">17</span><span class="cd">18</span><span class="cd">19</span><span class="cd">20</span><span class="cd">21</span><span class="cd">22</span><span class="cd">23</span><span class="cd">24</span><span class="cd">25</span><span class="cd">26</span><span class="cd">27</span><span class="cd">28</span><span class="cd">29</span><span class="cd">30</span><span class="cd"></span><span class="cd"></span><span class="cd"></span><span class="cd"></span><span class="cd"></span></div><div class="pop"><div class="val" style="margin-bottom:7px">Выплата заработной платы</div><div class="row" style="margin-bottom:6px"><span class="lab">Тип</span><span class="chip v">Платеж</span><span class="sp"></span><span style="color:#cfcfcf;font-size:16px">🔔</span></div><div class="row" style="margin-bottom:6px"><span class="lab">Участник</span><span class="sp"></span><span class="row" style="gap:3px"><span class="av" style="width:11px;height:11px;background:#cfcfcf"></span><span class="val">Бухгалтер</span></span></div><div class="row"><span class="lab">Срок</span><span class="sp"></span><span class="chip solid-o">1 число (ежемесячно)</span></div></div></div></div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== 11. любые процессы в банке · T2 === -->
+    <section class="slide" id="s11">
+      <div class="s-head">
+        <h2 class="s-title">Kaiten подходит для любых процессов банка</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:27cqw 1fr; gap:var(--gap); min-height:0; align-items:center">
+        <div>
+          <div class="features" style="gap:1.8cqw; margin-top:0">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9.2A3 3 0 0 0 9.6 10c0 2.6 4.8 1.6 4.8 4.2a3 3 0 0 1-4.9.8"/><path d="M12 7v10"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Кредитный конвейер</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 14h4"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Открытие счетов и онбординг клиентов</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Комплаенс и проверка контрагентов</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-5 6 5 6"/><path d="M16 6l5 6-5 6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Разработка цифровых продуктов</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Договоры и закупки</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l7 4V6l-7 4H4z"/><path d="M18 9.2a4 4 0 0 1 0 5.6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Маркетинг и продуктовые кампании</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Подбор и адаптация сотрудников</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center">
+          <img src="../assets/mocks/laptop-kanban-bank.png" alt="Доска цифровых продуктов банка на ноутбуке" style="width:100%; height:auto; display:block; filter:drop-shadow(0 .84cqw 1.8cqw rgba(45,45,45,.20))" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== 12. большие группы пользователей · T2 === -->
+    <section class="slide" id="s12">
+      <div class="s-head">
+        <h2 class="s-title">Управляйте доступами больших команд</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:37cqw 1fr; gap:var(--gap); min-height:0; align-items:center">
+        <div>
+          <p class="body" style="font-size:1.25cqw">Объединяйте сотрудников в группы по подразделениям, продуктам или проектам. Права выдаются группе, а не человеку, поэтому доступ к банковской тайне остается в рамках служебных полномочий</p>
+
+          <div class="features" style="gap:1.9cqw">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Подключайте новых сотрудников ко всем нужным пространствам сразу группой</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Синхронизируйте состав групп с корпоративной директорией банка</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A9 9 0 0 1 21 12a15 15 0 0 1-3 3.6M6.3 6.3A15 15 0 0 0 3 12a9 9 0 0 0 12.5 4.6"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Открывайте данные клиентов только тем, кому они нужны по роли</p></div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">При увольнении сотрудника доступы закрываются одним действием</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:flex-end">
+          <div class="ugroups" style="max-width:44cqw">
+            <div class="ug-item">
+              <div class="ug-head"><span class="ug-title">Все сотрудники банка</span><span class="ug-tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5 20.5 7.5 8 20H4v-4z"/></svg></span></div>
+              <p class="ug-note">Все сотрудники банка входят в эту группу</p>
+              <p class="ug-note is-quiet">Отсутствует доступ к административным разделам и функциям</p>
+              <p class="ug-spaces"><b>Пространства:</b> <span>Work</span></p>
+            </div>
+
+            <div class="ug-item">
+              <div class="ug-head"><span class="ug-title">Руководители подразделений</span><span class="ug-tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M18 8h4M20 6v4"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5 20.5 7.5 8 20H4v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></span></div>
+              <div class="ug-people">
+                <span class="ug-person"><span class="ug-av" style="background:#8a9bc9">А</span>Алексей</span>
+                <span class="ug-person"><span class="ug-av" style="background:#c98a8a">Е</span>Екатерина</span>
+              </div>
+              <p class="ug-note">Административный раздел «Метки», Административный раздел «Типы карточек», Административный раздел «Учет времени», Административный раздел «Пользователи», Dump action (API), Приглашение пользователей на пространства</p>
+              <p class="ug-spaces"><b>Пространства:</b> <span>Розница, Кредитование, Разработка</span></p>
+            </div>
+
+            <div class="ug-item">
+              <div class="ug-head"><span class="ug-title">Внешние подрядчики</span><span class="ug-tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M18 8h4M20 6v4"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5 20.5 7.5 8 20H4v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></span></div>
+              <div class="ug-people">
+                <span class="ug-person"><span class="ug-av" style="background:#8ac9a0">А</span>Ангелина</span>
+                <span class="ug-person"><span class="ug-av" style="background:#b0b0b6">КК</span><span class="ug-mask"></span>@mail.ru</span>
+              </div>
+              <p class="ug-note is-quiet">Отсутствует доступ к административным разделам и функциям</p>
+              <p class="ug-spaces"><b>Пространства:</b> <span>Разработка</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 13. диаграмма Ганта и ресурсы · T2 === -->
+    <section class="slide" id="s13">
+      <div class="s-head">
+        <h2 class="s-title">Планируйте крупные проекты на диаграмме Ганта</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:25.6cqw 1fr; gap:var(--gap); min-height:0; align-items:center">
+        <div>
+          <p class="body" style="font-size:1.25cqw">Запуск продукта, миграция систем, открытие сети отделений — крупные программы видно целиком, без выгрузок в таблицы</p>
+
+          <ul class="checks" style="margin-top:2.4cqw">
+            <li>Формулируйте цели и привязывайте к ним задачи</li>
+            <li>Планируйте сроки работы на временной шкале</li>
+            <li>Добавляйте взаимосвязи между задачами</li>
+            <li>Назначайте ответственных</li>
+            <li>Оперативно оценивайте состояние проектов</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center">
+          <img src="../assets/mocks/gantt-chart.png" alt="Диаграмма Ганта в Кайтене" style="width:90%; height:auto; display:block; margin-left:auto; margin-right:0" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ 14. распределение ресурсов · T2 + FM === -->
+    <section class="slide" id="s14">
+      <div class="s-head">
+        <h2 class="s-title">Распределяйте ресурсы команды</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:34cqw 1fr; gap:var(--gap); min-height:0; align-items:center">
+        <div>
+          <p class="body" style="font-size:1.25cqw">Ресурсное планирование показывает, кто чем занят в ближайшие недели. Руководитель видит перегрузки до того, как проект встанет</p>
+
+          <ul class="checks" style="margin-top:2.4cqw">
+            <li>Детально планируйте рабочие часы сотрудников</li>
+            <li>Учитывайте нагрузку каждого специалиста</li>
+            <li>Находите перегрузки и свободные окна</li>
+            <li>Выявляйте узкие места в процессах</li>
+          </ul>
+        </div>
+
+        <div class="cols-2" style="align-items:center">
+          <div class="frame" style="padding:1.6cqw">
+            <h3 class="h3">Загрузка команды</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Кто перегружен, а у кого есть свободные часы</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="lz"><div class="lzhead"><span class="nm">Сотрудник</span><span class="wk">Неделя 1</span><span class="wk">Неделя 2</span></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--green)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:2%;width:30%;background:var(--green-12)"></span><span class="lzbar" style="left:40%;width:12%;background:var(--green-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--violet)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:22%;width:48%;background:var(--violet-12)"></span><span class="lzbar" style="left:78%;width:18%;background:var(--violet-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--orange)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:2%;width:24%;background:var(--orange-12)"></span><span class="lzbar" style="left:54%;width:9%;background:var(--orange-12)"></span><span class="lzbar" style="left:68%;width:14%;background:var(--orange-12)"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--blue)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:24%;width:20%;background:var(--blue-12)"></span></div></div><div class="lzrow" style="border-bottom:0"><div class="lzwho"><span class="d" style="background:var(--red)"></span><span class="ln"></span></div><div class="lztrack"><span class="lzbar" style="left:10%;width:32%;background:var(--red-12)"></span><span class="lzbar" style="left:52%;width:18%;background:var(--red-12)"></span></div></div><div class="lzdiv"></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--green)"></span><span class="ln"></span></div><div class="lzcells"><span class="r"></span><span class="r"></span><span class="g"></span><span></span><span></span><span class="r"></span><span class="g"></span><span class="g"></span><span></span><span class="r"></span></div></div><div class="lzrow"><div class="lzwho"><span class="d" style="background:var(--violet)"></span><span class="ln"></span></div><div class="lzcells"><span class="g"></span><span class="g"></span><span class="r"></span><span></span><span class="r"></span><span></span><span class="g"></span><span class="r"></span><span></span><span class="g"></span></div></div><div class="lzrow" style="border-bottom:0"><div class="lzwho"><span class="d" style="background:var(--orange)"></span><span class="ln"></span></div><div class="lzcells"><span class="r"></span><span class="g"></span><span class="r"></span><span class="g"></span><span></span><span></span><span class="r"></span><span class="g"></span><span class="g"></span><span></span></div></div></div></div></div></div>
+          </div>
+          <div class="frame" style="padding:1.6cqw">
+            <h3 class="h3">Прогноз сроков</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Когда работа закончится при текущем темпе</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="ttl">Прогноз даты завершения</div><svg viewBox="0 0 216 92" style="width:100%;flex:1"><line x1="8" y1="76" x2="208" y2="76" stroke="#e6e6e6"/><line x1="8" y1="15" x2="8" y2="76" stroke="#eee"/><line x1="60" y1="76" x2="60" y2="19" stroke="#7d4ccf" stroke-width="1.1" stroke-dasharray="3 2"/><circle cx="60" cy="76" r="2.4" fill="#7d4ccf"/><rect x="51" y="1.5" width="18" height="11" rx="5.5" fill="#efe9f9"/><text x="60" y="9.6" text-anchor="middle" font-size="6.6" font-weight="600" fill="#7d4ccf">P50</text><line x1="108" y1="76" x2="108" y2="19" stroke="#ffa100" stroke-width="1.1" stroke-dasharray="3 2"/><circle cx="108" cy="76" r="2.4" fill="#ffa100"/><rect x="99" y="1.5" width="18" height="11" rx="5.5" fill="#fff3e0"/><text x="108" y="9.6" text-anchor="middle" font-size="6.6" font-weight="600" fill="#ffa100">P80</text><line x1="158" y1="76" x2="158" y2="34" stroke="#f44336" stroke-width="1.1" stroke-dasharray="3 2"/><circle cx="158" cy="76" r="2.4" fill="#f44336"/><rect x="149" y="1.5" width="18" height="11" rx="5.5" fill="#fde8e6"/><text x="158" y="9.6" text-anchor="middle" font-size="6.6" font-weight="600" fill="#f44336">P95</text><polyline points="10,32 30,23 52,18 74,16 96,16 118,19 140,25 162,33 184,41 206,46" fill="none" stroke="#7d4ccf" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="row" style="gap:16px;margin-top:5px;padding-left:8px"><span class="row" style="gap:3px"><i style="width:7px;height:7px;border-radius:2px;background:#7d4ccf"></i><span class="lab" style="font-weight:600;color:#7d4ccf">P50</span><span class="val" style="font-weight:500">23.04</span></span><span class="row" style="gap:3px"><i style="width:7px;height:7px;border-radius:2px;background:#ffa100"></i><span class="lab" style="font-weight:600;color:#ffa100">P80</span><span class="val" style="font-weight:500">15.05</span></span><span class="row" style="gap:3px"><i style="width:7px;height:7px;border-radius:2px;background:#f44336"></i><span class="lab" style="font-weight:600;color:#f44336">P95</span><span class="val" style="font-weight:500">10.06</span></span></div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 15. канбан и скрам · сетка фреймов === -->
+    <section class="slide" id="s15">
+      <div class="s-head">
+        <h2 class="s-title">Канбан и скрам для команд разработки</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <p class="body" style="font-size:1.25cqw; max-width:70cqw">ИТ-блок банка ведет циклы разработки цифровых продуктов в том же сервисе, где работают бизнес-подразделения. Готовые шаблоны досок, WIP-лимиты, спринты и отчеты по ним</p>
+
+        <div class="cols-4" style="margin-top:2cqw; align-items:start">
+          <div class="frame" style="padding:1.6cqw">
+            <h3 class="h3">Скрам-доска</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.4cqw">Спринт целиком помещается на экран</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="kbsh"><div class="kbside" style="gap:5px;justify-content:center"><span class="hd"></span><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="pj"><i></i><b>Спринт</b></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div></div><div class="kbmain" style="display:flex;flex-direction:column"><div class="vtb"><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi act"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1.5" y="2" width="3.4" height="12" rx="1"/><rect x="6.3" y="2" width="3.4" height="8" rx="1"/><rect x="11.1" y="2" width="3.4" height="10" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><line x1="1.5" y1="6.2" x2="14.5" y2="6.2"/><line x1="1.5" y1="9.9" x2="14.5" y2="9.9"/><line x1="6" y1="2.5" x2="6" y2="13.5"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="12" height="2" rx="1"/><rect x="2" y="7" width="8.5" height="2" rx="1"/><rect x="2" y="11" width="5" height="2" rx="1"/></svg></span><span class="vi"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="3" width="12.4" height="11" rx="2"/><line x1="1.8" y1="6.5" x2="14.2" y2="6.5"/><line x1="5" y1="1.6" x2="5" y2="4"/><line x1="11" y1="1.6" x2="11" y2="4"/></svg></span></div><div class="bttl">Скрам-доска</div><div class="kboard" style="flex:1"><div class="kcol" style="background:#f6f6f8;border-radius:4px;border-right:0;padding:4px 6px 6px;gap:6px;margin-top:-4px"><div class="kh">Бэклог</div><span class="kk" style="background:#fff;height:18px;flex:none"></span><span class="kk" style="background:#fff;height:18px;flex:none"></span><span class="kk" style="background:#fff;height:18px;flex:none"></span></div><div class="kcol"><div class="kh">В работе</div><span class="kk o" style="height:24px"></span><span class="kk r" style="height:22px"></span></div><div class="kcol"><div class="kh">Ревью</div><span class="kk o" style="height:20px"></span><span class="kk g" style="height:24px"></span></div><div class="kcol"><div class="kh">Готово</div><span class="kk g" style="height:18px"></span><span class="kk fg" style="height:24px"></span><span class="kk g" style="height:20px"></span></div></div></div></div></div></div></div>
+          </div>
+          <div class="frame" style="padding:1.6cqw">
+            <h3 class="h3">Дорожки</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.4cqw">Разделение потока по продуктам и командам</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="kbsh"><div class="kbside" style="gap:5px;justify-content:center"><span class="hd"></span><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="pj"><i></i><b>Бухгал.</b></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:78%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:80%"></span></div><div class="kbrow"><span class="dot"></span><span class="ln" style="width:60%"></span></div></div><div class="kbmain"><div class="swhdr">Оплата</div><div class="kboard" style="margin-bottom:6px"><div class="kcol"><div class="kh">Очередь</div><span class="kk g" style="height:18px"></span><span class="kk n" style="height:15px"></span></div><div class="kcol"><div class="kh">В работе</div><span class="kk o" style="height:20px"></span><span class="kk r" style="height:15px"></span></div><div class="kcol"><div class="kh">Соглас…</div><span class="kk g" style="height:15px"></span><span class="kk o" style="height:18px"></span></div><div class="kcol"><div class="kh">Готово</div><span class="kk r" style="height:15px"></span><span class="kk g" style="height:18px"></span></div></div><div class="swlane">Платежи клиентов</div><div class="swlane">Отчетность</div><div class="swlane">Еженедельные задачи</div><div class="swlane dim">Рабочие вопросы</div></div></div></div></div></div>
+          </div>
+          <div class="frame" style="padding:1.6cqw">
+            <h3 class="h3">Диаграмма сгорания</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.4cqw">Успевает ли команда к цели спринта</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="ttl">Диаграмма сгорания</div><svg viewBox="0 0 216 100" style="width:100%;flex:1"><line x1="8" y1="20" x2="212" y2="20" stroke="#f2f2f2"/><line x1="8" y1="42" x2="212" y2="42" stroke="#f2f2f2"/><line x1="8" y1="64" x2="212" y2="64" stroke="#f2f2f2"/><line x1="8" y1="86" x2="212" y2="86" stroke="#e6e6e6"/><line x1="8" y1="10" x2="8" y2="86" stroke="#e6e6e6"/><rect x="19" y="77" width="10" height="9" rx="1.5" fill="#7d4ccf"/><rect x="52" y="77" width="10" height="9" rx="1.5" fill="#7d4ccf"/><rect x="85" y="79" width="10" height="7" rx="1.5" fill="#f44336"/><rect x="118" y="76" width="10" height="10" rx="1.5" fill="#7d4ccf"/><rect x="152" y="78" width="10" height="8" rx="1.5" fill="#4caf51"/><line x1="8" y1="12" x2="208" y2="86" stroke="#2f80ed" stroke-width="1.4" stroke-dasharray="4 3"/><polyline points="8,12 41,12 41,22 74,22 74,34 107,34 107,52 140,52 140,64 174,64 174,79 208,79 208,86" fill="none" stroke="#ffa100" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="8" cy="12" r="2.2" fill="#ffa100" stroke="#fff" stroke-width=".8"/><circle cx="41" cy="22" r="2.2" fill="#ffa100" stroke="#fff" stroke-width=".8"/><circle cx="74" cy="34" r="2.2" fill="#ffa100" stroke="#fff" stroke-width=".8"/><circle cx="107" cy="52" r="2.2" fill="#ffa100" stroke="#fff" stroke-width=".8"/><circle cx="140" cy="64" r="2.2" fill="#ffa100" stroke="#fff" stroke-width=".8"/><circle cx="174" cy="79" r="2.2" fill="#ffa100" stroke="#fff" stroke-width=".8"/></svg><div class="row" style="gap:10px;margin-top:2px;flex-wrap:wrap;padding-left:8px"><span class="row" style="gap:4px"><i style="width:8px;height:8px;border-radius:2px;background:#7d4ccf"></i><span class="lab">Завершено</span></span><span class="row" style="gap:4px"><span style="width:12px;height:0;border-top:2px solid #ffa100;display:inline-block"></span><span class="lab">Осталось</span></span><span class="row" style="gap:4px"><span style="width:12px;height:0;border-top:1.5px dashed #2f80ed;display:inline-block"></span><span class="lab">Идеальное</span></span></div></div></div></div>
+          </div>
+          <div class="frame" style="padding:1.6cqw">
+            <h3 class="h3">Скорость команды</h3>
+            <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.4cqw">Сколько работы команда закрывает за спринт</p>
+            <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="display:flex;flex-direction:column"><div class="ttl">Скорость команды</div><svg viewBox="0 0 216 100" style="width:100%;flex:1"><line x1="8" y1="22" x2="212" y2="22" stroke="#f2f2f2"/><line x1="8" y1="44" x2="212" y2="44" stroke="#f2f2f2"/><line x1="8" y1="66" x2="212" y2="66" stroke="#f2f2f2"/><line x1="8" y1="80" x2="212" y2="80" stroke="#e6e6e6"/><rect x="10" y="70" width="17" height="10" fill="#ffa100"/><rect x="10" y="63" width="17" height="7" fill="#9e9e9e"/><rect x="10" y="55" width="17" height="8" fill="#4caf51"/><rect x="39" y="66" width="17" height="14" fill="#ffa100"/><rect x="39" y="50" width="17" height="16" fill="#2f80ed"/><rect x="68" y="68" width="17" height="12" fill="#ffa100"/><rect x="68" y="58" width="17" height="10" fill="#9e9e9e"/><rect x="97" y="68" width="17" height="12" fill="#2f80ed"/><rect x="126" y="72" width="17" height="8" fill="#2f80ed"/><rect x="155" y="70" width="17" height="10" fill="#ffa100"/><rect x="155" y="63" width="17" height="7" fill="#4caf51"/><rect x="155" y="53" width="17" height="10" fill="#9e9e9e"/><rect x="184" y="71" width="17" height="9" fill="#ffa100"/><rect x="184" y="45" width="17" height="26" fill="#9e9e9e"/></svg><div class="row" style="gap:9px;margin-top:2px;flex-wrap:wrap;padding-left:8px"><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#2f80ed"></i><span class="lab">Frontend</span></span><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#9e9e9e"></i><span class="lab">Тест</span></span><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#4caf51"></i><span class="lab">Дизайн</span></span><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#ffa100"></i><span class="lab">Аналитика</span></span></div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================== 16. формулы · T2 === -->
+    <section class="slide" id="s16">
+      <div class="s-head">
+        <h2 class="s-title">Считайте показатели формулами прямо в карточке задачи</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="align-items:center">
+        <div>
+          <p class="body" style="font-size:1.25cqw">Пользовательское поле «Формулы» автоматизирует повторяющиеся вычисления: расчет лимита, резерва или эффективной ставки не приходится вести в отдельной таблице</p>
+
+          <div class="steps" style="margin-top:2.4cqw; max-width:40cqw">
+            <div class="step is-strong"><div class="step-num">1</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Напишите в поле формулу</p></div></div>
+            <div class="step"><div class="step-num">2</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Подставьте в нее значения полей, которые участвуют в вычислении, и получите ответ</p></div></div>
+            <div class="step"><div class="step-num">3</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Если значения в карточке изменятся, результат пересчитается автоматически</p></div></div>
+            <div class="step"><div class="step-num">4</div><div><p class="step-title" style="font-size:1.0417cqw; line-height:1.4; font-weight:400">Числовые поля разных карточек суммируются в таблицах. Так собирается, например, портфель по всем заявкам отделения за месяц</p></div></div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:center">
+          <div class="ffield" style="max-width:42cqw">
+            <p class="ff-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Создать поле</p>
+
+            <div class="ff-box">
+              <span class="ff-cap">Тип</span>
+              <span class="ff-value"><span class="ff-sigma">Σ</span>Формула<span class="ff-caret">▾</span></span>
+            </div>
+
+            <div class="ff-box">
+              <span class="ff-cap">Название поля *</span>
+              <span class="ff-value">Резерв по ссуде</span>
+            </div>
+
+            <p class="ff-check"><span class="ff-cb"></span>Показывать на фасаде карточек</p>
+
+            <p class="ff-hint">Например, prop("Prop name") * prop("goals_done") − 1/2</p>
+
+            <div class="ff-box is-active">
+              <span class="ff-cap">Формула *</span>
+              <span class="ff-code">(prop("Сумма долга")*prop("Ставка резерва"))/100</span>
+            </div>
+
+            <p class="ff-note">Тестовый результат: неизвестен</p>
+
+            <div class="ff-chips">
+              <span class="ff-chip is-violet">+1 Сумма долга (n/a)</span><span class="ff-chip is-violet">+1 Ставка резерва (n/a)</span><span class="ff-chip is-violet">+1 Категория качества (n/a)</span>
+              <span class="ff-chip is-violet">+1 Обеспечение (n/a)</span><span class="ff-chip is-violet">+1 Срок (n/a)</span><span class="ff-chip is-violet">Лимит (n/a)</span>
+              <span class="ff-chip is-violet">Оценка времени (n/a)</span><span class="ff-chip is-violet">Скоринг клиента (n/a)</span><span class="ff-chip">+1 size (4)</span>
+              <span class="ff-chip">+1 goals_total (0)</span><span class="ff-chip">+1 goals_done (0)</span><span class="ff-chip">+1 children_count (0)</span>
+              <span class="ff-chip">+1 children_done (0)</span><span class="ff-chip">+1 parents_count (0)</span><span class="ff-chip">+1 time_spent_sum (0)</span>
+              <span class="ff-chip">+1 time_blocked_sum (26)</span>
+            </div>
+
+            <p class="ff-add">ДОБАВИТЬ</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 17. справочник клиентов · T2 === -->
+    <section class="slide" id="s17">
+      <div class="s-head">
+        <h2 class="s-title">Ведите справочник клиентов и контрагентов</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="grid-template-columns:36cqw 1fr; align-items:center">
+        <div style="display:flex; align-items:center">
+          <p class="body" style="font-size:1.25cqw">Справочник — это учет данных о клиентах, продуктах и партнерах банка. Выносите нужные поля на фасад карточки, чтобы менеджер видел сегмент, лимит и статус проверки без перехода в смежные системы. Настраивайте фильтры и делайте выборку по региону, виду деятельности и другим признакам</p>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0; align-self:stretch">
+          <img src="../assets/mocks/help-center.png" alt="Справочный центр Кайтена" style="max-height:100%; max-width:100%; width:auto; height:auto; display:block" />
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 18. отчеты о ходе проектов · сетка 4×3 === -->
+    <section class="slide" id="s18">
+      <div class="s-head">
+        <h2 class="s-title">Собирайте аналитику о ходе проектов и работе сотрудников</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <p class="body" style="font-size:1.25cqw; max-width:70cqw">Встроенные отчеты показывают, где процесс встает и сколько времени занимает каждый этап. Данные собираются автоматически, отдельная выгрузка для этого не нужна</p>
+
+        <div class="cols-2" style="grid-template-columns:44cqw 1fr; margin-top:2.4cqw; align-items:center">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 2.4cqw">
+            <ul class="checks">
+              <li>Суммарный отчет</li>
+              <li>Срок по задачам</li>
+              <li>Накопительная диаграмма потока</li>
+              <li>Контрольный график</li>
+              <li>Спектральная диаграмма</li>
+              <li>Динамика времени цикла</li>
+            </ul>
+            <ul class="checks">
+              <li>Пропускная способность</li>
+              <li>Распределение карточек</li>
+              <li>Время цикла</li>
+              <li>Время решения блокировок</li>
+              <li>Отчет по спринтам</li>
+              <li>Скорость выполнения</li>
+            </ul>
+          </div>
+
+          <div class="cols-2" style="align-items:center">
+            <div class="frame" style="padding:1.6cqw">
+              <h3 class="h3">Отчеты и метрики</h3>
+              <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.6cqw">Показатели процесса на одном экране</p>
+              <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="ttl">Скорость команды по спринтам</div><svg viewBox="0 0 256 96" style="width:100%;height:104px"><line x1="6" y1="86" x2="250" y2="86" stroke="#e6e6e6"/><g><rect x="14" y="60" width="9" height="26" fill="var(--blue)"/><rect x="24" y="66" width="9" height="20" fill="#2d2d2d"/><rect x="54" y="40" width="9" height="46" fill="var(--blue)"/><rect x="64" y="48" width="9" height="38" fill="#2d2d2d"/><rect x="94" y="52" width="9" height="34" fill="var(--blue)"/><rect x="104" y="58" width="9" height="28" fill="#2d2d2d"/><rect x="134" y="22" width="9" height="64" fill="var(--blue)"/><rect x="144" y="34" width="9" height="52" fill="#2d2d2d"/><rect x="174" y="50" width="9" height="36" fill="var(--blue)"/><rect x="184" y="44" width="9" height="42" fill="#2d2d2d"/><rect x="214" y="62" width="9" height="24" fill="var(--blue)"/><rect x="224" y="56" width="9" height="30" fill="#2d2d2d"/></g></svg><div class="row" style="gap:12px;margin-top:4px"><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:var(--blue)"></i><span class="lab">Взято в спринт</span></span><span class="row" style="gap:4px"><i style="width:7px;height:7px;border-radius:2px;background:#2d2d2d"></i><span class="lab">Выполнено</span></span></div></div></div></div>
+            </div>
+            <div class="frame" style="padding:1.6cqw">
+              <h3 class="h3">Учет времени</h3>
+              <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.6cqw">Сколько времени уходит на этапы работы</p>
+              <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="val" style="margin-bottom:9px;font-weight:700">Запустить таймер</div><div class="lab" style="margin-bottom:3px">Начало</div><div class="field row" style="margin-bottom:8px"><span class="val" style="font-weight:400">16.03.2026 15:00</span><span class="sp"></span><svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="var(--t3)" stroke-width="1.3"><rect x="1.8" y="3" width="12.4" height="11" rx="2"/><line x1="1.8" y1="6.5" x2="14.2" y2="6.5"/><line x1="5" y1="1.6" x2="5" y2="4"/><line x1="11" y1="1.6" x2="11" y2="4"/></svg></div><div class="field" style="height:24px;margin-bottom:7px"><span class="val" style="font-weight:400">Приступаю к задаче</span></div><div class="lab" style="margin-bottom:3px">Роль</div><div class="field row" style="margin-bottom:6px"><span class="val" style="font-weight:400">Куратор</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div><div class="row" style="justify-content:flex-end;gap:6px"><span style="border:1px solid var(--bd);border-radius:6px;padding:4px 10px;font-size:8px;font-weight:600;color:var(--t2);letter-spacing:0">ОТМЕНА</span><span style="background:var(--violet);border-radius:6px;padding:4px 10px;font-size:8px;font-weight:600;color:#fff;letter-spacing:0">ЗАПУСТИТЬ ТАЙМЕР</span></div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 19. детальные отчеты под запрос · T2 === -->
+    <section class="slide" id="s19">
+      <div class="s-head">
+        <h2 class="s-title">Детальные отчеты под ваш запрос</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <p class="body" style="font-size:1.25cqw; max-width:66cqw">Настраивайте выборку гибкой системой фильтров, выгружайте отчеты в XLSX и PDF или отдавайте данные в BI-систему банка по API</p>
+
+        <div class="cols-2" style="grid-template-columns:33.333cqw 1fr; margin-top:2.4cqw; align-items:center">
+          <div>
+            <h3 class="h3" style="margin:0">С аналитикой контролируйте все в одном месте:</h3>
+            <ul class="checks" style="margin-top:1.4cqw">
+              <li>Выполнение задач и соблюдение сроков</li>
+              <li>Уровень продуктивности сотрудников</li>
+              <li>Время, затраченное на выполнение задач</li>
+              <li>Объем работы за выбранный период</li>
+              <li>Интеграцию по API с любой BI-системой</li>
+              <li>Текущее распределение карточек на досках, чтобы оценить интенсивность процессов</li>
+            </ul>
+          </div>
+
+          <div style="display:flex; flex-direction:column; justify-content:center; gap:1.6cqw; min-height:0">
+            <div class="trep">
+              <table>
+                <colgroup><col style="width:26%" /><col style="width:26%" /><col style="width:19%" /><col style="width:19%" /><col style="width:10%" /></colgroup>
+                <thead>
+                  <tr><th>Название</th><th>Доска</th><th>Взята в работу</th><th>Выполнена</th><th class="sum">Сумма</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Заключение по заемщику</td><td><span class="brd"><i class="is-violet"></i><span>Кредитование — заявки МСБ</span></span></td><td>15.02.2026 17:28</td><td>15.02.2026 17:28</td><td class="sum">4ч 49м</td></tr>
+                  <tr><td>Проверка контрагента</td><td><span class="brd"><i class="is-orange"></i><span>Комплаенс</span></span></td><td>11.07.2026 16:29</td><td>18.07.2026 14:57</td><td class="sum">1ч 4м</td></tr>
+                  <tr><td>Расчет резерва</td><td><span class="brd"><span>Риски (портфель МСБ)</span></span></td><td>10.03.2026 16:41</td><td>26.09.2026 4:28</td><td class="sum">4ч 18м</td></tr>
+                  <tr class="is-on"><td>Согласование лимита</td><td><span class="brd"><span>Кредитный комитет</span></span></td><td>09.06.2026 4:32</td><td>16.08.2026 15:29</td><td class="sum">9ч 48м</td></tr>
+                  <tr><td>Открытие счета клиенту</td><td><span class="brd"><i class="is-violet"></i><span>Розница — обслуживание</span></span></td><td>11.07.2026 12:56</td><td>11.07.2026 22:05</td><td class="sum">15м</td></tr>
+                  <tr><td>Отчет по портфелю за месяц</td><td><span class="brd"><i class="is-violet"></i><span>Финансы и отчетность</span></span></td><td>11.07.2026 22:12</td><td>12.07.2026 19:52</td><td class="sum">1ч 35м</td></tr>
+                  <tr><td>Запуск зарплатного проекта</td><td><span class="brd"><span>Корпоративный бизнес</span></span></td><td>31.05.2026 13:36</td><td></td><td class="sum">4ч 15м</td></tr>
+                  <tr><td>Обновление тарифов</td><td><span class="brd"><i class="is-violet"></i><span>Продукты и тарифы</span></span></td><td>11.07.2026 22:06</td><td>17.07.2026 23:28</td><td class="sum">2ч</td></tr>
+                  <tr><td>Ответ на обращение клиента</td><td><span class="brd"><i class="is-violet"></i><span>Служба поддержки</span></span></td><td>19.07.2026 5:23</td><td>19.07.2026 5:28</td><td class="sum">10м</td></tr>
+                </tbody>
+              </table>
+              <p class="total">Суммарное время 35ч 3м</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================== 20. служба поддержки · T2 === -->
+    <section class="slide" id="s20">
+      <div class="s-head">
+        <h2 class="s-title">Служба поддержки принимает обращения клиентов и сотрудников</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="grid-template-columns:42.3cqw 1fr; align-items:center">
+        <div>
+          <ul class="checks">
+            <li>Получайте обращения через портал на сайте, почту или Телеграм</li>
+            <li>Храните все данные по обращению в карточке: клиент, продукт, история переписки</li>
+            <li>Создавайте SLA и контролируйте уровень сервиса по каждому каналу</li>
+            <li>Отправляйте заявителям автоматические уведомления о статусе</li>
+            <li>Оценивайте работу службы поддержки и находите повторяющиеся причины обращений</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center">
+          <img src="../assets/mocks/support-card.png" alt="Карточка обращения в службу поддержки" style="width:82%; height:auto; display:block; margin-left:auto; margin-right:0" />
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 21. интеграции · T2 === -->
+    <section class="slide" id="s21">
+      <div class="s-head">
+        <h2 class="s-title">Подключайте свои инструменты без сложных настроек</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="grid-template-columns:24cqw 1fr; align-items:center">
+        <div>
+          <ul class="checks">
+            <li>Почта, календарь и мессенджеры — уведомления приходят туда, где команда уже работает</li>
+            <li>GitLab и GitHub для команд разработки</li>
+            <li>Вебхуки и обмен с 1С для учетных процессов</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center">
+          <img src="../assets/mocks/integrations-hub.png" alt="Карта интеграций Кайтена" style="width:92%; height:auto; display:block; margin-left:auto; margin-right:0" />
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== 22. открытый API · T2 === -->
+    <section class="slide" id="s22">
+      <div class="s-head">
+        <h2 class="s-title">Настраивайте интеграции с внутренними системами через API</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="grid-template-columns:31cqw 1fr; align-items:center">
+        <div>
+          <ul class="checks">
+            <li>Передавайте данные в системы аналитики и отчетности банка</li>
+            <li>Создавайте вспомогательные утилиты под свои регламенты</li>
+            <li>Связывайте Kaiten с АБС, CRM и BI-системой</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0; align-self:stretch">
+          <img src="../assets/mocks/api-docs.png" alt="Справочник Kaiten API" style="width:100%; height:auto; display:block; filter:drop-shadow(0 .42cqw .84cqw rgba(45,45,45,.14))" />
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================== 23. импорт · T6 === -->
+    <section class="slide" id="s23">
+      <div class="s-head">
+        <h2 class="s-title">Импортируйте задачи из Trello и Jira в несколько кликов</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body is-tall">
+        <p class="body" style="font-size:1.25cqw">Быстрый перенос данных без сложных алгоритмов и разработчиков</p>
+
+        <div class="cols-2" style="margin-top:2cqw">
+          <div>
+            <div style="border-radius:.833cqw; background:var(--surface-frame); padding:1.8cqw; height:34.6cqw; overflow:hidden">
+              <h3 class="h2" style="margin-bottom:1.2cqw">Импорт задач в других сервисах</h3>
+              <p class="body" style="margin-bottom:2.6cqw">Перенос описывается запросом к API, поля сопоставляются вручную</p>
+              <div style="background:#fff; border-radius:.63cqw; padding:1.2cqw 1.4cqw; font-family:var(--font-mono); font-size:.83cqw; line-height:1.45; color:#2d2d2d">
+                <div style="min-height:1.1cqw">POST /v2/issues/_import</div>
+                <div style="min-height:1.1cqw">Authorization: OAuth &lt;token&gt;</div>
+                <div style="min-height:1.1cqw">Content-Type: application/json</div>
+                <div style="min-height:1.1cqw">&nbsp;</div>
+                <div style="min-height:1.1cqw">{</div>
+                <div style="min-height:1.1cqw">&nbsp;&nbsp;"queue": "CREDIT",</div>
+                <div style="min-height:1.1cqw">&nbsp;&nbsp;"summary": "Заявка на кредит МСБ",</div>
+                <div style="min-height:1.1cqw">&nbsp;&nbsp;"createdBy": "1234567890",</div>
+                <div style="min-height:1.1cqw">&nbsp;&nbsp;"createdAt": "2026-06-01T10:00:00.000+0300",</div>
+                <div style="min-height:1.1cqw">&nbsp;&nbsp;"updatedBy": "1234567890",</div>
+                <div style="min-height:1.1cqw">&nbsp;&nbsp;"updatedAt": "2026-06-01T14:20:00.000+0300"</div>
+                <div style="min-height:1.1cqw">}</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="border-radius:.833cqw; background:#efe9f9; padding:1.8cqw; height:34.6cqw; overflow:hidden; display:flex; flex-direction:column; gap:1.6cqw">
+              <div>
+                <h3 class="h2" style="margin:0">Импорт задач в Kaiten</h3>
+                <p class="body" style="margin-top:.4cqw">Trello, Jira, Confluence и таблицы CSV и XLS</p>
+              </div>
+              <div style="flex:1; display:flex; align-items:center; justify-content:center; min-height:0">
+                <img src="../assets/mocks/relocation.png" alt="Перенос задач из сторонних сервисов в Кайтен" style="width:100%; height:auto; display:block" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 24. инструменты платформы · 4×3 === -->
+    <section class="slide" id="s24">
+      <div class="s-head">
+        <h2 class="s-title">Все необходимые функции в одном сервисе</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body is-tall">
+        <p class="body" style="font-size:1.25cqw">Модули подключаются по мере надобности — банк платит за то, чем пользуется</p>
+
+        <div class="grid-4x3" style="margin-top:2cqw; height:auto; flex:1">
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></span>Канбан</h3><p class="body muted" style="color:var(--text-secondary)">Канбан-графики и отчеты, детальная визуализация процессов, WIP-лимиты</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Учет времени</h3><p class="body muted" style="color:var(--text-secondary)">Таймер для учета времени работы с задачами, отчеты по загрузке сотрудников</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14H2v5M17 10h5V5"/><path d="M2.5 9a9 9 0 0 1 15-3.4L22 10M2 14l4.5 4.4A9 9 0 0 0 21.5 15"/></svg></span>Скрам</h3><p class="body muted" style="color:var(--text-secondary)">Скрам-отчеты и графики, запуск спринтов, инструменты для визуализации</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></span>Группы пользователей</h3><p class="body muted" style="color:var(--text-secondary)">Объединение пользователей в группы, настройка доступов для крупных команд</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Ограничения</h3><p class="body muted" style="color:var(--text-secondary)">Строгий контроль над операциями сотрудников с задачами</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4v15M7 16l6 3 6-3V4l-6 3M7 16l-6 3V4l6-3 6 3M7 16V1"/></svg></span>User Story Mapping</h3><p class="body muted" style="color:var(--text-secondary)">Инструмент для создания карты пользовательских историй</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></span>Служба поддержки</h3><p class="body muted" style="color:var(--text-secondary)">Прием обращений от пользователей, у которых нет доступа к доскам</p></div>
+          <div class="frame" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M8 12h10M6 18h7"/><path d="M3 3v18"/></svg></span>Ресурсное планирование</h3><p class="body muted" style="color:var(--text-secondary)">Диаграмма Ганта, распределение ресурсов, планирование трудозатрат</p></div>
+          <div class="frame span-2" style="padding:1.6cqw"><h3 class="h3" style="display:flex; align-items:center; gap:.8cqw; margin-bottom:1.1cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></span>Автоматизации</h3><p class="body muted" style="color:var(--text-secondary)">Правила на досках и запланированные задания снимают с сотрудников повторяющиеся действия</p></div>
+          <div class="frame is-accent span-2" style="padding:1.6cqw"><h3 class="h3" style="margin:0; display:flex; align-items:center; gap:.8cqw"><span style="width:1.5cqw; height:1.5cqw; flex:none; color:var(--action-primary); display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span>Это еще не все</h3><p class="body muted" style="color:var(--text-secondary); margin-top:1.1cqw">Новые модули в активной разработке</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 25. мобильное приложение · T2 === -->
+    <section class="slide" id="s25">
+      <div class="s-head">
+        <h2 class="s-title">Мобильное приложение Kaiten</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="gap:2.6cqw">
+        <div class="cols-3">
+          <div class="features" style="max-width:24cqw; margin-top:0">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Работайте над задачами и документами с телефона в режиме реального времени</p></div>
+            </div>
+          </div>
+          <div class="features" style="max-width:24cqw; margin-top:0">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Создавайте карточки и комментируйте задачи в Телеграме и Slack</p></div>
+            </div>
+          </div>
+          <div class="features" style="max-width:24cqw; margin-top:0">
+            <div class="feature">
+              <div class="feature-icon" style="background:var(--surface-accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13 6 9z"/><path d="M10 18a2 2 0 0 0 4 0"/></svg></div>
+              <div><p class="feature-title" style="font-weight:400">Получайте уведомления о событиях, чтобы быстро реагировать на изменения</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mcta" style="--u:.0771cqw; width:93.75cqw; height:32.4cqw; margin-inline:auto">
+          <div class="mcta-art">
+            <img src="../assets/mocks/mobile-phones.png" alt="Мобильное приложение Кайтена" />
+          </div>
+
+          <div class="mcta-copy">
+            <h3>Мобильное приложение<br />Kaiten <em>для iOS и Android</em></h3>
+            <p>Все задачи, статусы, документы<br />и обсуждения в вашем телефоне</p>
+            <div class="mcta-btns">
+              <a class="mcta-btn" href="https://apps.apple.com/us/app/kaiten/id6739029367?roistat_visit=3039529"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.6 2.2-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.9.7c1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.1-.8-2.1-3.6zM14.3 5.3c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/></svg>App Store</a>
+              <a class="mcta-btn" href="https://play.google.com/store/apps/details?id=ru.kaiten.app&amp;hl=ru&amp;roistat_visit=3039529"><svg viewBox="0 0 24 24"><path d="M4 3.2v17.6c0 .5.5.8.9.6l9.6-5.6-2.6-2.6zm0 0 7.9 7.9 2.6-2.6L4.9 2.6c-.4-.2-.9.1-.9.6z" fill="currentColor"/><path d="m17.7 10.3-2.7-1.6-2.8 2.8 2.8 2.8 2.7-1.6c.8-.5.8-1.9 0-2.4z" fill="currentColor"/></svg>Google Play</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 26. разработка под запрос · T6 === -->
+    <section class="slide" id="s26">
+      <div class="s-head">
+        <h2 class="s-title">Разработка решений под ваш запрос</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body">
+        <div class="cols-2" style="align-items:center">
+          <div>
+            <p class="body" style="font-size:1.25cqw">Уникальный рабочий процесс крупного банка требует индивидуального подхода. Kaiten дорабатывает функции и настраивает сервис под задачи вашего бизнеса</p>
+
+            <ul class="checks" style="margin-top:2.4cqw">
+              <li>Разбираем процессы подразделений и собираем схему внедрения</li>
+              <li>Настраиваем доски, роли и права под структуру банка</li>
+              <li>Дорабатываем функции под регламенты и отчетность</li>
+              <li>Сопровождаем внедрение и обучаем команды</li>
+            </ul>
+          </div>
+
+          <div class="cols-2" style="align-items:center">
+            <div class="frame" style="padding:1.6cqw">
+              <h3 class="h3">Автоматизация и правила</h3>
+              <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Маршрут заявки описывается один раз и работает на всех карточках</p>
+              <div class="fm-shot is-sm"><div class="fm"><div class="card h180"><div class="row" style="gap:6px;margin-bottom:8px"><span class="av" style="width:16px;height:16px;border-radius:5px;background:transparent;flex:none"><svg width="16" height="16" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="aiBgA" x1="14" y1="24" x2="14" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#AB47BD"/><stop offset=".5" stop-color="#2196F3"/><stop offset="1" stop-color="#00BCD4"/></linearGradient></defs><path d="M2.5 9C2.5 6.23858 4.73858 4 7.5 4H19.8333C20.9152 4 21.9679 4.35089 22.8333 5L23.9 5.8C24.9072 6.55542 25.5 7.74097 25.5 9V19C25.5 20.259 24.9072 21.4446 23.9 22.2L22.8333 23C21.9679 23.6491 20.9152 24 19.8333 24H7.5C4.73858 24 2.5 21.7614 2.5 19V9Z" fill="url(#aiBgA)"/><rect x="4.5" y="6" width="16" height="16" rx="3" fill="#121212"/><rect x="7.3" y="9.8" width="4" height="4.2" rx="1.2" fill="#4CAF51"/><rect x="13.3" y="9.8" width="4" height="4.2" rx="1.2" fill="#4CAF51"/><path d="M8.5 17.3Q12.5 20.6 16.5 17.3" stroke="#4CAF51" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="val">Автоматизация</span></div><div class="tabs"><span class="a">СОБЫТИЯ</span><span>СРОКИ</span><span>КНОПКИ</span><span>ЧЕК-ЛИСТЫ</span></div><div style="display:flex;gap:8px"><div style="flex:1 1 0;min-width:0"><div class="lab" style="margin-bottom:4px">Когда</div><div class="field row" style="margin-bottom:7px"><span class="val" style="font-weight:400;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Карточка перемещена</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div><div class="lab" style="margin-bottom:4px">Условие</div><div class="field row"><span class="val" style="font-weight:400;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Метка карточки</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div></div><div style="flex:1 1 0;min-width:0"><div class="lab" style="margin-bottom:4px">Выполнить</div><div class="field row" style="margin-bottom:7px"><span class="val" style="font-weight:400;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Назначить ответ…</span><span class="sp"></span><span style="font-size:7px;color:var(--t3)">▾</span></div><div class="row" style="gap:5px;margin-bottom:4px"><span class="rb"></span><span class="lab">Автор события</span></div><div class="row" style="gap:5px;margin-bottom:4px"><span class="rb on"></span><span class="val" style="font-size:8px">Заказчик карточки</span></div><div class="row" style="gap:5px"><span class="rb"></span><span class="lab">Случайный польз…</span></div></div></div></div></div></div>
+            </div>
+            <div class="frame" style="padding:1.6cqw">
+              <h3 class="h3">Роли и права доступа</h3>
+              <p class="body muted" style="color:var(--text-secondary); margin-bottom:1.8cqw">Права настраиваются под структуру подразделений</p>
+              <div class="fm-shot is-sm"><div class="fm"><div class="card h180" style="position:relative;overflow:hidden"><div style="position:absolute;left:12px;top:0;bottom:0;width:120px;display:flex;flex-direction:column;justify-content:center"><div class="row" style="gap:7px;margin-bottom:11px"><span style="width:24px;height:24px;border-radius:50%;background:#e6e6e6;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden"><svg width="15" height="15" viewBox="0 0.75 24 24" fill="#b3b3b3"><circle cx="12" cy="8.5" r="4"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span><div><div class="val">@nickname</div><div class="lab">Комментатор</div></div></div><div class="lab" style="margin-bottom:8px">Роль</div><div class="row" style="gap:7px;margin-bottom:8px"><span class="rb"></span><span class="val" style="font-weight:400">администратор</span></div><div class="row" style="gap:7px;margin-bottom:8px"><span class="rb"></span><span class="val" style="font-weight:400">редактор</span></div><div class="row" style="gap:7px"><span class="rb on"></span><span class="val">комментатор</span></div></div><svg width="104" height="118" viewBox="0 0 58 66" style="position:absolute;right:2px;top:50%;transform:translateY(-50%)"><defs><filter id="shieldInner" x="-25%" y="-25%" width="150%" height="150%"><feOffset dy="0"/><feGaussianBlur stdDeviation="2" result="ib"/><feComposite operator="out" in="SourceGraphic" in2="ib" result="inv"/><feFlood flood-color="#000000" flood-opacity="0.15" result="col"/><feComposite operator="in" in="col" in2="inv" result="sh"/><feComposite operator="over" in="sh" in2="SourceGraphic"/></filter></defs><path d="M29 3 L54 13 V32 C54 49 43 60 29 64 C15 60 4 49 4 32 V13 Z" fill="#efe9f9" filter="url(#shieldInner)"/><rect x="20" y="31" width="18" height="15" rx="2.5" fill="#fff"/><path d="M23 31 V26 a6 6 0 0 1 12 0 V31" fill="none" stroke="#fff" stroke-width="2.5"/><rect x="27.5" y="36.5" width="3" height="5" rx="1.5" fill="#efe9f9"/></svg></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= 27. почему выбирают · 3×2 === -->
+    <section class="slide" id="s27">
+      <div class="s-head">
+        <h2 class="s-title">Почему банки выбирают Kaiten</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:min-content; gap:var(--gap); align-content:center; min-height:0">
+        <div class="frame">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <p class="tile-title">Надежность</p>
+            <p class="tile-text">Kaiten входит в реестр аккредитованных IT-компаний РФ и Единый реестр российского ПО</p>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+            <p class="tile-title">Безопасность</p>
+            <p class="tile-text">Коробочная версия ставится в контур банка, облачные серверы находятся в России и имеют степень защиты Tier 3</p>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></div>
+            <p class="tile-title">Коммуникации</p>
+            <p class="tile-text">Обсуждение идет внутри задачи, а не в сторонних мессенджерах — переписка по клиенту остается в контуре</p>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></div>
+            <p class="tile-title">Меньше рутины</p>
+            <p class="tile-text">Автоматизации и формулы снимают повторяющиеся действия и ручные расчеты</p>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9"/><path d="M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9"/><path d="M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></div>
+            <p class="tile-title">Масштаб</p>
+            <p class="tile-text">Группы пользователей, детальные права и синхронизация с директорией держат тысячи сотрудников в одном сервисе</p>
+          </div>
+        </div>
+        <div class="frame">
+          <div class="tile-item">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1z"/><path d="M7 11l4.2-7.4a2 2 0 0 1 3.6 1.6L14 9h5a2 2 0 0 1 2 2.4l-1.5 7A2 2 0 0 1 17.6 20H7"/></svg></div>
+            <p class="tile-title">Удобство</p>
+            <p class="tile-text">Низкий порог входа: чтобы начать работать в Kaiten, отдельное обучение не нужно</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ 28. контакты · T7 === -->
+    <section class="slide contact" id="s28">
+      <div class="contact-card">
+        <div class="contact-brand">
+          <img src="../assets/kaiten-logo-latin.svg" alt="Kaiten" />
+        </div>
+
+        <p class="contact-title">Профессиональный инструмент для прозрачных и управляемых рабочих процессов</p>
+
+        <div class="contact-cols">
+          <div class="contact-rows">
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg><span>sales@kaiten.ru</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 1.7z"/></svg><span>8 (499) 490-64-99</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg><span>kaiten.ru</span></div>
+          </div>
+          <div class="contact-note">
+            <p style="margin:0">Остались вопросы? Напишите нам на почту или свяжитесь по телефону</p>
+            <svg class="decor" style="right:1.2cqw; bottom:1.2cqw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M9.4 9.1a2.7 2.7 0 1 1 3.4 2.6c-.6.2-.9.7-.9 1.3v.6"/><path d="M12 17.2h.01"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="nav-fallback" aria-label="Слайды">
+  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 28</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 28</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 28</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 28</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4">←</a><span class="counter">5 / 28</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">6 / 28</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">7 / 28</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">8 / 28</span><a href="#s9">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8">←</a><span class="counter">9 / 28</span><a href="#s10">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9">←</a><span class="counter">10 / 28</span><a href="#s11">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10">←</a><span class="counter">11 / 28</span><a href="#s12">→</a></div>
+  <div class="nav-row" data-for="s12"><a href="#s11">←</a><span class="counter">12 / 28</span><a href="#s13">→</a></div>
+  <div class="nav-row" data-for="s13"><a href="#s12">←</a><span class="counter">13 / 28</span><a href="#s14">→</a></div>
+  <div class="nav-row" data-for="s14"><a href="#s13">←</a><span class="counter">14 / 28</span><a href="#s15">→</a></div>
+  <div class="nav-row" data-for="s15"><a href="#s14">←</a><span class="counter">15 / 28</span><a href="#s16">→</a></div>
+  <div class="nav-row" data-for="s16"><a href="#s15">←</a><span class="counter">16 / 28</span><a href="#s17">→</a></div>
+  <div class="nav-row" data-for="s17"><a href="#s16">←</a><span class="counter">17 / 28</span><a href="#s18">→</a></div>
+  <div class="nav-row" data-for="s18"><a href="#s17">←</a><span class="counter">18 / 28</span><a href="#s19">→</a></div>
+  <div class="nav-row" data-for="s19"><a href="#s18">←</a><span class="counter">19 / 28</span><a href="#s20">→</a></div>
+  <div class="nav-row" data-for="s20"><a href="#s19">←</a><span class="counter">20 / 28</span><a href="#s21">→</a></div>
+  <div class="nav-row" data-for="s21"><a href="#s20">←</a><span class="counter">21 / 28</span><a href="#s22">→</a></div>
+  <div class="nav-row" data-for="s22"><a href="#s21">←</a><span class="counter">22 / 28</span><a href="#s23">→</a></div>
+  <div class="nav-row" data-for="s23"><a href="#s22">←</a><span class="counter">23 / 28</span><a href="#s24">→</a></div>
+  <div class="nav-row" data-for="s24"><a href="#s23">←</a><span class="counter">24 / 28</span><a href="#s25">→</a></div>
+  <div class="nav-row" data-for="s25"><a href="#s24">←</a><span class="counter">25 / 28</span><a href="#s26">→</a></div>
+  <div class="nav-row" data-for="s26"><a href="#s25">←</a><span class="counter">26 / 28</span><a href="#s27">→</a></div>
+  <div class="nav-row" data-for="s27"><a href="#s26">←</a><span class="counter">27 / 28</span><a href="#s28">→</a></div>
+  <div class="nav-row" data-for="s28"><a href="#s27">←</a><span class="counter">28 / 28</span><a class="is-off">→</a></div>
+</nav>
+
+<script src="../kaiten-slides.js"></script>
+</body>
+</html>

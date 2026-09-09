@@ -1,0 +1,156 @@
+/* Экран «Портфель проектов» банка для слайда «Так выглядит банк».
+   Собран разметкой, а не картинкой: подписи колонок, карточек и досок —
+   банковские, и меняются вместе с текстом слайда.
+   Правила заскоуплены под .bboard, размеры в cqw от ширины слайда. */
+
+.bboard {
+  --bb-ink: #2d2d2d;
+  --bb-ink-2: #6b6b70;
+  --bb-ink-3: #9a9a9e;
+  --bb-line: #ececef;
+  --bb-line-2: #e2e2e6;
+  --bb-violet: #7d4ccf;
+  --bb-surface: #f7f7f8;
+  font-family: "Roboto", system-ui, sans-serif;
+  color: var(--bb-ink);
+  background: #fff;
+  border: .052cqw solid var(--bb-line-2);
+  border-radius: .833cqw;
+  overflow: hidden;
+}
+.bboard * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --------------------------------------------------------- верхняя панель */
+
+.bboard .bb-top {
+  display: flex; align-items: center; gap: .63cqw;
+  padding: .68cqw .95cqw;
+  border-bottom: .052cqw solid var(--bb-line);
+}
+.bboard .bb-top .bb-name { font-size: .84cqw; font-weight: 500; margin-right: .32cqw; }
+.bboard .bb-tab {
+  display: flex; align-items: center; gap: .32cqw;
+  height: 1.56cqw; padding: 0 .58cqw;
+  border-radius: .32cqw;
+  background: #efe9f9; color: var(--bb-violet);
+  font-size: .63cqw; font-weight: 600; letter-spacing: .02em;
+}
+.bboard .bb-ico {
+  width: 1.35cqw; height: 1.35cqw; flex: none;
+  color: var(--bb-ink-3);
+  display: flex; align-items: center; justify-content: center;
+}
+.bboard .bb-ico svg { width: .89cqw; height: .89cqw; display: block; }
+.bboard .bb-add {
+  margin-left: .52cqw;
+  height: 1.56cqw; padding: 0 .73cqw;
+  display: flex; align-items: center;
+  border: .052cqw solid var(--bb-violet); border-radius: .32cqw;
+  color: var(--bb-violet); font-size: .63cqw; font-weight: 600; letter-spacing: .02em;
+}
+.bboard .bb-pill {
+  height: 1.56cqw; padding: 0 .58cqw;
+  display: flex; align-items: center; gap: .3cqw;
+  border: .052cqw solid var(--bb-line-2); border-radius: .32cqw;
+  color: var(--bb-ink-2); font-size: .63cqw;
+}
+.bboard .bb-pill svg { width: .73cqw; height: .73cqw; display: block; }
+
+/* ------------------------------------------------------------- дорожка */
+
+.bboard .bb-lane { margin: .84cqw; border: .052cqw solid var(--bb-line); border-radius: .52cqw; overflow: hidden; }
+
+.bboard .bb-lane-head {
+  display: flex; align-items: center; gap: .52cqw;
+  padding: .73cqw .84cqw;
+  font-size: .84cqw; font-weight: 500;
+}
+.bboard .bb-grip { width: .52cqw; height: .84cqw; flex: none; color: var(--bb-ink-3); display: block; }
+.bboard .bb-grip svg { width: 100%; height: 100%; display: block; }
+
+.bboard .bb-cols { display: grid; grid-template-columns: repeat(5, 1fr); }
+.bboard .bb-col {
+  display: flex; align-items: center; gap: .42cqw;
+  padding: .52cqw .73cqw .68cqw;
+  font-size: .78cqw; line-height: 1.25;
+  border-bottom: .052cqw solid var(--bb-line);
+}
+.bboard .bb-col + .bb-col { border-left: .052cqw solid var(--bb-line); }
+.bboard .bb-badge {
+  margin-left: auto; flex: none;
+  min-width: 1.15cqw; height: 1.15cqw; padding: 0 .26cqw;
+  border-radius: .21cqw;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .58cqw; font-weight: 500;
+  background: #e8f0fd; color: #2f6fd0;
+}
+.bboard .bb-badge.is-warm { background: #fdf3e0; color: #c07a10; }
+
+.bboard .bb-swim {
+  padding: .52cqw .84cqw;
+  font-size: .73cqw; color: var(--bb-ink-2);
+  border-bottom: .052cqw solid var(--bb-line);
+}
+
+.bboard .bb-cards {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  align-items: start;
+  background: var(--bb-surface);
+}
+.bboard .bb-cards > div { padding: .68cqw .58cqw; display: grid; gap: .58cqw; align-content: start; }
+.bboard .bb-cards > div + div { border-left: .052cqw solid var(--bb-line); }
+
+.bboard .bb-card {
+  background: #fff;
+  border: .052cqw solid var(--bb-line-2);
+  border-radius: .42cqw;
+  padding: .58cqw .63cqw;
+  display: grid; gap: .42cqw;
+}
+.bboard .bb-card .bb-card-h { font-size: .73cqw; line-height: 1.3; font-weight: 500; }
+.bboard .bb-tags { display: flex; flex-wrap: wrap; gap: .32cqw; }
+.bboard .bb-tag {
+  padding: .16cqw .42cqw; border-radius: .32cqw;
+  font-size: .63cqw; line-height: 1.35;
+}
+.bboard .bb-tag.is-violet { background: #efe9f9; color: #6b3fbe; }
+.bboard .bb-tag.is-green  { background: #e6f5ec; color: #1f7a45; }
+.bboard .bb-tag.is-orange { background: #fdf0dd; color: #b4720c; }
+.bboard .bb-tag.is-blue   { background: #e8f0fd; color: #2f6fd0; }
+
+.bboard .bb-check {
+  display: flex; align-items: center; gap: .42cqw;
+  background: #f2f5f9; border-radius: .32cqw;
+  padding: .21cqw .42cqw;
+  font-size: .63cqw; color: var(--bb-ink-2);
+}
+.bboard .bb-check span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bboard .bb-check b { font-weight: 400; color: var(--bb-ink-3); }
+.bboard .bb-check.is-plain { background: none; padding-inline: 0; }
+
+.bboard .bb-avs { display: flex; }
+.bboard .bb-av { width: .94cqw; height: .94cqw; border-radius: 50%; border: .1cqw solid #fff; }
+.bboard .bb-av + .bb-av { margin-left: -.26cqw; }
+.bboard .bb-progress { height: .16cqw; width: 42%; border-radius: .1cqw; background: var(--bb-violet); }
+
+/* --------------------------------------------------- свернутые доски отделов */
+
+.bboard .bb-rows {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .52cqw .84cqw;
+  padding: 0 .84cqw .84cqw;
+}
+.bboard .bb-row {
+  display: flex; align-items: center; gap: .52cqw;
+  padding: .58cqw .84cqw;
+  border: .052cqw solid var(--bb-line);
+  border-radius: .42cqw;
+  font-size: .84cqw; font-weight: 500;
+}
+.bboard .bb-count {
+  margin-left: auto;
+  padding: .16cqw .42cqw; border-radius: .32cqw;
+  background: #e8f0fd; color: #2f6fd0;
+  font-size: .63cqw; font-weight: 400;
+}
+.bboard .bb-chev { width: .73cqw; height: .73cqw; color: var(--bb-ink-3); flex: none; }
+.bboard .bb-chev svg { width: 100%; height: 100%; display: block; }

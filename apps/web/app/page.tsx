@@ -133,7 +133,7 @@ export default async function DashboardPage() {
         </p>
       </header>
 
-      <section className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Link
           href="/new"
           className="group rounded-(--radius-xl) lg:rounded-(--radius-2xl) border border-(--color-action-primary)/30 bg-(--color-action-primary-soft) p-6 transition hover:border-(--color-action-primary)"
@@ -181,6 +181,24 @@ export default async function DashboardPage() {
               <h2 className="text-lg font-semibold">Как устроен конвейер</h2>
               <p className="mt-1 text-sm text-(--color-text-secondary) transition-colors group-hover:text-(--color-text-primary)">
                 Справочник по всем этапам: что на входе и выходе, правила и гейты, команды.
+              </p>
+            </div>
+            <span aria-hidden className="text-2xl">
+              →
+            </span>
+          </div>
+        </Link>
+
+        <Link
+          href="/presentations"
+          className="group rounded-(--radius-xl) lg:rounded-(--radius-2xl) border border-(--color-border-default) bg-(--color-surface-page) p-6 transition hover:border-(--color-action-primary)/50"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold">Презентации</h2>
+              <p className="mt-1 text-sm text-(--color-text-secondary) transition-colors group-hover:text-(--color-text-primary)">
+                Готовые деки на шаблоне V02 и раскладки, из которых они собираются. Превью
+                в браузере, PDF по Ctrl+P.
               </p>
             </div>
             <span aria-hidden className="text-2xl">

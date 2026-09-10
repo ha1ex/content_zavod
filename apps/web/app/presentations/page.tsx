@@ -79,6 +79,22 @@ const THEME_LABEL: Record<string, string> = {
   comparison: 'Сравнение',
 };
 
+/** Разделы — те же, что у лендингов на главной: дек для отрасли, дек про продукт,
+ *  дек про сам завод. Раскладываем по имени файла, чтобы новый дек попадал в раздел
+ *  сам, без правки списка. Неопознанное уходит в «Продукт и компания». */
+const GROUPS = ['Кайтен для отраслей', 'Продукт и компания', 'Внутренние'] as const;
+type Group = (typeof GROUPS)[number];
+
+const INDUSTRY = ['banks', 'retail', 'finance', 'manufacturing', 'support', 'legal'];
+
+function groupOf(slug: string): Group {
+  if (/-dlya-/.test(slug) || INDUSTRY.some((word) => slug.endsWith(`-${word}`))) {
+    return 'Кайтен для отраслей';
+  }
+  if (/content-factory|harness/.test(slug)) return 'Внутренние';
+  return 'Продукт и компания';
+}
+
 function PreviewIcon() {
   return (
     <svg aria-hidden width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="shrink-0">
@@ -98,6 +114,10 @@ function TextIcon() {
 export default async function PresentationsPage() {
   const decks = await listDecks();
   const slides = decks.reduce((sum, deck) => sum + deck.slides, 0);
+  const grouped = GROUPS.map((group) => ({
+    group,
+    items: decks.filter((deck) => groupOf(deck.slug) === group),
+  })).filter(({ items }) => items.length > 0);
 
   return (
     <main className="mx-auto max-w-6xl px-3 py-12 sm:px-6">
@@ -168,8 +188,30 @@ export default async function PresentationsPage() {
             Пока нет. Первый дек — копия <code>design-system/presentation-v02/templates.html</code>.
           </p>
         ) : (
-          <ul className="grid grid-cols-1 gap-2">
-            {decks.map((deck) => (
+          grouped.map(({ group, items }) => (
+          <details key={group} open className="group mb-4 rounded-(--radius-xl) lg:rounded-(--radius-2xl) bg-(--color-surface-section) px-2 py-4 sm:p-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
+              <span className="flex items-center gap-2">
+                <svg
+                  aria-hidden
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="-rotate-90 text-(--color-text-secondary) transition-transform group-open:rotate-0"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+                <h3 className="text-sm font-semibold uppercase tracking-wide">{group}</h3>
+              </span>
+              <span className="text-xs text-(--color-text-primary)">{items.length} шт.</span>
+            </summary>
+            <ul className="mt-4 grid grid-cols-1 gap-2 sm:mt-5">
+            {items.map((deck) => (
               <li
                 key={deck.slug}
                 className="flex flex-col gap-2 rounded-(--radius-lg) border border-transparent bg-(--color-surface-page) px-3 py-3 transition-colors hover:border-(--color-border-default) sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4"
@@ -219,7 +261,9 @@ export default async function PresentationsPage() {
                 </div>
               </li>
             ))}
-          </ul>
+            </ul>
+          </details>
+          ))
         )}
       </section>
 

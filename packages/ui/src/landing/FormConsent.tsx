@@ -96,7 +96,7 @@ function Consent({
           'accent-(--color-action-primary)',
         )}
       />
-      <span className="text-[13px] leading-snug text-(--color-text-secondary)">{label}</span>
+      <span className="text-[13px] leading-snug text-(--color-text-primary)">{label}</span>
     </label>
   );
 }

@@ -191,6 +191,33 @@ const RegistrationFormSlotSchema = z.object({
   newsletterRequired: z.boolean().optional(),
   /** Мягкая строка под кнопкой. */
   note: z.string().max(200).optional(),
+  /**
+   * Окно «Спасибо за регистрацию» после отправки формы — с переходом
+   * в мессенджер (порт модалки апрельской конференции). Задано → форма
+   * становится клиентской и показывает попап; нет — обычный нативный POST.
+   */
+  success: z
+    .object({
+      title: z.string().min(2).max(80),
+      caption: z.string().max(80).optional(),
+      sub: z.string().max(280).optional(),
+      blocks: z
+        .array(
+          z.object({
+            title: z.string().min(2).max(40),
+            text: z.string().max(200),
+            buttonLabel: z.string().max(40).optional(),
+            buttonHref: z.string().optional(),
+            links: z
+              .array(z.object({ label: z.string().min(1).max(40), href: z.string() }))
+              .max(3)
+              .optional(),
+          }),
+        )
+        .max(3)
+        .optional(),
+    })
+    .optional(),
 });
 
 /* ─── Спикер (строка в hero + блок SpeakerCard) ────────────────────── */
@@ -1078,6 +1105,10 @@ const LogoCloudSchema = z.object({
       )
       .min(4)
       .max(20),
+    /** Кнопка под логотипами (напр. «Стать партнером» → Telegram). */
+    cta: z
+      .object({ label: z.string().min(2).max(40), href: z.string().min(1) })
+      .optional(),
   }),
 });
 
@@ -1620,7 +1651,7 @@ const SpeakerGridSchema = z.object({
         z.object({
           name: z.string().min(2).max(80),
           /** Роль / компания спикера (1–2 строки). */
-          role: z.string().max(160).optional(),
+          role: z.string().max(200).optional(),
           /** Название доклада. */
           talkTitle: z.string().max(160).optional(),
           /** Тайминг и длительность, напр. «16:00 / 30 мин». */
@@ -1631,6 +1662,23 @@ const SpeakerGridSchema = z.object({
           photoSrc: z.string().optional(),
           photoAlt: z.string().max(160).optional(),
           initials: z.string().max(4).optional(),
+          /**
+           * Двойной блок — доклад двух спикеров (live-сессия): карточка на всю
+           * ширину ряда, сверху общий доклад, ниже по строке на каждого.
+           */
+          people: z
+            .array(
+              z.object({
+                name: z.string().min(2).max(80),
+                role: z.string().max(200).optional(),
+                photoSrc: z.string().optional(),
+                photoAlt: z.string().max(160).optional(),
+                initials: z.string().max(4).optional(),
+              }),
+            )
+            .min(2)
+            .max(2)
+            .optional(),
         }),
       )
       .min(1)

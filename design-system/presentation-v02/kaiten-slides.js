@@ -76,6 +76,35 @@
   }
   go(start);
 
+  /* Кнопка «Сохранить в PDF» — правый верхний угол. Печать идет через
+     системный диалог, там же выбирается «Сохранить как PDF». */
+  var pdf = document.createElement('button');
+  pdf.type = 'button';
+  pdf.className = 'pdf-btn';
+  pdf.textContent = 'Сохранить в PDF';
+  pdf.addEventListener('click', function (e) {
+    e.stopPropagation();
+    /* Сначала пробуем собрать файл на сервере — тогда диалога печати нет
+       вовсе. Если страница открыта как одиночный файл, запрос не пройдет,
+       и остается системная печать. */
+    if (location.protocol === 'file:') { window.print(); return; }
+    var label = pdf.textContent;
+    pdf.textContent = 'Собираю PDF…';
+    pdf.disabled = true;
+    fetch('/pdf?src=' + encodeURIComponent(location.pathname))
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); })
+      .then(function (blob) {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = document.title.replace(/[\\/:*?"<>|]/g, '') + '.pdf';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      })
+      .catch(function () { window.print(); })
+      .then(function () { pdf.textContent = label; pdf.disabled = false; });
+  });
+  document.body.appendChild(pdf);
+
   /* Печать: класс is-print включает печатные правила только на время печати.
      Без него @media print не срабатывает — см. комментарий в kaiten-slides.css. */
   window.addEventListener('beforeprint', function () {

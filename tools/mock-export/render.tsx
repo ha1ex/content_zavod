@@ -11,6 +11,8 @@ import { ModulePortfolioMock } from '../../packages/ui/src/landing/mocks/ModuleP
 import { ModuleFlowHorizontal } from '../../packages/ui/src/landing/mocks/ModuleFlowHorizontal';
 import { ModuleKnowledgeBaseMock } from '../../packages/ui/src/landing/mocks/ModuleKnowledgeBaseMock1';
 import { ModuleUsmMock } from '../../packages/ui/src/landing/mocks/ModuleUsmMock';
+import { WindowResourceMock } from '../../packages/ui/src/landing/mocks/WindowResourceMock';
+import { WindowCardMock } from '../../packages/ui/src/landing/mocks/WindowCardMock';
 import { LaptopKanbanMock } from '../../packages/ui/src/landing/mocks/GadgetLaptopKanbanMock';
 import { LaptopBoardTreeMock } from '../../packages/ui/src/landing/mocks/GadgetLaptopBoardTreeMock';
 import { LaptopDocEditorMock } from '../../packages/ui/src/landing/mocks/GadgetLaptopDocEditorMock';
@@ -28,6 +30,8 @@ const items: [string, () => JSX.Element][] = [
   ['flow', ModuleFlowHorizontal as any],
   ['knowledge', ModuleKnowledgeBaseMock as any],
   ['usm', ModuleUsmMock as any],
+  ['resource', WindowResourceMock as any],
+  ['card-window', WindowCardMock as any],
   ['gd-laptop-kanban', LaptopKanbanMock as any],
   ['gd-laptop-tree', LaptopBoardTreeMock as any],
   ['gd-laptop-doc', LaptopDocEditorMock as any],

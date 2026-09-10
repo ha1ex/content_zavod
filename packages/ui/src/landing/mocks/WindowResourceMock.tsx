@@ -80,7 +80,7 @@ export function WindowResourceMock() {
                       weekend && 'bg-(--color-neutral-100) text-(--color-neutral-500)',
                       !weekend && over && 'bg-(--color-red-12) font-semibold text-(--color-red-100)',
                       !weekend && !over && !zero && 'bg-(--color-green-12) font-medium text-[#2e7d32]',
-                      !weekend && !over && zero && 'text-(--color-text-secondary)',
+                      !weekend && !over && zero && 'bg-(--color-neutral-100) text-(--color-neutral-500)',
                     )}
                   >
                     {h}

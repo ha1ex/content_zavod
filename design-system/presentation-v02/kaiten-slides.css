@@ -151,7 +151,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 /* ----------------------------------------------------------- типографика --- */
 
 .s-title { font-size:2.5cqw;    line-height:1.083; font-weight:600; letter-spacing:-.01em; margin:0; }  /* 48/52 */
-.h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:600; margin:0 0 1.667cqw; }              /* 30/36, отступ снизу 32 */
+.h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:400; margin:0 0 1.667cqw; }              /* 30/36, отступ снизу 32 */
 .h3      { font-size:1.25cqw;   line-height:1.333; font-weight:600; margin:0 0 .5cqw; }                 /* 24/32 */
 .body    { font-size:1.0417cqw; line-height:1.4;   font-weight:400; margin:0; }                         /* 20/28 */
 .muted   { color: var(--text-primary); }
@@ -180,11 +180,34 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 }
 
 /* Контентная зона: 864px высоты — ровно 2 ряда модулей + гаттер */
-.s-body { flex:1; margin-top:var(--head-gap); min-height:0; }
+/* Содержимое слайда стоит по центру вертикали. Контентная зона всегда во
+   всю высоту, а блоки чаще короче нее — прижатые к верху они оставляют под
+   собой пустое поле. Раскладки cols-* и слайды со своим display это правило
+   перебивают: у них центрирование задано в самой раскладке. */
+.s-body {
+  flex:1; margin-top:var(--head-gap); min-height:0;
+
+  /* Содержимое стоит по середине кадра, а не по середине своей зоны: сверху
+     зону поджимают колонтитул и отступ под ним, снизу — только поле слайда.
+     Перевес 119 px макета отдаем нижним отступом, и центр блока совпадает с
+     центром слайда 1920x1080. */
+  display:flex; flex-direction:column; justify-content:center;
+  padding-bottom: 6.198cqw;
+}
+
+/* Класс оставлен для слайдов, где блок занимает зону целиком: разметка на
+   него ссылается, отдельного поведения ему больше не нужно. */
+.s-body.is-tall { padding-bottom: 0; }
 
 /* Раскладки по модульной сетке. cols-2 даёт две колонки по 886 (2 модуля),
    cols-4 — четыре по 429 (1 модуль), grid-2x2 — четыре фрейма по 429. */
-.cols-2   { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); min-height:0; }
+/* Содержимое стоит по центру вертикали: фреймы бывают короткими, и
+   прижатые к верху они оставляют под собой пустое поле в половину слайда. */
+/* justify-content:center у .s-body нужен флексу, но раскладки переключают
+   display на grid — и то же свойство начинает двигать всю сетку по
+   горизонтали. На колонках фиксированной ширины это давало отступ слева. */
+.cols-2, .cols-3, .cols-4, .grid-2x2, .grid-4x3 { justify-content:start; }
+.cols-2   { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); min-height:0; align-content:center; }
 .cols-3   { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); }
 .cols-4   { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); }
 .grid-2x2 { display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:var(--gap); min-height:0; }
@@ -450,7 +473,10 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 /* Серая плашка над столбиком — остаток до полного покрытия. Ставится
    перед .bar и занимает всю свободную высоту колонки. */
 .bars .bar-rest { flex:1; min-height:0; border-radius:.63cqw; background:var(--bar-rest-bg);
-  margin-bottom:1.2cqw; }
+  margin-bottom:1.2cqw;
+  /* Цифра остатка — там же, где значение у цветного столбика: сверху по центру. */
+  display:flex; align-items:flex-start; justify-content:center; padding-top:.8cqw;
+  font-size:1.0417cqw; font-weight:600; color:var(--text-secondary); }
 
 /* Узел схемы: заголовок цветом пары, под ним путь или пояснение */
 .node {
@@ -545,9 +571,9 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .case .case-text { font-size:1.25cqw; line-height:1.4; margin:0; flex:1; }
 .case .case-text b { font-weight:600; }
 .case .case-logos { display:flex; align-items:center; gap:1.04cqw; margin-top:auto; }
-.case .case-logos img { height:1.6cqw; width:auto; display:block; }
-.case .case-logos .client { font-size:1.15cqw; font-weight:600; }
-.case .case-logos .plus { color:var(--neutral-400); font-size:1.15cqw; }
+.case .case-logos img { height:2.1cqw; width:auto; display:block; }
+.case .case-logos .client { font-size:1.46cqw; font-weight:600; }
+.case .case-logos .plus { color:var(--neutral-400); font-size:1.46cqw; }
 
 /* Шаг конвейера */
 .flow { display:flex; align-items:stretch; gap:.6cqw; }
@@ -613,7 +639,7 @@ code {
 
 .nav {
   position:fixed; bottom:2.2vh; left:50%; transform:translateX(-50%);
-  display:flex; align-items:center; gap:14px; z-index:10;
+  display:flex; align-items:center; gap:10px; z-index:10;
   background:rgba(255,255,255,.94); border:1px solid var(--border-default);
   border-radius:999px; padding:8px 14px;
   box-shadow:0 2px 12px rgba(0,0,0,.08);
@@ -628,6 +654,7 @@ code {
 .nav .dots { display:flex; gap:7px; }
 .nav .dot { width:8px; height:8px; border-radius:50%; border:0; padding:0; background:var(--neutral-300); cursor:pointer; }
 .nav .dot[aria-current="true"] { background:var(--action-primary); }
+.nav .dot:hover { background:var(--violet-40, #c9b2f2); }
 /* Панель переключения стилей — сверху по центру, поверх сцены */
 .theme-bar {
   position:fixed; top:2.2vh; left:50%; transform:translateX(-50%);
@@ -645,6 +672,16 @@ code {
 .theme-bar button:hover { background:var(--surface-accent); color:var(--action-primary); }
 .theme-bar button[aria-pressed="true"] { background:var(--violet-100); color:#fff; }
 
+/* Кнопка сохранения в PDF — правый верхний угол, вровень с панелью стилей */
+.pdf-btn {
+  position:fixed; top:2.2vh; right:2.2vh; z-index:10;
+  border:1px solid var(--neutral-300); border-radius:999px;
+  background:rgba(255,255,255,.94); box-shadow:0 2px 12px rgba(0,0,0,.08);
+  font-family:var(--font); font-size:13px; line-height:1;
+  color:var(--neutral-600); padding:9px 16px; cursor:pointer;
+}
+.pdf-btn:hover { background:var(--surface-accent); color:var(--action-primary); }
+
 /* ------------------------------------------------- печать / экспорт PDF --- */
 
 /* Печать включается только когда пользователь реально печатает: на beforeprint
@@ -655,11 +692,19 @@ code {
   .is-print { }
   .is-print body { overflow:visible; background:#fff; }
   .is-print .stage { position:static; display:block; }
-  .is-print .nav, .is-print .theme-bar { display:none; }
-  .is-print .deck { width:297mm; height:167mm; container-type:size; page-break-after:always; break-after:page; }
-  .is-print .slide { display:flex !important; position:relative; page-break-after:always; break-after:page; }
+  .is-print .nav, .is-print .theme-bar, .is-print .pdf-btn { display:none; }
+  /* Дек в печати — просто стопка страниц: высоту задает каждый слайд. */
+  .is-print .deck { width:1920px; height:auto; container-type:normal; }
+  /* Каждый слайд — отдельная страница ровно 1920x1080 и свой контейнер,
+     чтобы единицы cqw считались от кадра, а не от стопки. */
+  .is-print .slide {
+    display:flex !important; position:relative;
+    width:1920px; height:1080px; container-type:size;
+    page-break-after:always; break-after:page;
+  }
+  .is-print .slide:last-child { page-break-after:auto; break-after:auto; }
 }
-@page { size: 297mm 167mm; margin: 0; }
+@page { size: 1920px 1080px; margin: 0; }
 
 /* --- Список возможностей (иконка слева, текст справа), макет 3-2218 --- */
 .features { display:grid; gap:1.25cqw; margin-top:2.08cqw; }   /* 40 — список отбит от абзаца сильнее */
@@ -667,7 +712,7 @@ code {
 .features .feature-icon {
   width:2.5cqw; height:2.5cqw; border-radius:.625cqw; flex:none;
   display:flex; align-items:center; justify-content:center;
-  background:var(--surface-page); color:var(--violet-100);
+  background:var(--violet-tint); color:var(--violet-100);
 }
 .features .feature-icon svg { width:1.25cqw; height:1.25cqw; }
 .features .feature-title { font-size:1.0417cqw; line-height:1.4; font-weight:600; margin:0; }
@@ -732,7 +777,8 @@ code {
    .is-fail красный, .is-idle светлый. Заливка яркая только у первого и
    последнего шага (.is-strong), остальные — тонированные 12%.
    -------------------------------------------------------------------------- */
-.steps { display:grid; gap:1.45cqw; align-content:start; }
+.steps { display:grid; gap:2.2cqw; align-content:start; }
+.steps { margin-top:2.6cqw; }
 .steps .step { display:grid; grid-template-columns:2.4cqw 1fr; gap:1.04cqw; align-items:start; }
 .steps .step-num {
   width:2.4cqw; height:2.4cqw; border-radius:50%; flex:none;
@@ -741,8 +787,8 @@ code {
   background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
 }
 .steps .step.is-strong .step-num { background:var(--c-100, var(--action-primary)); color:#fff; }
-.steps .step-title { font-size:1.4583cqw; line-height:1.35; font-weight:600; margin:0; }
-.steps .step-text  { font-size:1.25cqw; line-height:1.35; margin:.05cqw 0 0; color:var(--text-secondary); }
+.steps .step-title { font-size:1.0417cqw; line-height:1.35; font-weight:600; margin:0; }
+.steps .step-text  { font-size:.9375cqw; line-height:1.35; margin:.05cqw 0 0; color:var(--text-secondary); }
 
 /* --- Сгруппированные карточки, макет 213-2212 -------------------------------
    Тонированный фрейм группы, внутри белые карточки. Тон задается парой
@@ -820,6 +866,10 @@ code {
    -------------------------------------------------------------------------- */
 .flow-map { position:relative; width:100%; aspect-ratio:973 / 210; margin-top:1.25cqw; }
 .flow-map .fl-links { position:absolute; inset:0; width:100%; height:100%; }
+/* Линии связей чуть контрастнее рамок: на светлом фоне бледная граница
+   терялась, а схема читается по стрелкам. */
+.flow-map .fl-links path { stroke: var(--neutral-400); }
+.flow-map .fl-links marker path { fill: var(--neutral-400); stroke: none; }
 .flow-map .fl-node {
   position:absolute; box-sizing:border-box;
   background:var(--c-12, var(--surface-accent));
@@ -909,16 +959,17 @@ code {
 .links-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw; }
 .link-card {
   background:var(--surface-page); border-radius:.83cqw;
-  min-height:7cqw; padding:0 1.56cqw;
-  display:flex; align-items:center; gap:1.46cqw;
+  min-height:7cqw; padding:0 1.56cqw 0 4.7cqw;
+  display:flex; align-items:center; gap:1cqw;
 }
-.link-icons { display:flex; align-items:center; gap:.83cqw; flex:none; color:var(--text-secondary); }
+.link-icons { display:flex; align-items:center; gap:.83cqw; flex:none; color:var(--action-primary); }
 .link-icons svg { width:1.98cqw; height:1.98cqw; display:block; }
 .link-icons img { height:1.98cqw; width:auto; display:block; }
 .link-text { font-size:1.25cqw; line-height:1.3; text-decoration:underline; text-underline-offset:.21cqw; }
 
 /* Мокап платформы: вписан по высоте зоны, пропорции сохранены. */
-.platform-shot { width:100%; height:100%; object-fit:contain; display:block; }
+/* Снимок прижат к правому краю колонки: слева его держит текст. */
+.platform-shot { width:100%; height:100%; object-fit:contain; object-position:right center; display:block; }
 
 /* --- Засвет за иллюстрацией -------------------------------------------------
    Размытое пятно тем же градиентом, что и полоса по нижнему краю слайда.
@@ -974,6 +1025,8 @@ code {
 .mm-flow      .mkp { width: 951px; zoom: calc(100cqi / 951px); }
 .mm-knowledge .mkp { width: 1320px; zoom: calc(100cqi / 1320px); }
 .mm-usm       .mkp { width: 1435px; zoom: calc(100cqi / 1435px); }
+.mm-resource  .mkp { width: 900px; zoom: calc(100cqi / 900px); }
+.mm-card      .mkp { width: 760px; zoom: calc(100cqi / 760px); }
 
 /* Гаджеты: ноутбук, планшет, телефон. Ширина — вместе с корпусом, а не
    по экрану: у ноутбука в габарит входит подставка, у остальных — рамка. */
@@ -1049,4 +1102,135 @@ code {
              inset 0 0 .35cqw rgba(45,45,45,.045),
              inset 0 0 .9cqw  rgba(45,45,45,.035),
              inset 0 0 1.8cqw rgba(45,45,45,.03);
+}
+
+/* Кольцевая диаграмма и график площадью стоят в ячейках сетки 2×2 и должны
+   подгоняться по высоте ячейки. Раньше их размер задавала ширина: SVG держит
+   свою пропорцию и на узкой ячейке вылезал вниз, наезжая на заголовок
+   соседнего блока. Теперь высоту диктует ячейка, а ширина идет следом. */
+.chart-row { flex:1; min-height:0; align-items:stretch; grid-template-rows:minmax(0,1fr); }
+.chart-row > .legend { align-self:center; }
+.area { flex:1; min-height:0; display:flex; }
+.donut { display:flex; align-items:center; }
+.donut svg { width:auto; height:100%; max-height:100%; margin:0 auto; }
+.area svg { width:100%; height:100%; max-height:100%; }
+
+/* Плитка в строку: иконка слева, подписи справа. Иконка занимает обе строки,
+   поэтому заголовок и текст выстраиваются по одной левой границе. */
+.tiles.is-row { row-gap:2.8cqw; }
+.tiles.is-row .tile-item {
+  display: grid; grid-template-columns: 3.33cqw 1fr;
+  column-gap: 1cqw; align-items: start; align-content: start;
+}
+.tiles.is-row .tile-item .tile { grid-row: 1 / span 2; margin-bottom: 0; }
+
+/* Маршрут задачи нарисован на прозрачном фоне, и белая подложка рамки
+   превращалась в плашку вокруг схемы. У остальных мокапов свой фон, им
+   подложка нужна. */
+.mm-shot.mm-flow { background:none; box-shadow:none; }
+
+/* Внутри плашки иконка идет на белом: на залитом фоне светло-сиреневый
+   квадрат сливается с подложкой. Вне плашки остается сиреневым. */
+.frame .features .feature-icon { background: var(--surface-page); }
+
+/* --- Модуль кейса, макет 8572-65672 ------------------------------------- */
+.cs-list {
+  display:grid; gap:var(--gap);
+  background:var(--surface-frame); border-radius:1.25cqw; padding:1.25cqw;
+}
+.cs-row {
+  display:grid; grid-template-columns:31.95cqw 1fr; gap:2.1cqw;
+  background:var(--surface-page); border-radius:1.04cqw;
+  padding:1.04cqw 2.1cqw 1.04cqw 1.04cqw; align-items:center;
+}
+.cs-cover {
+  position:relative; aspect-ratio:16 / 9; border-radius:.83cqw;
+  background:linear-gradient(140deg,#efe9f9 0%,#e0d6f6 100%); overflow:hidden;
+}
+/* Метка клиента лежит на белом вырезе в углу обложки — как в макете. */
+.cs-cover .cs-mark {
+  position:absolute; left:0; top:0; padding:.83cqw 1.25cqw .83cqw 1.04cqw;
+  background:var(--surface-page); border-radius:0 0 1.04cqw 0;
+  display:flex; align-items:center; gap:.52cqw;
+  font-size:.94cqw; font-weight:700; letter-spacing:.01em; color:var(--text-primary);
+}
+.cs-cover .cs-mark i { width:1.67cqw; height:1.67cqw; border-radius:.42cqw; background:var(--violet-100); flex:none; }
+.cs-cover .cs-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.cs-body { min-width:0; display:flex; flex-direction:column; }
+.cs-head { display:flex; align-items:baseline; gap:1.25cqw; }
+.cs-title { font-size:1.46cqw; line-height:1.25; font-weight:600; margin:0; flex:1; }
+.cs-date { font-size:.94cqw; color:var(--text-secondary); flex:none; }
+.cs-text { font-size:1.04cqw; line-height:1.45; color:var(--text-secondary); margin:.63cqw 0 0; max-width:44cqw; }
+.cs-meta { display:flex; align-items:center; gap:1.25cqw; margin-top:1.46cqw; font-size:1.04cqw; color:var(--text-primary); }
+.cs-tags { display:flex; gap:.52cqw; margin-top:.83cqw; }
+.cs-tag {
+  font-size:.94cqw; line-height:1; padding:.52cqw .94cqw; border-radius:999px;
+  background:var(--surface-frame); color:var(--text-primary);
+}
+/* Нижняя строка: метрика слева, ссылка прижата к правому краю. */
+.cs-foot { display:flex; align-items:baseline; gap:.83cqw; margin-top:1.46cqw; }
+.cs-metric { font-size:1.98cqw; line-height:1.15; font-weight:600; color:var(--green-100); flex:none; }
+.cs-metric-cap { font-size:1.04cqw; color:var(--green-100); }
+.cs-link { margin-left:auto; font-size:1.04cqw; color:var(--text-accent); display:flex; align-items:center; gap:.42cqw; flex:none; }
+.cs-link svg { width:.94cqw; height:.94cqw; }
+
+/* --- Вертикальная карточка кейса, макет 8536-72689 ---------------------- */
+.cv-list {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--gap); align-items:stretch;
+  background:var(--surface-frame); border-radius:1.25cqw; padding:1.25cqw;
+}
+/* Плашка на всю зону слайда — карточки тянутся вместе с ней. */
+.cv-list.is-fill { flex:1; }
+.cv-card {
+  background:var(--surface-page); border-radius:1.04cqw; padding:1.04cqw;
+  display:flex; flex-direction:column; height:100%;
+}
+.cv-cover { position:relative; aspect-ratio:476 / 268; border-radius:.83cqw; overflow:hidden; flex:none; }
+.cv-cover img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.cv-mark {
+  position:absolute; left:0; top:0; z-index:1;
+  padding:.63cqw 1.04cqw .63cqw .83cqw; background:var(--surface-page);
+  border-radius:0 0 .83cqw 0; display:flex; align-items:center; gap:.42cqw;
+  font-size:.83cqw; font-weight:700; color:var(--text-primary);
+}
+.cv-mark i { width:1.35cqw; height:1.35cqw; border-radius:.31cqw; background:var(--violet-100); flex:none; }
+.cv-title { font-size:1.35cqw; line-height:1.25; font-weight:600; margin:1.25cqw 0 0; }
+.cv-text { font-size:1.04cqw; line-height:1.45; color:var(--text-secondary); margin:.83cqw 0 0; }
+.cv-meta { display:flex; flex-wrap:wrap; gap:.83cqw; margin-top:1.25cqw; font-size:.94cqw; color:var(--text-primary); }
+.cv-tags { display:flex; flex-wrap:wrap; gap:.42cqw; margin-top:.73cqw; }
+.cv-tag { font-size:1.04cqw; line-height:1; padding:.47cqw .83cqw; border-radius:999px; background:var(--surface-frame); color:var(--text-primary); }
+.cv-metric { display:flex; align-items:baseline; gap:.63cqw; margin-top:1.25cqw; }
+.cv-metric b { font-size:1.88cqw; line-height:1.15; font-weight:600; color:var(--green-100); flex:none; }
+.cv-metric span { font-size:1.04cqw; line-height:1.3; color:var(--green-100); }
+.cv-foot { display:flex; align-items:center; margin-top:auto; padding-top:1.25cqw; font-size:1.04cqw; }
+.cv-foot .cv-link { color:var(--text-accent); display:flex; align-items:center; gap:.42cqw; }
+.cv-foot .cv-link svg { width:.94cqw; height:.94cqw; }
+.cv-foot .cv-date { margin-left:auto; color:var(--text-secondary); font-size:.94cqw; }
+
+/* --- Отзывы клиентов: карточка с цитатой --------------------------------
+   Пропорции модуля Landing-DS 4714-47976 (карточка 384x484): поля 24,
+   логотип 60, кавычка 79x60, шаги по 24, портрет 56, кнопка 44.
+   Все размеры увеличены в 1.49 раза — под ширину колонки слайда 573px. */
+.rv-list {
+  display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gap);
+  align-items:stretch;
+  background:var(--surface-frame); border-radius:1.25cqw; padding:1.25cqw;
+}
+.rv-card {
+  background:var(--surface-page); border-radius:1.5cqw; padding:1.875cqw;
+  display:flex; flex-direction:column; height:100%;
+}
+.rv-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1.25cqw; }
+.rv-logo { max-width:11.66cqw; max-height:4.65cqw; width:auto; height:auto; display:block; }
+.rv-quote { width:6.14cqw; height:4.65cqw; color:var(--neutral-200); flex:none; }
+.rv-text { font-size:1.25cqw; line-height:1.75; color:var(--text-primary); margin:1.875cqw 0 0; }
+.rv-author { display:flex; align-items:center; gap:1.25cqw; margin-top:auto; padding-top:1.25cqw; }
+.rv-ava { width:4.375cqw; height:4.375cqw; border-radius:50%; object-fit:cover; flex:none; }
+.rv-name { font-size:1.25cqw; line-height:1.5; font-weight:600; }
+.rv-role { font-size:1.04cqw; line-height:1.5; color:var(--text-secondary); }
+.rv-btn {
+  align-self:flex-start; margin-top:1.875cqw;
+  display:flex; align-items:center; height:3.44cqw; padding:0 1.875cqw;
+  font-size:1.25cqw; line-height:1; color:var(--text-accent);
+  border:.05cqw solid var(--neutral-200); border-radius:.625cqw;
 }

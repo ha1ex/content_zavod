@@ -52,10 +52,10 @@
   --badge-bg:var(--violet-12);          /* сиреневый под 24% */
   --chevron-bg:var(--violet-12);
 
-  --tile-bg:var(--violet-100);           /* в темной теме плашка залитая */
+  --tile-bg:rgba(125,76,207,.30);        /* фиолетовая, но прозрачная: на темном сплошная слишком тяжелая */
   --bar-rest-bg:rgba(255,255,255,.12);   /* остаток столбика — белый под 12% */
   --case-bg:rgba(255,255,255,.08);       /* карточка кейса на темном */
-  --tile-fg:#ffffff;
+  --tile-fg:#c9b2f2;
 
   --contact-row-bg:rgba(255,255,255,.06);
 
@@ -182,7 +182,7 @@
    -------------------------------------------------------------------------- */
 
 /* Плашка иконки списка на темном — светлый сиреневый, иконка брендовая. */
-[data-theme="dark"] .features .feature-icon { background:var(--violet-tint); color:var(--violet-100); }
+[data-theme="dark"] .features .feature-icon { background:rgba(125,76,207,.30); color:#c9b2f2; }
 
 /* Карточки диаграмм на темном — белый под 92%, чтобы не слепить. */
 [data-theme="dark"] .diagrams-mock .rept { background:rgba(255,255,255,.92); border-color:rgba(255,255,255,.12); }
@@ -197,6 +197,41 @@
 /* Внутри залитой акцентной плашки фиолетовое слово сливается с фоном. */
 [data-theme="dark"] .frame.is-accent .accent { color: #ffffff; }
 
-/* На фиолетовой плашке метка Jira и стрелка идут белыми; в светлой теме
-   плашка бледная, и там лежит вариант в фирменных цветах. */
-[data-theme="dark"] .swap-img { content: url("assets/swap-jira-kaiten-dark.png"); }
+
+/* Логотипы клиентов на темной теме лежат на белой плашке: у части знаков
+   текст почти черный, на темном фоне он бы пропал. Подпись под знаком тоже
+   уходит на светлый — она внутри той же плашки. */
+[data-theme="dark"] .grid-4x3 .frame.is-center { background: #ffffff; }
+[data-theme="dark"] .grid-4x3 .frame.is-center .body { color: #5b5b5f !important; }
+
+/* --- Карточки кейсов: на темной теме остаются белыми ----------------- */
+[data-theme="dark"] .cs-row,
+[data-theme="dark"] .cv-card { background:#ffffff; }
+[data-theme="dark"] .cs-row .cs-mark,
+[data-theme="dark"] .cv-card .cv-mark { background:#ffffff; color:#2d2d2d; }
+[data-theme="dark"] .cs-row .cs-title,
+[data-theme="dark"] .cs-row .cs-meta,
+[data-theme="dark"] .cs-row .cs-tag,
+[data-theme="dark"] .cv-card .cv-title,
+[data-theme="dark"] .cv-card .cv-meta,
+[data-theme="dark"] .cv-card .cv-tag { color:#2d2d2d; }
+[data-theme="dark"] .cs-row .cs-text,
+[data-theme="dark"] .cs-row .cs-date,
+[data-theme="dark"] .cv-card .cv-text,
+[data-theme="dark"] .cv-card .cv-date { color:#5b5b5f; }
+[data-theme="dark"] .cs-row .cs-tag,
+[data-theme="dark"] .cv-card .cv-tag { background:#f5f5f5; }
+[data-theme="dark"] .cs-row .cs-metric,
+[data-theme="dark"] .cs-row .cs-metric-cap,
+[data-theme="dark"] .cv-card .cv-metric b,
+[data-theme="dark"] .cv-card .cv-metric span { color:#4caf51; }
+[data-theme="dark"] .cs-row .cs-link,
+[data-theme="dark"] .cv-card .cv-link { color:#7d4ccf; }
+
+/* --- Отзывы: карточка белая и на темной теме ---------------------------- */
+[data-theme="dark"] .rv-card { background:#ffffff; }
+[data-theme="dark"] .rv-card .rv-text,
+[data-theme="dark"] .rv-card .rv-name { color:#2d2d2d; }
+[data-theme="dark"] .rv-card .rv-role { color:#5b5b5f; }
+[data-theme="dark"] .rv-card .rv-quote { color:#e5e5e5; }
+[data-theme="dark"] .rv-card .rv-btn { color:#7d4ccf; border-color:#e5e5e5; }

@@ -29,6 +29,36 @@ const TYPES = {
 };
 
 const server = createServer(async (req, res) => {
+  const url = new URL(req.url, 'http://localhost');
+
+  /* Печать в PDF без диалога: рендерим ту же страницу в headless-браузере.
+     Плейрайт лежит в node_modules корня — импортируем лениво, чтобы сервер
+     поднимался и без него. */
+  if (url.pathname === '/pdf') {
+    const src = url.searchParams.get('src') || '/examples/kaiten-content-factory.html';
+    try {
+      const { chromium } = await import('playwright');
+      const browser = await chromium.launch();
+      const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+      await page.goto(`http://localhost:${PORT}${src}`, { waitUntil: 'networkidle' });
+      await page.evaluate(() => document.documentElement.classList.add('is-print'));
+      await page.waitForTimeout(400);
+      const pdf = await page.pdf({
+        width: '1920px', height: '1080px', printBackground: true,
+        margin: { top: '0', right: '0', bottom: '0', left: '0' }, preferCSSPageSize: true,
+      });
+      await browser.close();
+      const name = decodeURIComponent(src).split('/').pop().replace(/\.html$/, '') + '.pdf';
+      res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${name}"`,
+      }).end(pdf);
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' })
+        .end('Не удалось собрать PDF: ' + err.message);
+    }
+    return;
+  }
   let rel = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   if (rel === '/') rel = '/examples/kaiten-content-factory.html';
 

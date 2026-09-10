@@ -132,8 +132,7 @@ export default async function PresentationsPage() {
         <h1 className="text-3xl font-semibold tracking-tight">Презентации Кайтена</h1>
         <p className="mt-2 max-w-3xl text-base text-(--color-text-secondary)">
           Деки на шаблоне V02: слайд 1920×1080, Roboto, десять раскладок. Собираются руками из{' '}
-          <code>templates.html</code>, живут в <code>design-system/presentation-v02/examples/</code>.
-          В превью <code>Ctrl+P</code> даёт PDF — одна страница на слайд.
+          <code>templates.html</code>, лежат в <code>design-system/presentation-v02/examples/</code>.
         </p>
       </header>
 
@@ -170,6 +169,9 @@ export default async function PresentationsPage() {
             <li>
               Свериться с <code>wiki/presentations/rules.md</code>: акцент, цвет, один тезис на
               слайд.
+            </li>
+            <li>
+              <code>Ctrl+P</code> в превью даёт PDF — одна страница на слайд.
             </li>
           </ol>
         </div>

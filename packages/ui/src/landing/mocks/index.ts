@@ -146,4 +146,6 @@ export type {
 export { default as GanttSteps } from './GanttSteps';
 export type { GanttStepsProps, GanttStep } from './GanttSteps';
 export { default as OnPremise } from './OnPremise';
+export { default as InterfaceShowcase } from './InterfaceShowcase';
+export type { InterfaceShowcaseProps } from './InterfaceShowcase';
 export type { OnPremiseProps, OnPremiseAvatar, OnPremiseRequest } from './OnPremise';

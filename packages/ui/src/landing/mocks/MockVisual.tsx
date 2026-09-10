@@ -1,5 +1,6 @@
 import { ScaleToFit } from './ScaleToFit';
 import OnPremise from './OnPremise';
+import InterfaceShowcase from './InterfaceShowcase';
 import {
   AbTestResultsMock,
   AnalyticsKpiMock,
@@ -242,7 +243,8 @@ export type MockVariant =
   | 'help-center-setup'
   | 'help-center-portal-compact'
   // On-premise
-  | 'on-premise';
+  | 'on-premise'
+  | 'interface-showcase';
 
 /**
  * Обёртка-хук для темы. `display:contents` не создаёт бокс — раскладка мока не
@@ -523,6 +525,8 @@ function MockVisualSwitch({ variant }: { variant: MockVariant | undefined }) {
       return <HelpCenterPortalMock variant="compact" />;
     case 'on-premise':
       return <OnPremise />;
+    case 'interface-showcase':
+      return <InterfaceShowcase />;
     default:
       return null;
   }

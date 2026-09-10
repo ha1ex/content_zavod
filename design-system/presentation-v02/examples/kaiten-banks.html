@@ -61,7 +61,10 @@
       </div>
 
       <div class="s-body" style="position:relative">
-        <img src="../assets/russia-map.svg" alt="" style="position:absolute; right:-1cqw; top:50%; transform:translateY(-50%); width:58cqw; z-index:0" />
+        <!-- Карта вне потока, поэтому центрированием .s-body не управляется:
+             ее середина считается от padding-box зоны и уезжает вниз на
+             компенсацию колонтитула. Возвращаем ее на оптический центр кадра. -->
+        <img src="../assets/russia-map.svg" alt="" style="position:absolute; right:-1cqw; top:50%; transform:translateY(calc(-50% - 3.073cqw)); width:58cqw; z-index:0" />
         <div style="position:relative">
         <p class="body" style="max-width:44cqw">Kaiten представлен на рынке с 2014 года. Сервис работает на собственной инфраструктуре в России и не зависит от иностранных поставщиков — для банка это предсказуемая поддержка и понятная юрисдикция данных</p>
 

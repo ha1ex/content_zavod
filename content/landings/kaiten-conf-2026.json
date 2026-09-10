@@ -96,11 +96,11 @@
             ]
           },
           {
-            "name": "Алексей Халезов",
-            "role": "Бизнес-лидер SMB-сегмента Кайтен, 12+ лет опыта в продукте, SaaS и венчуре",
-            "talkTitle": "Как победить зоопарк инструментов",
-            "tag": "Инструменты",
-            "photoSrc": "/landings/kaiten-conf-2026/speakers/halezov.jpg"
+            "name": "Ильяна Левина",
+            "role": "Стратегический партнер департамента инноваций METTA, 14 лет в системном маркетинге (CBRE, ДОМ.РФ, СБЕР, РЖД), лектор Alibaba Group, ВШЭ, ВТБ",
+            "talkTitle": "В центре инноваций: как мы внедряем ИИ-культуру в международной tech health компании",
+            "tag": "ИИ-культура",
+            "photoSrc": "/landings/kaiten-conf-2026/speakers/levina.jpg"
           }
         ],
         "visual": "acceleration"
@@ -122,11 +122,25 @@
         },
         "speakers": [
           {
+            "name": "Александра Клименко",
+            "role": "CEO и Founder Soft Skills Lab — технологичной школы коммуникации и управления. Автор книги «Эффективный конфликт»",
+            "talkTitle": "Ключевые навыки руководителя для работы с сопротивлением при внедрении изменений",
+            "tag": "Сопротивление изменениям",
+            "photoSrc": "/landings/kaiten-conf-2026/speakers/klimenko.jpg"
+          },
+          {
             "name": "Павел Алферов",
             "role": "Профессор бизнес-практики, Школа управления Сколково",
             "talkTitle": "Управление в условиях ограниченных ресурсов",
             "tag": "Ресурсы и ограничения",
             "photoSrc": "/landings/kaiten-conf-2026/speakers/alferov.jpg"
+          },
+          {
+            "name": "Алексей Корсун",
+            "role": "Консультант по оптимизации процессов (Т-Банк, Авиасейлс, SemRush)",
+            "talkTitle": "Почему все заняты, а сроки горят: где на самом деле теряется время",
+            "tag": "Поток задач",
+            "photoSrc": "/landings/kaiten-conf-2026/speakers/korsun.jpg"
           },
           {
             "name": "Илья Прахт",
@@ -136,22 +150,8 @@
             "photoSrc": "/landings/kaiten-conf-2026/speakers/praht.jpg"
           },
           {
-            "name": "Алексей Корсун",
-            "role": "Специалист по оптимизации процессов",
-            "talkTitle": "Почему все заняты, а сроки горят: где на самом деле теряется время",
-            "tag": "Поток задач",
-            "photoSrc": "/landings/kaiten-conf-2026/speakers/korsun.jpg"
-          },
-          {
-            "name": "Александра Клименко",
-            "role": "CEO и Founder Soft Skills Lab — технологичной школы коммуникации и управления. Автор книги «Эффективный конфликт»",
-            "talkTitle": "Ключевые навыки руководителя для работы с сопротивлением при внедрении изменений",
-            "tag": "Сопротивление изменениям",
-            "photoSrc": "/landings/kaiten-conf-2026/speakers/klimenko.jpg"
-          },
-          {
             "name": "Иван Замесин",
-            "role": "Автор методологий Advanced JTBD и Next Move Theory, основатель школы Вани Замесина, основатель сервиса подбора психотерапевтов «Мета»",
+            "role": "Автор методологий Advanced JTBD и Next Move Theory. Основатель Школы Вани Замесина и сервиса подбора психотерапевтов «Мета». Автор канала @zamesin",
             "talkTitle": "Что делать, когда падает выручка: как выбирать стратегические шаги в кризис",
             "tag": "Стратегия в кризис",
             "photoSrc": "/landings/kaiten-conf-2026/speakers/zamesin.jpg"
@@ -177,14 +177,14 @@
             "description": "«Ускорение» и «Эффективность»"
           },
           {
-            "value": "9",
+            "value": "10",
             "label": "спикеров",
             "description": "Уже подтверждены, состав растет"
           },
           {
-            "value": "2 200",
-            "label": "участников в апреле",
-            "description": "Руководители из разных отраслей"
+            "value": "8+",
+            "label": "часов полезного контента",
+            "description": "Доклады и разборы за два дня"
           }
         ]
       }
@@ -461,7 +461,11 @@
             "logoSrc": "/landings/kaiten-conf-2026/partners/telegram.svg",
             "href": "https://t.me/suda_smotri"
           }
-        ]
+        ],
+        "cta": {
+          "label": "Стать партнером",
+          "href": "https://t.me/uizzly"
+        }
       }
     },
     {
@@ -507,7 +511,28 @@
         "description": "Конференция «ИИ и порядок в работе»: 23–24 сентября 2026, онлайн. Ссылку на подключение и запись пришлем на указанную почту.",
         "submitLabel": "Зарегистрироваться",
         "variant": "conference",
-        "accentWord": "до 22 сентября"
+        "accentWord": "до 22 сентября",
+        "success": {
+          "title": "Спасибо за регистрацию!",
+          "caption": "Онлайн-конференция Кайтен",
+          "sub": "В день начала конференции пришлем ссылку на подключение на указанную почту. Пожалуйста, подтвердите свой email.",
+          "blocks": [
+            {
+              "title": "Telegram-бот",
+              "text": "Ссылки на подключения, записи и материалы от спикеров пришлем в боте.",
+              "buttonLabel": "Подписаться",
+              "buttonHref": "https://telegram.me/Kaiten_conf_bot?start=tr14925"
+            },
+            {
+              "title": "Календарь",
+              "text": "Добавьте конференцию в свой календарь.",
+              "links": [
+                { "label": "Яндекс Календарь", "href": "https://calendar.360.yandex.ru/embed/week?layer_ids=38562056&show_date=2026-09-21" },
+                { "label": "Google Calendar", "href": "https://calendar.google.com/calendar/embed?src=693cf07a224850f8479b854826abea555e5c7be6aac99893c9ba14277af026c1%40group.calendar.google.com" }
+              ]
+            }
+          ]
+        }
       }
     },
     {

@@ -15,6 +15,8 @@ export interface LogoCloudProps {
   title?: string;
   description?: string;
   items: LogoCloudItemProps[];
+  /** Кнопка под логотипами (напр. «Стать партнером» → Telegram). */
+  cta?: { label: string; href: string };
 }
 
 /**
@@ -22,7 +24,7 @@ export interface LogoCloudProps {
  * compliance-first, migration-from-competitor). Используются инициалы как
  * stand-in для логотипов — без хранения внешних SVG.
  */
-export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps) {
+export function LogoCloud({ eyebrow, title, description, items, cta }: LogoCloudProps) {
   return (
     <section
       className={cn(
@@ -103,6 +105,23 @@ export function LogoCloud({ eyebrow, title, description, items }: LogoCloudProps
           </div>
         )}
       </div>
+
+      {cta && (
+        <div className="mt-6 flex justify-center md:mt-8">
+          <a
+            href={cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              'inline-flex h-12 items-center justify-center rounded-(--radius-lg) px-6',
+              'bg-(--color-action-primary) text-base font-semibold text-(--color-text-inverse)',
+              'transition hover:opacity-90',
+            )}
+          >
+            {cta.label}
+          </a>
+        </div>
+      )}
     </section>
   );
 }

@@ -49,10 +49,16 @@ body {
 
 .stage { position:fixed; inset:0; display:grid; place-items:center; }
 
+/* Полосы под внешние элементы — панель стилей сверху, навигация снизу.
+   Раньше слайд занимал всю высоту окна, и на экране 16:9 обе панели ложились
+   поверх содержимого. На контент-заводе служебные элементы над контентом не
+   висят, поэтому слайд ужимается и отдает им поля. */
+:root { --chrome-band: max(8vh, 56px); }
+
 .deck {
   position:relative;
-  width: min(100vw, calc(100vh * 16 / 9));
-  height: min(100vh, calc(100vw * 9 / 16));
+  width: min(100vw, calc((100vh - 2 * var(--chrome-band)) * 16 / 9));
+  height: min(calc(100vh - 2 * var(--chrome-band)), calc(100vw * 9 / 16));
   background: var(--surface-page);
   overflow: hidden;
   container-type: size;   /* включает cqw для всего содержимого */
@@ -78,7 +84,7 @@ body {
 /* Запасная листалка — обычные ссылки, живут в разметке.
    Скрипт при старте прячет ее и строит полноценную навигацию. */
 .nav-fallback {
-  position:fixed; bottom:2.2vh; left:50%; transform:translateX(-50%);
+  position:fixed; bottom:calc(var(--chrome-band) / 2); left:50%; transform:translate(-50%, 50%);
   display:flex; align-items:center; gap:6px; z-index:10;
   background:rgba(255,255,255,.94); border:1px solid var(--neutral-300);
   border-radius:999px; padding:6px 10px;
@@ -611,8 +617,10 @@ code {
 
 /* ------------------------------------------------------------ навигация --- */
 
+/* По центру нижней полосы: сдвиг на половину собственной высоты, чтобы
+   панель стояла ровно в полосе независимо от того, насколько она высокая. */
 .nav {
-  position:fixed; bottom:2.2vh; left:50%; transform:translateX(-50%);
+  position:fixed; bottom:calc(var(--chrome-band) / 2); left:50%; transform:translate(-50%, 50%);
   display:flex; align-items:center; gap:14px; z-index:10;
   background:rgba(255,255,255,.94); border:1px solid var(--border-default);
   border-radius:999px; padding:8px 14px;
@@ -628,9 +636,9 @@ code {
 .nav .dots { display:flex; gap:7px; }
 .nav .dot { width:8px; height:8px; border-radius:50%; border:0; padding:0; background:var(--neutral-300); cursor:pointer; }
 .nav .dot[aria-current="true"] { background:var(--action-primary); }
-/* Панель переключения стилей — сверху по центру, поверх сцены */
+/* Панель переключения стилей — по центру верхней полосы, над слайдом */
 .theme-bar {
-  position:fixed; top:2.2vh; left:50%; transform:translateX(-50%);
+  position:fixed; top:calc(var(--chrome-band) / 2); left:50%; transform:translate(-50%, -50%);
   display:flex; gap:4px; z-index:10;
   background:rgba(255,255,255,.94); border:1px solid var(--neutral-300);
   border-radius:999px; padding:4px; box-shadow:0 2px 12px rgba(0,0,0,.08);
@@ -968,7 +976,7 @@ code {
    раскладка на этот один пиксель. */
 .mm-shot:not(.is-bare) .mkp > div { border-color: transparent; }
 
-.mm-gantt     .mkp { width: 1053px; zoom: calc(100cqi / 1053px); }
+.mm-gantt     .mkp { width: 1030px; zoom: calc(100cqi / 1030px); }
 .mm-table     .mkp { width: 1500px; zoom: calc(100cqi / 1500px); }
 .mm-scrum     .mkp { width: 1832px; zoom: calc(100cqi / 1832px); }
 .mm-crm       .mkp { width: 1532px; zoom: calc(100cqi / 1532px); }

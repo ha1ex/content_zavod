@@ -27,14 +27,20 @@
   .rutube { display:flex; align-items:center; gap:1cqw; font-size:1.35cqw; font-weight:600; }
   .rutube .u { color:var(--action-primary); }
   .stat-sub { font-size:1.04cqw; line-height:1.4; color:var(--text-secondary); margin:.6cqw 0 0; }
-  /* слайд спикеров — 3×3 с фото */
-  .spk-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:1.5cqw; flex:1; min-height:0; }
-  .spk { display:flex; align-items:center; gap:1.6cqw; padding:1.7cqw 1.9cqw; }
-  .spk img { width:9.4cqw; height:9.4cqw; border-radius:1.2cqw; object-fit:cover; object-position:top center; flex:0 0 auto; }
-  .spk .nm { font-size:1.42cqw; font-weight:600; color:var(--action-primary); margin:0; line-height:1.15; }
-  .spk .co { font-size:1.04cqw; color:var(--text-secondary); margin:.5cqw 0 0; line-height:1.25; }
-  .spk .tp { font-size:1.16cqw; margin:.7cqw 0 0; line-height:1.28; }
-  .spk-more { text-align:center; font-size:1.06cqw; color:var(--text-secondary); margin:1.5cqw 0 0; }
+  /* Слайд спикеров — 3×3 с фото, раскладка по слайду 52 шаблона.
+     Главное в карточке — тема доклада, поэтому она стоит первой и набрана
+     основным цветом. Имя и компания прижаты к низу: `space-between` держит их
+     на одной линии во всех карточках ряда, как бы ни отличалась длина темы. */
+  .spk-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2.7cqw 1.6cqw; }
+  .spk { display:flex; align-items:stretch; gap:1.6cqw; padding:1cqw; }
+  /* Фото тянется на высоту карточки, а не живет квадратом: ряд с длинными
+     темами выше, и квадрат оставлял бы под собой дыру. */
+  .spk img { width:9.4cqw; align-self:stretch; border-radius:.8cqw; object-fit:cover; object-position:top center; flex:0 0 auto; }
+  .spk-text { display:flex; flex-direction:column; justify-content:space-between; gap:1.2cqw; flex:1; min-width:0; padding:.45cqw 0; }
+  .spk .tp { font-size:1.2cqw; color:var(--text-primary); margin:0; line-height:1.3; }
+  .spk .nm { font-size:1.16cqw; font-weight:600; color:var(--action-primary); margin:0; line-height:1.2; }
+  .spk .co { font-size:1.04cqw; color:var(--text-secondary); margin:.35cqw 0 0; line-height:1.25; }
+  .spk-more { text-align:center; font-size:1.06cqw; color:var(--text-secondary); margin:3.2cqw 0 0; }
   .spk-more b { color:var(--text-primary); font-weight:600; }
   /* призыв стать инфопартнером на обложке — крупная акцентная плашка */
   .cover-text .invite { display:inline-flex; align-items:center; gap:.8cqw; margin-top:2.2cqw; padding:1cqw 1.8cqw; border-radius:1cqw; background:var(--action-primary); color:#fff; font-size:1.55cqw; font-weight:600; line-height:1.25; }
@@ -185,74 +191,92 @@
         <div class="spk-grid">
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/letunov.jpg" alt="Илья Летунов" />
-            <div>
-              <p class="nm">Илья Летунов</p>
-              <p class="co">manaraga.ai</p>
+            <div class="spk-text">
               <p class="tp">Честно про AI: что работает, а что остается пилотом</p>
+              <div>
+                <p class="nm">Илья Летунов</p>
+                <p class="co">manaraga.ai</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/ustinov.jpg" alt="Сева Устинов" />
-            <div>
-              <p class="nm">Сева Устинов</p>
-              <p class="co">Plurio.AI</p>
+            <div class="spk-text">
               <p class="tp">Агенты и вайбкодинг в управлении</p>
+              <div>
+                <p class="nm">Сева Устинов</p>
+                <p class="co">Plurio.AI</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/orlov-pankratov.jpg" alt="Александр Орлов и Слава Панкратов" />
-            <div>
-              <p class="nm">Орлов и Панкратов</p>
-              <p class="co">Стратоплан</p>
+            <div class="spk-text">
               <p class="tp">Пересборка среднего менеджмента под ИИ</p>
+              <div>
+                <p class="nm">Орлов и Панкратов</p>
+                <p class="co">Стратоплан</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/levina.jpg" alt="Ильяна Левина" />
-            <div>
-              <p class="nm">Ильяна Левина</p>
-              <p class="co">METTA</p>
+            <div class="spk-text">
               <p class="tp">Как внедряем ИИ-культуру в международной tech health компании</p>
+              <div>
+                <p class="nm">Ильяна Левина</p>
+                <p class="co">METTA</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/klimenko.jpg" alt="Александра Клименко" />
-            <div>
-              <p class="nm">Александра Клименко</p>
-              <p class="co">Soft Skills Lab</p>
+            <div class="spk-text">
               <p class="tp">Навыки руководителя в работе с сопротивлением</p>
+              <div>
+                <p class="nm">Александра Клименко</p>
+                <p class="co">Soft Skills Lab</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/alferov.jpg" alt="Павел Алферов" />
-            <div>
-              <p class="nm">Павел Алферов</p>
-              <p class="co">Школа управления Сколково</p>
+            <div class="spk-text">
               <p class="tp">Управление в условиях ограничений</p>
+              <div>
+                <p class="nm">Павел Алферов</p>
+                <p class="co">Школа управления Сколково</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/korsun.jpg" alt="Алексей Корсун" />
-            <div>
-              <p class="nm">Алексей Корсун</p>
-              <p class="co">Т-Банк, Авиасейлс, SemRush</p>
+            <div class="spk-text">
               <p class="tp">Где теряется время: все заняты, а сроки горят</p>
+              <div>
+                <p class="nm">Алексей Корсун</p>
+                <p class="co">Т-Банк, Авиасейлс, SemRush</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/praht.jpg" alt="Илья Прахт" />
-            <div>
-              <p class="nm">Илья Прахт</p>
-              <p class="co">CTO-консультант, Стратоплан</p>
+            <div class="spk-text">
               <p class="tp">Полторы ставки директора на созвоны</p>
+              <div>
+                <p class="nm">Илья Прахт</p>
+                <p class="co">CTO-консультант, Стратоплан</p>
+              </div>
             </div>
           </div>
           <div class="frame spk">
             <img src="kaiten-conf-2026-assets/speakers/zamesin.jpg" alt="Иван Замесин" />
-            <div>
-              <p class="nm">Иван Замесин</p>
-              <p class="co">Advanced JTBD, «Мета»</p>
+            <div class="spk-text">
               <p class="tp">Что делать, когда падает выручка</p>
+              <div>
+                <p class="nm">Иван Замесин</p>
+                <p class="co">Advanced JTBD, «Мета»</p>
+              </div>
             </div>
           </div>
         </div>

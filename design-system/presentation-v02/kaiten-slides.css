@@ -918,7 +918,11 @@ code {
 }
 
 /* Мокап проекта вписывается в половину слайда, сохраняя пропорции. */
-.mod-shot { container-type:inline-size; width:100%; }
+.mod-shot {
+  container-type:inline-size; width:100%;
+  /* Снимок интерфейса всегда с небольшой серой тенью. */
+  border-radius:1.04cqw; box-shadow:0 .42cqw 1.04cqw -.1cqw rgba(45,45,45,.16);
+}
 .mod-shot .mod {
   border:none !important; box-shadow:none !important;
   padding-top:0 !important; padding-bottom:0 !important;
@@ -1039,6 +1043,10 @@ code {
    ни фона, ни тени, ни обрезки не нужно, иначе получается рамка в рамке. */
 .mm-shot.is-bare { background: none; box-shadow: none; overflow: visible; border-radius: 0; }
 
+/* Снимок интерфейса в разметке слайда — та же тень, что у .mm-shot, но
+   по форме картинки: у PNG скругленные углы прозрачные. */
+.shot-shadow { filter: drop-shadow(0 .42cqw 1.04cqw rgba(45,45,45,.16)); }
+
 /* ─── Пара планшетов, макет 407-2519 ─────────────────────────────────────
    Два экрана внахлест: сзади сторонний сервис, спереди Кайтен со сдвигом
    вправо и вверх. Пропорции блока — 1800×717 из макета, поэтому раскладка
@@ -1134,7 +1142,7 @@ code {
    квадрат сливается с подложкой. Вне плашки остается сиреневым. */
 .frame .features .feature-icon { background: var(--surface-page); }
 /* На сиреневом фрейме плашка под иконкой — белая с прозрачностью. */
-.frame.is-accent .features .feature-icon { background: rgba(255,255,255,.18); color:#ffffff; }
+.frame.is-accent .features .feature-icon { background:#ffffff; color:var(--violet-100); }
 
 /* --- Модуль кейса, макет 8572-65672 ------------------------------------- */
 .cs-list {

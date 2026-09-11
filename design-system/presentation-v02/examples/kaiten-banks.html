@@ -35,6 +35,10 @@
   /* Список полей карточки: иконки без плашки, поэтому базовые 24px рядом
      с текстом в 20 выглядят мелко — поднимаем до 28 */
   #s7 .features .feature-icon svg { width:1.458cqw; height:1.458cqw; }
+  /* Плашки нет, поэтому колонка под иконку сужена до самой иконки:
+     иначе текст отъезжает вправо на пустое поле несуществующей плашки */
+  #s7 .features .feature { grid-template-columns:1.458cqw 1fr; gap:.9cqw; }
+  #s7 .features .feature-icon { width:1.458cqw; height:1.458cqw; border-radius:0; }
 </style>
 </head>
 <body>
@@ -315,7 +319,7 @@
 
           <!-- zoom, а не transform: карточку нужно уменьшить вместе с ее
                высотой в потоке, иначе центрированный блок не влезает в зону. -->
-          <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0"><div class="tcard" style="height:auto; zoom:.88">
+          <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0"><div class="tcard" style="height:auto; zoom:.94">
             <div class="tc-main">
               <p class="tc-h">Проверка контрагента по&nbsp;заявке на&nbsp;кредит</p>
               <p class="tc-sub"><a>#30022876</a> Заказчик <a>Смирнова Ольга</a>, перемещена 2 часа назад</p>

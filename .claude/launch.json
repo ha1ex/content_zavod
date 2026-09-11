@@ -16,7 +16,9 @@
     {
       "name": "presentation",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["design-system/presentation-v02/serve.mjs"],
+      "runtimeArgs": [
+        "design-system/presentation-v02/serve.mjs"
+      ],
       "port": 4180,
       "autoPort": true
     },
@@ -76,6 +78,21 @@
         "design-system/presentation-v02"
       ],
       "port": 4324
+    },
+    {
+      "name": "banks-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        ".context/preview-banks/design-system/presentation-v02/serve.mjs",
+        "4190"
+      ],
+      "port": 4190,
+      "autoPort": true
+    },
+    {
+      "name": "presentation-attach",
+      "url": "http://localhost:4180",
+      "port": 4180
     }
   ]
 }

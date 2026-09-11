@@ -968,7 +968,7 @@ code {
    раскладка на этот один пиксель. */
 .mm-shot:not(.is-bare) .mkp > div { border-color: transparent; }
 
-.mm-gantt     .mkp { width: 1053px; zoom: calc(100cqi / 1053px); }
+.mm-gantt     .mkp { width: 1030px; zoom: calc(100cqi / 1030px); }
 .mm-table     .mkp { width: 1500px; zoom: calc(100cqi / 1500px); }
 .mm-scrum     .mkp { width: 1832px; zoom: calc(100cqi / 1832px); }
 .mm-crm       .mkp { width: 1532px; zoom: calc(100cqi / 1532px); }

@@ -19,6 +19,9 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
+  /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
+     где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
+  :root { --stage-bg:var(--neutral-200); }
   /* Содержимое центрируется по вертикали в зоне от заголовка до низа
      слайда, без ручных сдвигов и без компенсации колонтитула. */
   .s-body { display:flex; flex-direction:column; justify-content:center; }

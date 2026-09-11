@@ -146,3 +146,18 @@
   box-shadow: 0 calc(var(--u) * 2) calc(var(--u) * 6) rgba(40, 30, 70, .06);
 }
 .mcta-btn svg { width: calc(var(--u) * 18); height: calc(var(--u) * 18); display: block; flex: none; }
+
+/* Иллюстрация экранов снимком — Landing-DS, node 11852-84119.
+   Координаты те же, что были у собранных на CSS экранов: левый край в 14
+   единицах макета, ширина 580, низ уходит за нижнюю кромку плашки. */
+.mcta-art .mcta-pic {
+  position: absolute;
+  left: calc(var(--u) * 14);
+  top: calc(var(--u) * 53);
+  width: calc(var(--u) * 580);
+  height: auto;
+  background: none;
+}
+
+/* Кнопки магазинов — ссылки, но выглядят как кнопки. */
+a.mcta-btn { text-decoration: none; color: inherit; }

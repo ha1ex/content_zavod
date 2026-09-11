@@ -19,13 +19,9 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
-  /* Содержимое слайда стоит по центру вертикали, без ручных сдвигов.
-     Нижний отступ компенсирует перевес колонтитула: сверху зону поджимают
-     заголовок и зазор под ним, снизу — только поле слайда. Перевес — 119px
-     макета, отсюда 6.198cqw. Слайдам, где блок занимает зону целиком,
-     ставится .is-tall — иначе содержимому не хватает высоты. */
-  .s-body { display:flex; flex-direction:column; justify-content:center; padding-bottom:6.198cqw; }
-  .s-body.is-tall { padding-bottom:0; }
+  /* Содержимое центрируется по вертикали в зоне от заголовка до низа
+     слайда, без ручных сдвигов и без компенсации колонтитула. */
+  .s-body { display:flex; flex-direction:column; justify-content:center; }
   /* Нумерованные шаги: текст по центру кружка, а не по его верхнему краю */
   .steps .step { align-items:center; }
   /* Мокапы интерфейса стоят на белом полотне и сливаются с ним. Тень

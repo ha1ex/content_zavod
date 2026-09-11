@@ -3,7 +3,7 @@
    с остальными, чтобы build-css.cjs собрал под нее утилиты. */
 import { renderToStaticMarkup } from 'react-dom/server';
 import { writeFileSync, readFileSync } from 'node:fs';
-import { WindowCardMock } from '../packages/ui/src/landing/mocks/WindowCardMock';
+import { WindowCardMock } from '../../packages/ui/src/landing/mocks/WindowCardMock';
 
 const html = renderToStaticMarkup(<WindowCardMock />);
 writeFileSync('tools/mock-export/out/card-window.html', html, 'utf8');

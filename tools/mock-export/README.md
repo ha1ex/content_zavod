@@ -44,3 +44,24 @@ node tools/mock-export/gantt-resource.cjs   # нужен out/gantt.html из ren
 
 `build-slides.cjs` — разовая вставка слайдов s32–s39, оставлена как история
 происхождения разметки.
+
+## Карточка задачи для банковского дека
+
+`WindowCardMock` не входит в список `render.tsx` — под него есть своя точка
+рендера и своя съемка:
+
+```bash
+node_modules/.bin/esbuild tools/mock-export/render-card.tsx --bundle --platform=node \
+  --format=cjs --jsx=automatic --outfile=tools/mock-export/out/render-card.cjs \
+  --external:react --external:react-dom
+node tools/mock-export/out/render-card.cjs   # → out/card-window.html, дописывает out/all.html
+node tools/mock-export/build-css.cjs         # утилиты карточки попадут в out/mocks.css
+node tools/mock-export/card-window-bank.cjs  # → assets/mocks/card-window-narrow.png
+```
+
+Порядок важен: `build-css.cjs` сканирует `out/all.html`, и без шага рендера
+в CSS не будет ни `p-6`, ни `rounded-(--radius-3xl)` — карточка снимется без
+полей и скруглений, прямоугольником.
+
+Тексты банковского варианта лежат в `card-window-bank.cjs`: компонент общий
+с лендингом, его подписи там менять нельзя.

@@ -28,8 +28,24 @@
   .s-body.is-tall { padding-bottom:0; }
   /* Нумерованные шаги: текст по центру кружка, а не по его верхнему краю */
   .steps .step { align-items:center; }
-  /* Диалог стоит на белом полотне слайда, тень ему не нужна */
-  .ffield { box-shadow:none; }
+  /* Мокапы интерфейса стоят на белом полотне и сливаются с ним. Тень
+     короткая и серая: отделяет окно от фона, а не поднимает его над слайдом.
+     Родные тени у .tcard, .ffield и .ugroups глубже и уходят в фиолетовый —
+     перебиваем их одним значением на все интерфейсы дека. */
+  .ffield, .tcard, .bboard, .ugroups { box-shadow:0 .3cqw 1cqw rgba(45,45,45,.13); }
+  /* У картинок тень через drop-shadow: он идет по силуэту, а поля кадра
+     прозрачные, и box-shadow обвел бы пустой прямоугольник.
+     Схемы — контур компании, карта интеграций, переезд — тени не получают:
+     там она легла бы на каждую стрелку. */
+  .s-body img[src*="cta-product"],
+  .s-body img[src*="card-window-narrow"],
+  .s-body img[src*="gantt-chart"],
+  .s-body img[src*="gantt-resource"],
+  .s-body img[src*="support-card"],
+  .s-body img[src*="api-docs"],
+  .s-body img[src*="mobile-phones"],
+  .s-body img[src*="laptop-kanban-bank"],
+  .s-body img[src*="help-center"] { filter:drop-shadow(0 .25cqw .7cqw rgba(45,45,45,.16)); }
   /* Тэглайн у логотипа — на шкале текста, 20/28 вместо базовых 18 */
   .contact-brand .tagline { font-size:1.042cqw; line-height:1.4; }
   /* Список полей карточки: иконки без плашки, поэтому базовые 24px рядом

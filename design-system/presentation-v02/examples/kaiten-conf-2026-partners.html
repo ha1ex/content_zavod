@@ -53,6 +53,10 @@
   .spk .tp { font-size:1.2cqw; }
   .spk-more { font-size:1.16cqw; }
   .cover-text .meta { font-size:1.16cqw; }
+  /* Содержимое слайда стоит по центру зоны между заголовком и низом слайда,
+     без ручных сдвигов. Слайды на сетке `.cols-2` (3 и 4) держат блоки во всю
+     зону — там центрировать нечего, и переводить их во flex нельзя. */
+  .s-body:not(.cols-2) { display:flex; flex-direction:column; justify-content:center; }
 </style>
 </head>
 <body>

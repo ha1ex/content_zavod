@@ -17,6 +17,8 @@ const PEOPLE: PersonRow[] = [
   { name: 'Артем Куликов', initials: 'АК', color: 'bg-(--color-green-100)', hours: [4, 4, 0, 0, 8, 8, '4,5', '4,5'] },
   { name: 'Екатерина Громова', initials: 'ЕГ', color: 'bg-(--color-orange-100)', hours: [8, 6, 0, 0, 6, 3, 9, 8], over: [6] },
   { name: 'Павел Соколов', initials: 'ПС', color: 'bg-(--color-blue-100)', hours: [0, 4, 0, 0, 8, 8, 6, 4] },
+  { name: 'Ирина Лебедева', initials: 'ИЛ', color: 'bg-(--color-violet-100)', hours: [6, 6, 0, 0, 8, 4, 8, 6] },
+  { name: 'Денис Воронов', initials: 'ДВ', color: 'bg-(--color-green-100)', hours: [8, 8, 0, 0, '4,5', 6, 10, 5], over: [6] },
 ];
 
 /**
@@ -39,11 +41,11 @@ export function WindowResourceMock() {
         <h3 className="text-base font-semibold text-(--color-text-primary)">Загрузка команды</h3>
         <span className="ml-auto flex items-center gap-3.5 text-[13px] text-(--color-text-secondary)">
           <span className="inline-flex items-center gap-1.5 font-medium text-(--color-text-primary)">
-            <span className="relative inline-block h-4 w-4 rounded-full border-2 border-(--color-action-primary) after:absolute after:inset-[2.5px] after:rounded-full after:bg-(--color-action-primary) after:content-['']" />
+            <span className="relative inline-block aspect-square h-4 w-4 shrink-0 rounded-full border-2 border-(--color-action-primary) after:absolute after:inset-[2.5px] after:rounded-full after:bg-(--color-action-primary) after:content-['']" />
             Часы
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="inline-block h-4 w-4 rounded-full border-2 border-(--color-neutral-400)" />
+            <span className="inline-block aspect-square h-4 w-4 shrink-0 rounded-full border-2 border-(--color-neutral-400)" />
             Карточки
           </span>
         </span>

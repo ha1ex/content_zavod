@@ -101,6 +101,7 @@
 [data-theme="dark"] .contact-brand img { content: url("assets/kaiten-logo-latin-on-dark.svg"); }
 /* Лого рядом с названием клиента в карточке кейса — тоже с белой надписью */
 [data-theme="dark"] .case-logos img { content: url("assets/kaiten-logo-on-dark.svg"); }
+[data-theme="dark"] .link-icons img { content: url("assets/kaiten-logo-on-dark.svg"); }
 
 /* Пилюля пути в схеме статусов остается белой: на темном полотне
    подложка цвета фона сливается с самим узлом. */
@@ -235,3 +236,20 @@
 [data-theme="dark"] .rv-card .rv-role { color:#5b5b5f; }
 [data-theme="dark"] .rv-card .rv-quote { color:#e5e5e5; }
 [data-theme="dark"] .rv-card .rv-btn { color:#7d4ccf; border-color:#e5e5e5; }
+
+/* --- Карта России ------------------------------------------------------- */
+/* Файл карты один на обе темы: светлая сирень #E9E2FA. На темном фоне она
+   светит слишком сильно, поэтому гасим прозрачностью. */
+[data-theme="dark"] .ru-map { opacity:.45; }
+
+/* Плашка-баннер на темной теме залита сиреневым — текст на ней белый. */
+[data-theme="dark"] .banner p,
+[data-theme="dark"] .banner .accent { color:#ffffff; }
+
+/* Серая группа на темном полотне: своего серого нет, берем белый вполсилы. */
+[data-theme="dark"] .group.c-gray { --c-12:rgba(255,255,255,.08); --c-100:rgba(255,255,255,.72); }
+
+/* Схема экосистемы: кольцо между плитками нарисовано черным с альфой 7 —
+   на темном фоне его не видно. Берем копию со светлой линией. */
+/* На залитом сиреневом фрейме белая точка читается лучше фиолетовой. */
+[data-theme="dark"] .frame.is-accent .bullets li::before { background:#ffffff; }

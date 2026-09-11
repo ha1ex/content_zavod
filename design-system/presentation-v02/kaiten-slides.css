@@ -187,16 +187,16 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .s-body {
   flex:1; margin-top:var(--head-gap); min-height:0;
 
-  /* Содержимое стоит по середине кадра, а не по середине своей зоны: сверху
-     зону поджимают колонтитул и отступ под ним, снизу — только поле слайда.
-     Перевес 119 px макета отдаем нижним отступом, и центр блока совпадает с
-     центром слайда 1920x1080. */
+  /* Содержимое центрируется по свободному полю под заголовком. Поле идет
+     от низа колонтитула, а зона начинается ниже — после отступа под ним,
+     поэтому отдаем этот отступ вниз: блок поднимается на его половину и
+     встает ровно по середине свободного поля. */
   display:flex; flex-direction:column; justify-content:center;
-  padding-bottom: 6.198cqw;
+  padding-bottom: var(--head-gap);
 }
 
-/* Класс оставлен для слайдов, где блок занимает зону целиком: разметка на
-   него ссылается, отдельного поведения ему больше не нужно. */
+/* Класс остался в разметке с тех пор, когда центр считали по кадру: теперь
+   зону занимают все слайды, отдельного поведения ему не нужно. */
 .s-body.is-tall { padding-bottom: 0; }
 
 /* Раскладки по модульной сетке. cols-2 даёт две колонки по 886 (2 модуля),
@@ -336,7 +336,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .contact-brand { display:flex; align-items:center; justify-content:center; gap:1.35cqw; }
 .contact-brand img { height:2.92cqw; width:auto; display:block; }   /* 56px */
 .contact-brand .divider { width:1px; align-self:stretch; background:var(--border-default); }
-.contact-brand .tagline { font-size:.94cqw; line-height:1.35; margin:0; }
+.contact-brand .tagline { font-size:1.15cqw; line-height:1.35; margin:0; color:var(--text-secondary); }
 
 /* Вертикаль набрана по макету: лого заканчивается на 322.5, заголовок
    занимает 412…448, колонки начинаются с 508.5. */
@@ -358,7 +358,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
 .contact-note {
   background:var(--surface-accent); border-radius:.833cqw;
-  padding:1.5cqw 1.6cqw; font-size:1.25cqw; line-height:1.4;
+  padding:1.5cqw 1.6cqw; font-size:1.46cqw; line-height:1.4;
   position:relative; overflow:hidden;
 }
 .contact-note .decor {
@@ -569,7 +569,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
   padding:.52cqw 1.04cqw; border-radius:999px;
 }
 .case .case-text { font-size:1.25cqw; line-height:1.4; margin:0; flex:1; }
-.case .case-text b { font-weight:600; }
+.case .case-text b { font-weight:400; }
 .case .case-logos { display:flex; align-items:center; gap:1.04cqw; margin-top:auto; }
 .case .case-logos img { height:2.1cqw; width:auto; display:block; }
 .case .case-logos .client { font-size:1.46cqw; font-weight:600; }
@@ -959,7 +959,7 @@ code {
 .links-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw; }
 .link-card {
   background:var(--surface-page); border-radius:.83cqw;
-  min-height:7cqw; padding:0 1.56cqw 0 4.7cqw;
+  min-height:7cqw; padding:0 1.56cqw 0 6.2cqw;
   display:flex; align-items:center; gap:1cqw;
 }
 .link-icons { display:flex; align-items:center; gap:.83cqw; flex:none; color:var(--action-primary); }
@@ -1023,6 +1023,7 @@ code {
 .mm-crm       .mkp { width: 1532px; zoom: calc(100cqi / 1532px); }
 .mm-portfolio .mkp { width: 1360px; zoom: calc(100cqi / 1360px); }
 .mm-flow      .mkp { width: 951px; zoom: calc(100cqi / 951px); }
+.mm-flow-v    .mkp { width: 462px; zoom: calc(100cqi / 462px); }
 .mm-knowledge .mkp { width: 1320px; zoom: calc(100cqi / 1320px); }
 .mm-usm       .mkp { width: 1435px; zoom: calc(100cqi / 1435px); }
 .mm-resource  .mkp { width: 900px; zoom: calc(100cqi / 900px); }
@@ -1127,11 +1128,13 @@ code {
 /* Маршрут задачи нарисован на прозрачном фоне, и белая подложка рамки
    превращалась в плашку вокруг схемы. У остальных мокапов свой фон, им
    подложка нужна. */
-.mm-shot.mm-flow { background:none; box-shadow:none; }
+.mm-shot.mm-flow, .mm-shot.mm-flow-v { background:none; box-shadow:none; }
 
 /* Внутри плашки иконка идет на белом: на залитом фоне светло-сиреневый
    квадрат сливается с подложкой. Вне плашки остается сиреневым. */
 .frame .features .feature-icon { background: var(--surface-page); }
+/* На сиреневом фрейме плашка под иконкой — белая с прозрачностью. */
+.frame.is-accent .features .feature-icon { background: rgba(255,255,255,.18); color:#ffffff; }
 
 /* --- Модуль кейса, макет 8572-65672 ------------------------------------- */
 .cs-list {
@@ -1234,3 +1237,39 @@ code {
   font-size:1.25cqw; line-height:1; color:var(--text-accent);
   border:.05cqw solid var(--neutral-200); border-radius:.625cqw;
 }
+
+/* --- Спикеры: сетка 3x3, снимок слева, подпись справа ------------------- */
+.spk-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:1.5cqw; flex:1; min-height:0; }
+.spk { display:flex; align-items:stretch; gap:1.6cqw; padding:1.45cqw 1.9cqw 1.7cqw 1.1cqw; }
+/* Подпись занимает высоту карточки: тема сверху, имя с компанией — у нижнего
+   края, между ними распорка на auto-отступе. */
+.spk > div { display:flex; flex-direction:column; flex:1; min-width:0; }
+.spk img { width:9.4cqw; height:9.4cqw; align-self:center; border-radius:.63cqw; object-fit:cover; object-position:top center; flex:0 0 auto; }
+.spk .tp { order:-1; font-size:1.16cqw; line-height:1.28; margin:0 0 .7cqw; }
+.spk .nm { font-size:1.09cqw; font-weight:600; color:var(--action-primary); line-height:1.15; margin:auto 0 0; }
+.spk .co { font-size:1.04cqw; color:var(--text-secondary); line-height:1.25; margin:.4cqw 0 0; }
+.spk-more { text-align:center; font-size:1.06cqw; color:var(--text-secondary); margin:1.5cqw 0 0; }
+.spk-more b { color:var(--text-primary); font-weight:600; }
+
+/* --- Карта России со слоем «Минцифры» ------------------------------------
+   Логотип лежит поверх карты отдельным слоем: на темной теме карту гасим
+   прозрачностью, а плашка остается белой. Координаты — доли от карты
+   (плашка в макете 251/264.567 при кадре 758x444). */
+.ru-map-wrap { position:absolute; top:50%; transform:translateY(calc(-50% - 2.06cqw)); width:58cqw; z-index:0; display:block; }
+.ru-map-wrap .ru-map { width:100%; height:auto; display:block; }
+.ru-map-wrap .ru-mark {
+  /* Плашка шире логотипа: поля добавлены в размер, сам знак остается прежним. */
+  position:absolute; left:31.39%; top:57.24%; width:37.22%; height:17.29%;
+  box-sizing:border-box; padding:.8cqw 1cqw;
+  background:#fff; border-radius:.63cqw; display:block; object-fit:contain;
+}
+
+/* Буллиты на залитом сиреневом фрейме: серая точка на нем не видна. */
+.frame.is-accent .bullets li::before { background:#ffffff; }
+
+/* Шаг с исходом красит заголовок своим цветом — «не прошла» и «починка»
+   читаются с одного взгляда. Остальные шаги остаются нейтральными. */
+.steps .step.c-red .step-title,
+.steps .step.c-green .step-title { color:var(--c-100); }
+
+

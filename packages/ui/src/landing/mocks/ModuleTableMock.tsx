@@ -62,7 +62,7 @@ function Av({ list }: { list: [string, 'v' | 'g'][] }) {
   );
 }
 function Cell({ children, className }: { children?: React.ReactNode; className?: string }) {
-  return <div className={cn('flex min-w-0 items-center border-r border-(--color-border-default) px-3 py-1.5 text-[13.5px] text-(--color-text-primary)', className)}>{children}</div>;
+  return <div className={cn('flex min-w-0 items-center border-r border-(--color-border-default) last:border-r-0 px-3 py-1.5 text-[13.5px] text-(--color-text-primary)', className)}>{children}</div>;
 }
 function TBtn({ icon, label, active }: { icon: string; label?: string; active?: boolean }) {
   return (
@@ -82,7 +82,7 @@ export function ModuleTableMock() {
   return (
     <div aria-hidden className="w-max overflow-hidden rounded-2xl border border-(--color-border-default) bg-(--color-surface-page) shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]">
       {/* toolbar */}
-      <div className="flex items-center gap-1 border-b border-(--color-border-default) px-3 py-2">
+      <div className="flex items-center gap-1 border-b border-(--color-border-default) last:border-b-0 px-3 py-2">
         <TBtn icon="LayoutGrid" /><TBtn icon="List" /><TBtn icon="Table2" label="ТАБЛИЦА" active /><TBtn icon="AlignLeft" /><TBtn icon="Calendar" /><TBtn icon="ChartLine" /><TBtn icon="SquareChevronDown" />
         <span className="ml-2 inline-flex items-center rounded-lg border border-(--color-action-primary) px-3 py-1.5 text-[13px] font-semibold text-(--color-text-accent)">ДОБАВИТЬ</span>
         <span className="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-(--color-border-default) px-3 py-1.5 text-[13px] font-medium text-(--color-text-secondary)"><Icon name="ListFilter" className="h-4 w-4" strokeWidth={2} /> ФИЛЬТРЫ</span>
@@ -90,29 +90,29 @@ export function ModuleTableMock() {
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#7d4ccf] text-[11px] font-semibold text-white">TR</span>
         </div>
       </div>
-      <div className="flex items-center justify-end gap-2 border-b border-(--color-border-default) px-3 py-2">
+      <div className="flex items-center justify-end gap-2 border-b border-(--color-border-default) last:border-b-0 px-3 py-2">
         <span className="inline-flex items-center gap-1.5 rounded-lg border border-(--color-border-default) px-3 py-1.5 text-[13px] font-medium text-(--color-text-secondary)"><Icon name="CloudDownload" className="h-4 w-4" strokeWidth={2} /> СКАЧАТЬ</span>
         <span className="inline-flex items-center gap-1.5 rounded-lg border border-(--color-border-default) px-3 py-1.5 text-[13px] font-medium text-(--color-text-secondary)"><Icon name="Settings" className="h-4 w-4" strokeWidth={2} /> НАСТРОЙКИ</span>
       </div>
 
       {/* header */}
-      <div className="grid border-b border-(--color-border-default) bg-(--color-surface-page)" style={{ gridTemplateColumns: GRID }}>
+      <div className="grid border-b border-(--color-border-default) last:border-b-0 bg-(--color-surface-page)" style={{ gridTemplateColumns: GRID }}>
         <div className="flex items-center justify-center py-1.5 text-(--color-text-secondary)"><Icon name="ChevronDown" className="h-4 w-4" strokeWidth={2} /></div>
-        {COLS.map((c) => <div key={c} className="border-r border-(--color-border-default) px-3 py-1.5 text-[13px] font-semibold text-(--color-text-primary)">{c}</div>)}
+        {COLS.map((c) => <div key={c} className="border-r border-(--color-border-default) last:border-r-0 px-3 py-1.5 text-[13px] font-semibold text-(--color-text-primary)">{c}</div>)}
       </div>
 
       {/* rows */}
       {ROWS.map((r, idx) => {
         if (r.type === 'group') {
           return (
-            <div key={idx} className="border-b border-(--color-border-default) py-1.5 pl-[44px] text-[14px] font-semibold text-(--color-text-accent)">{r.label}</div>
+            <div key={idx} className="border-b border-(--color-border-default) last:border-b-0 py-1.5 pl-[44px] text-[14px] font-semibold text-(--color-text-accent)">{r.label}</div>
           );
         }
         if (r.type === 'add') {
-          return <div key={idx} className="border-b border-(--color-border-default) py-1.5 pl-[68px] text-[13px] italic text-(--color-text-secondary)">Добавить карточку</div>;
+          return <div key={idx} className="border-b border-(--color-border-default) last:border-b-0 py-1.5 pl-[68px] text-[13px] italic text-(--color-text-secondary)">Добавить карточку</div>;
         }
         return (
-          <div key={idx} className="grid items-center border-b border-(--color-border-default) hover:bg-(--color-surface-section)" style={{ gridTemplateColumns: GRID }}>
+          <div key={idx} className="grid items-center border-b border-(--color-border-default) last:border-b-0 hover:bg-(--color-surface-section)" style={{ gridTemplateColumns: GRID }}>
             <div />
             <Cell className="gap-1.5 font-medium"><span className="text-[15px]">{r.icon}</span><span className="min-w-0 truncate">{r.name}</span></Cell>
             <Cell className="truncate">{r.lane}</Cell>

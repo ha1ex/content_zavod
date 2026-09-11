@@ -32,7 +32,7 @@
      короткая и серая: отделяет окно от фона, а не поднимает его над слайдом.
      Родные тени у .tcard, .ffield и .ugroups глубже и уходят в фиолетовый —
      перебиваем их одним значением на все интерфейсы дека. */
-  .ffield, .tcard, .bboard, .ugroups { box-shadow:0 .3cqw 1cqw rgba(45,45,45,.13); }
+  .ffield, .tcard, .bboard, .ugroups, .trep { box-shadow:0 .3cqw 1cqw rgba(45,45,45,.13); }
   /* У картинок тень через drop-shadow: он идет по силуэту, а поля кадра
      прозрачные, и box-shadow обвел бы пустой прямоугольник.
      Схемы — контур компании, карта интеграций, переезд — тени не получают:
@@ -658,7 +658,7 @@
       </div>
 
       <div class="s-body">
-        <div class="cols-2" style="grid-template-columns:24cqw 1fr; align-items:center">
+        <div class="cols-2" style="grid-template-columns:20cqw 1fr; align-items:center">
         <div>
           <ul class="checks">
             <li>Почта, календарь и&nbsp;мессенджеры — уведомления приходят туда, где команда уже работает</li>
@@ -668,7 +668,7 @@
         </div>
 
         <div style="display:flex; align-items:center">
-          <img src="../assets/mocks/integrations-hub-bank.png" alt="Карта интеграций Кайтена" style="width:92%; height:auto; display:block; margin-left:auto; margin-right:0" />
+          <img src="../assets/mocks/integrations-hub-bank.png" alt="Карта интеграций Кайтена" style="width:100%; height:auto; display:block" />
         </div>
         </div>
       </div>

@@ -32,6 +32,9 @@
      Родные тени у .tcard, .ffield и .ugroups глубже и уходят в фиолетовый —
      перебиваем их одним значением на все интерфейсы дека. */
   .ffield, .tcard, .bboard, .ugroups, .trep { box-shadow:0 .3cqw 1cqw rgba(45,45,45,.13); }
+  /* Метка доски в отчете — эмодзи вместо цветного кружка. Базовое правило
+     .trep .brd i задает размеры точки, здесь они снимаются. */
+  .trep .brd i.emo { width:auto; height:auto; border-radius:0; font-style:normal; font-size:.95cqw; line-height:1; }
   /* У картинок тень через drop-shadow: он идет по силуэту, а поля кадра
      прозрачные, и box-shadow обвел бы пустой прямоугольник.
      Схемы — контур компании, карта интеграций, переезд — тени не получают:
@@ -274,7 +277,7 @@
         </div>
 
         <div style="display:flex; align-items:center">
-          <img src="../assets/mocks/card-window-narrow.png" alt="Карточка задачи в Кайтене" style="width:100%; height:auto; display:block" />
+          <img src="../assets/mocks/card-window-narrow.png" alt="Карточка задачи в Кайтене" style="width:85%; height:auto; display:block; margin-inline:auto" />
         </div>
         </div>
       </div>
@@ -503,7 +506,7 @@
       </div>
 
       <div class="s-body">
-        <p class="body" style="font-size:1.25cqw; max-width:70cqw">ИТ-блок банка ведет циклы разработки цифровых продуктов в&nbsp;том же&nbsp;сервисе, где работают бизнес-подразделения. Готовые шаблоны досок, WIP-лимиты, спринты и&nbsp;отчеты по&nbsp;ним</p>
+        <p class="body" style="font-size:1.25cqw; max-width:56cqw">ИТ-блок банка ведет циклы разработки цифровых продуктов в&nbsp;том же&nbsp;сервисе, где работают бизнес-подразделения. Готовые шаблоны досок, WIP-лимиты, спринты и&nbsp;отчеты по&nbsp;ним</p>
 
         <div class="cols-4" style="margin-top:2cqw">
           <div class="frame" style="padding:1.6cqw; display:flex; flex-direction:column">
@@ -608,15 +611,15 @@
                   <tr><th>Название</th><th>Доска</th><th>Взята в&nbsp;работу</th><th>Выполнена</th><th class="sum">Сумма</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Заключение по&nbsp;заемщику</td><td><span class="brd"><i class="is-violet"></i><span>Кредитование МСБ</span></span></td><td>15.02.2026 17:28</td><td>15.02.2026 17:28</td><td class="sum">4ч 49м</td></tr>
-                  <tr><td>Проверка контрагента</td><td><span class="brd"><i class="is-orange"></i><span>Комплаенс</span></span></td><td>11.07.2026 16:29</td><td>18.07.2026 14:57</td><td class="sum">1ч 4м</td></tr>
+                  <tr><td>Заключение по&nbsp;заемщику</td><td><span class="brd"><i class="emo">💳</i><span>Кредитование МСБ</span></span></td><td>15.02.2026 17:28</td><td>15.02.2026 17:28</td><td class="sum">4ч 49м</td></tr>
+                  <tr><td>Проверка контрагента</td><td><span class="brd"><i class="emo">🛡️</i><span>Комплаенс</span></span></td><td>11.07.2026 16:29</td><td>18.07.2026 14:57</td><td class="sum">1ч 4м</td></tr>
                   <tr><td>Расчет резерва</td><td><span class="brd"><span>Риски (портфель МСБ)</span></span></td><td>10.03.2026 16:41</td><td>26.09.2026 4:28</td><td class="sum">4ч 18м</td></tr>
                   <tr class="is-on"><td>Согласование лимита</td><td><span class="brd"><span>Кредитный комитет</span></span></td><td>09.06.2026 4:32</td><td>16.08.2026 15:29</td><td class="sum">9ч 48м</td></tr>
-                  <tr><td>Открытие счета клиенту</td><td><span class="brd"><i class="is-violet"></i><span>Розница</span></span></td><td>11.07.2026 12:56</td><td>11.07.2026 22:05</td><td class="sum">15м</td></tr>
-                  <tr><td>Отчет по&nbsp;портфелю</td><td><span class="brd"><i class="is-violet"></i><span>Финансы и&nbsp;отчетность</span></span></td><td>11.07.2026 22:12</td><td>12.07.2026 19:52</td><td class="sum">1ч 35м</td></tr>
+                  <tr><td>Открытие счета клиенту</td><td><span class="brd"><i class="emo">🏪</i><span>Розница</span></span></td><td>11.07.2026 12:56</td><td>11.07.2026 22:05</td><td class="sum">15м</td></tr>
+                  <tr><td>Отчет по&nbsp;портфелю</td><td><span class="brd"><i class="emo">📊</i><span>Финансы и&nbsp;отчетность</span></span></td><td>11.07.2026 22:12</td><td>12.07.2026 19:52</td><td class="sum">1ч 35м</td></tr>
                   <tr><td>Зарплатный проект</td><td><span class="brd"><span>Корпоративный бизнес</span></span></td><td>31.05.2026 13:36</td><td></td><td class="sum">4ч 15м</td></tr>
-                  <tr><td>Обновление тарифов</td><td><span class="brd"><i class="is-violet"></i><span>Продукты и&nbsp;тарифы</span></span></td><td>11.07.2026 22:06</td><td>17.07.2026 23:28</td><td class="sum">2ч</td></tr>
-                  <tr><td>Ответ клиенту</td><td><span class="brd"><i class="is-violet"></i><span>Служба поддержки</span></span></td><td>19.07.2026 5:23</td><td>19.07.2026 5:28</td><td class="sum">10м</td></tr>
+                  <tr><td>Обновление тарифов</td><td><span class="brd"><i class="emo">🏷️</i><span>Продукты и&nbsp;тарифы</span></span></td><td>11.07.2026 22:06</td><td>17.07.2026 23:28</td><td class="sum">2ч</td></tr>
+                  <tr><td>Ответ клиенту</td><td><span class="brd"><i class="emo">🎧</i><span>Служба поддержки</span></span></td><td>19.07.2026 5:23</td><td>19.07.2026 5:28</td><td class="sum">10м</td></tr>
                 </tbody>
               </table>
               <p class="total">Суммарное время 35ч 3м</p>

@@ -15,8 +15,9 @@
   .grad { background:linear-gradient(120deg,#8b5cf0,#6fe5ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
   /* крупные цифры градиентом, как в апрельском деке */
   .stat-value { background:linear-gradient(120deg,#8b5cf0,#6fe5ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
-  /* нижнее градиентное свечение — выше и мягче (было ~30px) */
-  .slide::after { height:9cqw; bottom:-2.4cqw; filter:blur(3.2cqw); opacity:.5; }
+  /* Нижнее градиентное свечение — выше и мягче, чем базовые 30px, но сдержаннее
+     первой версии: полоса была в 9cqw и забирала на себя низ слайда. */
+  .slide::after { height:5.4cqw; bottom:-1.8cqw; filter:blur(2.8cqw); opacity:.34; }
   /* сетка логотипов инфопартнеров */
   .logos { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:2.2cqw 3.2cqw; }
   .logos img { height:2.3cqw; width:auto; max-width:12cqw; object-fit:contain; opacity:.92; }

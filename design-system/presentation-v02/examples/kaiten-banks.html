@@ -19,6 +19,15 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
+  /* Полоса под навигацию: панель лежала поверх слайда и срезала низ
+     содержимого. Отдаем ей место под кадром, отнимая только снизу —
+     так слайд теряет 6% масштаба, а не 16%, как при полосах с двух сторон. */
+  :root { --nav-space: max(6vh, 64px); }
+  .stage { padding-bottom: var(--nav-space); }
+  .deck {
+    width: min(100vw, calc((100vh - var(--nav-space)) * 16 / 9));
+    height: min(calc(100vh - var(--nav-space)), calc(100vw * 9 / 16));
+  }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   :root { --stage-bg:var(--neutral-200); }
@@ -129,15 +138,13 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <!-- Раскладка T13 занимает зону целиком: при центрировании низ сертификатов
-           уходит под панель навигации, поэтому блок стоит от заголовка вниз -->
-      <div class="s-body" style="justify-content:flex-start">
+      <div class="s-body">
         <p class="body" style="max-width:52cqw">Kaiten работает на&nbsp;российских операционных системах семейства Linux «РЕД ОС»&nbsp;и&nbsp;«РОСА» — переход не&nbsp;требует замены парка рабочих станций банка</p>
 
         <div class="cols-2" style="margin-top:2.4cqw">
           <div class="frame">
             <div style="display:flex; align-items:center; gap:1.2cqw">
-              <span style="width:3.33cqw; height:3.33cqw; border-radius:var(--radius-tile); background:var(--tile-bg); color:var(--tile-fg); display:flex; align-items:center; justify-content:center; flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1.7cqw; height:1.7cqw; display:flex"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span style="width:3.33cqw; height:3.33cqw; border-radius:var(--radius-tile); background:var(--tile-bg); color:var(--tile-fg); display:flex; align-items:center; justify-content:center; flex:none"><span style="width:1.7cqw; height:1.7cqw; display:flex"><svg viewBox="0 0 18 19.8468" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 7L8 11L6 9M17 8.16505C17 14.7333 12.0319 17.6781 9.92578 18.6314L9.92313 18.6326C9.70162 18.7328 9.59058 18.7831 9.33887 18.8263C9.17946 18.8537 8.82154 18.8537 8.66214 18.8263C8.40942 18.7829 8.29723 18.7325 8.07395 18.6314C5.9678 17.6781 1 14.7333 1 8.16504V4.2002C1 3.08009 1 2.51962 1.21799 2.0918C1.40974 1.71547 1.71547 1.40974 2.0918 1.21799C2.51962 1 3.08009 1 4.2002 1H13.8002C14.9203 1 15.4796 1 15.9074 1.21799C16.2837 1.40974 16.5905 1.71547 16.7822 2.0918C17 2.5192 17 3.079 17 4.19691V8.16505Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               <h3 class="h3" style="margin:0"><a href="https://reestr.digital.gov.ru/reestr/870368/" style="color:var(--text-accent); text-decoration:underline; text-underline-position:from-font">В&nbsp;реестре российского ПО</a></h3>
             </div>
             <p class="body muted" style="margin-top:1.6cqw">Кайтен включен в&nbsp;Единый реестр российских программ для&nbsp;ЭВМ и&nbsp;баз данных.<br />ПО&nbsp;отвечает требованиям безопасности компаний, нормативам защиты данных и&nbsp;корпоративным политикам</p>

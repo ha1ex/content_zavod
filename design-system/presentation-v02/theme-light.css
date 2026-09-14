@@ -43,6 +43,7 @@
   --surface-page:var(--neutral-000);
   --surface-frame:var(--neutral-100);   /* #F5F5F5 — между шаблонным #F2F2F2 и #FAFAFA */
   --surface-accent:var(--violet-12);
+  --surface-info:#f0f7fe;               /* голубая плашка — светлее 12-й ступени */
   --border-default:var(--neutral-300);
   --table-line:#D1D5DB;                 /* разделители строк в таблице сравнения */
   --action-primary:var(--violet-100);
@@ -72,7 +73,7 @@
      В макете прямоугольник 2005.5×30.7 в точке y=1064.73, opacity .75,
      gaussian blur 50. Здесь тише, чтобы не спорить с контентом. */
   --glow-gradient: linear-gradient(90deg, #6FE5FF, #E298FF);
-  --glow-h: 1.599cqw;        /* 30.7px */
+  --glow-h: 2.083cqw;        /* 40px — было 30.7 */
   --glow-bottom: -.804cqw;   /* низ уходит на 15.43px за край слайда */
   --glow-opacity: .42;       /* в макете .75 */
   --glow-blur: 1.3cqw;       /* в макете stdDeviation 50 */

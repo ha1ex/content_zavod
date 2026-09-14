@@ -1,0 +1,148 @@
+/* Мокап Calendar — календарь Кайтена с открытой панелью фильтров.
+   Упрощенный снимок интерфейса для слайда про календарь.
+
+   Геометрия макета — 1180×720 px. Внутри блока считаем в этих же координатах:
+   --u равна одному пикселю макета, поэтому все размеры записаны как
+   calc(var(--u) * N) и тянутся вместе с деком.
+
+   Классы заскоуплены под .calv, чтобы не пересекаться с классами презентации.
+   Мокап остается светлым и в темной теме — это снимок интерфейса. */
+
+.calv {
+  --u: .0529cqw;                 /* 62.5cqw / 1180 px макета */
+  --c-ink: #2d2d2d;
+  --c-ink-2: #5b5b5f;
+  --c-ink-3: #9a9a9e;
+  --c-line: #e8e8ec;
+  --c-surf: #f4f4f6;
+  --c-violet: #7d4ccf;
+  --c-violet-12: #efe9f9;
+  position: relative;
+  width: 100%;
+  padding-bottom: calc(var(--u) * 2);
+  border-radius: calc(var(--u) * 18);
+  background: #ffffff;
+  box-shadow: 0 .42cqw 1.04cqw -.1cqw rgba(45, 45, 45, .16);
+  overflow: hidden;
+  font-family: "Roboto", system-ui, sans-serif;
+  color: var(--c-ink);
+}
+.calv * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --------------------------------------------------------------- панель вида */
+
+.calv-bar {
+  display: flex; align-items: center; gap: calc(var(--u) * 10);
+  height: calc(var(--u) * 62);
+  padding: 0 calc(var(--u) * 20) 0 calc(var(--u) * 8);
+  border-bottom: 1px solid var(--c-line);
+}
+.calv-group {
+  display: flex; align-items: center; gap: calc(var(--u) * 4);
+  background: var(--c-surf); border-radius: calc(var(--u) * 10);
+  padding: calc(var(--u) * 4);
+}
+.calv-vi {
+  width: calc(var(--u) * 38); height: calc(var(--u) * 32);
+  border-radius: calc(var(--u) * 8);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-ink-2);
+}
+.calv-vi svg { width: calc(var(--u) * 18); height: calc(var(--u) * 18); display: block; }
+.calv-vi.is-sep { width: 1px; height: calc(var(--u) * 20); background: var(--c-line); border-radius: 0; }
+
+/* Активный вид — календарь: подпись рядом с иконкой, сиреневая подложка. */
+.calv-vi.is-on {
+  width: auto; gap: calc(var(--u) * 7);
+  padding: 0 calc(var(--u) * 12);
+  background: var(--c-violet-12); color: var(--c-violet);
+  font-size: calc(var(--u) * 12); font-weight: 600; letter-spacing: .04em;
+}
+
+.calv-filter {
+  margin-left: auto;
+  display: flex; align-items: center; gap: calc(var(--u) * 8);
+  height: calc(var(--u) * 34); padding: 0 calc(var(--u) * 14);
+  border: 1px solid var(--c-violet); border-radius: calc(var(--u) * 8);
+  color: var(--c-violet);
+  font-size: calc(var(--u) * 12); font-weight: 600; letter-spacing: .04em;
+}
+.calv-filter svg { width: calc(var(--u) * 15); height: calc(var(--u) * 15); display: block; }
+
+/* ------------------------------------------------------------------- сетка */
+
+.calv-month {
+  text-align: center;
+  font-size: calc(var(--u) * 22); font-weight: 500;
+  padding: calc(var(--u) * 18) 0 calc(var(--u) * 14);
+}
+.calv-week, .calv-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.calv-week span {
+  font-size: calc(var(--u) * 13); color: var(--c-ink-2);
+  text-align: right; padding-right: calc(var(--u) * 8);
+  padding-bottom: calc(var(--u) * 9);
+  border-bottom: 1px solid var(--c-line);
+}
+.calv-grid { border-top: 0; }
+.calv-day {
+  min-height: calc(var(--u) * 92);
+  padding: calc(var(--u) * 7) calc(var(--u) * 8);
+  border-right: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: calc(var(--u) * 5);
+}
+.calv-day:nth-child(7n) { border-right: 0; }
+.calv-day:nth-last-child(-n+7) { border-bottom: 0; }
+.calv-day b { font-size: calc(var(--u) * 13); font-weight: 400; color: var(--c-ink-2); }
+.calv-day.is-out b { color: #c9c9ce; }
+
+/* Карточка в дне: сплошная заливка статуса, подпись в одну строку. */
+.calv-card {
+  width: 100%;
+  display: flex; align-items: center; gap: calc(var(--u) * 5);
+  height: calc(var(--u) * 20); padding: 0 calc(var(--u) * 6);
+  border-radius: calc(var(--u) * 4);
+  font-size: calc(var(--u) * 11); color: #ffffff;
+  white-space: nowrap; overflow: hidden;
+}
+.calv-card span { overflow: hidden; text-overflow: ellipsis; }
+.calv-card i { font-style: normal; flex: none; opacity: .85; }
+.calv-card.is-amber  { background: #f0a92c; }
+.calv-card.is-blue   { background: #2f80ed; }
+.calv-card.is-violet { background: #8e44d0; }
+.calv-card.is-red    { background: #e5564a; }
+
+/* ------------------------------------------------------- панель фильтров */
+
+.calv-pop {
+  position: absolute; right: calc(var(--u) * 96); top: calc(var(--u) * 86);
+  width: calc(var(--u) * 296);
+  background: #ffffff;
+  border: 1px solid var(--c-line);
+  border-radius: calc(var(--u) * 10);
+  box-shadow: 0 calc(var(--u) * 16) calc(var(--u) * 34) calc(var(--u) * -12) rgba(45, 45, 45, .22);
+  overflow: hidden;
+}
+.calv-pop-h {
+  font-size: calc(var(--u) * 15); font-weight: 500;
+  padding: calc(var(--u) * 14) calc(var(--u) * 16) calc(var(--u) * 12);
+  background: #fafafb; border-bottom: 1px solid var(--c-line);
+}
+.calv-search {
+  display: flex; align-items: center; gap: calc(var(--u) * 9);
+  margin: calc(var(--u) * 12) calc(var(--u) * 16);
+  height: calc(var(--u) * 36); padding: 0 calc(var(--u) * 12);
+  border: 1px solid var(--c-line); border-radius: calc(var(--u) * 7);
+  font-size: calc(var(--u) * 14); color: var(--c-ink-3);
+}
+.calv-search svg { width: calc(var(--u) * 15); height: calc(var(--u) * 15); display: block; }
+.calv-list { padding-bottom: calc(var(--u) * 6); }
+.calv-li {
+  display: flex; align-items: center; gap: calc(var(--u) * 14);
+  padding: calc(var(--u) * 8) calc(var(--u) * 16);
+  font-size: calc(var(--u) * 14);
+}
+.calv-li svg { width: calc(var(--u) * 17); height: calc(var(--u) * 17); display: block; flex: none; color: var(--c-ink-2); }
+.calv-li.is-off { color: var(--c-ink-3); }
+.calv-li.is-off svg { color: #c9c9ce; }

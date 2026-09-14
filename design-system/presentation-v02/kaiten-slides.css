@@ -25,9 +25,9 @@
      По вертикали: 1080 = 36 (поле) + 52 (заголовок) + 79 + 864 + 49 (поле).
        контент 864 = 2 ряда по 418 + гаттер 28. Модуль — 429×418.         */
   --margin-x: 3.125cqw;      /* 60px */
-  --margin-top: 1.875cqw;    /* 36px — по верху знака в макете */
+  --margin-top: 2.5cqw;      /* 48px — равно высоте знака */
   --margin-bottom: 2.552cqw; /* 49px */
-  --head-gap: 4.115cqw;      /* 79px — от заголовка до контента */
+  --head-gap: 3.802cqw;      /* 73px — от заголовка до контента: 48 + 46 + 73 + 864 + 49 = 1080 */
   --col: 22.344cqw;          /* 429px — ширина модуля */
   --row: 21.771cqw;          /* 418px — высота модуля */
   --gap: 1.458cqw;           /* 28px — гаттер, одинаковый по обеим осям */
@@ -150,7 +150,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
 /* ----------------------------------------------------------- типографика --- */
 
-.s-title { font-size:2.5cqw;    line-height:1.083; font-weight:600; letter-spacing:-.01em; margin:0; }  /* 48/52 */
+.s-title { font-size:2.19cqw;   line-height:1.083; font-weight:600; letter-spacing:-.01em; margin:0; }  /* 42/46 */
 .h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:400; margin:0 0 1.667cqw; }              /* 30/36, отступ снизу 32 */
 .h3      { font-size:1.25cqw;   line-height:1.333; font-weight:600; margin:0 0 .5cqw; }                 /* 24/32 */
 .body    { font-size:1.0417cqw; line-height:1.4;   font-weight:400; margin:0; }                         /* 20/28 */
@@ -224,9 +224,15 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
   min-height:0;
 }
 .frame.is-accent { background: var(--surface-accent); }
-.frame.is-accent .h2,
+/* Заголовок плашки идет цветом плашки: на фиолетовой — фиолетовый,
+   на голубой — голубой (см. .frame.is-info). Подзаголовок остается
+   основным цветом текста. */
+.frame.is-accent .h2 { color: var(--text-accent); }
 .frame.is-accent .h3 { color: var(--text-primary); }
 .frame.is-center { display:flex; align-items:center; justify-content:center; text-align:center; }
+/* Голубая карточка — промежуточная ступень рядом с обычной и фиолетовой. */
+.frame.is-info { background: var(--surface-info); }
+.frame.is-info .h2 { color: var(--blue-100); }
 
 /* Пункт с иконочной плашкой */
 .tiles { display:grid; grid-template-columns:1fr 1fr; gap:1.8cqw 2.6cqw; }
@@ -358,7 +364,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
 .contact-note {
   background:var(--surface-accent); border-radius:.833cqw;
-  padding:1.5cqw 1.6cqw; font-size:1.46cqw; line-height:1.4;
+  padding:1.5cqw 1.6cqw; font-size:1.46cqw; line-height:1.25;
   position:relative; overflow:hidden;
 }
 .contact-note .decor {
@@ -374,7 +380,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
 /* Сегменты не расставлены, а заходят друг на друга на 4px — как в макете,
    где шаг между вершинами меньше длины сегмента. */
-.chevrons { display:flex; gap:.104cqw; }   /* 4px между сегментами */
+.chevrons { display:flex; gap:.035cqw; }   /* белый просвет между сегментами — 0.7px */
    /* −4px */
 .chevron {
   flex:1; height:2.5cqw;                  /* 48px */
@@ -394,12 +400,12 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 /* Крупный вариант — периоды и кварталы */
 .chevrons.is-wide .chevron { height:3.33cqw; font-size:1.25cqw; }
 .chevrons.is-wide .chevron b { font-weight:600; margin-right:.3em; }
-.chevrons.is-wide .chevron .year { color:var(--text-secondary); }
+.chevrons.is-wide .chevron .year { color:inherit; }  /* год того же цвета, что и период */
 
 /* Ромбы с соединителями — вехи по периодам */
 /* Повернутый на 45° квадрат занимает по высоте в 1.41 раза больше своей
    стороны — поэтому у ленты запас по вертикали, иначе углы срезаются. */
-.diamonds { display:flex; align-items:center; gap:.8cqw; padding:.75cqw 0; }
+.diamonds { display:flex; align-items:center; gap:.8cqw; padding:.75cqw .72cqw; }  /* боковой запас — под углы повернутых ромбов */
 .diamond {
   width:3.44cqw; height:3.44cqw; flex:none; transform:rotate(45deg);
   border-radius:.42cqw; background:var(--surface-accent);
@@ -523,7 +529,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
   display:flex; align-items:center;
   font-size:1.25cqw; line-height:1.333; font-weight:400;   /* 24/32 Regular */
 }
-.cmp-table .cmp-head { height:6.25cqw; font-weight:600; font-size:1.5625cqw; line-height:1.2; }  /* 120px, 30/36 */
+.cmp-table .cmp-head { height:6.25cqw; font-weight:400; font-size:1.5625cqw; line-height:1.2; }  /* 120px, 30/36 */
 
 /* Разделители идут во всех трех колонках: в макете их 33 — по 11 на колонку.
    Одиннадцать это шапка плюс десять строк, то есть линия есть и под последней. */
@@ -625,7 +631,7 @@ code {
 .cover-logo { display:block; width:10.417cqw; }  /* 200px — лого целиком из макета */
 .cover-logo img { display:block; width:100%; height:auto; }
 
-.cover-text { position:absolute; left:6.25cqw; top:50%; transform:translateY(-50%); max-width:46cqw; z-index:1; }
+.cover-text { position:absolute; left:6.25cqw; top:50%; transform:translateY(-50%); max-width:42cqw; z-index:1; }
 .cover-text h1 { font-size:3.75cqw; line-height:1.25; font-weight:600; letter-spacing:-.015em; margin:0; }  /* 72/90 */
 .cover-text .sub { font-size:1.5625cqw; line-height:1.2; margin:1.7cqw 0 0; }                               /* 30/36 */
 .cover-text .meta { font-size:1.0417cqw; line-height:1.4; color:var(--text-secondary); margin:2.4cqw 0 0; }
@@ -787,6 +793,18 @@ code {
   background:var(--c-12, var(--surface-accent)); color:var(--c-100, var(--text-accent));
 }
 .steps .step.is-strong .step-num { background:var(--c-100, var(--action-primary)); color:#fff; }
+/* Связка между шагами: тонкая линия из-под кружка до следующего. Рисуем
+   псевдоэлементом самого кружка, поэтому она всегда стоит по его центру
+   и тянется ровно на зазор списка. */
+.steps .step { position:relative; }
+.steps .step:not(:last-child) .step-num::after {
+  content:""; position:absolute; left:50%; top:100%;
+  width:.1cqw; height:2.2cqw; transform:translateX(-50%);
+  background:var(--neutral-300);
+}
+.steps .step-num { position:relative; }
+/* Вариант списка без связки: кружки стоят сами по себе. */
+.steps.is-plain .step:not(:last-child) .step-num::after { content:none; }
 .steps .step-title { font-size:1.0417cqw; line-height:1.35; font-weight:600; margin:0; }
 .steps .step-text  { font-size:.9375cqw; line-height:1.35; margin:.05cqw 0 0; color:var(--text-secondary); }
 
@@ -960,15 +978,23 @@ code {
    В карточке пара знаков слева и подчеркнутая ссылка справа.
    -------------------------------------------------------------------------- */
 .links-frame { background:var(--surface-accent); border-radius:var(--radius-frame); padding:1.46cqw; width:100%; }
+/* Четыре ссылки столбиком слева, справа одна большая плашка на всю высоту. */
 .links-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw; }
+.links-grid.is-split { grid-template-columns:1fr 1fr; grid-auto-rows:1fr; }
+.links-grid.is-split .link-big { grid-column:2; grid-row:1 / span 4; display:flex; align-items:center; justify-content:center; padding:1.4cqw; }
+.links-grid.is-split .link-big img { width:auto; height:auto; max-width:100%; max-height:22cqw; object-fit:contain; display:block; }
 .link-card {
   background:var(--surface-page); border-radius:.83cqw;
   min-height:7cqw; padding:0 1.56cqw 0 6.2cqw;
   display:flex; align-items:center; gap:1cqw;
 }
-.link-icons { display:flex; align-items:center; gap:.83cqw; flex:none; color:var(--action-primary); }
-.link-icons svg { width:1.98cqw; height:1.98cqw; display:block; }
-.link-icons img { height:1.98cqw; width:auto; display:block; }
+.link-icons { display:flex; align-items:center; gap:1.35cqw; flex:none; color:var(--action-primary); }
+.link-icons svg {
+  width:1.25cqw; height:1.25cqw; display:block;
+  box-sizing:content-box; padding:.36cqw;
+  background:var(--violet-tint); border-radius:.42cqw;
+}
+.link-icons img { height:1.98cqw; width:auto; display:block; order:-1; }  /* знак слева от иконки */
 .link-text { font-size:1.25cqw; line-height:1.3; text-decoration:underline; text-underline-offset:.21cqw; }
 
 /* Мокап платформы: вписан по высоте зоны, пропорции сохранены. */
@@ -1143,6 +1169,7 @@ code {
 .frame .features .feature-icon { background: var(--surface-page); }
 /* На сиреневом фрейме плашка под иконкой — белая с прозрачностью. */
 .frame.is-accent .features .feature-icon { background:#ffffff; color:var(--violet-100); }
+.frame.is-info   .features .feature-icon { background:#ffffff; color:var(--blue-100); }
 
 /* --- Модуль кейса, макет 8572-65672 ------------------------------------- */
 .cs-list {

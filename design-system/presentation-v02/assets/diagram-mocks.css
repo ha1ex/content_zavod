@@ -20,10 +20,10 @@
 .diagrams-mock .repts{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-6);}
 @media(min-width:1280px){.diagrams-mock .repts{gap:var(--sp-8);}}
 .diagrams-mock .rept{background:#fff; border:1px solid var(--border); border-radius:var(--radius-2xl); padding:var(--sp-6) var(--sp-6) var(--sp-5); display:flex; flex-direction:column;}
-.diagrams-mock .rept__t{font-size:15px; line-height:20px; font-weight:var(--fw-semi); color:var(--text-title); margin-bottom:var(--sp-1);}
+.diagrams-mock .rept__t{font-size:18px; line-height:24px; font-weight:400; color:var(--text-title); margin-bottom:var(--sp-1);}
 .diagrams-mock .rept svg{display:block; width:100%; height:auto;}
 .diagrams-mock .rept__lg{display:flex; flex-wrap:wrap; gap:5px 16px; margin-top:auto; padding-top:12px;}
-.diagrams-mock .rept__lg span{display:inline-flex; align-items:center; gap:4px; flex:none; white-space:nowrap; font-size:11px; line-height:1; color:var(--text-secondary);}
+.diagrams-mock .rept__lg span{display:inline-flex; align-items:center; gap:4px; flex:none; white-space:nowrap; font-size:13px; line-height:1; color:var(--text-secondary);}
 
 .diagrams-mock .repts__nav{display:none; justify-content:center; gap:14px; margin-top:var(--sp-5);}
 .diagrams-mock .repts__navbtn{width:48px; height:48px; border-radius:9999px; border:1px solid var(--border); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s;}

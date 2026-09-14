@@ -40,6 +40,7 @@
   --surface-page:var(--ink);
   --surface-frame:rgba(125,76,207,.12);  /* #7D4CCF под 12% — пара 100/12 из DS */
   --surface-accent:var(--violet-100);    /* акцентный фрейм — сплошной */
+  --surface-info:rgba(33,150,243,.12);   /* голубая плашка */
   --border-default:rgba(255,255,255,.16);
   --table-line:rgba(255,255,255,.16);    /* на темном разделители еле заметны */
   --action-primary:var(--violet-100);
@@ -68,7 +69,7 @@
      режим наложения — hard light (правило ниже). В темном макете полоса
      была 42px и плотнее, но в одинаковых цифрах обе темы держатся ровнее. */
   --glow-gradient: linear-gradient(90deg, #6FE5FF, #E298FF);
-  --glow-h: 1.599cqw;         /* 30.7px — как в Light */
+  --glow-h: 2.083cqw;        /* 40px — было 30.7 */
   --glow-bottom: -.804cqw;    /* низ уходит на 15.43px за край слайда */
   --glow-opacity: .42;
   --glow-blur: 1.3cqw;
@@ -178,6 +179,8 @@
 /* Внутри сплошного акцентного фрейма полярность переворачивается:
    плашка становится светлой, иконка — сиреневой, пояснения — белые
    вполсилы. Иначе залитая плашка на залитом фрейме сливается. */
+/* Плашка залита сплошным фиолетовым — заголовок на ней белый, а не цветной. */
+[data-theme="dark"] .frame.is-accent .h2 { color: var(--text-primary); }
 [data-theme="dark"] .frame.is-accent .tile { background: var(--violet-tint); color: var(--violet-100); }
 [data-theme="dark"] .frame.is-accent .tile-title { color: #ffffff; }
 [data-theme="dark"] .frame.is-accent .h3 { color: #ffffff; }

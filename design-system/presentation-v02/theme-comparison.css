@@ -23,7 +23,10 @@
    один в один: полка на y=12 до x=1290, диагональ 45° до x=1447, дальше
    полка на y=119. Скругления на изломах те же, что были. */
 [data-theme="comparison"] .slide::before {
-  content:""; position:absolute; z-index:0; pointer-events:none;
+  /* Плашка зонирования идет поверх засвета: круг на обложке не должен
+     размывать колонтитул с логотипами. Содержимое слайда все равно выше —
+     у него свой z-index:1, и в потоке оно после псевдоэлемента. */
+  content:""; position:absolute; z-index:1; pointer-events:none;
   left:0; top:0; width:100%;
   height:7.031cqw;          /* 135px — 119 + воздух под знаком */
   background: no-repeat center/100% 100%
@@ -41,16 +44,26 @@
   position:absolute;
   right:var(--margin-x);
   top:1.875cqw;             /* 36px */
-  width:8.385cqw;           /* 161px — полный лоckup */
+  width:auto;
+  display:flex; align-items:center;
+}
+/* На обложке пара логотипов такая же, как на остальных слайдах: слева
+   пунктирная заглушка под вторую сторону, справа знак Кайтена. */
+[data-theme="comparison"] .cover .cover-logo img { width:8.385cqw; }  /* 161px — полный локап */
+[data-theme="comparison"] .cover .cover-logo::before {
+  content:"ЛОГО"; flex:none;
+  width:8.385cqw; height:2.5cqw;   /* габарит знака Кайтена, 161x48 */
+  margin-right:1.25cqw;
+  border:.104cqw dashed var(--border-default); border-radius:.42cqw;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.83cqw; letter-spacing:.08em; color:var(--text-secondary);
 }
 
-/* На обложке сравнения заголовок стоит вверху слева, а не по центру
-   по вертикали, как в Light. */
+/* На обложке сравнения заголовок стоит слева, по центру вертикали — на одной
+   оси со снимком, как в Light. */
 [data-theme="comparison"] .cover-text {
-  top:auto; transform:none;
   left:3.255cqw;            /* 62.5px */
-  top:8.5cqw;               /* 163px — ниже логотипа: он стоит на 60 и высотой 60 */
-  max-width:52cqw;
+  max-width:47cqw;
 }
 
 /* --- Что НЕ меняется относительно Light -----------------------------------

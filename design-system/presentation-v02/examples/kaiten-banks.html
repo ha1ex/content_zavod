@@ -19,15 +19,12 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
-  /* Полоса под навигацию: панель лежала поверх слайда и срезала низ
-     содержимого. Отдаем ей место под кадром, отнимая только снизу —
-     так слайд теряет 6% масштаба, а не 16%, как при полосах с двух сторон. */
-  :root { --nav-space: max(6vh, 64px); }
-  .stage { padding-bottom: var(--nav-space); }
-  .deck {
-    width: min(100vw, calc((100vh - var(--nav-space)) * 16 / 9));
-    height: min(calc(100vh - var(--nav-space)), calc(100vw * 9 / 16));
-  }
+  /* Кадр занимает окно целиком, поэтому панель навигации неизбежно лежит
+     поверх слайда. Прячем ее: на показе слайд чистый, панель проявляется
+     от движения мыши и уходит через две секунды покоя. Клавиатурная
+     навигация от этого не зависит, а таб выводит панель через focus-within. */
+  .nav { opacity:0; pointer-events:none; transition:opacity .25s ease; }
+  body.nav-on .nav, .nav:focus-within { opacity:1; pointer-events:auto; }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   :root { --stage-bg:var(--neutral-200); }
@@ -1355,5 +1352,20 @@
 </nav>
 
 <script src="../kaiten-slides.js"></script>
+<script>
+  // Панель показывается от любого движения мыши и гаснет через две секунды
+  // без движения. Стартует видимой, чтобы было понятно, что она есть.
+  (function () {
+    var body = document.body, timer;
+    function show() {
+      body.classList.add('nav-on');
+      clearTimeout(timer);
+      timer = setTimeout(function () { body.classList.remove('nav-on'); }, 2000);
+    }
+    show();
+    addEventListener('mousemove', show, { passive: true });
+    addEventListener('mousedown', show, { passive: true });
+  })();
+</script>
 </body>
 </html>

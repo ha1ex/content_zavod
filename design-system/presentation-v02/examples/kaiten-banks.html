@@ -19,16 +19,6 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
-  /* Слайд отдает полосы сверху и снизу под служебные элементы: панель
-     навигации раньше ложилась поверх содержимого — из-за этого низ карточек
-     с сертификатами уходил под нее. Правило взято из дека контент-завода
-     (ветка claude/conf-2026-partners-center), при слиянии уедет в общий
-     kaiten-slides.css и отсюда уйдет. */
-  :root { --chrome-band: max(8vh, 56px); }
-  .deck {
-    width: min(100vw, calc((100vh - 2 * var(--chrome-band)) * 16 / 9));
-    height: min(calc(100vh - 2 * var(--chrome-band)), calc(100vw * 9 / 16));
-  }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   :root { --stage-bg:var(--neutral-200); }
@@ -139,7 +129,9 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body">
+      <!-- Раскладка T13 занимает зону целиком: при центрировании низ сертификатов
+           уходит под панель навигации, поэтому блок стоит от заголовка вниз -->
+      <div class="s-body" style="justify-content:flex-start">
         <p class="body" style="max-width:52cqw">Kaiten работает на&nbsp;российских операционных системах семейства Linux «РЕД ОС»&nbsp;и&nbsp;«РОСА» — переход не&nbsp;требует замены парка рабочих станций банка</p>
 
         <div class="cols-2" style="margin-top:2.4cqw">

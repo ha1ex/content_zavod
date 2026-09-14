@@ -21,20 +21,19 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
-  /* Переключатель тем уезжает в ту же нижнюю полосу, что и навигация:
-     штатно он висит сверху по центру и ложится на заголовок слайда.
-     Прячется и проявляется вместе с панелью. */
-  .theme-bar { top:auto; left:auto; transform:none; right:3.125vw; bottom:2.2vh; opacity:0; pointer-events:none; transition:opacity .25s ease; }
+  /* Переключатель тем остается сверху по центру, но стоит в своей полосе
+     над кадром, а не поверх заголовка. Прячется вместе с навигацией. */
+  .theme-bar { opacity:0; pointer-events:none; transition:opacity .25s ease; }
   body.nav-on .theme-bar, .theme-bar:focus-within { opacity:1; pointer-events:auto; }
-  /* Панель навигации не заезжает на слайд: под нее отведена полоса под
-     кадром. Отнимаем только снизу — кадр теряет около 6% масштаба, и на
-     столько же мельче выглядит заголовок. В экспорте и на полном экране
-     панели нет, там слайд занимает всю площадь. */
-  :root { --nav-space: max(6vh, 64px); }
-  .stage { padding-bottom: var(--nav-space); }
+  /* Служебные элементы стоят в своих полосах и на слайд не заезжают:
+     сверху переключатель тем, снизу навигация. Кадр отдает им место
+     и теряет около 12% масштаба. В экспорте и на полном экране их нет,
+     там слайд занимает всю площадь. */
+  :root { --chrome-space: max(6vh, 64px); }
+  .stage { padding-top: var(--chrome-space); padding-bottom: var(--chrome-space); }
   .deck {
-    width: min(100vw, calc((100vh - var(--nav-space)) * 16 / 9));
-    height: min(calc(100vh - var(--nav-space)), calc(100vw * 9 / 16));
+    width: min(100vw, calc((100vh - 2 * var(--chrome-space)) * 16 / 9));
+    height: min(calc(100vh - 2 * var(--chrome-space)), calc(100vw * 9 / 16));
   }
   /* Кадр занимает окно целиком, поэтому панель навигации неизбежно лежит
      поверх слайда. Прячем ее: на показе слайд чистый, панель проявляется
@@ -1250,7 +1249,7 @@
         </div>
 
         <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0; align-self:stretch">
-          <img src="../assets/mocks/help-center.png" alt="Справочный центр Кайтена" style="max-height:100%; max-width:100%; width:auto; height:auto; display:block" />
+          <img src="../assets/mocks/help-center.png" alt="Справочный центр Кайтена" style="max-height:100%; max-width:86%; width:auto; height:auto; display:block; margin-inline:auto" />
         </div>
         </div>
       </div>

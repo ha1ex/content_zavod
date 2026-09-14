@@ -166,6 +166,15 @@
    поднимаем до полупрозрачного белого. */
 [data-theme="dark"] .bullets li::before { background: rgba(255,255,255,.32); }
 
+/* Тихий вариант чек-листа на темном не работает: подложка --surface-accent
+   здесь сплошная сиреневая, а галочка в нем нарисована тем же сиреневым —
+   и пропадает. В темной теме залитый вариант и так норма, поэтому
+   .is-soft возвращается к белой галочке на сиреневом. */
+[data-theme="dark"] .checks.is-soft li::before {
+  background: var(--action-primary) no-repeat center/62%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E");
+}
+
 /* Внутри сплошного акцентного фрейма полярность переворачивается:
    плашка становится светлой, иконка — сиреневой, пояснения — белые
    вполсилы. Иначе залитая плашка на залитом фрейме сливается. */

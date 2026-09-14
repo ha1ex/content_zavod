@@ -46,6 +46,7 @@ const SECTION_TO_COMPONENT: Record<string, string> = {
   tabbed_feature: 'TabbedFeatureSection',
   scenario_walkthrough: 'ScenarioWalkthroughSection',
   industry_picker: 'IndustryPickerSection',
+  partner_directory: 'PartnerDirectory',
   comparison_table: 'ComparisonTable',
   timeline_roadmap: 'TimelineRoadmap',
   bento_grid: 'BentoGrid',
@@ -241,6 +242,19 @@ export function InspectorOverlay({ slug, children }: Props) {
   const [taggedCount, setTaggedCount] = useState<number>(0);
   const rafRef = useRef<number | null>(null);
 
+  // Плавающей кнопки нет — она перекрывала правый нижний угол страницы и лезла
+  // в скриншоты. Включение осталось на Alt+I, выключение — там же или Esc.
+  useEffect(() => {
+    function onToggleKey(e: KeyboardEvent) {
+      if (e.altKey && (e.code === 'KeyI' || e.key.toLowerCase() === 'i')) {
+        e.preventDefault();
+        setActive((v) => !v);
+      }
+    }
+    window.addEventListener('keydown', onToggleKey);
+    return () => window.removeEventListener('keydown', onToggleKey);
+  }, []);
+
   // Подсчёт data-comp при включении (для пользователя — видеть «работает ли вообще»)
   useEffect(() => {
     if (!active) return;
@@ -419,47 +433,6 @@ export function InspectorOverlay({ slug, children }: Props) {
         </div>
       )}
 
-      <button
-        data-inspector="toggle"
-        type="button"
-        onClick={() => setActive((v) => !v)}
-        title={
-          active
-            ? 'Inspector ON — клик по блоку копирует промпт. Esc — выкл.'
-            : 'Включить Inspector: hover на блок → подсветка → клик копирует контекст для CLI'
-        }
-        style={{
-          position: 'fixed',
-          bottom: 16,
-          right: 16,
-          background: active ? '#10b981' : '#1e293b',
-          color: 'white',
-          fontSize: 14,
-          fontWeight: 600,
-          padding: '12px 18px',
-          borderRadius: 999,
-          boxShadow: '0 6px 16px rgba(0,0,0,0.3)',
-          zIndex: 9998,
-          border: 'none',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-        }}
-      >
-        <span
-          aria-hidden
-          style={{
-            display: 'inline-block',
-            width: 10,
-            height: 10,
-            borderRadius: '50%',
-            background: active ? '#a7f3d0' : '#94a3b8',
-            boxShadow: active ? '0 0 8px #a7f3d0' : 'none',
-          }}
-        />
-        Inspector {active ? `ON · ${taggedCount} блоков` : 'OFF'}
-      </button>
 
       {active && (
         <div

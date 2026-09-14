@@ -8,3 +8,15 @@ html {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+/* Смена мокапа в панели аккордиона: новый проявляется, а не подменяется рывком. */
+@keyframes mock-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

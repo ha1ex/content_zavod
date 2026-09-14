@@ -35,6 +35,13 @@ export interface CTAsecondaryMockProps {
   buttons?: CTAButton[];
   /** Интерфейс справа: любой мокап (напр. <CTAmainMock/>). Без него — плейсхолдер-борд. */
   visual?: ReactNode;
+  /**
+   * Светло-серая подложка под градиентной карточкой во всю ширину секции.
+   * Opt-in: без него секция стоит на белом фоне страницы, как раньше.
+   */
+  onSurface?: boolean;
+  /** Нижний отступ секции на десктопе — 96px вместо 48px. Opt-in. */
+  spaceBottom?: boolean;
 }
 
 const STYLE = `
@@ -48,13 +55,18 @@ const STYLE = `
   display:block; width:100%; padding:128px var(--sp-4); box-sizing:border-box;
 }
 .cta-secondary, .cta-secondary *{box-sizing:border-box;}
-.cta-secondary .fcta{position:relative; overflow:hidden; max-width:1216px; margin:0 auto; background:linear-gradient(90deg,#ece0ff,#cdecff); border-radius:var(--radius-3xl); text-align:left; padding:var(--sp-16) var(--sp-12);}
+.cta-secondary--surface{background:var(--surface-section);}
+@media(min-width:768px) and (max-width:1023px){.cta-secondary--space-bottom{padding-bottom:64px;}}
+@media(min-width:1024px){.cta-secondary--space-bottom{padding-bottom:96px;}}
+@media(min-width:768px) and (max-width:1279px){.cta-secondary{padding-left:var(--sp-6); padding-right:var(--sp-6);}}
+.cta-secondary .fcta{position:relative; overflow:hidden; max-width:1216px; margin:0 auto; background:linear-gradient(90deg,#ece0ff,#cdecff); border-radius:var(--radius-3xl); text-align:left; padding:var(--sp-16) var(--sp-12) var(--sp-12);}
 .cta-secondary .fcta__blur{display:none;}
 @media(max-width:1279px){.cta-secondary .fcta{background:linear-gradient(180deg,#ece0ff 30%,#cdecff 85%);}}
-.cta-secondary .fcta__in{position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) 500px; gap:var(--sp-8); align-items:center;}
-.cta-secondary .fcta__copy{max-width:760px; align-self:start;}
-.cta-secondary .fcta h2{font-size:30px; line-height:36px; font-weight:var(--fw-semi); margin:0 0 var(--sp-4);}
-.cta-secondary .fcta p{font-size:18px; line-height:28px; color:#2d2d2d; margin:0 0 var(--sp-8);}
+.cta-secondary .fcta__in{position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) 520px; gap:var(--sp-10); align-items:center;}
+.cta-secondary .fcta__copy{max-width:560px; align-self:start;}
+.cta-secondary--space-bottom .fcta__copy{align-self:center;}
+.cta-secondary .fcta__copy h2{font-size:30px; line-height:36px; font-weight:var(--fw-semi); margin:0 0 var(--sp-4);}
+.cta-secondary .fcta__copy p{font-size:16px; line-height:26px; color:#2d2d2d; margin:0 0 var(--sp-8);}
 .cta-secondary .fcta__cta{display:flex; gap:var(--sp-3); justify-content:flex-start; flex-wrap:nowrap;}
 .cta-secondary .btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-1); font-family:inherit; font-weight:var(--fw-med); letter-spacing:var(--ls); border-radius:var(--radius-lg); border:none; cursor:pointer; white-space:nowrap; text-decoration:none; height:48px; padding:var(--sp-3) var(--sp-5); font-size:16px; line-height:24px; transition:background .18s, border-color .18s, color .18s;}
 .cta-secondary .btn--fill{background:var(--brand-100); color:#fff;}
@@ -76,19 +88,21 @@ const STYLE = `
   .cta-secondary{padding:96px var(--sp-4);}
   .cta-secondary .fcta__in{grid-template-columns:minmax(0,1fr); text-align:center; gap:var(--sp-12); justify-items:center;}
   .cta-secondary .fcta__copy{max-width:680px; margin:0 auto; min-width:0;}
-  .cta-secondary .fcta__cta{justify-content:center; flex-wrap:nowrap;}
+  .cta-secondary .fcta__cta{justify-content:center; flex-wrap:wrap;}
   .cta-secondary .fcta__visual{justify-self:center; align-self:auto; width:100%; max-width:520px; text-align:left;}
 }
 @media(max-width:767px){
-  .cta-secondary{padding:64px var(--sp-4);}
-  .cta-secondary .fcta{padding:var(--sp-12) var(--sp-6); border-radius:12px;}
-  .cta-secondary .fcta h2{font-size:20px; line-height:28px;}
-  .cta-secondary .fcta p{font-size:16px; line-height:24px;}
+  .cta-secondary{padding:32px var(--sp-4);}
+  .cta-secondary .fcta{padding:var(--sp-12) var(--sp-6) 0; border-radius:12px;}
+  .cta-secondary .fcta__copy h2{font-size:20px; line-height:28px;}
+  .cta-secondary .fcta__copy p{font-size:16px; line-height:24px;}
   .cta-secondary .fcta__copy{text-align:left;}
   /* Кнопки в один ряд и на мобилке: две штуки помещаются по ширине. */
   .cta-secondary .fcta__cta{flex-direction:row; flex-wrap:wrap; justify-content:center; margin-inline:auto;}
   .cta-secondary .fcta__cta .btn{width:auto;}
 }
+@media(max-width:767px){.cta-secondary--space-bottom{padding-bottom:48px;}}
+@media(max-width:767px){.cta-secondary--space-bottom .fcta{padding-bottom:var(--sp-6);}}
 `;
 
 const DEFAULT_BUTTONS: CTAButton[] = [
@@ -128,9 +142,20 @@ export function CTAsecondaryMock({
   subtitle = 'Короткий поясняющий подзаголовок под заголовком CTA-блока.',
   buttons = DEFAULT_BUTTONS,
   visual,
+  onSurface,
+  spaceBottom,
 }: CTAsecondaryMockProps) {
   return (
-    <section className="cta-secondary" aria-label="Призыв к действию">
+    <section
+      className={[
+        'cta-secondary',
+        onSurface ? 'cta-secondary--surface' : '',
+        spaceBottom ? 'cta-secondary--space-bottom' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      aria-label="Призыв к действию"
+    >
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="fcta">
         <div className="fcta__blur" aria-hidden="true" />

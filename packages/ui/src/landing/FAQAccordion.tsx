@@ -33,6 +33,8 @@ export interface FAQItemProps {
 export type FaqItem = FAQItemProps;
 
 export interface FAQAccordionProps {
+  /** Верхний отступ секции на планшете — 96px вместо 48px. Opt-in. */
+  spaceTop?: boolean;
   /** Надзаголовок над заголовком (uppercase, брендовый). */
   eyebrow?: string;
   /** Заголовок секции. */
@@ -56,6 +58,8 @@ const STYLE = `
   background:var(--surface-section); width:100%; padding:96px var(--sp-4);
 }
 .faq-mock *{box-sizing:border-box;}
+@media(min-width:768px){.faq-mock--space-top{padding-top:96px;}}
+@media(min-width:768px) and (max-width:1279px){.faq-mock{padding-left:var(--sp-6); padding-right:var(--sp-6);}}
 .faq-mock .faq-section__container{display:flex; flex-direction:column; align-items:center; width:100%; gap:var(--sp-12); max-width:1216px; margin:0 auto;}
 .faq-mock .faq-section__head{display:flex; flex-direction:column; align-items:center; gap:var(--sp-3); width:100%;}
 .faq-mock .faq-section__eyebrow{font-weight:var(--fw-semi); font-size:14px; line-height:20px; text-transform:uppercase; letter-spacing:0; color:var(--brand-100); text-align:center; margin:0;}
@@ -148,7 +152,14 @@ const PLACEHOLDER_ITEMS: FAQItemProps[] = [
   { question: 'Четвёртый вопрос — про возможности?', answer: 'Короткий ответ на четвёртый вопрос.' },
 ];
 
-export function FAQAccordion({ eyebrow, title = 'Заголовок FAQ-секции', description, items, defaultOpen = 0 }: FAQAccordionProps) {
+export function FAQAccordion({
+  eyebrow,
+  title = 'Заголовок FAQ-секции',
+  description,
+  items,
+  defaultOpen = 0,
+  spaceTop,
+}: FAQAccordionProps) {
   const data = items && items.length ? items : PLACEHOLDER_ITEMS;
   const refs = useRef<Array<HTMLDetailsElement | null>>([]);
 
@@ -177,7 +188,10 @@ export function FAQAccordion({ eyebrow, title = 'Заголовок FAQ-секц
   };
 
   return (
-    <section className="faq-mock" aria-label="Часто задаваемые вопросы">
+    <section
+      className={spaceTop ? 'faq-mock faq-mock--space-top' : 'faq-mock'}
+      aria-label="Часто задаваемые вопросы"
+    >
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="faq-section__container">
         <div className="faq-section__head">

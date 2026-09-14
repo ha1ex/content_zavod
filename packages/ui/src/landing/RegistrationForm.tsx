@@ -20,9 +20,21 @@ export interface RegistrationFormProps {
    * 'default' — имя/email/телефон (эталон вебинара). 'conference' — форма 1-в-1
    * с конференции kaiten-conf-ai: белые поля с иконками, «Имя» на всю ширину,
    * «Телефон» + «E-mail» в строку, селект «Являюсь действующим клиентом Кайтена».
+   * 'partner' — заявка в партнёрскую программу: имя, компания, контакты и
+   * селект «Интересует» (тип партнёрства).
    */
-  variant?: 'default' | 'conference';
+  variant?: 'default' | 'conference' | 'partner';
+  /** Опции селекта «Интересует» — только для варианта 'partner'. */
+  partnerOptions?: { value: string; label: string }[];
 }
+
+/** Типы партнёрства по умолчанию — совпадают с фильтром каталога партнёров. */
+const DEFAULT_PARTNER_OPTIONS = [
+  { value: 'reseller', label: 'Продавать лицензии (реселлер)' },
+  { value: 'integrator', label: 'Внедрять Кайтен (интегратор)' },
+  { value: 'agent', label: 'Приводить клиентов (агент)' },
+  { value: 'tech', label: 'Технологическое партнерство' },
+];
 
 /**
  * Форма регистрации на событие. Поля браузерно-валидируемые (JS не нужен —
@@ -40,9 +52,11 @@ export function RegistrationForm({
   maxHref,
   newsletterRequired,
   variant = 'default',
+  partnerOptions = DEFAULT_PARTNER_OPTIONS,
 }: RegistrationFormProps) {
   const fid = (name: string) => `${anchorId ?? 'reg'}-${name}`;
   const isConf = variant === 'conference';
+  const isPartner = variant === 'partner';
 
   return (
     <form
@@ -63,7 +77,54 @@ export function RegistrationForm({
         </p>
       )}
 
-      {isConf ? (
+      {isPartner ? (
+        <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
+          <Field id={fid('name')} name="name" type="text" label="Имя" required autoComplete="name" />
+          <Field
+            id={fid('company')}
+            name="company"
+            type="text"
+            label="Компания"
+            required
+            placeholder="ООО «Ромашка»"
+            autoComplete="organization"
+          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field
+              id={fid('email')}
+              name="email"
+              type="email"
+              label="Рабочий e-mail"
+              required
+              placeholder="name@company.ru"
+              autoComplete="email"
+            />
+            <Field
+              id={fid('phone')}
+              name="phone"
+              type="tel"
+              label="Телефон"
+              placeholder="+7 999 000-00-00"
+              autoComplete="tel"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor={fid('partner_type')}
+              className="text-sm font-medium text-(--color-text-primary)"
+            >
+              Что интересует
+            </label>
+            <NonNativeSelect
+              id={fid('partner_type')}
+              name="partner_type"
+              icon="Handshake"
+              placeholder="Выберите формат партнерства"
+              options={partnerOptions}
+            />
+          </div>
+        </div>
+      ) : isConf ? (
         <div className={cn('flex flex-col gap-4', title || description ? 'mt-6' : '')}>
           <Field
             id={fid('name')}

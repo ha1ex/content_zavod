@@ -6,6 +6,7 @@ import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { Icon } from '../primitives/Icon';
 import { MockVisual, type MockVariant } from './mocks/MockVisual';
+import { FeatureGridMock } from './mocks/FeatureGridMock';
 import { FeatureTile, FeatureTilesStyle } from './mocks/FeatureTile';
 
 export interface FeatureItemProps {
@@ -62,6 +63,25 @@ export interface FeatureGridProps {
    * вертикальную шкалу и просвет складывается вдвое.
    */
   flushTop?: boolean;
+  /**
+   * 'cards' (дефолт) — простая сетка карточек с иконкой, как у старых лендингов.
+   * 'mock' — эталонный блок `FeatureGridMock`: три колонки на десктопе,
+   * карусель со стрелками на планшете и мобилке, иллюстрация каждой карточки —
+   * мини-мокап фичи из галереи (`items[].featureTile`).
+   */
+  variant?: 'cards' | 'mock';
+  /**
+   * Карточки как в эталонном блоке фич (`FeatureGridMock`): светло-серая
+   * заливка, без рамки и без hover-подъёма. Opt-in — без него остаётся прежняя
+   * белая карточка с обводкой, чтобы не менять старые лендинги.
+   */
+  flat?: boolean;
+  /**
+   * Убрать нижний отступ секции. Сейчас действует только для `variant: 'mock'`
+   * (у эталонного блока свой крупный padding) — нужен, когда под блоком сразу
+   * идёт кнопка или следующая секция.
+   */
+  flushBottom?: boolean;
 }
 
 /**
@@ -120,8 +140,11 @@ export function FeatureGrid({
   description,
   items,
   columns = 3,
+  variant = 'cards',
   slider = false,
   flushTop = false,
+  flat,
+  flushBottom,
 }: FeatureGridProps) {
   // На планшете и мобилке карточки не помещаются в ряд — трек листается
   // свайпом и стрелками под ним. На десктопе это обычная сетка.
@@ -165,6 +188,29 @@ export function FeatureGrid({
     const step = first ? first.getBoundingClientRect().width + 16 : el.clientWidth * 0.85;
     el.scrollBy({ left: dir * step, behavior: 'smooth' });
   };
+  // Эталонный блок галереи фич. Иллюстрация карточки — мини-мокап из
+  // FeatureMocksV01 по подписи `featureTile`; стили галереи объёмные, поэтому
+  // подключаем их один раз на секцию, а плиткам ставим withStyle={false}.
+  if (variant === 'mock') {
+    const withTiles = items.some((it) => it.featureTile);
+    return (
+      <>
+        {withTiles && <FeatureTilesStyle />}
+        <FeatureGridMock
+          title={title}
+          subtitle={description}
+          flushBottom={flushBottom}
+          items={items.map((it) => ({
+            title: it.title,
+            desc: it.description,
+            illustration: it.featureTile ? (
+              <FeatureTile caption={it.featureTile} withStyle={false} />
+            ) : undefined,
+          }))}
+        />
+      </>
+    );
+  }
 
   return (
     <section
@@ -194,7 +240,7 @@ export function FeatureGrid({
         {description && (
           <p
             data-comp="features.description"
-            className="mt-4 text-lg text-(--color-text-primary)"
+            className="mt-4 text-base text-(--color-text-primary) md:text-lg"
           >
             {description}
           </p>
@@ -226,8 +272,11 @@ export function FeatureGrid({
             key={i}
             name={`features.items[${i}]`}
             className={cn(
-              // Внутренние отступы по шкале DS: 24 / 32 / 48.
+              // Внутренние отступы по шкале DS: 24 / 32 / 48. Карточка идёт
+              // заливкой без обводки — так в эталонном блоке фич; проп `flat`
+              // остался для спек, которые просят такую карточку явно.
               'rounded-(--radius-xl) bg-(--color-surface-section) p-6 md:p-8 lg:rounded-(--radius-2xl)',
+              flat && 'bg-(--color-surface-section)',
               // в треке карточка держит свою ширину и цепляется снапом
               // Ширина карточки — доля трека, чтобы в окно попадало целое число
               // карточек: на мобилке одна, на планшете две. Фиксированная ширина

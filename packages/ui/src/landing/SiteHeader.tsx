@@ -25,8 +25,9 @@ const SIGNUP = 'https://passport.kaiten.ru/ru/registration';
 
 export interface SiteHeaderProps {
   /**
-   * Тон wordmark в логотипе: 'dark' — чёрный (светлая страница, дефолт),
-   * 'light' — белый (тёмная схема). Проставляется рендером из spec.theme.
+   * Тон вордмарка «Кайтен». 'dark' (дефолт) — чёрный, для светлой страницы.
+   * 'light' — белый: тёмная тема (`spec.theme = "dark"`) ставит его сама,
+   * руками в spec задавать не нужно.
    */
   logoTone?: 'light' | 'dark';
 }

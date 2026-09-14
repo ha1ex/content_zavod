@@ -49,7 +49,7 @@
 [data-theme="comparison"] .cover-text {
   top:auto; transform:none;
   left:3.255cqw;            /* 62.5px */
-  top:4.052cqw;             /* 77.8px */
+  top:8.5cqw;               /* 163px — ниже логотипа: он стоит на 60 и высотой 60 */
   max-width:52cqw;
 }
 

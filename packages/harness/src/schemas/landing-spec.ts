@@ -80,6 +80,14 @@ export const AssetRefSchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      // Автоматизации (модуль Kaiten)
+      'window-rule-trigger',
+      'window-rule-action',
+      'automation-rules-list',
+      'window-deadline',
+      'window-checklist-done',
+      'window-card-flow',
+      'platform-kaiten',
       'cli-terminal-hero',
       'cli-terminal-hero-animated',
       'cli-terminal-final-animated',
@@ -91,7 +99,21 @@ export const AssetRefSchema = z.object({
       'cli-ai-models',
       'cli-safe-mode',
       'cli-install',
+      'help-center-portal',
+      'help-center-sections',
+      'help-center-request-form',
+      'help-center-search',
+      'help-center-suggested-articles',
+      'help-center-request-card',
+      'help-center-requests',
+      'help-center-branding',
+      'help-center-domain',
+      'help-center-email',
+      'help-center-template',
+      'help-center-setup',
+      'help-center-portal-compact',
       'hero-screen-interface',
+      'hero-screen-video',
       'generic',
     ])
     .optional(),
@@ -169,6 +191,33 @@ const RegistrationFormSlotSchema = z.object({
   newsletterRequired: z.boolean().optional(),
   /** Мягкая строка под кнопкой. */
   note: z.string().max(200).optional(),
+  /**
+   * Окно «Спасибо за регистрацию» после отправки формы — с переходом
+   * в мессенджер (порт модалки апрельской конференции). Задано → форма
+   * становится клиентской и показывает попап; нет — обычный нативный POST.
+   */
+  success: z
+    .object({
+      title: z.string().min(2).max(80),
+      caption: z.string().max(80).optional(),
+      sub: z.string().max(280).optional(),
+      blocks: z
+        .array(
+          z.object({
+            title: z.string().min(2).max(40),
+            text: z.string().max(200),
+            buttonLabel: z.string().max(40).optional(),
+            buttonHref: z.string().optional(),
+            links: z
+              .array(z.object({ label: z.string().min(1).max(40), href: z.string() }))
+              .max(3)
+              .optional(),
+          }),
+        )
+        .max(3)
+        .optional(),
+    })
+    .optional(),
 });
 
 /* ─── Спикер (строка в hero + блок SpeakerCard) ────────────────────── */
@@ -204,6 +253,11 @@ const HeroSectionSchema = z.object({
     board: HeroBoardSchema.optional(),
     /** Короткие буллеты под подзаголовком («что заберёте»). Только layout 'side'. */
     bullets: z.array(z.string().min(2).max(160)).max(4).optional(),
+    trust: z
+      .array(z.object({ icon: z.string().max(40).optional(), label: z.string().min(2).max(60) }))
+      .max(4)
+      .optional()
+      .describe('строка доверия под видео: пункты с фиолетовыми иконками'),
     /**
      * Карточка формы регистрации в правой колонке вместо `visual` — для лендингов,
      * где целевое действие это заполнить форму, а не перейти по кнопке. Подпись
@@ -243,6 +297,7 @@ const FeatureGridSchema = z.object({
             .describe('опциональное компактное мок-превью внутри карточки'),
           featureTile: z
             .string()
+            .max(80)
             .optional()
             .describe(
               'подпись плитки из галереи мини-мокапов фич (FeatureMocksV01), напр. «Канбан-доски»',
@@ -270,6 +325,18 @@ const FeatureGridSchema = z.object({
     slider: z.boolean().optional(),
     /** Убрать верхний отступ секции (когда блок сверху уже несёт свою шкалу). */
     flushTop: z.boolean().optional(),
+    variant: z
+      .enum(['cards', 'mock'])
+      .optional()
+      .describe("'cards' (дефолт) — сетка карточек с иконкой; 'mock' — эталонный FeatureGridMock: 3 колонки на десктопе, карусель на планшете и мобилке, мини-мокапы фич в карточках"),
+    flat: z
+      .boolean()
+      .optional()
+      .describe('карточки как в эталонном блоке фич: светло-серая заливка, без рамки и hover-подъёма. Opt-in — старые лендинги не трогаем'),
+    flushBottom: z
+      .boolean()
+      .optional()
+      .describe("убрать нижний отступ секции (только для variant: 'mock') — когда под блоком сразу идёт кнопка или следующая секция"),
   }),
 });
 
@@ -303,6 +370,10 @@ const FAQAccordionSchema = z.object({
   id: z.literal('faq'),
   component: z.literal('FAQAccordion'),
   props: z.object({
+    spaceTop: z
+      .boolean()
+      .optional()
+      .describe('верхний отступ секции на планшете — 96px вместо 48px. Opt-in'),
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(80),
     description: z.string().max(200).optional(),
@@ -328,13 +399,30 @@ const FinalCtaSchema = z.object({
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
     variant: z
-      .enum(['solid', 'gradient', 'dark'])
+      .enum(['solid', 'gradient', 'dark', 'product'])
       .optional()
-      .describe("'solid' (дефолт) — сплошная заливка (старые лендинги); 'gradient' — блок CTAsecondaryMock (ритейл и новые); 'dark' — тёмный CTAdark (текст + терминал), для CLI-лендингов"),
+      .describe("'solid' (дефолт) — сплошная заливка (старые лендинги); 'gradient' — блок CTAsecondaryMock (ритейл и новые); 'dark' — тёмный CTAdark (текст + терминал), для CLI-лендингов; 'product' — блок CTAproduct: текст слева, иллюстрация платформы справа, градиент лаванда → голубой"),
     visualVariant: z
       .string()
       .optional()
       .describe('интерфейс справа для variant=gradient под тематику лендинга (напр. retail-portfolio-animated, pm-board-1)'),
+    visualSrc: z
+      .string()
+      .optional()
+      .describe("иллюстрация справа для variant=product; по умолчанию общая картинка платформы Kaiten (/brand/cta-product.png)"),
+    visualAlt: z.string().max(160).optional().describe('alt для visualSrc'),
+    onSurface: z
+      .boolean()
+      .optional()
+      .describe("светло-серая подложка секции (только для variant: 'gradient'). Opt-in, старые лендинги не трогаем"),
+    spaceBottom: z
+      .boolean()
+      .optional()
+      .describe("нижний отступ секции на десктопе — 96px вместо 48px (только для variant: 'gradient')"),
+    fitVisual: z
+      .boolean()
+      .optional()
+      .describe("ужимать мокап справа под ширину слота (variant: 'gradient') — для моков фиксированной ширины, иначе на мобилке правый край обрезается. Opt-in"),
   }),
 });
 
@@ -376,12 +464,27 @@ const ReviewSliderSchema = z.object({
           metric: z.string().max(80).optional(),
           /** Высота логотипа в px (дефолт 40) — вертикальным знакам нужно больше. */
           logoHeight: z.number().min(16).max(96).optional(),
+          logoScale: z
+            .number()
+            .min(0.4)
+            .max(1)
+            .optional()
+            .describe('множитель высоты логотипа (1 = базовые 60px); для знаков разной плотности'),
           quote: z.string().min(10).max(600),
           name: z.string().min(2).max(80),
-          role: z.string().min(2).max(120),
+          role: z
+            .string()
+            .min(2)
+            .max(120)
+            .optional()
+            .describe('должность автора; необязательна (отзыв от команды) — перевод строки \\n разбивает должность и компанию на две строки'),
           avatar: z.string().optional(),
           avatarInitial: z.string().max(4).optional(),
           avatarBg: z.string().max(30).optional(),
+          avatarWide: z
+            .boolean()
+            .optional()
+            .describe('широкое фото вместо круглого аватара — для командных снимков с несколькими людьми в кадре'),
           caseUrl: z.string().optional(),
           caseLabel: z.string().max(40).optional(),
         }),
@@ -419,13 +522,77 @@ const CtaBannerSchema = z.object({
   id: z.literal('cta_banner'),
   component: z.literal('CtaBanner'),
   props: z.object({
-    title: z.string().min(4).max(120),
+    title: z.string().min(4).max(120).optional(),
     description: z.string().max(280).optional(),
-    primaryCta: CtaSchema,
+    descriptionLink: z
+      .union([
+        z.object({ text: z.string().min(2).max(120), href: z.string().url() }),
+        z
+          .array(z.object({ text: z.string().min(2).max(120), href: z.string().url() }))
+          .min(1)
+          .max(4),
+      ])
+      .optional()
+      .describe('куски описания фирменными фиолетовыми ссылками: text ищется в описании; можно списком'),
+    primaryCta: CtaSchema.optional(),
     secondaryCta: CtaSchema.nullable().optional(),
+    cards: z
+      .array(
+        z.object({
+          icon: z.string().max(40).optional(),
+          title: z.string().min(4).max(120),
+          description: z.string().max(400).optional(),
+          cta: CtaSchema,
+          tone: z.enum(['violet', 'gray']).optional(),
+        }),
+      )
+      .min(2)
+      .max(3)
+      .optional()
+      .describe('пара карточек в строку вместо широкого баннера: иконка, заголовок, описание, ссылка'),
+    featureTile: z
+      .string()
+      .max(80)
+      .optional()
+      .describe('подпись плитки из галереи мини-мокапов фич — визуал у правого края баннера; кнопка при этом уходит под текст'),
     /** Градиентный вид (подложка GradientPanel). Opt-in, старые лендинги без него. */
     gradient: z.boolean().optional(),
+    /**
+     * Интерфейсный мок домена справа от текста (кнопки уходят под текст).
+     * Значение — variant из реестра моков, тот же набор, что у Hero и MediaCopy.
+     */
+    mediaVariant: z
+      .string()
+      .optional()
+      .describe('variant из реестра моков (MockVariantSchema объявлен ниже по файлу)'),
+    /**
+     * Кнопки под текстом, а не справа от него. Opt-in: без него остаётся прежняя
+     * раскладка «текст слева, кнопки справа» (старые лендинги не трогаем).
+     * Нужен, когда описание длинное и колонка кнопок сжимает текст.
+     */
+    ctaBelow: z.boolean().optional(),
+    /**
+     * 'product' — блок `CTAproduct`: текст и кнопка слева, иллюстрация платформы
+     * справа, собственный градиент лаванда → голубой. `gradient` с ним не нужен.
+     */
+    variant: z.enum(['default', 'product']).optional(),
+    /** Иллюстрация справа для `variant: 'product'` (дефолт — /brand/cta-product.png). */
+    visualSrc: z.string().optional(),
+    /** Alt для `visualSrc`. */
+    visualAlt: z.string().max(160).optional(),
+    /** Увеличенный нижний отступ секции: 96px вместо 48px. */
+    spaceBottom: z.boolean().optional(),
   }),
+}).superRefine((section, ctx) => {
+  // Секция рисует либо широкий баннер, либо пару карточек — что-то одно должно быть заполнено.
+  const { title, primaryCta, cards } = section.props;
+  if (!cards && !(title && primaryCta)) {
+    ctx.addIssue({
+      code: 'custom',
+      path: ['props'],
+      message: 'cta_banner: нужен либо title + primaryCta, либо cards',
+    });
+  }
 });
 
 /* ─── CtaButtons (одиночная/парная кнопка по центру, без карточки) ──── */
@@ -435,6 +602,18 @@ const CtaButtonsSchema = z.object({
   props: z.object({
     primaryCta: CtaSchema,
     secondaryCta: CtaSchema.nullable().optional(),
+    flushTop: z
+      .boolean()
+      .optional()
+      .describe('убрать верхний отступ секции — когда кнопки идут сразу за предыдущим блоком'),
+    spaceBottom: z
+      .boolean()
+      .optional()
+      .describe('нижний отступ секции на десктопе — 96px вместо 48px. Opt-in'),
+    tightSpacing: z
+      .boolean()
+      .optional()
+      .describe('компактные отступы: 24/48px на мобилке, 32/64px на планшете вместо 40/40. Opt-in'),
   }),
 });
 
@@ -484,9 +663,49 @@ const MediaCopySchema = z.object({
   id: z.literal('media_copy'),
   component: z.literal('MediaCopy'),
   props: z.object({
+    spaceTop: z
+      .boolean()
+      .optional()
+      .describe('верхний отступ секции — 96px вместо 48/64px. Opt-in'),
+    spaceBottom: z
+      .boolean()
+      .optional()
+      .describe('нижний отступ секции: 64px мобилка и планшет, 96px десктоп. Opt-in'),
+    tightBottomMobile: z
+      .boolean()
+      .optional()
+      .describe('нижний отступ секции на мобилке — 24px вместо 48px. Opt-in'),
+    tightBottom: z
+      .boolean()
+      .optional()
+      .describe('нижний отступ секции 32/48px вместо 64/96px — для текстовых шапок раздела. Opt-in'),
+    ctaCenterMobile: z
+      .boolean()
+      .optional()
+      .describe('на мобилке кнопки по центру и по ширине контента, а не во всю колонку. Opt-in'),
+    spaceTopMobile: z
+      .boolean()
+      .optional()
+      .describe('верхний отступ секции на мобилке — 32px. Opt-in'),
+    ctaBelow: z
+      .boolean()
+      .optional()
+      .describe('кнопка под обеими колонками и по центру, а не в текстовой колонке. Opt-in'),
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(120),
+    accentWord: z
+      .string()
+      .max(40)
+      .optional()
+      .describe('кусок заголовка фирменным фиолетовым, напр. «Шаг 1.»'),
     description: z.string().max(400).optional(),
+    descriptionLink: z
+      .object({
+        text: z.string().min(2).max(120),
+        href: z.string().url(),
+      })
+      .optional()
+      .describe('кусок описания фирменной фиолетовой ссылкой: text ищется в описании'),
     checklist: z
       .array(
         z.object({
@@ -496,8 +715,28 @@ const MediaCopySchema = z.object({
       )
       .max(8)
       .optional(),
-    mediaPosition: z.enum(['left', 'right']).optional(),
+    mediaPosition: z
+      .enum(['left', 'right', 'below'])
+      .optional()
+      .describe("'left'/'right' — две колонки; 'below' — текст сверху, визуал под ним во всю ширину (для широких схем)"),
     mediaPlaceholder: z.string().max(80).optional(),
+    align: z
+      .enum(['left', 'center'])
+      .optional()
+      .describe("'left' (дефолт); 'center' — блок центрируется от планшета (для текстовых шапок разделов)"),
+    flushTop: z
+      .boolean()
+      .optional()
+      .describe('убрать верхний отступ секции — когда блок идёт сразу под текстовой шапкой раздела'),
+    titleSize: z
+      .enum(['default', 'small'])
+      .optional()
+      .describe("'default' — H2 раздела; 'small' — уменьшенный заголовок для секций под общей шапкой (напр. «Шаг 1»/«Шаг 2»)"),
+    mediaSrc: z
+      .string()
+      .optional()
+      .describe('растровая картинка вместо мока (напр. /brand/platform.png); отменяет mediaVariant'),
+    mediaAlt: z.string().max(160).optional().describe('alt для mediaSrc'),
     mediaVariant: z
       .enum([
         'default',
@@ -564,6 +803,14 @@ const MediaCopySchema = z.object({
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      // Автоматизации (модуль Kaiten)
+      'window-rule-trigger',
+      'window-rule-action',
+      'automation-rules-list',
+      'window-deadline',
+      'window-checklist-done',
+      'window-card-flow',
+      'platform-kaiten',
       'cli-terminal-hero',
       'cli-terminal-hero-animated',
       'cli-terminal-final-animated',
@@ -575,6 +822,19 @@ const MediaCopySchema = z.object({
       'cli-ai-models',
       'cli-safe-mode',
       'cli-install',
+      'help-center-portal',
+      'help-center-sections',
+      'help-center-request-form',
+      'help-center-search',
+      'help-center-suggested-articles',
+      'help-center-request-card',
+      'help-center-requests',
+      'help-center-branding',
+      'help-center-domain',
+      'help-center-email',
+      'help-center-template',
+      'help-center-setup',
+      'help-center-portal-compact',
       ])
       .optional(),
     /**
@@ -777,6 +1037,18 @@ const BentoGridSchema = z.object({
   id: z.literal('bento_grid'),
   component: z.literal('BentoGrid'),
   props: z.object({
+    wideGap: z
+      .boolean()
+      .optional()
+      .describe('просвет между ячейками на десктопе — 32px вместо 20px. Opt-in'),
+    spaceY: z
+      .boolean()
+      .optional()
+      .describe('вертикальные отступы секции на десктопе — 96px вместо 64px. Opt-in'),
+    smallTitleMobile: z
+      .boolean()
+      .optional()
+      .describe('компактная шапка на мобилке: заголовок 24px и отступ до сетки 24px. Opt-in'),
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(120),
     description: z.string().max(400).optional(),
@@ -801,6 +1073,14 @@ const BentoGridSchema = z.object({
       )
       .min(3)
       .max(9),
+    onSurface: z
+      .boolean()
+      .optional()
+      .describe('секция на светло-серой подложке во всю ширину, ячейки — белые карточки без обводки. Opt-in, старые лендинги не трогаем'),
+    align: z
+      .enum(['left', 'center'])
+      .optional()
+      .describe("'left' (дефолт) или 'center' — шапка секции по центру"),
   }),
 });
 
@@ -825,6 +1105,10 @@ const LogoCloudSchema = z.object({
       )
       .min(4)
       .max(20),
+    /** Кнопка под логотипами (напр. «Стать партнером» → Telegram). */
+    cta: z
+      .object({ label: z.string().min(2).max(40), href: z.string().min(1) })
+      .optional(),
   }),
 });
 
@@ -958,6 +1242,14 @@ export const MockVariantSchema = z.enum([
 'retail-report-bottlenecks',
 'retail-report-ai',
 'gantt-chart',
+// Автоматизации (модуль Kaiten)
+'window-rule-trigger',
+'window-rule-action',
+'automation-rules-list',
+'window-deadline',
+'window-checklist-done',
+'window-card-flow',
+'platform-kaiten',
 // Window-моки планирования (эталон — лендинг сравнения с MS Project)
 'window-links',
 'window-resource',
@@ -973,6 +1265,19 @@ export const MockVariantSchema = z.enum([
 'cli-ai-models',
 'cli-safe-mode',
 'cli-install',
+'help-center-portal',
+'help-center-sections',
+'help-center-request-form',
+'help-center-search',
+'help-center-suggested-articles',
+'help-center-request-card',
+'help-center-requests',
+'help-center-branding',
+'help-center-domain',
+'help-center-email',
+'help-center-template',
+'help-center-setup',
+'help-center-portal-compact',
 ]);
 export type MockVariant = z.infer<typeof MockVariantSchema>;
 
@@ -983,6 +1288,26 @@ const TabbedFeatureSectionSchema = z.object({
   props: z.object({
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(120),
+    variant: z
+      .enum(['tabs', 'list', 'accordion'])
+      .optional()
+      .describe("'tabs' (дефолт) — переключаемые вкладки; 'list' — раскрытый список; 'accordion' — шапка и раскрывающиеся строки слева, мок справа"),
+    wideDescription: z
+      .boolean()
+      .optional()
+      .describe('снять ограничение ширины у описания секции, чтобы длинный подзаголовок лёг в одну строку на десктопе'),
+    flushBottom: z
+      .boolean()
+      .optional()
+      .describe('убрать нижний отступ секции, когда следующая отбивается сверху сама. Opt-in'),
+    primaryCta: CtaSchema.optional().describe(
+      'кнопка под пунктами аккордеона — одна на всю секцию',
+    ),
+    accentWord: z
+      .string()
+      .max(40)
+      .optional()
+      .describe('кусок заголовка фирменным фиолетовым, напр. «более 300 сценариев»'),
     description: z.string().max(280).optional(),
     tabs: z
       .array(
@@ -1053,11 +1378,34 @@ const ScenarioWalkthroughSectionSchema = z.object({
           title: z.string().min(4).max(120),
           description: z.string().min(10).max(400),
           icon: z.string().optional(),
+          primaryCta: CtaSchema.optional().describe(
+            'кнопка под текстом шага — для завершающего шага сценария',
+          ),
           mockVariant: MockVariantSchema,
         }),
       )
       .min(3)
       .max(6),
+    plainTimeline: z
+      .boolean()
+      .optional()
+      .describe('простой таймлайн: без нумерованных кружков и без вертикальной линии между шагами. Opt-in, старые лендинги не трогаем'),
+    stepInTitle: z
+      .boolean()
+      .optional()
+      .describe('номер шага (steps[].time) уходит фиолетовым в начало заголовка вместо отдельной плашки над ним'),
+    align: z
+      .enum(['left', 'center'])
+      .optional()
+      .describe("'left' (дефолт) или 'center' — шапка секции по центру"),
+    columnsFromTablet: z
+      .boolean()
+      .optional()
+      .describe('две колонки уже с планшета — та же пропорция, что на десктопе. Opt-in'),
+    onSurface: z
+      .boolean()
+      .optional()
+      .describe('светло-серая подложка секции во всю ширину экрана. Opt-in'),
   }),
 });
 
@@ -1096,6 +1444,73 @@ const IndustryPickerSectionSchema = z.object({
       )
       .min(3)
       .max(8),
+  }),
+});
+
+/* ─── PartnerDirectory ────────────────────────────────────────────── */
+const PartnerDirectorySchema = z.object({
+  id: z.literal('partner_directory'),
+  component: z.literal('PartnerDirectory'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    /** Типы партнёрства — фильтр и бейдж на карточке. */
+    types: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(40),
+          label: z.string().min(2).max(40),
+          /** Пояснение, что этот тип делает для клиента (видно при выборе фильтра). */
+          description: z.string().max(200).optional(),
+          accent: z.enum(['violet', 'blue', 'green', 'orange', 'purple']).optional(),
+          icon: z.string().max(40).optional(),
+        }),
+      )
+      .min(1)
+      .max(8),
+    /** Регионы — второй фильтр. Пусто → фильтр не рендерится. */
+    regions: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(40),
+          label: z.string().min(2).max(40),
+        }),
+      )
+      .max(10)
+      .optional(),
+    partners: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(60),
+          /** Публичное брендовое название. Юрлицо/ИНН на страницу не выносим. */
+          name: z.string().min(2).max(80),
+          initials: z.string().max(4).optional(),
+          logoSrc: z.string().optional(),
+          logoAlt: z.string().max(160).optional(),
+          /** 'light' — светлая версия логотипа: кладётся на тёмную плашку, а не перекрашивается. */
+          logoTone: z.enum(['light', 'dark']).optional(),
+          /** Цвет плашки под светлым логотипом (по умолчанию нейтральный тёмный). */
+          logoBg: z.string().max(32).optional(),
+          type: z.string().min(1).max(40),
+          region: z.string().max(40).optional(),
+          location: z.string().max(60).optional(),
+          services: z.array(z.string().min(2).max(48)).max(4).optional(),
+          since: z.string().max(20).optional(),
+          href: z.string().optional(),
+        }),
+      )
+      .min(3)
+      .max(80),
+    allTypesLabel: z.string().max(40).optional(),
+    allRegionsLabel: z.string().max(40).optional(),
+    searchPlaceholder: z.string().max(60).optional(),
+    emptyLabel: z.string().max(200).optional(),
+    note: z.string().max(240).optional(),
+    contactCta: z
+      .object({ label: z.string().min(2).max(40), href: z.string() })
+      .optional()
+      .describe('Действие в подвале карточки, когда у партнёра нет публичной ссылки'),
   }),
 });
 
@@ -1236,7 +1651,7 @@ const SpeakerGridSchema = z.object({
         z.object({
           name: z.string().min(2).max(80),
           /** Роль / компания спикера (1–2 строки). */
-          role: z.string().max(160).optional(),
+          role: z.string().max(200).optional(),
           /** Название доклада. */
           talkTitle: z.string().max(160).optional(),
           /** Тайминг и длительность, напр. «16:00 / 30 мин». */
@@ -1247,6 +1662,23 @@ const SpeakerGridSchema = z.object({
           photoSrc: z.string().optional(),
           photoAlt: z.string().max(160).optional(),
           initials: z.string().max(4).optional(),
+          /**
+           * Двойной блок — доклад двух спикеров (live-сессия): карточка на всю
+           * ширину ряда, сверху общий доклад, ниже по строке на каждого.
+           */
+          people: z
+            .array(
+              z.object({
+                name: z.string().min(2).max(80),
+                role: z.string().max(200).optional(),
+                photoSrc: z.string().optional(),
+                photoAlt: z.string().max(160).optional(),
+                initials: z.string().max(4).optional(),
+              }),
+            )
+            .min(2)
+            .max(2)
+            .optional(),
         }),
       )
       .min(1)
@@ -1264,8 +1696,13 @@ const RegistrationCtaSchema = z.object({
     description: z.string().max(280).optional(),
     /** Подпись кнопки отправки. */
     submitLabel: z.string().min(1).max(40),
-    /** Вариант формы: 'default' или 'conference' (иконки в полях + вопрос про клиента). */
-    variant: z.enum(['default', 'conference']).optional(),
+    /** Вариант формы: 'default' | 'conference' (иконки в полях + вопрос про клиента) | 'partner' (заявка в партнёрскую программу). */
+    variant: z.enum(['default', 'conference', 'partner']).optional(),
+    /** Опции селекта «Что интересует» — только для варианта 'partner'. */
+    partnerOptions: z
+      .array(z.object({ value: z.string().min(1).max(40), label: z.string().min(2).max(80) }))
+      .max(8)
+      .optional(),
     /** Акцентное продолжение заголовка (градиентом на новой строке) — для conference. */
     accentWord: z.string().max(60).optional(),
   }),
@@ -1295,6 +1732,7 @@ export const SectionSchema = z.discriminatedUnion('component', [
   AccordionFeatureSectionSchema,
   ScenarioWalkthroughSectionSchema,
   IndustryPickerSectionSchema,
+  PartnerDirectorySchema,
   ComparisonTableSchema,
   TimelineRoadmapSchema,
   BentoGridSchema,
@@ -1336,6 +1774,7 @@ export const LandingSpecMetaSchema = z
         'docs',
         'manufacturing',
         'cli-community-edition',
+        'help-center',
         'unknown',
       ])
       .optional()
@@ -1387,7 +1826,7 @@ export const LandingSpecSchema = z.object({
     .enum(['light', 'dark'])
     .optional()
     .describe(
-      "Цветовая схема всей страницы. 'light' (дефолт) — обычные лендинги. 'dark' — тёмная схема: рендер оборачивается в .landing-theme-dark, семантические токены (--color-*) и кнопки переопределяются на тёмную палитру, логотип шапки становится белым. Продуктовые mock'и остаются светлыми (светлые карточки на тёмном фоне — как на старом лендинге конференции).",
+      "Цветовая схема всей страницы. 'light' (дефолт) — обычные лендинги. 'dark' — тёмная тема V01-dark (design-system/kaiten-v01/dark): рендер оборачивается в .landing-theme-dark, семантические токены (--color-*) и кнопки переопределяются на тёмную палитру, вордмарк шапки становится белым. Продуктовые mock'и остаются светлыми — светлые карточки интерфейса на тёмной странице.",
     ),
   sections: z.array(SectionSchema).min(1),
   seo: z.object({

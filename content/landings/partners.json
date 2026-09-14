@@ -1,0 +1,565 @@
+{
+  "pageType": "saas_landing",
+  "goal": "find_partner",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Партнёрская сеть Кайтена",
+        "title": "Партнёры Кайтена: у кого купить лицензии и кто поможет внедрить",
+        "accentWord": "поможет внедрить",
+        "accentPill": false,
+        "subtitle": "23 компании в России и Казахстане работают с Кайтеном официально: продают лицензии, настраивают процессы под ваш бизнес и сопровождают команду после запуска",
+        "primaryCta": {
+          "label": "Выбрать партнёра",
+          "href": "#partner_directory"
+        },
+        "secondaryCta": {
+          "label": "Стать партнёром",
+          "href": "#partner-request"
+        },
+        "visual": null,
+        "visualPosition": "below",
+        "motif": "chaos-order"
+      }
+    },
+    {
+      "id": "stats",
+      "component": "StatStrip",
+      "props": {
+        "stats": [
+          {
+            "value": "23",
+            "label": "партнёра в каталоге",
+            "description": "Реселлеры, интеграторы, агенты и технологические партнёры"
+          },
+          {
+            "value": "4",
+            "label": "формата партнёрства",
+            "description": "От продажи лицензий до совместных решений на стеке партнёра"
+          },
+          {
+            "value": "2",
+            "label": "страны",
+            "description": "Россия и Казахстан, работа по всей стране удалённо"
+          },
+          {
+            "value": "2022",
+            "label": "год старта сети",
+            "description": "Первые партнёрские договоры подписаны в 2022 году"
+          }
+        ]
+      }
+    },
+    {
+      "id": "partner_directory",
+      "component": "PartnerDirectory",
+      "props": {
+        "eyebrow": "Каталог",
+        "title": "Найдите партнёра под свою задачу",
+        "description": "Отфильтруйте по формату партнёрства и региону или найдите компанию по названию",
+        "types": [
+          {
+            "id": "reseller",
+            "label": "Реселлер",
+            "description": "Продают лицензии Кайтена: договор, счёт и закрывающие документы — на стороне партнёра",
+            "accent": "violet",
+            "icon": "shopping-cart"
+          },
+          {
+            "id": "integrator",
+            "label": "Интегратор",
+            "description": "Внедряют Кайтен: настраивают доски и процессы, переносят данные, обучают команду",
+            "accent": "blue",
+            "icon": "wrench"
+          },
+          {
+            "id": "agent",
+            "label": "Агент",
+            "description": "Помогают выбрать тариф и сопровождают сделку, договор при этом заключается с Кайтеном",
+            "accent": "green",
+            "icon": "handshake"
+          },
+          {
+            "id": "tech",
+            "label": "Технологический партнёр",
+            "description": "Совместные решения на стеке партнёра — совместимость проверяется на уровне продукта",
+            "accent": "orange",
+            "icon": "plug"
+          }
+        ],
+        "regions": [
+          {
+            "id": "msk",
+            "label": "Москва"
+          },
+          {
+            "id": "spb",
+            "label": "Санкт-Петербург"
+          },
+          {
+            "id": "rf",
+            "label": "Регионы России"
+          },
+          {
+            "id": "cis",
+            "label": "СНГ"
+          }
+        ],
+        "partners": [
+          {
+            "id": "mkt",
+            "name": "МКТ",
+            "type": "reseller",
+            "region": "spb",
+            "location": "Санкт-Петербург",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2023",
+            "logoSrc": "/landings/partners/mkt.svg"
+          },
+          {
+            "id": "yunilever-rus",
+            "name": "Юнилевер Русь",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2023",
+            "logoSrc": "/landings/partners/yunilever-rus.svg"
+          },
+          {
+            "id": "ingruppa",
+            "name": "Ингруппа",
+            "type": "reseller",
+            "region": "rf",
+            "location": "Пенза",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "logoSrc": "/landings/partners/ingruppa.svg",
+            "href": "https://ingru.ru"
+          },
+          {
+            "id": "kyu-lab",
+            "name": "Кью Лаб",
+            "type": "agent",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Подбор тарифа",
+              "Сопровождение сделки"
+            ],
+            "logoSrc": "/landings/partners/kyu-lab.svg",
+            "href": "https://qlab.group"
+          },
+          {
+            "id": "vebzavod",
+            "name": "Вебзавод",
+            "type": "integrator",
+            "region": "rf",
+            "location": "Самара",
+            "services": [
+              "Внедрение",
+              "Настройка процессов",
+              "Обучение"
+            ],
+            "logoSrc": "/landings/partners/vebzavod.png",
+            "href": "https://webzavod.ru",
+            "logoTone": "light",
+            "logoBg": "#c2410c"
+          },
+          {
+            "id": "atlas-ayti-resheniya",
+            "name": "Атлас Айти Решения",
+            "type": "integrator",
+            "region": "rf",
+            "location": "Казань",
+            "services": [
+              "Внедрение",
+              "Настройка процессов",
+              "Обучение"
+            ],
+            "since": "с 2024",
+            "logoSrc": "/landings/partners/atlas-ayti-resheniya.svg"
+          },
+          {
+            "id": "ekspert-choys-siayes",
+            "name": "Эксперт Чойс СИАЙЭС",
+            "type": "reseller",
+            "region": "rf",
+            "location": "Белгород",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2024",
+            "logoSrc": "/landings/partners/ekspert-choys-siayes.png",
+            "href": "https://expchoice.tech"
+          },
+          {
+            "id": "van-ay-ti-treyd",
+            "name": "Wone IT",
+            "type": "reseller",
+            "region": "rf",
+            "location": "Московская область",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2025",
+            "logoSrc": "/landings/partners/van-ay-ti-treyd.svg",
+            "href": "https://wone-it.ru"
+          },
+          {
+            "id": "timlid",
+            "name": "Тимлид",
+            "type": "integrator",
+            "region": "spb",
+            "location": "Санкт-Петербург",
+            "services": [
+              "Внедрение",
+              "Настройка процессов",
+              "Обучение"
+            ],
+            "since": "с 2025",
+            "logoSrc": "/landings/partners/timlid.svg",
+            "href": "https://teamlead.ru"
+          },
+          {
+            "id": "bazalt-spo",
+            "name": "Базальт СПО",
+            "type": "tech",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Совместные решения"
+            ],
+            "since": "с 2025",
+            "logoSrc": "/landings/partners/bazalt-spo.svg",
+            "href": "https://basealt.ru"
+          },
+          {
+            "id": "yuniks-it",
+            "name": "Юникс-ИТ",
+            "type": "reseller",
+            "region": "spb",
+            "location": "Санкт-Петербург",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2025",
+            "logoSrc": "/landings/partners/yuniks-it.webp",
+            "href": "https://unix-it.ru"
+          },
+          {
+            "id": "avara-ay-ti-kazahstan",
+            "name": "Awara IT Kazakhstan",
+            "type": "integrator",
+            "region": "cis",
+            "location": "Казахстан",
+            "services": [
+              "Внедрение",
+              "Настройка процессов",
+              "Обучение"
+            ],
+            "since": "с 2025",
+            "logoSrc": "/landings/partners/avara-ay-ti-kazahstan.png",
+            "href": "https://awara-it.com"
+          },
+          {
+            "id": "7-krasnyh-liniy",
+            "name": "7 Красных Линий",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2025",
+            "logoSrc": "/landings/partners/7-krasnyh-liniy.png",
+            "href": "https://7rlines.ru"
+          },
+          {
+            "id": "media-tehnologii",
+            "name": "Медиа Технологии",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "logoSrc": "/landings/partners/media-tehnologii.svg"
+          },
+          {
+            "id": "komsvyazenerdzhi",
+            "name": "Комсвязьэнерджи",
+            "type": "integrator",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Внедрение",
+              "Настройка процессов",
+              "Обучение"
+            ],
+            "logoSrc": "/landings/partners/komsvyazenerdzhi.svg",
+            "href": "https://komsvenergy.ru"
+          },
+          {
+            "id": "obit",
+            "name": "ОБИТ",
+            "type": "integrator",
+            "region": "spb",
+            "location": "Санкт-Петербург",
+            "services": [
+              "Внедрение",
+              "Настройка процессов",
+              "Обучение"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/obit.svg",
+            "href": "https://obit.ru"
+          },
+          {
+            "id": "akstim",
+            "name": "Axenix",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/akstim.svg",
+            "href": "https://axenix.pro"
+          },
+          {
+            "id": "infosistemy-dzhet",
+            "name": "Инфосистемы Джет",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/infosistemy-dzhet.svg",
+            "href": "https://jet.su"
+          },
+          {
+            "id": "it-konstrakt",
+            "name": "ИТ Констракт",
+            "type": "agent",
+            "region": "rf",
+            "location": "Новосибирск",
+            "services": [
+              "Подбор тарифа",
+              "Сопровождение сделки"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/it-konstrakt.svg",
+            "href": "https://itconstruct.ru"
+          },
+          {
+            "id": "informconsulting",
+            "name": "InformConsulting",
+            "type": "reseller",
+            "region": "cis",
+            "location": "Казахстан",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/informconsulting.png",
+            "href": "https://ico.kz"
+          },
+          {
+            "id": "soft-lodzhistik",
+            "name": "Софт Лоджистик",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/soft-lodzhistik.png",
+            "href": "https://slsc.ru"
+          },
+          {
+            "id": "atos-ayti-solyushens-end-servisez",
+            "name": "Auxo",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/atos-ayti-solyushens-end-servisez.svg",
+            "href": "https://auxo-it.ru",
+            "logoTone": "light",
+            "logoBg": "#000000"
+          },
+          {
+            "id": "skillstaff",
+            "name": "СкиллСтафф",
+            "type": "reseller",
+            "region": "msk",
+            "location": "Москва",
+            "services": [
+              "Лицензии",
+              "Договор и закрывающие"
+            ],
+            "since": "с 2026",
+            "logoSrc": "/landings/partners/skillstaff.svg",
+            "href": "https://skillstaff.ru"
+          }
+        ],
+        "searchPlaceholder": "Поиск по названию",
+        "note": "Каталог собран по действующим партнёрским договорам. Условия работы и контакты уточняйте у менеджера Кайтена",
+        "contactCta": {
+          "label": "Запросить контакты",
+          "href": "#partner-request"
+        }
+      }
+    },
+    {
+      "id": "process",
+      "component": "ProcessSteps",
+      "props": {
+        "eyebrow": "Как это работает",
+        "title": "Как выбрать партнёра",
+        "description": "Четыре шага от задачи до старта работы",
+        "steps": [
+          {
+            "icon": "target",
+            "title": "Определите задачу",
+            "description": "Нужны лицензии и закрывающие документы — идите к реселлеру. Нужно настроить процессы и перенести данные — к интегратору"
+          },
+          {
+            "icon": "filter",
+            "title": "Отфильтруйте каталог",
+            "description": "Выберите формат партнёрства и регион, чтобы работать с командой в своём часовом поясе"
+          },
+          {
+            "icon": "send",
+            "title": "Оставьте заявку",
+            "description": "Не уверены в выборе — напишите нам: подберём партнёра под задачу и передадим контакты"
+          },
+          {
+            "icon": "rocket",
+            "title": "Начните работу",
+            "description": "Договор и внедрение идут через партнёра, поддержка самого продукта остаётся на стороне Кайтена"
+          }
+        ],
+        "variant": "roadmap"
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "title": "Вопросы о работе с партнёрами",
+        "items": [
+          {
+            "question": "Чем реселлер отличается от интегратора",
+            "answer": "Реселлер продаёт лицензии: с ним вы заключаете договор, он выставляет счёт и закрывающие документы. Интегратор занимается внедрением: настраивает доски и процессы, переносит данные из другого трекера и обучает команду. Одна компания может делать и то, и другое"
+          },
+          {
+            "question": "С кем я заключаю договор",
+            "answer": "Зависит от формата. У реселлера договор и счёт — с партнёром. У агента договор заключается напрямую с Кайтеном, а партнёр помогает выбрать тариф и сопровождает сделку"
+          },
+          {
+            "question": "Сколько стоит Кайтен через партнёра",
+            "answer": "Партнёр работает по действующим тарифам Кайтена. Точную сумму под ваш объём лицензий и срок назовёт менеджер партнёра или наш отдел продаж"
+          },
+          {
+            "question": "Моего города нет в каталоге",
+            "answer": "Большинство партнёров работает по всей России удалённо, а фильтр по региону нужен, чтобы найти команду в своём часовом поясе. Напишите нам — подберём того, кто закроет задачу"
+          },
+          {
+            "question": "Как попасть в каталог",
+            "answer": "Оставьте заявку в форме ниже. Обсудим формат партнёрства, подпишем договор — и компания появится в каталоге"
+          }
+        ]
+      }
+    },
+    {
+      "id": "registration_cta",
+      "component": "RegistrationCta",
+      "props": {
+        "anchorId": "partner-request",
+        "action": "#",
+        "newsletterRequired": false,
+        "note": "Отвечаем в рабочие дни",
+        "eyebrow": "Партнёрская программа",
+        "title": "Стать партнёром Кайтена",
+        "description": "Расскажите о компании и о том, какой формат вам интересен — вернёмся с условиями и проектом договора",
+        "submitLabel": "Отправить заявку",
+        "variant": "partner"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Партнёры Кайтена — каталог реселлеров и интеграторов",
+    "description": "Каталог официальных партнёров Кайтена: реселлеры, интеграторы, агенты и технологические партнёры в России и Казахстане. Заявка на партнёрство"
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-09-02T09:52:38.107Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "tokenEstimate": 47380,
+    "domain": "crm"
+  }
+}

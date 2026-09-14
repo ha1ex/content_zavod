@@ -26,7 +26,7 @@ import { useState, type ReactNode } from 'react';
  *    колонку — текст сверху, картинка снизу.
  *  - Mobile ≤767: то же, но картинка сверху, текст снизу; радиус превью 8.
  *
- * Self-contained: scoped `<style>` под `.tabsg-mock`, палитра V01, шрифт Inter.
+ * Self-contained: scoped `<style>` под `.tabsg-mock`, палитра V01, шрифт Roboto.
  */
 
 export interface TabsGalleryItem {

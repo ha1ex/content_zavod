@@ -1,0 +1,530 @@
+/**
+ * Kaiten Landing DS — тёмная тема (V01-dark)
+ *
+ * Источник: Figma «Landing DS»
+ *   desktop 1920 — node 2732:43296
+ *   mobile   360 — node 2732:43758
+ *   Макет: конференция «AI в управлении компанией: тренды 2026».
+ *
+ * Значения ниже сняты двумя способами:
+ *   [VAR]  — из Figma-переменных (get_variable_defs), точные;
+ *   [PX]   — пипеткой по полноразмерному рендеру макета, точные;
+ *   [DERIVED] — выведено по системе (состояния, которых нет в макете). Помечено явно.
+ *
+ * Ключ к теме: это НЕ отдельная палитра. Все поверхности — фиолетовый бренд
+ * #7d4ccf, положенный на тёмный фон с альфой 8 / 12 / 15 / 24 / 48 %.
+ * Поэтому тема масштабируется: нужен новый уровень — берите следующую альфу,
+ * а не новый хекс.
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1. Токены
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme='kaiten-dark'] {
+  /* ─── Фоны ────────────────────────────────────────────────────────── */
+  --kd-bg-page: #190f29;   /* [VAR] Background/White/Primary — фон десктопа   */
+  --kd-bg-deep: #130b1f;   /* [VAR] Background/White/Secondary — фон мобилки  */
+  --kd-bg-ink: #030712;    /* [VAR] Background/Gray/Secondary_alt_2 — кнопка
+                                    бургер-меню, самые тёмные плашки          */
+
+  /* ─── Бренд ───────────────────────────────────────────────────────── */
+  --kd-brand: #7d4ccf;        /* [VAR] Colors/Kaiten/Brand 100K               */
+  --kd-brand-48: #7d4ccf7a;   /* [VAR] Colors/Kaiten/Brand 48K — бордеры      */
+  --kd-brand-24: #7d4ccf3d;   /* [PX]  бордер выделенной карточки             */
+  --kd-brand-15: #7d4ccf26;   /* [VAR] Badges/Primary/Background              */
+  --kd-brand-12: #7d4ccf1f;   /* [VAR] Button/Primary Outline/Background      */
+  --kd-cyan: #00cffe;         /* [PX]  вторая точка всех градиентов           */
+
+  /* Плоские эквиваленты оверлеев на --kd-bg-page (для мест, где нельзя
+     положить полупрозрачный слой: SVG-заливки, e-mail, экспорт). [PX] */
+  --kd-surface-raised: #25163d;  /* brand 12 % на #190f29 — чипы, иконки,
+                                    вторичная кнопка, карточки модалки        */
+  --kd-border-soft: #311d51;     /* brand 24 % на #190f29                     */
+  --kd-border-strong: #4f2f83;   /* brand 48 % на #190f29 — бордер кнопки     */
+  --kd-surface-raised-mobile: #201334; /* brand 12 % на #130b1f — карточки    */
+  --kd-chip-mobile: #2b1a47;           /* brand 24 % на #130b1f — чипы        */
+
+  /* ─── Текст ───────────────────────────────────────────────────────── */
+  --kd-text-title: #ffffffe5;   /* [VAR] Text/Title Color — заголовки, 90 %   */
+  --kd-text-brand: #ffffff;     /* [VAR] Text/Brand Color — текст на брендовом
+                                         фоне, лид-абзацы, названия карточек  */
+  --kd-text-secondary: #9ca3af; /* [VAR] Text/Secondary Text Color — описания */
+  --kd-text-tertiary: #9e9e9e;  /* [VAR] Text/Tertiary Text Color — подписи   */
+  --kd-icon: #ffffff;           /* [VAR] icon-color                           */
+  --kd-icon-muted: #d1d5db;     /* [VAR] Mobile nav menu button/Icon color    */
+
+  /* ─── Формы (внутри тёмной темы поля остаются светлыми) ───────────── */
+  --kd-input-bg: #ffffff;             /* [VAR] Input/Background               */
+  --kd-input-text: #424242;           /* [VAR] Text/Text Color                */
+  --kd-input-placeholder: #9ca3af;    /* [VAR] Input/Placeholder text color   */
+  --kd-input-border: #d1d5db;         /* [VAR] Border/Tertiary                */
+  --kd-checkbox-bg: #ffffff;          /* [VAR] Checkbox/Background            */
+
+  /* ─── Градиенты ───────────────────────────────────────────────────── */
+
+  /* Пилюля-бейдж: даты, «1 день стратегии», «БОНУСЫ», «АУДИТОРИЯ».
+     Горизонтально, фиолетовый → циан, обе точки полупрозрачные. [PX] */
+  --kd-grad-pill: linear-gradient(90deg, #47317d 0%, #0d6e93 100%);
+
+  /* Градиентный текст заголовков: «Расписание конференции»,
+     «до 20 апреля». Горизонтально, бренд → циан. [PX] */
+  --kd-grad-heading: linear-gradient(90deg, #7d4ccf 0%, #00cffe 100%);
+
+  /* Градиентный акцент цифр и «AI» в H1. Вертикально, циан → бренд. [PX] */
+  --kd-grad-accent: linear-gradient(180deg, #00cffe 0%, #7d4ccf 100%);
+
+  /* Карточка-метрика (3 дня / 12 докладов). Вертикально, оверлей бренда
+     затухает сверху вниз. [PX] #24153b → #1a102c на --kd-bg-page */
+  --kd-grad-card: linear-gradient(
+    180deg,
+    rgba(125, 76, 207, 0.12) 0%,
+    rgba(125, 76, 207, 0.02) 100%
+  );
+
+  /* Карточка CTA / формы регистрации. Диагональ фиолетовый → синий.
+     Замеренные углы [PX]: ЛВ #311f53, ПВ #133e5e, ЛН #3c2169, ПН #355e8c. */
+  --kd-grad-cta: linear-gradient(107deg, #3a2065 0%, #262b57 45%, #2f5c8a 100%);
+
+  /* Футер: сплошная брендовая плашка с лёгким вертикальным осветлением.
+     Над ней в макете лежит декоративная «волна» — растровый ассет,
+     в этот файл не входит (см. reference/). [PX] #7347bf → #7d4ccf */
+  --kd-grad-footer: linear-gradient(180deg, #7347bf 0%, #7d4ccf 100%);
+
+  /* ─── Типографика ─────────────────────────────────────────────────── */
+  --kd-font: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --kd-text-xs: 12px;   --kd-lh-xs: 16px;   /* [VAR] */
+  --kd-text-sm: 14px;   --kd-lh-sm: 20px;
+  --kd-text-md: 16px;   --kd-lh-md: 24px;
+  --kd-text-lg: 18px;   --kd-lh-lg: 28px;
+  --kd-text-xl: 20px;   --kd-lh-xl: 28px;
+  --kd-text-2xl: 24px;  --kd-lh-2xl: 32px;
+  --kd-text-3xl: 30px;  --kd-lh-3xl: 36px;
+  --kd-text-4xl: 36px;  --kd-lh-4xl: 40px;
+  --kd-text-5xl: 48px;  --kd-lh-5xl: 52px;
+  --kd-text-7xl: 72px;  --kd-lh-7xl: 72px;
+
+  /* Трекинг: у текста -0.2px, у крупных SemiBold-заголовков 0. [VAR] */
+  --kd-tracking-body: -0.2px;
+  --kd-tracking-display: 0;
+
+  /* ─── Радиусы ─────────────────────────────────────────────────────── */
+  --kd-radius-sm: 2px;    /* [VAR] */
+  --kd-radius-lg: 8px;    /* кнопки, поля ввода */
+  --kd-radius-xl: 12px;   /* плитки иконок */
+  --kd-radius-2xl: 16px;  /* карточки */
+  --kd-radius-3xl: 24px;  /* крупные карточки, CTA-блок */
+  --kd-radius-full: 999px;/* пилюли и чипы */
+
+  /* ─── Тень ────────────────────────────────────────────────────────── */
+  --kd-shadow-xs: 0 1px 2px 0 rgba(16, 24, 40, 0.05); /* [VAR] shadow-xs */
+
+  /* ─── Сетка ───────────────────────────────────────────────────────── */
+  --kd-container: 1216px;  /* [PX] 1920 − 2 × 352 */
+  --kd-gutter: 32px;       /* [PX] 4 × 280 + 3 × 32 = 1216 */
+  --kd-margin-mobile: 16px;/* [PX] контейнер мобилки 328px на 360px */
+}
+
+/* Мобильный брейкпоинт переносит страницу на самый тёмный фон. [PX] */
+@media (max-width: 767px) {
+  :root,
+  [data-theme='kaiten-dark'] {
+    --kd-bg-page: #130b1f;
+    --kd-surface-raised: var(--kd-surface-raised-mobile);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   2. Базовый слой
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Компоненты темы считают размеры по внешней границе: без этого бордер
+   вторичной кнопки и поля ввода добавляет 2px к замеренной высоте 48px. */
+.kd,
+.kd *,
+.kd *::before,
+.kd *::after,
+[class^='kd-'],
+[class*=' kd-'] {
+  box-sizing: border-box;
+}
+
+.kd {
+  background: var(--kd-bg-page);
+  color: var(--kd-text-brand);
+  font-family: var(--kd-font);
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  letter-spacing: var(--kd-tracking-body);
+}
+
+.kd-container {
+  width: 100%;
+  max-width: var(--kd-container);
+  margin-inline: auto;
+  padding-inline: var(--kd-margin-mobile);
+}
+
+@media (min-width: 768px) {
+  .kd-container { padding-inline: 24px; }
+}
+@media (min-width: 1280px) {
+  .kd-container { padding-inline: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   3. Типографика
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.kd-h1 {
+  font-size: var(--kd-text-4xl);
+  line-height: var(--kd-lh-4xl);
+  font-weight: 600;
+  letter-spacing: var(--kd-tracking-display);
+  color: var(--kd-text-brand);
+}
+@media (min-width: 1280px) {
+  .kd-h1 { font-size: var(--kd-text-7xl); line-height: var(--kd-lh-7xl); }
+}
+
+.kd-h2 {
+  font-size: var(--kd-text-3xl);
+  line-height: var(--kd-lh-3xl);
+  font-weight: 600;
+  letter-spacing: var(--kd-tracking-display);
+  color: var(--kd-text-brand);
+}
+@media (min-width: 1280px) {
+  .kd-h2 { font-size: var(--kd-text-5xl); line-height: var(--kd-lh-5xl); }
+}
+
+/* H3 — заголовок дня в расписании и подзаголовки секций */
+.kd-h3 {
+  font-size: var(--kd-text-2xl);
+  line-height: var(--kd-lh-2xl);
+  font-weight: 400;
+  letter-spacing: var(--kd-tracking-body);
+  color: var(--kd-text-title);
+}
+@media (min-width: 1280px) {
+  .kd-h3 { font-size: var(--kd-text-3xl); line-height: var(--kd-lh-3xl); }
+}
+
+/* Название доклада / карточки */
+.kd-card-title {
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  font-weight: 600;
+  letter-spacing: var(--kd-tracking-body);
+  color: var(--kd-text-brand);
+}
+
+.kd-lead {
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  color: var(--kd-text-brand);
+}
+@media (min-width: 1280px) {
+  .kd-lead { font-size: var(--kd-text-xl); line-height: var(--kd-lh-xl); }
+}
+
+.kd-body { color: var(--kd-text-secondary); }
+.kd-caption {
+  font-size: var(--kd-text-sm);
+  line-height: var(--kd-lh-sm);
+  color: var(--kd-text-tertiary);
+}
+
+/* Надзаголовок «БЕСПЛАТНАЯ ОНЛАЙН КОНФЕРЕНЦИЯ КАЙТЕН» */
+.kd-eyebrow {
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kd-text-brand);
+}
+
+/* Градиентный фрагмент внутри заголовка: <span class="kd-gradient">…</span> */
+.kd-gradient {
+  background: var(--kd-grad-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Цифра метрики и «AI» в H1 — вертикальный градиент */
+.kd-gradient-accent {
+  background: var(--kd-grad-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   4. Кнопки — высота 48px, радиус 8px [PX]
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.kd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;   /* вертикальный паддинг 0: высоту держит min-height */
+  border: 1px solid transparent;
+  border-radius: var(--kd-radius-lg);
+  font-family: var(--kd-font);
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  font-weight: 500;
+  letter-spacing: var(--kd-tracking-body);
+  cursor: pointer;
+  transition: background-color 180ms cubic-bezier(0.2, 0, 0.2, 1),
+              border-color 180ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.kd-btn--primary {
+  background: var(--kd-brand);       /* [VAR] Button/Primary/Background */
+  color: var(--kd-text-brand);       /* [VAR] Button/Primary/Text       */
+}
+.kd-btn--primary:hover { background: #8d5fd8; }  /* [DERIVED] +8 % lightness */
+.kd-btn--primary:active { background: #6f43b8; } /* [DERIVED] из V01 light   */
+
+.kd-btn--secondary {
+  background: var(--kd-brand-12);         /* [VAR] Primary Outline/Background */
+  border-color: var(--kd-brand-48);       /* [VAR] Brand 48K                  */
+  color: var(--kd-text-brand);
+}
+.kd-btn--secondary:hover { background: var(--kd-brand-24); } /* [DERIVED] */
+
+.kd-btn--block { width: 100%; }  /* мобильная форма растягивает кнопку */
+
+/* Кнопка бургер-меню на мобилке [VAR] */
+.kd-btn--burger {
+  min-height: 40px;
+  width: 40px;
+  padding: 0;
+  background: var(--kd-bg-ink);
+  color: var(--kd-icon-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   5. Пилюли и чипы
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Пилюля-бейдж секции: высота 32px [PX] */
+.kd-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: var(--kd-radius-full);
+  background: var(--kd-grad-pill);
+  color: var(--kd-text-brand);
+  font-size: var(--kd-text-sm);
+  line-height: var(--kd-lh-sm);
+  font-weight: 500;
+  letter-spacing: var(--kd-tracking-body);
+}
+
+/* Мета-чип карточки: «16:00 / 30 мин», «Внедрение ИИ». Высота 28px [PX] */
+.kd-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--kd-radius-full);
+  background: var(--kd-brand-12);
+  color: var(--kd-text-brand);
+  font-size: var(--kd-text-sm);
+  line-height: var(--kd-lh-sm);
+  letter-spacing: var(--kd-tracking-body);
+}
+@media (max-width: 767px) {
+  .kd-chip { background: var(--kd-brand-24); }  /* [PX] на мобилке контрастнее */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   6. Карточки
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Карточка-метрика: 280 × 180, градиентная заливка [PX] */
+.kd-card-metric {
+  padding: 24px;
+  border-radius: var(--kd-radius-2xl);
+  background: var(--kd-grad-card);
+  text-align: center;
+}
+.kd-card-metric__value {
+  font-size: var(--kd-text-5xl);
+  line-height: var(--kd-lh-5xl);
+  font-weight: 600;
+  letter-spacing: var(--kd-tracking-display);
+  background: var(--kd-grad-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.kd-card-metric__label {
+  margin-top: 8px;
+  font-size: var(--kd-text-xl);
+  line-height: var(--kd-lh-xl);
+  color: var(--kd-text-brand);
+}
+.kd-card-metric__hint {
+  margin-top: 4px;
+  font-size: var(--kd-text-sm);
+  line-height: var(--kd-lh-sm);
+  color: var(--kd-text-tertiary);
+}
+
+/* Карточка доклада. На десктопе фон прозрачный (лежит прямо на секции),
+   на мобилке получает поверхность brand 12 %. [PX] */
+.kd-card-talk {
+  border-radius: var(--kd-radius-2xl);
+  background: transparent;
+}
+@media (max-width: 767px) {
+  .kd-card-talk {
+    padding: 16px;
+    background: var(--kd-brand-12);
+  }
+}
+
+/* Выделенная карточка (Live-сессия): рамка brand 24 %, радиус 24 [PX] */
+.kd-card-talk--featured {
+  padding: 24px;
+  border: 1px solid var(--kd-brand-24);
+  border-radius: var(--kd-radius-3xl);
+  background: transparent;
+}
+
+/* Плитка иконки/эмодзи: 56 × 56, радиус 12 [PX] */
+.kd-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--kd-radius-xl);
+  background: var(--kd-brand-12);
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Фото спикера — ч/б, радиус 8 [PX] */
+.kd-speaker-photo {
+  border-radius: var(--kd-radius-lg);
+  filter: grayscale(1);
+  object-fit: cover;
+}
+.kd-speaker-name {
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  font-weight: 500;
+  color: var(--kd-text-brand);
+}
+.kd-speaker-role {
+  font-size: var(--kd-text-sm);
+  line-height: var(--kd-lh-sm);
+  color: var(--kd-text-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   7. CTA-блок с формой регистрации
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.kd-cta {
+  padding: 32px;
+  border-radius: var(--kd-radius-3xl);
+  background: var(--kd-grad-cta);
+}
+@media (min-width: 1280px) {
+  .kd-cta { padding: 48px; }
+}
+
+/* Поля ввода остаются светлыми — так в макете [VAR] */
+.kd-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--kd-input-border);
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-input-bg);
+  color: var(--kd-input-text);
+  font-family: var(--kd-font);
+  font-size: var(--kd-text-md);
+  line-height: var(--kd-lh-md);
+  letter-spacing: var(--kd-tracking-body);
+  box-shadow: var(--kd-shadow-xs);
+}
+.kd-input::placeholder { color: var(--kd-input-placeholder); }
+.kd-input:focus-visible {
+  outline: 2px solid var(--kd-brand);   /* [DERIVED] в макете состояния нет */
+  outline-offset: 2px;
+}
+
+.kd-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--kd-radius-sm);
+  background: var(--kd-checkbox-bg);
+}
+.kd-consent {
+  font-size: var(--kd-text-xs);
+  line-height: var(--kd-lh-xs);
+  color: var(--kd-text-secondary);
+}
+.kd-consent a { color: var(--kd-text-brand); text-decoration: underline; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   8. Футер — единственная светлая брендовая зона страницы
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.kd-footer {
+  background: var(--kd-grad-footer);
+  color: var(--kd-text-brand);
+  font-size: var(--kd-text-sm);
+  line-height: var(--kd-lh-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   9. Сетки секций [PX]
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* 4 колонки метрик: 280px, гуттер 32 */
+.kd-grid-metrics {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+/* 3 колонки: 384px, гуттер 32 — «Для кого», партнёры, телеграм-каналы */
+.kd-grid-3 {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+}
+/* 2 колонки: 592px, гуттер 32 — карточки докладов */
+.kd-grid-2 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 1280px) {
+  .kd-grid-metrics { gap: var(--kd-gutter); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .kd-grid-3 { gap: var(--kd-gutter) 32px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kd-grid-2 { gap: 32px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Вертикальный ритм секции: пилюля → H2 = 24, H2 → контент = 72 [PX] */
+.kd-section { padding-block: 64px; }
+.kd-section__head { text-align: center; margin-bottom: 40px; }
+.kd-section__head .kd-pill + .kd-h2 { margin-top: 24px; }
+
+@media (min-width: 1280px) {
+  .kd-section { padding-block: 112px; }
+  .kd-section__head { margin-bottom: 72px; }
+}

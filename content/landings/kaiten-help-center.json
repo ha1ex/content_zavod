@@ -1,0 +1,477 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Справочный центр",
+        "title": "Создайте собственный Справочный центр в Kaiten",
+        "subtitle": "Соберите инструкции и поддержку в одном Справочном центре, чтобы клиенты и сотрудники находили ответы самостоятельно, а команда получала меньше типовых обращений",
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-help-center-video",
+          "alt": "Видео: как устроен Справочный центр в Кайтене",
+          "variant": "hero-screen-video"
+        },
+        "visualPosition": "below",
+        "trust": [
+          {
+            "icon": "book-open",
+            "label": "Инструкции и вопросы с ответами"
+          },
+          {
+            "icon": "search",
+            "label": "Поиск по материалам"
+          },
+          {
+            "icon": "inbox",
+            "label": "Обращения из портала"
+          },
+          {
+            "icon": "palette",
+            "label": "Фирменный стиль и свой домен"
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "tightBottom": true,
+        "title": "Как работает Справочный центр",
+        "description": "Справочный центр объединяет инструкции и поддержку: пользователь сначала ищет нужную информацию\nсамостоятельно в статьях, а если ответа нет — сразу отправляет обращение",
+        "align": "center",
+        "mediaVariant": "none"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceTopMobile": true,
+        "title": "Инструкции и ответы на вопросы",
+        "description": "Публикуйте инструкции, регламенты, FAQ, документацию и новости. Пользователи смогут находить нужные материалы через структуру разделов или поиск",
+        "mediaPosition": "right",
+        "flushTop": true,
+        "titleSize": "small",
+        "mediaVariant": "help-center-sections",
+        "tightBottom": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "ctaCenterMobile": true,
+        "title": "Обращения в поддержку",
+        "description": "Подключите сервисы Службы поддержки, чтобы клиенты могли отправлять заявки прямо из Справочного центра",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "titleSize": "small",
+        "mediaVariant": "help-center-request-form",
+        "primaryCta": {
+          "label": "Создать справочный центр",
+          "href": "https://kaiten.ru/signup"
+        },
+        "ctaBelow": true
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Уже работаете в Кайтен?",
+        "description": "Создайте Справочный центр в своем пространстве по пошаговой инструкции. А чтобы получать заявки клиентов из Справочного центра, подключите модуль «Служба поддержки». Он доступен на тарифах «Стандарт» и «Бизнес» как один из модулей на выбор, а на тарифе «Корпорация» уже включен",
+        "descriptionLink": [
+          {
+            "text": "пошаговой инструкции",
+            "href": "https://faq-ru.kaiten.site/spravochnyy-centr"
+          },
+          {
+            "text": "тарифах «Стандарт» и «Бизнес»",
+            "href": "https://kaiten.ru/tariffs"
+          }
+        ],
+        "primaryCta": {
+          "label": "Открыть инструкцию",
+          "href": "https://faq-ru.kaiten.site/"
+        },
+        "secondaryCta": {
+          "label": "Подробнее о тарифах",
+          "href": "https://kaiten.ru/pricing/"
+        },
+        "gradient": true,
+        "mediaVariant": "help-center-setup"
+      }
+    },
+    {
+      "id": "scenario_walkthrough",
+      "component": "ScenarioWalkthroughSection",
+      "props": {
+        "title": "От вопроса до решения — в одном Справочном центре",
+        "description": "Как работает Справочный центр в Кайтен",
+        "steps": [
+          {
+            "time": "Шаг 1",
+            "title": "Найти ответ",
+            "description": "Пользователь вводит вопрос в поиск и сразу видит подходящие инструкции и материалы",
+            "icon": "search",
+            "mockVariant": "help-center-search"
+          },
+          {
+            "time": "Шаг 2",
+            "title": "Обратиться за помощью",
+            "description": "Если готового ответа нет, пользователь создает заявку прямо в Справочном центре. При заполнении формы Kaiten предложит подходящие статьи, которые могут помочь решить вопрос самостоятельно",
+            "icon": "message-square-plus",
+            "mockVariant": "help-center-suggested-articles"
+          },
+          {
+            "time": "Шаг 3",
+            "title": "Передать заявку в работу",
+            "description": "Каждое обращение автоматически создается отдельной карточкой на доске Kaiten. Команда видит новую заявку и ведет ее по настроенному процессу до решения",
+            "icon": "square-kanban",
+            "mockVariant": "help-center-request-card"
+          },
+          {
+            "time": "Шаг 4",
+            "title": "Следить за статусом обращения",
+            "description": "Пользователь видит свои обращения и их статусы в Справочном центре — не нужно искать ответы в почте или переписках",
+            "icon": "list-checks",
+            "primaryCta": {
+              "label": "Попробовать Кайтен бесплатно",
+              "href": "https://kaiten.ru/signup"
+            },
+            "mockVariant": "help-center-requests"
+          }
+        ],
+        "plainTimeline": true,
+        "stepInTitle": true,
+        "align": "center",
+        "columnsFromTablet": true
+      }
+    },
+    {
+      "id": "tabbed_feature",
+      "component": "TabbedFeatureSection",
+      "props": {
+        "title": "Справочный центр в стиле вашей компании",
+        "variant": "accordion",
+        "flushBottom": true,
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "description": "Настройте внешний вид Справочного центра так, чтобы он стал естественной частью вашего продукта или корпоративной среды",
+        "tabs": [
+          {
+            "id": "branding",
+            "label": "Фирменный стиль",
+            "icon": "palette",
+            "title": "Фирменный стиль",
+            "description": "Добавьте логотип компании, выберите основной цвет и название Справочного центра",
+            "mockVariant": "help-center-branding"
+          },
+          {
+            "id": "domain",
+            "label": "Собственный домен",
+            "icon": "globe",
+            "title": "Собственный домен",
+            "description": "Используйте адрес на домене вашей компании, например help.company.ru",
+            "mockVariant": "help-center-domain"
+          },
+          {
+            "id": "email",
+            "label": "Шаблон писем",
+            "icon": "mail",
+            "title": "Шаблон писем",
+            "description": "Настройте внешний вид писем, которые получают пользователи после создания и изменения заявок",
+            "mockVariant": "help-center-email"
+          }
+        ]
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Возможности Справочного центра",
+        "items": [
+          {
+            "icon": "search",
+            "title": "Умный поиск",
+            "description": "Помогите пользователям быстрее находить нужную информацию — поиск работает по опубликованным статьям и материалам",
+            "featureTile": "Поиск по Справочному центру"
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Рекомендации статей",
+            "description": "При создании заявки Kaiten предлагает подходящие материалы. Пользователь может найти решение еще до отправки обращения",
+            "featureTile": "Рекомендации статей в заявке"
+          },
+          {
+            "icon": "layout-dashboard",
+            "title": "Главная страница",
+            "description": "Настройте стартовую страницу с нужными разделами и помогите пользователям быстрее переходить к важным материалам",
+            "featureTile": "Главная страница Справочного центра"
+          },
+          {
+            "icon": "list-checks",
+            "title": "История заявок",
+            "description": "Все обращения и их статусы доступны пользователю в одном месте. Найти нужную заявку можно с помощью поиска и фильтров",
+            "featureTile": "Мои заявки в Справочном центре"
+          },
+          {
+            "icon": "globe",
+            "title": "Индексация в поисковиках",
+            "description": "Откройте публичные материалы для индексации, чтобы пользователи могли находить ваши инструкции через поисковые системы",
+            "featureTile": "Статья компании в поиске"
+          },
+          {
+            "icon": "rss",
+            "title": "Новостная лента",
+            "description": "Публикуйте новости и обновления в Справочном центре, а пользователи смогут следить за ними через RSS-ленту",
+            "featureTile": "Новостная лента Справочного центра"
+          }
+        ],
+        "columns": 3,
+        "variant": "mock",
+        "flushBottom": true
+      }
+    },
+    {
+      "id": "cta_buttons",
+      "component": "CtaButtons",
+      "props": {
+        "primaryCta": {
+          "label": "Попробовать бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "spaceBottom": true,
+        "tightSpacing": true
+      }
+    },
+    {
+      "id": "bento_grid",
+      "component": "BentoGrid",
+      "props": {
+        "wideGap": true,
+        "spaceY": true,
+        "smallTitleMobile": true,
+        "title": "Для клиентов и внутренних команд",
+        "description": "Настройте Справочный центр под задачи разных отделов, продуктов и внешних пользователей",
+        "cells": [
+          {
+            "icon": "headphones",
+            "title": "Поддержка клиентов",
+            "description": "Разместите FAQ, полезные материалы и решения типовых проблем. Клиенты смогут самостоятельно получать нужную информацию, а при необходимости — обращаться за помощью",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "monitor-cog",
+            "title": "ИТ и внутренний хелпдеск",
+            "description": "Добавьте информацию о доступах, программах и оборудовании, а технические запросы сотрудников направляйте сразу ответственным специалистам",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "user-plus",
+            "title": "HR и онбординг",
+            "description": "Помогите новым сотрудникам быстрее освоиться: разместите материалы для адаптации, правила компании и информацию о кадровых процессах. Здесь же можно принимать обращения в HR",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "book-open",
+            "title": "Документация продукта",
+            "description": "Объедините руководства, техническую документацию, новости и обновления для пользователей, клиентов и партнеров",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "scale",
+            "title": "Бухгалтерия, юристы и АХО",
+            "description": "Организуйте внутренний сервис для запросов на справки и документы, закупок, юридических вопросов, обслуживания офиса и других административных задач",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "briefcase",
+            "title": "Партнеры и подрядчики",
+            "description": "Дайте внешним командам доступ к правилам работы, документам, брендбуку и другим полезным материалам и возможность обратиться к ответственному специалисту",
+            "size": "small",
+            "accent": false
+          }
+        ],
+        "onSurface": false,
+        "align": "center"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceTop": true,
+        "spaceBottom": true,
+        "ctaCenterMobile": true,
+        "title": "Посмотрите, как выглядит Справочный центр в Кайтен",
+        "description": "Мы сами используем Справочный центр для инструкций, новостей и поддержки пользователей.\n\nВ нем есть отдельный раздел о создании Справочного центра — посмотрите, как все устроено, и попробуйте настроить свой по инструкции. Если в процессе появятся вопросы, создайте заявку в конце любой статьи — наша команда поможет разобраться",
+        "descriptionLink": {
+          "text": "отдельный раздел о создании Справочного центра",
+          "href": "https://faq-ru.kaiten.site/spravochnyy-centr"
+        },
+        "mediaPosition": "right",
+        "titleSize": "small",
+        "mediaVariant": "help-center-template",
+        "primaryCta": {
+          "label": "Посмотреть Справочный центр Kaiten",
+          "href": "https://faq-ru.kaiten.site/"
+        }
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceBottom": true,
+        "ctaCenterMobile": true,
+        "title": "Начните с готового шаблона",
+        "description": "Не обязательно создавать структуру с нуля. Используйте готовый шаблон Справочного центра, добавьте свои инструкции и оформление, а при необходимости подключите сервисы Службы поддержки",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "titleSize": "small",
+        "mediaVariant": "help-center-portal",
+        "primaryCta": {
+          "label": "Открыть шаблон",
+          "href": "https://elli.kaiten.ru/p/3beb86fd-cb2f-4a66-990b-2594b57189d0"
+        },
+        "tightBottomMobile": true
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Для тех, кто уже в Кайтен",
+        "description": "Мы описали подробную инструкцию, как пошагово создать справочный центр вашей компании. Попробуйте настроить все сами или оставьте заявку в конце статьи в нашу службу поддержки",
+        "primaryCta": {
+          "label": "Открыть инструкцию",
+          "href": "https://faq-ru.kaiten.site/"
+        },
+        "variant": "product",
+        "visualAlt": "Платформа Кайтен: задачи, документы и сервисные модули",
+        "spaceBottom": true
+      }
+    },
+    {
+      "id": "faq",
+      "component": "FAQAccordion",
+      "props": {
+        "spaceTop": true,
+        "title": "Частые вопросы о Справочном центре",
+        "items": [
+          {
+            "question": "Можно ли использовать Справочный центр без Службы поддержки?",
+            "answer": "Да. Вы можете создать Справочный центр с инструкциями, FAQ, документацией, новостями и другими материалами без подключения сервисов Службы поддержки. Если позже захотите принимать обращения пользователей, сервисы можно подключить дополнительно."
+          },
+          {
+            "question": "Справочный центр подходит только для поддержки клиентов?",
+            "answer": "Нет. Его можно использовать как для клиентов и партнеров, так и внутри компании — например, для IT, HR, бухгалтерии, юридического отдела или АХО. Вы сами определяете, какие материалы публиковать и какие сервисы Службы поддержки подключать."
+          },
+          {
+            "question": "Можно ли оформить Справочный центр в стиле компании?",
+            "answer": "Да. Можно добавить логотип, название и фирменные цвета, а также настроить внешний вид писем для пользователей. Также Справочный центр можно разместить на домене вашей компании."
+          },
+          {
+            "question": "Что происходит с заявкой после отправки?",
+            "answer": "Обращение из Справочного центра создается отдельной карточкой на доске Kaiten. Команда может назначить ответственного, работать с заявкой по своему процессу и менять ее статус, а пользователь — следить за обращением в Справочном центре."
+          },
+          {
+            "question": "Как пользователи находят нужные материалы?",
+            "answer": "Через разделы Справочного центра и поиск по опубликованным материалам. А при создании заявки Kaiten может дополнительно предложить подходящие статьи, чтобы пользователь попробовал найти решение самостоятельно."
+          },
+          {
+            "question": "Можно ли создать несколько Справочных центров?",
+            "answer": "Да. Вы можете создать несколько Справочных центров для разных задач и аудиторий — например, отдельные для клиентов, сотрудников, партнеров или разных продуктов. В каждом можно настроить свои материалы, оформление и сервисы Службы поддержки."
+          },
+          {
+            "question": "Нужно ли разрабатывать отдельный сайт для Справочного центра?",
+            "answer": "Нет. Справочный центр создается и настраивается прямо в Kaiten без разработки. Добавьте нужные материалы, настройте оформление и при необходимости подключите сервисы Службы поддержки. Готовый Справочный центр можно разместить на собственном домене"
+          }
+        ]
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Создайте Справочный центр для своей компании уже сегодня",
+        "description": "И сократите количество типовых обращений: пользователи находят ответы самостоятельно, а заявки сразу попадают в Kaiten и остаются в работе до решения",
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "variant": "gradient",
+        "visualVariant": "help-center-template",
+        "onSurface": false,
+        "spaceBottom": true,
+        "fitVisual": true
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Справочный центр Kaiten: портал помощи клиентам и сотрудникам",
+    "description": "Соберите инструкции и вопросы с ответами в одном портале и принимайте обращения оттуда же: поиск по материалам, свой домен, фирменный стиль, без разработки."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-09-07T14:04:39.721Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "single-module-deep-dive",
+    "tokenEstimate": 48147,
+    "domain": "help-center"
+  }
+}

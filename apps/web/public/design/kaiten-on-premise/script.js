@@ -107,11 +107,17 @@
       var c = cards[0];
       return c ? c.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 24) : 320;
     }
+    // Число позиций листания = число колонок: на планшете сетка в две строки
+    function cols(){
+      var seen = {}, n = 0;
+      cards.forEach(function(c){ var l = Math.round(c.offsetLeft); if (!seen[l]) { seen[l] = 1; n++; } });
+      return n || cards.length;
+    }
     function update(){
       var maxScroll = track.scrollWidth - track.clientWidth;
       if (nav) nav.style.display = maxScroll > 6 ? '' : 'none';
       var idx = Math.round(track.scrollLeft / step());
-      count.innerHTML = '<b>' + (idx + 1) + '</b> / ' + cards.length;
+      count.innerHTML = '<b>' + (idx + 1) + '</b> / ' + cols();
       prev.disabled = track.scrollLeft <= 6;
       next.disabled = track.scrollLeft >= maxScroll - 6;
     }
@@ -262,11 +268,17 @@
       var c = cards[0];
       return c ? c.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16) : 296;
     }
+    // Число позиций листания = число колонок: на планшете сетка в две строки
+    function cols(){
+      var seen = {}, n = 0;
+      cards.forEach(function(c){ var l = Math.round(c.offsetLeft); if (!seen[l]) { seen[l] = 1; n++; } });
+      return n || cards.length;
+    }
     function update(){
       var maxScroll = track.scrollWidth - track.clientWidth;
       if (nav) nav.style.display = maxScroll > 6 ? '' : 'none';
       var idx = Math.round(track.scrollLeft / step());
-      count.innerHTML = '<b>' + (idx + 1) + '</b> / ' + cards.length;
+      count.innerHTML = '<b>' + (idx + 1) + '</b> / ' + cols();
       prev.disabled = track.scrollLeft <= 6;
       next.disabled = track.scrollLeft >= maxScroll - 6;
     }

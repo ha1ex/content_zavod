@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ru" data-theme="dark" data-themes="light:Light dark:Dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Конференция Кайтен 2026 — инфопартнерам</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../kaiten-slides.css" />
+<link rel="stylesheet" href="../theme-light.css" />
+<link rel="stylesheet" href="../theme-dark.css" />
+<style>
+  /* акцентное слово градиентом (как на лендинге конференции) */
+  .grad { background:linear-gradient(120deg,#8b5cf0,#6fe5ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+  /* крупные цифры градиентом, как в апрельском деке */
+  .stat-value { background:linear-gradient(120deg,#8b5cf0,#6fe5ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+  /* нижнее градиентное свечение — выше и мягче (было ~30px) */
+  .slide::after { height:9cqw; bottom:-2.4cqw; filter:blur(3.2cqw); opacity:.5; }
+  /* сетка логотипов инфопартнеров */
+  .logos { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:2.2cqw 3.2cqw; }
+  .logos img { height:2.3cqw; width:auto; max-width:12cqw; object-fit:contain; opacity:.92; }
+  .logos .slot { font-size:1.04cqw; font-weight:600; letter-spacing:.04em; color:var(--text-secondary); text-transform:uppercase; }
+  .tg-list { display:flex; flex-direction:column; gap:.5cqw; margin-top:1.6cqw; text-align:center; }
+  .tg-list span { font-size:.94cqw; letter-spacing:.03em; color:var(--text-secondary); text-transform:uppercase; }
+  .rutube { display:flex; align-items:center; gap:1cqw; font-size:1.35cqw; font-weight:600; }
+  .rutube .u { color:var(--action-primary); }
+  .stat-sub { font-size:1.04cqw; line-height:1.4; color:var(--text-secondary); margin:.6cqw 0 0; }
+  /* слайд спикеров — 3×3 с фото */
+  .spk-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:1.5cqw; flex:1; min-height:0; }
+  .spk { display:flex; align-items:center; gap:1.6cqw; padding:1.7cqw 1.9cqw; }
+  .spk img { width:9.4cqw; height:9.4cqw; border-radius:1.2cqw; object-fit:cover; object-position:top center; flex:0 0 auto; }
+  .spk .nm { font-size:1.42cqw; font-weight:600; color:var(--action-primary); margin:0; line-height:1.15; }
+  .spk .co { font-size:1.04cqw; color:var(--text-secondary); margin:.5cqw 0 0; line-height:1.25; }
+  .spk .tp { font-size:1.16cqw; margin:.7cqw 0 0; line-height:1.28; }
+  .spk-more { text-align:center; font-size:1.06cqw; color:var(--text-secondary); margin:1.5cqw 0 0; }
+  .spk-more b { color:var(--text-primary); font-weight:600; }
+  /* призыв стать инфопартнером на обложке — крупная акцентная плашка */
+  .cover-text .invite { display:inline-flex; align-items:center; gap:.8cqw; margin-top:2.2cqw; padding:1cqw 1.8cqw; border-radius:1cqw; background:var(--action-primary); color:#fff; font-size:1.55cqw; font-weight:600; line-height:1.25; }
+  .cover-text .invite svg { width:1.9cqw; height:1.9cqw; flex:none; }
+  /* крупные цифры в карточках — как большие числа на слайде итогов */
+  .stat-card .stat-value { font-size:4cqw; }
+  /* крупное число-герой в карточке пользы (s6) */
+  .perk-num { font-size:3.6cqw; font-weight:600; line-height:1; }
+  .perk-num-label { font-size:1.16cqw; color:var(--text-secondary); margin:.5cqw 0 0; }
+  /* основной текст крупнее + серый оттенок везде на белый */
+  [data-theme="dark"] { --text-secondary:#ffffff; }
+  .body { font-size:1.2cqw; }
+  .checks li { font-size:1.2cqw; }
+  .stat-card .stat-label { font-size:1.16cqw; }
+  .stat-sub { font-size:1.16cqw; }
+  .spk .co { font-size:1.04cqw; }
+  .spk .tp { font-size:1.2cqw; }
+  .spk-more { font-size:1.16cqw; }
+  .cover-text .meta { font-size:1.16cqw; }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- 1 — Обложка -->
+    <section class="slide cover is-active" id="s1">
+      <img src="kaiten-conf-2026-assets/neon-bg.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.7; z-index:0" />
+      <div style="position:absolute; inset:0; z-index:0; background:linear-gradient(90deg, #190f29 20%, rgba(25,15,41,.72) 46%, rgba(25,15,41,0) 72%)"></div>
+      <div class="cover-logo"><img src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" /></div>
+      <div class="cover-text">
+        <h1><span class="grad">ИИ</span> и порядок<br />в работе</h1>
+        <p class="sub">Два трека: «Ускорение» — прикладной ИИ в ежедневной работе, «Эффективность» — как доводить дела до конца</p>
+        <p class="meta">Онлайн · 23–24 сентября 2026</p>
+        <span class="invite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+          Приглашаем стать информационным партнером
+        </span>
+      </div>
+    </section>
+
+    <!-- 2 — О конференции -->
+    <section class="slide" id="s2">
+      <div class="s-head">
+        <h2 class="s-title">О конференции</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body">
+        <div class="cols-4">
+          <div class="stat-card"><div class="stat-value">2</div><div class="stat-label">дня</div><p class="stat-sub">23–24 сентября 2026, полностью онлайн</p></div>
+          <div class="stat-card"><div class="stat-value">2</div><div class="stat-label">трека</div><p class="stat-sub">«Ускорение» и «Эффективность»</p></div>
+          <div class="stat-card"><div class="stat-value">10</div><div class="stat-label">спикеров</div><p class="stat-sub">уже подтверждены, состав растет</p></div>
+          <div class="stat-card"><div class="stat-value">100%</div><div class="stat-label">бесплатно</div><p class="stat-sub">максимальный охват аудитории</p></div>
+        </div>
+        <div class="banner" style="margin-top:var(--gap)">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg></div>
+          <p>Двухдневный онлайн-форум, где руководители получат <span style="font-weight:600">конкретные инструменты</span> для управления командами в эпоху ИИ</p>
+        </div>
+        <div class="cols-2" style="margin-top:var(--gap)">
+          <div class="frame">
+            <h3 class="h3" style="color:var(--action-primary); margin:0">Трек «Ускорение»</h3>
+            <p class="body muted" style="margin-top:.9cqw">Прикладной ИИ, ИИ-агенты и автоматизация — чем умножать результат и что реально работает, а не остается пилотом</p>
+          </div>
+          <div class="frame">
+            <h3 class="h3" style="color:var(--action-primary); margin:0">Трек «Эффективность»</h3>
+            <p class="body muted" style="margin-top:.9cqw">Довести работу до конца, видеть загрузку команды без слежки и быстро выводить людей на продуктивность</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 — Итоги прошлой конференции -->
+    <section class="slide" id="s3">
+      <div class="s-head">
+        <h2 class="s-title">Итоги апрельской конференции</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body cols-2">
+        <div class="frame">
+          <h3 class="h2">Апрель 2026</h3>
+          <div style="display:flex; gap:3.4cqw; margin-top:2cqw">
+            <div><div class="grad" style="font-size:4.6cqw; font-weight:600; line-height:1">2200</div><div class="stat-label" style="margin-top:.6cqw">регистраций</div></div>
+            <div><div class="grad" style="font-size:4.6cqw; font-weight:600; line-height:1">500+</div><div class="stat-label" style="margin-top:.6cqw">онлайн в пике</div></div>
+          </div>
+          <p class="body muted" style="margin-top:2.6cqw">Первая конференция Кайтена для руководителей. В сентябре проводим второй сезон — уже в двух треках и с новыми спикерами.</p>
+        </div>
+        <a class="frame" href="https://rutube.ru/plst/1600260/" style="text-decoration:none; color:#fff; padding:0; overflow:hidden; display:flex; flex-direction:column">
+          <div style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden">
+            <img src="kaiten-conf-2026-assets/rutube-cover.jpg" alt="Запись конференции" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover" />
+            <div style="position:absolute; inset:0; background:rgba(13,11,20,.30)"></div>
+            <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:6cqw; height:6cqw; border-radius:50%; background:rgba(255,255,255,.95); display:flex; align-items:center; justify-content:center; box-shadow:0 .6cqw 2cqw rgba(0,0,0,.4)">
+              <svg viewBox="0 0 24 24" fill="#1a1327" style="width:2.6cqw; height:2.6cqw; margin-left:.3cqw"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </div>
+          <div style="padding:1.6cqw 1.8cqw">
+            <h3 class="h3" style="margin:0; color:#fff">Записи всех докладов уже доступны</h3>
+            <p style="font-weight:600; font-size:1.35cqw; color:#6fe5ff; margin:.5cqw 0 0">rutube.ru/plst/1600260</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4 — Два дня — два трека -->
+    <section class="slide" id="s4">
+      <div class="s-head">
+        <h2 class="s-title">Два дня — два трека</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body cols-2">
+        <div class="frame is-accent">
+          <h3 class="h2">День 1 — «Ускорение»</h3>
+          <h4 class="h3">Прикладной ИИ в ежедневной работе</h4>
+          <ul class="checks" style="margin-top:1.4cqw">
+            <li>Восемь из десяти ИИ-проектов остаются пилотами</li>
+            <li>ИИ не чинит хаос — он его масштабирует</li>
+            <li>Первая линия схлопнулась: ИИ дешевле оператора в 145 раз</li>
+          </ul>
+          <p class="body" style="margin-top:1.4cqw; opacity:.85">и другие темы трека</p>
+        </div>
+        <div class="frame">
+          <h3 class="h2">День 2 — «Эффективность»</h3>
+          <h4 class="h3">Как доводить дела до конца</h4>
+          <ul class="checks" style="margin-top:1.4cqw">
+            <li>Решение принимается за 8 минут и ждет 11 дней</li>
+            <li>Берем в работу 80%, доводим до конца 65%</li>
+            <li>Портфель из 120 проектов: как решить, что не делать</li>
+          </ul>
+          <p class="body muted" style="margin-top:1.4cqw">и другие темы трека</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4b — Спикеры конференции -->
+    <section class="slide" id="s4b">
+      <div class="s-head">
+        <h2 class="s-title">Спикеры конференции</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body" style="display:flex; flex-direction:column">
+        <div class="spk-grid">
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/letunov.jpg" alt="Илья Летунов" />
+            <div>
+              <p class="nm">Илья Летунов</p>
+              <p class="co">manaraga.ai</p>
+              <p class="tp">Честно про AI: что работает, а что остается пилотом</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/ustinov.jpg" alt="Сева Устинов" />
+            <div>
+              <p class="nm">Сева Устинов</p>
+              <p class="co">Plurio.AI</p>
+              <p class="tp">Агенты и вайбкодинг в управлении</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/orlov-pankratov.jpg" alt="Александр Орлов и Слава Панкратов" />
+            <div>
+              <p class="nm">Орлов и Панкратов</p>
+              <p class="co">Стратоплан</p>
+              <p class="tp">Пересборка среднего менеджмента под ИИ</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/levina.jpg" alt="Ильяна Левина" />
+            <div>
+              <p class="nm">Ильяна Левина</p>
+              <p class="co">METTA</p>
+              <p class="tp">Как внедряем ИИ-культуру в международной tech health компании</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/klimenko.jpg" alt="Александра Клименко" />
+            <div>
+              <p class="nm">Александра Клименко</p>
+              <p class="co">Soft Skills Lab</p>
+              <p class="tp">Навыки руководителя в работе с сопротивлением</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/alferov.jpg" alt="Павел Алферов" />
+            <div>
+              <p class="nm">Павел Алферов</p>
+              <p class="co">Школа управления Сколково</p>
+              <p class="tp">Управление в условиях ограничений</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/korsun.jpg" alt="Алексей Корсун" />
+            <div>
+              <p class="nm">Алексей Корсун</p>
+              <p class="co">Т-Банк, Авиасейлс, SemRush</p>
+              <p class="tp">Где теряется время: все заняты, а сроки горят</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/praht.jpg" alt="Илья Прахт" />
+            <div>
+              <p class="nm">Илья Прахт</p>
+              <p class="co">CTO-консультант, Стратоплан</p>
+              <p class="tp">Полторы ставки директора на созвоны</p>
+            </div>
+          </div>
+          <div class="frame spk">
+            <img src="kaiten-conf-2026-assets/speakers/zamesin.jpg" alt="Иван Замесин" />
+            <div>
+              <p class="nm">Иван Замесин</p>
+              <p class="co">Advanced JTBD, «Мета»</p>
+              <p class="tp">Что делать, когда падает выручка</p>
+            </div>
+          </div>
+        </div>
+        <p class="spk-more"><b>Состав расширяется</b> — новых спикеров анонсируем ближе к событию, среди них эксперты Авито</p>
+      </div>
+    </section>
+
+    <!-- 5 — Состав участников -->
+    <section class="slide" id="s5">
+      <div class="s-head">
+        <h2 class="s-title">Состав участников</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body">
+        <p class="body muted" style="margin:0 0 1.6cqw; max-width:64cqw">Кто приходит на конференцию — руководители, которые принимают решения о процессах и инструментах в своих командах</p>
+        <div class="cols-3">
+          <div class="stat-card"><div class="stat-value">45%</div><div class="stat-label">ИТ-компании и digital-продукты</div><p class="stat-sub">СТО, тимлиды, продакты, Agile-коучи</p></div>
+          <div class="stat-card"><div class="stat-value">21%</div><div class="stat-label">банки, страхование, финтех</div><p class="stat-sub">IT-директора, Agile-коучи крупных банков</p></div>
+          <div class="stat-card"><div class="stat-value">34%</div><div class="stat-label">производство, ритейл, строительство</div><p class="stat-sub">CEO, операционные директора, PMO</p></div>
+        </div>
+        <div class="banner" style="margin-top:var(--gap)">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 20v-2a4 4 0 0 0-3-3.87"/></svg></div>
+          <p>Размер команд: <span style="font-weight:600">до 50 сотрудников — около 70%</span>, 50–500 — около 20%, 500+ — примерно 10%</p>
+        </div>
+        <div class="banner" style="margin-top:1.4cqw">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <p>Кто в зале: <span style="font-weight:600">CTO и руководители разработки</span>, PMO, продуктовые и операционные директора, Agile-коучи</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 — Что вы получите как инфопартнер -->
+    <section class="slide" id="s6">
+      <div class="s-head">
+        <h2 class="s-title">Что вы получите как инфопартнер</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body">
+        <div class="cols-4">
+          <div class="frame">
+            <div class="grad perk-num">250К+</div>
+            <div class="perk-num-label">подписчиков в базе рассылки</div>
+            <h3 class="h3" style="margin-top:1.6cqw">Упоминание в рассылке</h3>
+            <p class="body muted" style="margin-top:.8cqw">Блок инфопартнеров во все анонсы конференции</p>
+          </div>
+          <div class="frame">
+            <div class="grad perk-num">8500+</div>
+            <div class="perk-num-label">подписчиков в соцсетях Кайтен</div>
+            <h3 class="h3" style="margin-top:1.6cqw">Посты в соцсетях</h3>
+            <p class="body muted" style="margin-top:.8cqw">Отдельный пост инфопартнера в наших каналах</p>
+          </div>
+          <div class="frame">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--action-primary)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:3.2cqw;height:3.2cqw"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>
+            <h3 class="h3" style="margin-top:1.6cqw">Лого на лендинге</h3>
+            <p class="body muted" style="margin-top:.8cqw">Ваш логотип на странице конференции с активной ссылкой на ваш ресурс</p>
+          </div>
+          <div class="frame is-accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:3.2cqw;height:3.2cqw"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            <h3 class="h3" style="margin-top:1.6cqw">Лого на материалах</h3>
+            <p class="body" style="margin-top:.8cqw">Ваш логотип во все пост-рассылки и материалы конференции</p>
+          </div>
+        </div>
+        <div class="banner" style="margin-top:var(--gap)">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <p>Конференция <span style="font-weight:600">полностью бесплатна</span> для участников — это обеспечивает максимальный охват и вовлеченность целевой аудитории</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 — Инфопартнеры конференции -->
+    <section class="slide" id="s7">
+      <div class="s-head">
+        <h2 class="s-title">Инфопартнеры конференции</h2>
+        <img class="mark" src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" />
+      </div>
+      <div class="s-body">
+        <div class="frame is-center" style="flex-direction:column; gap:2.2cqw; padding:2.6cqw">
+          <p class="h3" style="margin:0; text-align:center; color:var(--text-primary); font-weight:400">В прошлый раз, в апреле, конференцию поддержали профильные агентства, медиа и сообщества</p>
+          <div class="logos">
+            <img src="kaiten-conf-2026-assets/nimax.svg" alt="Nimax" />
+            <img src="kaiten-conf-2026-assets/scrumtrek.svg" alt="ScrumTrek" />
+            <img src="kaiten-conf-2026-assets/neogenda.png" alt="Neogenda" />
+            <img src="kaiten-conf-2026-assets/osmysle.svg" alt="о'смысле" />
+            <img src="kaiten-conf-2026-assets/sissoft.png" alt="СисСофт" />
+            <img src="kaiten-conf-2026-assets/headpromo.png" alt="Head Promo" />
+            <img src="kaiten-conf-2026-assets/lideryizmeneniy.png" alt="Лидеры изменений" />
+            <img src="kaiten-conf-2026-assets/kartagipotez.svg" alt="Карта гипотез" />
+            <img src="kaiten-conf-2026-assets/axoft.png" alt="AXOFT" />
+            <img src="kaiten-conf-2026-assets/custodia.svg" alt="Custodia-Silentis" />
+            <img src="kaiten-conf-2026-assets/coactors.svg" alt="Coactors" />
+            <img src="kaiten-conf-2026-assets/rubytech.svg" alt="Rubytech" />
+          </div>
+          <div class="tg-list">
+            <span>Телеграм-каналы: «Продуктовочная» · «Fresh Product Manager» · «Про руководство разработкой и продуктом»</span>
+          </div>
+          <p class="h3" style="margin-top:1cqw"><span class="accent">Тут может быть ваш логотип</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 — Будем рады сотрудничеству -->
+    <section class="slide cover" id="s8">
+      <img src="kaiten-conf-2026-assets/neon-bg.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.7; z-index:0" />
+      <div style="position:absolute; inset:0; z-index:0; background:linear-gradient(90deg, #190f29 20%, rgba(25,15,41,.72) 46%, rgba(25,15,41,0) 72%)"></div>
+      <div class="cover-logo"><img src="../assets/kaiten-logo-on-dark.svg" alt="Кайтен" /></div>
+      <div class="cover-text">
+        <h1>Будем рады<br /><span class="grad">сотрудничеству</span></h1>
+        <p class="sub">Заявки на партнерство принимаются до 19 сентября 2026. Количество партнеров ограничено.</p>
+        <p class="meta">Написать по партнерству: тг @uizzly · marketing@kaiten.ru</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="nav-fallback" aria-label="Слайды">
+  <div class="nav-row" data-for="s1"><a class="is-off">←</a><span class="counter">1 / 9</span><a href="#s2">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1">←</a><span class="counter">2 / 9</span><a href="#s3">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2">←</a><span class="counter">3 / 9</span><a href="#s4">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3">←</a><span class="counter">4 / 9</span><a href="#s4b">→</a></div>
+  <div class="nav-row" data-for="s4b"><a href="#s4">←</a><span class="counter">5 / 9</span><a href="#s5">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4b">←</a><span class="counter">6 / 9</span><a href="#s6">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5">←</a><span class="counter">7 / 9</span><a href="#s7">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6">←</a><span class="counter">8 / 9</span><a href="#s8">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7">←</a><span class="counter">9 / 9</span><a class="is-off">→</a></div>
+</nav>
+
+<script src="../kaiten-slides.js"></script>
+</body>
+</html>

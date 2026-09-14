@@ -1,4 +1,5 @@
 import { ButtonLink } from '../primitives/ButtonLink';
+import { Icon } from '../primitives/Icon';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
 import { MockVisual, type MockVariant } from './mocks';
@@ -8,6 +9,7 @@ import {
   type HsiLane,
   type HsiAnimatedCard,
 } from './HeroScreenInterface';
+import { HeroScreenVideo } from './HeroScreenVideo';
 import { RegistrationForm } from './RegistrationForm';
 import { ChaosOrderMotif } from './ChaosOrderMotif';
 import { ThreadsMotif } from './ThreadsMotif';
@@ -60,7 +62,7 @@ export interface AssetRefProps {
   src?: string;
   alt?: string;
   /** Built-in detailed mocks (see ./mocks). When set, ignores src. */
-  variant?: MockVariant | 'generic' | 'hero-screen-interface';
+  variant?: MockVariant | 'generic' | 'hero-screen-interface' | 'hero-screen-video';
   /**
    * Reference to an auto-generated unique SVG illustration (P8 phase).
    * When set, renderer uses it instead of variant. Currently passed through
@@ -108,6 +110,8 @@ export interface HeroSectionProps {
    * Рендерятся только в layout 'side'.
    */
   bullets?: string[];
+  /** Строка доверия под видео: пункты с фиолетовыми иконками через разделители. */
+  trust?: { icon?: string; label: string }[];
   /**
    * Карточка формы регистрации в правой колонке — вместо `visual`. Когда задана,
    * кнопки CTA не рендерятся: submit формы и есть целевое действие, а его подпись
@@ -173,6 +177,7 @@ export function HeroSection({
   visualPosition = 'side',
   board,
   bullets,
+  trust,
   form,
   speaker,
   flush,
@@ -198,6 +203,45 @@ export function HeroSection({
         // строка доверия из ТЗ — под доской, разделители между пунктами
         trustLine={bullets}
         ariaLabel="Первый экран Kaiten"
+      />
+    );
+  }
+
+  // Вариант `hero-screen-video` — весь первый экран рендерит `HeroScreenVideo`:
+  // центрированная колонка (бейдж → H1 → подзаголовок → CTA) и видео-блок 16/9
+  // с фирменной кнопкой play. Пока ролик не передан (`visual.src`), показывается
+  // плейсхолдер с кнопкой — валидный вид до передачи ассета.
+  // `bullets` идут отдельными строками в конец подзаголовка (а не в trust-строку
+  // под видео): так короткая приписка вроде «300 + готовых сценариев» читается
+  // вместе с обещанием H1. Trust-строка при этом не рендерится (`trustItems={[]}`).
+  // Правило: `hero-screen-video`.
+  if (visual?.variant === 'hero-screen-video') {
+    return (
+      <HeroScreenVideo
+        badge={eyebrow}
+        title={accentWord ? highlightAccent(title, accentWord, accentPill) : title}
+        subtitle={
+          bullets?.length ? (
+            <>
+              {subtitle}
+              {bullets.map((line) => (
+                <span key={line} className="hsv-sub-line">
+                  {line}
+                </span>
+              ))}
+            </>
+          ) : (
+            subtitle
+          )
+        }
+        buttonLabel={primaryCta.label}
+        buttonHref={primaryCta.href}
+        videoSrc={visual.src}
+        placeholderLabel={visual.alt ?? 'Видео о продукте'}
+        trustItems={(trust ?? []).map((t) => ({
+          icon: t.icon ? <Icon name={t.icon} className="h-full w-full" strokeWidth={2} /> : undefined,
+          label: t.label,
+        }))}
       />
     );
   }

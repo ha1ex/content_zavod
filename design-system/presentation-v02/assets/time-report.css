@@ -1,0 +1,39 @@
+/* Отчет по учету времени: таблица задач со сроками и списанным временем.
+   Правила заскоуплены под .trep, размеры в cqw от ширины слайда. */
+
+.trep {
+  --tr-ink: #2d2d2d;
+  --tr-ink-2: #5b5b5f;
+  --tr-ink-3: #9a9a9e;
+  --tr-line: #ececef;
+  font-family: "Roboto", system-ui, sans-serif;
+  color: var(--tr-ink);
+  background: #fff;
+  border: .052cqw solid var(--tr-line);
+  border-radius: .63cqw;
+  overflow: hidden;
+  font-size: .63cqw;
+  line-height: 1.35;
+}
+.trep * { box-sizing: border-box; margin: 0; padding: 0; }
+
+.trep table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.trep th, .trep td {
+  text-align: left; padding: .52cqw .68cqw;
+  border-bottom: .052cqw solid var(--tr-line);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.trep th { font-weight: 500; color: var(--tr-ink); }
+.trep td { color: var(--tr-ink-2); }
+.trep tbody tr.is-on td { background: #f7f7f8; }
+.trep tbody tr:last-child td { border-bottom: 0; }
+
+/* Колонка «Доска» — цветная точка доски и ее название */
+.trep .brd { display: inline-flex; align-items: center; gap: .36cqw; min-width: 0; }
+.trep .brd i { width: .63cqw; height: .63cqw; border-radius: 50%; flex: none; }
+.trep .brd i.is-violet { background: #b79ae0; }
+.trep .brd i.is-orange { background: #f0a92c; }
+.trep .brd span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.trep .sum { text-align: right; padding: .52cqw .68cqw; font-weight: 500; }
+.trep .total { display: flex; justify-content: flex-end; padding: .63cqw .68cqw; font-weight: 500; }

@@ -20,6 +20,7 @@ import {
   AccordionFeatureSection,
   ScenarioWalkthroughSection,
   IndustryPickerSection,
+  PartnerDirectory,
   ComparisonTable,
   TimelineRoadmap,
   BentoGrid,
@@ -55,6 +56,7 @@ function RenderSection({
 }: {
   section: Section;
   expandTabs?: boolean;
+  /** Тема страницы — влияет только на chrome-компоненты (шапка). */
   theme?: 'light' | 'dark';
 }) {
   switch (section.component) {
@@ -140,6 +142,8 @@ function RenderSection({
       return <ScenarioWalkthroughSection {...section.props} />;
     case 'IndustryPickerSection':
       return <IndustryPickerSection {...section.props} />;
+    case 'PartnerDirectory':
+      return <PartnerDirectory {...section.props} />;
     case 'ComparisonTable':
       return <ComparisonTable {...section.props} />;
     case 'TimelineRoadmap':

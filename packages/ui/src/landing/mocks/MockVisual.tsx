@@ -1,4 +1,6 @@
 import { ScaleToFit } from './ScaleToFit';
+import OnPremise from './OnPremise';
+import InterfaceShowcase from './InterfaceShowcase';
 import {
   AbTestResultsMock,
   AnalyticsKpiMock,
@@ -16,6 +18,7 @@ import {
   EmailSequenceMock,
   HiringPipelineMock,
   IntegrationsConsoleMock,
+  IntegrationsHubMock,
   InventoryGridMock,
   InvoiceStatusMock,
   KnowledgeBaseMock,
@@ -66,6 +69,13 @@ import {
   RetailDocMiniMock,
   RetailReportMiniMock,
   GanttChartMock,
+  ModulePlatformKaiten,
+  WindowRuleTriggerMock,
+  WindowRuleActionMock,
+  AutomationRulesListMock,
+  WindowDeadlineMock,
+  WindowChecklistDoneMock,
+  WindowCardFlowMock,
   WindowLinksMock,
   WindowResourceMock,
   WindowReportsMock,
@@ -80,6 +90,18 @@ import {
   CliAiModelsMock,
   CliSafeModeMock,
   CliInstallMock,
+  HelpCenterPortalMock,
+  HelpCenterSectionsMock,
+  HelpCenterRequestFormMock,
+  HelpCenterSearchMock,
+  HelpCenterSuggestedArticlesMock,
+  HelpCenterRequestCardMock,
+  HelpCenterRequestsMock,
+  HelpCenterBrandingMock,
+  HelpCenterDomainMock,
+  HelpCenterEmailMock,
+  HelpCenterTemplateMock,
+  HelpCenterSetupMock,
 } from '.';
 
 /**
@@ -95,6 +117,7 @@ export type MockVariant =
   | 'mcp-agent-board-animated'
   | 'analytics-kpi'
   | 'integrations-console'
+  | 'integrations-hub'
   | 'modules-matrix'
   // Support
   | 'support-board'
@@ -181,6 +204,14 @@ export type MockVariant =
   | 'retail-report-bottlenecks'
   | 'retail-report-ai'
   | 'gantt-chart'
+  // Автоматизации (модуль Kaiten): конструктор правила «если — то» и сценарии
+  | 'window-rule-trigger'
+  | 'window-rule-action'
+  | 'automation-rules-list'
+  | 'window-deadline'
+  | 'window-checklist-done'
+  | 'window-card-flow'
+  | 'platform-kaiten'
   // Window-моки планирования (эталон — лендинг сравнения с MS Project)
   | 'window-links'
   | 'window-resource'
@@ -196,9 +227,40 @@ export type MockVariant =
   | 'cli-migrate'
   | 'cli-ai-models'
   | 'cli-safe-mode'
-  | 'cli-install';
+  | 'cli-install'
+  // Справочный центр (help-center): портал компании с материалами и обращениями
+  | 'help-center-portal'
+  | 'help-center-sections'
+  | 'help-center-request-form'
+  | 'help-center-search'
+  | 'help-center-suggested-articles'
+  | 'help-center-request-card'
+  | 'help-center-requests'
+  | 'help-center-branding'
+  | 'help-center-domain'
+  | 'help-center-email'
+  | 'help-center-template'
+  | 'help-center-setup'
+  | 'help-center-portal-compact'
+  // On-premise
+  | 'on-premise'
+  | 'interface-showcase';
 
-export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
+/**
+ * Обёртка-хук для темы. `display:contents` не создаёт бокс — раскладка мока не
+ * меняется, — но даёт селектор `[data-mock]`, по которому тема может подкрутить
+ * переменные внутри продуктовых моков. Тёмная тема этим пользуется: акцентный
+ * текст в мокапах идёт кеглем 11–12px, и чистый бренд на тёмном там не читается.
+ */
+export function MockVisual(props: { variant: MockVariant | undefined }) {
+  return (
+    <div data-mock className="contents">
+      <MockVisualSwitch {...props} />
+    </div>
+  );
+}
+
+function MockVisualSwitch({ variant }: { variant: MockVariant | undefined }) {
   switch (variant) {
     case 'support-board':
       return <SupportBoardMock />;
@@ -218,6 +280,15 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <AnalyticsKpiMock />;
     case 'integrations-console':
       return <IntegrationsConsoleMock />;
+    // Карта интеграций фикс. ширины 1440px — в узких слотах масштабируется.
+    case 'integrations-hub':
+      return (
+        <div className="w-full overflow-hidden">
+          <ScaleToFit designWidth={1440}>
+            <IntegrationsHubMock />
+          </ScaleToFit>
+        </div>
+      );
     case 'modules-matrix':
       return <ModulesMatrixMock />;
     case 'sales-funnel':
@@ -378,6 +449,26 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
           </ScaleToFit>
         </div>
       );
+    case 'window-rule-trigger':
+      return <WindowRuleTriggerMock />;
+    case 'window-rule-action':
+      return <WindowRuleActionMock />;
+    case 'automation-rules-list':
+      return <AutomationRulesListMock />;
+    case 'window-deadline':
+      return <WindowDeadlineMock />;
+    case 'window-checklist-done':
+      return <WindowChecklistDoneMock />;
+    case 'window-card-flow':
+      return <WindowCardFlowMock />;
+    case 'platform-kaiten':
+      return (
+        <div className="w-full overflow-hidden">
+          <ScaleToFit designWidth={2000}>
+            <ModulePlatformKaiten />
+          </ScaleToFit>
+        </div>
+      );
     case 'window-links':
       return <WindowLinksMock />;
     case 'window-resource':
@@ -406,6 +497,36 @@ export function MockVisual({ variant }: { variant: MockVariant | undefined }) {
       return <CliSafeModeMock />;
     case 'cli-install':
       return <CliInstallMock />;
+    case 'help-center-portal':
+      return <HelpCenterPortalMock />;
+    case 'help-center-sections':
+      return <HelpCenterSectionsMock />;
+    case 'help-center-request-form':
+      return <HelpCenterRequestFormMock />;
+    case 'help-center-search':
+      return <HelpCenterSearchMock />;
+    case 'help-center-suggested-articles':
+      return <HelpCenterSuggestedArticlesMock />;
+    case 'help-center-request-card':
+      return <HelpCenterRequestCardMock />;
+    case 'help-center-requests':
+      return <HelpCenterRequestsMock />;
+    case 'help-center-branding':
+      return <HelpCenterBrandingMock />;
+    case 'help-center-domain':
+      return <HelpCenterDomainMock />;
+    case 'help-center-email':
+      return <HelpCenterEmailMock />;
+    case 'help-center-template':
+      return <HelpCenterTemplateMock />;
+    case 'help-center-setup':
+      return <HelpCenterSetupMock />;
+    case 'help-center-portal-compact':
+      return <HelpCenterPortalMock variant="compact" />;
+    case 'on-premise':
+      return <OnPremise />;
+    case 'interface-showcase':
+      return <InterfaceShowcase />;
     default:
       return null;
   }

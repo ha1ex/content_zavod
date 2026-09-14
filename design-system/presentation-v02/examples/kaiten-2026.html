@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="ru" data-theme="light" data-themes="light:Light dark:Dark comparison:Сравнение">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Кайтен 2026 — экосистема в движении</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../kaiten-slides.css" />
+<link rel="stylesheet" href="../theme-light.css" />
+<link rel="stylesheet" href="../theme-dark.css" />
+<link rel="stylesheet" href="../theme-comparison.css" />
+<style>
+  /* --- Локальные добавки этого дека. Все опирается на токены тем,
+         поэтому Light / Dark / Сравнение переключаются без правок. --- */
+
+  /* Крупное число вне карточки-цифры: цель, доля, срок. */
+  .big-num { font-size:3.75cqw; line-height:1.05; font-weight:600; color:var(--text-accent); }
+  .frame.is-accent .big-num { color:var(--frame-accent-fg); }
+  .big-num.is-md { font-size:2.5cqw; }
+
+  /* Бейдж со статусом. Цвет берется из пар 100/12 и означает ровно то же,
+     что в лентах: оранжевый — в работе, зеленый — реализовано. */
+  .badge.is-warning { background:var(--orange-12); color:var(--orange-100); }
+  .badge.is-success { background:var(--green-12);  color:var(--green-100); }
+  .badge.is-info    { background:var(--blue-12);   color:var(--blue-100); }
+
+  /* Схема процесса: узлы в ряд, между ними подпись перехода. */
+  .flow-nodes { display:flex; align-items:center; gap:.7cqw; }
+  .flow-nodes .node { flex:1; min-width:0; }
+  .flow-nodes .link-label { flex:none; }
+
+  /* Стена логотипов клиентов: каждый логотип лежит на фрейме. */
+  .client-wall { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2cqw; }
+  .client-wall .frame {
+    padding:1cqw; display:flex; align-items:center; justify-content:center;
+    height:5.4cqw;
+  }
+  .client-wall img { max-width:100%; max-height:100%; width:auto; display:block; }
+  /* Логотипы отгружены серыми — на темном полотне выбеливаем. */
+  [data-theme="dark"] .client-wall img { filter:brightness(0) invert(1); opacity:.72; }
+
+  /* Заголовок группы внутри колонки: иконочная плашка и текст в строку. */
+  .group-head { display:flex; align-items:center; gap:1cqw; margin:0 0 1.1cqw; }
+  .group-head .tile {
+    width:3.33cqw; height:3.33cqw; border-radius:var(--radius-tile); flex:none;
+    background:var(--tile-bg); color:var(--tile-fg);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .group-head .tile svg { width:1.7cqw; height:1.7cqw; }
+  .group-head h4 { font-size:1.25cqw; line-height:1.333; font-weight:600; margin:0; }
+
+  /* Карточки квартальных планов: заголовок сверху, описание под ним. */
+  .plan-card { display:flex; flex-direction:column; justify-content:center; gap:.8cqw; }
+  .plan-card .badges { margin-bottom:.2cqw; }
+  .plan-card .h3 { margin:0; }
+  .plan-card .body { margin:0; }
+
+  /* Список модулей: узел на строку, без внутренней сетки. */
+  .module-list { display:grid; gap:.8cqw; }
+
+  /* Сетка из семи агентов и восьмой плашки-вывода: восемь модулей 429×418. */
+  .agent-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:1fr;
+    gap:var(--gap);
+  }
+
+  /* Модуль сетки высокий, а текста в нем обычно меньше, чем 418px.
+     Чтобы пустота не собиралась внизу фрейма, содержимое либо
+     распределяется по высоте (.is-spread + .spread на списке),
+     либо центрируется (.is-mid). */
+  .frame.is-spread,
+  .col-spread { display:flex; flex-direction:column; }
+  .frame.is-spread > .spread,
+  .col-spread > .spread { flex:1; align-content:space-between; }
+  .frame.is-mid { display:flex; flex-direction:column; justify-content:center; }
+  .push-bottom { margin-top:auto; }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- ================================================== 1 — обложка === -->
+    <section class="slide cover is-active" id="s1">
+      <div class="cover-logo">
+        <img src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="cover-text">
+        <h1>Экосистема в движении</h1>
+        <p class="sub">Стратегия, эволюция и масштаб</p>
+        <p class="meta">Кайтен · план развития на 2026 год</p>
+      </div>
+
+      <div class="cover-shot">
+        <img src="../assets/kaiten-board.png" alt="Интерфейс Кайтена" />
+      </div>
+    </section>
+
+    <!-- ======================================= 2 — рыночный момент === -->
+    <section class="slide" id="s2">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Рыночный момент:</span> кому мы помогаем расти</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div class="frame" style="display:flex; flex-direction:column;">
+          <h3 class="h2">Доли отраслей в клиентской базе</h3>
+          <div class="bars c-violet" style="flex:1; min-height:0; max-height:24cqw; margin-top:auto; margin-bottom:auto;">
+            <div class="bar-col">
+              <div class="bar" style="--h:100%">15,8%</div>
+              <div class="bar-label">ИТ: собственная<br />разработка</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar" style="--h:77%">12,1%</div>
+              <div class="bar-label">Производство</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar" style="--h:46%">7,3%</div>
+              <div class="bar-label">ИТ: интеграторы<br />и консалтинг</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-rows:1fr auto; gap:var(--gap); min-height:0;">
+          <div class="frame is-accent is-center">
+            <div>
+              <div class="big-num" style="font-size:5cqw">ТОП-3</div>
+              <p class="h2" style="margin:1.6cqw 0 0">инструментов для управления задачами<br />и проектами в России</p>
+              <p class="body" style="margin-top:1.4cqw">Ядро базы — ИТ и производство: команды, которым нужен<br />управляемый процесс, а не просто список задач</p>
+            </div>
+          </div>
+          <div class="banner">
+            <div class="tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><rect x="4" y="10" width="4" height="8"/><rect x="10" y="6" width="4" height="12"/><rect x="16" y="13" width="4" height="5"/></svg>
+            </div>
+            <p>Оборудование, ритейл и финансы — остальная доля базы</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= 3 — макроэкономика === -->
+    <section class="slide" id="s3">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Макроэкономика:</span> силы, которые формируют наш рост</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2" style="align-items:center">
+        <div>
+          <h3 class="h2" style="color:var(--green-100)">Окно возможностей</h3>
+          <div class="module-list" style="margin-top:1.6cqw">
+            <div class="node c-green">
+              <p class="node-title">Импортозамещение</p>
+              <p class="node-text">56% компаний ускоряют переход на российское программное обеспечение</p>
+            </div>
+            <div class="node c-green">
+              <p class="node-title">Сдвиг парадигмы платформ</p>
+              <p class="node-text">Рынок уходит от узкоспециализированных сервисов к единой операционной системе компании (WorkOS)</p>
+            </div>
+            <div class="node c-green">
+              <p class="node-title">Спрос на ИИ</p>
+              <p class="node-text">Компании ищут встроенных ИИ-помощников внутри рабочих инструментов, а не отдельно от них</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="h2" style="color:var(--red-100)">Угрозы и барьеры</h3>
+          <div class="module-list" style="margin-top:1.6cqw">
+            <div class="node c-red">
+              <p class="node-title">Давление конкурентов</p>
+              <p class="node-text">Битрикс24 продвигает модель «все в одном» и активно занимает нишу</p>
+            </div>
+            <div class="node c-red">
+              <p class="node-title">Инерция рынка</p>
+              <p class="node-text">Команды привыкли к таблицам и мессенджерам, переход требует усилий</p>
+            </div>
+            <div class="node c-red">
+              <p class="node-title">Давление на ИТ-бюджеты</p>
+              <p class="node-text">Жесткая денежно-кредитная политика заставляет компании экономить</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ 4 — что такое Кайтен сегодня === -->
+    <section class="slide" id="s4">
+      <div class="s-head">
+        <h2 class="s-title">Что такое Кайтен на начало 2025 года</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Один сервис вместо десятка других</h3>
+          <p class="body muted">Модульная архитектура: компания подключает только те модули, которыми пользуется, и платит за них.</p>
+
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg></div>
+              <p class="tile-title">Таск-менеджер</p>
+              <p class="tile-text">Канбан, скрам, автоматизации</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="14" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="11" y2="17"/></svg></div>
+              <p class="tile-title">Проекты</p>
+              <p class="tile-text">Ресурсное планирование, таймлайны</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg></div>
+              <p class="tile-title">База знаний</p>
+              <p class="tile-text">Документы и корпоративная вики</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.6"/></svg></div>
+              <p class="tile-title">Служба поддержки</p>
+              <p class="tile-text">Заявки, соглашение об уровне сервиса (SLA)</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center;">
+          <img src="../assets/kaiten-board.png" alt="Доска задач в Кайтене" style="width:100%; height:auto; display:block;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ 5 — таск-менеджер === -->
+    <section class="slide" id="s5">
+      <div class="s-head">
+        <h2 class="s-title">Таск-менеджер</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <div class="group-head">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg></div>
+            <h4>Канбан- и скрам-доски</h4>
+          </div>
+          <ul class="checks is-soft">
+            <li>Готовые шаблоны досок под канбан-метод и скрам-фреймворк</li>
+            <li>Гибкая настройка колонок и дорожек</li>
+            <li>Несколько досок на одном пространстве</li>
+            <li>Иерархия задач: от целей до подзадач</li>
+          </ul>
+
+          <div class="group-head" style="margin-top:2.4cqw">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div>
+            <h4>Автоматизации</h4>
+          </div>
+          <ul class="checks is-soft">
+            <li>Правила вида «если условие — то действие»</li>
+            <li>Карточка не уйдет дальше без заполненного чек-листа</li>
+          </ul>
+
+          <div class="group-head" style="margin-top:2.4cqw">
+            <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/></svg></div>
+            <h4>Учет времени и отчеты</h4>
+          </div>
+          <ul class="checks is-soft">
+            <li>Учет времени по задачам и командам</li>
+            <li>Канбан- и скрам-отчеты</li>
+            <li>Анализ блокировок и узких мест</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; align-items:center;">
+          <img src="../assets/kaiten-board.png" alt="Доска задач в Кайтене" style="width:100%; height:auto; display:block;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== 6 — ядро платформы === -->
+    <section class="slide" id="s6">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Ядро платформы:</span> управление проектами и процессами</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div>
+          <h3 class="h2">Зрелое ядро, на котором работают 100 000+ компаний</h3>
+          <p class="body muted">Планирование, доски, процессы и иерархия задач собраны в одном контуре — без стыковки нескольких сервисов.</p>
+
+          <div class="tiles" style="margin-top:2.4cqw">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="14" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="11" y2="17"/></svg></div>
+              <p class="tile-title">Ресурсное планирование</p>
+              <p class="tile-text">и диаграммы Ганта</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg></div>
+              <p class="tile-title">Гибкая настройка досок</p>
+              <p class="tile-text">канбан-метод и скрам-фреймворк</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div>
+              <p class="tile-title">Автоматизация</p>
+              <p class="tile-text">визуальный конструктор процессов и контроль переходов</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 4v11a2 2 0 0 0 2 2h12"/><line x1="10" y1="9" x2="19" y2="9"/><line x1="14" y1="21" x2="19" y2="21"/></svg></div>
+              <p class="tile-title">Иерархия задач</p>
+              <p class="tile-text">от целей бизнеса до подзадач</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="frame is-mid">
+          <h3 class="h2">Выбор крупных компаний</h3>
+          <div class="client-wall" style="margin-top:1.8cqw">
+            <div class="frame"><img src="../assets/clients/x5tech.png" alt="X5 Tech" /></div>
+            <div class="frame"><img src="../assets/clients/alfabank.png" alt="Альфа-Банк" /></div>
+            <div class="frame"><img src="../assets/clients/nornikel.png" alt="Норникель" /></div>
+            <div class="frame"><img src="../assets/clients/s7.png" alt="S7 Airlines" /></div>
+            <div class="frame"><img src="../assets/clients/atol.png" alt="АТОЛ" /></div>
+            <div class="frame"><img src="../assets/clients/tele2.png" alt="Tele2" /></div>
+          </div>
+          <p class="body muted" style="margin-top:1.8cqw">Кайтен в реестре отечественного ПО, данные хранятся в России, доступна установка на серверы компании</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== 7 — база знаний === -->
+    <section class="slide" id="s7">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">База знаний:</span> корпоративный мозг в едином месте</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div style="display:grid; grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0;">
+          <div class="frame is-mid">
+            <div class="group-head">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a3 3 0 0 1 0 5.6"/><path d="M17.5 19a5.5 5.5 0 0 0-2.2-4.4"/></svg></div>
+              <h4>Совместная работа</h4>
+            </div>
+            <ul class="checks is-soft">
+              <li>Редактирование в реальном времени</li>
+              <li>Комментарии прямо внутри документов</li>
+              <li>Упоминание коллег с мгновенными уведомлениями</li>
+            </ul>
+          </div>
+
+          <div class="frame is-mid">
+            <div class="group-head">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 8.5 19.5H4.5v-4z"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg></div>
+              <h4>Гибкое форматирование</h4>
+            </div>
+            <ul class="checks is-soft">
+              <li>Колонки и раскрывающиеся блоки</li>
+              <li>Цветовое кодирование</li>
+              <li>Вложенные папки и публичная база знаний</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0;">
+          <div class="frame is-accent is-center">
+            <div>
+              <p class="h2" style="margin:0">Документы и задачи больше не живут в разных окнах</p>
+              <p class="body" style="margin-top:1.6cqw">Контекст не теряется по дороге между сервисами</p>
+            </div>
+          </div>
+
+          <div class="frame is-mid">
+            <h3 class="h2">Что это меняет в работе</h3>
+            <ul class="checks is-soft" style="margin-top:1.4cqw">
+              <li>Регламент открывается прямо из карточки задачи</li>
+              <li>Задача заводится из документа в один клик</li>
+              <li>Публичная база знаний для клиентов и партнеров</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================== 8 — служба поддержки === -->
+    <section class="slide" id="s8">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Служба поддержки:</span> заявки и качество сервиса</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-rows:auto 1fr; gap:var(--gap); min-height:0;">
+        <div>
+          <h3 class="h3">Как идет заявка</h3>
+          <div class="chevrons">
+            <div class="chevron is-strong">Заказчики</div>
+            <div class="chevron">Портал</div>
+            <div class="chevron">Карточки</div>
+            <div class="chevron">Решение</div>
+            <div class="chevron is-strong">Обратная связь</div>
+          </div>
+        </div>
+
+        <div class="cols-2" style="min-height:0">
+          <div class="frame is-mid">
+            <h3 class="h2">Возможности</h3>
+            <ul class="checks is-soft" style="margin-top:1.6cqw">
+              <li>Портал заявок: сайт, почта, Telegram</li>
+              <li>Все данные заявки лежат в карточке</li>
+              <li>Соглашение об уровне сервиса (SLA) и контроль сроков</li>
+              <li>Автоматические уведомления заказчику</li>
+              <li>Оценка работы поддержки после закрытия</li>
+            </ul>
+          </div>
+          <div style="display:flex; align-items:center;">
+            <img src="../assets/kaiten-board.png" alt="Доска техподдержки в Кайтене" style="width:100%; height:auto; display:block;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= 9 — что сделано в 2025 === -->
+    <section class="slide" id="s9">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Что сделано в 2025:</span> трансформация в умную систему</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div style="display:grid; grid-template-rows:repeat(3,1fr); gap:var(--gap); min-height:0;">
+          <div class="stat-card">
+            <div class="stat-value">×1,5</div>
+            <div class="stat-label">увеличение скорости платформы</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">&gt;90</div>
+            <div class="stat-label">обновлений продукта за год</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">критических падений за последний год</div>
+          </div>
+        </div>
+
+        <div class="frame is-mid">
+          <h3 class="h2">Перестроен инфраструктурный фундамент</h3>
+          <p class="body muted">Таск-менеджер, база знаний, служба поддержки и проекты работают на общем ядре.</p>
+
+          <div class="tiles" style="margin-top:2.2cqw">
+            <div class="tile-item is-accent">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.9 9l5.6 1.9-5.6 1.9L12 18.4l-1.9-5.6L4.5 10.9 10.1 9z"/></svg></div>
+              <p class="tile-title">Запуск Кайтен ИИ</p>
+              <p class="tile-text">7 встроенных ИИ-агентов</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="7" height="6" rx="1.6"/><rect x="14" y="4" width="7" height="6" rx="1.6"/><rect x="14" y="14" width="7" height="6" rx="1.6"/><path d="M10 12h4M14 7h-2v10h2"/></svg></div>
+              <p class="tile-title">Workflow</p>
+              <p class="tile-text">визуальный конструктор бизнес-процессов</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg></div>
+              <p class="tile-title">Обновление документов</p>
+              <p class="tile-text">новый дизайн, колонки, совместное редактирование</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.6"/></svg></div>
+              <p class="tile-title">Модули на общем ядре</p>
+              <p class="tile-text">задачи, знания, заявки, проекты</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================ 10 — Workflow === -->
+    <section class="slide" id="s10">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Workflow:</span> рабочие процессы под контролем</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-rows:auto 1fr; gap:var(--gap); min-height:0;">
+        <div class="cols-2">
+          <div>
+            <h3 class="h2">Контроль процессов</h3>
+            <ul class="checks is-soft" style="margin-top:1.4cqw">
+              <li>Контроль переходов между статусами</li>
+              <li>Обязательные поля для перемещения карточек</li>
+              <li>Условия для смены статуса</li>
+              <li>Визуальный конструктор процессов</li>
+            </ul>
+          </div>
+
+          <div class="frame is-accent">
+            <h3 class="h2">Для кого</h3>
+            <p class="body">Команды с регламентированными процессами: согласования, документооборот, производство, поддержка.</p>
+            <p class="body" style="margin-top:1cqw">Процесс описан один раз — дальше система сама не пускает карточку дальше положенного.</p>
+          </div>
+        </div>
+
+        <div class="frame" style="display:flex; flex-direction:column; justify-content:center;">
+          <h4 class="h3">Пример: согласование макета</h4>
+          <div class="flow-nodes" style="margin-top:1.4cqw">
+            <div class="node c-violet">
+              <p class="node-title">Очередь</p>
+              <p class="node-text">Доска с задачами</p>
+            </div>
+            <span class="link-label">В работу</span>
+            <div class="node c-orange">
+              <p class="node-title">В работе</p>
+              <p class="node-text">Назначен ответственный</p>
+            </div>
+            <span class="link-label">На проверку</span>
+            <div class="node c-orange">
+              <p class="node-title">Согласование</p>
+              <p class="node-text">Обязательный чек-лист</p>
+            </div>
+            <span class="link-label">Готово</span>
+            <div class="node c-green">
+              <p class="node-title">Готово</p>
+              <p class="node-text">Задача уходит в дизайн</p>
+            </div>
+          </div>
+          <p class="body muted" style="margin-top:1.6cqw">Правки возвращают карточку в «Согласование»: без заполненного чек-листа переход дальше закрыт</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================= 11 — ИИ-агенты === -->
+    <section class="slide" id="s11">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">7 ИИ-агентов</span>, встроенных в каждый процесс</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body agent-grid">
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="12" rx="2.5"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg></div>
+          <p class="tile-title">Транскрибация встреч</p>
+          <p class="tile-text">задачи заводятся прямо из созвона</p>
+          </div>
+        </div>
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5 21 7v10l-6-3.5z"/></svg></div>
+          <p class="tile-title">Видеозапись экрана</p>
+          <p class="tile-text">заменяет часовые созвоны</p>
+          </div>
+        </div>
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 8.5 19.5H4.5v-4z"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg></div>
+          <p class="tile-title">ИИ-редактор в задачах</p>
+          <p class="tile-text">форматирует и уточняет описание</p>
+          </div>
+        </div>
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/></svg></div>
+          <p class="tile-title">Голосовые комментарии</p>
+          <p class="tile-text">расшифровка прямо в контексте задачи</p>
+          </div>
+        </div>
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7l5 5v13H6z"/><path d="M13 3v5h5"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+          <p class="tile-title">ИИ-редактор в документах</p>
+          <p class="tile-text">приводит текст к корпоративному стилю</p>
+          </div>
+        </div>
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div>
+          <p class="tile-title">Создание задач из браузера</p>
+          <p class="tile-text">без переключения окон</p>
+          </div>
+        </div>
+        <div class="frame is-mid">
+          <div class="tile-item">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><line x1="16" y1="16" x2="21" y2="21"/></svg></div>
+          <p class="tile-title">Deep Research</p>
+          <p class="tile-text">ответы по базе знаний за секунды</p>
+          </div>
+        </div>
+
+        <div class="frame is-accent is-center">
+          <p class="h3" style="margin:0">Агенты живут внутри процесса, а не в отдельном окне</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================== 12 — финансовая цель 2027 === -->
+    <section class="slide" id="s12">
+      <div class="s-head">
+        <h2 class="s-title">Стратегическая финансовая цель <span class="accent">2027</span></h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div style="display:grid; grid-template-rows:1fr auto; gap:var(--gap); min-height:0;">
+          <div class="tiles" style="grid-template-columns:1fr; align-content:start; gap:2.6cqw;">
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16l5-5 4 4 7-7"/><path d="M15 8h5v5"/></svg></div>
+              <p class="tile-title">Трехкратный рост</p>
+              <p class="tile-text">регулярной выручки (MRR) к текущим показателям</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v9h9"/></svg></div>
+              <p class="tile-title">Фокус роста: малый и средний бизнес</p>
+              <p class="tile-text">увеличение с 19 до 65 млн ₽</p>
+            </div>
+            <div class="tile-item">
+              <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/></svg></div>
+              <p class="tile-title">Фокус роста: допродажа модулей</p>
+              <p class="tile-text">рост в основном за счет расширения существующей базы</p>
+            </div>
+          </div>
+
+          <div class="banner">
+            <div class="tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>
+            </div>
+            <p><span class="accent">Условие успеха:</span> базовая ценность платформы и нулевое трение при подключении новых модулей</p>
+          </div>
+        </div>
+
+        <div class="frame is-accent is-center">
+          <div>
+            <div class="big-num">125 000 000 ₽</div>
+            <p class="h2" style="margin:1.2cqw 0 0">регулярной выручки в месяц</p>
+            <p class="body" style="margin-top:1cqw">целевой MRR к 2027 году</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================= 13 — двигатель роста (NRR) === -->
+    <section class="slide" id="s13">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Двигатель роста:</span> удержание выручки и допродажа модулей</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-rows:auto auto 1fr; gap:2.4cqw; align-content:start;">
+        <h3 class="h2">Допродажа работает только при четырех условиях</h3>
+
+        <div class="milestones">
+          <div class="milestone is-strong">
+            <div class="dot">1</div>
+            <p class="m-title">Стабильность платформы</p>
+            <p class="m-text">Базовое ядро управления проектами работает без сбоев</p>
+          </div>
+          <div class="milestone">
+            <div class="dot">2</div>
+            <p class="m-title">Академия и обучение</p>
+            <p class="m-text">Системное обучение снимает трение и ускоряет внедрение</p>
+          </div>
+          <div class="milestone">
+            <div class="dot">3</div>
+            <p class="m-title">Подтвержденная польза</p>
+            <p class="m-text">Клиент получает измеримый результат от базовых функций</p>
+          </div>
+          <div class="milestone is-strong">
+            <div class="dot">4</div>
+            <p class="m-title">Допродажа модулей</p>
+            <p class="m-text">Новые модули подключаются в уже установленный контур без затрат на привлечение</p>
+          </div>
+        </div>
+
+        <div class="cols-2">
+          <div class="frame">
+            <h4 class="h3">Что это дает</h4>
+            <p class="body muted">Выручка растет внутри действующей базы: клиент уже внедрен, обучен и получает пользу.</p>
+          </div>
+          <div class="frame">
+            <h4 class="h3">Где ломается</h4>
+            <p class="body muted">Если ядро работает нестабильно или внедрение затянулось, допродажа не стартует.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 14 — от таск-трекера к WorkOS === -->
+    <section class="slide" id="s14">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Стратегическая цель:</span> от таск-трекера к операционной системе</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2">
+        <div class="frame is-spread">
+          <h3 class="h2">Кайтен 1.0</h3>
+          <h4 class="h3">Визуальная система управления</h4>
+          <p class="body muted">Задачи, проекты, документы и заявки на одном экране. Модульная архитектура и понятная цена подключения.</p>
+          <div class="big-num is-md" style="margin-top:2.4cqw">125 млн ₽</div>
+          <p class="body muted" style="margin-top:.6cqw">целевая регулярная выручка в месяц, трехкратный рост к 2027 году</p>
+          <ul class="badges push-bottom">
+            <li class="badge is-success">Работает сегодня</li>
+            <li class="badge">Ядро платформы</li>
+          </ul>
+        </div>
+
+        <div class="frame is-accent is-spread">
+          <h3 class="h2">Кайтен 2.0</h3>
+          <h4 class="h3">Экосистема под управлением ИИ</h4>
+          <p class="body">Операционная система компании (WorkOS): процессы, коммуникации и аналитика в одном контуре, ИИ помогает на каждом шаге.</p>
+          <div class="big-num is-md" style="margin-top:2.4cqw">1 млрд ₽</div>
+          <p class="body" style="margin-top:.6cqw">целевая EBITDA — прибыль до вычета процентов, налогов и амортизации</p>
+          <ul class="badges push-bottom">
+            <li class="badge is-warning">Строим</li>
+            <li class="badge">Горизонт 2027</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= 15 — дорожная карта === -->
+    <section class="slide" id="s15">
+      <div class="s-head">
+        <h2 class="s-title">Дорожная карта Кайтена на 2026 год</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-rows:auto 1fr; gap:2cqw; align-content:start;">
+        <h3 class="h2">Публичный план развития, квартальный уровень</h3>
+
+        <div class="roadmap">
+          <div>
+            <div class="quarter-head">Q1 2026</div>
+            <div class="quarter-item">CRM — базовый релиз</div>
+            <div class="quarter-item">Серверные дополнения</div>
+            <div class="quarter-item">Набор для разработчиков (SDK) 2.0</div>
+            <div class="quarter-item">ИИ-бот первой линии</div>
+            <div class="quarter-item">База знаний: правки интерфейса</div>
+            <div class="quarter-item">Документы: шрифты, вкладки, спойлеры</div>
+          </div>
+          <div>
+            <div class="quarter-head">Q2 2026</div>
+            <div class="quarter-item">Таск-трекер</div>
+            <div class="quarter-item">CRM: умный поиск</div>
+            <div class="quarter-item">MCP-сервер, официальный релиз</div>
+            <div class="quarter-item">Встроенные коммуникации</div>
+            <div class="quarter-item">Поддержка: редизайн портала</div>
+            <div class="quarter-item">Поддержка: встраиваемый чат</div>
+          </div>
+          <div>
+            <div class="quarter-head">Q3 2026</div>
+            <div class="quarter-item">Маркетплейс дополнений</div>
+            <div class="quarter-item">Канбан-отчеты 2.0</div>
+            <div class="quarter-item">Таймлайн и диаграмма Ганта 2.0</div>
+            <div class="quarter-item">Холст</div>
+            <div class="quarter-item">Календарь: синхронизация</div>
+            <div class="quarter-item">Поддержка: все каналы в одном окне</div>
+          </div>
+          <div>
+            <div class="quarter-head">Q4 2026</div>
+            <div class="quarter-item">Экосистема интеграций</div>
+            <div class="quarter-item">Управленческая аналитика (BI)</div>
+            <div class="quarter-item">Календарь: видеовстречи</div>
+            <div class="quarter-item">Раздел «Личное»</div>
+            <div class="quarter-item">Личные списки задач</div>
+            <div class="quarter-item">Браузерное дополнение 2.0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================= 16 — Q1 2026 === -->
+    <section class="slide" id="s16">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Q1 2026:</span> в работе прямо сейчас</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0;">
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q1 2026</li></ul>
+          <h3 class="h3">CRM — базовый релиз</h3>
+          <p class="body muted">Воронки продаж на канбан-доске, карточки клиентов, аналитика и телефония внутри Кайтена. Сделки живут рядом с задачами команды.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Свой сервер</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">Серверные дополнения</h3>
+          <p class="body muted">Подключение дополнений в версии на своих серверах. Для компаний с изолированным контуром и требованиями к критической инфраструктуре.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Набор для разработчиков 2.0</h3>
+          <p class="body muted">Больше возможностей для интеграций и расширений. Фундамент маркетплейса и открытая экосистема для партнеров.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Облако</li><li class="badge">Q4 2026</li></ul>
+          <h3 class="h3">ИИ-бот поддержки первой линии</h3>
+          <p class="body muted">Разбирает обращения в службе поддержки и отвечает на типовые запросы. Снимает нагрузку с первой линии.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Облако</li><li class="badge">Q1 2026</li></ul>
+          <h3 class="h3">База знаний: правки интерфейса</h3>
+          <p class="body muted">Улучшения интерфейса базы знаний по накопленным запросам пользователей.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Облако</li><li class="badge">Q1 2026</li></ul>
+          <h3 class="h3">Документы: редактор и связь с задачами</h3>
+          <p class="body muted">Размеры и наборы шрифтов, вкладки, спойлеры. Документ создается из карточки, задача — из документа.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================= 17 — Q2 2026 === -->
+    <section class="slide" id="s17">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Q2 2026:</span> коммуникации и зрелость платформы</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0;">
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">Таск-трекер</h3>
+          <p class="body muted">Ключевые сценарии команд, которые приходят из Jira. Закрываем основные болевые точки при переносе процессов.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">CRM: умный поиск и автоматика</h3>
+          <p class="body muted">Быстрая обработка обращений и автоматические сценарии в воронке продаж.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">MCP-сервер, официальный релиз</h3>
+          <p class="body muted">Стандартный интерфейс для интеграций и ИИ-агентов. Открывает экосистему для внешних разработчиков.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">Поддержка: редизайн портала</h3>
+          <p class="body muted">Новый первый экран службы поддержки, обзорная страница с демо и отдельные Telegram-боты под каждый сервис.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">Поддержка: встраиваемый чат на сайте</h3>
+          <p class="body muted">Виджет чата прямо на сайте клиента — обращения падают в те же карточки, что и остальные каналы.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q2 2026</li></ul>
+          <h3 class="h3">Встроенные коммуникации</h3>
+          <p class="body muted">Чат, видеовстречи и командный календарь внутри Кайтена — рабочее обсуждение рядом с задачей.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================= 18 — Q3 2026 === -->
+    <section class="slide" id="s18">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Q3 2026:</span> экосистема и аналитика</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0;">
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Маркетплейс дополнений</h3>
+          <p class="body muted">Каталог, набор для разработчиков и партнерская экосистема вокруг платформы.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Канбан-отчеты 2.0</h3>
+          <p class="body muted">Время цикла, пропускная способность и накопительная диаграмма потока для команд.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Таймлайн и диаграмма Ганта 2.0</h3>
+          <p class="body muted">Планирование и зависимости на уровне портфеля проектов, а не отдельной доски.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Облако</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Отчеты по проектам и ИИ-сводки</h3>
+          <p class="body muted">Управленческие сводки собираются быстрее, рутинной сборки отчетов становится меньше.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Холст</h3>
+          <p class="body muted">Визуальная доска идей со связью с задачами: схема на холсте превращается в карточки.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q3 2026</li></ul>
+          <h3 class="h3">Календарь: синхронизация</h3>
+          <p class="body muted">Личные и рабочие календари собираются в одном месте внутри Кайтена.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================= 19 — Q4 2026 === -->
+    <section class="slide" id="s19">
+      <div class="s-head">
+        <h2 class="s-title"><span class="accent">Q4 2026:</span> интеграции, аналитика и личный контур</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body" style="display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:1fr 1fr; gap:var(--gap); min-height:0;">
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q4 2026</li></ul>
+          <h3 class="h3">Экосистема интеграций</h3>
+          <p class="body muted">Каталог интеграций, партнеры и общая шина обмена данными.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q4 2026</li></ul>
+          <h3 class="h3">Управленческая аналитика (BI)</h3>
+          <p class="body muted">Единые показатели по компании и контроль исполнения на уровне руководства.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q4 2026</li></ul>
+          <h3 class="h3">Календарь: видеовстречи</h3>
+          <p class="body muted">Встречи создаются прямо из Кайтена, приглашения уходят по почте, календарь можно открыть по ссылке.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q4 2026</li></ul>
+          <h3 class="h3">Раздел «Личное»</h3>
+          <p class="body muted">Домашняя страница, личные списки задач и связь с личным календарем. Личное не видно администратору.</p>
+        </div>
+
+        <div class="frame plan-card">
+          <ul class="badges"><li class="badge is-warning">В работе</li><li class="badge">Q4 2026</li></ul>
+          <h3 class="h3">Браузерное дополнение 2.0</h3>
+          <p class="body muted">Задача из любой вкладки уходит в раздел «Личное» в один клик.</p>
+        </div>
+
+        <div class="frame is-accent is-center">
+          <p class="h3" style="margin:0">К концу 2026 года рабочий день сотрудника целиком помещается в Кайтен</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 20 — один сервис вместо десятка === -->
+    <section class="slide" id="s20">
+      <div class="s-head">
+        <h2 class="s-title">Один сервис вместо десятка других</h2>
+        <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
+      </div>
+
+      <div class="s-body cols-2" style="align-items:center">
+        <div>
+          <h3 class="h2" style="color:var(--green-100)">Реализовано</h3>
+          <div class="module-list" style="margin-top:1.6cqw">
+            <div class="node c-green">
+              <p class="node-title">Таск-менеджер</p>
+              <p class="node-text">управление задачами, канбан, скрам</p>
+            </div>
+            <div class="node c-green">
+              <p class="node-title">База знаний</p>
+              <p class="node-text">документы и корпоративная вики</p>
+            </div>
+            <div class="node c-green">
+              <p class="node-title">Workflow</p>
+              <p class="node-text">контроль бизнес-процессов</p>
+            </div>
+            <div class="node c-green">
+              <p class="node-title">Служба поддержки</p>
+              <p class="node-text">работа с заявками, сервис-деск</p>
+            </div>
+            <div class="node c-green">
+              <p class="node-title">Управление проектами</p>
+              <p class="node-text">диаграмма Ганта, ресурсное планирование</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="h2">Планы на 2026</h3>
+          <div class="module-list" style="margin-top:1.6cqw">
+            <div class="node c-violet">
+              <p class="node-title">CRM</p>
+              <p class="node-text">управление продажами и воронкой</p>
+            </div>
+            <div class="node c-violet">
+              <p class="node-title">Корпоративный чат</p>
+              <p class="node-text">рабочая переписка внутри платформы</p>
+            </div>
+            <div class="node c-violet">
+              <p class="node-title">Коммуникации</p>
+              <p class="node-text">видеовстречи и командный календарь</p>
+            </div>
+            <div class="node c-violet">
+              <p class="node-title">Холст</p>
+              <p class="node-text">визуальная совместная работа</p>
+            </div>
+            <div class="node c-violet">
+              <p class="node-title">Маркетплейс дополнений</p>
+              <p class="node-text">каталог, набор для разработчиков, партнеры</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= 21 — контактный слайд === -->
+    <section class="slide contact" id="s21">
+      <div class="contact-card">
+        <div class="contact-brand">
+          <img src="../assets/kaiten-logo-latin.svg" alt="Kaiten" />
+          <span class="divider"></span>
+          <p class="tagline">профессиональный инструмент<br />для прозрачных процессов</p>
+        </div>
+
+        <p class="contact-title">Готовы ответить на все вопросы</p>
+
+        <div class="contact-cols">
+          <div class="contact-rows">
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm8 7.2 7.4-4.6H4.6L12 12.2z"/></svg><span>sales@kaiten.ru</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 1.7z"/></svg><span>8 (499) 490-64-99</span></div>
+            <div class="contact-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg><span>kaiten.ru/partners</span></div>
+          </div>
+
+          <div class="contact-note">
+            <p style="margin:0"><b>50+ месяцев</b> — столько в среднем с нами работают клиенты</p>
+            <p style="margin:1cqw 0 0">Станьте партнером и зарабатывайте годами</p>
+            <svg class="decor" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.5S4 15.6 4 10.2A4.2 4.2 0 0 1 12 8a4.2 4.2 0 0 1 8 2.2c0 5.4-8 10.3-8 10.3z"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<nav class="nav-fallback" aria-label="Слайды">
+  <div class="nav-row" data-for="s1"><a class="is-off" aria-hidden="true">←</a><span class="counter">1 / 21</span><a href="#s2" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s2"><a href="#s1" aria-label="Предыдущий слайд">←</a><span class="counter">2 / 21</span><a href="#s3" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s3"><a href="#s2" aria-label="Предыдущий слайд">←</a><span class="counter">3 / 21</span><a href="#s4" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s4"><a href="#s3" aria-label="Предыдущий слайд">←</a><span class="counter">4 / 21</span><a href="#s5" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s5"><a href="#s4" aria-label="Предыдущий слайд">←</a><span class="counter">5 / 21</span><a href="#s6" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s6"><a href="#s5" aria-label="Предыдущий слайд">←</a><span class="counter">6 / 21</span><a href="#s7" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s7"><a href="#s6" aria-label="Предыдущий слайд">←</a><span class="counter">7 / 21</span><a href="#s8" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s8"><a href="#s7" aria-label="Предыдущий слайд">←</a><span class="counter">8 / 21</span><a href="#s9" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s9"><a href="#s8" aria-label="Предыдущий слайд">←</a><span class="counter">9 / 21</span><a href="#s10" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s10"><a href="#s9" aria-label="Предыдущий слайд">←</a><span class="counter">10 / 21</span><a href="#s11" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s11"><a href="#s10" aria-label="Предыдущий слайд">←</a><span class="counter">11 / 21</span><a href="#s12" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s12"><a href="#s11" aria-label="Предыдущий слайд">←</a><span class="counter">12 / 21</span><a href="#s13" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s13"><a href="#s12" aria-label="Предыдущий слайд">←</a><span class="counter">13 / 21</span><a href="#s14" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s14"><a href="#s13" aria-label="Предыдущий слайд">←</a><span class="counter">14 / 21</span><a href="#s15" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s15"><a href="#s14" aria-label="Предыдущий слайд">←</a><span class="counter">15 / 21</span><a href="#s16" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s16"><a href="#s15" aria-label="Предыдущий слайд">←</a><span class="counter">16 / 21</span><a href="#s17" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s17"><a href="#s16" aria-label="Предыдущий слайд">←</a><span class="counter">17 / 21</span><a href="#s18" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s18"><a href="#s17" aria-label="Предыдущий слайд">←</a><span class="counter">18 / 21</span><a href="#s19" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s19"><a href="#s18" aria-label="Предыдущий слайд">←</a><span class="counter">19 / 21</span><a href="#s20" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s20"><a href="#s19" aria-label="Предыдущий слайд">←</a><span class="counter">20 / 21</span><a href="#s21" aria-label="Следующий слайд">→</a></div>
+  <div class="nav-row" data-for="s21"><a href="#s20" aria-label="Предыдущий слайд">←</a><span class="counter">21 / 21</span><a class="is-off" aria-hidden="true">→</a></div>
+</nav>
+
+<script src="../kaiten-slides.js"></script>
+</body>
+</html>

@@ -25,7 +25,8 @@ export interface ComponentEntry {
     | 'tabbed_feature'
     | 'accordion_feature'
     | 'scenario_walkthrough'
-    | 'industry_picker';
+    | 'industry_picker'
+    | 'partner_directory';
   description: string;
   props: Record<string, string>;
   constraints: string[];
@@ -319,6 +320,36 @@ export const REGISTRY: ComponentEntry[] = [
         'Array<{ id: 1..40; icon: lucide-name; name: 2..60; summary: 4..160; scenario: 10..400; keyFeatures: Array<{icon?, text: 2..120}> (2..6); metric?: {value: 1..20, label: 2..60} }> (3..8)',
     },
     constraints: ['min_3_industries', 'max_8_industries', 'each_industry_has_unique_id'],
+  },
+  {
+    name: 'PartnerDirectory',
+    specComponent: 'PartnerDirectory',
+    sectionId: 'partner_directory',
+    category: 'partner_directory',
+    description:
+      'Каталог партнёров: фильтр по типу партнёрства (реселлер / интегратор / агент / технологический) + фильтр по региону + поиск по названию, ниже сетка карточек. Карточка — монограмма или логотип, название, бейдж типа, регион, теги услуг и ссылка (сайт партнёра либо общий CTA на форму). Витрина для клиента «у кого купить и кто внедрит», не рекрутинговый блок: заявку на партнёрство ставь отдельной секцией. Юрлица и ИНН на страницу не выносим — только публичные брендовые названия.',
+    props: {
+      eyebrow: 'string (<=80) | undefined',
+      title: 'string (4..120)',
+      description: 'string (<=280) | undefined',
+      types:
+        "Array<{ id: 1..40; label: 2..40; description?: <=200; accent?: 'violet'|'blue'|'green'|'orange'|'purple'; icon?: lucide-name }> (1..8)",
+      regions: 'Array<{ id: 1..40; label: 2..40 }> (<=10) | undefined',
+      partners:
+        'Array<{ id; name: 2..80; initials?: <=4; logoSrc?; logoAlt?; type: id из types; region?: id из regions; location?: <=60; services?: string[] (<=4); since?: <=20; href? }> (3..80)',
+      allTypesLabel: 'string (<=40) | undefined',
+      allRegionsLabel: 'string (<=40) | undefined',
+      searchPlaceholder: 'string (<=60) | undefined',
+      emptyLabel: 'string (<=200) | undefined',
+      note: 'string (<=240) | undefined',
+      contactCta: '{ label: 2..40; href } | undefined',
+    },
+    constraints: [
+      'min_3_partners',
+      'partner_type_must_exist_in_types',
+      'partner_region_must_exist_in_regions',
+      'no_legal_entity_names_or_inn',
+    ],
   },
   {
     name: 'PromoBanner',

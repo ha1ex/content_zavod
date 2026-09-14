@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
 /**
  * Review slider (мокап секции отзывов «Отзывы клиентов»).
@@ -23,6 +23,12 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 export interface Review {
   /** Логотип компании: <img/>, инлайновый <svg/> или просто текст-название. */
   logo?: ReactNode;
+  /**
+   * Множитель высоты логотипа (по умолчанию 1 — базовые 60px, 50px на мобилке).
+   * Нужен, когда у компаний знаки разной плотности: широкий горизонтальный
+   * логотип рядом с компактным квадратным читается крупнее и перевешивает.
+   */
+  logoScale?: number;
   /** Текст отзыва (уже с «ёлочками», если нужно). */
   quote: string;
   /** Имя автора. */
@@ -31,14 +37,25 @@ export interface Review {
   metric?: string;
   /** Высота логотипа в px. Дефолт 40; вертикальным знакам нужно больше. */
   logoHeight?: number;
-  /** Должность / роль автора. */
-  role: string;
+  /**
+   * Должность / роль автора. Необязательна: когда отзыв подписан командой,
+   * а не человеком, строка роли дублировала бы название компании из .
+   * Перевод строки () в значении сохраняется — им разбивают должность
+   * и название компании на две строки.
+   */
+  role?: string;
   /** URL фото-аватара (если есть). */
   avatar?: string;
   /** Буква-заглушка под аватар, если фото нет. */
   avatarInitial?: string;
   /** Цвет фона аватара-заглушки. */
   avatarBg?: string;
+  /**
+   * Широкое фото вместо круглого аватара — для командных снимков, где в кадре
+   * несколько человек: круглая обрезка 56×56 оставила бы половину лица.
+   * Слот становится по ширине содержимого, фон прозрачный, кадр не режется.
+   */
+  avatarWide?: boolean;
   /** Ссылка «Читать кейс» (если есть — рисуется кнопка). */
   caseUrl?: string;
   /** Подпись кнопки-ссылки. */
@@ -65,6 +82,8 @@ const STYLE = `
   font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
   background:var(--surface-section); padding:96px 0;
 }
+/* На десктопе секция дышит шире — 96px сверху и снизу. */
+@media(min-width:1024px){ .revx-mock{ padding:96px 0; } }
 .revx-mock *{box-sizing:border-box;}
 /* Боковой отступ контейнера держим в переменной: окно листалки гасит его на
    свою ширину, чтобы карточки шли от края до края на всех брейкпоинтах. */
@@ -83,7 +102,7 @@ const STYLE = `
 .revx-mock .otz__top{display:flex; flex-direction:column; gap:var(--sp-5); flex:1; min-height:0;}
 .revx-mock .otz__hd{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-4); min-height:64px;}
 .revx-mock .otz__co{font-size:18px; line-height:28px; font-weight:var(--fw-semi); color:var(--text-title);}
-.revx-mock .otz__co img{height:40px; width:auto; max-width:140px; object-fit:contain; display:block;}
+.revx-mock .otz__co img{height:calc(40px * var(--otz-logo-scale, 1)); width:auto; max-width:140px; object-fit:contain; display:block;}
 .revx-mock .otz__q{flex-shrink:0; width:79px; height:60px; color:#f3f4f6;}
 /* Текст отзыва начинается на одной высоте во всех карточках: по центру
    свободного места он ездил вверх-вниз вслед за высотой подписи автора. */
@@ -94,6 +113,9 @@ const STYLE = `
 .revx-mock .otz__av{position:relative; overflow:hidden; isolation:isolate; width:56px; height:56px; border-radius:9999px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:var(--fw-semi); color:#fff; background:#c4b5e0;}
 .revx-mock .otz__av:has(img){background:none;}
 .revx-mock .otz__av img{position:absolute; inset:-1px; width:calc(100% + 2px); height:calc(100% + 2px); object-fit:cover; border-radius:inherit;}
+/* Широкий знак вместо портрета: круг и фон снимаем, картинку вписываем целиком. */
+.revx-mock .otz__av--wide{width:auto; border-radius:0; background:transparent; overflow:visible;}
+.revx-mock .otz__av--wide img{position:static; width:auto; height:100%; object-fit:contain;}
 .revx-mock .otz__who{display:flex; flex-direction:column; min-width:0;}
 .revx-mock .otz__name{font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--text-title);}
 .revx-mock .otz__role{font-size:16px; line-height:24px; color:var(--text-secondary); white-space:pre-line;}
@@ -104,7 +126,7 @@ const STYLE = `
 .revx-mock .revx__navbtn:hover:not(:disabled){background:var(--brand-12); border-color:var(--brand-48); color:var(--brand-hover);}
 .revx-mock .revx__navbtn:focus-visible{outline:none; box-shadow:0 0 0 4px rgba(152,162,179,.14);}
 .revx-mock .revx__navbtn:disabled{background:#fff; border-color:var(--border-default); color:var(--border-default); cursor:default;}
-.revx-mock .revx__navbtn svg{width:24px; height:24px;}
+.revx-mock .revx__navbtn svg{width:20px; height:20px;}
 .revx-mock .revx__count{font-size:16px; line-height:24px; color:var(--text-secondary); min-width:52px; text-align:center;}
 .revx-mock .revx__count b{font-weight:var(--fw-med); color:var(--brand-100);}
 /* Боковой отступ: 16 на мобилке, 24 с планшета и на десктопе. Контейнер на
@@ -131,7 +153,8 @@ const STYLE = `
   .revx-mock .revx__head h2{font-size:24px; line-height:32px;}
   .revx-mock .otz{width:328px; max-width:100%; height:auto;}
   .revx-mock .otz__co{font-size:16px; line-height:24px;}
-  .revx-mock .otz__co img{height:50px; max-width:150px;}
+  .revx-mock .otz__co{--otz-logo-h:50px;}
+  .revx-mock .otz__co img{max-width:150px;}
 }
 `;
 
@@ -188,6 +211,13 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
   const [idx, setIdx] = useState(0);
   const [maxI, setMaxI] = useState(0);
 
+  /** Фактический зазор между карточками — он разный на мобилке, планшете и десктопе. */
+  const gapPx = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return GAP;
+    return parseFloat(getComputedStyle(track).columnGap) || GAP;
+  }, []);
+
   const step = useCallback(() => {
     const track = trackRef.current;
     if (!track) return 0;
@@ -198,8 +228,8 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     if (second) {
       return second.getBoundingClientRect().left - first.getBoundingClientRect().left;
     }
-    return first.getBoundingClientRect().width + GAP;
-  }, []);
+    return first.getBoundingClientRect().width + gapPx();
+  }, [gapPx]);
 
   const maxIdx = useCallback(() => {
     const wrap = wrapRef.current;
@@ -214,7 +244,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
     const gap = parseFloat(cs.columnGap) || GAP;
     const vis = Math.max(1, Math.floor((inner + gap) / s));
     return Math.max(0, track.children.length - vis);
-  }, [step]);
+  }, [gapPx, step]);
 
   const apply = useCallback(() => {
     const track = trackRef.current;
@@ -271,7 +301,16 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
               <div className="otz" key={i}>
                 <div className="otz__top">
                   <div className="otz__hd">
-                    <div className="otz__co">{renderLogo(r.logo, r.logoHeight)}</div>
+                    <div
+                      className="otz__co"
+                      style={
+                        r.logoScale
+                          ? ({ '--otz-logo-scale': r.logoScale } as CSSProperties)
+                          : undefined
+                      }
+                    >
+                      {renderLogo(r.logo, r.logoHeight)}
+                    </div>
                     <QuoteMark />
                   </div>
                   {/* метрика стоит вплотную к цитате, а не отдельным блоком сверху */}
@@ -283,13 +322,20 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
 
                 <div className="otz__author">
                   {/* под фотографией фона нет — иначе он проступает каёмкой в 1px по краю круга */}
-                  <span className="otz__av" style={!r.avatar && r.avatarBg ? { background: r.avatarBg } : undefined}>
+                  <span
+                    className={`otz__av${r.avatarWide ? ' otz__av--wide' : ''}`}
+                    style={
+                      !r.avatar && r.avatarBg && !r.avatarWide
+                        ? { background: r.avatarBg }
+                        : undefined
+                    }
+                  >
                     {r.avatar ? <img src={r.avatar} alt={r.name} onError={(e) => e.currentTarget.remove()} /> : null}
-                    {r.avatarInitial ?? r.name.charAt(0)}
+                    <span className="otz__av-initial">{r.avatarInitial ?? r.name.charAt(0)}</span>
                   </span>
                   <span className="otz__who">
                     <span className="otz__name">{r.name}</span>
-                    <span className="otz__role">{r.role}</span>
+                    {r.role && <span className="otz__role">{r.role}</span>}
                   </span>
                 </div>
 

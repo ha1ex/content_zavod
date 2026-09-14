@@ -1,8 +1,429 @@
 /**
+ * Тёмная тема лендинга — V01-dark.
+ *
+ * Источник: design-system/kaiten-v01/dark/ (слепок Figma «Landing DS»,
+ * артборды 2732:43296 desktop / 2732:43758 mobile). Значения сверены пипеткой
+ * по полноразмерному рендеру макета.
+ *
+ * Активируется, когда в спеке стоит `theme: "dark"` — рендер (render-spec-react /
+ * render-landing) оборачивает страницу в `.landing-theme-dark`. Компоненты
+ * завода читают семантические токены (`--color-*`) и кнопочные токены, поэтому
+ * вся token-based вёрстка переворачивается без правок самих компонентов.
+ *
+ * ГЛАВНЫЙ ПРИНЦИП ТЕМЫ (из DS): это не отдельная палитра. Все поверхности —
+ * брендовый #7d4ccf, положенный на тёмный фон с альфой 8 / 12 / 15 / 24 / 48 %.
+ * Нужен новый уровень глубины — берите следующую альфу, а не новый хекс.
+ * Поэтому поверхности здесь заданы через rgba: вложенная карточка на секции
+ * автоматически становится на ступень светлее, и подсветка страницы просвечивает.
+ *
+ * Фон десктопа и мобилки в макете разный: #190f29 против более глубокого
+ * #130b1f — переключается на брейкпоинте 767px (см. блок «Мобилка»).
+ */
+
+.landing-theme-dark {
+  /* ─── Нейтральная шкала: инверсия ───────────────────────────────────
+     Компоненты и моки местами берут сырые `neutral-*` (bg-neutral-200,
+     text-neutral-600 и т.п.). Переворачиваем шкалу целиком, чтобы такие места
+     тоже читались на тёмном, а не светили белым пятном. Светлые ступени
+     уезжают в фиолетовые поверхности, тёмные — в белый текст. */
+  --color-neutral-000: #190f29;
+  --color-neutral-050: #1c1130;
+  --color-neutral-100: #211436;
+  --color-neutral-200: #2a1943;
+  --color-neutral-300: #33204f;
+  --color-neutral-400: #56407a;
+  --color-neutral-500: #9e9e9e; /* [VAR] Text/Tertiary Text Color */
+  --color-neutral-600: #9ca3af; /* [VAR] Text/Secondary Text Color */
+  --color-neutral-700: #b9bcc4;
+  --color-neutral-800: #d6d8dd;
+  --color-neutral-900: rgba(255, 255, 255, 0.9); /* [VAR] Text/Title Color */
+  --color-neutral-950: #ffffff;
+
+  /* Мягкий бренд-тинт (в светлой теме — почти белый #efe9f9) на тёмном
+     становится фиолетовой подложкой. */
+  --color-violet-12: rgba(125, 76, 207, 0.18);
+
+  /* ─── Семантические токены ──────────────────────────────────────── */
+  --color-text-primary: rgba(255, 255, 255, 0.9); /* [VAR] Text/Title Color   */
+  --color-text-secondary: #9ca3af; /* [VAR] Text/Secondary Text Color         */
+  --color-text-inverse: #ffffff; /* [VAR] Text/Brand Color                    */
+  --color-text-accent: #7d4ccf; /* [PX] в макете акцентный текст — чистый бренд */
+
+  --color-surface-page: #190f29; /* [VAR] Background/White/Primary            */
+  --color-surface-section: rgba(125, 76, 207, 0.07); /* бренд 8 % — банд секции */
+  --color-surface-card: rgba(125, 76, 207, 0.12); /* [VAR] бренд 12 % — карточки */
+  --color-border-default: rgba(125, 76, 207, 0.28); /* [PX] бренд 24 % (+запас) */
+
+  --color-action-primary: #7d4ccf; /* [VAR] Colors/Kaiten/Brand 100K          */
+  --color-action-primary-hover: #8f63d9; /* [DERIVED]                         */
+  --color-action-primary-soft: rgba(125, 76, 207, 0.18);
+
+  /* ─── Кнопки ────────────────────────────────────────────────────── */
+  --button-fill-bg: #7d4ccf; /* [VAR] Button/Primary/Background               */
+  --button-fill-bg-hover: #8f63d9; /* [DERIVED]                               */
+  --button-fill-bg-disabled: rgba(125, 76, 207, 0.12);
+  --button-fill-text: #ffffff; /* [VAR] Button/Primary/Text                   */
+  --button-fill-text-disabled: #9e9e9e;
+  --button-outline-bg: rgba(125, 76, 207, 0.12); /* [VAR] Primary Outline/Bg  */
+  --button-outline-bg-hover: rgba(125, 76, 207, 0.24);
+  --button-outline-border: rgba(125, 76, 207, 0.48); /* [VAR] Brand 48K       */
+  --button-outline-border-hover: #7d4ccf;
+  --button-outline-text: #ffffff;
+  --button-outline-text-hover: #ffffff;
+  --button-outline-text-disabled: rgba(255, 255, 255, 0.4);
+
+  /* ─── Градиенты темы (три из DS) ────────────────────────────────── */
+  --kd-grad-pill: linear-gradient(90deg, #47317d 0%, #0d6e93 100%);
+  --kd-grad-heading: linear-gradient(90deg, #7d4ccf 0%, #00cffe 100%);
+  --kd-grad-accent: linear-gradient(180deg, #7d4ccf 0%, #00cffe 100%);
+  /* CTA-блок. Снято пипеткой с ноды 2732:43522 (1216×436): скан по горизонтали
+     и по вертикали показал строго горизонтальный двухточечный градиент —
+     середина #222e58 ровно на линейной интерполяции, верх и низ идентичны.
+     README темной DS называет его диагональным (107°, четыре угла) — там
+     значения сняты с общего артборда, где сверху лежит подсветка страницы. */
+  --kd-grad-cta: linear-gradient(90deg, #311e52 0%, #133e5e 100%);
+
+  color-scheme: dark;
+  background-color: var(--color-surface-page);
+  color: var(--color-text-primary);
+}
+
+/* Мобилка стоит на более глубоком фоне — так в макете (360). */
+@media (max-width: 767px) {
+  .landing-theme-dark {
+    --color-surface-page: #130b1f; /* [VAR] Background/White/Secondary */
+  }
+}
+
+/* Фон самого документа: обёртка лендинга занимает свою ширину, и всё, что
+   вылезает за неё (широкий мокап на узком экране, резиновая прокрутка), светит
+   белым из html. Красим документ только на страницах с тёмным лендингом. */
+html:has(.landing-theme-dark) {
+  background: #190f29;
+}
+@media (max-width: 767px) {
+  html:has(.landing-theme-dark) {
+    background: #130b1f;
+  }
+}
+
+/* ─── Подсветка страницы ─────────────────────────────────────────────
+   В макете за первым экраном стоит крупное фиолетово-синее свечение. Здесь оно
+   собрано двумя статичными радиальными пятнами: фон прокручивается вместе со
+   страницей (не fixed) — это композитится один раз и не тормозит скролл. */
+.landing-theme-dark {
+  background-image:
+    radial-gradient(780px 250px at 50% 300px, rgba(125, 76, 207, 0.34), transparent 72%),
+    radial-gradient(620px 200px at 66% 240px, rgba(76, 95, 195, 0.29), transparent 72%),
+    radial-gradient(520px 170px at 32% 360px, rgba(0, 207, 254, 0.09), transparent 72%);
+  background-repeat: no-repeat;
+}
+
+/* ─── Поля ввода остаются светлыми ───────────────────────────────────
+   Инверсия, о которой легко забыть: в макете инпуты белые с тёмным текстом.
+   Правило только для настоящих форм страницы (регистрация, подписка в подвале):
+   поля внутри продуктовых моков рисуются их собственными классами и должны
+   оставаться тёмными. */
+.landing-theme-dark form input[type='text'],
+.landing-theme-dark form input[type='email'],
+.landing-theme-dark form input[type='tel'],
+.landing-theme-dark form textarea,
+.landing-theme-dark form select {
+  background-color: #ffffff; /* [VAR] Input/Background */
+  color: #424242; /* [VAR] Text/Text Color */
+  border-color: #d1d5db; /* [VAR] Border/Tertiary */
+}
+.landing-theme-dark form input::placeholder,
+.landing-theme-dark form textarea::placeholder {
+  color: #9ca3af; /* [VAR] Input/Placeholder text color */
+}
+
+/* ─── Градиентные панели: светлый лавандово-голубой → тёмный из DS ────
+   Светлый градиент #ece0ff → #cdecff на тёмной странице читается как дырка.
+   CTA-блоки (`CTAsecondaryMock`, `CtaProduct`) берут диагональный градиент CTA
+   из DS — это их фирменный приём и на тёмном он работает. */
+.landing-theme-dark .cta-secondary .fcta,
+.landing-theme-dark .ctp {
+  background-image: var(--kd-grad-cta);
+}
+
+/* Подложка `GradientPanel` (её носит баннер «Уже работаете в Кайтен?») стояла
+   на ровной заливке бренд 18 %. Даём ей тот же градиент CTA из макета. */
+.landing-theme-dark [class~='isolate'][class*='bg-(--color-action-primary-soft)'] {
+  background-color: transparent;
+  background-image: var(--kd-grad-cta);
+}
+/* Внутри подложки лежит размытое розово-голубое пятно (#e298ff → #6fe5ff) —
+   приём светлой темы. В макете плашка это чистый двухточечный градиент без
+   блума, поэтому пятно убираем. Селектор ловит только arbitrary-класс Tailwind
+   с этим хексом и не задевает `.hsv-glow`, где цвет зашит в CSS компонента. */
+.landing-theme-dark [class*='#e298ff'] {
+  display: none;
+}
+
+/* А панели `TabbedFeatureSection` (аккордеон на мобилке и слот мока на десктопе)
+   носят тот же светлый градиент литералом в arbitrary-классе Tailwind. Там
+   градиент не несёт смысла — гасим его и ставим ровную поверхность. */
+.landing-theme-dark [class*='#ece0ff'] {
+  background-image: none;
+  background-color: var(--color-surface-card);
+}
+
+/* Текст в CTA-блоках зашит тёмным (#2d2d2d / #424242) — на градиенте темы
+   не читается. */
+.landing-theme-dark .cta-secondary .fcta__copy h2,
+.landing-theme-dark .ctp__copy h2 {
+  color: #ffffff;
+}
+.landing-theme-dark .cta-secondary .fcta__copy p,
+.landing-theme-dark .ctp__copy p {
+  color: rgba(255, 255, 255, 0.78);
+  /* В макете (2732:43522) описание CTA-блока идёт Text lg/Regular — 18/28. */
+  font-size: 18px;
+  line-height: 28px;
+}
+
+/* ─── Карточки бенто без обводки ─────────────────────────────────────
+   Компонент вешает бордер, когда у секции нет подложки: в светлой теме белая
+   карточка на белой странице иначе не читается. На тёмном заливка карточки —
+   бренд 12 %, она сама по себе отделяется от фона, и рамка только дробит сетку.
+   Гасим цвет, а не саму границу: 1px остаётся в раскладке, ничего не съезжает. */
+/* `:not` обязателен: заголовок и описание внутри карточки несут data-comp вида
+   `bento_grid.cells[2].title`, то есть тоже начинаются с `bento_grid.cells`.
+   Без отсечки по `].` заливка ложилась бы ещё и на них — прямоугольниками
+   поверх текста. Оставляем только саму обёртку карточки. */
+.landing-theme-dark [data-comp^='bento_grid.cells']:not([data-comp*='].']) {
+  border-color: transparent;
+  /* Плашки без рамки читаются тише — опускаем заливку на ступень ниже,
+     с бренда 12 % на бренд 8 % (обе ступени из шкалы альф DS). */
+  background-color: rgba(125, 76, 207, 0.08);
+}
+
+/* ─── Тело текста в секциях ──────────────────────────────────────────
+   Описания секций в светлой теме идут цветом заголовка (`--color-text-primary`)
+   — на белом это нормально, на тёмном белый абзац спорит с H2 и утомляет.
+   Ставим серый #bdbdbd.
+
+   Ловим по `data-comp$='.description'` плюс наличию класса text-primary:
+   первое отсекает заголовки, ссылки шапки и вообще всё внутри продуктовых моков
+   (у них data-comp нет), второе — описания, которые и так идут вторичным серым
+   (карточки бенто, `#9ca3af`), чтобы не осветлять их без нужды. */
+.landing-theme-dark [data-comp$='.description'][class*='text-(--color-text-primary)'] {
+  color: #bdbdbd;
+}
+
+/* ─── Акцент внутри продуктовых моков ────────────────────────────────
+   На странице акцентный текст — чистый бренд #7d4ccf (как в макете). Внутри
+   мокапов тот же токен используется кеглем 11–12px, где бренд на тёмном уже
+   не читается: там берём осветлённую ступень. */
+.landing-theme-dark [data-mock] {
+  --color-text-accent: #a274ea;
+}
+
+/* ─── Подвал: серый #2d2d2d → без собственной подложки ────────────────
+   Своя плашка отрезала подвал от страницы горизонтом. Подвал садится прямо на
+   фон страницы, глубину держат карточки внутри. */
+.landing-theme-dark .kf {
+  --bg: transparent;
+  --card: rgba(125, 76, 207, 0.12);
+  --news: rgba(125, 76, 207, 0.16);
+  --ink: rgba(255, 255, 255, 0.9);
+  --border: rgba(125, 76, 207, 0.28);
+}
+/* Заголовок и ссылки карточки подписки идут брендом кеглем 13–16px — на тёмной
+   подложке осветляем (заливка кнопки остаётся чистым брендом). */
+.landing-theme-dark .kf .kf-sub-title,
+.landing-theme-dark .kf .kf-consent .lnk {
+  color: #a274ea;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Компоненты со своей локальной палитрой
+   ─────────────────────────────────────────────────────────────────────
+   Часть блоков завода несёт собственный набор переменных внутри <style> и
+   семантические токены не читает. Их переопределяем адресно — тем же принципом
+   «бренд с альфой на тёмном».
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Первый экран с видео. */
+.landing-theme-dark .hsv-mock {
+  --brand-12: rgba(125, 76, 207, 0.18);
+  --brand-12k: rgba(125, 76, 207, 0.18);
+  --brand-hover: #8f63d9;
+  --border-default: rgba(125, 76, 207, 0.28);
+  --surface-section: rgba(125, 76, 207, 0.12);
+  --text-title: rgba(255, 255, 255, 0.9);
+  --text-secondary: #9ca3af;
+  background: transparent;
+}
+/* Бейдж над H1 — пилюля с градиентом из DS, текст белый. */
+.landing-theme-dark .hsv-mock .sh-badge {
+  background: var(--kd-grad-pill);
+}
+.landing-theme-dark .hsv-mock .sh-badge__text {
+  color: #ffffff;
+}
+/* Приписка под подзаголовком: бренд на тёмном не читается — берём светлый тинт. */
+.landing-theme-dark .hsv-mock .hero__sub .hsv-sub-line {
+  color: #b79cf2;
+}
+/* Растушёвка у верхнего края: гасит засвет под липкой шапкой. В светлой теме
+   она белая, здесь — цвет страницы. Тянем её вдвое ниже (112 → 240): пятна
+   страницы лежат под секцией и короткой растушёвкой не перекрывались, отчего
+   верх первого экрана светился сильнее, чем нужно. 140 — компромисс: шапку
+   прикрывает, поднятое пятно не съедает. */
+.landing-theme-dark .hsv-mock .hsv-fade {
+  height: 140px;
+  background: linear-gradient(to bottom, var(--color-surface-page) 0, rgba(25, 15, 41, 0) 100%);
+}
+/* Собственный засвет первого экрана. В светлой теме это розово-голубое пятно
+   на белом; на тёмном оно выцветало в серое. Берём цвета блума из макета —
+   пик засвета там #4c5fc3, фиолетово-синий, а не розовый. */
+.landing-theme-dark .hsv-mock .hsv-glow {
+  width: 412px;
+  height: 326px;
+  top: -100px;
+  background: linear-gradient(
+    270deg,
+    rgba(226, 152, 255, 0.5) 0%,
+    rgba(111, 229, 255, 0.5) 100%
+  );
+  mix-blend-mode: hard-light;
+  filter: blur(100px);
+  /* rotate из макета дописан к translateX компонента — тот центрирует пятно,
+     и без него оно уехало бы к левому краю. */
+  transform: translateX(-50%) rotate(-180deg);
+  opacity: 1;
+}
+/* Trust-строка под видео: цвет зашит #424242 — на тёмном не читается. */
+.landing-theme-dark .hsv-mock .trust-line,
+.landing-theme-dark .hsv-mock .trust-line b {
+  color: #9ca3af;
+}
+.landing-theme-dark .hsv-mock .trust-line b svg {
+  color: #b79cf2;
+}
+/* Рамка вокруг видео — тонкая брендовая, а не толстая светло-серая.
+   Заливка — плоский эквивалент бренда 12 % (#25163d), а не полупрозрачный слой:
+   сквозь прозрачную подложку просвечивал засвет и размывал экран видео. */
+.landing-theme-dark .hsv-mock .video-ph {
+  border-width: 1px;
+  background: #25163d;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+/* FAQ-аккордеон. */
+.landing-theme-dark .faq-mock {
+  --border-default: rgba(125, 76, 207, 0.28);
+  --border-hover: rgba(125, 76, 207, 0.6);
+  --text-title: rgba(255, 255, 255, 0.9);
+  --icon: #9ca3af;
+  --brand-100: #7d4ccf; /* раскрытый вопрос — чистым брендом, как акцент страницы */
+  --surface-section: transparent;
+}
+.landing-theme-dark .faq-mock .faq-item {
+  background: rgba(125, 76, 207, 0.12);
+}
+/* Ховер не перекрашивает вопрос в фиолетовый — текст и иконка держат свой цвет,
+   отклик даёт подсветка рамки. `:not([open])` обязателен: у раскрытого вопроса
+   фиолетовый остаётся, и без отсечки этот селектор перебивал бы его по весу. */
+.landing-theme-dark .faq-mock .faq-item:not([open]):hover .faq-item__q-text {
+  color: var(--text-title);
+}
+.landing-theme-dark .faq-mock .faq-item:not([open]):hover .faq-item__icon {
+  color: var(--icon);
+}
+
+/* Плитки возможностей (FeatureGrid variant="mock"). */
+.landing-theme-dark .fg-mock {
+  --brand-12: rgba(125, 76, 207, 0.18);
+  --text-title: rgba(255, 255, 255, 0.9);
+  --text-secondary: #9ca3af;
+  --border-default: rgba(125, 76, 207, 0.28);
+  --surface-page: #190f29;
+  --surface-section: rgba(125, 76, 207, 0.12);
+}
+
+/* ─── Стрелки каруселей ──────────────────────────────────────────────
+   У трёх моков стрелки залиты `#fff` литералом, а текст берут из токена темы.
+   На тёмном получалось белое на белом — кнопка исчезала (видно на планшете и
+   мобилке, где стрелки вообще показываются). Приводим их к вторичной кнопке DS:
+   бренд 12 % с бордером бренд 48 %. */
+.landing-theme-dark .fg-mock .fg-nav button,
+.landing-theme-dark .diagrams-mock .repts__navbtn,
+.landing-theme-dark .revx-mock .revx__navbtn {
+  background: rgba(125, 76, 207, 0.12);
+  border-color: rgba(125, 76, 207, 0.48);
+  color: rgba(255, 255, 255, 0.9);
+}
+.landing-theme-dark .fg-mock .fg-nav button:not(:disabled):hover,
+.landing-theme-dark .diagrams-mock .repts__navbtn:not(:disabled):hover,
+.landing-theme-dark .revx-mock .revx__navbtn:not(:disabled):hover {
+  background: rgba(125, 76, 207, 0.24);
+  border-color: #7d4ccf;
+  color: #ffffff;
+}
+
+/* Вторичный CTA-мок и мобильный CTA. */
+.landing-theme-dark .cta-secondary,
+.landing-theme-dark .ctam {
+  --brand-12: rgba(125, 76, 207, 0.18);
+  --brand-hover: #8f63d9;
+  --border-default: rgba(125, 76, 207, 0.28);
+  --text-title: rgba(255, 255, 255, 0.9);
+  --skel: rgba(255, 255, 255, 0.12);
+  --skel-strong: rgba(255, 255, 255, 0.2);
+  --surface-section: rgba(125, 76, 207, 0.12);
+}
+
+/* Диаграммы, шаги, галерея табов, отзывы. */
+.landing-theme-dark .diagrams-mock,
+.landing-theme-dark .steps-mock,
+.landing-theme-dark .tabsg-mock,
+.landing-theme-dark .revx-mock {
+  --brand-12: rgba(125, 76, 207, 0.18);
+  --brand-hover: #8f63d9;
+  --border: rgba(125, 76, 207, 0.28);
+  --border-default: rgba(125, 76, 207, 0.28);
+  --text-title: rgba(255, 255, 255, 0.9);
+  --text-secondary: #9ca3af;
+  --surface-section: rgba(125, 76, 207, 0.12);
+}
+
+/* ─── Шапка: сплошная, без просветов ────────────────────────────────
+   Шапка липкая и едет над контентом — полупрозрачная секционная подложка дала
+   бы просвечивание. Ставим цвет страницы. */
+.landing-theme-dark header[data-kt-header] > div {
+  background-color: var(--color-surface-page);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ТЁМНЫЙ ЛЕНДИНГ КОНФЕРЕНЦИИ (kaiten-conf-2026)
+   ══════════════════════════════════════════════════════════════════════
+
+   У конференции своя тёмная палитра и свои приёмы (аврора, градиентные
+   заголовки, проявление секций при скролле) — она сделана до того, как в DS
+   появилась тема V01-dark, и живёт на проде в этом виде.
+
+   Чтобы обе тёмные страницы работали, правила конференции ограничены её
+   собственным скоупом: `:has([data-comp='speaker_grid'])` — сетка спикеров
+   есть только у неё. Всё, что выше, — V01-dark, база для новых тёмных
+   лендингов; ничего из этого блока на них не попадает.
+
+   Новый тёмный лендинг ничего отсюда не наследует. Если конференцию будут
+   переводить на V01-dark — этот блок удаляется целиком.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Фон документа под конференцией — её собственный, а не V01-dark. */
+html:has(.landing-theme-dark [data-comp='speaker_grid']) {
+  background: #0d0b14;
+}
+
+/**
  * Тёмная схема лендинга — активируется, когда spec.theme = "dark".
  *
  * Рендер (render-spec-react / render-landing) оборачивает страницу в
- * `.landing-theme-dark`. Компоненты завода читают семантические токены
+ * `.landing-theme-dark:has([data-comp='speaker_grid'])`. Компоненты завода читают семантические токены
  * (`--color-*`) и кнопочные токены — здесь мы переопределяем их на тёмную
  * палитру, и вся token-based вёрстка (Hero, FeatureGrid, MediaCopy, Timeline,
  * SpeakerCard, RegistrationCta/Form, StatStrip, LogoCloud, шапка/подвал…)
@@ -14,7 +435,7 @@
  * FAQAccordion (`.faq-mock`), его переопределяем адресно ниже.
  */
 
-.landing-theme-dark {
+.landing-theme-dark:has([data-comp='speaker_grid']) {
   /* ─── Семантические токены ──────────────────────────────────────── */
   --color-text-primary: #f4f2fb;
   --color-text-secondary: #a89fc4;
@@ -41,19 +462,19 @@
 }
 
 /* ─── Крупный тег-eyebrow в hero (больше кегль и подложка) ──────────── */
-.landing-theme-dark [data-comp="hero.eyebrow"] > span {
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="hero.eyebrow"] > span {
   padding: 0.5rem 1.125rem;
   font-size: 0.9375rem;
 }
 @media (min-width: 768px) {
-  .landing-theme-dark [data-comp="hero.eyebrow"] > span {
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="hero.eyebrow"] > span {
     padding: 0.625rem 1.375rem;
     font-size: 1.0625rem;
   }
 }
 
 /* ─── Отступ под липкую шапку при переходе по якорям навигации ──────── */
-.landing-theme-dark > div[data-comp] {
+.landing-theme-dark:has([data-comp='speaker_grid']) > div[data-comp] {
   scroll-margin-top: 88px;
 }
 
@@ -62,7 +483,7 @@
    тёмный лендинг (:has), чтобы не менять поведение остального сайта.
    Уважаем prefers-reduced-motion — для таких пользователей резкий переход. */
 @media (prefers-reduced-motion: no-preference) {
-  :root:has(.landing-theme-dark) {
+  :root:has(.landing-theme-dark [data-comp='speaker_grid']) {
     scroll-behavior: smooth;
   }
 }
@@ -70,8 +491,8 @@
 /* ─── Градиентный текст (фиолет → циан, цвета из hero-мотива) ───────── */
 /* Заголовки секций (h2) и акцентное слово в hero заливаются градиентом —
    единый яркий приём по всей странице. Тело текста не трогаем (читаемость). */
-.landing-theme-dark [data-comp="hero.title"] span,
-.landing-theme-dark h2 {
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="hero.title"] span,
+.landing-theme-dark:has([data-comp='speaker_grid']) h2 {
   background-image: linear-gradient(
     90deg,
     var(--h2-from, #8b5cf0) 0%,
@@ -98,18 +519,18 @@
     transform: none;
   }
 }
-.landing-theme-dark .reveal-section {
+.landing-theme-dark:has([data-comp='speaker_grid']) .reveal-section {
   animation: landing-reveal both;
   animation-timeline: view();
   animation-range: entry 0% cover 22%;
 }
 @supports not (animation-timeline: view()) {
-  .landing-theme-dark .reveal-section {
+  .landing-theme-dark:has([data-comp='speaker_grid']) .reveal-section {
     animation: landing-reveal 0.6s ease-out both;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .landing-theme-dark .reveal-section {
+  .landing-theme-dark:has([data-comp='speaker_grid']) .reveal-section {
     animation: none;
   }
 }
@@ -120,7 +541,7 @@
    background-position заставляли браузер перерисовывать фон на КАЖДЫЙ кадр
    скролла (главный источник джанка). Теперь статичный градиент: прокручивается
    вместе со страницей, композитится один раз. Пятна те же. */
-.landing-theme-dark {
+.landing-theme-dark:has([data-comp='speaker_grid']) {
   background-image:
     radial-gradient(38% 40% at 18% 22%, rgba(139, 92, 240, 0.20), transparent 60%),
     radial-gradient(34% 36% at 82% 16%, rgba(111, 229, 255, 0.14), transparent 60%),
@@ -142,18 +563,18 @@
    fixed (а не sticky) — потому что sticky ограничен своей короткой обёрткой-
    секцией и по странице не держится. Стекло убрано (это был самый тяжёлый при
    скролле слой — размывался каждый кадр). Контент компенсируем padding-top. */
-.landing-theme-dark header {
+.landing-theme-dark:has([data-comp='speaker_grid']) header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 40;
 }
-.landing-theme-dark header > div {
+.landing-theme-dark:has([data-comp='speaker_grid']) header > div {
   background-color: var(--color-surface-page) !important;
 }
 /* Отступ под фиксированную шапку (высота ≈ 65px), чтобы hero не прятался. */
-.landing-theme-dark {
+.landing-theme-dark:has([data-comp='speaker_grid']) {
   padding-top: 65px;
 }
 
@@ -162,65 +583,65 @@
    секциями ровно один секционный шаг (96 на десктопе), а не удвоенный.
    Финальный CTA (registration_cta) не трогаем — у него свой акцентный
    отступ по правилу завода. Скоуп — только тёмный лендинг. */
-.landing-theme-dark [data-comp="speaker_grid"] > section,
-.landing-theme-dark [data-comp="stats"] > section,
-.landing-theme-dark [data-comp="timeline_roadmap"] > section,
-.landing-theme-dark [data-comp="social_proof"] > section,
-.landing-theme-dark [data-comp="features"] > section,
-.landing-theme-dark [data-comp="logo_cloud"] > section,
-.landing-theme-dark [data-comp="video_gallery"] > section,
-.landing-theme-dark [data-comp="cta_banner"] > section {
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="speaker_grid"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="stats"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="timeline_roadmap"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="social_proof"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="features"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="logo_cloud"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="video_gallery"] > section,
+.landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="cta_banner"] > section {
   padding-top: 48px;
   padding-bottom: 0;
 }
 @media (min-width: 768px) {
-  .landing-theme-dark [data-comp="speaker_grid"] > section,
-  .landing-theme-dark [data-comp="stats"] > section,
-  .landing-theme-dark [data-comp="timeline_roadmap"] > section,
-  .landing-theme-dark [data-comp="social_proof"] > section,
-  .landing-theme-dark [data-comp="features"] > section,
-  .landing-theme-dark [data-comp="logo_cloud"] > section,
-  .landing-theme-dark [data-comp="video_gallery"] > section,
-  .landing-theme-dark [data-comp="cta_banner"] > section {
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="speaker_grid"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="stats"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="timeline_roadmap"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="social_proof"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="features"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="logo_cloud"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="video_gallery"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="cta_banner"] > section {
     padding-top: 64px;
   }
 }
 @media (min-width: 1024px) {
-  .landing-theme-dark [data-comp="speaker_grid"] > section,
-  .landing-theme-dark [data-comp="stats"] > section,
-  .landing-theme-dark [data-comp="timeline_roadmap"] > section,
-  .landing-theme-dark [data-comp="social_proof"] > section,
-  .landing-theme-dark [data-comp="features"] > section,
-  .landing-theme-dark [data-comp="logo_cloud"] > section,
-  .landing-theme-dark [data-comp="video_gallery"] > section,
-  .landing-theme-dark [data-comp="cta_banner"] > section {
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="speaker_grid"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="stats"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="timeline_roadmap"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="social_proof"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="features"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="logo_cloud"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="video_gallery"] > section,
+  .landing-theme-dark:has([data-comp='speaker_grid']) [data-comp="cta_banner"] > section {
     padding-top: 96px;
   }
 }
 
 /* ─── Форма регистрации: белые поля на градиентной панели (как на апрельском) ── */
-.landing-theme-dark form input[type="text"],
-.landing-theme-dark form input[type="email"],
-.landing-theme-dark form input[type="tel"],
-.landing-theme-dark form select {
+.landing-theme-dark:has([data-comp='speaker_grid']) form input[type="text"],
+.landing-theme-dark:has([data-comp='speaker_grid']) form input[type="email"],
+.landing-theme-dark:has([data-comp='speaker_grid']) form input[type="tel"],
+.landing-theme-dark:has([data-comp='speaker_grid']) form select {
   background-color: #ffffff !important;
   color: #221a2e;
   border-color: transparent;
 }
-.landing-theme-dark form input::placeholder {
+.landing-theme-dark:has([data-comp='speaker_grid']) form input::placeholder {
   color: #8b8b9a;
 }
-.landing-theme-dark form select {
+.landing-theme-dark:has([data-comp='speaker_grid']) form select {
   color: #5a5a68;
 }
 
 /* Заголовок финального блока: «Регистрация» белым, дата — градиентом (1-в-1 апрель) */
-.landing-theme-dark h2.reg-heading {
+.landing-theme-dark:has([data-comp='speaker_grid']) h2.reg-heading {
   -webkit-text-fill-color: #f4f2fb;
   color: #f4f2fb;
   background: none;
 }
-.landing-theme-dark h2.reg-heading .reg-accent {
+.landing-theme-dark:has([data-comp='speaker_grid']) h2.reg-heading .reg-accent {
   background-image: linear-gradient(90deg, #8b5cf0 0%, #a78bfa 45%, #6fe5ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -229,13 +650,36 @@
 }
 
 /* ─── FAQAccordion: собственная светлая палитра → тёмная ───────────── */
-.landing-theme-dark .faq-mock {
+.landing-theme-dark:has([data-comp='speaker_grid']) .faq-mock {
   --surface-section: #0d0b14;
   --text-title: #f4f2fb;
   --icon: #a89fc4;
   --brand-100: #b79cf2;
   --border-hover: rgba(139, 92, 240, 0.6);
 }
-.landing-theme-dark .faq-mock .faq-item {
+.landing-theme-dark:has([data-comp='speaker_grid']) .faq-mock .faq-item {
   background: #1a1527;
+}
+
+
+/* Белые чекбоксы согласий на тёмных лендингах (кастомная отрисовка: нативный
+   accent-color красит только галочку в отмеченном состоянии, сам серый квадрат
+   остаётся — поэтому рисуем бокс сами). Светлые лендинги не затрагиваем. */
+.landing-theme-dark input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #ffffff;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+.landing-theme-dark input[type='checkbox']:checked {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23190f29' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l4.5 4.5L19 6'/%3E%3C/svg%3E");
+  background-size: 12px 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: #ffffff;
 }

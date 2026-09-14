@@ -4,7 +4,12 @@
     {
       "name": "web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "apps/web", "run", "dev"],
+      "runtimeArgs": [
+        "--prefix",
+        "apps/web",
+        "run",
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
     },
@@ -16,10 +21,61 @@
       "autoPort": true
     },
     {
+      "name": "out-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4321",
+        "--directory",
+        "out"
+      ],
+      "port": 4321
+    },
+    {
       "name": "storybook",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "packages/ui", "run", "storybook"],
+      "runtimeArgs": [
+        "--prefix",
+        "packages/ui",
+        "run",
+        "storybook"
+      ],
       "port": 6006
+    },
+    {
+      "name": "presentation-v02",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4322",
+        "--directory",
+        "design-system/presentation-v02"
+      ],
+      "port": 4322
+    },
+    {
+      "name": "presentation-cf24",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/mi/AppData/Local/Temp/claude/C--Users-mi-Desktop-Figma-Claude--------------/28bca7ad-0de4-4d64-a06b-4d4222fa586a/scratchpad/static-nostore.js",
+        ".claude/worktrees/bold-poincare-203375/design-system/presentation-v02",
+        "4332"
+      ],
+      "port": 4332
+    },
+    {
+      "name": "presentation-2026",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4324",
+        "--directory",
+        "design-system/presentation-v02"
+      ],
+      "port": 4324
     }
   ]
 }

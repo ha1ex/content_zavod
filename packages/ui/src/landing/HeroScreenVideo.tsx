@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState, type ReactNode } from 'react';
 
 /**
@@ -52,14 +54,18 @@ export interface HeroScreenVideoProps {
   poster?: string;
   /** Подпись под кнопкой play в плейсхолдере (когда нет видео). */
   placeholderLabel?: ReactNode;
-  /** Пункты trust-строки. Если не передать — нейтральные плейсхолдеры. */
+  /**
+   * Пункты trust-строки. Не передан — нейтральные плейсхолдеры (вид шаблона);
+   * пустой массив — строка не рендерится вовсе (когда пункты перенесены
+   * в подзаголовок или их нет в ТЗ).
+   */
   trustItems?: HeroTrustItem[];
 }
 
 const STYLE = `
 .hsv-mock{
   --sp-1:4px; --sp-1-5:6px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-24:96px;
-  --radius-lg:8px; --radius-2xl:16px;
+  --radius-lg:8px; --radius-xl:12px; --radius-2xl:16px; --radius-3xl:24px;
   --fw-reg:400; --fw-med:500; --fw-semi:600; --ls:0;
   --brand-100:#7d4ccf; --brand-hover:#6f43b8; --brand-12:#efe9f9; --brand-12k:rgba(125,76,207,.12); --border-default:#e0e0e0;
   --surface-section:#f5f5f5; --text-title:#2d2d2d; --text-secondary:#757575;
@@ -69,7 +75,9 @@ const STYLE = `
   background:radial-gradient(900px 420px at 50% -140px, var(--brand-12) 0%, rgba(239,233,249,0) 70%), linear-gradient(#fff,#fff);
 }
 .hsv-mock .hsv-glow{position:absolute;width:720px;height:520px;left:50%;top:-220px;transform:translateX(-50%);border-radius:9999px;background:linear-gradient(-90deg,#e298ff,#6fe5ff);filter:blur(220px);opacity:.28;pointer-events:none;z-index:0}
-.hsv-mock .hero__grid{position:relative;z-index:1}
+.hsv-mock .hero__grid{position:relative;z-index:2}
+/* белая растушёвка у верхнего края: засвет не должен подниматься под шапку сайта */
+.hsv-mock .hsv-fade{position:absolute;left:0;right:0;top:0;height:112px;z-index:1;pointer-events:none;background:linear-gradient(to bottom,#fff 0,rgba(255,255,255,0) 100%)}
 .hsv-mock, .hsv-mock *{box-sizing:border-box;}
 .hsv-mock .hsv-container{max-width:1216px; margin:0 auto; padding:0 var(--sp-4);}
 .hsv-mock .hero__grid{display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--sp-12);}
@@ -78,14 +86,16 @@ const STYLE = `
 .hsv-mock .sh-badge__text{font-size:14px; line-height:20px; font-weight:var(--fw-med); letter-spacing:var(--ls); color:var(--brand-100); white-space:nowrap;}
 .hsv-mock h1{font-size:48px; line-height:52px; font-weight:var(--fw-semi); letter-spacing:0; margin:var(--sp-4) 0 var(--sp-5);}
 .hsv-mock .hero__sub{font-size:20px; line-height:28px; color:var(--text-title); font-weight:var(--fw-reg); max-width:760px; margin:0 auto var(--sp-8);}
+/* Приписка под подзаголовком («300 + готовых сценариев») — фирменным фиолетовым. */
+.hsv-mock .hero__sub .hsv-sub-line{display:block; margin-top:var(--sp-2); color:var(--brand-100);}
 .hsv-mock .hero__cta{display:flex; gap:var(--sp-3); flex-wrap:wrap; justify-content:center;}
 .hsv-mock .hsv-btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-1); height:48px; padding:var(--sp-3) var(--sp-5); font-size:16px; line-height:24px; font-weight:var(--fw-med); letter-spacing:var(--ls); border-radius:var(--radius-lg); border:none; cursor:pointer; text-decoration:none; white-space:nowrap; background:var(--brand-100); color:#fff; transition:background .18s;}
 .hsv-mock .hsv-btn:hover{background:var(--brand-hover);}
 .hsv-mock .hero__visual{width:100%; display:flex; justify-content:center;}
-.hsv-mock .video-ph{width:100%; max-width:1008px; margin:0 auto; aspect-ratio:16/9; border-radius:var(--radius-2xl); background:var(--surface-section); border:1px solid var(--border-default); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-4); box-shadow:0 24px 60px -30px rgba(45,45,45,.22); position:relative; overflow:hidden;}
+.hsv-mock .video-ph{width:100%; max-width:1008px; margin:0 auto; aspect-ratio:16/9; border-radius:var(--radius-3xl); background:var(--surface-section); border:4px solid var(--border-default); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-4); box-shadow:0 0 40px -12px rgba(45,45,45,.22); position:relative; overflow:hidden;}
 .hsv-mock .video-ph__video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; border:none; background:#000; z-index:0;}
 .hsv-mock .video-ph__play{position:relative; z-index:2; width:72px; height:72px; padding:0; border:none; cursor:pointer; border-radius:9999px; background:var(--brand-100); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px -8px rgba(125,76,207,.5);}
-.hsv-mock .video-ph__play svg{width:30px; height:30px; margin-left:4px;}
+.hsv-mock .video-ph__play svg{width:30px; height:30px; margin-left:2px;}
 .hsv-mock .video-ph__label{position:relative; z-index:2; font-size:18px; line-height:28px; color:var(--text-secondary);}
 .hsv-mock .trust-line{display:flex; align-items:center; justify-content:center; flex-wrap:nowrap; gap:16px; color:#424242; font-size:16px; line-height:22px; letter-spacing:0; min-width:0; max-width:100%; overflow:hidden; padding-top:0; padding-bottom:24px; margin-top:16px;}
 .hsv-mock .trust-line b{display:inline-flex; align-items:center; gap:8px; white-space:nowrap; color:#424242; font-weight:400;}
@@ -104,14 +114,14 @@ const STYLE = `
 @keyframes hsv-trustmarquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 @media(prefers-reduced-motion:reduce){.hsv-mock .trust-track{animation:none;}}
 @media(max-width:980px){.hsv-mock .hero__grid{gap:var(--sp-10);} .hsv-mock .hero__copy{max-width:680px;}}
+@media(max-width:1023px){.hsv-mock .video-ph{border-radius:var(--radius-xl);}}
 @media(max-width:767px){
   .hsv-mock{padding-top:var(--sp-6);}
   .hsv-mock .hero__grid{align-items:flex-start; text-align:left;}
   .hsv-mock .hero__copy{text-align:left;}
-  .hsv-mock .hero__cta{justify-content:flex-start;}
+  .hsv-mock .hero__cta{justify-content:center;}
   .hsv-mock h1{font-size:36px; line-height:40px;}
   .hsv-mock .hero__sub{font-size:16px; line-height:24px;}
-  .hsv-mock .video-ph{border-radius:4px;}
   .hsv-mock .video-ph__play{width:56px; height:56px;}
   .hsv-mock .video-ph__play svg{width:24px; height:24px;}
   .hsv-mock .video-ph__label{font-size:16px; line-height:24px;}
@@ -166,7 +176,8 @@ export function HeroScreenVideo({
   placeholderLabel = 'Видео о продукте',
   trustItems,
 }: HeroScreenVideoProps) {
-  const data = trustItems && trustItems.length ? trustItems : PLACEHOLDER_TRUST;
+  // `undefined` — вид шаблона с плейсхолдерами; `[]` — осознанное «строки нет».
+  const data = trustItems ?? PLACEHOLDER_TRUST;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const play = () => { videoRef.current?.play(); };
@@ -175,6 +186,7 @@ export function HeroScreenVideo({
     <section className="hsv-mock" aria-label="Первый экран">
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="hsv-glow" aria-hidden="true" />
+      <div className="hsv-fade" aria-hidden="true" />
       <div className="hsv-container">
         <div className="hero__grid">
           <div className="hero__copy">
@@ -218,14 +230,16 @@ export function HeroScreenVideo({
             </div>
           </div>
 
-          <div className="trust-line">
-            <div className="trust-track">
-              <TrustSet items={data} />
-              <span className="sep trust-gap" />
-              <TrustSet items={data} ariaHidden />
-              <span className="sep trust-gap" />
+          {data.length > 0 && (
+            <div className="trust-line">
+              <div className="trust-track">
+                <TrustSet items={data} />
+                <span className="sep trust-gap" />
+                <TrustSet items={data} ariaHidden />
+                <span className="sep trust-gap" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

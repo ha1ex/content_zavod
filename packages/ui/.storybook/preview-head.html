@@ -1,0 +1,18 @@
+<!--
+  Roboto для Storybook. В приложении (apps/web) шрифт подключает next/font и
+  отдаёт переменную --font-roboto; здесь next/font недоступен, поэтому грузим
+  тот же Roboto с Google Fonts и объявляем ту же переменную, чтобы токен
+  --font-sans из tokens.css резолвился одинаково в обеих средах.
+  Подмножество cyrillic обязательно — весь копирайт моков на русском.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic,latin"
+  rel="stylesheet"
+/>
+<style>
+  :root {
+    --font-roboto: 'Roboto';
+  }
+</style>

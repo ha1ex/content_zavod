@@ -81,6 +81,15 @@ export type {
   IndustryProps,
 } from './IndustryPickerSection';
 
+export { PartnerDirectory } from './PartnerDirectory';
+export type {
+  PartnerDirectoryProps,
+  PartnerItemProps,
+  PartnerTypeProps,
+  PartnerRegionProps,
+  PartnerAccent,
+} from './PartnerDirectory';
+
 export { ComparisonTable } from './ComparisonTable';
 export type {
   ComparisonTableProps,
@@ -134,6 +143,9 @@ export { ReviewSlider } from './Review';
 export type { Review, ReviewSliderProps } from './Review';
 
 export { TemplateGalleryMock } from './TemplateGalleryMock';
+
+export { HeroScreenVideo } from './HeroScreenVideo';
+export type { HeroScreenVideoProps, HeroTrustItem } from './HeroScreenVideo';
 
 export { HeroScreenInterface } from './HeroScreenInterface';
 export type {

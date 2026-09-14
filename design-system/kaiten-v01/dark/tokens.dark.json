@@ -1,0 +1,121 @@
+{
+  "version": "0.1.0",
+  "source": "Figma «Landing DS» — desktop node 2732:43296, mobile node 2732:43758 (лендинг конференции «AI в управлении компанией: тренды 2026»)",
+  "notes": "Тёмная тема поверх Kaiten DS V01. Типографика, спейсинги, радиусы и сетка наследуются из ../tokens.json без изменений — здесь только то, что тема переопределяет. Провенанс значений: var = Figma-переменная, px = пипетка по рендеру макета, derived = выведено по системе (в макете состояния нет). Не подключено к генератору packages/ui/src/tokens.css — это референс.",
+  "principle": "Все поверхности — бренд #7d4ccf с альфой 8/12/15/24/48 % поверх тёмного фона. Новый уровень глубины берётся следующей альфой, а не новым хексом.",
+
+  "colors": {
+    "background": {
+      "page": { "value": "#190f29", "provenance": "var", "figma": "Background/White/Primary", "usage": "фон десктопной страницы" },
+      "deep": { "value": "#130b1f", "provenance": "var", "figma": "Background/White/Secondary", "usage": "фон мобильной страницы" },
+      "ink": { "value": "#030712", "provenance": "var", "figma": "Background/Gray/Secondary_alt_2", "usage": "кнопка бургер-меню" }
+    },
+
+    "brand": {
+      "100": { "value": "#7d4ccf", "provenance": "var", "figma": "Colors/Kaiten/Brand 100K" },
+      "48": { "value": "#7d4ccf7a", "provenance": "var", "figma": "Colors/Kaiten/Brand 48K", "usage": "бордер вторичной кнопки" },
+      "24": { "value": "#7d4ccf3d", "provenance": "px", "usage": "бордер выделенной карточки, чипы на мобилке" },
+      "15": { "value": "#7d4ccf26", "provenance": "var", "figma": "Badges/Primary/Background" },
+      "12": { "value": "#7d4ccf1f", "provenance": "var", "figma": "Button/Primary Outline/Background", "usage": "чипы, плитки иконок, вторичная кнопка, карточки" },
+      "cyan": { "value": "#00cffe", "provenance": "px", "usage": "вторая точка всех градиентов" }
+    },
+
+    "surfaceFlat": {
+      "_comment": "Плоские эквиваленты оверлеев — для мест, где полупрозрачный слой недоступен (SVG, e-mail, экспорт).",
+      "raised-on-page": { "value": "#25163d", "provenance": "px", "equals": "brand 12 % на #190f29" },
+      "border-soft-on-page": { "value": "#311d51", "provenance": "px", "equals": "brand 24 % на #190f29" },
+      "border-strong-on-page": { "value": "#4f2f83", "provenance": "px", "equals": "brand 48 % на #190f29" },
+      "raised-on-deep": { "value": "#201334", "provenance": "px", "equals": "brand 12 % на #130b1f" },
+      "chip-on-deep": { "value": "#2b1a47", "provenance": "px", "equals": "brand 24 % на #130b1f" }
+    },
+
+    "text": {
+      "title": { "value": "#ffffffe5", "provenance": "var", "figma": "Text/Title Color" },
+      "brand": { "value": "#ffffff", "provenance": "var", "figma": "Text/Brand Color" },
+      "secondary": { "value": "#9ca3af", "provenance": "var", "figma": "Text/Secondary Text Color" },
+      "tertiary": { "value": "#9e9e9e", "provenance": "var", "figma": "Text/Tertiary Text Color" }
+    },
+
+    "icon": {
+      "default": { "value": "#ffffff", "provenance": "var", "figma": "icon-color" },
+      "muted": { "value": "#d1d5db", "provenance": "var", "figma": "Mobile nav menu button/Icon color" }
+    },
+
+    "input": {
+      "_comment": "Поля ввода в тёмной теме остаются светлыми — так в макете.",
+      "background": { "value": "#ffffff", "provenance": "var", "figma": "Input/Background" },
+      "text": { "value": "#424242", "provenance": "var", "figma": "Text/Text Color" },
+      "placeholder": { "value": "#9ca3af", "provenance": "var", "figma": "Input/Placeholder text color" },
+      "border": { "value": "#d1d5db", "provenance": "var", "figma": "Border/Tertiary" },
+      "checkbox": { "value": "#ffffff", "provenance": "var", "figma": "Checkbox/Background" }
+    }
+  },
+
+  "gradients": {
+    "pill": {
+      "value": "linear-gradient(90deg, #47317d 0%, #0d6e93 100%)",
+      "provenance": "px",
+      "usage": "бейджи дат, «1 день стратегии», «БОНУСЫ», «АУДИТОРИЯ»"
+    },
+    "heading": {
+      "value": "linear-gradient(90deg, #7d4ccf 0%, #00cffe 100%)",
+      "provenance": "px",
+      "usage": "градиентная часть H2 («Расписание конференции», «до 20 апреля»), background-clip: text"
+    },
+    "accent": {
+      "value": "linear-gradient(180deg, #00cffe 0%, #7d4ccf 100%)",
+      "provenance": "px",
+      "usage": "цифры метрик и «AI» в H1, background-clip: text"
+    },
+    "cardMetric": {
+      "value": "linear-gradient(180deg, rgba(125,76,207,0.12) 0%, rgba(125,76,207,0.02) 100%)",
+      "provenance": "px",
+      "measured": { "top": "#24153b", "bottom": "#1a102c", "on": "#190f29" }
+    },
+    "cta": {
+      "value": "linear-gradient(107deg, #3a2065 0%, #262b57 45%, #2f5c8a 100%)",
+      "provenance": "px",
+      "approximation": true,
+      "measuredCorners": { "topLeft": "#311f53", "topRight": "#133e5e", "bottomLeft": "#3c2169", "bottomRight": "#355e8c" },
+      "usage": "блок регистрации"
+    },
+    "footer": {
+      "value": "linear-gradient(180deg, #7347bf 0%, #7d4ccf 100%)",
+      "provenance": "px",
+      "usage": "футер — единственная светлая брендовая зона страницы",
+      "asset": "над плашкой в макете лежит декоративная растровая «волна»; ассет не экспортирован, см. reference/dark-desktop-1920.png"
+    }
+  },
+
+  "components": {
+    "button": { "height": 48, "radius": 8, "paddingX": 24, "font": "md/Medium", "provenance": "px" },
+    "pill": { "height": 32, "radius": "full", "paddingX": 16, "font": "sm/Medium", "provenance": "px" },
+    "chip": { "height": 28, "radius": "full", "paddingX": 12, "font": "sm/Regular", "provenance": "px" },
+    "iconTile": { "size": 56, "radius": 12, "background": "brand.12", "glyph": 24, "provenance": "px" },
+    "cardMetric": { "width": 280, "height": 180, "radius": 16, "provenance": "px" },
+    "cardFeatured": { "radius": 24, "border": "1px brand.24", "provenance": "px" },
+    "cta": { "radius": 24, "width": 1216, "provenance": "px" },
+    "speakerPhoto": { "radius": 8, "treatment": "grayscale(1)", "provenance": "px" },
+    "burger": { "size": 40, "radius": 8, "background": "background.ink", "provenance": "var" }
+  },
+
+  "grid": {
+    "_comment": "Совпадает с V01: контейнер 1216, гуттер 32. Отличий у тёмной темы нет.",
+    "desktop": { "artboard": 1920, "container": 1216, "outerMargin": 352, "gutter": 32, "columns": { "metrics": 280, "thirds": 384, "halves": 592 } },
+    "mobile": { "artboard": 360, "container": 328, "margin": 16 }
+  },
+
+  "rhythm": {
+    "pillToHeading": 24,
+    "headingToContent": 72,
+    "provenance": "px"
+  },
+
+  "derived": {
+    "_comment": "В макете этих состояний нет — значения выведены по системе. Проверьте у дизайнера перед продакшеном.",
+    "button.primary.hover": "#8d5fd8",
+    "button.primary.active": "#6f43b8",
+    "button.secondary.hover": "brand.24",
+    "input.focus": "2px outline brand.100, offset 2px"
+  }
+}

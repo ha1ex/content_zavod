@@ -54,6 +54,16 @@ async function fetchText(url: string): Promise<string> {
   return res.text();
 }
 
+async function fetchBuffer(url: string): Promise<Buffer | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return Buffer.from(await res.arrayBuffer());
+  } catch {
+    return null;
+  }
+}
+
 /** Все строковые значения из props секции — для дампа контента в README. */
 function collectStrings(o: unknown, acc: string[]): void {
   if (typeof o === 'string') {
@@ -90,7 +100,7 @@ function makeReadme(spec: LandingSpec, slug: string, tokens: Record<string, stri
 
 ## Дизайн-система (Kaiten V01)
 
-- **Шрифт:** Roboto (в \`styles.css\` — фолбэк; подключите свой / Google Fonts).
+- **Шрифт:** Roboto — самохостится в \`assets/fonts/\` (woff2), подключён через \`@font-face\` в \`styles.css\`. Ничего доставлять не нужно; фолбэк — system-ui.
 - **Контейнер:** max-width **1216px**, центрируется авто-отступами; на десктопе боковой padding 0.
 - **Палитра (ключевое):**
   - Акцент / кнопки: \`${t('--color-violet-100', '#7d4ccf')}\` (soft \`${t('--color-violet-12', '#efe9f9')}\`)
@@ -180,6 +190,35 @@ export async function buildStaticHandoff(
     `.rmp__item .rmp__dot{background:#7d4ccf !important;transform:none !important}\n` +
     `.rmp{--p:1}\n` +
     `\n:root{--font-sans:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}\n`;
+
+  // 4b. Шрифты. next/font самохостит Roboto под /_next/static/media/*.woff2, а в
+  //     Tailwind-CSS они прописаны относительным url(../media/*.woff2) от исходного
+  //     /_next/static/css/. В архиве этой папки нет и файлов нет → шрифт не грузился,
+  //     и вёрстка падала на системный фолбэк (другие шрифты, переносы, отступы).
+  //     Скачиваем woff2 с завода в assets/fonts/ и переписываем ссылки на них.
+  const fontFiles: { name: string; buf: Buffer }[] = [];
+  {
+    const seen = new Set<string>();
+    for (const m of stylesCss.matchAll(/url\(\s*['"]?([^)'"]+?\.woff2?)(?:[?#][^)'"]*)?['"]?\s*\)/g)) {
+      const name = basename(m[1]!);
+      if (seen.has(name)) continue;
+      seen.add(name);
+      const ref = m[1]!;
+      const src = ref.startsWith('http')
+        ? ref
+        : ref.startsWith('/')
+          ? base + ref
+          : `${base}/_next/static/media/${name}`;
+      const buf = await fetchBuffer(src);
+      if (buf) fontFiles.push({ name, buf });
+    }
+    // любые url(...woff2) → на бандл assets/fonts/<basename> (относительно styles.css в корне пакета)
+    stylesCss = stylesCss.replace(
+      /url\(\s*(['"]?)([^)'"]*?([\w.~-]+\.woff2?))(?:[?#][^)'"]*)?\1\s*\)/g,
+      (_m, _q, _full, file) => `url("assets/fonts/${file}")`,
+    );
+  }
+
   stylesCss = stylesCss.replace(/url\(\s*\//g, `url(${base}/`);
 
   // 5. styles.scoped.css (+ дочистка краевых нескоупленных корневых селекторов)
@@ -340,6 +379,10 @@ export async function buildStaticHandoff(
     if (await fileExists(src)) {
       files.push({ archivePath: `landing-${slug}/assets/${basename(ref)}`, content: await readFile(src) });
     }
+  }
+  // шрифты (Roboto woff2) → assets/fonts/
+  for (const f of fontFiles) {
+    files.push({ archivePath: `landing-${slug}/assets/fonts/${f.name}`, content: f.buf });
   }
   // иконки
   for (const ic of iconFiles) {

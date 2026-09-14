@@ -23,25 +23,33 @@ const COLUMNS: { title: string; count: number; cards: Card[] }[] = [
     title: 'Очередь',
     count: 3,
     cards: [
-      { title: 'Свёрстать лендинг для рассылки', label: 'Дизайн', tone: 'violet', who: 'АК' },
-      { title: 'Подключить продуктовую аналитику', label: 'Аналитика', tone: 'blue', who: 'ИЛ' },
-      { title: 'Тексты для онбординг-писем', label: 'Контент', tone: 'green', who: 'МС' },
+      { title: 'Лендинг для рассылки', label: 'Дизайн', tone: 'violet', who: 'АК' },
+      { title: 'Продуктовая аналитика', label: 'Аналитика', tone: 'blue', who: 'ИЛ' },
+      { title: 'Онбординг-письма', label: 'Контент', tone: 'green', who: 'МС' },
     ],
   },
   {
     title: 'В работе',
     count: 2,
     cards: [
-      { title: 'Интеграция с CRM amoCRM', label: 'Backend', tone: 'orange', who: 'МС', check: '3/5' },
-      { title: 'Сценарий онбординга клиентов', label: 'Product', tone: 'violet', who: 'АС', check: '2/4' },
+      { title: 'Интеграция с amoCRM', label: 'Backend', tone: 'orange', who: 'МС', check: '3/5' },
+      { title: 'Сценарий онбординга', label: 'Product', tone: 'violet', who: 'АС', check: '2/4' },
+    ],
+  },
+  {
+    title: 'Согласование',
+    count: 2,
+    cards: [
+      { title: 'Гейт бренд-тона', label: 'Редактура', tone: 'violet', who: 'ЕР', check: '2/3' },
+      { title: 'Проверка доступности', label: 'Дизайн', tone: 'blue', who: 'АС', check: '5/6' },
     ],
   },
   {
     title: 'Готово',
     count: 2,
     cards: [
-      { title: 'Релиз мобильного приложения', label: 'Mobile', tone: 'green', who: 'ДВ', done: true },
-      { title: 'A/B-тест главной страницы', label: 'Аналитика', tone: 'blue', who: 'АК', done: true },
+      { title: 'Релиз приложения', label: 'Mobile', tone: 'green', who: 'ДВ', done: true },
+      { title: 'A/B-тест главной', label: 'Аналитика', tone: 'blue', who: 'АК', done: true },
     ],
   },
 ];
@@ -56,7 +64,7 @@ function Avatar({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Фирменный знак Kaiten: красный круг, мятный повёрнутый ромб, фиолетовый круг. */
+/** Фирменный знак Kaiten: красный круг, мятный повернутый ромб, фиолетовый круг. */
 function KaitenMark() {
   return <BrandLogo markOnly tone="dark" className="h-5 w-5" />;
 }

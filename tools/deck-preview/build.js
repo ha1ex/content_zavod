@@ -12,6 +12,8 @@ const path = require('path');
 
 const SRC = path.resolve(__dirname, '../../design-system/presentation-v02');
 const OUT = process.argv[2] ?? path.join(SRC, 'examples/preview.html');
+// Третий аргумент — какой файл собирать; по умолчанию дек контент-завода.
+const IN = process.argv[3] ?? 'examples/kaiten-content-factory.html';
 const read = (p) => fs.readFileSync(path.join(SRC, p), 'utf8');
 
 const mime = { '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' };
@@ -21,7 +23,7 @@ const dataUri = (file) => {
   return `data:${mime[ext]};base64,${buf.toString('base64')}`;
 };
 
-let html = read('examples/kaiten-content-factory.html');
+let html = read(IN);
 let css = [
   read('kaiten-slides.css'),
   read('theme-light.css'),
@@ -37,6 +39,7 @@ let css = [
 // специфичностью и держит первый ряд поверх текущего. Вырезаем.
 css = css.replace(/body:not\(:has\(\.slide:target\)\) \.nav-row:first-child \{[^}]*\}/g, '');
 
+css = css.split('.is-print ').join('').split('.is-print {').join('html {');
 css = css.split('[data-theme="dark"]').join('body:has(#th-dark:checked)')
          .split('[data-theme="comparison"]').join('body:has(#th-cmp:checked)')
          .split('[data-theme="light"]').join('body:has(#th-light:checked)');
@@ -107,6 +110,7 @@ ${radios}
     <label for="th-cmp">Сравнение</label>
   </div>
 </div>
+<button type="button" class="pdf-btn" onclick="window.print()">Сохранить в PDF</button>
 <div class="css-bar css-bar-bottom">
   <div class="css-nav">${navRows}</div>
 </div>

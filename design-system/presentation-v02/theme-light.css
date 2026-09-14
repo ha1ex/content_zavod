@@ -29,6 +29,7 @@
   --neutral-900:#2d2d2d;
   --violet-100:#7d4ccf;
   --violet-12:#efe9f9;
+  --violet-tint:#efe9f9;             /* светлая плашка под иконкой во всех темах */
 
   /* статусные пары 100/12 — для процессных лент и таймлайнов */
   --green-100:#4caf51;  --green-12:#e9f5ea;
@@ -38,7 +39,7 @@
   --lime-100:#a5ca00;   --lime-12:#f4f8e0;
 
   /* --- роли --- */
-  --stage-bg:var(--neutral-000);        /* поле вокруг слайда — белое */
+  --stage-bg:#e4e4e8;                   /* поле вокруг слайда — серое, кадр читается как лист */
   --surface-page:var(--neutral-000);
   --surface-frame:var(--neutral-100);   /* #F5F5F5 — между шаблонным #F2F2F2 и #FAFAFA */
   --surface-accent:var(--violet-12);

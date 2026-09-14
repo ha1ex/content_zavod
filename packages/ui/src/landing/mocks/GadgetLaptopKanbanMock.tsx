@@ -21,27 +21,41 @@ type Card = {
 const COLUMNS: { title: string; count: number; cards: Card[] }[] = [
   {
     title: 'Очередь',
-    count: 3,
+    count: 4,
     cards: [
-      { title: 'Свёрстать лендинг для рассылки', label: 'Дизайн', tone: 'violet', who: 'АК' },
-      { title: 'Подключить продуктовую аналитику', label: 'Аналитика', tone: 'blue', who: 'ИЛ' },
-      { title: 'Тексты для онбординг-писем', label: 'Контент', tone: 'green', who: 'МС' },
+      { title: 'Лендинг для рассылки', label: 'Дизайн', tone: 'violet', who: 'АК' },
+      { title: 'Продуктовая аналитика', label: 'Аналитика', tone: 'blue', who: 'ИЛ' },
+      { title: 'Онбординг-письма', label: 'Контент', tone: 'green', who: 'МС' },
+      { title: 'Брифы на страницы', label: 'Маркетинг', tone: 'orange', who: 'ЕР' },
     ],
   },
   {
     title: 'В работе',
-    count: 2,
+    count: 4,
     cards: [
-      { title: 'Интеграция с CRM amoCRM', label: 'Backend', tone: 'orange', who: 'МС', check: '3/5' },
-      { title: 'Сценарий онбординга клиентов', label: 'Product', tone: 'violet', who: 'АС', check: '2/4' },
+      { title: 'Интеграция с amoCRM', label: 'Backend', tone: 'orange', who: 'МС', check: '3/5' },
+      { title: 'Сценарий онбординга', label: 'Product', tone: 'violet', who: 'АС', check: '2/4' },
+      { title: 'Справка по тарифам', label: 'Контент', tone: 'green', who: 'ИЛ', check: '1/3' },
+      { title: 'Гейт домена страниц', label: 'Аналитика', tone: 'blue', who: 'ДВ', check: '4/6' },
+    ],
+  },
+  {
+    title: "Согласование",
+    count: 3,
+    cards: [
+      { title: "Гейт бренд-тона", label: "Редактура", tone: "violet", who: "ЕР", check: "2/3" },
+      { title: "Проверка доступности", label: "Дизайн", tone: "blue", who: "АС", check: "5/6" },
+      { title: "Сверка с реестром", label: "Продукт", tone: "orange", who: "МС", check: "1/2" },
     ],
   },
   {
     title: 'Готово',
-    count: 2,
+    count: 4,
     cards: [
-      { title: 'Релиз мобильного приложения', label: 'Mobile', tone: 'green', who: 'ДВ', done: true },
-      { title: 'A/B-тест главной страницы', label: 'Аналитика', tone: 'blue', who: 'АК', done: true },
+      { title: 'Релиз приложения', label: 'Mobile', tone: 'green', who: 'ДВ', done: true },
+      { title: 'A/B-тест главной', label: 'Аналитика', tone: 'blue', who: 'АК', done: true },
+      { title: 'Страница сравнения', label: 'Маркетинг', tone: 'orange', who: 'МС', done: true },
+      { title: 'Рассылка по базе', label: 'Контент', tone: 'green', who: 'ЕР', done: true },
     ],
   },
 ];
@@ -106,7 +120,7 @@ function KanbanBoard() {
                   {col.cards.map((c, i) => (
                     <div
                       key={i}
-                      className="space-y-2 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2.5"
+                      className="space-y-1.5 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-2"
                     >
                       <span className={cn('inline-flex h-4 items-center rounded-full px-1.5 text-[9px] font-medium', LABEL_CLASS[c.tone])}>
                         {c.label}

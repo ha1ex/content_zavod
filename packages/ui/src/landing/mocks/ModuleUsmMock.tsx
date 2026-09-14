@@ -64,9 +64,9 @@ function Status({ st }: { st: 'done' | 'wait' }) {
     : <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#bfbfc4] text-white"><Icon name="Clock" className="h-3 w-3" strokeWidth={2.5} /></span>;
 }
 
-function YellowCard({ d }: { d: Step }) {
+function StepCard({ d }: { d: Step }) {
   return (
-    <div className="space-y-2 rounded-(--radius-lg) p-3" style={{ background: '#fce9b0' }}>
+    <div className="space-y-2 rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) p-3">
       <div><Tag tone={d.tag} /></div>
       <div className="text-[13.5px] font-medium leading-snug text-(--color-text-primary)">{d.t}</div>
       <div className="flex items-center gap-1.5">
@@ -149,13 +149,13 @@ export function ModuleUsmMock() {
           ))}
         </div>
         <div className="mt-3 flex gap-3">
-          {YELLOW.map((d, i) => <div key={i} className="w-[145px] shrink-0"><YellowCard d={d} /></div>)}
+          {YELLOW.map((d, i) => <div key={i} className="w-[145px] shrink-0"><StepCard d={d} /></div>)}
         </div>
       </div>
 
       {/* releases */}
-      <Lane name="Первый релиз" dot="#2f9fd0" band="#a3e4f0" body="#ddf3f9" prog="8 / 20" info cells={R1} />
-      <Lane name="Следующий релиз" dot="#f5b800" band="#f3d886" body="#fdf4e0" prog="0 / 12" cells={R2} />
+      <Lane name="Первый релиз" dot="#2f9fd0" band="#a3e4f0" body="#e8f3f7" prog="8 / 20" info cells={R1} />
+      <Lane name="Следующий релиз" dot="#8b5cf0" band="#e9d0ef" body="#f2eaf4" prog="0 / 12" cells={R2} />
     </div>
   );
 }

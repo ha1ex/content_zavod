@@ -13,8 +13,8 @@ const TONE: Record<Tone, [string, string]> = {
   teal: ['#d9f0ec', '#0e7a66'],
 };
 
-const COLS = ['Название', 'Дорожка', 'Колонка', 'Участники', 'Доска', 'Очередь', 'Подрядчик', 'Начало работы', 'Номер дома', 'ЖК', 'ID'];
-const GRID = '32px 232px 116px 136px 96px 188px 116px 148px 126px 96px 132px 80px';
+const COLS = ['Название', 'Дорожка', 'Колонка', 'Участники', 'Очередь', 'Подрядчик', 'Начало работы', 'ЖК', 'ID'];
+const GRID = '32px 232px 116px 136px 96px 116px 148px 126px 96px 80px';
 
 type Row =
   | { type: 'group'; label: string }
@@ -87,7 +87,7 @@ export function ModuleTableMock() {
         <span className="ml-2 inline-flex items-center rounded-lg border border-(--color-action-primary) px-3 py-1.5 text-[13px] font-semibold text-(--color-text-accent)">ДОБАВИТЬ</span>
         <span className="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-(--color-border-default) px-3 py-1.5 text-[13px] font-medium text-(--color-text-secondary)"><Icon name="ListFilter" className="h-4 w-4" strokeWidth={2} /> ФИЛЬТРЫ</span>
         <div className="ml-auto flex items-center gap-3 text-(--color-text-secondary)">
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#7d4ccf] text-[11px] font-semibold text-white">TR</span>
+          <span className="inline-flex aspect-square h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#7d4ccf] text-[11px] font-semibold text-white">TR</span>
         </div>
       </div>
       <div className="flex items-center justify-end gap-2 border-b border-(--color-border-default) last:border-b-0 px-3 py-2">
@@ -118,11 +118,9 @@ export function ModuleTableMock() {
             <Cell className="truncate">{r.lane}</Cell>
             <Cell>{r.col}</Cell>
             <Cell><Av list={r.av} /></Cell>
-            <Cell className="truncate">{r.board}</Cell>
             <Cell><Pill v={r.q} /></Cell>
             <Cell><Pill v={r.c} /></Cell>
             <Cell>{r.start}</Cell>
-            <Cell>{r.house}</Cell>
             <Cell><Pill v={r.zhk} /></Cell>
             <Cell>{r.id}</Cell>
           </div>

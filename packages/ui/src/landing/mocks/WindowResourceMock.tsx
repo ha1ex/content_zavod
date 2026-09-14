@@ -9,16 +9,16 @@ interface PersonRow {
   over?: number[];
 }
 
-const DAYS = ['16', '17', '18', '19', '20', '21', '22', '23'];
-const WEEKEND = [2, 3];
+const DAYS = ['16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27'];
+const WEEKEND = [2, 3, 9, 10];
 
 const PEOPLE: PersonRow[] = [
-  { name: 'Анна Морозова', initials: 'АМ', color: 'bg-(--color-action-primary)', hours: [6, 8, 0, 0, 4, '12,5', 6, 5], over: [5] },
-  { name: 'Артем Куликов', initials: 'АК', color: 'bg-(--color-green-100)', hours: [4, 4, 0, 0, 8, 8, '4,5', '4,5'] },
-  { name: 'Екатерина Громова', initials: 'ЕГ', color: 'bg-(--color-orange-100)', hours: [8, 6, 0, 0, 6, 3, 9, 8], over: [6] },
-  { name: 'Павел Соколов', initials: 'ПС', color: 'bg-(--color-blue-100)', hours: [0, 4, 0, 0, 8, 8, 6, 4] },
-  { name: 'Ирина Лебедева', initials: 'ИЛ', color: 'bg-(--color-violet-100)', hours: [6, 6, 0, 0, 8, 4, 8, 6] },
-  { name: 'Денис Воронов', initials: 'ДВ', color: 'bg-(--color-green-100)', hours: [8, 8, 0, 0, '4,5', 6, 10, 5], over: [6] },
+  { name: 'Анна Морозова', initials: 'АМ', color: 'bg-(--color-action-primary)', hours: [6, 8, 0, 0, 4, '12,5', 6, 5, 7, 8, 0, 0], over: [5] },
+  { name: 'Артем Куликов', initials: 'АК', color: 'bg-(--color-green-100)', hours: [4, 4, 0, 0, 8, 8, '4,5', '4,5', 6, 5, 0, 0] },
+  { name: 'Екатерина Громова', initials: 'ЕГ', color: 'bg-(--color-orange-100)', hours: [8, 6, 0, 0, 6, 3, 9, 8, 4, 7, 0, 0], over: [6] },
+  { name: 'Павел Соколов', initials: 'ПС', color: 'bg-(--color-blue-100)', hours: [0, 4, 0, 0, 8, 8, 6, 4, 8, 6, 0, 0] },
+  { name: 'Ирина Лебедева', initials: 'ИЛ', color: 'bg-(--color-violet-100)', hours: [6, 6, 0, 0, 8, 4, 8, 6, 5, 8, 0, 0] },
+  { name: 'Денис Воронов', initials: 'ДВ', color: 'bg-(--color-green-100)', hours: [8, 8, 0, 0, '4,5', 6, 10, 5, 7, 4, 0, 0], over: [6] },
 ];
 
 /**

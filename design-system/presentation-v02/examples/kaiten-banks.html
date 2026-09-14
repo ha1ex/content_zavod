@@ -310,7 +310,7 @@
         <img class="mark" src="../assets/kaiten-logo.svg" alt="Кайтен" />
       </div>
 
-      <div class="s-body">
+      <div class="s-body" style="position:relative">
         <p class="body" style="font-size:1.25cqw; max-width:42cqw">Карточка задачи заменяет переписку по&nbsp;почте и&nbsp;в&nbsp;мессенджерах: этапы работы, документы клиента, согласования и&nbsp;обсуждения хранятся в&nbsp;одном месте и&nbsp;остаются в&nbsp;контуре банка</p>
 
         <div class="cols-2" style="grid-template-columns:31cqw 1fr; gap:2.4cqw; align-items:center; margin-top:.8cqw; flex:1; min-height:0">
@@ -359,7 +359,7 @@
 
           <!-- zoom, а не transform: карточку нужно уменьшить вместе с ее
                высотой в потоке, иначе центрированный блок не влезает в зону. -->
-          <div style="display:flex; align-items:center; justify-content:center; min-height:0"><div class="tcard" style="height:auto; zoom:1.02">
+          <div style="position:absolute; right:0; top:50%; transform:translateY(-50%); width:calc(100% - 31cqw - 2.4cqw); display:flex; align-items:center; justify-content:center"><div class="tcard" style="height:auto; zoom:1.02">
             <div class="tc-main">
               <p class="tc-h">Проверка контрагента по&nbsp;заявке на&nbsp;кредит</p>
               <p class="tc-sub"><a>#30022876</a> Заказчик <a>Смирнова Ольга</a>, перемещена 2 часа назад</p>

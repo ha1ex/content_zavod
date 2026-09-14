@@ -74,6 +74,30 @@ async function listDesignLandings(): Promise<{ slug: string; title: string | nul
   }
 }
 
+async function listPresentations(): Promise<{ slug: string; title: string | null; date: string | null }[]> {
+  const dir = resolve(process.cwd(), '..', '..', 'design-system', 'presentation-v02', 'examples');
+  try {
+    const files = await readdir(dir);
+    return Promise.all(
+      files
+        .filter((f) => f.endsWith('.html'))
+        .sort()
+        .map(async (file) => {
+          const title = await readFile(resolve(dir, file), 'utf8')
+            .then((html) => html.match(/<title>([^<]*)<\/title>/)?.[1]?.trim() || null)
+            .catch(() => null);
+          return {
+            slug: file.replace(/\.html$/, ''),
+            title,
+            date: await publishedAt(resolve(dir, file)),
+          };
+        }),
+    );
+  } catch {
+    return [];
+  }
+}
+
 async function specTitle(slug: string): Promise<string | null> {
   const file = resolve(process.cwd(), '..', '..', 'content', 'landings', `${slug}.json`);
   try {
@@ -90,7 +114,14 @@ async function specTitle(slug: string): Promise<string | null> {
   }
 }
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
+  const { tab } = await searchParams;
+  const activeTab = tab === 'presentations' ? 'presentations' : 'landings';
+  const presentations = await listPresentations();
   const landings = await listLandings();
   const designLandings = await listDesignLandings();
   const specDir = resolve(process.cwd(), '..', '..', 'content', 'landings');
@@ -191,11 +222,79 @@ export default async function DashboardPage() {
       </section>
 
       <section>
-        <div className="mb-5 flex items-end justify-between pr-4 sm:pr-5">
-          <h2 className="text-xl font-medium">Существующие лендинги</h2>
-          <span className="text-xs text-(--color-text-primary)">{allLandings.length} шт.</span>
+        <div className="mb-5 inline-flex items-center gap-1 rounded-full bg-(--color-surface-section) p-1">
+          <Link
+            href="/"
+            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              activeTab === 'landings'
+                ? 'bg-(--color-action-primary) text-white'
+                : 'text-(--color-text-primary) hover:bg-(--color-surface-page)'
+            }`}
+          >
+            <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M2 12h20" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
+            </svg>
+            Лендинги
+            <span className={activeTab === 'landings' ? 'text-white/70' : 'text-(--color-text-secondary)'}>
+              {allLandings.length}
+            </span>
+          </Link>
+          <Link
+            href="/?tab=presentations"
+            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              activeTab === 'presentations'
+                ? 'bg-(--color-action-primary) text-white'
+                : 'text-(--color-text-primary) hover:bg-(--color-surface-page)'
+            }`}
+          >
+            <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8" />
+              <path d="M12 17v4" />
+            </svg>
+            Презентации
+            <span className={activeTab === 'presentations' ? 'text-white/70' : 'text-(--color-text-secondary)'}>
+              {presentations.length}
+            </span>
+          </Link>
         </div>
-        {allLandings.length === 0 ? (
+        {activeTab === 'presentations' ? (
+          <div className="rounded-(--radius-xl) lg:rounded-(--radius-2xl) bg-(--color-surface-section) px-2 py-4 sm:p-5">
+            <ul className="grid grid-cols-1 gap-2">
+              {presentations.map(({ slug, title, date }) => (
+                <li
+                  key={slug}
+                  className="flex flex-col gap-2 rounded-(--radius-lg) border border-transparent bg-(--color-surface-page) px-3 py-3 transition-colors hover:border-(--color-border-default) sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4"
+                >
+                  <span className="flex min-w-0 flex-col gap-0.5">
+                    <span className="truncate text-sm font-medium">{slug}</span>
+                    {title && (
+                      <span className="text-xs text-(--color-text-secondary) lg:truncate" title={title}>
+                        {title}
+                      </span>
+                    )}
+                  </span>
+                  <span className="flex items-center gap-x-4 text-xs sm:gap-x-6">
+                    <span className="text-(--color-neutral-500)" title="Дата публикации">
+                      {date}
+                    </span>
+                    <a
+                      href={`/deck/examples/${slug}.html`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-(--color-neutral-500) transition-colors hover:text-(--color-text-primary)"
+                    >
+                      <ActionIcon name="preview" />
+                      <span className="hidden sm:inline">preview</span>
+                    </a>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : allLandings.length === 0 ? (
           <p className="text-sm text-(--color-text-secondary)">
             Пока нет. Начните с <Link href="/new" className="underline">/new</Link>.
           </p>

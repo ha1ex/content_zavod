@@ -35,7 +35,7 @@ for (const [from, to] of SWAP) {
 }
 if (/ё/.test(MOCK.replace(/<[^>]+>/g, ''))) throw new Error('в тексте осталась «ё»');
 
-const W = 760;
+const W = 560;
 const html = `<!doctype html><html><head><meta charset="utf-8" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>${CSS}

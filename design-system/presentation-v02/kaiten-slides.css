@@ -161,7 +161,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 /* --------------------------------------------------------------- хром ----- */
 
 .s-head { display:flex; align-items:flex-start; justify-content:space-between; gap:2cqw; }
-.s-head .s-title { max-width:82cqw; }
+.s-head .s-title { max-width:62cqw; }   /* 1190px — до ступеньки плашки «Сравнения» */
 
 /* Логотип Кайтена в углу — полный, знак со словом, 161×48 в макете */
 .mark { width:8.385cqw; height:2.5cqw; flex:none; display:block; }
@@ -187,17 +187,14 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 .s-body {
   flex:1; margin-top:var(--head-gap); min-height:0;
 
-  /* Содержимое центрируется по свободному полю под заголовком. Поле идет
-     от низа колонтитула, а зона начинается ниже — после отступа под ним,
-     поэтому отдаем этот отступ вниз: блок поднимается на его половину и
-     встает ровно по середине свободного поля. */
+  /* Содержимое центрируется по контентной зоне 169..1031, центр 599:
+     поля сверху и снизу у блока равные. */
   display:flex; flex-direction:column; justify-content:center;
-  padding-bottom: var(--head-gap);
 }
 
 /* Класс остался в разметке с тех пор, когда центр считали по кадру: теперь
    зону занимают все слайды, отдельного поведения ему не нужно. */
-.s-body.is-tall { padding-bottom: 0; }
+/* .is-tall остался в разметке с прежних правил центрирования — поведения у него больше нет. */
 
 /* Раскладки по модульной сетке. cols-2 даёт две колонки по 886 (2 модуля),
    cols-4 — четыре по 429 (1 модуль), grid-2x2 — четыре фрейма по 429. */
@@ -1292,7 +1289,7 @@ code {
    Логотип лежит поверх карты отдельным слоем: на темной теме карту гасим
    прозрачностью, а плашка остается белой. Координаты — доли от карты
    (плашка в макете 251/264.567 при кадре 758x444). */
-.ru-map-wrap { position:absolute; top:50%; transform:translateY(calc(-50% - 2.06cqw)); width:58cqw; z-index:0; display:block; }
+.ru-map-wrap { position:absolute; top:50%; transform:translateY(-50%); width:58cqw; z-index:0; display:block; }
 .ru-map-wrap .ru-map { width:100%; height:auto; display:block; }
 .ru-map-wrap .ru-mark {
   /* Плашка шире логотипа: поля добавлены в размер, сам знак остается прежним. */

@@ -97,7 +97,7 @@
 .calv-day b { font-size: calc(var(--u) * 13); font-weight: 400; color: var(--c-ink-2); }
 .calv-day.is-out b { color: #c9c9ce; }
 
-/* Карточка в дне: сплошная заливка статуса, подпись в одну строку. */
+/* Карточка в дне: приглушенная заливка статуса, подпись цветом статуса в одну строку. */
 .calv-card {
   width: 100%;
   display: flex; align-items: center; gap: calc(var(--u) * 5);
@@ -108,10 +108,10 @@
 }
 .calv-card span { overflow: hidden; text-overflow: ellipsis; }
 .calv-card i { font-style: normal; flex: none; opacity: .85; }
-.calv-card.is-amber  { background: #f0a92c; }
-.calv-card.is-blue   { background: #2f80ed; }
-.calv-card.is-violet { background: #8e44d0; }
-.calv-card.is-red    { background: #e5564a; }
+.calv-card.is-amber  { background: #fcebcc; color: #9a6410; }
+.calv-card.is-blue   { background: #dbe8fb; color: #2366c2; }
+.calv-card.is-violet { background: #ece0f7; color: #7337ad; }
+.calv-card.is-red    { background: #f9dedb; color: #bd4238; }
 
 /* ------------------------------------------------------- панель фильтров */
 

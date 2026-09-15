@@ -265,3 +265,26 @@
    на темном фоне его не видно. Берем копию со светлой линией. */
 /* На залитом сиреневом фрейме белая точка читается лучше фиолетовой. */
 [data-theme="dark"] .frame.is-accent .bullets li::before { background:#ffffff; }
+
+
+/* Контакты с иллюстрацией: в темной теме тот же градиент слева направо,
+   но на темном полотне — сиреневый в синий. */
+[data-theme="dark"] .slide.contact.is-illo { background:linear-gradient(90deg, #241640 0%, #1d1739 40%, #171b37 70%, #121e36 100%); }
+
+/* Картинки под тему: вариант для темного полотна лежит рядом со светлым
+   и показывается только в темной теме. */
+.only-dark { display:none !important; }
+[data-theme="dark"] .only-dark { display:block !important; }
+[data-theme="dark"] .only-light { display:none !important; }
+
+/* Контакты с иллюстрацией в темной теме: под градиентной заливкой — небольшой
+   засвет по низу, тише обычной полосы. */
+[data-theme="dark"] .slide.contact.is-illo::after {
+  display:block; inset:auto; left:-2.305cqw; bottom:var(--glow-bottom); transform:none;
+  width:104.45cqw; height:var(--glow-h); border-radius:0;
+  opacity:calc(var(--glow-opacity) * .6); filter:blur(var(--glow-blur));
+}
+
+/* Сиреневая карточка контактов — только для светлого полотна; в темной теме обычная. */
+[data-theme="dark"] .slide.contact.is-accent-card .contact-card { background:var(--surface-page); }
+[data-theme="dark"] .slide.contact.is-accent-card .contact-row { background:var(--contact-row-bg); }

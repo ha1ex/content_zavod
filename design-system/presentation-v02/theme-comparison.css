@@ -8,7 +8,7 @@
    там стоят логотип конкурента, разделитель и логотип Кайтена.
    Переход между ступенями идет диагональю под 45° со скруглениями.
 
-   Верхнее поле здесь такое же, как в Light и Dark: 36px. Заголовок и знак
+   Верхнее поле здесь такое же, как в Light и Dark: 48px. Заголовок и знак
    стоят на той же отметке во всех трех стилях, тонкая полка проходит выше
    и ничего не задевает.
 
@@ -38,12 +38,13 @@
 [data-theme="comparison"] .slide.contact::before { display:none; }
 
 /* На обложке сравнения логотипа слева нет — брендинг живет в колонтитуле.
-   Логотип Кайтена уезжает вправо, в толстую часть плашки, на отметку y=36.
+   Логотип Кайтена уезжает вправо, в толстую часть плашки, на отметку y=48,
+   как знак в колонтитуле обычных слайдов: пара логотипов не прыгает при листании.
    Если у дека есть логотип конкурента, вместо .cover-logo ставится .brand-pair. */
 [data-theme="comparison"] .cover .cover-logo {
   position:absolute;
   right:var(--margin-x);
-  top:1.875cqw;             /* 36px */
+  top:var(--margin-top);    /* 48px — как знак в .s-head */
   width:auto;
   display:flex; align-items:center;
 }
@@ -81,7 +82,8 @@
 [data-theme="comparison"] .s-head::after {
   content:"ЛОГО"; box-sizing:border-box; order:1; flex:none;
   width:8.385cqw; height:2.5cqw;   /* габарит знака Кайтена, 161x48 */
-  margin-right:1.25cqw;
+  /* зазор до знака 24, как на обложке: у .s-head свой gap 2cqw (38), гасим разницу */
+  margin-right:-.75cqw;
   border:.104cqw dashed var(--border-default); border-radius:.42cqw;
   display:flex; align-items:center; justify-content:center;
   font-size:.83cqw; letter-spacing:.08em; color:var(--text-secondary);

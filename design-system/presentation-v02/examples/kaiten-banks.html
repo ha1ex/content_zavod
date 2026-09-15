@@ -43,6 +43,9 @@
      сравнения подрастает на столько же — иначе под знаком остается
      меньше воздуха, чем в шаблоне. */
   [data-theme="comparison"] .slide::before { height:7.2cqw; }
+  /* Тема Сравнение штатно ставит текст обложки вверху слева. В этом деке
+     он центрируется по вертикали, как в Light. */
+  [data-theme="comparison"] .cover-text { top:50%; transform:translateY(-50%); }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   :root { --stage-bg:var(--neutral-200); }
@@ -154,7 +157,7 @@
       </div>
 
       <div class="s-body">
-        <p class="body" style="max-width:52cqw">Kaiten работает на&nbsp;российских операционных системах семейства Linux «РЕД ОС»&nbsp;и&nbsp;«РОСА» — переход не&nbsp;требует замены парка рабочих станций банка</p>
+        <p class="body" style="font-size:1.25cqw; max-width:52cqw">Kaiten работает на&nbsp;российских операционных системах семейства Linux «РЕД ОС»&nbsp;и&nbsp;«РОСА» — переход не&nbsp;требует замены парка рабочих станций банка</p>
 
         <div class="cols-2" style="margin-top:2.4cqw">
           <div class="frame">
@@ -589,7 +592,7 @@
       </div>
 
       <div class="s-body is-tall">
-        <p class="body" style="font-size:1.25cqw; max-width:70cqw; margin-top:-3cqw">Встроенные отчеты показывают, где процесс встает и&nbsp;сколько времени занимает каждый этап.<br />Данные собираются автоматически, отдельная выгрузка для&nbsp;этого не&nbsp;нужна</p>
+        <p class="body" style="font-size:1.25cqw; max-width:70cqw; margin-top:-3cqw; margin-bottom:1.6cqw">Встроенные отчеты показывают, где процесс встает и&nbsp;сколько времени занимает каждый этап.<br />Данные собираются автоматически, отдельная выгрузка для&nbsp;этого не&nbsp;нужна</p>
 
         <div style="--gap:2.4cqw; display:flex; flex-wrap:wrap; gap:var(--gap); align-content:center; zoom:.72; width:112.5cqw; margin-inline:auto; margin-top:1.6cqw">
           <div class="diagrams-mock" style="width:calc((100% - 2 * var(--gap)) / 3)"><div class="rept"><div class="rept__t">Диаграмма сгорания</div><svg viewBox="0 0 280 150" role="img" aria-label="Диаграмма сгорания"><g stroke="#eee" stroke-width="1"><line x1="6" y1="30" x2="274" y2="30"></line><line x1="6" y1="60" x2="274" y2="60"></line><line x1="6" y1="90" x2="274" y2="90"></line><line x1="6" y1="120" x2="274" y2="120"></line></g><line x1="10" y1="20" x2="270" y2="122" stroke="#5aa5e8" stroke-width="1.5" stroke-dasharray="4 3"></line><polyline points="10,20 52,32 52,46 96,46 96,62 140,62 140,90 184,90 184,106 228,106 228,120 270,120" fill="none" stroke="#ffb340" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline><g><rect x="46" y="128" width="12" height="10" fill="#9569d4"></rect><rect x="90" y="130" width="12" height="8" fill="#9569d4"></rect><rect x="90" y="125" width="12" height="4" fill="#ee6b5f"></rect><rect x="134" y="128" width="12" height="10" fill="#9569d4"></rect><rect x="178" y="132" width="12" height="6" fill="#9569d4"></rect><rect x="10" y="129" width="12" height="9" fill="#9569d4"></rect><rect x="10" y="124" width="12" height="4" fill="#bcd451"></rect></g><g fill="#5aa5e8"><circle cx="10" cy="20" r="2.4"></circle><circle cx="140" cy="90" r="2.4"></circle><circle cx="270" cy="120" r="2.4"></circle></g></svg><div class="rept__lg"><span><i style="width:8px;height:8px;border-radius:2px;background:#9569d4;flex:none"></i>Завершено</span><span><i style="width:12px;height:0;border-top:2px solid #ffb340;flex:none"></i>Осталось</span><span><i style="width:12px;height:0;border-top:2px dashed #5aa5e8;flex:none"></i>Идеальное</span></div></div></div>

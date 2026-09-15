@@ -33,6 +33,12 @@
      навигация от этого не зависит, а таб выводит панель через focus-within. */
   .nav { opacity:0; pointer-events:none; transition:opacity .25s ease; }
   body.nav-on .nav, .nav:focus-within { opacity:1; pointer-events:auto; }
+  /* Колонтитул дека: заголовок мельче шаблонных 48/52 и опущен — низ
+     заголовка выровнен по низу знака. Отклонение от V02 сознательное,
+     в шаблоне заголовок 2.5cqw и оба стоят по верху на отметке 36. */
+  .s-head { align-items:flex-end; }
+  .s-title { font-size:2.292cqw; line-height:1.083; }
+  .mark { margin-top:.42cqw; }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   :root { --stage-bg:var(--neutral-200); }

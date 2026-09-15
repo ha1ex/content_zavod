@@ -21,25 +21,12 @@
 <link rel="stylesheet" href="../assets/module-mocks.css" />
 <link rel="stylesheet" href="../assets/diagram-mocks.css" />
 <style>
-  /* Переключатель тем остается сверху по центру, но стоит в своей полосе
-     над кадром, а не поверх заголовка. Прячется вместе с навигацией. */
-  .theme-bar { opacity:0; pointer-events:none; transition:opacity .25s ease; }
+  /* Кадр занимает окно целиком, поэтому служебные панели неизбежно лежат
+     поверх слайда. Держим их скрытыми: переключатель уводим вниз к навигации,
+     чтобы он не закрывал заголовок, и обе панели проявляются только от
+     движения мыши. */
+  .theme-bar { top:auto; left:auto; transform:none; right:3.125vw; bottom:2.2vh; opacity:0; pointer-events:none; transition:opacity .25s ease; }
   body.nav-on .theme-bar, .theme-bar:focus-within { opacity:1; pointer-events:auto; }
-  /* Служебные элементы стоят в своих полосах и на слайд не заезжают:
-     сверху переключатель тем, снизу навигация. Кадр отдает им место
-     и теряет около 12% масштаба. В экспорте и на полном экране их нет,
-     там слайд занимает всю площадь. */
-  :root { --chrome-space: max(6vh, 64px); }
-  /* На полном экране служебных панелей нет — полосы под них не нужны,
-     и кадр занимает экран целиком. Тогда колонтитул выходит в размеры
-     шаблона один в один: заголовок 48/52, поля 60, знак 161x48. */
-  @media (display-mode: fullscreen) { :root { --chrome-space: 0px; } }
-  :root:fullscreen { --chrome-space: 0px; }
-  .stage { padding-top: var(--chrome-space); padding-bottom: var(--chrome-space); }
-  .deck {
-    width: min(100vw, calc((100vh - 2 * var(--chrome-space)) * 16 / 9));
-    height: min(calc(100vh - 2 * var(--chrome-space)), calc(100vw * 9 / 16));
-  }
   /* Кадр занимает окно целиком, поэтому панель навигации неизбежно лежит
      поверх слайда. Прячем ее: на показе слайд чистый, панель проявляется
      от движения мыши и уходит через две секунды покоя. Клавиатурная

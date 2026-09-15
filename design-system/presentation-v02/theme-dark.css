@@ -288,3 +288,11 @@
 /* Сиреневая карточка контактов — только для светлого полотна; в темной теме обычная. */
 [data-theme="dark"] .slide.contact.is-accent-card .contact-card { background:var(--surface-page); }
 [data-theme="dark"] .slide.contact.is-accent-card .contact-row { background:var(--contact-row-bg); }
+
+/* Рамка ссылок в темной теме: сплошной фиолетовый слишком громкий под темными
+   карточками — оставляем полупрозрачный. */
+[data-theme="dark"] .links-frame { background:rgba(125,76,207,.18); }
+
+/* Плашка иконки ссылки в темной теме: светлая сиреневая слишком яркая —
+   полупрозрачный фиолетовый, иконка светлее. */
+[data-theme="dark"] .link-icons svg { background:rgba(125,76,207,.28); color:#b99af0; }

@@ -33,6 +33,11 @@
      навигация от этого не зависит, а таб выводит панель через focus-within. */
   .nav { opacity:0; pointer-events:none; transition:opacity .25s ease; }
   body.nav-on .nav, .nav:focus-within { opacity:1; pointer-events:auto; }
+  /* Колонтитул дека: заголовок чуть мельче шаблонных 48/52, знак опущен
+     от верхнего поля. Это отклонение от V02 — в шаблоне заголовок 2.5cqw
+     и знак стоит вровень с заголовком на отметке 36. */
+  .s-title { font-size:2.292cqw; line-height:1.083; }
+  .mark { margin-top:.42cqw; }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   :root { --stage-bg:var(--neutral-200); }
@@ -1237,7 +1242,7 @@
       <div class="s-body">
         <div class="cols-2" style="grid-template-columns:45cqw 1fr; align-items:center">
         <div style="display:flex; align-items:center">
-          <p class="body" style="font-size:1.25cqw">Справочник — это учет данных о&nbsp;клиентах, продуктах и&nbsp;партнерах банка. Выносите нужные поля на&nbsp;фасад карточки, чтобы менеджер видел сегмент, лимит и&nbsp;статус проверки без&nbsp;перехода в&nbsp;смежные системы. Настраивайте фильтры и&nbsp;делайте выборку по&nbsp;региону, виду деятельности и&nbsp;другим признакам</p>
+          <p class="body" style="font-size:1.25cqw; max-width:38cqw">Справочник — это учет данных о&nbsp;клиентах, продуктах и&nbsp;партнерах банка. Выносите нужные поля на&nbsp;фасад карточки, чтобы менеджер видел сегмент, лимит и&nbsp;статус проверки без&nbsp;перехода в&nbsp;смежные системы. Настраивайте фильтры и&nbsp;делайте выборку по&nbsp;региону, виду деятельности и&nbsp;другим признакам</p>
         </div>
 
         <div style="display:flex; align-items:center; justify-content:flex-end; min-height:0; align-self:stretch">

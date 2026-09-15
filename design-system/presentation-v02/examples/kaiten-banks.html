@@ -30,6 +30,11 @@
      и теряет около 12% масштаба. В экспорте и на полном экране их нет,
      там слайд занимает всю площадь. */
   :root { --chrome-space: max(6vh, 64px); }
+  /* На полном экране служебных панелей нет — полосы под них не нужны,
+     и кадр занимает экран целиком. Тогда колонтитул выходит в размеры
+     шаблона один в один: заголовок 48/52, поля 60, знак 161x48. */
+  @media (display-mode: fullscreen) { :root { --chrome-space: 0px; } }
+  :root:fullscreen { --chrome-space: 0px; }
   .stage { padding-top: var(--chrome-space); padding-bottom: var(--chrome-space); }
   .deck {
     width: min(100vw, calc((100vh - 2 * var(--chrome-space)) * 16 / 9));

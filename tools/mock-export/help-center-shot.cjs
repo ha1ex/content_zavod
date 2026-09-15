@@ -11,7 +11,8 @@ const fs = require('fs');
 const path = require('path');
 
 const CSS = fs.readFileSync('tools/mock-export/out/mocks.css', 'utf8');
-const MOCK = fs.readFileSync('tools/mock-export/out/help-center.html', 'utf8');
+// Предлог не должен висеть в конце строки: при узкой рамке «с» уходил вправо
+const MOCK = fs.readFileSync('tools/mock-export/out/help-center.html', 'utf8').replace('работать с сервисом', 'работать с сервисом');
 
 const W = Number(process.argv[2] || 470);
 const OUT = process.argv[3] || '.context/help-center.png';

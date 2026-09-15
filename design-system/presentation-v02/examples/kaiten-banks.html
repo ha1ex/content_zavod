@@ -104,6 +104,8 @@
      иначе текст отъезжает вправо на пустое поле несуществующей плашки */
   #s7 .features .feature { grid-template-columns:1.458cqw 1fr; gap:.9cqw; }
   #s7 .features .feature-icon { width:1.458cqw; height:1.458cqw; border-radius:0; }
+  /* Слайд 20 — положение экранов как на слайде 65 шаблона: левый край 14, ширина 580 единиц макета */
+  #s20 .mcta-art img.mcta-pic { left:calc(var(--u) * 14); top:calc(var(--u) * 53); width:calc(var(--u) * 580); filter:drop-shadow(0 .42cqw 1.04cqw rgba(45,45,45,.16)); }
 </style>
 </head>
 <body>
@@ -633,10 +635,10 @@
       </div>
 
       <div class="s-body">
-        <p class="body" style="font-size:1.25cqw; max-width:36cqw; margin-top:2cqw">Настраивайте выборку гибкой системой фильтров, выгружайте отчеты в&nbsp;XLSX и&nbsp;PDF или&nbsp;отдавайте данные в&nbsp;BI-систему банка по&nbsp;API</p>
 
-        <div class="cols-2" style="grid-template-columns:33.333cqw 1fr; margin-top:2.4cqw; align-items:center">
+        <div class="cols-2" style="grid-template-columns:33.333cqw 1fr; align-items:center">
           <div>
+            <p class="body" style="font-size:1.25cqw; max-width:32cqw; margin:0 0 2.4cqw">Настраивайте выборку гибкой системой фильтров, выгружайте отчеты в&nbsp;XLSX и&nbsp;PDF или&nbsp;отдавайте данные в&nbsp;BI-систему банка по&nbsp;API</p>
             <h3 class="h3" style="margin:0">С&nbsp;аналитикой контролируйте все в&nbsp;одном месте:</h3>
             <ul class="checks" style="margin-top:1.4cqw; max-width:26cqw">
               <li>Выполнение задач и&nbsp;соблюдение сроков</li>
@@ -906,7 +908,7 @@
 
         <div class="mcta" style="--u:.0771cqw; width:93.75cqw; height:32.4cqw; margin-inline:auto">
           <div class="mcta-art">
-            <img src="../assets/mocks/mobile-app.png" alt="Мобильное приложение Кайтена" />
+            <img class="mcta-pic" src="../assets/mocks/mobile-app.png" alt="Мобильное приложение Кайтена" />
           </div>
 
           <div class="mcta-copy">

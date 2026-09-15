@@ -1,6 +1,7 @@
 import { cn } from '../primitives/cn';
 import { GradientPanel } from './GradientPanel';
 import { RegistrationForm } from './RegistrationForm';
+import { RegistrationSuccessBoundary, type RegistrationSuccess } from './RegistrationSuccessModal';
 
 export interface RegistrationCtaProps {
   eyebrow?: string;
@@ -21,6 +22,12 @@ export interface RegistrationCtaProps {
   partnerOptions?: { value: string; label: string }[];
   /** Акцентное продолжение заголовка (градиентом на новой строке) — для conference. */
   accentWord?: string;
+  /**
+   * Окно «Спасибо за регистрацию» после отправки — с переходом в мессенджер
+   * (как на апрельской конференции). Задано → форма показывает попап; нет —
+   * обычный нативный POST.
+   */
+  success?: RegistrationSuccess;
 }
 
 /**
@@ -47,6 +54,7 @@ export function RegistrationCta({
   variant,
   partnerOptions,
   accentWord,
+  success,
 }: RegistrationCtaProps) {
   const isConf = variant === 'conference';
   return (
@@ -87,18 +95,35 @@ export function RegistrationCta({
             )}
           </div>
 
-          <RegistrationForm
-            submitLabel={submitLabel}
-            note={note}
-            anchorId={anchorId}
-            action={action}
-            dataConsentHref={dataConsentHref}
-            telegramHref={telegramHref}
-            maxHref={maxHref}
-            newsletterRequired={newsletterRequired}
-            variant={variant}
-            partnerOptions={partnerOptions}
-          />
+          {success ? (
+            <RegistrationSuccessBoundary success={success} action={action}>
+              <RegistrationForm
+                submitLabel={submitLabel}
+                note={note}
+                anchorId={anchorId}
+                action={action}
+                dataConsentHref={dataConsentHref}
+                telegramHref={telegramHref}
+                maxHref={maxHref}
+                newsletterRequired={newsletterRequired}
+                variant={variant}
+                partnerOptions={partnerOptions}
+              />
+            </RegistrationSuccessBoundary>
+          ) : (
+            <RegistrationForm
+              submitLabel={submitLabel}
+              note={note}
+              anchorId={anchorId}
+              action={action}
+              dataConsentHref={dataConsentHref}
+              telegramHref={telegramHref}
+              maxHref={maxHref}
+              newsletterRequired={newsletterRequired}
+              variant={variant}
+              partnerOptions={partnerOptions}
+            />
+          )}
         </div>
       </GradientPanel>
     </section>

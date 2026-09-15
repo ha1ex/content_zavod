@@ -661,3 +661,25 @@ html:has(.landing-theme-dark [data-comp='speaker_grid']) {
   background: #1a1527;
 }
 
+
+/* Белые чекбоксы согласий на тёмных лендингах (кастомная отрисовка: нативный
+   accent-color красит только галочку в отмеченном состоянии, сам серый квадрат
+   остаётся — поэтому рисуем бокс сами). Светлые лендинги не затрагиваем. */
+.landing-theme-dark input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #ffffff;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+.landing-theme-dark input[type='checkbox']:checked {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23190f29' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l4.5 4.5L19 6'/%3E%3C/svg%3E");
+  background-size: 12px 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: #ffffff;
+}

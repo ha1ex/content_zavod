@@ -33,6 +33,7 @@
 .trep .brd i { width: .78cqw; height: .78cqw; border-radius: 50%; flex: none; }
 .trep .brd i.is-violet { background: #b79ae0; }
 .trep .brd i.is-orange { background: #f0a92c; }
+.trep .brd .emo { font-style: normal; font-size: .9cqw; line-height: 1; flex: none; }
 .trep .brd span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .trep .sum { text-align: right; padding: .68cqw .84cqw; font-weight: 500; }

@@ -150,7 +150,7 @@ body:has(#s18:target) .nav-row[data-for="s18"] { display:flex; }
 
 /* ----------------------------------------------------------- типографика --- */
 
-.s-title { font-size:2.5cqw;    line-height:1.083; font-weight:600; letter-spacing:-.01em; margin:0; }  /* 48/52 */
+.s-title { font-size:var(--title-fs, 2.5cqw);    line-height:1.083; font-weight:600; letter-spacing:-.01em; margin:0; }  /* 48/52 */
 .h2      { font-size:1.5625cqw; line-height:1.2;   font-weight:600; margin:0 0 1.667cqw; }              /* 30/36, отступ снизу 32 */
 .h3      { font-size:1.25cqw;   line-height:1.333; font-weight:600; margin:0 0 .5cqw; }                 /* 24/32 */
 .body    { font-size:1.0417cqw; line-height:1.4;   font-weight:400; margin:0; }                         /* 20/28 */

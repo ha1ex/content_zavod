@@ -59,6 +59,10 @@ const DOMAIN_GROUPS: Array<{ domain: string; variants: MockVariant[] }> = [
       'mobile-doc-reader',
     ],
   },
+  {
+    domain: 'On-premise',
+    variants: ['on-premise'],
+  },
 ];
 
 export function MockCatalog() {

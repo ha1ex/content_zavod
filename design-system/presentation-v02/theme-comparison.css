@@ -51,7 +51,7 @@
    пунктирная заглушка под вторую сторону, справа знак Кайтена. */
 [data-theme="comparison"] .cover .cover-logo img { width:8.385cqw; }  /* 161px — полный локап */
 [data-theme="comparison"] .cover .cover-logo::before {
-  content:"ЛОГО"; flex:none;
+  content:"ЛОГО"; box-sizing:border-box; flex:none;
   width:8.385cqw; height:2.5cqw;   /* габарит знака Кайтена, 161x48 */
   margin-right:1.25cqw;
   border:.104cqw dashed var(--border-default); border-radius:.42cqw;
@@ -79,7 +79,7 @@
 [data-theme="comparison"] .s-head { justify-content:flex-start; }
 [data-theme="comparison"] .s-head .s-title { margin-right:auto; }
 [data-theme="comparison"] .s-head::after {
-  content:"ЛОГО"; order:1; flex:none;
+  content:"ЛОГО"; box-sizing:border-box; order:1; flex:none;
   width:8.385cqw; height:2.5cqw;   /* габарит знака Кайтена, 161x48 */
   margin-right:1.25cqw;
   border:.104cqw dashed var(--border-default); border-radius:.42cqw;

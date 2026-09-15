@@ -46,6 +46,14 @@
   /* Тема Сравнение штатно ставит текст обложки вверху слева. В этом деке
      он центрируется по вертикали, как в Light. */
   [data-theme="comparison"] .cover-text { top:50%; transform:translateY(-50%); }
+  /* Акцентное слово на темной обложке — градиент, как в шаблоне (Figma 149-583):
+     сверху бирюзовый #00d0ff, снизу фиолетовый #7d4ccf. Плоский --text-accent
+     #c4a6f5 темы для обложки не подходит. */
+  [data-theme="dark"] .cover-text h1 span {
+    background:linear-gradient(180deg,#00d0ff 18%,#7d4ccf 82%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent !important;
+  }
   /* Поле вокруг слайда серое: на белом кромка слайда не видна и непонятно,
      где кончается кадр. Цвет берем из шкалы темы, а не подбираем. */
   /* Только для светлых тем: локальное правило стоит после theme-dark.css и

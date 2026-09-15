@@ -1167,6 +1167,8 @@ code {
 /* Внутри плашки иконка идет на белом: на залитом фоне светло-сиреневый
    квадрат сливается с подложкой. Вне плашки остается сиреневым. */
 .frame .features .feature-icon { background: var(--surface-page); }
+/* Цвет иконки идет за фоном плашки: на нейтральной серой — серая. */
+.frame:not(.is-accent):not(.is-info) .features .feature-icon { color: var(--text-secondary); }
 /* На сиреневом фрейме плашка под иконкой — белая с прозрачностью. */
 .frame.is-accent .features .feature-icon { background:#ffffff; color:var(--violet-100); }
 .frame.is-info   .features .feature-icon { background:#ffffff; color:var(--blue-100); }

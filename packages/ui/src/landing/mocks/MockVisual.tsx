@@ -3,8 +3,8 @@ import { cn } from '../../primitives/cn';
 import OnPremise from './OnPremise';
 import { FeatureTile } from './FeatureTile';
 import { Diagrams } from './Diagram';
-import { NotificationSettingsMock } from './NotificationSettingsMock';
-import { RecurringTaskScheduleMock } from './RecurringTaskScheduleMock';
+import { WindowNotificationSettingsMock } from './WindowNotificationSettingsMock';
+import { WindowRecurringScheduleMock } from './WindowRecurringScheduleMock';
 import { ReportChartMock, type ReportChartKind } from './ReportChartMock';
 import {
   AbTestResultsMock,
@@ -283,8 +283,8 @@ export type MockVariant =
   | 'tile-integrations-git'
   | 'report-diagrams'
   | 'window-rule-full'
-  | 'notification-settings'
-  | 'recurring-task-schedule'
+  | 'window-notification-settings'
+  | 'window-recurring-schedule'
   // Отчеты: одна диаграмма в карточке фичи
   | 'report-chart-burndown'
   | 'report-chart-velocity'
@@ -574,20 +574,20 @@ function MockVisualSwitch({
         </div>
       );
     // Запланированные задания: календарь месяца + окно «Создание задания» поверх.
-    case 'recurring-task-schedule':
+    case 'window-recurring-schedule':
       return (
         <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
           <ScaleToFit designWidth={800}>
-            <RecurringTaskScheduleMock />
+            <WindowRecurringScheduleMock />
           </ScaleToFit>
         </div>
       );
     // Настройка уведомлений: окно каналов и событий + телефон с чатом бота.
-    case 'notification-settings':
+    case 'window-notification-settings':
       return (
         <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
           <ScaleToFit designWidth={796}>
-            <NotificationSettingsMock />
+            <WindowNotificationSettingsMock />
           </ScaleToFit>
         </div>
       );

@@ -193,7 +193,7 @@ function ScheduleModal() {
  * «Создание задания»: название, тип повторения и интервал, дни недели, время,
  * доска и место карточки. Для блока про повторяющиеся задачи.
  */
-export function RecurringTaskScheduleMock() {
+export function WindowRecurringScheduleMock() {
   return (
     <div aria-hidden className="relative h-[580px] w-[800px]">
       <div className="absolute left-0 top-0">

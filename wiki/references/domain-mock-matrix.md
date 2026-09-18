@@ -103,8 +103,8 @@ points, ревью, MR, deployment, дорожная карта.
 | `FeatureTile` (галерея `FeatureMocksV01`) | `tile-recurring-tasks` / `tile-notifications` / `tile-integrations-git` | Плитки «Повторяющиеся задачи» (календарь и карточка по расписанию), «Боты и уведомления» (бот Кайтена, доставка в Telegram, Max, мобильное приложение) и «Интеграции: GitLab · GitHub» (репозиторий, связанный с карточкой) — для блоков про запланированные задания, уведомления и связку разработки с задачами |
 | `Diagrams` (`Diagram.tsx`, headless) | `report-diagrams` | Шесть диаграмм отчетов в карточках: сгорание, скорость команды, контрольная, CFD, спектральная, пропускная способность |
 | `WindowRuleTriggerMock` + `WindowRuleActionMock` | `window-rule-full` | Правило автоматизации целиком: «Когда» слева и «Выполнить» справа |
-| `NotificationSettingsMock` | `notification-settings` | Настройка уведомлений: каналы с тумблерами, события по карточкам с отметками, телефон с чатом бота |
-| `RecurringTaskScheduleMock` | `recurring-task-schedule` | Календарь месяца с карточками по расписанию и окно «Создание задания» поверх |
+| `WindowNotificationSettingsMock` | `window-notification-settings` | Настройка уведомлений: каналы с тумблерами, события по карточкам с отметками, телефон с чатом бота |
+| `WindowRecurringScheduleMock` | `window-recurring-schedule` | Календарь месяца с карточками по расписанию и окно «Создание задания» поверх |
 | `ReportChartMock` | `report-chart-burndown` / `-velocity` / `-control` / `-cfd` / `-spectral` / `-throughput` / `-blocked` / `-cycle-time` | Одна диаграмма отчета в белой карточке для карточек фич: шесть из сетки `Diagrams` плюс время разрешения блокировок (дни по причинам) и время цикла (дни на этапах доски) — для лендинга «Отчеты» |
 | `AdminSpaceMock` | `admin-space` | Административное пространство «Рабочий кабинет руководителя»: доски разных отделов на одном экране — стратегические проекты, проекты ИТ-департамента, развитие сотрудников. 820px |
 | `ModulePortfolioMock` (stretch) | `portfolio-board-stretch` | Портфель проектов с колонками на всю ширину доски и свернутые доски проектов, 1360px |

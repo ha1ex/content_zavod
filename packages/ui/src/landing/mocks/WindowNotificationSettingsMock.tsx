@@ -98,7 +98,7 @@ function Group({ title, rows }: { title: string; rows: EventRow[] }) {
  * плитке галереи «Боты и уведомления». Для блока «Получайте уведомления о
  * действиях с карточками в удобном для вас формате».
  */
-export function NotificationSettingsMock() {
+export function WindowNotificationSettingsMock() {
   return (
     <div aria-hidden className="relative w-[796px] pb-6 pr-[166px]">
       <div

@@ -504,7 +504,7 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
       },
       {
         variant: 'notification-settings',
-        sections: ['media'],
+        sections: ['media', 'tab'],
         description:
           'Настройка уведомлений Кайтена: вкладки профиля, каналы с тумблерами (почта, Telegram, Max, мобильное приложение), таблица событий по карточкам с отметками по каналам и телефон с чатом бота поверх окна',
       },

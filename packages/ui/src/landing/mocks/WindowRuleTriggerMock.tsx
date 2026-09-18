@@ -67,7 +67,7 @@ export function WindowRuleTriggerMock() {
     <div
       aria-hidden
       className={cn(
-        'relative w-[520px] overflow-hidden rounded-(--radius-xl) lg:rounded-(--radius-2xl)',
+        'relative w-[460px] overflow-hidden rounded-(--radius-xl) lg:rounded-(--radius-2xl)',
         'bg-(--color-surface-card) p-5',
         'shadow-[0_0_40px_-12px_rgba(24,24,27,0.25)]',
       )}

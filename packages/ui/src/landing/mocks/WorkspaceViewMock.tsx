@@ -80,7 +80,7 @@ function Badge() {
 
 function BoardView() {
   return (
-    <div className="relative overflow-hidden rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section)">
+    <div className="relative overflow-hidden rounded-(--radius-lg) bg-(--color-surface-section)">
       <div className="flex items-center gap-2 px-3 pb-1.5 pt-2.5">
         <Icon name="GripVertical" className="h-3.5 w-3.5 text-(--color-text-secondary)" strokeWidth={2} />
         <span className="text-[13px] font-semibold text-(--color-text-primary)">Новая доска</span>
@@ -371,8 +371,8 @@ function TimelineView() {
 }
 
 function CalendarView() {
-  // Сентябрь 2026: 7-е — понедельник. Показываем пять недель, после 30-го — октябрь.
-  const weeks = [7, 14, 21, 28, 35].map((mon) => ({ mon, days: Array.from({ length: 7 }, (_, i) => mon + i) }));
+  // Сентябрь 2026: 7-е — понедельник. Показываем четыре недели, после 30-го — октябрь.
+  const weeks = [7, 14, 21, 28].map((mon) => ({ mon, days: Array.from({ length: 7 }, (_, i) => mon + i) }));
   return (
     <div className="overflow-hidden rounded-(--radius-lg) border border-(--color-border-default)">
       <div className="grid grid-cols-7 bg-(--color-surface-section) text-[10.5px] font-semibold text-(--color-text-secondary)">
@@ -386,7 +386,7 @@ function CalendarView() {
             <div
               key={day}
               className={cn(
-                'flex min-h-[65px] flex-col gap-1 border-r border-(--color-border-default) p-1.5 last:border-r-0',
+                'flex min-h-[82px] flex-col gap-1 border-r border-(--color-border-default) p-1.5 last:border-r-0',
                 i > 4 && 'bg-(--color-surface-section)/60',
               )}
             >

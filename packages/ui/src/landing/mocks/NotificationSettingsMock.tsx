@@ -52,15 +52,14 @@ function Toggle({ on }: { on: boolean }) {
   );
 }
 
-function Check({ on, muted }: { on: boolean; muted?: boolean }) {
+function Check({ on }: { on: boolean }) {
   return (
     <span
       className={cn(
         'inline-flex h-[16px] w-[16px] items-center justify-center rounded-[4px] border',
         on
           ? 'border-(--color-action-primary) bg-(--color-action-primary) text-white'
-          : 'border-(--color-neutral-300) bg-white',
-        muted && 'opacity-40',
+          : 'border-(--color-neutral-300) bg-(--color-surface-section)',
       )}
     >
       {on && (
@@ -83,7 +82,7 @@ function Group({ title, rows }: { title: string; rows: EventRow[] }) {
           <span className="truncate text-[13px] text-(--color-text-primary)">{r.label}</span>
           {r.checks.map((c, i) => (
             <span key={i} className="flex justify-center">
-              <Check on={c} muted={!CHANNELS[i]!.on} />
+              <Check on={c} />
             </span>
           ))}
         </div>
@@ -101,7 +100,7 @@ function Group({ title, rows }: { title: string; rows: EventRow[] }) {
  */
 export function NotificationSettingsMock() {
   return (
-    <div aria-hidden className="relative w-[800px] pb-6 pr-[230px]">
+    <div aria-hidden className="relative w-[796px] pb-6 pr-[166px]">
       <div
         className={cn(
           'overflow-hidden rounded-(--radius-2xl) bg-(--color-surface-card) px-6 pb-3 pt-4',
@@ -140,10 +139,10 @@ export function NotificationSettingsMock() {
         <Group title="События в карточках, на которые вы подписаны" rows={SUBSCRIBED} />
 
         <div className="mt-3 flex justify-end gap-2">
-          <span className="rounded-(--radius-md) border border-(--color-border-default) px-3 py-1.5 text-[11px] font-semibold uppercase text-(--color-text-primary)">
+          <span className="inline-flex items-center rounded-(--radius-md) border border-(--color-border-default) px-2.5 pb-[5px] pt-[7px] text-[10.5px] font-semibold uppercase leading-none text-(--color-text-primary)">
             Отмена
           </span>
-          <span className="rounded-(--radius-md) border border-(--color-action-primary) px-3 py-1.5 text-[11px] font-semibold uppercase text-(--color-text-accent)">
+          <span className="inline-flex items-center rounded-(--radius-md) border border-(--color-action-primary) px-2.5 pb-[5px] pt-[7px] text-[10.5px] font-semibold uppercase leading-none text-(--color-text-accent)">
             Сохранить
           </span>
         </div>
@@ -152,7 +151,7 @@ export function NotificationSettingsMock() {
       {/* Телефон с чатом бота — поверх левого нижнего угла окна настроек */}
       <div
         className={cn(
-          'absolute bottom-0 right-[80px] flex h-[300px] w-[170px] flex-col gap-2.5 rounded-[22px] border border-(--color-border-default)',
+          'absolute bottom-0 right-[32px] flex h-[300px] w-[170px] flex-col gap-2.5 rounded-[22px] border border-(--color-border-default)',
           'bg-(--color-surface-card) p-3 shadow-[0_10px_40px_-12px_rgba(24,24,27,0.35)]',
         )}
       >

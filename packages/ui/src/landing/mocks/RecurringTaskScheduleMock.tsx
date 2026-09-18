@@ -175,10 +175,10 @@ function ScheduleModal() {
       </div>
 
       <div className="mt-4 flex justify-end gap-2">
-        <span className="rounded-(--radius-md) px-3 py-1.5 text-[11px] font-semibold uppercase text-(--color-text-primary)">
+        <span className="inline-flex items-center rounded-(--radius-md) px-2.5 pb-[5px] pt-[7px] text-[10.5px] font-semibold uppercase leading-none text-(--color-text-primary)">
           Отмена
         </span>
-        <span className="rounded-(--radius-md) border border-(--color-action-primary) px-3 py-1.5 text-[11px] font-semibold uppercase text-(--color-text-accent)">
+        <span className="inline-flex items-center rounded-(--radius-md) border border-(--color-action-primary) px-2.5 pb-[5px] pt-[7px] text-[10.5px] font-semibold uppercase leading-none text-(--color-text-accent)">
           Создать
         </span>
       </div>
@@ -199,7 +199,7 @@ export function RecurringTaskScheduleMock() {
       <div className="absolute left-0 top-0">
         <Calendar />
       </div>
-      <div className="absolute bottom-0 right-[60px]">
+      <div className="absolute bottom-0 right-[20px]">
         <ScheduleModal />
       </div>
     </div>

@@ -238,7 +238,7 @@ export function FeatureGrid({
         )}
         <h2
           data-comp="features.title"
-          className="text-3xl font-semibold leading-tight md:whitespace-pre-line md:text-4xl"
+          className="text-2xl font-semibold leading-tight md:whitespace-pre-line md:text-4xl"
         >
           {title}
         </h2>
@@ -264,6 +264,9 @@ export function FeatureGrid({
                 'fg-track',
                 // мобилка/планшет — горизонтальный трек со снапом
                 'flex snap-x snap-mandatory gap-4 overflow-x-auto md:gap-6',
+                // трек выходит в поля секции: карточка доезжает до края экрана,
+                // а не обрывается на невидимой границе контейнера
+                '-mx-4 scroll-px-4 px-4 md:-mx-6 md:scroll-px-6 md:px-6 lg:mx-0 lg:px-0',
                 // десктоп — обычная сетка
                 'lg:grid lg:gap-6 lg:overflow-visible xl:gap-8',
               )
@@ -292,14 +295,14 @@ export function FeatureGrid({
               // широкая карточка занимает весь ряд — уходит отдельной строкой вниз
               item.wide && 'md:w-full lg:col-span-full',
               // текст и картинка бок о бок
-              item.imageAside && (item.image || item.featureTile) && cn('lg:flex lg:items-center lg:gap-8', item.imageAsidePosition === 'left' && 'flex flex-col lg:flex-row'),
+              item.imageAside && (item.image || item.featureTile) && cn('xl:flex xl:items-center xl:gap-8', item.imageAsidePosition === 'left' && 'flex flex-col xl:flex-row'),
             )}
           >
             {item.imageAside && (item.image || item.featureTile) ? (
               // Иллюстрация сбоку: порядок в разметке — текст, потом картинка,
               // поэтому на узких экранах она сама уходит вниз.
               <>
-                <div className={cn('lg:min-w-0 lg:flex-1', item.imageAsidePosition === 'left' ? 'order-2' : 'lg:order-1')}>
+                <div className={cn('xl:min-w-0 xl:flex-1', item.imageAsidePosition === 'left' ? 'order-2' : 'xl:order-1')}>
                   <h3 data-comp={`features.items[${i}].title`} className="text-lg font-semibold leading-snug">
                     {keepHyphenated(item.title)}
                   </h3>
@@ -310,9 +313,9 @@ export function FeatureGrid({
                 </div>
                 {/* Размер как у плиток галереи фич — 240px, чтобы иллюстрации
                     в разных карточках читались в одном масштабе. */}
-                {/* Пока картинка под текстом (до lg) — по центру карточки;
+                {/* Пока картинка под текстом (до xl) — по центру карточки;
                     сбоку от текста центрировать нечего. */}
-                <div className={cn('mx-auto w-[240px] max-w-full shrink-0 overflow-hidden rounded-(--radius-xl) lg:mx-0 lg:mt-0', item.imageAsidePosition === 'left' ? 'order-1 mb-6 lg:mb-0' : 'mt-6 lg:order-2')}>
+                <div className={cn('mx-auto w-[240px] max-w-full shrink-0 overflow-hidden rounded-(--radius-xl) xl:mx-0 xl:mt-0', item.imageAsidePosition === 'left' ? 'order-1 mb-6 xl:mb-0' : 'mt-6 xl:order-2')}>
                   {item.image ? (
                     <img src={item.image.src} alt={item.image.alt ?? ''} loading="lazy" className="block h-auto w-full" />
                   ) : (

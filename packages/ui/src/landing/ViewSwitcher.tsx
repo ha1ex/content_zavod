@@ -11,6 +11,8 @@ export interface ViewSwitcherItem {
   label: string;
   icon?: string;
   mockVariant: MockVariant;
+  /** Скриншот вида вместо мока: путь из public и alt. Перекрывает mockVariant. */
+  image?: { src: string; alt?: string };
 }
 
 export interface ViewSwitcherProps {
@@ -24,7 +26,7 @@ export interface ViewSwitcherProps {
   background?: 'soft' | 'gradient';
   /** Убрать нижний отступ секции на всех ширинах. Opt-in. */
   flushBottom?: boolean;
-  /** Верхний отступ: мобилка 64px, планшет 128px, десктоп 96px. Opt-in. */
+  /** Верхний отступ секции 128px на всех ширинах. Opt-in. */
   spaceTopTablet?: boolean;
   /** Верхний отступ секции: 96px на планшете, 128px на десктопе. Opt-in. */
   spaceTopDesktop?: boolean;
@@ -43,19 +45,19 @@ export function ViewSwitcher({ eyebrow, title, accentWord, description, items, b
   return (
     <section
       className={cn(
-        'mx-auto w-full max-w-(--container-kaiten) px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
+        'mx-auto w-full max-w-(--container-kaiten) px-4 py-12 pt-16 md:px-6 md:py-16 xl:px-0 lg:py-24',
         flushBottom && 'pb-0 md:pb-0 lg:pb-0',
-        spaceTopTablet && 'pt-16 md:pt-32 lg:pt-24',
+        spaceTopTablet && 'pt-32 md:pt-32 lg:pt-32',
         spaceTopDesktop && 'md:pt-24 lg:pt-32',
       )}
     >
-      <div className="mx-auto mb-6 max-w-6xl text-center md:mb-8">
+      <div className="mx-auto mb-6 max-w-6xl text-left md:mb-8 md:text-center">
         {eyebrow && (
           <p data-comp="view_switcher.eyebrow" className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)">
             {eyebrow}
           </p>
         )}
-        <h2 data-comp="view_switcher.title" className="text-3xl font-semibold leading-tight whitespace-pre-line md:text-3xl lg:text-4xl">
+        <h2 data-comp="view_switcher.title" className="text-2xl font-semibold leading-tight md:whitespace-pre-line md:text-3xl lg:text-4xl">
           <AccentText text={title} accentWord={accentWord} />
         </h2>
         {description && (
@@ -98,7 +100,7 @@ export function ViewSwitcher({ eyebrow, title, accentWord, description, items, b
 
       <div
         className={cn(
-          'rounded-[12px] px-4 py-6 md:rounded-(--radius-3xl) md:px-10 md:py-10 lg:px-16 lg:py-14',
+          'rounded-[12px] px-4 py-6 md:rounded-(--radius-2xl) md:px-10 md:py-10 lg:px-16 lg:py-14',
           background === 'gradient'
             ? 'bg-[linear-gradient(180deg,#ece0ff,#cdecff)] lg:bg-[linear-gradient(90deg,#ece0ff,#cdecff)]'
             : 'bg-(--color-violet-12)',
@@ -106,7 +108,7 @@ export function ViewSwitcher({ eyebrow, title, accentWord, description, items, b
       >
         {/* все моки в одной grid-ячейке: высота равна самому высокому, блок не прыгает */}
         {/* minmax(0,1fr): иначе колонка растягивается под 760px мока и он вылезает за экран */}
-        <div className="mx-auto grid max-w-[760px] grid-cols-[minmax(0,1fr)]">
+        <div className="mx-auto grid max-w-[760px] grid-cols-[minmax(0,1fr)] [overflow:clip] [overflow-clip-margin:16px]">
           {items.map((it, idx) => (
             <div
               key={it.id}
@@ -114,7 +116,18 @@ export function ViewSwitcher({ eyebrow, title, accentWord, description, items, b
               data-comp={`view_switcher.items[${idx}].mockVariant`}
               className={cn('[grid-area:1/1]', it.id !== activeId && 'invisible')}
             >
-              <MockVisual variant={it.mockVariant} />
+              {it.image ? (
+                // Скриншот лежит как окно интерфейса: скругление, обводка и
+                // та же небольшая серая тень, что у моков WorkspaceView.
+                <img
+                  src={it.image.src}
+                  alt={it.image.alt ?? ''}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  className="block h-auto w-full rounded-(--radius-2xl) border border-(--color-border-default) shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]"
+                />
+              ) : (
+                <MockVisual variant={it.mockVariant} />
+              )}
             </div>
           ))}
         </div>

@@ -1,0 +1,593 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Функция Задачи",
+        "eyebrowIcon": "tasks",
+        "title": "Соберите всю информацию по задачам в карточках",
+        "accentWord": "в карточках",
+        "accentPill": false,
+        "subtitle": "Вы можете добавить в карточки неограниченное количество полей с информацией, назначить ответственных, установить сроки, добавить подробное описание и общаться с коллегами.",
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://passport.kaiten.ru/ru/registration"
+        },
+        "secondaryCta": {
+          "label": "Записаться на демо",
+          "href": "/demo"
+        },
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-workspace-board",
+          "alt": "Рабочее пространство Кайтена: карточка переезжает между этапами работы на доске",
+          "variant": "hero-screen-interface"
+        },
+        "visualPosition": "side",
+        "board": {
+          "boardTitle": "Маркетинг",
+          "columns": [
+            {
+              "label": "Очередь",
+              "count": 3
+            },
+            {
+              "label": "В работе",
+              "count": 2
+            },
+            {
+              "label": "Проверка",
+              "count": 2
+            },
+            {
+              "label": "Согласование",
+              "count": 2
+            },
+            {
+              "label": "Готово",
+              "count": 2,
+              "done": true
+            }
+          ],
+          "lanes": [
+            {
+              "name": "Запуск продукта",
+              "count": 6,
+              "columns": [
+                [
+                  {
+                    "title": "Статья в блог про рабочее пространство",
+                    "tags": [
+                      {
+                        "label": "Блог",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9"
+                    ],
+                    "assigneeInitials": [
+                      "ЕГ"
+                    ],
+                    "due": "22 сен"
+                  },
+                  {
+                    "title": "Вебинар для партнеров",
+                    "tags": [
+                      {
+                        "label": "События",
+                        "variant": "big"
+                      }
+                    ],
+                    "assignees": [
+                      "#d9a3a3"
+                    ],
+                    "assigneeInitials": [
+                      "АМ"
+                    ],
+                    "due": "25 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Баннеры для соцсетей",
+                    "tags": [
+                      {
+                        "label": "Дизайн",
+                        "variant": "urg"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a0"
+                    ],
+                    "assigneeInitials": [
+                      "ПС"
+                    ],
+                    "due": "19 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Промостраница новой функции",
+                    "tags": [
+                      {
+                        "label": "Сайт",
+                        "variant": "ok"
+                      }
+                    ],
+                    "checklist": {
+                      "label": "Чек-лист",
+                      "done": 3,
+                      "total": 5
+                    },
+                    "counters": {
+                      "attachments": 3,
+                      "comments": 4,
+                      "children": 2
+                    },
+                    "assignees": [
+                      "#b88ac9"
+                    ],
+                    "assigneeInitials": [
+                      "АК"
+                    ],
+                    "active": true,
+                    "due": "18 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Пресс-релиз о запуске",
+                    "tags": [
+                      {
+                        "label": "Пресса",
+                        "variant": "cx"
+                      }
+                    ],
+                    "assignees": [
+                      "#d9a3a3"
+                    ],
+                    "assigneeInitials": [
+                      "АМ"
+                    ],
+                    "due": "20 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Рассылка клиентам",
+                    "tags": [
+                      {
+                        "label": "Рассылка",
+                        "variant": "prod"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9"
+                    ],
+                    "assigneeInitials": [
+                      "ЕГ"
+                    ],
+                    "due": "11 сен"
+                  }
+                ]
+              ]
+            },
+            {
+              "name": "Разработка",
+              "count": 5,
+              "columns": [
+                [
+                  {
+                    "title": "Настроить права доступа для отделов",
+                    "tags": [
+                      {
+                        "label": "Платформа",
+                        "variant": "cx"
+                      }
+                    ],
+                    "assignees": [
+                      "#b88ac9"
+                    ],
+                    "assigneeInitials": [
+                      "АК"
+                    ],
+                    "due": "23 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Отчеты по пространству",
+                    "tags": [
+                      {
+                        "label": "Аналитика",
+                        "variant": "blue"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a0"
+                    ],
+                    "assigneeInitials": [
+                      "ПС"
+                    ],
+                    "due": "24 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Импорт задач из таблиц",
+                    "tags": [
+                      {
+                        "label": "Миграция",
+                        "variant": "prod"
+                      }
+                    ],
+                    "assignees": [
+                      "#d9a3a3"
+                    ],
+                    "assigneeInitials": [
+                      "АМ"
+                    ],
+                    "due": "17 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Доступы для подрядчиков",
+                    "tags": [
+                      {
+                        "label": "Платформа",
+                        "variant": "big"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a0"
+                    ],
+                    "assigneeInitials": [
+                      "ПС"
+                    ],
+                    "due": "21 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Мобильное приложение: карточка задачи",
+                    "tags": [
+                      {
+                        "label": "Мобильное",
+                        "variant": "ok"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9"
+                    ],
+                    "assigneeInitials": [
+                      "ЕГ"
+                    ],
+                    "due": "12 сен"
+                  }
+                ]
+              ]
+            }
+          ],
+          "animate": false,
+          "animatedCard": {
+            "card": {
+              "title": "Промостраница новой функции",
+              "tags": [
+                {
+                  "label": "Сайт",
+                  "variant": "ok"
+                }
+              ],
+              "assignees": [
+                "#b88ac9"
+              ],
+              "assigneeInitials": [
+                "АК"
+              ],
+              "due": "18 сен"
+            },
+            "fromColumn": 1
+          },
+          "cardWindow": true
+        }
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Все данные и вложения будут храниться\nв одном месте и не потеряются",
+        "description": "Метки · Типы задач · Вложения · Размер · Чек-листы · Чат · Сроки · Пользовательские поля",
+        "items": [
+          {
+            "icon": "MessagesSquare",
+            "title": "Соберите все нужные данные и коммуникации в одном месте",
+            "description": "Создавайте карточки для каждой задачи, добавляйте подробное описание и общайтесь с коллегами в чате.",
+            "featureTile": "Карточка задачи и связи",
+            "imageAside": true,
+            "imageAsidePosition": "left"
+          },
+          {
+            "icon": "LayoutTemplate",
+            "title": "Создавайте шаблоны для разных типов задач",
+            "description": "Для разных категорий задач создавайте готовые шаблоны с нужными полями и описаниями. Для каждого типа задач задавайте свои правила и строгий поток.",
+            "featureTile": "Кастомные поля и типы",
+            "imageAside": true,
+            "imageAsidePosition": "left"
+          },
+          {
+            "icon": "Ban",
+            "title": "Блокируйте карточки, над которыми не можете продолжить работу",
+            "description": "Если по какой-то причине вы не можете в данный момент выполнить задачу, добавьте предупреждение-блокировку и укажите причину или блокирующую карточку.",
+            "featureTile": "Блокировка задач",
+            "imageAside": true,
+            "imageAsidePosition": "left"
+          },
+          {
+            "icon": "Kanban",
+            "title": "Сделайте процесс работы над задачами прозрачным и управляемым",
+            "description": "По мере выполнения работы передвигайте карточки на доске от одного этапа к другому, пока задача не будет готова. Добавьте визуальные сигналы и метки, чтобы быстро ориентироваться в задачах на досках.",
+            "featureTile": "Канбан-доски",
+            "imageAside": true,
+            "imageAsidePosition": "left"
+          }
+        ],
+        "columns": 2,
+        "slider": true,
+        "flat": true
+      }
+    },
+    {
+      "id": "view_switcher",
+      "component": "ViewSwitcher",
+      "props": {
+        "title": "Выберите удобный формат отображения задач\nна рабочем пространстве",
+        "background": "gradient",
+        "flushBottom": true,
+        "spaceTopDesktop": true,
+        "items": [
+          {
+            "id": "boards",
+            "label": "Доски",
+            "icon": "LayoutGrid",
+            "mockVariant": "scrum-board-wide"
+          },
+          {
+            "id": "lists",
+            "label": "Списки",
+            "icon": "List",
+            "mockVariant": "workspace-view-list"
+          },
+          {
+            "id": "tables",
+            "label": "Таблицы",
+            "icon": "Table2",
+            "mockVariant": "workspace-view-table"
+          },
+          {
+            "id": "timeline",
+            "label": "Таймлайн",
+            "icon": "AlignLeft",
+            "mockVariant": "workspace-view-timeline"
+          },
+          {
+            "id": "calendar",
+            "label": "Календарь",
+            "icon": "Calendar",
+            "mockVariant": "workspace-view-calendar"
+          },
+          {
+            "id": "reports",
+            "label": "Отчеты",
+            "icon": "ChartLine",
+            "mockVariant": "workspace-view-reports"
+          }
+        ]
+      }
+    },
+    {
+      "id": "view_switcher",
+      "component": "ViewSwitcher",
+      "props": {
+        "title": "Выберите удобный формат отображения задач\nна рабочем пространстве",
+        "background": "gradient",
+        "flushBottom": true,
+        "spaceTopDesktop": true,
+        "items": [
+          {
+            "id": "boards",
+            "label": "Доски",
+            "icon": "LayoutGrid",
+            "mockVariant": "scrum-board-wide",
+            "image": {
+              "src": "/brand/features/tasks-views/boards.webp",
+              "alt": "Доска задач команды в Кайтене"
+            }
+          },
+          {
+            "id": "lists",
+            "label": "Списки",
+            "icon": "List",
+            "mockVariant": "workspace-view-list",
+            "image": {
+              "src": "/brand/features/tasks-views/lists.webp",
+              "alt": "Задачи команды списками по колонкам"
+            }
+          },
+          {
+            "id": "tables",
+            "label": "Таблицы",
+            "icon": "Table2",
+            "mockVariant": "workspace-view-table",
+            "image": {
+              "src": "/brand/features/tasks-views/tables.webp",
+              "alt": "Задачи команды таблицей с полями"
+            }
+          },
+          {
+            "id": "timeline",
+            "label": "Таймлайн",
+            "icon": "AlignLeft",
+            "mockVariant": "workspace-view-timeline"
+          },
+          {
+            "id": "calendar",
+            "label": "Календарь",
+            "icon": "Calendar",
+            "mockVariant": "workspace-view-calendar",
+            "image": {
+              "src": "/brand/features/tasks-views/calendar.webp",
+              "alt": "Задачи команды в календаре"
+            }
+          },
+          {
+            "id": "reports",
+            "label": "Отчеты",
+            "icon": "ChartLine",
+            "mockVariant": "workspace-view-reports",
+            "image": {
+              "src": "/brand/features/tasks-views/reports.webp",
+              "alt": "Отчеты по задачам команды"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "tightBottom": true,
+        "titleSmallTablet": true,
+        "title": "Добавляйте связи между карточками и стройте иерархию задач",
+        "align": "center",
+        "mediaVariant": "none"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Связи помогают декомпозировать крупные задачи",
+        "description": "Внутри карточки будут показаны все ее взаимосвязи — родительские и дочерние задачи. Вы сможете наглядно оценить, какую работу необходимо сделать, чтобы завершить проект, и легко следить за прогрессом выполнения подзадач.",
+        "mediaPosition": "right",
+        "flushTop": true,
+        "titleSize": "xsmall",
+        "mediaVariant": "window-card-flow"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Создавайте запланированные задания для повторяющихся задач",
+        "description": "Если у вас есть регулярные повторяющиеся задачи, создайте карточки по расписанию, которые будут автоматически появляться на досках в нужное время",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "mediaVariant": "window-recurring-schedule"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "ctaCenterMobile": true,
+        "title": "Избавьтесь от рутины и освободите время для более важных вещей",
+        "description": "Легко автоматизируйте повторяющиеся действия с задачами",
+        "checklistInline": true,
+        "checklist": [
+          {
+            "icon": "Zap",
+            "text": "Если — условие"
+          },
+          {
+            "icon": "CircleCheck",
+            "text": "То — действие"
+          }
+        ],
+        "mediaPosition": "right",
+        "flushTop": true,
+        "mediaVariant": "window-rule-full",
+        "primaryCta": {
+          "label": "Подробнее",
+          "href": "/features/automation/"
+        }
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Получайте уведомления о действиях с карточками в удобном для вас формате",
+        "description": "Вы сами решаете, о каких действиях с задачами получать уведомления. И где их получать. Узнавайте о важных событиях, оставляйте комментарии и ставьте задачи там, где вам удобно",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "mediaVariant": "window-notification-settings"
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Попробуйте Кайтен прямо сейчас",
+        "primaryCta": {
+          "label": "Попробовать Кайтен",
+          "href": "https://passport.kaiten.ru/ru/registration"
+        },
+        "variant": "product"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Кайтен — эффективная работа с карточками в удобном формате",
+    "description": "Соберите всю информацию по задачам в карточках."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-09-22T14:11:12.983Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "depersonalized-product-tour",
+    "tokenEstimate": 48142,
+    "domain": "pm"
+  }
+}

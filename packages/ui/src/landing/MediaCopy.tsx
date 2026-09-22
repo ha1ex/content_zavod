@@ -112,6 +112,8 @@ export interface MediaCopyProps {
   spaceTopLarge?: boolean;
   /** Заголовок default на планшете 30px вместо 36px. Opt-in. */
   titleSmallTablet?: boolean;
+  /** Мок на десктопе уже колонки на 16px (576 вместо 592). Opt-in. */
+  mediaNarrow?: boolean;
   /** Текстовая колонка уже на десктопе — 520px. Opt-in. */
   copyNarrow?: boolean;
   /** Зазор между текстом и моком на мобилке — 24px вместо 40px. Opt-in. */
@@ -181,6 +183,7 @@ export function MediaCopy({
   flushBottomMobile = false,
   spaceTopLarge = false,
   titleSmallTablet = false,
+  mediaNarrow = false,
   copyNarrow = false,
   gapTightMobile = false,
   mediaCenterMobile = false,
@@ -227,7 +230,7 @@ export function MediaCopy({
     <section
       className={cn(
         'mx-auto w-full max-w-(--container-kaiten)',
-        'px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24',
+        'px-4 py-12 pt-16 md:px-6 md:py-16 xl:px-0 lg:py-24',
         // Модификаторы отступов — opt-in: базовый ритм секции задаёт шкала DS.
         spaceBottom && 'pb-12 md:pb-16 lg:pb-24',
         // Половинный нижний отступ на мобилке — идёт после spaceBottom.
@@ -284,12 +287,12 @@ export function MediaCopy({
             className={cn(
               'font-semibold leading-tight',
               titleSize === 'xsmall'
-                ? 'text-xl md:text-2xl'
+                ? 'text-lg md:text-2xl'
                 : titleSize === 'small'
-                  ? 'text-xl md:text-2xl lg:text-3xl'
+                  ? 'text-lg md:text-2xl lg:text-3xl'
                   : titleSmallTablet
                     ? 'text-2xl md:text-3xl lg:text-4xl'
-                    : 'text-2xl md:text-2xl lg:text-4xl',
+                    : 'text-xl md:text-2xl',
               // перенос строки из спека (\n) — только там, где он явно задан
               title.includes('\n') && 'whitespace-pre-line',
             )}
@@ -371,7 +374,12 @@ export function MediaCopy({
           <Inspect
             as="div"
             name="media_copy.media"
-            className={cn(isStacked && 'w-full', mediaCenterMobile && 'max-md:[&_[data-mockfit=inner]]:mx-auto')}
+            className={cn(
+              isStacked && 'w-full',
+              mediaCenterMobile && 'max-md:[&_[data-mockfit=inner]]:mx-auto',
+              // мок уже колонки на 16px: прижимаем к тому краю, где стоит колонка
+              mediaNarrow && (mediaPosition === 'left' ? 'lg:max-w-[576px]' : 'lg:ml-auto lg:max-w-[576px]'),
+            )}
           >
             <MediaCopyVisual
               variant={mediaVariant}

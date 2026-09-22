@@ -9,6 +9,7 @@
  * Usage:
  *   node scripts/build-static-html.mjs <slug> [outPath]
  *   node scripts/build-static-html.mjs crm out/crm/crm.html
+ *   node scripts/build-static-html.mjs crm out/hero.html --block hero-0
  */
 
 import { writeFile, mkdir } from 'node:fs/promises';
@@ -17,7 +18,18 @@ import { dirname, resolve } from 'node:path';
 const args = process.argv.slice(2);
 /** --split-css: вынести стили в соседний styles.css вместо инлайна. */
 const splitCss = args.includes('--split-css');
-const [slug = 'crm', outPathArg] = args.filter((a) => !a.startsWith('--'));
+/**
+ * --block <id>: выгрузить одну секцию вместо всей страницы. `id` — атрибут
+ * её обёртки в разметке (`<div id="media_copy-5">`), он же виден в инспекторе.
+ * Остальной документ отбрасывается, стили чистятся уже по этому блоку.
+ */
+const blockFlag = args.indexOf('--block');
+const blockId = blockFlag >= 0 ? args[blockFlag + 1] : null;
+// -1, когда флага нет: иначе фильтр съел бы первый позиционный аргумент.
+const blockValueAt = blockFlag >= 0 ? blockFlag + 1 : -1;
+const [slug = 'crm', outPathArg] = args.filter(
+  (a, i) => !a.startsWith('--') && i !== blockValueAt,
+);
 const outPath = outPathArg ?? `out/${slug}/${slug}.html`;
 const baseUrl = process.env.BASE_URL ?? 'http://localhost:3000';
 
@@ -71,6 +83,59 @@ function stripPreloads(html) {
   return html
     .replace(/<link\s+[^>]*rel=["'](?:preload|modulepreload|prefetch)["'][^>]*\/?>/gi, '')
     .replace(/<link\s+[^>]*rel=["'](?:dns-prefetch|preconnect)["'][^>]*\/?>/gi, '');
+}
+
+/**
+ * Вырезает секцию целиком: от `<div id="…">` до парного `</div>`. Глубину
+ * считаем только по div — секция обёрнута именно в него, а `>` внутри классов
+ * (`md:[&>div:first-child]`) приезжает сущностью и на разбор тегов не влияет.
+ */
+function extractBlock(html, id) {
+  const opener = new RegExp(`<div[^>]*\\sid=["']${id}["'][^>]*>`, 'i');
+  const start = html.match(opener);
+  if (!start) throw new Error(`блок #${id} на странице не найден`);
+
+  const tags = /<(\/?)div\b[^>]*>/gi;
+  tags.lastIndex = start.index + start[0].length;
+  let depth = 1;
+  for (let tag; (tag = tags.exec(html)); ) {
+    depth += tag[1] ? -1 : 1;
+    if (depth === 0) return html.slice(start.index, tag.index + tag[0].length);
+  }
+  throw new Error(`блок #${id}: не нашёлся закрывающий </div>`);
+}
+
+/**
+ * Минимальный документ вокруг одной секции. Класс с <html> переносим — на нём
+ * висит переменная шрифта; в голову кладём только общий бандл стилей, свои
+ * `<style>` моки несут внутри разметки и уезжают вместе с блоком.
+ */
+function blockDocument(html, id) {
+  const block = extractBlock(html, id);
+  const bundle = html.match(/<style data-inlined="true">[\s\S]*?<\/style>/i)?.[0] ?? '';
+  const htmlClass = html.match(/<html[^>]*\sclass=["']([^"']*)["']/i)?.[1] ?? '';
+  // Заголовок вкладки — по заголовку самого блока: имя страницы для куска
+  // страницы вводит в заблуждение. Нет заголовка — остаётся id.
+  const heading = block
+    .match(/<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/i)?.[1]
+    ?.replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;| /g, ' ')
+    .trim();
+  const title = heading || id;
+
+  return `<!doctype html>
+<html lang="ru" class="${htmlClass}">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>${title}</title>
+${bundle}
+</head>
+<body>
+${block}
+</body>
+</html>
+`;
 }
 
 /**
@@ -290,12 +355,15 @@ function injectMockFit(html) {
  * строк, так что переключение сводится к перестановке классов.
  */
 function injectAccordion(html) {
+  // В выгрузке одного блока аккордиона может не быть — не тащим мёртвый скрипт.
+  if (!html.includes('data-acc-row')) return html;
   const script = `<script>(function(){var rows=document.querySelectorAll('[data-acc-row]');if(!rows.length)return;function apply(el,on){var a=el.getAttribute('data-acc-on')||'',b=el.getAttribute('data-acc-off')||'';(on?b:a).split(/\\s+/).forEach(function(c){if(c)el.classList.remove(c)});(on?a:b).split(/\\s+/).forEach(function(c){if(c)el.classList.add(c)})}function select(id){for(var i=0;i<rows.length;i++){var row=rows[i],on=row.getAttribute('data-acc-row')===id;apply(row,on);var kids=row.querySelectorAll('[data-acc-on],[data-acc-off]');for(var j=0;j<kids.length;j++)apply(kids[j],on);var btn=row.querySelector('button');if(btn)btn.setAttribute('aria-expanded',on?'true':'false')}var panels=document.querySelectorAll('[data-acc-panel]');for(var k=0;k<panels.length;k++)panels[k].classList.toggle('hidden',panels[k].getAttribute('data-acc-panel')!==id);if(window.__ktFitMocks)window.__ktFitMocks()}for(var i=0;i<rows.length;i++){(function(row){var id=row.getAttribute('data-acc-row');row.addEventListener('mouseenter',function(){select(id)});row.addEventListener('click',function(){select(id)});row.addEventListener('focusin',function(){select(id)})})(rows[i])}})();</script>`;
   return html.replace(/<\/body>/i, `${script}</body>`);
 }
 
 function injectStaticBanner(html, slug) {
-  const banner = `\n<!--\n  Static export of /landings/${slug}\n  Generated: ${new Date().toISOString()}\n  Note: интерактив (табы, picker) показывает default-state.\n        Для полной интерактивности откройте через dev-сервер.\n-->\n`;
+  const source = blockId ? `/landings/${slug} #${blockId}` : `/landings/${slug}`;
+  const banner = `\n<!--\n  Static export of ${source}\n  Generated: ${new Date().toISOString()}\n  Note: интерактив (табы, picker) показывает default-state.\n        Для полной интерактивности откройте через dev-сервер.\n-->\n`;
   return html.replace(/<html[^>]*>/i, (match) => `${match}${banner}`);
 }
 
@@ -312,8 +380,12 @@ async function main() {
   console.log('→ stripping preload/prefetch links to chunks');
   const noPreloads = stripPreloads(noScripts);
 
+  const document = blockId
+    ? (console.log(`→ extracting block #${blockId}`), blockDocument(noPreloads, blockId))
+    : noPreloads;
+
   console.log('→ purging unused CSS');
-  const purged = purgeInlineCss(noPreloads);
+  const purged = purgeInlineCss(document);
 
   console.log('→ swapping local @font-face for Google Fonts');
   const withFonts = replaceFontFaces(purged);
@@ -331,6 +403,15 @@ async function main() {
   await mkdir(dirname(absOut), { recursive: true });
 
   let htmlOut = finalHtml;
+  if (blockId && !splitCss) {
+    // Отдельный блок — файл маленький, и мусор в стилях на его фоне заметен:
+    // чистим переменные и анимации, на которые в блоке никто не ссылается.
+    console.log('→ tidying inline CSS');
+    htmlOut = htmlOut.replace(
+      /<style>([\s\S]*?)<\/style>/i,
+      (_m, css) => `<style>${tidyCss(css, htmlOut)}</style>`,
+    );
+  }
   if (splitCss) {
     console.log('→ extracting styles.css');
     const blocks = [];

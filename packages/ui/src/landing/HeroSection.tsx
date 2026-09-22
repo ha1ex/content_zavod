@@ -298,7 +298,7 @@ export function HeroSection({
         )}
       >
         {isBelow ? (
-          <div className="flex flex-col items-center gap-12">
+          <div className={cn('flex flex-col items-center', copyStyle === 'screen' ? 'gap-6' : 'gap-12')}>
             <div className={cn('text-center', copyStyle === 'screen' ? 'w-full max-w-[940px]' : 'max-w-3xl')}>
               {eyebrow && (
                 <Inspect name="hero.eyebrow">

@@ -1597,6 +1597,8 @@ const ViewSwitcherSchema = z.object({
           label: z.string().min(2).max(40),
           icon: z.string().optional().describe('lucide-icon name'),
           mockVariant: MockVariantSchema,
+          /** Скриншот вида вместо мока: путь из public и alt. Перекрывает mockVariant. */
+          image: z.object({ src: z.string().min(1), alt: z.string().max(200).optional() }).optional(),
         }),
       )
       .min(2)

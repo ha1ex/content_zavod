@@ -56,6 +56,8 @@ export { MetricsSplit } from './MetricsSplit';
 export type { MetricsSplitProps, MetricCellProps } from './MetricsSplit';
 
 export { TabbedFeatureSection } from './TabbedFeatureSection';
+export { TabsGallery } from './TabsGallery';
+export type { TabsGalleryProps, TabsGalleryItem } from './TabsGallery';
 export type {
   TabbedFeatureSectionProps,
   TabbedFeatureTabProps,

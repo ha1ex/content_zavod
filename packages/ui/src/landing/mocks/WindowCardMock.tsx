@@ -7,22 +7,23 @@ interface Param {
 
 /**
  * Window: карточка задачи Kaiten — поручение с основными параметрами.
- * Соответствует экрану «Подготовить отчёт по исполнению бюджета».
+ * Соответствует экрану «Подготовить отчет по исполнению бюджета».
  * Тулбар действий, блок «Основные параметры», метки и приоритет.
  */
-export function WindowCardMock() {
+export function WindowCardMock({ grayShadow = false }: { grayShadow?: boolean } = {}) {
   return (
     <div
       aria-hidden
       className={cn(
         'relative overflow-hidden rounded-(--radius-3xl)',
         'border border-(--color-border-default) bg-(--color-surface-card)',
-        'shadow-[0_30px_80px_-30px_rgba(125,76,207,0.25)] p-6 md:p-7',
+        grayShadow ? 'shadow-[0_0_40px_rgba(45,45,45,0.12)]' : 'shadow-[0_30px_80px_-30px_rgba(125,76,207,0.25)]',
+        'p-6 md:p-7',
       )}
     >
       {/* title */}
       <h3 className="text-xl font-semibold leading-snug text-(--color-text-primary)">
-        Подготовить отчёт по исполнению бюджета за I квартал 2025 года
+        Подготовить отчет по исполнению бюджета за I квартал 2025 года
       </h3>
 
       {/* meta */}

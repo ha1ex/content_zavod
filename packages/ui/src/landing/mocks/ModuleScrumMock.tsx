@@ -12,6 +12,16 @@ const DUE: Record<'red' | 'green' | 'gray', [string, string, string]> = {
   green: ['#2e9e5b', '#ffffff', '#ffffff'],
   gray: ['#ececee', '#6b6b70', '#9a9a9e'],
 };
+/** Приглушённый красный для лендингов: светлая заливка вместо сплошной. */
+const DUE_RED_MUTED: [string, string, string] = ['#fdecec', '#c2413b', '#c2413b'];
+/** Карточки, которые не показываем в лендинговом режиме. */
+const LANDING_HIDDEN_IDS = new Set(['FM-222', 'FM-207', 'FM-203']);
+/** В лендинговом режиме видны первые три колонки: остальные за кадром только тянут высоту дорожек. */
+const LANDING_COLS = 3;
+/** Короткие заголовки для лендингового режима — в две строки. */
+const LANDING_TITLES: Record<string, string> = {
+  'FM-223': 'Рекомендации «Вам понравится» по истории заказов',
+};
 
 type Card = {
   plain?: boolean;
@@ -90,8 +100,8 @@ function Avatars({ list }: { list: string[] }) {
     </div>
   );
 }
-function Due({ value, tone }: { value: string; tone: 'red' | 'green' | 'gray' }) {
-  const t = DUE[tone];
+function Due({ value, tone, muted }: { value: string; tone: 'red' | 'green' | 'gray'; muted?: boolean }) {
+  const t = muted && tone === 'red' ? DUE_RED_MUTED : DUE[tone];
   return (
     <span className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[12px] font-medium" style={{ background: t[0], color: t[1] }}>
       <Icon name="Calendar" className="h-3.5 w-3.5" strokeWidth={2} />
@@ -100,7 +110,7 @@ function Due({ value, tone }: { value: string; tone: 'red' | 'green' | 'gray' })
   );
 }
 
-function CardView({ d }: { d: Card }) {
+function CardView({ d, muted }: { d: Card; muted?: boolean }) {
   if (d.plain) {
     return <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) px-3 py-2.5 text-[13px] text-(--color-text-primary)">{d.title}</div>;
   }
@@ -114,7 +124,9 @@ function CardView({ d }: { d: Card }) {
       <div className="space-y-2.5 p-3.5">
         {d.bar && <div className="h-[3px] w-9 rounded-full" style={{ background: BAR[d.bar] }} />}
         <div className="flex items-start justify-between gap-2">
-          <div className="text-[14px] font-medium leading-snug text-(--color-text-primary)">{d.title}</div>
+          <div className="text-[14px] font-medium leading-snug text-(--color-text-primary)">
+            {(muted && d.id && LANDING_TITLES[d.id]) || d.title}
+          </div>
           {d.bug && <Icon name="Bug" className="h-4 w-4 shrink-0 text-[#e5484d]" strokeWidth={2} />}
         </div>
         <div className="flex items-center gap-3 text-[12px] text-(--color-text-secondary)">
@@ -144,25 +156,28 @@ function CardView({ d }: { d: Card }) {
         )}
         <div className="flex items-center justify-between border-t border-(--color-border-default) pt-2.5">
           {d.av ? <Avatars list={d.av} /> : <span />}
-          {d.due ? <Due value={d.due[0]} tone={d.due[1]} /> : <span />}
+          {d.due ? <Due value={d.due[0]} tone={d.due[1]} muted={muted} /> : <span />}
         </div>
       </div>
     </div>
   );
 }
 
-function Lane({ lane }: { lane: { name: string; count: number; cells: Card[][] } }) {
+function Lane({ lane, landing, cols }: { lane: { name: string; count: number; cells: Card[][] }; landing?: boolean; cols: number }) {
   return (
     <div className="border-t border-(--color-border-default) pt-3">
-      <div className="mb-3 flex items-center border-b border-(--color-border-default) px-1 pb-2">
+      {/* на лендинге название дорожки выровнено по заголовкам колонок (px-4) */}
+      <div className={cn('mb-3 flex items-center border-b border-(--color-border-default) pb-2', landing ? 'px-4' : 'px-1')}>
         <span className="text-[14px] font-semibold text-(--color-text-primary)">{lane.name}</span>
         <span className="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-(--color-border-default) px-1.5 text-[12px] font-medium text-(--color-text-secondary)">{lane.count}</span>
         <Icon name="ChevronUp" className="ml-3 h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} />
       </div>
       <div className="flex">
-        {lane.cells.map((cards, i) => (
-          <div key={i} className={cn('w-[300px] shrink-0 space-y-3 px-4 pb-3', i < COLS.length - 1 && 'border-r border-(--color-border-default)')}>
-            {cards.map((d, j) => <CardView key={j} d={d} />)}
+        {lane.cells.slice(0, cols).map((cards, i, cells) => (
+          <div key={i} className={cn('w-[300px] shrink-0 space-y-3 px-4 pb-3', i < cells.length - 1 && 'border-r border-(--color-border-default)')}>
+            {cards
+              .filter((d) => !(landing && d.id && LANDING_HIDDEN_IDS.has(d.id)))
+              .map((d, j) => <CardView key={j} d={d} muted={landing} />)}
           </div>
         ))}
       </div>
@@ -175,8 +190,14 @@ function Lane({ lane }: { lane: { name: string; count: number; cells: Card[][] }
  * и колонки (Бэклог спринта → В работе → Ревью → Доработка → Тестирование → Готово)
  * с карточками-задачами: стори-поинты, теги, FM-ID, оценки, диапазоны дат,
  * чек-листы, баг-иконки, баннеры действий, аватары и дедлайн-чипы.
+ *
+ * `landing` — режим для лендингов: без части карточек (фильтры, unit-тесты,
+ * карточка с баннером «Отправили на доработку») и с приглушённым красным у
+ * сроков. Без флага мок остаётся прежним — его же выгружают в презентации.
  */
-export function ModuleScrumMock() {
+export function ModuleScrumMock({ landing, columns }: { landing?: boolean; columns?: number } = {}) {
+  // columns — сколько колонок показать; в лендинговом режиме по умолчанию три
+  const cols = columns ?? (landing ? LANDING_COLS : COLS.length);
   return (
     <div aria-hidden className="w-max rounded-2xl bg-(--color-surface-section) p-4">
       {/* board header */}
@@ -187,8 +208,8 @@ export function ModuleScrumMock() {
       </div>
       {/* column headers */}
       <div className="flex">
-        {COLS.map((col, i) => (
-          <div key={col.t} className={cn('flex w-[300px] shrink-0 items-center gap-2 px-4 pb-2', i < COLS.length - 1 && 'border-r border-(--color-border-default)')}>
+        {COLS.slice(0, cols).map((col, i, cols) => (
+          <div key={col.t} className={cn('flex w-[300px] shrink-0 items-center gap-2 px-4 pb-2', i < cols.length - 1 && 'border-r border-(--color-border-default)')}>
             {col.done && <Icon name="Check" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2.5} />}
             <span className="text-[14px] font-medium text-(--color-text-primary)">{col.t}</span>
             <span className="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-(--color-border-default) px-1.5 text-[12px] font-medium text-(--color-text-secondary)">{col.n}</span>
@@ -196,7 +217,7 @@ export function ModuleScrumMock() {
         ))}
       </div>
       {/* lanes */}
-      {LANES.map((lane) => <Lane key={lane.name} lane={lane} />)}
+      {LANES.map((lane) => <Lane key={lane.name} lane={lane} landing={landing} cols={cols} />)}
     </div>
   );
 }

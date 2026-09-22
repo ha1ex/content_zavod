@@ -69,9 +69,17 @@ function TBtn({ icon, label, active }: { icon: string; label?: string; active?: 
  * «Первый приоритет» (карточки с тегами, датами, чек-листами, аватарами),
  * свёрнутые доски проектов/задач и доски «Письма»/«Документы» с колонками.
  */
-export function ModulePortfolioMock() {
+/** stretch — колонки портфеля растянуты на всю ширину доски, а не по 220px. */
+export function ModulePortfolioMock({ stretch = false }: { stretch?: boolean } = {}) {
   return (
-    <div aria-hidden className="w-[1360px] overflow-hidden rounded-2xl border border-(--color-border-default) bg-(--color-surface-section) shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]">
+    <div
+      aria-hidden
+      className={cn(
+        'w-[1360px] overflow-hidden rounded-2xl border border-(--color-border-default) shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]',
+        // вариант stretch (лендинг «Единое рабочее пространство») — белое окно
+        stretch ? 'bg-(--color-surface-card)' : 'bg-(--color-surface-section)',
+      )}
+    >
       {/* toolbar */}
       <div className="flex items-center gap-1 border-b border-(--color-border-default) bg-white px-3 py-2">
         <Icon name="Menu" className="mr-1 h-5 w-5 text-(--color-text-secondary)" strokeWidth={2} />
@@ -88,13 +96,13 @@ export function ModulePortfolioMock() {
           <div className="flex items-center gap-2 px-4 py-3"><Icon name="GripVertical" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} /><span className="text-[16px] font-semibold text-(--color-text-primary)">Портфель проектов</span></div>
           <div className="flex border-b border-(--color-border-default) px-3 pb-2">
             {PF_COLS.map((c, i) => (
-              <div key={c[0]} className={cn('flex w-[220px] shrink-0 items-center gap-2 px-3', i > 0 && 'border-l border-(--color-border-default)')}><span className="text-[14px] font-medium text-(--color-text-primary)">{c[0]}</span><span className="ml-auto"><CountBadge n={c[1]} tone={c[2]} /></span></div>
+              <div key={c[0]} className={cn('flex items-center gap-2 px-3', stretch ? 'min-w-0 flex-1' : 'w-[220px] shrink-0', i > 0 && 'border-l border-(--color-border-default)')}><span className="text-[14px] font-medium text-(--color-text-primary)">{c[0]}</span><span className="ml-auto"><CountBadge n={c[1]} tone={c[2]} /></span></div>
             ))}
           </div>
           <div className="border-b border-(--color-border-default) px-4 py-2"><span className="text-[14px] font-semibold text-(--color-text-primary)">Первый приоритет</span></div>
           <div className="flex p-3">
             {PF_CARDS.map((col, i) => (
-              <div key={i} className={cn('w-[220px] shrink-0 px-3', i > 0 && 'border-l border-(--color-border-default)')}>
+              <div key={i} className={cn('px-3', stretch ? 'min-w-0 flex-1' : 'w-[220px] shrink-0', i > 0 && 'border-l border-(--color-border-default)')}>
                 <div className="space-y-3">{col.map((card, j) => <PortfolioCard key={j} d={card} />)}</div>
               </div>
             ))}

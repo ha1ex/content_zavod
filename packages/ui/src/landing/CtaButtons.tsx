@@ -23,6 +23,12 @@ export interface CtaButtonsProps {
    * Opt-in.
    */
   tightSpacing?: boolean;
+  /** Убрать нижний отступ секции на всех ширинах. Opt-in. */
+  flushBottom?: boolean;
+  /** Верхний отступ на мобилке 48px вместо 24 — когда мок сверху выступает за свой блок. Opt-in. */
+  spaceTopMobile?: boolean;
+  /** Видимый отступ 48px от мока сверху, который выступает за свой блок: 64 / 65 / 74px. Opt-in. */
+  spaceTopOverflow?: boolean;
 }
 
 /**
@@ -36,6 +42,9 @@ export function CtaButtons({
   flushTop,
   spaceBottom,
   tightSpacing,
+  flushBottom,
+  spaceTopMobile,
+  spaceTopOverflow,
 }: CtaButtonsProps) {
   return (
     <section
@@ -45,6 +54,9 @@ export function CtaButtons({
         tightSpacing && 'pt-6 pb-12 md:pt-8 md:pb-16',
         flushTop && 'pt-0 md:pt-0 lg:pt-0',
         spaceBottom && 'lg:pb-24',
+        flushBottom && 'pb-0 md:pb-0 lg:pb-0',
+        spaceTopMobile && 'max-md:pt-12',
+        spaceTopOverflow && '!pt-[64px] md:!pt-[65px] lg:!pt-[74px]',
       )}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">

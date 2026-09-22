@@ -37,6 +37,10 @@ export interface Review {
   metric?: string;
   /** Высота логотипа в px. Дефолт 40; вертикальным знакам нужно больше. */
   logoHeight?: number;
+  /** Широкий логотип: снять потолок ширины 140px (горизонтальные знаки с подписью). Opt-in. */
+  logoWide?: boolean;
+  /** Без строки автора (аватар + имя): отзыв подписан логотипом компании. Opt-in. */
+  hideAuthor?: boolean;
   /**
    * Должность / роль автора. Необязательна: когда отзыв подписан командой,
    * а не человеком, строка роли дублировала бы название компании из .
@@ -69,6 +73,8 @@ export interface ReviewSliderProps {
   subtitle?: string;
   /** Данные отзывов. Если не передать — покажутся нейтральные плейсхолдеры. */
   reviews?: Review[];
+  /** Карточки по высоте контента вместо фиксированных 460px — кнопка стоит ближе к цитате. Opt-in. */
+  compact?: boolean;
 }
 
 const STYLE = `
@@ -120,6 +126,9 @@ const STYLE = `
 .revx-mock .otz__name{font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--text-title);}
 .revx-mock .otz__role{font-size:16px; line-height:24px; color:var(--text-secondary); white-space:pre-line;}
 .revx-mock .otz__btn{align-self:flex-start; display:inline-flex; align-items:center; border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:10px var(--sp-4); font-size:16px; line-height:24px; font-weight:var(--fw-med); color:var(--brand-100); background:#fff; text-decoration:none; cursor:pointer; transition:background .18s, border-color .18s, color .18s;}
+.revx-mock.revx--compact .otz{height:auto;}
+@media(min-width:1280px){ .revx-mock.revx--compact{padding-bottom:96px;} }
+@media(min-width:768px) and (max-width:1279px){ .revx-mock.revx--compact .revx__head h2{font-size:30px; line-height:36px;} }
 .revx-mock .otz__btn:hover{border-color:var(--brand-48); background:var(--brand-12); color:var(--brand-hover);}
 .revx-mock .revx__nav{display:flex; gap:14px; align-items:center;}
 .revx-mock .revx__navbtn{width:40px; height:40px; border-radius:9999px; border:1px solid var(--border-default); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s, border-color .18s, color .18s, box-shadow .18s;}
@@ -171,7 +180,7 @@ function QuoteMark() {
 }
 
 /** Логотип: строка-URL → <img>, строка-текст → как есть, ReactNode → как есть. */
-function renderLogo(logo: ReactNode, logoHeight?: number) {
+function renderLogo(logo: ReactNode, logoHeight?: number, wide?: boolean) {
   if (typeof logo === 'string') {
     const isImg = /^https?:\/\//.test(logo) || logo.includes('/') || /\.(png|jpe?g|svg|webp|gif)$/i.test(logo);
     return isImg ? (
@@ -179,7 +188,7 @@ function renderLogo(logo: ReactNode, logoHeight?: number) {
         src={logo}
         alt=""
         // вертикальные знаки читаются мельче словесных — высота задаётся на карточку
-        style={logoHeight ? { height: `${logoHeight}px` } : undefined}
+        style={logoHeight || wide ? { ...(logoHeight ? { height: `${logoHeight}px` } : {}), ...(wide ? { maxWidth: 'none' } : {}) } : undefined}
         onError={(e) => e.currentTarget.remove()}
       />
     ) : (
@@ -203,7 +212,7 @@ const PLACEHOLDER_REVIEWS: Review[] = Array.from({ length: 4 }, (_, i) => ({
 
 const GAP = 32;
 
-export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
+export function ReviewSlider({ title, subtitle, reviews, compact }: ReviewSliderProps) {
   const data = reviews && reviews.length ? reviews : PLACEHOLDER_REVIEWS;
 
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -279,7 +288,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
   }, [apply]);
 
   return (
-    <section className={`revx-mock${maxI === 0 ? ' revx--nopager' : ''}`} aria-label="Отзывы клиентов">
+    <section className={`revx-mock${maxI === 0 ? ' revx--nopager' : ''}${compact ? ' revx--compact' : ''}`} aria-label="Отзывы клиентов">
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       <div className="revx__in">
         {/* Шапка секции опциональна: без title и subtitle блок не рендерится. */}
@@ -309,7 +318,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
                           : undefined
                       }
                     >
-                      {renderLogo(r.logo, r.logoHeight)}
+                      {renderLogo(r.logo, r.logoHeight, r.logoWide)}
                     </div>
                     <QuoteMark />
                   </div>
@@ -320,6 +329,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
                   </div>
                 </div>
 
+                {!r.hideAuthor && (
                 <div className="otz__author">
                   {/* под фотографией фона нет — иначе он проступает каёмкой в 1px по краю круга */}
                   <span
@@ -338,6 +348,7 @@ export function ReviewSlider({ title, subtitle, reviews }: ReviewSliderProps) {
                     {r.role && <span className="otz__role">{r.role}</span>}
                   </span>
                 </div>
+                )}
 
                 {r.caseUrl ? (
                   <a className="otz__btn" href={r.caseUrl}>{r.caseLabel ?? 'Читать кейс'}</a>

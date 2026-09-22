@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 /**
  * Ужимает мок фиксированной ширины до ширины контейнера. Моки нарисованы под
@@ -9,7 +9,12 @@ import { useEffect, useRef, useState } from 'react';
  * страницы. Натуральную ширину берём у самого мока, поэтому значение не нужно
  * прописывать руками под каждый вариант.
  */
-export function MockFit({ children }: { children: React.ReactNode }) {
+/**
+ * `round` — видимое скругление окна мока 12px (мобилка, планшет) / 16px (десктоп)
+ * при любом масштабе: переопределяем --radius-3xl внутри мока с поправкой на scale.
+ * Действует на моки, чей корень скруглен токеном --radius-3xl. Opt-in.
+ */
+export function MockFit({ children, round = false }: { children: React.ReactNode; round?: boolean }) {
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -39,12 +44,16 @@ export function MockFit({ children }: { children: React.ReactNode }) {
     // Обрезка не нужна: браузер считает область прокрутки по трансформированным
     // границам, поэтому ужатый мок сам по себе не расширяет страницу. Обрезали бы —
     // срезали бы тень по краям. Задаём только высоту: её transform не меняет.
-    <div ref={outerRef} data-mockfit="outer" className="w-full" style={{ height }}>
+    <div ref={outerRef} data-mockfit="outer" className={round ? 'w-full [--mf-r:12px] lg:[--mf-r:16px]' : 'w-full'} style={{ height }}>
       <div
         ref={innerRef}
         data-mockfit="inner"
         className="w-max"
-        style={{ transformOrigin: 'top left', transform: `scale(${scale})` }}
+        style={{
+          transformOrigin: 'top left',
+          transform: `scale(${scale})`,
+          ...(round ? ({ '--radius-3xl': `calc(var(--mf-r) / ${scale})` } as CSSProperties) : {}),
+        }}
       >
         {children}
       </div>

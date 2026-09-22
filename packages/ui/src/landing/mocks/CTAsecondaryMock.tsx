@@ -42,6 +42,8 @@ export interface CTAsecondaryMockProps {
   onSurface?: boolean;
   /** Нижний отступ секции на десктопе — 96px вместо 48px. Opt-in. */
   spaceBottom?: boolean;
+  /** Текст и кнопки по центру вертикали относительно интерфейса справа. Opt-in. */
+  centerCopy?: boolean;
 }
 
 const STYLE = `
@@ -65,6 +67,7 @@ const STYLE = `
 .cta-secondary .fcta__in{position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) 520px; gap:var(--sp-10); align-items:center;}
 .cta-secondary .fcta__copy{max-width:560px; align-self:start;}
 .cta-secondary--space-bottom .fcta__copy{align-self:center;}
+.cta-secondary--center-copy .fcta__copy{align-self:center;}
 .cta-secondary .fcta__copy h2{font-size:30px; line-height:36px; font-weight:var(--fw-semi); margin:0 0 var(--sp-4);}
 .cta-secondary .fcta__copy p{font-size:16px; line-height:26px; color:#2d2d2d; margin:0 0 var(--sp-8);}
 .cta-secondary .fcta__cta{display:flex; gap:var(--sp-3); justify-content:flex-start; flex-wrap:nowrap;}
@@ -144,6 +147,7 @@ export function CTAsecondaryMock({
   visual,
   onSurface,
   spaceBottom,
+  centerCopy,
 }: CTAsecondaryMockProps) {
   return (
     <section
@@ -151,6 +155,7 @@ export function CTAsecondaryMock({
         'cta-secondary',
         onSurface ? 'cta-secondary--surface' : '',
         spaceBottom ? 'cta-secondary--space-bottom' : '',
+        centerCopy ? 'cta-secondary--center-copy' : '',
       ]
         .filter(Boolean)
         .join(' ')}

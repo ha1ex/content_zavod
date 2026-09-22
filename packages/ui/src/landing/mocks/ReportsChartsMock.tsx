@@ -7,7 +7,8 @@
 
 // ── CFD (накопительная диаграмма потока) ─────────────────────────────
 const CFD_X = [46, 98, 150, 202, 254, 306, 358, 410, 458];
-const cfdY = (v: number) => 190 - v * 4; // value(0..45) → y
+// value(0..45) → y; bottom — нижняя граница области (190 — базовая высота, больше — выше график)
+const cfdY = (v: number, bottom = 190) => bottom - (v * (bottom - 10)) / 45;
 // Накопительные верхние границы слоёв (снизу вверх): зелёный, бирюзовый, фиолетовый, светло-фиолетовый
 const CFD_LAYERS: { fill: string; top: number[] }[] = [
   { fill: '#a5c34a', top: [0, 0, 3, 6, 9, 13, 17, 23, 30] },
@@ -16,35 +17,37 @@ const CFD_LAYERS: { fill: string; top: number[] }[] = [
   { fill: '#d1c4e9', top: [10, 13, 18, 22, 27, 31, 35, 39, 42] },
 ];
 
-function cfdArea(top: number[], bottom: number[]): string {
-  const up = CFD_X.map((x, i) => `${x},${cfdY(top[i]!)}`);
-  const down = CFD_X.map((x, i) => `${x},${cfdY(bottom[i]!)}`).reverse();
+function cfdArea(top: number[], bottom: number[], b: number): string {
+  const up = CFD_X.map((x, i) => `${x},${cfdY(top[i]!, b)}`);
+  const down = CFD_X.map((x, i) => `${x},${cfdY(bottom[i]!, b)}`).reverse();
   return `M ${up.join(' L ')} L ${down.join(' L ')} Z`;
 }
 
-function CfdChart() {
+/** tall — область графика выше (для каскада 592px). */
+function CfdChart({ tall = false }: { tall?: boolean }) {
+  const b = tall ? 250 : 190;
   const gridVals = [10, 15, 20, 25, 30, 35, 40, 45];
   let prev = CFD_X.map(() => 0);
   return (
-    <svg viewBox="0 0 480 210" className="w-full" role="img" aria-label="Накопительная диаграмма потока">
+    <svg viewBox={`0 0 480 ${b + 20}`} className="w-full" role="img" aria-label="Накопительная диаграмма потока">
       {/* фон области */}
-      <rect x={40} y={10} width={430} height={180} fill="#f4f1fb" />
+      <rect x={40} y={10} width={430} height={b - 10} fill="#f4f1fb" />
       {/* сетка + подписи Y */}
       {gridVals.map((v) => (
         <g key={v}>
-          <line x1={40} y1={cfdY(v)} x2={470} y2={cfdY(v)} stroke="#e6e6ea" strokeWidth={1} />
-          <text x={32} y={cfdY(v) + 4} textAnchor="end" fontSize={11} fill="#9a9aa0">{v}</text>
+          <line x1={40} y1={cfdY(v, b)} x2={470} y2={cfdY(v, b)} stroke="#e6e6ea" strokeWidth={1} />
+          <text x={32} y={cfdY(v, b) + 4} textAnchor="end" fontSize={11} fill="#9a9aa0">{v}</text>
         </g>
       ))}
       {/* слои */}
       {CFD_LAYERS.map((l, i) => {
-        const d = cfdArea(l.top, prev);
+        const d = cfdArea(l.top, prev, b);
         prev = l.top;
         return <path key={i} d={d} fill={l.fill} />;
       })}
       {/* подписи X */}
-      <text x={330} y={205} textAnchor="middle" fontSize={11} fill="#9a9aa0">11.02</text>
-      <text x={452} y={205} textAnchor="middle" fontSize={11} fill="#9a9aa0">18.02</text>
+      <text x={330} y={b + 15} textAnchor="middle" fontSize={11} fill="#9a9aa0">11.02</text>
+      <text x={452} y={b + 15} textAnchor="middle" fontSize={11} fill="#9a9aa0">18.02</text>
     </svg>
   );
 }
@@ -82,11 +85,13 @@ function ControlChart() {
   );
 }
 
-function Card({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
+/** softShadow — серая тень как у остальных окон лендинга (каскад 592px). */
+function Card({ title, children, className, softShadow = false }: { title: string; children: React.ReactNode; className?: string; softShadow?: boolean }) {
   return (
     <div
       className={
-        'rounded-2xl border border-(--color-border-default) bg-(--color-surface-page) p-4 shadow-[0_20px_50px_-24px_rgba(45,45,45,0.35)] ' +
+        'rounded-2xl border border-(--color-border-default) bg-(--color-surface-page) p-4 ' +
+        (softShadow ? 'shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)] ' : 'shadow-[0_20px_50px_-24px_rgba(45,45,45,0.35)] ') +
         (className ?? '')
       }
     >
@@ -103,6 +108,24 @@ export function ReportsChartsMock() {
         <CfdChart />
       </Card>
       <Card title="Контрольный график" className="relative z-10 -mt-28 w-[78%]">
+        <ControlChart />
+      </Card>
+    </div>
+  );
+}
+
+/**
+ * Те же два отчёта каскадом: окна одного размера, второе смещено вправо и вниз
+ * поверх первого. Холст фиксированной ширины 592px — не сжимается до содержимого
+ * в MockFit/ScaleToFit, поэтому графики крупнее, чем у ReportsChartsMock.
+ */
+export function ReportsChartsCascadeMock() {
+  return (
+    <div aria-hidden className="relative h-[426px] w-[592px]">
+      <Card title="Накопительная диаграмма потока" className="absolute left-[128px] top-0 w-[440px]" softShadow>
+        <CfdChart tall />
+      </Card>
+      <Card title="Контрольный график" className="absolute left-0 top-[126px] z-10 w-[440px]" softShadow>
         <ControlChart />
       </Card>
     </div>

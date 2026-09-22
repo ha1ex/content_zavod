@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { ProductNavIcon, isProductNavIcon } from './ProductNavIcon';
 
 /** Ширина, на которой нарисована доска, и её предел на десктопе (контейнер DS). */
 const BOARD_DESIGN_WIDTH = 1360;
@@ -31,7 +32,13 @@ export interface HsiCard {
   title: React.ReactNode;
   tags?: HsiTag[];
   checklist?: { label: string; done: number; total: number };
+  /** Мини-счетчики карточки: вложения, комментарии, дочерние карточки. */
+  counters?: { attachments?: number; comments?: number; children?: number };
   assignees?: string[];
+  /** Буквы внутри аватаров — по порядку `assignees`. */
+  assigneeInitials?: string[];
+  /** Цель анимации «наведение → щелчок → окно карточки» (при `cardWindow`). */
+  active?: boolean;
   extraAssignee?: string;
   due?: string;
 }
@@ -63,6 +70,8 @@ export interface HeroScreenInterfaceProps {
   /* ── Копирайт первого экрана ── */
   /** Бейдж-надзаголовок (eyebrow). */
   eyebrow?: string;
+  /** Иконка слева в бейдже (имя из набора ProductNavIcon). */
+  eyebrowIcon?: string;
   /** Заголовок H1 (можно ReactNode с <br />). */
   heading: React.ReactNode;
   /** Подзаголовок-польза. */
@@ -79,6 +88,10 @@ export interface HeroScreenInterfaceProps {
   lanes: HsiLane[];
   animate?: boolean;
   animatedCard?: HsiAnimatedCard;
+  /** Боковое меню пространств слева от доски (как в интерфейсе Кайтена). */
+  sidebar?: boolean;
+  /** Окно открытой карточки задачи поверх правого края доски. Opt-in. */
+  cardWindow?: boolean;
   /** Базовый zoom доски (по умолчанию 0.86). */
   scale?: number;
   /**
@@ -105,6 +118,74 @@ const Checklist = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>
 );
 
+/* ─── боковое меню ───────────────────────────────────────────────────── */
+type MenuItem = { i: number; label: string; emoji?: string; folder?: string; board?: string; chev?: 'r' | 'd'; active?: boolean };
+/** Дерево по образцу ModuleKnowledgeBaseMock1; активна доска «Запуск продукта». */
+const MENU: MenuItem[] = [
+  { i: 0, emoji: '❤️', label: 'Маркетинг', chev: 'r' },
+  { i: 0, emoji: '📚', label: 'База знаний', chev: 'r' },
+  { i: 0, emoji: '🧑', label: 'Команда' },
+  { i: 0, emoji: '📋', label: 'Процессы', chev: 'd' },
+  { i: 1, folder: '#9e9e9e', label: 'Редакция', chev: 'r' },
+  { i: 1, folder: '#9e9e9e', label: 'Маркетинг', chev: 'd' },
+  { i: 2, board: '#9e9e9e', label: 'Запуск продукта', active: true },
+  { i: 2, board: '#9e9e9e', label: 'Разработка' },
+  { i: 1, folder: '#9e9e9e', label: 'Разработка', chev: 'r' },
+  { i: 1, folder: '#9e9e9e', label: 'HR', chev: 'r' },
+  { i: 0, emoji: '🧾', label: 'Бухгалтерия' },
+  { i: 0, board: '#9e9e9e', label: 'Пространство руководителя', chev: 'r' },
+  { i: 0, board: '#9e9e9e', label: 'Продакт-менеджмент', chev: 'r' },
+  { i: 0, board: '#9e9e9e', label: 'Служба поддержки' },
+  { i: 0, folder: '#9e9e9e', label: 'Проекты', chev: 'r' },
+];
+const MenuFolder = ({ color }: { color: string }) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill={color}><path d="M3 7a2 2 0 0 1 2-2h4l1.6 1.6H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" /></svg>
+);
+const MenuBoard = ({ color }: { color: string }) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill={color}><rect x="3" y="3" width="8" height="8" rx="2" /><rect x="13" y="3" width="8" height="8" rx="2" /><rect x="3" y="13" width="8" height="8" rx="2" /><rect x="13" y="13" width="8" height="8" rx="2" /></svg>
+);
+const MenuChev = ({ dir }: { dir: 'r' | 'd' | 'l' }) => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+    <path d={dir === 'd' ? 'm6 9 6 6 6-6' : dir === 'l' ? 'm11 17-5-5 5-5M18 17l-5-5 5-5' : 'm9 18 6-6-6-6'} />
+  </svg>
+);
+
+function Sidebar() {
+  return (
+    <div className="side">
+      <div className="side__hd"><span>Меню</span></div>
+      <div className="side__search">
+        <span className="side__input">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          Найти..
+        </span>
+        <span className="side__plus">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+        </span>
+      </div>
+      <div className="side__tree">
+        {MENU.map((it, idx) => (
+          <div key={idx} className={`side__it${it.active ? ' is-active' : ''}`} style={{ paddingLeft: 8 + it.i * 16 }}>
+            {it.emoji && <span className="side__emoji">{it.emoji}</span>}
+            {it.folder && <MenuFolder color={it.folder} />}
+            {it.board && <MenuBoard color={it.board} />}
+            {it.chev && <span className="side__muted"><MenuChev dir={it.chev} /></span>}
+            <span className="side__lbl">{it.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="side__foot">
+        <div className="side__it"><MenuBoard color="#9e9e9e" /><span className="side__lbl">Шаблоны пространств</span></div>
+        <div className="side__it">
+          <span className="side__muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" /></svg></span>
+          <span className="side__muted"><MenuChev dir="r" /></span>
+          <span className="side__lbl">Администрирование</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── карточка ───────────────────────────────────────────────────────── */
 function CardBody({ card }: { card: HsiCard }) {
   const hasFoot = (card.assignees && card.assignees.length) || card.due;
@@ -123,11 +204,24 @@ function CardBody({ card }: { card: HsiCard }) {
           <span className="sub"><Checklist />{card.checklist.label} {card.checklist.done}/{card.checklist.total}</span>
         </div>
       )}
+      {card.counters && (
+        <div className="row cnts">
+          {card.counters.attachments != null && (
+            <span className="sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="m21 11-8.6 8.6a5 5 0 0 1-7-7l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9" /></svg>{card.counters.attachments}</span>
+          )}
+          {card.counters.comments != null && (
+            <span className="sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /></svg>{card.counters.comments}</span>
+          )}
+          {card.counters.children != null && (
+            <span className="sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="6" cy="5" r="2" /><circle cx="18" cy="19" r="2" /><path d="M6 7v6a4 4 0 0 0 4 4h6" /></svg>{card.counters.children}</span>
+          )}
+        </div>
+      )}
       {hasFoot && (
         <div className="foot">
           <span className="avs">
             {card.assignees?.map((c, i) => (
-              <span key={i} className="av" style={{ background: c }} />
+              <span key={i} className="av" style={{ background: c }}>{card.assigneeInitials?.[i]}</span>
             ))}
             {card.extraAssignee && <span className="plus">{card.extraAssignee}</span>}
           </span>
@@ -164,7 +258,18 @@ function Lane({ lane, foot, animate, animatedCard }: { lane: HsiLane; foot: bool
                 </div>
               </div>
             )}
-            {col.map((card, ki) => <div className="card" key={ki}><CardBody card={card} /></div>)}
+            {col.map((card, ki) => (
+              <div className={card.active ? 'card is-target' : 'card'} key={ki}>
+                <CardBody card={card} />
+                {card.active && (
+                  <span className="pick" aria-hidden="true">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#fff" stroke="#2d2d2d" strokeWidth={1.4} strokeLinejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11V7.5a1.5 1.5 0 0 1 3 0V11v-1a1.5 1.5 0 0 1 3 0v5.5a5.5 5.5 0 0 1-5.5 5.5H12a5 5 0 0 1-4.3-2.5l-2.4-4a1.5 1.5 0 0 1 2.5-1.6L9 15z" /></svg>
+                  </span>
+                )}
+              </div>
+            ))}
+            {/* светло-фиолетовая плашка-приемник под карточками колонки, куда едет карточка */}
+            {animate && animatedCard && ci === dragCol + 1 && <span className="drop-slot" aria-hidden="true" />}
           </div>
         ))}
       </div>
@@ -237,10 +342,13 @@ const CSS = `
 @media(min-width:1280px){.hsi-screen__container{padding:0}}
 .hsi-screen__grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-12,48px)}
 .hsi-screen__copy{width:100%;max-width:940px;margin:0 auto;text-align:center}
-.hsi-screen__badge{display:inline-flex;align-items:center;justify-content:center;background:var(--_brand-12k);border-radius:var(--radius-2xl,16px);padding:var(--sp-1,4px) var(--sp-4,16px);margin-bottom:var(--sp-4,16px)}
-.hsi-screen__badge-text{font-size:var(--fs-sm,14px);line-height:var(--lh-sm,20px);font-weight:var(--fw-med,500);color:var(--_brand);white-space:nowrap}
-.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,44px);font-weight:var(--fw-semi,600);letter-spacing:0;margin:var(--sp-4,16px) 0 var(--sp-5,20px)}
-.hsi-screen__sub{font-size:var(--fs-lg,18px);line-height:var(--lh-lg,28px);font-weight:var(--fw-reg,400);color:#2d2d2d;max-width:820px;margin:0 auto var(--sp-8,32px)}
+.hsi-screen__badge{display:inline-flex;align-items:center;justify-content:center;background:var(--_brand-12k);border-radius:var(--radius-2xl,16px);padding:var(--sp-1,4px) var(--sp-4,16px);margin-bottom:0}
+.hsi-screen__badge-icon{width:18px;height:18px;flex:none;margin:0 6px 0 14px;color:var(--_brand)}
+.hsi-screen__badge-text{font-size:var(--fs-sm,14px);line-height:var(--lh-sm,20px);font-weight:var(--fw-med,500);color:var(--_brand);white-space:nowrap;position:relative;top:1px}
+/* Первое слово бейджа: капсом и обычным начертанием, цвет фирменный */
+.hsi-screen__badge-text--lead{font-size:12px;font-weight:var(--fw-med,500);text-transform:uppercase;position:relative;top:1px}
+.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,44px);font-weight:var(--fw-semi,600);letter-spacing:0;margin:var(--sp-4,16px) 0 var(--sp-5,20px);white-space:pre-line}
+.hsi-screen__sub{font-size:var(--fs-lg,18px);line-height:var(--lh-lg,28px);font-weight:var(--fw-reg,400);color:#2d2d2d;max-width:820px;margin:0 auto var(--sp-8,32px);white-space:pre-line}
 .hsi-screen__cta{display:flex;gap:var(--sp-3,12px);flex-wrap:wrap;justify-content:center}
 .hsi-screen__btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-1,4px);height:48px;padding:var(--sp-3,12px) var(--sp-5,20px);font-family:var(--_font);font-size:var(--fs-md,16px);line-height:var(--lh-md,24px);font-weight:var(--fw-med,500);letter-spacing:var(--_ls);border-radius:var(--radius-lg,8px);border:none;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .18s,border-color .18s,color .18s}
 .hsi-screen__btn--fill{background:var(--_brand);color:#fff}
@@ -271,13 +379,13 @@ const CSS = `
 @keyframes hsiTrustMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.hsi-screen__trust .trust-track{animation:none}}
 @media(max-width:980px){.hsi-screen__grid{gap:var(--sp-10,40px)}.hsi-screen__copy{max-width:none}.hsi-screen__sub{max-width:none}}
-@media(max-width:767px){.hsi-screen{padding:var(--sp-12,48px) 0 var(--sp-6,24px)}.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,40px)}.hsi-screen__sub{font-size:var(--fs-md,16px)}.hsi-screen__copy{text-align:left}.hsi-screen__cta{justify-content:center}}
+@media(max-width:767px){.hsi-screen{padding:var(--sp-12,48px) 0 var(--sp-6,24px)}.hsi-screen__title{font-size:var(--fs-3xl,30px);line-height:var(--lh-3xl,36px)}.hsi-screen__sub{font-size:var(--fs-md,16px);white-space:normal}.hsi-screen__copy{text-align:left}.hsi-screen__cta{justify-content:center}}
 @media(max-width:480px){.hsi-screen__badge{max-width:100%}.hsi-screen__badge-text{white-space:normal}}
 @media(max-width:384px){.hsi-screen__title{font-size:var(--fs-3xl,30px);line-height:var(--lh-3xl,36px)}}
 
 .hsi{--tp:#2d2d2d;--ts:#8a8a8f;--acc:#7d4ccf;--bd:#e8e8eb;--sec:#f4f4f6;font-family:var(--font-sans,'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif);color:var(--tp);-webkit-font-smoothing:antialiased;text-align:left;display:flex;justify-content:center;zoom:.894}
 .hsi *{box-sizing:border-box;margin:0;padding:0}
-.hsi .mod{width:1360px;flex:0 0 auto;background:#f1f1f4;border:1px solid var(--bd);border-radius:16px;box-shadow:0 0 50px -24px rgba(45,45,45,.35);overflow:hidden}
+.hsi .mod{width:1360px;flex:0 0 auto;background:#f1f1f4;border:1px solid var(--bd);border-radius:16px;box-shadow:0 14px 34px -20px rgba(45,45,45,.30);overflow:hidden}
 .hsi .hdr{display:flex;align-items:center;gap:12px;padding:14px 18px}
 .hsi .grip{display:grid;grid-template-columns:repeat(2,3px);gap:3px}
 .hsi .grip i{width:3px;height:3px;border-radius:50%;background:#c4c4c9;display:block}
@@ -302,6 +410,7 @@ const CSS = `
 .hsi .prio{display:inline-flex;align-items:center;gap:3px;color:var(--ts);font-size:13px}
 .hsi .prio b{color:#6b6b70;font-weight:600}
 .hsi .sub{display:inline-flex;align-items:center;gap:4px;color:var(--ts);font-size:12.5px}
+.hsi .cnts{display:flex;gap:12px}
 .hsi .tags{display:flex;flex-wrap:wrap;gap:6px}
 .hsi .tag{border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:500;white-space:nowrap}
 .hsi .t-prod{background:#ededf0;color:#6b6b70}
@@ -313,12 +422,100 @@ const CSS = `
 .hsi .t-jud{background:#efe9f9;color:#7d4ccf}
 .hsi .foot{display:flex;align-items:center;justify-content:space-between}
 .hsi .avs{display:flex;align-items:center}
-.hsi .av{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-left:-7px}
+.hsi .av{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-left:-7px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;line-height:1}
 .hsi .av:first-child{margin-left:0}
 .hsi .plus{font-size:12.5px;color:var(--ts);margin-left:7px}
 .hsi .due{display:inline-flex;align-items:center;gap:5px;color:var(--ts);font-size:12.5px}
 .hsi .drag-slot{position:relative}
+/* Окно карточки (opt-in cardWindow): поверх правого края доски, стиль WindowCardMock */
+/* Анимация cardWindow: курсор наводится на карточку, щелкает, окно выезжает справа налево */
+.hsi .cw-clip{position:absolute;top:0;right:0;bottom:0;width:490px;overflow:hidden;border-radius:0 16px 16px 0;z-index:5;pointer-events:none}
+.hsi .card.is-target{position:relative}
+.hsi .stage .card.is-target{animation:hsiPickCard 5s ease-in-out .4s 1 both}
+.hsi .pick{display:none}
+.hsi .stage .pick{display:block;position:absolute;left:58%;top:34%;z-index:6;pointer-events:none;opacity:0;transform-origin:15px 6px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));animation:hsiPick 5s ease-in-out .4s 1 both}
+@keyframes hsiPick{0%{opacity:0;transform:translate(110px,115px)}10%{opacity:1;transform:translate(110px,115px)}45%{opacity:1;transform:translate(0,0) scale(1)}52%{transform:translate(0,0) scale(.8)}58%,100%{opacity:1;transform:translate(0,0) scale(1)}}
+@keyframes hsiPickCard{0%,44%{border-color:var(--bd);box-shadow:0 0 2px rgba(45,45,45,.05)}47%,100%{border-color:#b99be8;box-shadow:0 8px 22px -10px rgba(125,76,207,.45)}}
+@keyframes hsiPanel{0%,52%{transform:translateX(105%)}72%,100%{transform:translateX(0)}}
+
+.hsi .stage{position:relative;flex:0 0 auto}
+/* С окном карточки столбцы доски узкие и фиксированные — видно больше колонок слева от окна */
+.hsi .stage .colhdr .c,.hsi .stage .col{flex:1 1 0;min-width:0}
+/* Доска не ниже окна карточки, иначе низ окна обрезается */
+.hsi .stage .mod{min-height:690px}
+.hsi .cw{position:absolute;right:0;top:0;bottom:0;animation:hsiPanel 5s cubic-bezier(.4,0,.2,1) .4s 1 both;display:flex;flex-direction:column;width:440px;z-index:5;background:#fff;border:1px solid var(--bd);border-radius:0 16px 16px 0;box-shadow:-14px 0 28px -18px rgba(45,45,45,.25);padding:20px 24px}
+/* Мобилка и уменьшенное движение: без анимации, сразу последний кадр */
+@media(max-width:767px){
+  .hsi .cw{animation:none;transform:translateX(0)}
+  .hsi .stage .pick{animation:none;opacity:1;transform:translate(0,0)}
+  .hsi .stage .card.is-target{animation:none;border-color:#b99be8;box-shadow:0 8px 22px -10px rgba(125,76,207,.45)}
+}
+@media(prefers-reduced-motion:reduce){
+  .hsi .cw{animation:none;transform:translateX(0)}
+  .hsi .stage .pick{animation:none;opacity:1;transform:translate(0,0)}
+  .hsi .stage .card.is-target{animation:none;border-color:#b99be8;box-shadow:0 8px 22px -10px rgba(125,76,207,.45)}
+}
+.hsi .cw__desc{margin-top:8px;font-size:12.5px;line-height:1.45;color:var(--tp)}
+.hsi .cw__cm{margin-top:auto;padding-top:10px;display:flex;gap:10px;font-size:13px;line-height:1.45}
+.hsi .cw__cm b{font-weight:600}
+.hsi .cw__cm .t{color:var(--ts);font-size:12px;margin-left:6px}
+.hsi .cw__lk{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.hsi .cw__lk-hd{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ts)}
+.hsi .cw__lk-sel{border:1px solid var(--bd);border-radius:6px;padding:2px 8px;font-size:12px;color:var(--tp)}
+.hsi .cw__child{display:flex;align-items:center;gap:10px;border:1px solid var(--bd);border-radius:6px;padding:3px 10px;font-size:12px;line-height:1.35}
+.hsi .cw__child .n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hsi .cw__child .m{display:flex;align-items:center;gap:8px;color:var(--ts);font-size:12px;flex:none}
+.hsi .cw__child .m>span{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.hsi .cw__child .a{width:18px;height:18px;border-radius:50%;background:var(--sec);display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:var(--ts)}
+.hsi .cw__add{align-self:flex-start;border:1px solid var(--bd);border-radius:6px;padding:3px 10px;font-size:10.5px;line-height:1.4;font-weight:600;text-transform:uppercase;color:var(--tp)}
+.hsi .cw__x{position:absolute;top:26px;right:26px;color:var(--ts);display:flex;line-height:0}
+.hsi .cw__t{padding-right:28px;font-size:20px;font-weight:600;line-height:1.3}
+.hsi .cw__meta{margin-top:8px;font-size:13px;color:var(--ts)}
+.hsi .cw__meta a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.hsi .cw__tb{display:flex;align-items:center;gap:6px;margin-top:10px}
+.hsi .cw__plus{width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1}
+.hsi .cw__btn{height:32px;padding:0 12px;border:1px solid var(--bd);border-radius:16px;display:flex;align-items:center;font-size:12px;font-weight:600;text-transform:uppercase;color:var(--tp)}
+.hsi .cw__btn{gap:6px}
+.hsi .cw__ic{width:32px;padding:0;justify-content:center;font-size:14px}
+.hsi .cw__rec{width:10px;height:10px;border-radius:2px;background:var(--acc);display:inline-block}
+.hsi .cw__sec{margin-top:12px;font-size:14px;font-weight:600}
+.hsi .cw__row{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:12px;margin-top:8px;font-size:13.5px}
+.hsi .cw__row .l{color:var(--ts)}
+.hsi .cw__link{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.hsi .cw__pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px;background:var(--sec)}
+.hsi .cw__av{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:600}
+.hsi .cw__bar{height:6px;border-radius:3px;background:#ececef;overflow:hidden}
+.hsi .cw__bar i{display:block;height:100%;width:60%;background:var(--acc)}
+.hsi .cw__ck{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:13.5px}
+.hsi .cw__box{width:18px;height:18px;border-radius:4px;border:1.5px solid #cfcfd4;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
+.hsi .cw__box.on{background:var(--acc);border-color:var(--acc)}
+/* Боковое меню (opt-in sidebar): окно 1360 = меню 260 + доска */
+.hsi .win{width:1360px;flex:0 0 auto;display:flex;background:#fff;border:1px solid var(--bd);border-radius:16px;box-shadow:0 0 50px -24px rgba(45,45,45,.35);overflow:hidden}
+.hsi .win .mod{width:auto;flex:1;min-width:0;border:0;border-radius:0;box-shadow:none}
+.hsi .side{width:260px;flex:none;display:flex;flex-direction:column;background:var(--sec);border-right:1px solid var(--bd);padding:12px 8px}
+.hsi .side__hd{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 10px;font-size:16px;font-weight:600}
+.hsi .side__muted{color:var(--ts);display:inline-flex;flex:none}
+.hsi .side__search{display:flex;gap:8px;padding:0 4px 8px}
+.hsi .side__input{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--bd);border-radius:8px;padding:7px 10px;font-size:13.5px;color:var(--ts)}
+.hsi .side__plus{width:34px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--bd);border-radius:8px;color:var(--ts)}
+.hsi .side__tree{flex:1;overflow:hidden}
+.hsi .side__it{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:8px;font-size:13.5px;color:var(--tp);white-space:nowrap}
+.hsi .side__it.is-active{background:#e6e6ea;font-weight:500}
+.hsi .side__emoji{font-size:14px;line-height:1;width:16px;text-align:center;flex:none}
+.hsi .side__lbl{overflow:hidden;text-overflow:ellipsis}
+.hsi .win .lane .cnt2{background:#dcdce1;color:#45454a}
+.hsi .win .hand{top:52%}
+.hsi .side__foot{border-top:1px solid var(--bd);padding-top:6px}
 /* Место, откуда карточку унесли: плашка чёрным с прозрачностью 10%. */
+/* Доска с меню (лендинг «Единое рабочее пространство»): после цикла пауза 5 секунд */
+@keyframes hsiTravelP{0%{transform:translate(0,0)}5%{transform:translate(0,0)}10%{transform:translate(4px,-12px)}22%{transform:translate(154px,48px)}28%{transform:translate(154px,48px)}41%{transform:translate(4px,-12px)}47%{transform:translate(0,0)}50%,100%{transform:translate(0,0)}}
+@keyframes hsiLiftP{0%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}5%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}10%{transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}41%{transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}47%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}50%,100%{transform:rotate(0) scale(1);box-shadow:0 0 2px rgba(45,45,45,.06)}}
+@keyframes hsiHandP{0%{opacity:0}5%{opacity:0}10%{opacity:1}43%{opacity:1}50%,100%{opacity:0}}
+@keyframes hsiGhostP{0%{opacity:0}7%{opacity:0}10%{opacity:1}41%{opacity:1}46%{opacity:0}50%,100%{opacity:0}}
+@keyframes hsiDropP{0%,15%{opacity:0}19%{opacity:1}38%{opacity:1}42%,50%,100%{opacity:0}}
+@media(min-width:768px){.hsi .win .drag-layer{animation-name:hsiTravelP;animation-duration:10s}.hsi .win .drag-card{animation-name:hsiLiftP;animation-duration:10s}.hsi .win .hand{animation-name:hsiHandP;animation-duration:10s}.hsi .win .drag-ghost{animation-name:hsiGhostP;animation-duration:10s}.hsi .win .drop-slot{animation-name:hsiDropP;animation-duration:10s}}
+.hsi .drop-slot{display:block;height:120px;border-radius:12px;background:var(--_brand-12k);opacity:0;animation:hsiDrop 5s ease-in-out infinite}
+@keyframes hsiDrop{0%,30%{opacity:0}38%{opacity:1}76%{opacity:1}84%,100%{opacity:0}}
 .hsi .drag-ghost{position:absolute;inset:0;border-radius:12px;background:rgba(0,0,0,.1);opacity:0;z-index:1;pointer-events:none;animation:hsiGhost 5s ease-in-out infinite}
 .hsi .drag-layer{position:relative;z-index:30;animation:hsiTravel 5s ease-in-out infinite}
 .hsi .drag-card{border:1px solid #e0d6f3;transform-origin:center;animation:hsiLift 5s ease-in-out infinite}
@@ -339,6 +536,7 @@ const CSS = `
 /* Мобилка: доска без анимации. Кадр застывает в момент, когда карточку донесли до соседней
    колонки: слой смещён в конечную точку, карточка приподнята, рука и призрак видны. */
 @media(max-width:767px){
+  .hsi .drop-slot{animation:none;opacity:1}
   .hsi .drag-layer{animation:none;transform:translate(154px,48px)}
   .hsi .drag-card{animation:none;transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}
   .hsi .hand{animation:none;opacity:1}
@@ -346,8 +544,56 @@ const CSS = `
 }
 `;
 
+/** Окно открытой карточки задачи — для opt-in `cardWindow` первого экрана. */
+function CardWindow() {
+  const Box = ({ on }: { on?: boolean }) => (
+    <span className={on ? 'cw__box on' : 'cw__box'}>{on && <Check />}</span>
+  );
+  return (
+    <div className="cw">
+      <span className="cw__x" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </span>
+      <div className="cw__t">Промостраница новой функции</div>
+      <div className="cw__meta"><a>#48210573</a> Заказчик <a>Анна</a> · Создана 3 дня назад</div>
+      <div className="cw__tb">
+        <span className="cw__plus">+</span>
+        <span className="cw__btn cw__ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none" /></svg></span>
+        <span className="cw__btn">→ Проверка</span>
+        <span className="cw__btn cw__ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none" /></svg></span>
+        <span className="cw__btn cw__ic">!</span>
+        <span className="cw__btn cw__ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="2.5" /><circle cx="6" cy="12" r="2.5" /><circle cx="18" cy="19" r="2.5" /><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4" /></svg></span>
+        <span className="cw__btn cw__ic">⋮</span>
+      </div>
+      <div className="cw__sec">Основные параметры</div>
+      <div className="cw__row"><span className="l">Расположение</span><span className="cw__link">Маркетинг / Проверка</span></div>
+      <div className="cw__row"><span className="l">Участники</span><span><span className="cw__pill"><span className="cw__av" style={{ background: '#b88ac9' }}>АК</span>Ответственный</span></span></div>
+      <div className="cw__row"><span className="l">Срок</span><span>18 сентября</span></div>
+      <div className="cw__row"><span className="l">Метки</span><span><span className="cw__pill" style={{ background: '#e9f5ea', color: '#2e7d32' }}>Сайт</span></span></div>
+      <div className="cw__row"><span className="l">Чек-лист 3/5</span><span className="cw__bar"><i /></span></div>
+      <div className="cw__ck"><Box on />Собрать тексты и скриншоты</div>
+      <div className="cw__ck"><Box on />Согласовать макет</div>
+      <div className="cw__ck"><Box />Опубликовать страницу</div>
+      <div className="cw__sec">Описание</div>
+      <div className="cw__desc">Страница о новой функции для раздела «Продукт»: текст, три скриншота и кнопка регистрации. Макет в дочерней карточке.</div>
+      <div className="cw__sec">Связи</div>
+      <div className="cw__lk">
+        <div className="cw__lk-hd"><span>Дочерние карточки</span><span className="cw__lk-sel">Список ▾</span></div>
+          <div className="cw__child"><span className="n">Верстка главной страницы</span><span className="m"><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="m21 11-8.6 8.6a5 5 0 0 1-7-7l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg> 1</span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg> 1</span><span className="a">А</span></span></div>
+          <div className="cw__child"><span className="n">Тестирование главной и каталога</span><span className="m"><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="m21 11-8.6 8.6a5 5 0 0 1-7-7l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg> 1</span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg> 2</span><span className="a">А</span></span></div>
+        <span className="cw__add">Добавить дочернюю карточку</span>
+      </div>
+      <div className="cw__cm">
+        <span className="cw__av" style={{ background: '#8aa8c9', width: 28, height: 28, flex: 'none', fontSize: 11, marginTop: 4 }}>Е</span>
+        <span><b>Елена</b><span className="t">сегодня, 11:40</span><br />Скриншоты приложила, осталось согласовать заголовок</span>
+      </div>
+    </div>
+  );
+}
+
 export function HeroScreenInterface({
   eyebrow,
+  eyebrowIcon,
   heading,
   subheading,
   primaryCta,
@@ -358,6 +604,8 @@ export function HeroScreenInterface({
   lanes,
   animate,
   animatedCard,
+  sidebar,
+  cardWindow,
   scale,
   trustLine,
   className,
@@ -398,7 +646,20 @@ export function HeroScreenInterface({
       <div className="hsi-screen__container hsi-screen__grid">
         <div className="hsi-screen__copy">
           {eyebrow && (
-            <div className="hsi-screen__badge"><span className="hsi-screen__badge-text">{eyebrow}</span></div>
+            <div className="hsi-screen__badge">
+              {isProductNavIcon(eyebrowIcon) ? (
+                <>
+                  {/* Иконка встает после первого слова бейджа: «Функция ▣ «Задачи»» */}
+                  <span className="hsi-screen__badge-text hsi-screen__badge-text--lead">{eyebrow.split(' ')[0]}</span>
+                  <ProductNavIcon name={eyebrowIcon} className="hsi-screen__badge-icon" />
+                  {eyebrow.split(' ').slice(1).join(' ') && (
+                    <span className="hsi-screen__badge-text">{eyebrow.split(' ').slice(1).join(' ')}</span>
+                  )}
+                </>
+              ) : (
+                <span className="hsi-screen__badge-text">{eyebrow}</span>
+              )}
+            </div>
           )}
           <h1 className="hsi-screen__title">{heading}</h1>
           {subheading && <p className="hsi-screen__sub">{subheading}</p>}
@@ -412,25 +673,31 @@ export function HeroScreenInterface({
 
         <div className="hsi-screen__visual" ref={visualRef}>
           <div className="hsi" aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
-            <div className="mod">
-              <div className="hdr">
-                <span className="grip"><i /><i /><i /><i /><i /><i /></span>
-                <span className="nm">{boardTitle}</span>
-                <span className="chev"><Chevron /></span>
-              </div>
-              <div className="colhdr">
-                {columns.map((c, i) => (
-                  <div className="c" key={i}>
-                    {c.done && <span className="chk"><Check /></span>}
-                    <span className="t">{c.label}</span>
-                    {c.count != null && <span className="cnt">{c.count}</span>}
+            {(() => {
+              const board = (
+                <div className="mod">
+                  <div className="hdr">
+                    <span className="grip"><i /><i /><i /><i /><i /><i /></span>
+                    <span className="nm">{boardTitle}</span>
+                    <span className="chev"><Chevron /></span>
                   </div>
-                ))}
-              </div>
-              {lanes.map((lane, i) => (
-                <Lane key={i} lane={lane} foot={i > 0} animate={animate && i === 0} animatedCard={animatedCard} />
-              ))}
-            </div>
+                  <div className="colhdr">
+                    {columns.map((c, i) => (
+                      <div className="c" key={i}>
+                        {c.done && <span className="chk"><Check /></span>}
+                        <span className="t">{c.label}</span>
+                        {c.count != null && <span className="cnt">{c.count}</span>}
+                      </div>
+                    ))}
+                  </div>
+                  {lanes.map((lane, i) => (
+                    <Lane key={i} lane={lane} foot={i > 0} animate={animate && i === 0} animatedCard={animatedCard} />
+                  ))}
+                </div>
+              );
+              const shell = sidebar ? <div className="win"><Sidebar />{board}</div> : board;
+              return cardWindow ? <div className="stage">{shell}<div className="cw-clip"><CardWindow /></div></div> : shell;
+            })()}
           </div>
         </div>
 

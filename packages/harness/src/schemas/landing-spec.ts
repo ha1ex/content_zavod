@@ -132,6 +132,7 @@ export const AssetRefSchema = z.object({
       'scrum-board-wide',
 
       'module-boards',
+      'module-task-card',
 
       'admin-space',
 
@@ -978,6 +979,7 @@ const MediaCopySchema = z.object({
       'scrum-board-wide',
 
       'module-boards',
+      'module-task-card',
 
       'admin-space',
 
@@ -1461,6 +1463,7 @@ export const MockVariantSchema = z.enum([
 'scrum-board-wide',
 
 'module-boards',
+'module-task-card',
 
 'admin-space',
 

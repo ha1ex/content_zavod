@@ -80,6 +80,7 @@ export { WindowNotificationSettingsMock } from './WindowNotificationSettingsMock
 export { WindowRecurringScheduleMock } from './WindowRecurringScheduleMock';
 export { ScaleToFit } from './ScaleToFit';
 export { ModulePortfolioMock } from './ModulePortfolioMock';
+export { ModuleTaskCardMock } from './ModuleTaskCardMock';
 export { ModuleScrumMock } from './ModuleScrumMock';
 export { AdminSpaceMock, BoardWindowHeader } from './AdminSpaceMock';
 // ModuleBoards: портфель проектов, свёрнутые доски проектов и доска «Письма»

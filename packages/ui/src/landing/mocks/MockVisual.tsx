@@ -4,6 +4,7 @@ import OnPremise from './OnPremise';
 import { FeatureTile } from './FeatureTile';
 import { Diagrams } from './Diagram';
 import { WindowNotificationSettingsMock } from './WindowNotificationSettingsMock';
+import { ModuleTaskCardMock } from './ModuleTaskCardMock';
 import { WindowRecurringScheduleMock } from './WindowRecurringScheduleMock';
 import { ReportChartMock, type ReportChartKind } from './ReportChartMock';
 import {
@@ -274,6 +275,7 @@ export type MockVariant =
   | 'scrum-board'
   | 'scrum-board-wide'
   | 'module-boards'
+  | 'module-task-card'
   | 'admin-space'
   | 'laptop-boards'
   // Задачи: карточка проекта и плитки галереи фич (FeatureMocksV01)
@@ -495,6 +497,15 @@ function MockVisualSwitch({
         </div>
       );
     // Портфель проектов, свёрнутые доски проектов и доска «Письма», 1360px.
+    // Доска «Маркетинг» с открытым окном карточки справа, 1360px.
+    case 'module-task-card':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1360}>
+            <ModuleTaskCardMock />
+          </ScaleToFit>
+        </div>
+      );
     case 'module-boards':
       return (
         <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">

@@ -120,16 +120,16 @@ const Checklist = () => (
 
 /* ─── боковое меню ───────────────────────────────────────────────────── */
 type MenuItem = { i: number; label: string; emoji?: string; folder?: string; board?: string; chev?: 'r' | 'd'; active?: boolean };
-/** Дерево по образцу ModuleKnowledgeBaseMock1; активна доска «Маркетинг». */
+/** Дерево по образцу ModuleKnowledgeBaseMock1; активна доска «Запуск продукта». */
 const MENU: MenuItem[] = [
   { i: 0, emoji: '❤️', label: 'Маркетинг', chev: 'r' },
   { i: 0, emoji: '📚', label: 'База знаний', chev: 'r' },
   { i: 0, emoji: '🧑', label: 'Команда' },
   { i: 0, emoji: '📋', label: 'Процессы', chev: 'd' },
   { i: 1, folder: '#9e9e9e', label: 'Редакция', chev: 'r' },
-  { i: 1, folder: '#b13bd0', label: 'Запуск продукта', chev: 'd' },
-  { i: 2, board: '#7d4ccf', label: 'Маркетинг', active: true },
-  { i: 2, board: '#e0306e', label: 'Контент-план' },
+  { i: 1, folder: '#b13bd0', label: 'Маркетинг', chev: 'd' },
+  { i: 2, board: '#7d4ccf', label: 'Запуск продукта', active: true },
+  { i: 2, board: '#e0306e', label: 'Разработка' },
   { i: 1, folder: '#9e9e9e', label: 'Разработка', chev: 'r' },
   { i: 1, folder: '#2f9fd0', label: 'HR', chev: 'r' },
   { i: 0, emoji: '🟥', label: 'Бухгалтерия' },
@@ -258,6 +258,8 @@ function Lane({ lane, foot, animate, animatedCard }: { lane: HsiLane; foot: bool
                 </div>
               </div>
             )}
+            {/* светло-фиолетовая плашка-приемник в колонке, куда едет карточка */}
+            {animate && animatedCard && ci === dragCol + 1 && <span className="drop-slot" aria-hidden="true" />}
             {col.map((card, ki) => (
               <div className={card.active ? 'card is-target' : 'card'} key={ki}>
                 <CardBody card={card} />
@@ -341,8 +343,10 @@ const CSS = `
 .hsi-screen__grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-12,48px)}
 .hsi-screen__copy{width:100%;max-width:940px;margin:0 auto;text-align:center}
 .hsi-screen__badge{display:inline-flex;align-items:center;justify-content:center;background:var(--_brand-12k);border-radius:var(--radius-2xl,16px);padding:var(--sp-1,4px) var(--sp-4,16px);margin-bottom:0}
-.hsi-screen__badge-icon{width:18px;height:18px;flex:none;margin:0 6px 0 -2px;color:var(--_brand)}
-.hsi-screen__badge-text{font-size:var(--fs-sm,14px);line-height:var(--lh-sm,20px);font-weight:var(--fw-med,500);color:var(--_brand);white-space:nowrap}
+.hsi-screen__badge-icon{width:18px;height:18px;flex:none;margin:0 6px 0 14px;color:var(--_brand)}
+.hsi-screen__badge-text{font-size:var(--fs-sm,14px);line-height:var(--lh-sm,20px);font-weight:var(--fw-med,500);color:var(--_brand);white-space:nowrap;position:relative;top:1px}
+/* Первое слово бейджа: капсом и обычным начертанием, цвет фирменный */
+.hsi-screen__badge-text--lead{font-size:12px;font-weight:var(--fw-med,500);text-transform:uppercase;position:relative;top:1px}
 .hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,44px);font-weight:var(--fw-semi,600);letter-spacing:0;margin:var(--sp-4,16px) 0 var(--sp-5,20px);white-space:pre-line}
 .hsi-screen__sub{font-size:var(--fs-lg,18px);line-height:var(--lh-lg,28px);font-weight:var(--fw-reg,400);color:#2d2d2d;max-width:820px;margin:0 auto var(--sp-8,32px);white-space:pre-line}
 .hsi-screen__cta{display:flex;gap:var(--sp-3,12px);flex-wrap:wrap;justify-content:center}
@@ -375,7 +379,7 @@ const CSS = `
 @keyframes hsiTrustMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.hsi-screen__trust .trust-track{animation:none}}
 @media(max-width:980px){.hsi-screen__grid{gap:var(--sp-10,40px)}.hsi-screen__copy{max-width:none}.hsi-screen__sub{max-width:none}}
-@media(max-width:767px){.hsi-screen{padding:var(--sp-12,48px) 0 var(--sp-6,24px)}.hsi-screen__title{font-size:var(--fs-4xl,36px);line-height:var(--lh-4xl,40px)}.hsi-screen__sub{font-size:var(--fs-md,16px);white-space:normal}.hsi-screen__copy{text-align:left}.hsi-screen__cta{justify-content:center}}
+@media(max-width:767px){.hsi-screen{padding:var(--sp-12,48px) 0 var(--sp-6,24px)}.hsi-screen__title{font-size:var(--fs-3xl,30px);line-height:var(--lh-3xl,36px)}.hsi-screen__sub{font-size:var(--fs-md,16px);white-space:normal}.hsi-screen__copy{text-align:left}.hsi-screen__cta{justify-content:center}}
 @media(max-width:480px){.hsi-screen__badge{max-width:100%}.hsi-screen__badge-text{white-space:normal}}
 @media(max-width:384px){.hsi-screen__title{font-size:var(--fs-3xl,30px);line-height:var(--lh-3xl,36px)}}
 
@@ -464,7 +468,8 @@ const CSS = `
 .hsi .cw__child .m>span{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
 .hsi .cw__child .a{width:18px;height:18px;border-radius:50%;background:var(--sec);display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:var(--ts)}
 .hsi .cw__add{align-self:flex-start;border:1px solid var(--bd);border-radius:6px;padding:3px 10px;font-size:10.5px;line-height:1.4;font-weight:600;text-transform:uppercase;color:var(--tp)}
-.hsi .cw__t{font-size:20px;font-weight:600;line-height:1.3}
+.hsi .cw__x{position:absolute;top:26px;right:26px;color:var(--ts);display:flex;line-height:0}
+.hsi .cw__t{padding-right:28px;font-size:20px;font-weight:600;line-height:1.3}
 .hsi .cw__meta{margin-top:8px;font-size:13px;color:var(--ts)}
 .hsi .cw__meta a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
 .hsi .cw__tb{display:flex;align-items:center;gap:6px;margin-top:10px}
@@ -502,6 +507,8 @@ const CSS = `
 .hsi .win .hand{top:52%}
 .hsi .side__foot{border-top:1px solid var(--bd);padding-top:6px}
 /* Место, откуда карточку унесли: плашка чёрным с прозрачностью 10%. */
+.hsi .drop-slot{display:block;height:92px;border-radius:12px;background:var(--_brand-12k);border:1px dashed #c9b8ec;opacity:0;animation:hsiDrop 5s ease-in-out infinite}
+@keyframes hsiDrop{0%,16%{opacity:0}26%{opacity:1}80%{opacity:1}92%,100%{opacity:0}}
 .hsi .drag-ghost{position:absolute;inset:0;border-radius:12px;background:rgba(0,0,0,.1);opacity:0;z-index:1;pointer-events:none;animation:hsiGhost 5s ease-in-out infinite}
 .hsi .drag-layer{position:relative;z-index:30;animation:hsiTravel 5s ease-in-out infinite}
 .hsi .drag-card{border:1px solid #e0d6f3;transform-origin:center;animation:hsiLift 5s ease-in-out infinite}
@@ -522,6 +529,7 @@ const CSS = `
 /* Мобилка: доска без анимации. Кадр застывает в момент, когда карточку донесли до соседней
    колонки: слой смещён в конечную точку, карточка приподнята, рука и призрак видны. */
 @media(max-width:767px){
+  .hsi .drop-slot{animation:none;opacity:1}
   .hsi .drag-layer{animation:none;transform:translate(154px,48px)}
   .hsi .drag-card{animation:none;transform:rotate(3deg) scale(1.03);box-shadow:0 0 45px -12px rgba(45,45,45,.40)}
   .hsi .hand{animation:none;opacity:1}
@@ -536,6 +544,9 @@ function CardWindow() {
   );
   return (
     <div className="cw">
+      <span className="cw__x" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </span>
       <div className="cw__t">Промостраница новой функции</div>
       <div className="cw__meta"><a>#48210573</a> Заказчик <a>Анна</a> · Создана 3 дня назад</div>
       <div className="cw__tb">
@@ -566,10 +577,56 @@ function CardWindow() {
         <span className="cw__add">Добавить дочернюю карточку</span>
       </div>
       <div className="cw__cm">
-        <span className="cw__av" style={{ background: '#8aa8c9', width: 28, height: 28, flex: 'none', fontSize: 11 }}>Е</span>
+        <span className="cw__av" style={{ background: '#8aa8c9', width: 28, height: 28, flex: 'none', fontSize: 11, marginTop: 4 }}>Е</span>
         <span><b>Елена</b><span className="t">сегодня, 11:40</span><br />Скриншоты приложила, осталось согласовать заголовок</span>
       </div>
     </div>
+  );
+}
+
+/** Данные доски: общие для первого экрана и отдельного module-мока. */
+export type HsiBoardData = Pick<HeroScreenInterfaceProps, 'boardTitle' | 'columns' | 'lanes' | 'animate' | 'animatedCard' | 'sidebar' | 'cardWindow'>;
+
+/** Доска модуля (+ боковое меню и окно карточки, если включены) без обертки первого экрана. */
+function BoardShell({ boardTitle, columns, lanes, animate, animatedCard, sidebar, cardWindow }: HsiBoardData) {
+  const board = (
+    <div className="mod">
+      <div className="hdr">
+        <span className="grip"><i /><i /><i /><i /><i /><i /></span>
+        <span className="nm">{boardTitle}</span>
+        <span className="chev"><Chevron /></span>
+      </div>
+      <div className="colhdr">
+        {columns.map((c, i) => (
+          <div className="c" key={i}>
+            {c.done && <span className="chk"><Check /></span>}
+            <span className="t">{c.label}</span>
+            {c.count != null && <span className="cnt">{c.count}</span>}
+          </div>
+        ))}
+      </div>
+      {lanes.map((lane, i) => (
+        <Lane key={i} lane={lane} foot={i > 0} animate={animate && i === 0} animatedCard={animatedCard} />
+      ))}
+    </div>
+  );
+  const shell = sidebar ? <div className="win"><Sidebar />{board}</div> : board;
+  return cardWindow ? <div className="stage">{shell}<div className="cw-clip"><CardWindow /></div></div> : shell;
+}
+
+/**
+ * Доска первого экрана отдельным мокапом: те же стили и данные, но без
+ * бейджа, заголовка и кнопок. Рисуется в натуральную ширину 1360px —
+ * масштаб задает контейнер (ScaleToFit), поэтому свой zoom сброшен.
+ */
+export function HsiBoard(props: HsiBoardData) {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <div className="hsi" aria-hidden="true" style={{ zoom: 1 }}>
+        <BoardShell {...props} />
+      </div>
+    </>
   );
 }
 
@@ -629,8 +686,18 @@ export function HeroScreenInterface({
         <div className="hsi-screen__copy">
           {eyebrow && (
             <div className="hsi-screen__badge">
-              {isProductNavIcon(eyebrowIcon) && <ProductNavIcon name={eyebrowIcon} className="hsi-screen__badge-icon" />}
-              <span className="hsi-screen__badge-text">{eyebrow}</span>
+              {isProductNavIcon(eyebrowIcon) ? (
+                <>
+                  {/* Иконка встает после первого слова бейджа: «Функция ▣ «Задачи»» */}
+                  <span className="hsi-screen__badge-text hsi-screen__badge-text--lead">{eyebrow.split(' ')[0]}</span>
+                  <ProductNavIcon name={eyebrowIcon} className="hsi-screen__badge-icon" />
+                  {eyebrow.split(' ').slice(1).join(' ') && (
+                    <span className="hsi-screen__badge-text">{eyebrow.split(' ').slice(1).join(' ')}</span>
+                  )}
+                </>
+              ) : (
+                <span className="hsi-screen__badge-text">{eyebrow}</span>
+              )}
             </div>
           )}
           <h1 className="hsi-screen__title">{heading}</h1>
@@ -645,31 +712,7 @@ export function HeroScreenInterface({
 
         <div className="hsi-screen__visual" ref={visualRef}>
           <div className="hsi" aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
-            {(() => {
-              const board = (
-                <div className="mod">
-                  <div className="hdr">
-                    <span className="grip"><i /><i /><i /><i /><i /><i /></span>
-                    <span className="nm">{boardTitle}</span>
-                    <span className="chev"><Chevron /></span>
-                  </div>
-                  <div className="colhdr">
-                    {columns.map((c, i) => (
-                      <div className="c" key={i}>
-                        {c.done && <span className="chk"><Check /></span>}
-                        <span className="t">{c.label}</span>
-                        {c.count != null && <span className="cnt">{c.count}</span>}
-                      </div>
-                    ))}
-                  </div>
-                  {lanes.map((lane, i) => (
-                    <Lane key={i} lane={lane} foot={i > 0} animate={animate && i === 0} animatedCard={animatedCard} />
-                  ))}
-                </div>
-              );
-              const shell = sidebar ? <div className="win"><Sidebar />{board}</div> : board;
-              return cardWindow ? <div className="stage">{shell}<div className="cw-clip"><CardWindow /></div></div> : shell;
-            })()}
+            <BoardShell boardTitle={boardTitle} columns={columns} lanes={lanes} animate={animate} animatedCard={animatedCard} sidebar={sidebar} cardWindow={cardWindow} />
           </div>
         </div>
 

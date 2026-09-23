@@ -394,7 +394,7 @@ const APP_CSS = `
    иначе шаг между «Расположение / Тип / Участники / Срок / Метки» гуляет */
 .hsi .app__cw dl>*{min-height:29px}
 /* строка действий («+ … На согласовании») — отодвигаем от подзаголовка */
-.hsi .app__cw>*>:first-child>.mt-3{margin-top:18px}
+.hsi .app__cw>*>:first-child>.mt-3{margin-top:26px}
 /* кнопка «Скрыть отмеченные» в строке прогресса — пошире */
 .hsi .app__cw>*>:first-child>div.mt-2>span:last-child{padding-left:14px;padding-right:14px}
 /* плашки «Материал» и «Маркетинг» — пошире (чип «Ответственный» не трогаем:

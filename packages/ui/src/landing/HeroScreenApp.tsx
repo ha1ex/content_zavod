@@ -381,7 +381,11 @@ const APP_CSS = `
 /* в ленте тот же зазор чуть больше: пузырь под именем автора */
 .hsi .app__cw>*>:last-child .min-w-0>div+div{margin-top:4px}
 /* поле «Напишите комментарий» — текст не липнет к рамке */
-.hsi .app__cw>*>:last-child [class*="flex-1"][class*="h-8"]{padding-left:16px}
+.hsi .app__cw>*>:last-child [class*="flex-1"][class*="h-8"]{padding-left:16px;font-size:13px}
+/* фильтр «Все» — ниже и шире */
+.hsi .app__cw>*>:last-child [class*="mb-3"]>span[class*="h-7"]{height:24px;padding-left:12px;padding-right:12px}
+/* селектор «Список» в строке дочерних карточек — пошире */
+.hsi .app__cw>*>:first-child>div[class*="mt-2.5"]>span[class*="h-6"]{padding-left:14px;padding-right:14px}
 /* лента комментариев дышит: между репликами и вокруг строки фильтра */
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"]>div+div{margin-top:20px}
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"]{margin-top:20px}
@@ -389,7 +393,7 @@ const APP_CSS = `
 /* пузыри реплик — просторнее внутри */
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"] [class*="px-3"]{padding:9px 12px}
 /* вертикальные отступы — родные, как в самом окне карточки */
-.hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
+.hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:24px}
 /* заголовок карточки: помельче и с воздухом над ним */
 .hsi .app__cw h3{font-size:17px;line-height:1.3;font-weight:500}
 /* подзаголовки под названием — номер карточки и «создана / перемещена» — мельче */

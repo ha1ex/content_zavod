@@ -361,7 +361,7 @@ const APP_CSS = `
    Отступ сверху переводим в единицы интерфейса: * --bz / --cw-k. */
 .hsi .app__cw{--cw-k:.78;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
   top:calc(108px * var(--bz,1) / var(--cw-k));right:calc(57px * var(--bz,1) / var(--cw-k));bottom:0;
-  width:432px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
+  width:486px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
   grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;overflow:hidden}
@@ -372,7 +372,9 @@ const APP_CSS = `
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
 /* заголовок карточки: помельче и с воздухом над ним */
 .hsi .app__cw h3{font-size:17px;line-height:1.3}
-.hsi .app__cw>*>:first-child{padding-top:30px}
+.hsi .app__cw>*>:first-child{padding-top:24px}
+/* группы карточки — «Описание», «Файлы», «Подготовка», «Связи» — разделяем воздухом */
+.hsi .app__cw>*>:first-child>.mt-4{margin-top:26px}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

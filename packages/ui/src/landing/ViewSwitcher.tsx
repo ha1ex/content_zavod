@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Icon } from '../primitives/Icon';
+import { APP_ICONS } from './HeroScreenApp';
 import { cn } from '../primitives/cn';
 import { AccentText } from '../primitives/AccentText';
 import { MockVisual, type MockVariant } from './mocks';
@@ -90,7 +91,14 @@ export function ViewSwitcher({ eyebrow, title, accentWord, description, items, b
                     : 'text-(--color-text-secondary) hover:bg-(--color-surface-page) hover:text-(--color-text-accent)',
                 )}
               >
-                {it.icon && <Icon name={it.icon} className="h-4 w-4" strokeWidth={2} />}
+                {it.icon?.startsWith('kaiten:') ? (
+                  /* значок из набора самого продукта — тот же, что в панели видов мокапа */
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4 shrink-0">
+                    <path d={APP_ICONS[it.icon.slice(7) as keyof typeof APP_ICONS]} />
+                  </svg>
+                ) : (
+                  it.icon && <Icon name={it.icon} className="h-4 w-4" strokeWidth={2} />
+                )}
                 {it.label}
               </button>
             );

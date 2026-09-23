@@ -14,7 +14,7 @@ export const APP_DESIGN_WIDTH = 1920;
  */
 
 /* ─── Material Icons (24×24, заливка) ─────────────────────────────────── */
-const M = {
+export const APP_ICONS = {
   mail: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z',
   folderShared: 'M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-5 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4 8h-8v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1z',
   star: 'M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z',
@@ -141,32 +141,32 @@ function TreeIcon({ it }: { it: TreeItem }) {
   switch (it.kind) {
     case 'emoji': return <span className="app__emoji">{it.emoji}</span>;
     case 'books': return <Books />;
-    case 'board': return <I d={M.spaceDashboard} size={22} />;
-    case 'doc': return <I d={M.article} size={22} />;
-    case 'folder': return <I d={M.folder} size={22} />;
-    case 'chart': return <I d={M.assessment} size={22} />;
+    case 'board': return <I d={APP_ICONS.spaceDashboard} size={22} />;
+    case 'doc': return <I d={APP_ICONS.article} size={22} />;
+    case 'folder': return <I d={APP_ICONS.folder} size={22} />;
+    case 'chart': return <I d={APP_ICONS.assessment} size={22} />;
   }
 }
 
 function Tree({ activeLabel }: { activeLabel?: string }) {
   return (
     <aside className="app__tree">
-      <div className="app__tree-hd"><span>Дерево</span><I d={M.sidebar} size={22} /></div>
+      <div className="app__tree-hd"><span>Дерево</span><I d={APP_ICONS.sidebar} size={22} /></div>
       <div className="app__tree-search">
-        <span className="app__tree-input"><I d={M.search} size={26} />Найти..</span>
-        <I d={M.add} size={26} />
+        <span className="app__tree-input"><I d={APP_ICONS.search} size={26} />Найти..</span>
+        <I d={APP_ICONS.add} size={26} />
       </div>
       <div className="app__tree-list">
         {TREE.map((it, i) => (
           <div className={it.active ? 'app__tree-it is-active' : 'app__tree-it'} key={i}>
             <span className="app__tree-ic"><TreeIcon it={it} /></span>
-            {it.chev && <I d={M.chevronRight} size={22} className="app__chev" />}
-            {it.access && <I d={it.access === 'globe' ? M.public : M.groups} size={it.access === 'globe' ? 21 : 20} className="app__acc" />}
+            {it.chev && <I d={APP_ICONS.chevronRight} size={22} className="app__chev" />}
+            {it.access && <I d={it.access === 'globe' ? APP_ICONS.public : APP_ICONS.groups} size={it.access === 'globe' ? 21 : 20} className="app__acc" />}
             {it.extra === 'books' && <Books size={18} />}
             {it.extra === 'puzzle' && <span className="app__emoji app__emoji--sm">🧩</span>}
             <span className="app__tree-lbl">{it.active && activeLabel ? activeLabel : it.label}</span>
             {it.active && (
-              <span className="app__tree-act"><I d={M.add} size={24} /><I d={M.settings} size={22} /><I d={M.moreVert} size={22} /></span>
+              <span className="app__tree-act"><I d={APP_ICONS.add} size={24} /><I d={APP_ICONS.settings} size={22} /><I d={APP_ICONS.moreVert} size={22} /></span>
             )}
           </div>
         ))}
@@ -210,10 +210,10 @@ function AppCard({ card }: { card: HsiCard }) {
       {c && (
         <div className="app__meta">
           {c.children != null && (
-            <span><I d={M.split} size={17} />{c.childrenDone != null ? `${c.childrenDone}/${c.children}` : c.children || ''}</span>
+            <span><I d={APP_ICONS.split} size={17} />{c.childrenDone != null ? `${c.childrenDone}/${c.children}` : c.children || ''}</span>
           )}
-          {c.attachments != null && <span><I d={M.attach} size={19} />{c.attachments}</span>}
-          {c.comments != null && <span><I d={M.comment} size={16} />{c.comments}</span>}
+          {c.attachments != null && <span><I d={APP_ICONS.attach} size={19} />{c.attachments}</span>}
+          {c.comments != null && <span><I d={APP_ICONS.comment} size={16} />{c.comments}</span>}
         </div>
       )}
       {card.tags && card.tags.length > 0 && (
@@ -232,10 +232,10 @@ function AppCard({ card }: { card: HsiCard }) {
         <span className="app__badges">
           {card.due && (
             <span className={card.dueTone ? `app__due app__due--${card.dueTone}` : 'app__due'}>
-              <I d={M.event} size={17} />{card.due}
+              <I d={APP_ICONS.event} size={17} />{card.due}
             </span>
           )}
-          {card.urgent && <span className="app__due app__due--red"><I d={M.fire} size={17} />Срочно</span>}
+          {card.urgent && <span className="app__due app__due--red"><I d={APP_ICONS.fire} size={17} />Срочно</span>}
         </span>
       </div>
     </div>
@@ -262,44 +262,44 @@ export function HsiApp({
 }) {
   // Доска в режиме appShell — одна дорожка: карточки всех дорожек сводятся в колонки.
   const cols = columns.map((_, ci) => lanes.flatMap((l) => l.columns[ci] ?? []));
-  const views = [M.kanbanO, M.grid, M.sort, M.calendarO, M.sync, M.folderO];
+  const views = [APP_ICONS.kanbanO, APP_ICONS.grid, APP_ICONS.sort, APP_ICONS.calendarO, APP_ICONS.sync, APP_ICONS.folderO];
   return (
     <div className="app">
       <style dangerouslySetInnerHTML={{ __html: APP_CSS }} />
       <header className="app__top">
         <span className="app__logo"><KaitenMark />Kaiten</span>
-        <span className="app__space"><I d={M.spaceDashboard} size={24} />{spaceTitle ?? boardTitle}</span>
-        <span className="app__search">Найти<I d={M.search} size={26} /></span>
+        <span className="app__space"><I d={APP_ICONS.spaceDashboard} size={24} />{spaceTitle ?? boardTitle}</span>
+        <span className="app__search">Найти<I d={APP_ICONS.search} size={26} /></span>
         <span className="app__ai">Kaiten - AI</span>
-        <span className="app__help"><I d={M.help} size={28} /><i /></span>
+        <span className="app__help"><I d={APP_ICONS.help} size={28} /><i /></span>
         <span className="app__me">З<i /></span>
       </header>
       <div className="app__body">
         <nav className="app__rail">
-          <span className="app__rail-it"><I d={M.mail} size={26} /><b>36</b></span>
-          <span className="app__rail-it"><I d={M.folderShared} size={26} /></span>
-          <span className="app__rail-it"><I d={M.star} size={26} /></span>
-          <span className="app__rail-it is-active"><I d={M.accountTree} size={26} /></span>
-          <span className="app__rail-it"><I d={M.send} size={26} /></span>
+          <span className="app__rail-it"><I d={APP_ICONS.mail} size={26} /><b>36</b></span>
+          <span className="app__rail-it"><I d={APP_ICONS.folderShared} size={26} /></span>
+          <span className="app__rail-it"><I d={APP_ICONS.star} size={26} /></span>
+          <span className="app__rail-it is-active"><I d={APP_ICONS.accountTree} size={26} /></span>
+          <span className="app__rail-it"><I d={APP_ICONS.send} size={26} /></span>
           <span className="app__rail-sp" />
-          <span className="app__rail-it"><I d={M.boards} size={24} /></span>
-          <span className="app__rail-it"><I d={M.adminShield} size={24} /></span>
+          <span className="app__rail-it"><I d={APP_ICONS.boards} size={24} /></span>
+          <span className="app__rail-it"><I d={APP_ICONS.adminShield} size={24} /></span>
         </nav>
         {tree && <Tree activeLabel={boardTitle} />}
         <div className="app__main">
           <div className="app__bar">
             <span className="app__seg">
-              <span className="app__btn is-on"><I d={M.dashboardO} size={22} />Доски</span>
+              <span className="app__btn is-on"><I d={APP_ICONS.dashboardO} size={22} />Доски</span>
               {views.map((d, i) => <span className="app__vbtn" key={i}><I d={d} size={24} /></span>)}
             </span>
-            <span className="app__btn app__btn--g"><I d={M.insights} size={22} />Отчеты</span>
-            <span className="app__btn app__btn--g"><I d={M.archiveDown} size={20} />Архив</span>
-            <span className="app__btn app__btn--add"><I d={M.add} size={24} />Добавить</span>
+            <span className="app__btn app__btn--g"><I d={APP_ICONS.insights} size={22} />Отчеты</span>
+            <span className="app__btn app__btn--g"><I d={APP_ICONS.archiveDown} size={20} />Архив</span>
+            <span className="app__btn app__btn--add"><I d={APP_ICONS.add} size={24} />Добавить</span>
             <span className="app__bar-r">
-              <span className="app__btn app__btn--g"><I d={M.filter} size={22} />Фильтры</span>
-              <span className="app__btn app__btn--g app__btn--ic"><I d={M.cards} size={22} /></span>
-              <span className="app__btn app__btn--g app__btn--ic"><I d={M.dblUp} size={22} /></span>
-              <span className="app__btn app__btn--g app__btn--ic"><I d={M.starO} size={22} /></span>
+              <span className="app__btn app__btn--g"><I d={APP_ICONS.filter} size={22} />Фильтры</span>
+              <span className="app__btn app__btn--g app__btn--ic"><I d={APP_ICONS.cards} size={22} /></span>
+              <span className="app__btn app__btn--g app__btn--ic"><I d={APP_ICONS.dblUp} size={22} /></span>
+              <span className="app__btn app__btn--g app__btn--ic"><I d={APP_ICONS.starO} size={22} /></span>
             </span>
           </div>
           <div className="app__work">
@@ -308,13 +308,13 @@ export function HsiApp({
                 <div className="app__bhd">
                   <span className="app__grip"><i /><i /><i /><i /><i /><i /></span>
                   <span className="app__bnm">{boardTitle}</span>
-                  <I d={M.expandLess} size={24} className="app__bchev" />
+                  <I d={APP_ICONS.expandLess} size={24} className="app__bchev" />
                 </div>
                 <div className="app__cols">
                   {columns.map((col, ci) => (
                     <div className="app__col" key={ci}>
                       <div className="app__chd">
-                        {col.done && <I d={M.check} size={20} className="app__chk" />}
+                        {col.done && <I d={APP_ICONS.check} size={20} className="app__chk" />}
                         <span className="app__cnm">{col.label}</span>
                         {col.count != null && <span className="app__cnt">{col.count}</span>}
                       </div>
@@ -327,7 +327,7 @@ export function HsiApp({
               </section>
             </div>
             <nav className="app__rail app__rail--r">
-              {[M.peopleO, M.avTimer, M.history, M.filterNone, M.brightnessAutoO, M.block, M.camera, M.shareO, M.schema].map((d, i) => (
+              {[APP_ICONS.peopleO, APP_ICONS.avTimer, APP_ICONS.history, APP_ICONS.filterNone, APP_ICONS.brightnessAutoO, APP_ICONS.block, APP_ICONS.camera, APP_ICONS.shareO, APP_ICONS.schema].map((d, i) => (
                 <span className="app__rail-it" key={i}><I d={d} size={24} /></span>
               ))}
             </nav>
@@ -381,13 +381,15 @@ const APP_CSS = `
 .hsi .app__cw h3{font-size:17px;line-height:1.3;font-weight:500}
 /* подзаголовки под названием — номер карточки и «создана / перемещена» — мельче */
 .hsi .app__cw>*>:first-child>div[class*="mt-1.5"]{font-size:12px}
-.hsi .app__cw>*>:first-child{padding-top:24px}
+.hsi .app__cw>*>:first-child{padding-top:24px;padding-bottom:22px}
 /* группы карточки — «Описание», «Файлы», «Подготовка», «Связи» — разделяем воздухом */
 .hsi .app__cw>*>:first-child>.mt-4{margin-top:20px}
 /* содержимое групп — описание, файл, прогресс, чек-боксы — отодвигаем от заголовка группы */
 .hsi .app__cw>*>:first-child>[class*="mt-2"]{margin-top:12px}
 /* заголовки групп сдвинуты левее, чтобы шевроны сворачивания выступали */
 .hsi .app__cw>*>:first-child>[class*="-ml-"]{margin-left:-13px}
+/* фильтр и кнопки режимов в строке «Связи» — к правому краю */
+.hsi .app__cw>*>:first-child>[class*="-ml-"]>span:last-child{margin-left:auto}
 /* пункты чек-листа — чуть свободнее друг от друга */
 .hsi .app__cw>*>:first-child>ul>li+li{margin-top:9px}
 /* строки параметров разной высоты (плашка «Материал», аватарки) — ровняем,

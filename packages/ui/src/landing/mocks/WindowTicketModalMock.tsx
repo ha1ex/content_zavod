@@ -242,13 +242,6 @@ function PresentationColumn() {
           </svg>
           Создана 7 дней назад
         </span>
-        <span className="inline-flex items-center gap-1.5">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-            <path d="M4 12h16" strokeLinecap="round" />
-            <path d="M7.5 8.5 4 12l3.5 3.5M16.5 8.5 20 12l-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Перемещена 21 час назад
-        </span>
       </div>
 
       {/* toolbar */}
@@ -401,7 +394,6 @@ function PresentationColumn() {
       </div>
       {/* дочерняя карточка — как строка в продукте: метки, связи, срок, исполнитель, тип и время */}
       <div className="relative mt-2 flex h-8 items-center rounded-[4px] border border-[#e0e0e0] px-2.5">
-        <span className="absolute left-2 top-0 h-[2px] w-9 rounded-b-full bg-[#f8bbd0]" />
         <span className="text-xs text-(--color-text-primary)">Подготовить дизайн слайдов</span>
         <span className="ml-auto flex items-center gap-2 text-[11px] text-[#9e9e9e]">
           <span className="inline-flex items-center gap-0.5">
@@ -411,10 +403,10 @@ function PresentationColumn() {
             <circle cx="12" cy="5" r="2.6" /><circle cx="5" cy="19" r="2.6" /><circle cx="19" cy="19" r="2.6" />
             <path d="M11 7h2v4l5.5 5.5-1.4 1.4L12 12.8l-5.1 5.1-1.4-1.4L11 11z" />
           </svg>
-          <span className="inline-flex h-[18px] items-center gap-0.5 rounded-[4px] bg-[#e57373] px-1 font-semibold leading-none text-white">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fff"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h2zM5 10v10h14V10zm2 2h5v5H7z" /></svg> 20 сент.
+          <span className="inline-flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#9e9e9e"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h2zM5 10v10h14V10zm2 2h5v5H7z" /></svg> 24 сент.
           </span>
-          <span className="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#efe9f9] text-[9px] font-semibold leading-none text-[#7d4ccf]">А</span>
+          <img src="/brand/avatars/man-orange.png" alt="" className="h-[18px] w-[18px] rounded-full object-cover" />
           <svg width="15" height="15" viewBox="0 0 24 24"><path d="M3 6.5A1.5 1.5 0 014.5 5h4.2l2 2h8.8A1.5 1.5 0 0121 8.5v9a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 17.5z" fill="#42a5f5" /></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#757575" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" /></svg>
         </span>

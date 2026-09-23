@@ -422,37 +422,37 @@
           {
             "id": "boards",
             "label": "Доски",
-            "icon": "LayoutGrid",
+            "icon": "kaiten:boards",
             "mockVariant": "scrum-board-wide"
           },
           {
             "id": "lists",
             "label": "Списки",
-            "icon": "List",
+            "icon": "kaiten:sort",
             "mockVariant": "workspace-view-list"
           },
           {
             "id": "tables",
             "label": "Таблицы",
-            "icon": "Table2",
+            "icon": "kaiten:grid",
             "mockVariant": "workspace-view-table"
           },
           {
             "id": "timeline",
             "label": "Таймлайн",
-            "icon": "AlignLeft",
+            "icon": "kaiten:viewWeek",
             "mockVariant": "workspace-view-timeline"
           },
           {
             "id": "calendar",
             "label": "Календарь",
-            "icon": "Calendar",
+            "icon": "kaiten:calendarO",
             "mockVariant": "workspace-view-calendar"
           },
           {
             "id": "reports",
             "label": "Отчеты",
-            "icon": "ChartLine",
+            "icon": "kaiten:insights",
             "mockVariant": "workspace-view-reports"
           }
         ]
@@ -470,7 +470,7 @@
           {
             "id": "boards",
             "label": "Доски",
-            "icon": "LayoutGrid",
+            "icon": "kaiten:boards",
             "mockVariant": "scrum-board-wide",
             "image": {
               "src": "/brand/features/tasks-views/boards.webp",
@@ -480,7 +480,7 @@
           {
             "id": "lists",
             "label": "Списки",
-            "icon": "List",
+            "icon": "kaiten:sort",
             "mockVariant": "workspace-view-list",
             "image": {
               "src": "/brand/features/tasks-views/lists.webp",
@@ -490,7 +490,7 @@
           {
             "id": "tables",
             "label": "Таблицы",
-            "icon": "Table2",
+            "icon": "kaiten:grid",
             "mockVariant": "workspace-view-table",
             "image": {
               "src": "/brand/features/tasks-views/tables.webp",
@@ -500,13 +500,13 @@
           {
             "id": "timeline",
             "label": "Таймлайн",
-            "icon": "AlignLeft",
+            "icon": "kaiten:viewWeek",
             "mockVariant": "workspace-view-timeline"
           },
           {
             "id": "calendar",
             "label": "Календарь",
-            "icon": "Calendar",
+            "icon": "kaiten:calendarO",
             "mockVariant": "workspace-view-calendar",
             "image": {
               "src": "/brand/features/tasks-views/calendar.webp",
@@ -516,7 +516,7 @@
           {
             "id": "reports",
             "label": "Отчеты",
-            "icon": "ChartLine",
+            "icon": "kaiten:insights",
             "mockVariant": "workspace-view-reports",
             "image": {
               "src": "/brand/features/tasks-views/reports.webp",

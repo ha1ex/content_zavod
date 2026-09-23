@@ -68,7 +68,7 @@ const css = `
 .ctp__visual img{width:100%;height:auto;display:block;border-radius:12px}
 @media(min-width:1024px){.ctp{border-radius:16px}.ctp__visual img{border-radius:16px}}
 /* Иллюстрация не во всю колонку: на широких экранах она крупнее текста. */
-@media(min-width:1024px){.ctp__visual img{width:82%}}
+@media(min-width:1024px){.ctp__visual img{width:94%}}
 /* Иллюстрация отбивается от верхнего и нижнего края карточки. */
 @media(min-width:1024px){.ctp__visual{margin-block:-16px;padding-block:0}}
 @media(max-width:1023px){

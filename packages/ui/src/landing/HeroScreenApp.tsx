@@ -36,6 +36,8 @@ const M = {
   help: 'M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z',
   sidebar: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 19H5V5h4v14zm10 0h-8V5h8v14z',
   dashboardO: 'M19 5v2h-4V5h4M9 5v6H5V5h4m10 8v6h-4v-6h4M9 17v2H5v-2h4M21 3h-8v6h8V3zM11 3H3v10h8V3zm10 8h-8v10h8V11zm-10 4H3v6h8v-6z',
+  /* Значок «Доски» в рельсе разделов: залитый квадрат, колонки вырезаны (10/5/8). */
+  boards: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 7h2v10H7zm4 0h2v5h-2zm4 0h2v8h-2z',
   kanbanO: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h2v8H7zm4 0h2v5h-2zm4 0h2v8h-2z',
   grid: 'M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z',
   sort: 'M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z',
@@ -282,7 +284,7 @@ export function HsiApp({
           <span className="app__rail-it is-active"><I d={M.accountTree} size={26} /></span>
           <span className="app__rail-it"><I d={M.send} size={26} /></span>
           <span className="app__rail-sp" />
-          <span className="app__rail-it"><I d={M.kanbanO} size={24} /></span>
+          <span className="app__rail-it"><I d={M.boards} size={24} /></span>
           <span className="app__rail-it"><I d={M.adminShield} size={24} /></span>
         </nav>
         {tree && <Tree activeLabel={boardTitle} />}

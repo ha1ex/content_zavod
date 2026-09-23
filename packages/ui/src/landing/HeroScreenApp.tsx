@@ -374,7 +374,14 @@ const APP_CSS = `
 .hsi .app__cw h3{font-size:17px;line-height:1.3}
 .hsi .app__cw>*>:first-child{padding-top:24px}
 /* группы карточки — «Описание», «Файлы», «Подготовка», «Связи» — разделяем воздухом */
-.hsi .app__cw>*>:first-child>.mt-4{margin-top:26px}
+.hsi .app__cw>*>:first-child>.mt-4{margin-top:20px}
+/* строки параметров разной высоты (плашка «Материал», аватарки) — ровняем,
+   иначе шаг между «Расположение / Тип / Участники / Срок / Метки» гуляет */
+.hsi .app__cw dl>*{min-height:29px}
+/* строка действий («+ … На согласовании») — отодвигаем от подзаголовка */
+.hsi .app__cw>*>:first-child>.mt-3{margin-top:18px}
+/* кнопка «Скрыть отмеченные» в строке прогресса — пошире */
+.hsi .app__cw>*>:first-child>div.mt-2>span:last-child{padding-left:14px;padding-right:14px}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

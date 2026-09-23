@@ -77,8 +77,8 @@ const I = ({ d, size = 24, className }: { d: string; size?: number; className?: 
 const KaitenMark = () => (
   <svg width="26" height="26" viewBox="-0.5 -0.5 27 27" aria-hidden="true">
     <circle cx="13" cy="13" r="13" fill="#F11F24" />
-    <path d="M11.33 6.27 6.27 11.33a2.36 2.36 0 0 0 0 3.33l5.07 5.07a2.36 2.36 0 0 0 3.33 0l5.07-5.07a2.36 2.36 0 0 0 0-3.33l-5.07-5.07a2.36 2.36 0 0 0-3.33 0z" fill="#78FFC7" />
-    <circle cx="13" cy="13" r="4.38" fill="#7D4CCF" />
+    <path d="M11.17 5.63 5.63 11.17a2.58 2.58 0 0 0 0 3.65l5.55 5.55a2.58 2.58 0 0 0 3.65 0l5.55-5.55a2.58 2.58 0 0 0 0-3.65l-5.55-5.55a2.58 2.58 0 0 0-3.65 0z" fill="#78FFC7" />
+    <circle cx="13" cy="13" r="4" fill="#7D4CCF" />
   </svg>
 );
 

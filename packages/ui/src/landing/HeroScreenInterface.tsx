@@ -732,7 +732,12 @@ export function HeroScreenInterface({
         </div>
 
         <div className="hsi-screen__visual" ref={visualRef}>
-          <div className={appShell ? 'hsi hsi--app' : 'hsi'} aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
+          <div
+            className={appShell ? 'hsi hsi--app' : 'hsi'}
+            aria-hidden="true"
+            /* --bz/--ubz: окно карточки компенсирует масштаб интерфейса и рисуется 1:1 */
+            style={boardZoom != null ? ({ zoom: boardZoom, '--bz': boardZoom, '--ubz': 1 / boardZoom } as React.CSSProperties) : undefined}
+          >
             {appShell ? (
               <HsiApp
                 boardTitle={boardTitle}

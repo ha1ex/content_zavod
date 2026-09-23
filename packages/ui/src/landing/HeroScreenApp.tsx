@@ -355,8 +355,10 @@ const APP_CSS = `
   box-shadow:0 2px 12px rgba(45,45,45,.10);font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);font-size:15px;line-height:1.35;letter-spacing:.15px}
 .hsi .app svg{flex:none;display:block}
 /* окно карточки у правого края: на всю высоту под шапкой, как выехавшая панель в продукте */
-.hsi .app__cw{position:absolute;top:108px;right:0;bottom:0;width:560px;display:flex;z-index:5;
-  box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
+/* Окно карточки гасит масштаб интерфейса (--ubz) и рисуется 1:1 — его надо читать.
+   Отступы задаем в единицах интерфейса, домножая на --bz. */
+.hsi .app__cw{position:absolute;zoom:var(--ubz,1);top:calc(108px * var(--bz,1));right:0;bottom:0;
+  width:560px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
   grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;overflow:hidden}

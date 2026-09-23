@@ -195,7 +195,7 @@
                       }
                     ],
                     "checklist": {
-                      "label": "Чек-лист",
+                      "label": "Подготовка презентации",
                       "done": 2,
                       "total": 4
                     },
@@ -204,8 +204,9 @@
                       "#f6c453"
                     ],
                     "extraAssignee": "+1",
-                    "due": "18 сен",
-                    "active": true
+                    "due": "Сегодня",
+                    "active": true,
+                    "dueTone": "orange"
                   },
                   {
                     "title": "Импорт задач из таблиц",
@@ -355,7 +356,8 @@
               "assigneeInitials": [
                 "АК"
               ],
-              "due": "18 сен"
+              "due": "Сегодня",
+              "dueTone": "orange"
             },
             "fromColumn": 1
           },

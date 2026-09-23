@@ -179,15 +179,16 @@ function Tree({ activeLabel }: { activeLabel?: string }) {
 
 /* ─── карточка ───────────────────────────────────────────────────────── */
 /** Аватар-портрет на цветном фоне (вместо фотографий сотрудников). */
-const Avatar = ({ color }: { color: string }) => (
-  <span className="app__av" style={{ background: color }}>
-    <svg viewBox="0 0 28 28" aria-hidden="true">
-      <path d="M5 28c1-5.2 4.6-8 9-8s8 2.8 9 8z" fill="#fff" opacity=".85" />
-      <circle cx="14" cy="12" r="5.2" fill="#f3c9a8" />
-      <path d="M8.6 11.6C8.6 7.9 11 6 14 6s5.4 1.9 5.4 5.6c-1.3-1.8-3.4-2.7-5.4-2.7s-4.1.9-5.4 2.7z" fill="#5d4037" />
-    </svg>
-  </span>
-);
+/** Фото исполнителей — те же, что в окне карточки. Цвет из данных выбирает снимок. */
+const AVATAR_PHOTOS = ['woman-blonde', 'man-orange', 'woman-teal'];
+const Avatar = ({ color }: { color: string }) => {
+  const i = [...color].reduce((sum, ch) => sum + ch.charCodeAt(0), 0) % AVATAR_PHOTOS.length;
+  return (
+    <span className="app__av">
+      <img src={`/brand/avatars/${AVATAR_PHOTOS[i]}.png`} alt="" />
+    </span>
+  );
+};
 
 function TypeIcon({ icon }: { icon: NonNullable<HsiCard['icon']> }) {
   if (icon === 'dot') return <span className="app__dot" />;
@@ -373,7 +374,9 @@ const APP_CSS = `
 .hsi .app__cw>*::-webkit-scrollbar{width:13px}
 .hsi .app__cw>*::-webkit-scrollbar-track{background:#f1f1f1}
 .hsi .app__cw>*::-webkit-scrollbar-thumb{background:#c3c3c3;border-radius:7px;border:3px solid #f1f1f1}
-.hsi .app__cw>*>:first-child{border-right:0;border-bottom:1px solid var(--line)}
+.hsi .app__cw>*>:first-child{border-right:0;border-bottom:0}
+/* подпись «Родительские карточки» — отбита от кнопок режимов «Связей» */
+.hsi .app__cw>*>:first-child>div[class*="mt-3.5"]{margin-top:20px}
 /* поля и лента идут во всю ширину панели — держим одинаковые поля по бокам */
 .hsi .app__cw>*>*{padding-left:24px;padding-right:24px}
 /* подпись под именем файла — на 2px ниже */
@@ -426,6 +429,8 @@ const APP_CSS = `
 /* плашки «Материал» и «Маркетинг» — пошире (чип «Ответственный» не трогаем:
    у него аватарка прижата к левой кромке) */
 .hsi .app__cw dl dd span[class*="px-2.5"]{padding-left:12px;padding-right:12px}
+/* чип «Ответственный»: аватарка прижата слева, справа тексту нужен воздух */
+.hsi .app__cw dl dd span[class*="pl-0.5"]{padding-right:12px}
 /* плашка статуса «На согласовании» — пошире */
 .hsi .app__cw>*>:first-child>.mt-3>span[class*="px-4"]{padding-left:15px;padding-right:15px}
 /* шапка */
@@ -529,6 +534,7 @@ const APP_CSS = `
 .hsi .app__avs{display:flex;align-items:center;gap:7px}
 .hsi .app__av{width:28px;height:28px;border-radius:50%;overflow:hidden;display:inline-flex;box-shadow:0 0 0 1.5px #c792d8}
 .hsi .app__av svg{width:28px;height:28px}
+.hsi .app__av img{width:28px;height:28px;object-fit:cover;display:block}
 .hsi .app__plus{font-size:13.5px;color:#666;margin-left:1px;letter-spacing:.3px}
 .hsi .app__badges{display:flex;gap:4px}
 .hsi .app__due{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:500;color:#9e9e9e;letter-spacing:.6px}

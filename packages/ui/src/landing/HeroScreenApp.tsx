@@ -355,14 +355,14 @@ const APP_CSS = `
   box-shadow:0 2px 12px rgba(45,45,45,.10);font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);font-size:15px;line-height:1.35;letter-spacing:.15px}
 .hsi .app svg{flex:none;display:block}
 /* окно карточки у правого края: на всю высоту под шапкой, как выехавшая панель в продукте */
-/* Окно карточки гасит масштаб интерфейса (--ubz) и рисуется крупнее доски,
-   но не в полный рост: --cw-k — доля от 1:1. Раскладка внутри считается от
-   width, поэтому она остается эталонной, а на экран окно выходит уже.
-   Отступ сверху переводим в единицы интерфейса: * --bz / --cw-k. */
+/* Окно карточки крупнее доски в --cw-k раз и масштабируется ВМЕСТЕ с ней:
+   zoom задан относительно интерфейса, а не экрана, поэтому на узких
+   ширинах окно ужимается пропорционально. Раскладка внутри считается от width.
+   Отступы делим на --cw-k, чтобы остались в единицах интерфейса. */
 /* карточка, открытая в окне справа, подсвечена фиолетовой обводкой */
 .hsi .app__card.is-open{border-color:#7d4ccf}
-.hsi .app__cw{--cw-k:.78;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
-  top:calc(108px * var(--bz,1) / var(--cw-k));right:calc(57px * var(--bz,1) / var(--cw-k));bottom:0;
+.hsi .app__cw{--cw-k:1.232;position:absolute;zoom:var(--cw-k);
+  top:calc(108px / var(--cw-k));right:calc(57px / var(--cw-k));bottom:0;
   width:486px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
@@ -401,7 +401,7 @@ const APP_CSS = `
    у него аватарка прижата к левой кромке) */
 .hsi .app__cw dl dd span[class*="px-2.5"]{padding-left:12px;padding-right:12px}
 /* плашка статуса «На согласовании» — пошире */
-.hsi .app__cw>*>:first-child>.mt-3>span[class*="px-4"]{padding-left:22px;padding-right:22px}
+.hsi .app__cw>*>:first-child>.mt-3>span[class*="px-4"]{padding-left:15px;padding-right:15px}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

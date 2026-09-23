@@ -369,11 +369,15 @@ const APP_CSS = `
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
   grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;
-  overflow-y:scroll;overflow-x:hidden}
-/* полоса прокрутки у правой кромки окна — контент длиннее панели */
-.hsi .app__cw>*::-webkit-scrollbar{width:13px}
-.hsi .app__cw>*::-webkit-scrollbar-track{background:#f1f1f1}
-.hsi .app__cw>*::-webkit-scrollbar-thumb{background:#c3c3c3;border-radius:7px;border:3px solid #f1f1f1}
+  overflow:hidden;animation:cw-scroll 16s cubic-bezier(.45,0,.2,1) 3s forwards}
+/* Карточка стоит 3 секунды, потом медленно уезжает вниз до конца ленты. */
+@keyframes cw-scroll{from{transform:translateY(0)}to{transform:translateY(-721px)}}
+/* Полоса прокрутки нарисована на панели, бегунок едет в такт с контентом. */
+.hsi .app__cw::before{content:'';position:absolute;top:0;right:0;bottom:0;width:13px;background:#f1f1f1;z-index:6}
+.hsi .app__cw::after{content:'';position:absolute;right:3px;top:0;width:7px;height:50%;border-radius:7px;background:#c3c3c3;z-index:7;
+  animation:cw-thumb 16s cubic-bezier(.45,0,.2,1) 3s forwards}
+@keyframes cw-thumb{from{top:0}to{top:50%}}
+@media(prefers-reduced-motion:reduce){.hsi .app__cw>*,.hsi .app__cw::after{animation:none}}
 .hsi .app__cw>*>:first-child{border-right:0;border-bottom:0}
 /* подпись «Родительские карточки» — отбита от кнопок режимов «Связей» */
 .hsi .app__cw>*>:first-child>div[class*="mt-3.5"]{margin-top:20px}
@@ -431,6 +435,8 @@ const APP_CSS = `
 .hsi .app__cw dl dd span[class*="px-2.5"]{padding-left:12px;padding-right:12px}
 /* чип «Ответственный»: аватарка прижата слева, справа тексту нужен воздух */
 .hsi .app__cw dl dd span[class*="pl-0.5"]{padding-right:12px}
+/* плашка метки — повыше, вровень с чипом типа */
+.hsi .app__cw dl dd span[class*="f8bbd0"]{height:20px;padding-top:0;padding-bottom:0}
 /* плашка статуса «На согласовании» — пошире */
 .hsi .app__cw>*>:first-child>.mt-3>span[class*="px-4"]{padding-left:15px;padding-right:15px}
 /* шапка */

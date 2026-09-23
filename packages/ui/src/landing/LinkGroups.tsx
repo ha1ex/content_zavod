@@ -19,6 +19,11 @@ export interface LinkGroupsProps {
    * на десктопе три колонки «группа · мок · группа», ниже — мок над ссылками.
    */
   centerMockVariant?: MockVariant;
+  /**
+   * Место мока на десктопе: `first` (по умолчанию) — слева от обеих групп,
+   * `center` — между группами «группа · мок · группа». Ниже 1280px мок всегда над ссылками.
+   */
+  mockPosition?: 'first' | 'center';
 }
 
 /**
@@ -26,8 +31,9 @@ export interface LinkGroupsProps {
  * с колонками ссылок, у каждой колонки подпись группы. Для перелинковки на
  * соседние страницы продукта («Больше возможностей»: функции и модули).
  */
-export function LinkGroups({ eyebrow, title, description, groups, centerMockVariant }: LinkGroupsProps) {
+export function LinkGroups({ eyebrow, title, description, groups, centerMockVariant, mockPosition = 'first' }: LinkGroupsProps) {
   const withMock = Boolean(centerMockVariant) && groups.length === 2;
+  const mockCenter = withMock && mockPosition === 'center';
   return (
     <section className="w-full">
       <div className="mx-auto w-full max-w-(--container-kaiten) px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24">
@@ -51,12 +57,17 @@ export function LinkGroups({ eyebrow, title, description, groups, centerMockVari
           className={cn(
             'grid w-full grid-cols-[minmax(0,1fr)] gap-8 md:grid-cols-2 md:gap-10',
             withMock
-              ? 'xl:grid-cols-[minmax(0,1fr)_max-content_max-content] xl:items-center xl:gap-12'
+              ? cn(
+                  mockCenter
+                    ? 'xl:grid-cols-[max-content_minmax(0,1fr)_max-content]'
+                    : 'xl:grid-cols-[minmax(0,1fr)_max-content_max-content]',
+                  'xl:items-center xl:gap-12',
+                )
               : 'rounded-(--radius-3xl) bg-(--color-surface-card) p-6 md:p-10 lg:px-16 lg:py-12',
           )}
         >
           {groups.map((g, gi) => (
-            <div key={g.title} className={cn(withMock && (gi === 0 ? 'xl:order-2' : 'xl:order-3'))}>
+            <div key={g.title} className={cn(withMock && (gi === 0 ? (mockCenter ? 'xl:order-1' : 'xl:order-2') : 'xl:order-3'))}>
               <p data-comp={`link_groups.groups[${gi}].title`} className="mb-4 text-sm font-medium uppercase text-(--color-text-accent)">
                 {g.title}
               </p>
@@ -85,7 +96,7 @@ export function LinkGroups({ eyebrow, title, description, groups, centerMockVari
           ))}
           {withMock && (
             // до 1280px мок над ссылками на всю ширину, шире — слева, группы ссылок справа
-            <div data-comp="link_groups.centerMockVariant" className="order-first mx-auto w-full min-w-0 max-w-[560px] md:col-span-2 xl:order-1 xl:col-span-1 xl:max-w-none">
+            <div data-comp="link_groups.centerMockVariant" className={cn("order-first mx-auto w-full min-w-0 max-w-[560px] md:col-span-2 xl:col-span-1 xl:max-w-none", mockCenter ? 'xl:order-2' : 'xl:order-1')}>
               <MockVisual variant={centerMockVariant} />
             </div>
           )}

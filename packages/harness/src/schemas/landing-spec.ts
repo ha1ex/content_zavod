@@ -126,6 +126,7 @@ export const AssetRefSchema = z.object({
       'task-card-full',
       'window-card',
       'window-ticket-modal',
+      'window-ticket-modal-origin',
       'card-checklist-relations',
       'platform-slider',
       'modules-collage',
@@ -137,6 +138,8 @@ export const AssetRefSchema = z.object({
       'workspace-view-table',
       'workspace-view-timeline',
       'workspace-view-calendar',
+      'kaiten-calendar',
+      'api-docs',
       'workspace-view-reports',
       'workspace-spaces',
       'workspace-access',
@@ -147,10 +150,16 @@ export const AssetRefSchema = z.object({
       'scrum-board-wide',
 
       'module-boards',
+      'module-workspace-board',
+      'module-boards-origin',
 
       'admin-space',
 
       'laptop-boards',
+
+      'tablet-boards',
+
+      'tablet-team-board',
       'window-project-modal',
       'tile-recurring-tasks',
       'tile-notifications',
@@ -190,7 +199,9 @@ const HeroBoardCardSchema = z.object({
     .array(
       z.object({
         label: z.string().max(24),
-        variant: z.enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud']).optional(),
+        variant: z
+          .enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud', 'peach', 'lime', 'pink', 'sky'])
+          .optional(),
       }),
     )
     .max(3)
@@ -201,8 +212,26 @@ const HeroBoardCardSchema = z.object({
   /** Цвета аватаров-исполнителей (hex). Декоративны. */
   /** Мини-счетчики карточки: вложения, комментарии, дочерние карточки. */
   counters: z
-    .object({ attachments: z.number().optional(), comments: z.number().optional(), children: z.number().optional() })
+    .object({
+      attachments: z.number().optional(),
+      comments: z.number().optional(),
+      children: z.number().optional(),
+      childrenDone: z.number().optional(),
+    })
     .optional(),
+  /* Поля ниже рисуются только в режиме appShell (интерфейс Кайтена целиком). */
+  /** Цветная полоска-тип над заголовком карточки (hex). */
+  accent: z.string().max(16).optional(),
+  /** Иконка типа карточки справа от заголовка. */
+  icon: z.enum(['dot', 'doc', 'folder', 'chart']).optional(),
+  /** Заливка срока: красная (просрочено/скоро) или оранжевая (сегодня). */
+  dueTone: z.enum(['red', 'orange']).optional(),
+  /** Бейдж «Срочно». */
+  urgent: z.boolean().optional(),
+  /** Красная плашка блокировки над карточкой. */
+  blocker: z.string().max(60).optional(),
+  /** Родительская карточка — рамка над заголовком. */
+  parent: z.string().max(60).optional(),
   assignees: z.array(z.string()).max(4).optional(),
   /** Буквы внутри аватаров — по порядку assignees. */
   assigneeInitials: z.array(z.string().max(3)).max(4).optional(),
@@ -241,6 +270,10 @@ const HeroBoardSchema = z.object({
   sidebar: z.boolean().optional(),
   /** Окно открытой карточки задачи поверх правого края доски. */
   cardWindow: z.boolean().optional(),
+  /** Полный интерфейс Кайтена вокруг доски: шапка, рельсы, «Дерево», панель видов. */
+  appShell: z.boolean().optional(),
+  /** Название пространства в шапке (при appShell). */
+  spaceTitle: z.string().max(60).optional(),
 });
 
 /* ─── Форма регистрации (слот hero + секция RegistrationCta) ───────── */
@@ -1063,6 +1096,7 @@ const MediaCopySchema = z.object({
       'task-card-full',
       'window-card',
       'window-ticket-modal',
+      'window-ticket-modal-origin',
       'card-checklist-relations',
       'platform-slider',
       'modules-collage',
@@ -1074,6 +1108,8 @@ const MediaCopySchema = z.object({
       'workspace-view-table',
       'workspace-view-timeline',
       'workspace-view-calendar',
+      'kaiten-calendar',
+      'api-docs',
       'workspace-view-reports',
       'workspace-spaces',
       'workspace-access',
@@ -1084,10 +1120,16 @@ const MediaCopySchema = z.object({
       'scrum-board-wide',
 
       'module-boards',
+      'module-workspace-board',
+      'module-boards-origin',
 
       'admin-space',
 
       'laptop-boards',
+
+      'tablet-boards',
+
+      'tablet-team-board',
       'window-project-modal',
       'tile-recurring-tasks',
       'tile-notifications',
@@ -1560,6 +1602,7 @@ export const MockVariantSchema = z.enum([
 'task-card-full',
 'window-card',
 'window-ticket-modal',
+'window-ticket-modal-origin',
 'card-checklist-relations',
 'platform-slider',
 'modules-collage',
@@ -1572,6 +1615,8 @@ export const MockVariantSchema = z.enum([
 'workspace-view-table',
 'workspace-view-timeline',
 'workspace-view-calendar',
+'kaiten-calendar',
+'api-docs',
 'workspace-view-reports',
 'workspace-spaces',
 'workspace-access',
@@ -1582,10 +1627,16 @@ export const MockVariantSchema = z.enum([
 'scrum-board-wide',
 
 'module-boards',
+'module-workspace-board',
+'module-boards-origin',
 
 'admin-space',
 
 'laptop-boards',
+
+'tablet-boards',
+
+'tablet-team-board',
 'window-project-modal',
 'tile-recurring-tasks',
 'tile-notifications',
@@ -1749,6 +1800,7 @@ const LinkGroupsSchema = z.object({
       .min(1)
       .max(4),
     centerMockVariant: MockVariantSchema.optional().describe('мок интерфейса между двумя группами ссылок'),
+    mockPosition: z.enum(['first', 'center']).optional().describe('место мока на десктопе: first — слева от групп, center — между группами'),
   }),
 });
 

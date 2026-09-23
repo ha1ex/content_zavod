@@ -38,7 +38,7 @@ export function CardChecklistRelationsMock() {
         <OutlineButton>Скрыть отмеченные</OutlineButton>
       </div>
 
-      <ul className="mt-3 space-y-3 pl-[34px]">
+      <ul className="mt-3 space-y-3 pl-6">
         {ITEMS.map(([text, done]) => (
           <li key={text} className="flex items-center gap-4 text-[15px]">
             <span

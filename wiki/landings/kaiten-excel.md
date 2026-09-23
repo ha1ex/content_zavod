@@ -2,7 +2,7 @@
 slug: kaiten-excel
 type: landing
 created: 2026-09-18
-updated: 2026-09-22
+updated: 2026-09-23
 status: draft
 brief: content/briefs/kaiten-excel.json
 archetype: saas_landing
@@ -172,7 +172,7 @@ stale: false
 - **Score:** 74.55 / 100 (threshold 70) — ✅ pass
 - **Resolved segments:** IT
 - **CTA types detected:** Trial
-- **Generated:** 2026-09-22T11:13:38.539Z
+- **Generated:** 2026-09-23T06:51:58.290Z
 
 ## Breakdown
 

@@ -318,9 +318,10 @@ export function MediaCopy({
         {/*
           Акцент в начале заголовка — это метка-нумератор («Шаг 1»), а не
           выделенное слово внутри фразы: отбиваем его от остального текста,
-          чтобы номер читался отдельным элементом.
+          чтобы номер читался отдельным элементом. Нумератор всегда с цифрой —
+          обычная фраза в начале («API и вебхуки») идёт в строку без отбивки.
         */}
-        {accentWord && title.startsWith(accentWord) ? (
+        {accentWord && title.startsWith(accentWord) && /\d/.test(accentWord) ? (
           <>
             <span className={cn('text-(--color-text-accent)', accentBreak ? 'mb-1 block' : 'mr-2')}>
               {accentWord}

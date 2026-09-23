@@ -272,3 +272,26 @@ export function LaptopBoardTreeMock() {
     </div>
   );
 }
+
+/**
+ * Mock планшета (iPad, альбомная ориентация, flat-white) с тем же экраном:
+ * канбан-доски производства и дерево разделов. Рамка как у TabletKanbanMock —
+ * ровный белый безель, фронтальная камера, мягкая внешняя и внутренняя тень.
+ */
+export function TabletBoardTreeMock() {
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        'relative h-[500px] w-[760px] overflow-hidden rounded-[28px] border-[8px] border-white bg-(--color-surface-card)',
+        'shadow-[0_0_44px_-16px_rgba(45,45,45,0.20)]',
+      )}
+    >
+      {/* front camera */}
+      <span className="absolute left-1/2 top-1 z-30 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-(--color-border-default)" />
+      <BoardTreeScreen />
+      {/* внутренняя тень по рамке */}
+      <div className="pointer-events-none absolute inset-0 z-20 rounded-[20px] shadow-[inset_0_0_6px_0_rgba(0,0,0,0.1)]" />
+    </div>
+  );
+}

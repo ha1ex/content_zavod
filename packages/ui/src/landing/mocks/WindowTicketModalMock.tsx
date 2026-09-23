@@ -225,8 +225,8 @@ const PRESENTATION_CHECKLIST: [string, boolean][] = [
 
 function PresentationColumn() {
   return (
-    <div className="border-r border-(--color-border-default) p-5">
-      <h3 className="text-xl font-semibold leading-snug text-(--color-text-primary)">
+    <div className="border-r border-(--color-border-default) py-5 pl-7 pr-5">
+      <h3 className="text-xl font-normal leading-snug text-(--color-text-primary)">
         Подготовить презентацию для клиента
       </h3>
       <div className="mt-1.5 text-sm text-(--color-text-secondary)">
@@ -235,22 +235,26 @@ function PresentationColumn() {
       </div>
 
       {/* toolbar */}
-      <div className="mt-3 flex items-center gap-2">
+      <div className="relative mt-3 flex items-center gap-2 [&>span:not(:first-child)]:relative">
+        {/* серая линия по центру за кнопками, как в продукте */}
+        <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-(--color-border-default)" />
         <TBtn primary>
           <PlusIcon />
         </TBtn>
-        <span className="mx-2 h-px flex-1 bg-(--color-border-default)" />
+        <span className="mx-2 flex-1" />
         <TBtn>
           <PlayIcon />
         </TBtn>
         <TPill>НА СОГЛАСОВАНИИ</TPill>
         <TBtn>
-          <b className="text-base leading-none">!</b>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="10.4" y="3.3" width="3.2" height="11.4" rx="1.6" /><circle cx="12" cy="18.9" r="1.85" /></svg>
         </TBtn>
         <TBtn>
           <ShareIcon />
         </TBtn>
-        <TBtn>⋮</TBtn>
+        <TBtn>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5.5" r="1.9" /><circle cx="12" cy="12" r="1.9" /><circle cx="12" cy="18.5" r="1.9" /></svg>
+        </TBtn>
       </div>
 
       {/* params */}
@@ -269,10 +273,10 @@ function PresentationColumn() {
         <Row label="Участники">
           <span className="inline-flex items-center gap-1.5">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-(--color-surface-section) py-0.5 pl-0.5 pr-2.5 text-xs">
-              <span className="h-5 w-5 rounded-full bg-[#9fc3e8]" /> Ответственный
+              <img src="/brand/avatars/woman-blonde.png" alt="" className="h-5 w-5 rounded-full object-cover" /> Ответственный
             </span>
-            <span className="h-5 w-5 rounded-full bg-[#f4a37b]" />
-            <span className="h-5 w-5 rounded-full bg-[#8fd3c7]" />
+            <img src="/brand/avatars/man-orange.png" alt="" className="h-5 w-5 rounded-full object-cover" />
+            <img src="/brand/avatars/woman-teal.png" alt="" className="h-5 w-5 rounded-full object-cover" />
             <span className="text-lg text-(--color-text-secondary)">+</span>
           </span>
         </Row>
@@ -285,14 +289,14 @@ function PresentationColumn() {
       </dl>
 
       {/* description */}
-      <Section icon={<LinesIcon />} title="Описание" />
+      <Section icon={<LinesIcon />} title="Описание" chevron />
       <p className="mt-2 text-[13px] leading-snug text-(--color-text-primary)">
         Подготовить презентацию услуг для встречи с новым клиентом: как команда организует работу
         и контролирует сроки
       </p>
 
       {/* files */}
-      <Section icon={<ClipIcon />} title="Файлы" />
+      <Section icon={<ClipIcon />} title="Файлы" chevron />
       <div className="mt-2.5 flex items-center gap-3">
         <span className="inline-flex h-10 w-12 shrink-0 items-center justify-center rounded-md bg-(--color-surface-section) text-xs font-semibold text-(--color-text-secondary)">
           MD
@@ -306,13 +310,18 @@ function PresentationColumn() {
       </div>
 
       {/* checklist */}
-      <Section icon={<CheckListIcon />} title="Подготовка презентации" />
-      <div className="mt-2 flex items-center gap-2.5 text-[11px] text-(--color-text-secondary)">
-        50%
-        <span className="h-1 flex-1 overflow-hidden rounded-full bg-(--color-surface-section)">
-          <span className="block h-full w-1/2 rounded-full bg-(--color-action-primary)" />
+      <Section icon={<CheckListIcon />} title="Подготовка презентации" chevron />
+      <div className="mt-2 flex items-center gap-2.5">
+        <span className="text-[10px] text-[#616161]">50%</span>
+        <span className="relative h-1 flex-1 rounded-full bg-[#e1bee7]">
+          <span className="absolute inset-y-0 left-0 w-1/2 rounded-full bg-[#9c27b0]" />
         </span>
-        2/4
+        <span className="text-[10px] text-[#616161]">
+          <span className="text-[#43a047]">2</span>/4
+        </span>
+        <span className="inline-flex h-6 items-center rounded-[4px] border border-[#bdbdbd] px-2 text-[10px] font-medium uppercase tracking-[0.02em] text-[#212121]">
+          Скрыть отмеченные
+        </span>
       </div>
       <ul className="mt-2 space-y-1.5">
         {PRESENTATION_CHECKLIST.map(([text, done]) => (
@@ -330,18 +339,67 @@ function PresentationColumn() {
         ))}
       </ul>
 
-      {/* relations */}
-      <div className="mt-4 flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 text-[13px] font-medium text-(--color-text-primary)">
-          <RelationIcon /> Связи
+      {/* relations — как в продукте: шеврон, иконка связей, фильтр и фиолетовая группа кнопок */}
+      <div className="-ml-[13px] mt-4 flex items-center gap-2">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#424242" strokeWidth="2.5" style={{ marginRight: -5 }}>
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#212121">
+          <circle cx="12" cy="5" r="2.6" />
+          <circle cx="5" cy="19" r="2.6" />
+          <circle cx="19" cy="19" r="2.6" />
+          <path d="M11 7h2v4l5.5 5.5-1.4 1.4L12 12.8l-5.1 5.1-1.4-1.4L11 11z" />
+        </svg>
+        <span className="text-[13px] font-medium text-(--color-text-primary)">Связи</span>
+        <span className="ml-auto flex items-center gap-3">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#616161">
+            <path d="M3 6h18v2H3zM6 11h12v2H6zM10 16h4v2h-4z" />
+          </svg>
+          <span className="flex h-6 overflow-hidden rounded-[4px] bg-[#9c27b0] shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+            <span className="flex w-8 items-center justify-center text-white">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" strokeLinecap="round" />
+              </svg>
+            </span>
+            <span className="flex w-8 items-center justify-center border-l border-white/25">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff">
+                <path d="M4 6l8 6-8 6zM12 6l8 6-8 6z" />
+              </svg>
+            </span>
+            <span className="flex w-8 items-center justify-center border-l border-white/25">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3">
+                <path d="M5 12l5 5 9-10" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </span>
         </span>
-        <RelationToggle />
       </div>
-      <div className="mt-2.5 text-[13px] text-(--color-text-secondary)">Дочерние карточки</div>
-      <div className="mt-2 flex items-center justify-between rounded-(--radius-lg) border border-(--color-border-default) px-3 py-1.5">
+      <div className="mt-2.5 flex items-center justify-between">
+        <span className="text-[13px] text-(--color-text-secondary)">Дочерние карточки</span>
+        <span className="inline-flex h-6 items-center gap-2 rounded-[4px] border border-[#bdbdbd] px-2.5 text-xs text-[#212121]">
+          Список
+          <svg width="8" height="5" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="#616161" /></svg>
+        </span>
+      </div>
+      {/* дочерняя карточка — как строка в продукте: метки, связи, срок, исполнитель, тип и время */}
+      <div className="relative mt-2 flex h-8 items-center rounded-[4px] border border-[#e0e0e0] px-2.5">
+        <span className="absolute left-2 top-0 h-[2px] w-9 rounded-b-full bg-[#f8bbd0]" />
         <span className="text-xs text-(--color-text-primary)">Подготовить дизайн слайдов</span>
-        <span className="inline-flex h-5 items-center gap-1 rounded-md bg-[#e57373] px-1.5 text-[11px] font-medium leading-none text-white [&_svg]:h-3 [&_svg]:w-3">
-          <CalIcon /> 20 сент.
+        <span className="ml-auto flex items-center gap-2 text-[11px] text-[#9e9e9e]">
+          <span className="inline-flex items-center gap-0.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#9e9e9e"><path d="M3 7a2 2 0 012-2h10l6 7-6 7H5a2 2 0 01-2-2z" /></svg> 1
+          </span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#9e9e9e">
+            <circle cx="12" cy="5" r="2.6" /><circle cx="5" cy="19" r="2.6" /><circle cx="19" cy="19" r="2.6" />
+            <path d="M11 7h2v4l5.5 5.5-1.4 1.4L12 12.8l-5.1 5.1-1.4-1.4L11 11z" />
+          </svg>
+          <span className="inline-flex h-[18px] items-center gap-0.5 rounded-[4px] bg-[#e57373] px-1 font-semibold leading-none text-white">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fff"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h2zM5 10v10h14V10zm2 2h5v5H7z" /></svg> 20 сент.
+          </span>
+          <span className="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#efe9f9] text-[9px] font-semibold leading-none text-[#7d4ccf]">А</span>
+          <svg width="15" height="15" viewBox="0 0 24 24"><path d="M3 6.5A1.5 1.5 0 014.5 5h4.2l2 2h8.8A1.5 1.5 0 0121 8.5v9a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 17.5z" fill="#42a5f5" /></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#757575" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" /></svg>
         </span>
       </div>
     </div>
@@ -351,9 +409,9 @@ function PresentationColumn() {
 function PresentationComments() {
   return (
     <div className="flex flex-col bg-(--color-surface-card) p-4">
-      <div className="flex-1 rounded-[8px] border border-(--color-border-default) p-4">
+      <div className="flex-1 py-4">
         {/* вкладки панели, как в продукте: «Комментарии» активна, рядом «Спросить ИИ» */}
-        <div className="-mx-4 -mt-4 mb-3 grid grid-cols-2 border-b border-(--color-border-default) text-[11px] font-medium uppercase tracking-[0.02em]">
+        <div className="-mt-4 mb-3 grid grid-cols-2 border-b border-(--color-border-default) text-[11px] font-medium uppercase tracking-[0.02em]">
           <span className="relative flex h-10 items-center justify-center gap-1.5 text-[#9c27b0]">
             <CommentTabIcon /> Комментарии
             <span className="absolute inset-x-0 -bottom-px h-0.5 bg-[#9c27b0]" />
@@ -369,11 +427,19 @@ function PresentationComments() {
             <svg width="8" height="5" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="#424242" /></svg>
           </span>
         </div>
-        <div className="flex items-center gap-2.5 rounded-(--radius-xl) border border-(--color-border-default) px-3 py-2.5 text-sm text-(--color-text-secondary)">
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#efe9f9] text-[11px] font-semibold leading-none text-[#7d4ccf]">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#efe9f9] text-[11px] font-semibold leading-none text-[#7d4ccf]">
             З
           </span>
+          <div className="flex h-8 flex-1 items-center rounded-[6px] border border-(--color-border-default) px-3 text-sm text-(--color-text-secondary)">
+          
           Напишите комментарий
+        </div>
+          <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-(--color-border-default) text-[#757575]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-3.1A7 7 0 0019 11z" />
+            </svg>
+          </span>
         </div>
         <div className="mt-4 space-y-3.5">
           {PRESENTATION_COMMENTS.map((c, i) => (
@@ -611,9 +677,15 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
-function Section({ icon, title }: { icon: React.ReactNode; title: string }) {
+function Section({ icon, title, chevron }: { icon: React.ReactNode; title: string; chevron?: boolean }) {
   return (
-    <div className="mt-4 flex items-center gap-2 text-[13px] font-medium text-(--color-text-primary)">
+    // шеврон висит слева от колонки, как в продукте: иконка раздела на линии текста
+    <div className={`mt-4 flex items-center gap-2 text-[13px] font-medium text-(--color-text-primary)${chevron ? ' -ml-[13px]' : ''}`}>
+      {chevron && (
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#424242" strokeWidth="2.5" style={{ marginRight: -5 }}>
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
       {icon} {title}
     </div>
   );
@@ -677,7 +749,7 @@ function TBtn({ children, primary }: { children: React.ReactNode; primary?: bool
 }
 function TPill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex h-9 items-center gap-1.5 rounded-full border border-(--color-border-default) bg-(--color-surface-card) px-4 text-xs font-medium text-(--color-text-primary)">
+    <span className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-(--color-border-default) bg-(--color-surface-card) px-4 text-xs font-medium text-(--color-text-primary)">
       <ArrowRightIcon />
       {children}
     </span>

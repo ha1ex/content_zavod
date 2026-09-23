@@ -49,21 +49,30 @@ const COLUMNS: { name: string; cards: { title: string; tag: [string, Tone]; who:
   },
 ];
 
-const MENU: { section: string; items: { icon: string; label: string; active?: boolean }[] }[] = [
+/* Material Icons (24×24, заливка) — как в меню «+» продукта. */
+const MI = {
+  space: 'M9 21H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h4v18zm2 0h8c1.1 0 2-.9 2-2v-7H11v9zm10-11V5c0-1.1-.9-2-2-2h-8v7h10z',
+  storyMap: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z',
+  doc: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z',
+  folder: 'M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z',
+  importExport: 'M9 3 5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z',
+};
+
+const MENU: { section: string; items: { icon: string; label: string }[] }[] = [
   {
     section: 'Добавить',
     items: [
-      { icon: 'LayoutDashboard', label: 'Пространство', active: true },
-      { icon: 'ChartColumn', label: 'Story map' },
-      { icon: 'FileText', label: 'Документ' },
-      { icon: 'Folder', label: 'Папку' },
+      { icon: MI.space, label: 'Пространство' },
+      { icon: MI.storyMap, label: 'Story map' },
+      { icon: MI.doc, label: 'Документ' },
+      { icon: MI.folder, label: 'Папку' },
     ],
   },
   {
     section: 'Импортировать',
     items: [
-      { icon: 'ChartColumn', label: 'Story map' },
-      { icon: 'ArrowDownUp', label: 'Импортировать' },
+      { icon: MI.storyMap, label: 'Story map' },
+      { icon: MI.importExport, label: 'Импортировать' },
     ],
   },
 ];
@@ -71,7 +80,7 @@ const MENU: { section: string; items: { icon: string; label: string; active?: bo
 /**
  * Window: создание пространства в Kaiten. На заднем плане — приложение:
  * дерево пространств и документов слева, доска «Маркетинг» справа. Поверх —
- * выпадающее меню кнопки «+» с подсвеченным пунктом «Пространство».
+ * выпадающее меню кнопки «+»: «Добавить» и «Импортировать», как в продукте.
  * Реконструкция экрана Kaiten упрощённым мокапом, дизайн-ширина 640px.
  */
 export function WorkspaceCreateMock() {
@@ -152,20 +161,16 @@ export function WorkspaceCreateMock() {
         </div>
       </div>
 
-      {/* выпадающее меню кнопки «+» */}
-      <div className="absolute left-[166px] top-[108px] z-10 w-[164px] rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-card) py-1.5 shadow-[0_12px_32px_-12px_rgba(45,45,45,0.35)]">
+      {/* выпадающее меню кнопки «+»: как в продукте — серые заливные иконки, группы без разделителя */}
+      <div className="absolute left-[166px] top-[108px] z-10 w-[164px] rounded-(--radius-lg) bg-(--color-surface-card) py-1.5 shadow-[0_2px_4px_-1px_rgba(0,0,0,0.2),0_4px_5px_0_rgba(0,0,0,0.14),0_1px_10px_0_rgba(0,0,0,0.12)]">
         {MENU.map((g, gi) => (
-          <div key={g.section} className={cn(gi > 0 && 'mt-1 border-t border-(--color-border-default) pt-1')}>
-            <div className="px-3 py-1.5 text-[11px] font-medium text-(--color-text-secondary)">{g.section}</div>
+          <div key={g.section} className={cn(gi > 0 && 'mt-1')}>
+            <div className="px-3 pb-1 pt-1.5 text-[11.5px] font-medium text-[#757575]">{g.section}</div>
             {g.items.map((it) => (
-              <div
-                key={g.section + it.label}
-                className={cn(
-                  'flex items-center gap-2.5 px-3 py-1.5 text-[12px]',
-                  it.active ? 'bg-(--color-action-primary-soft) font-medium text-(--color-text-accent)' : 'text-(--color-text-primary)',
-                )}
-              >
-                <Icon name={it.icon} className={cn('h-4 w-4', it.active ? 'text-(--color-text-accent)' : 'text-(--color-text-secondary)')} strokeWidth={2} />
+              <div key={g.section + it.label} className="flex items-center gap-3 px-3 py-[5px] text-[12px] text-[#212121]">
+                <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="#616161" aria-hidden="true">
+                  <path d={it.icon} />
+                </svg>
                 {it.label}
               </div>
             ))}

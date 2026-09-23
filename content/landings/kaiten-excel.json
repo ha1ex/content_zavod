@@ -233,7 +233,7 @@
         "flushTop": true,
         "titleSize": "xsmall",
         "mediaAlt": "Карточка задачи Кайтена: параметры, описание, чек-лист, файлы и обсуждение с командой",
-        "mediaVariant": "window-ticket-modal"
+        "mediaVariant": "window-ticket-modal-origin"
       }
     },
     {
@@ -409,7 +409,7 @@
       "packages/harness/src/prompts/section-mock-skill.md",
       "wiki/layouts/index.md"
     ],
-    "generatedAt": "2026-09-22T11:13:38.553Z",
+    "generatedAt": "2026-09-23T06:51:58.611Z",
     "generator": "host-agent",
     "archetype": "saas_landing",
     "layout": "migration-from-competitor",

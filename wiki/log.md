@@ -771,3 +771,21 @@ Append-only хроника операций harness'а. Формат запис�
 ## [2026-09-22 14:12] generate | kaiten-excel | ok | agent-ingest archetype=saas_landing sections=18 errors=0 audienceScore=74.55/70
 
 ## [2026-09-22 14:13] generate | kaiten-excel | ok | agent-ingest archetype=saas_landing sections=18 errors=0 audienceScore=74.55/70
+
+## [2026-09-22 15:05] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=72.45/70
+
+## [2026-09-22 15:35] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=72.45/70
+
+## [2026-09-22 15:38] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=72.45/70
+
+## [2026-09-22 15:41] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=72.45/70
+
+## [2026-09-22 16:00] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=72.45/70
+
+## [2026-09-22 16:00] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=72.45/70
+
+## [2026-09-22 16:04] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=69.12/70
+
+## [2026-09-22 16:06] generate | kaiten-integrations-v2 | ok | agent-ingest archetype=saas_landing sections=8 errors=0 audienceScore=69.12/70
+
+## [2026-09-23 09:51] generate | kaiten-excel | ok | agent-ingest archetype=saas_landing sections=18 errors=0 audienceScore=74.55/70

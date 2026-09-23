@@ -8,7 +8,7 @@ const TAG: Record<'violet' | 'green' | 'yellow', [string, string]> = {
   yellow: ['#faf1cf', '#8a6a00'],
 };
 const DUE: Record<'red' | 'green' | 'gray', [string, string, string]> = {
-  red: ['#d9594e', '#ffffff', '#ffffff'],
+  red: ['#f0443a', '#ffffff', '#ffffff'],
   green: ['#2e9e5b', '#ffffff', '#ffffff'],
   gray: ['#ececee', '#6b6b70', '#9a9a9e'],
 };

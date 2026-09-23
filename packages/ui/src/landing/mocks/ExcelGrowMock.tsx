@@ -5,8 +5,7 @@ import { cn } from '../../primitives/cn';
  * ExcelGrowMock (`excel-grow`) — таблица задач в Excel, которая растет без конца.
  *
  * Блок «Excel хранит данные. Кайтен помогает управлять работой»: аккуратный файл
- * постепенно превращается в бесконечный список — строки едут вверх (чистый CSS
- * @keyframes, 18с, уважает prefers-reduced-motion), внизу кадр растворяется,
+ * превращается в бесконечный список — статичный первый кадр, внизу кадр растворяется,
  * в подвале множатся листы. Это визуальный аргумент «потолка таблицы», поэтому
  * оформление намеренно не кайтеновское: серая сетка, зеленая шапка файла.
  */
@@ -16,22 +15,25 @@ type Row = {
   who: string;
   due: string;
   status: 'В работе' | 'Готово' | 'Не начата' | 'Ждем ответ';
+  note?: string;
 };
 
 /** Строки листа: обычная операционка команды, которую заводят в таблицу. */
 const ROWS: Row[] = [
-  { task: 'Обновить прайс на сайте', who: 'Анна', due: '04.09', status: 'В работе' },
-  { task: 'Собрать отчет по продажам за август', who: 'Игорь', due: '05.09', status: 'Не начата' },
-  { task: 'Согласовать макет каталога', who: 'Мария', due: '05.09', status: 'Ждем ответ' },
-  { task: 'Договор с подрядчиком по монтажу', who: 'Павел', due: '08.09', status: 'В работе' },
+  { task: 'Обновить прайс на сайте', who: 'Анна', due: '04.09', status: 'В работе', note: 'Ждем цены' },
+  { task: 'Собрать отчет по продажам за август', who: 'Игорь', due: '05.09', status: 'Не начата', note: 'Нет данных филиалов' },
+  { task: 'Согласовать макет каталога', who: 'Мария', due: '05.09', status: 'Ждем ответ', note: 'Правки от продаж' },
+  { task: 'Договор с подрядчиком по монтажу', who: 'Павел', due: '08.09', status: 'В работе', note: 'Юристы смотрят п. 4' },
   { task: 'Рассылка по клиентам из сегмента B', who: 'Анна', due: '09.09', status: 'Не начата' },
-  { task: 'Проверить остатки на складе', who: 'Дмитрий', due: '10.09', status: 'Готово' },
-  { task: 'Интервью с кандидатом на позицию', who: 'Мария', due: '11.09', status: 'Не начата' },
+  { task: 'Проверить остатки на складе', who: 'Дмитрий', due: '10.09', status: 'Готово', note: 'Сверено с 1С' },
+  { task: 'Интервью с кандидатом на позицию', who: 'Мария', due: '11.09', status: 'Не начата', note: 'Перенести на пятницу' },
   { task: 'Обновить регламент приемки', who: 'Павел', due: '12.09', status: 'В работе' },
-  { task: 'Счета за сентябрь по подрядчикам', who: 'Игорь', due: '12.09', status: 'Ждем ответ' },
-  { task: 'Фотосъемка новой коллекции', who: 'Анна', due: '15.09', status: 'Не начата' },
-  { task: 'Перенести задачи из чата в таблицу', who: 'Дмитрий', due: '15.09', status: 'В работе' },
+  { task: 'Счета за сентябрь по подрядчикам', who: 'Игорь', due: '12.09', status: 'Ждем ответ', note: 'Ждем подписи' },
+  { task: 'Фотосъемка новой коллекции', who: 'Анна', due: '15.09', status: 'Не начата', note: 'Бронь студии?' },
+  { task: 'Перенести задачи из чата в таблицу', who: 'Дмитрий', due: '15.09', status: 'В работе', note: 'См. чат' },
   { task: 'Сверка по заказам с бухгалтерией', who: 'Игорь', due: '16.09', status: 'Не начата' },
+  { task: 'Тексты для страницы каталога', who: 'Мария', due: '17.09', status: 'Готово', note: 'Готово, см. файл' },
+  { task: 'Подготовить презентацию для клиента', who: 'Анна', due: '18.09', status: 'В работе', note: 'Версия 3, финал?' },
 ];
 
 const STATUS_CLASS: Record<Row['status'], string> = {
@@ -45,7 +47,8 @@ const STATUS_CLASS: Record<Row['status'], string> = {
 const ROW_H = 26;
 
 const KEYFRAMES = `
-.xlg .roll{ animation: xlgRoll 18s linear infinite; }
+/* Анимация остановлена на первом кадре по решению макета: строки стоят. */
+.xlg .roll{ animation:none; }
 @keyframes xlgRoll{
   0%{ transform:translateY(0); }
   100%{ transform:translateY(-${ROW_H * ROWS.length}px); }
@@ -70,7 +73,7 @@ function Cell({
     <div
       className={cn(
         'shrink-0 truncate border-r border-(--color-border-default) px-2',
-        'leading-[26px]',
+        'leading-[23px]',
         className,
       )}
       style={{ width }}
@@ -100,8 +103,8 @@ function Rows() {
           className="flex border-b border-(--color-border-default) text-[11.5px] text-(--color-text-primary)"
           style={{ height: ROW_H }}
         >
-          <div className="w-8 shrink-0 border-r border-(--color-border-default) bg-(--color-surface-section) text-center leading-[26px] text-[10px] text-(--color-text-secondary)">
-            {i + 2}
+          <div className="w-8 shrink-0 border-r border-(--color-border-default) bg-(--color-surface-section) text-center leading-[23px] text-[10px] text-(--color-text-secondary)">
+            {i + 1}
           </div>
           <Cell width="286px">{r.task}</Cell>
           <Cell width="104px" className="text-(--color-text-secondary)">
@@ -113,7 +116,9 @@ function Rows() {
           <Cell width="118px" className={STATUS_CLASS[r.status]}>
             {r.status}
           </Cell>
-          <Cell width="126px" className="text-(--color-text-secondary)" />
+          <Cell width="126px" className="text-(--color-text-secondary)">
+            {r.note}
+          </Cell>
         </div>
       ))}
     </>
@@ -126,7 +131,7 @@ export function ExcelGrowMock() {
       <style dangerouslySetInnerHTML={{ __html: KEYFRAMES }} />
       <div
         aria-hidden
-        className="relative h-[480px] w-[720px] overflow-hidden rounded-(--radius-3xl) border border-(--color-border-default) bg-(--color-surface-card) shadow-[0_0_40px_rgba(45,45,45,0.12)]"
+        className="relative h-[506px] w-[720px] overflow-hidden rounded-(--radius-3xl) border border-(--color-border-default) bg-(--color-surface-card) shadow-[0_0_40px_rgba(45,45,45,0.12)]"
       >
         {/* шапка файла */}
         <div className="flex items-center gap-2 border-b border-(--color-border-default) bg-[#217346] px-4 py-2.5">
@@ -159,9 +164,8 @@ export function ExcelGrowMock() {
         </div>
 
         {/* бесконечная лента строк */}
-        <div className="relative h-[340px] overflow-hidden">
+        <div className="relative h-[366px] overflow-hidden">
           <div className="roll">
-            <Rows />
             <Rows />
           </div>
           {/* растворение кадра: строк становится все больше, конца не видно */}

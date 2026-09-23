@@ -6,7 +6,6 @@ import { Diagrams } from './Diagram';
 import { NotificationSettingsMock } from './NotificationSettingsMock';
 import { RecurringTaskScheduleMock } from './RecurringTaskScheduleMock';
 import { ReportChartMock, type ReportChartKind } from './ReportChartMock';
-import InterfaceShowcase from './InterfaceShowcase';
 import {
   AbTestResultsMock,
   AnalyticsKpiMock,
@@ -87,14 +86,20 @@ import {
   WindowResourceMock,
   WindowReportsMock,
   WorkspaceViewMock,
+  KaitenCalendarMock,
+  ApiDocsMock,
   WorkspaceViewHeader,
   type WorkspaceView,
   WorkspaceSpacesMock,
   WorkspaceCreateMock,
   ModuleScrumMock,
   ModuleBoardsMock,
+  ModuleWorkspaceBoardMock,
+  ModuleBoardsOriginMock,
   AdminSpaceMock,
   LaptopBoardTreeMock,
+  TabletBoardTreeMock,
+  TabletImageMock,
   BoardWindowHeader,
   WindowProjectModalMock,
   CliTerminalHeroMock,
@@ -125,6 +130,7 @@ import {
   TaskCardFullMock,
   WindowCardMock,
   WindowTicketModalMock,
+  WindowTicketModalOrigin,
   CardChecklistRelationsMock,
   PlatformSliderMock,
   ModulesCollageMock,
@@ -282,6 +288,8 @@ export type MockVariant =
   | 'workspace-view-table'
   | 'workspace-view-timeline'
   | 'workspace-view-calendar'
+  | 'kaiten-calendar'
+  | 'api-docs'
   | 'workspace-view-reports'
   | 'workspace-spaces'
   | 'workspace-access'
@@ -289,8 +297,12 @@ export type MockVariant =
   | 'scrum-board'
   | 'scrum-board-wide'
   | 'module-boards'
+  | 'module-workspace-board'
+  | 'module-boards-origin'
   | 'admin-space'
   | 'laptop-boards'
+  | 'tablet-boards'
+  | 'tablet-team-board'
   // Задачи: карточка проекта и плитки галереи фич (FeatureMocksV01)
   | 'window-project-modal'
   | 'tile-recurring-tasks'
@@ -316,14 +328,14 @@ export type MockVariant =
   | 'task-card-full'
   | 'window-card'
   | 'window-ticket-modal'
+  | 'window-ticket-modal-origin'
   | 'card-checklist-relations'
   | 'platform-slider'
   | 'modules-collage'
   | 'board-signals'
   | 'excel-import'
   | 'tablet-pair'
-  | 'on-premise'
-  | 'interface-showcase';
+  | 'on-premise';
 
 /**
  * Обёртка-хук для темы. `display:contents` не создаёт бокс — раскладка мока не
@@ -531,6 +543,24 @@ function MockVisualSwitch({
           </ScaleToFit>
         </div>
       );
+    // Пространство с меню слева и доской «Запуск продукта» (доска первого экрана), 1360px.
+    case 'module-workspace-board':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1360}>
+            <ModuleWorkspaceBoardMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Интерфейс Кайтена целиком: дерево, панель видов, доска «Задачи команды», 1920px.
+    case 'module-boards-origin':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <ModuleBoardsOriginMock />
+          </ScaleToFit>
+        </div>
+      );
     // Рабочий кабинет руководителя: доски разных отделов, 820px.
     case 'admin-space':
       return (
@@ -546,6 +576,24 @@ function MockVisualSwitch({
         <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
           <ScaleToFit designWidth={880}>
             <LaptopBoardTreeMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Планшет: тот же экран с досками и деревом разделов, 760px.
+    case 'tablet-boards':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={760}>
+            <TabletBoardTreeMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Планшет со скриншотом доски «Задачи команды», 760px.
+    case 'tablet-team-board':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={760}>
+            <TabletImageMock />
           </ScaleToFit>
         </div>
       );
@@ -663,6 +711,24 @@ function MockVisualSwitch({
     // Мок фиксированной ширины 760px — в узких слотах масштабируется.
     // window-board-new — то же окно вида «Доски» (пустая «Новая доска») под именем семейства Window
     case 'window-board-new':
+    // Портал разработчиков Kaiten API: дерево методов и страница Introduction.
+    case 'api-docs':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={640}>
+            <ApiDocsMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Календарь пространства один в один с продуктом (месяц, цветные плашки карточек).
+    case 'kaiten-calendar':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={760}>
+            <KaitenCalendarMock />
+          </ScaleToFit>
+        </div>
+      );
     case 'workspace-view-board':
     case 'workspace-view-list':
     case 'workspace-view-table':
@@ -826,6 +892,9 @@ function MockVisualSwitch({
     // Окно обращения Service Desk: карточка слева, переписка справа. 800px, ужимает MockFit.
     case 'window-ticket-modal':
       return <WindowTicketModalMock bare grayShadow card="presentation" />;
+    // Карточка задачи Кайтена 1:1 с продукта: поля и чек-лист слева, комментарии справа. 800px, ужимает MockFit.
+    case 'window-ticket-modal-origin':
+      return <WindowTicketModalOrigin />;
     // Фрагмент карточки 1:1 с продукта: чек-лист и связи с дочерней карточкой. 620px, ужимает MockFit.
     case 'card-checklist-relations':
       return <CardChecklistRelationsMock />;
@@ -844,8 +913,6 @@ function MockVisualSwitch({
       return <TabletPairMock />;
     case 'on-premise':
       return <OnPremise />;
-    case 'interface-showcase':
-      return <InterfaceShowcase />;
     default:
       return null;
   }

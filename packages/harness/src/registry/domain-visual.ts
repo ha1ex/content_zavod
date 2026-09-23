@@ -430,6 +430,12 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
           'Окно карточки обращения Service Desk: слева описание, файлы и связанные карточки, справа панель комментариев с перепиской команды и шаблоном ответа',
       },
       {
+        variant: 'window-ticket-modal-origin',
+        sections: ['media', 'tab', 'scenario'],
+        description:
+          'Карточка задачи Кайтена один в один с продукта: поля, описание, файлы, чек-лист и связи слева, комментарии команды справа',
+      },
+      {
         variant: 'window-card',
         sections: ['media', 'tab', 'scenario'],
         description:
@@ -487,6 +493,18 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
         description: 'Вид «Календарь»: три недели, карточки стоят на датах своих сроков',
       },
       {
+        variant: 'api-docs',
+        sections: ['media', 'tab'],
+        description:
+          'Портал разработчиков Kaiten API (developers.kaiten.ru): вкладки REST / External webhooks / Webhooks / SCIM, дерево методов с метками POST/GET/PATCH/DELETE, страница Introduction с базовым адресом и заголовком авторизации — для блоков про открытый API',
+      },
+      {
+        variant: 'kaiten-calendar',
+        sections: ['media', 'tab'],
+        description:
+          'Календарь пространства один в один с продуктом: шапка приложения, тулбар видов, «Сегодня/Срок», месяц целиком, цветные плашки карточек со статусом, аватаром и «+N», сегодняшний день желтым',
+      },
+      {
         variant: 'workspace-view-reports',
         sections: ['media', 'tab'],
         description: 'Вид «Отчеты»: накопительная диаграмма потока, счетчики карточек и время выполнения по участникам',
@@ -532,6 +550,18 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
         variant: 'portfolio-board-stretch',
         sections: ['media', 'tab'],
         description: 'ModulePortfolioMock с колонками портфеля на всю ширину доски: воронка договоров, свимлейн «Первый приоритет» и свернутые доски проектов — «комбинируйте несколько досок в пространстве»',
+      },
+      {
+        variant: 'module-workspace-board',
+        sections: ['hero', 'media', 'tab'],
+        description:
+          'Module: пространство Kaiten с меню слева (дерево папок и досок) и доской «Запуск продукта» — дорожки «Маркетинг» и «Разработка», колонки Очередь → В работе → Проверка → Готово, анимация переноса карточки в «Проверку» — «единое рабочее пространство для визуализации процессов»',
+      },
+      {
+        variant: 'module-boards-origin',
+        sections: ['hero', 'media', 'tab'],
+        description:
+          'ModuleBoardsOriginMock: интерфейс Кайтена целиком, как в продукте — шапка с поиском и Kaiten AI, колонка разделов, «Дерево» пространств, панель видов, доска «Задачи команды» (Запланировано → В работе → На согласовании → Готово) с метками, сроками, блокировкой и чек-листом, колонка инструментов. 1920px',
       },
       {
         variant: 'module-boards',
@@ -1139,6 +1169,16 @@ export const DOMAIN_REGISTRY: DomainEntry[] = [
         variant: 'laptop-boards',
         sections: ['media', 'tab'],
         description: 'LaptopBoardTreeMock: ноутбук с канбан-доской производства и развёрнутым деревом разделов (цех, снабжение, технологи, ОТК, руководство, бухгалтерия, проектный офис), 880px',
+      },
+      {
+        variant: 'tablet-boards',
+        sections: ['media', 'tab'],
+        description: 'TabletBoardTreeMock: тот же экран, что у laptop-boards (доски и дерево разделов), в рамке планшета, 760px',
+      },
+      {
+        variant: 'tablet-team-board',
+        sections: ['media', 'tab'],
+        description: 'TabletImageMock: планшет со скриншотом доски «Задачи команды» (brand/kaiten-board-team-tasks.webp), 760px',
       },
     ],
     missingMocks: [],

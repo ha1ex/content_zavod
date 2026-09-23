@@ -10,6 +10,7 @@ import {
   type HsiAnimatedCard,
 } from './HeroScreenInterface';
 import { HeroScreenVideo } from './HeroScreenVideo';
+import { ProductNavIcon, isProductNavIcon } from './ProductNavIcon';
 import { RegistrationForm } from './RegistrationForm';
 import { ChaosOrderMotif } from './ChaosOrderMotif';
 import { ThreadsMotif } from './ThreadsMotif';
@@ -109,6 +110,10 @@ export interface HeroSectionProps {
     /** Боковое меню пространств слева от доски. */
     sidebar?: boolean;
     cardWindow?: boolean;
+    /** Полный интерфейс Кайтена вокруг доски: шапка, рельсы, «Дерево», панель видов. */
+    appShell?: boolean;
+    /** Название пространства в шапке (при appShell). */
+    spaceTitle?: string;
   };
   /**
    * Короткие буллеты под подзаголовком («что заберёте» на лендинге вебинара).
@@ -228,6 +233,8 @@ export function HeroSection({
         animatedCard={board?.animatedCard ?? HSI_BOARD_ANIMATED}
         sidebar={board?.sidebar}
         cardWindow={board?.cardWindow}
+        appShell={board?.appShell}
+        spaceTitle={board?.spaceTitle}
         // строка доверия из ТЗ — под доской, разделители между пунктами
         trustLine={bullets}
         ariaLabel="Первый экран Kaiten"
@@ -328,7 +335,16 @@ export function HeroSection({
                 <Inspect name="hero.eyebrow">
                   {copyStyle === 'screen' ? (
                     <span className="inline-flex items-center rounded-2xl bg-[rgba(125,76,207,0.12)] px-4 py-1 text-sm leading-5 font-medium text-(--color-text-accent)">
-                      {eyebrow}
+                      {isProductNavIcon(eyebrowIcon) ? (
+                        <>
+                          {/* Как бейдж HeroScreenInterface: «ФУНКЦИЯ ▣ Интеграции» */}
+                          <span className="relative top-px text-xs uppercase">{eyebrow.split(' ')[0]}</span>
+                          <ProductNavIcon name={eyebrowIcon} className="mr-1.5 ml-3.5 h-[18px] w-[18px] flex-none" />
+                          <span className="relative top-px">{eyebrow.split(' ').slice(1).join(' ')}</span>
+                        </>
+                      ) : (
+                        eyebrow
+                      )}
                     </span>
                   ) : (
                     <EyebrowPill>{eyebrow}</EyebrowPill>

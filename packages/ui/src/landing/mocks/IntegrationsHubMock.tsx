@@ -28,6 +28,12 @@ const H = 580;
  * под ним нужно только лиловой панели — без нее оно выглядит лишним отступом.
  */
 const PLAIN_H = 490;
+/**
+ * Сколько срезать сверху без подложки: верхний ряд карточек начинается на 74px,
+ * оставляем 16px воздуха. Вся геометрия сдвигается вверх одним translate,
+ * координаты карточек и проводов не меняются.
+ */
+const PLAIN_TOP = 58;
 
 /** Цвет проводов, кружков и наконечников — Violet 100. */
 const WIRE = '#7D4CCF';
@@ -338,6 +344,7 @@ const css = `
   background:#fff;border-radius:24px}
 .ihb--plain{background:transparent;border-radius:0;overflow:visible}
 .ihb--plain .ihb__wires{height:${H}px;bottom:auto}
+.ihb--plain .ihb__wires,.ihb--plain .ihb__card,.ihb--plain .ihb__hub{translate:0 -${PLAIN_TOP}px}
 .ihb--plain .ihb__card{background:#F4F4F4}
 .ihb--plain .ihb__hub{background:#EFE9F9}
 `;
@@ -361,7 +368,7 @@ export function IntegrationsHubMock({ className, surface = 'panel' }: Integratio
     <div
       aria-hidden
       className={`ihb${surface === 'plain' ? ' ihb--plain' : ''}${className ? ` ${className}` : ''}`}
-      style={{ width: W, height: surface === 'plain' ? PLAIN_H : H }}
+      style={{ width: W, height: surface === 'plain' ? PLAIN_H - PLAIN_TOP : H }}
     >
       <style dangerouslySetInnerHTML={{ __html: css }} />
 

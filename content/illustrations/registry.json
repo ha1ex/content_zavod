@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-22T11:13:38.687Z",
+  "updatedAt": "2026-09-23T06:51:58.826Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -886,12 +886,39 @@
     },
     {
       "kind": "mock-use",
+      "variant": "integrations-hub",
+      "landingSlug": "kaiten-integrations-v2",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-09-22T13:06:57.729Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "window-ticket-modal",
+      "landingSlug": "kaiten-integrations-v2",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "pm",
+      "recordedAt": "2026-09-22T13:06:57.740Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "api-docs",
+      "landingSlug": "kaiten-integrations-v2",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "pm",
+      "recordedAt": "2026-09-22T13:06:57.748Z"
+    },
+    {
+      "kind": "mock-use",
       "variant": "tablet-pair",
       "landingSlug": "kaiten-excel",
       "sectionId": "hero",
       "sectionIdx": 1,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.572Z"
+      "recordedAt": "2026-09-23T06:51:58.642Z"
     },
     {
       "kind": "mock-use",
@@ -900,7 +927,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 4,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.582Z"
+      "recordedAt": "2026-09-23T06:51:58.659Z"
     },
     {
       "kind": "mock-use",
@@ -909,7 +936,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 5,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.591Z"
+      "recordedAt": "2026-09-23T06:51:58.682Z"
     },
     {
       "kind": "mock-use",
@@ -918,7 +945,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 7,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.601Z"
+      "recordedAt": "2026-09-23T06:51:58.704Z"
     },
     {
       "kind": "mock-use",
@@ -927,16 +954,16 @@
       "sectionId": "media_copy",
       "sectionIdx": 8,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.624Z"
+      "recordedAt": "2026-09-23T06:51:58.723Z"
     },
     {
       "kind": "mock-use",
-      "variant": "window-ticket-modal",
+      "variant": "window-ticket-modal-origin",
       "landingSlug": "kaiten-excel",
       "sectionId": "media_copy",
       "sectionIdx": 9,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.644Z"
+      "recordedAt": "2026-09-23T06:51:58.743Z"
     },
     {
       "kind": "mock-use",
@@ -945,7 +972,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 10,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.656Z"
+      "recordedAt": "2026-09-23T06:51:58.761Z"
     },
     {
       "kind": "mock-use",
@@ -954,7 +981,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 11,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.668Z"
+      "recordedAt": "2026-09-23T06:51:58.786Z"
     },
     {
       "kind": "mock-use",
@@ -963,7 +990,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 12,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.678Z"
+      "recordedAt": "2026-09-23T06:51:58.805Z"
     },
     {
       "kind": "mock-use",
@@ -972,7 +999,7 @@
       "sectionId": "media_copy",
       "sectionIdx": 15,
       "domain": "pm",
-      "recordedAt": "2026-09-22T11:13:38.687Z"
+      "recordedAt": "2026-09-23T06:51:58.826Z"
     }
   ]
 }

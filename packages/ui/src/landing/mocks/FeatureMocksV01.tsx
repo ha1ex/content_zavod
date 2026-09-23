@@ -17,7 +17,7 @@ const CSS = `
 .fm .board{display:grid;grid-template-columns:repeat(auto-fill,240px);justify-content:center;gap:30px 24px;align-items:start}
 .fm .tile{display:flex;flex-direction:column;gap:10px;width:240px}
 .fm .cap{font-size:12px;font-weight:500;color:#4a4a4e;padding-left:2px}
-.fm .card{position:relative;width:240px;background:#fff;border-radius:16px;box-shadow:0 0 40px -20px rgba(40,40,60,.45);padding:12px;overflow:hidden}
+.fm .card{position:relative;width:240px;background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(45,45,45,.12);padding:12px;overflow:hidden}
 .fm .h180{height:176px}.fm .h210{height:212px}
 .fm .ttl{font-size:11px;font-weight:600;margin-bottom:9px}
 .fm .lab{font-size:8.5px;color:var(--t2)}.fm .val{font-size:8.5px;color:var(--t1);font-weight:500}

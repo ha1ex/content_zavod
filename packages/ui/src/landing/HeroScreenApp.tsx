@@ -355,9 +355,12 @@ const APP_CSS = `
   box-shadow:0 2px 12px rgba(45,45,45,.10);font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);font-size:15px;line-height:1.35;letter-spacing:.15px}
 .hsi .app svg{flex:none;display:block}
 /* окно карточки у правого края: на всю высоту под шапкой, как выехавшая панель в продукте */
-/* Окно карточки гасит масштаб интерфейса (--ubz) и рисуется 1:1 — его надо читать.
-   Отступы задаем в единицах интерфейса, домножая на --bz. */
-.hsi .app__cw{position:absolute;zoom:var(--ubz,1);top:calc(108px * var(--bz,1));right:0;bottom:0;
+/* Окно карточки гасит масштаб интерфейса (--ubz) и рисуется крупнее доски,
+   но не в полный рост: --cw-k — доля от 1:1. Раскладка внутри считается от
+   width, поэтому она остается эталонной, а на экран окно выходит уже.
+   Отступ сверху переводим в единицы интерфейса: * --bz / --cw-k. */
+.hsi .app__cw{--cw-k:.72;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
+  top:calc(108px * var(--bz,1) / var(--cw-k));right:0;bottom:0;
   width:560px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;

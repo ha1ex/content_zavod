@@ -233,6 +233,23 @@ function PresentationColumn() {
         <span className="text-(--color-text-accent) underline underline-offset-2">#70692833</span> Заказчик{' '}
         <span className="text-(--color-text-primary) underline underline-offset-2">Teamlead</span>
       </div>
+      {/* когда карточку завели и когда последний раз двигали — как в шапке карточки продукта */}
+      <div className="mt-1.5 flex items-center gap-4 text-[13px] text-(--color-text-secondary)">
+        <span className="inline-flex items-center gap-1.5">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7.5V12l3 2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Создана 7 дней назад
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+            <path d="M3 15c0-3 2-5 5-5h9" strokeLinecap="round" />
+            <path d="M14 7l3 3-3 3" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Перемещена 21 час назад
+        </span>
+      </div>
 
       {/* toolbar */}
       <div className="relative mt-3 flex items-center gap-2 [&>span:not(:first-child)]:relative">

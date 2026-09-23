@@ -199,7 +199,7 @@ function AppCard({ card }: { card: HsiCard }) {
   const c = card.counters;
   const pct = card.checklist ? card.checklist.done / card.checklist.total : 0;
   return (
-    <div className="app__card">
+    <div className={card.active ? 'app__card is-open' : 'app__card'}>
       {card.blocker && <div className="app__blocker"><span className="app__hand">✋</span><span>{card.blocker.replace(/ /g, ' ')}</span></div>}
       {card.parent && <div className="app__parent">{card.parent}</div>}
       {card.accent && <span className="app__accent" style={{ background: card.accent }} />}
@@ -359,6 +359,8 @@ const APP_CSS = `
    но не в полный рост: --cw-k — доля от 1:1. Раскладка внутри считается от
    width, поэтому она остается эталонной, а на экран окно выходит уже.
    Отступ сверху переводим в единицы интерфейса: * --bz / --cw-k. */
+/* карточка, открытая в окне справа, подсвечена фиолетовой обводкой */
+.hsi .app__card.is-open{border-color:#7d4ccf}
 .hsi .app__cw{--cw-k:.78;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
   top:calc(108px * var(--bz,1) / var(--cw-k));right:calc(57px * var(--bz,1) / var(--cw-k));bottom:0;
   width:486px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
@@ -371,10 +373,16 @@ const APP_CSS = `
 /* вертикальные отступы — родные, как в самом окне карточки */
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
 /* заголовок карточки: помельче и с воздухом над ним */
-.hsi .app__cw h3{font-size:17px;line-height:1.3}
+.hsi .app__cw h3{font-size:17px;line-height:1.3;font-weight:500}
+/* подзаголовки под названием — номер карточки и «создана / перемещена» — мельче */
+.hsi .app__cw>*>:first-child>div[class*="mt-1.5"]{font-size:12px}
 .hsi .app__cw>*>:first-child{padding-top:24px}
 /* группы карточки — «Описание», «Файлы», «Подготовка», «Связи» — разделяем воздухом */
 .hsi .app__cw>*>:first-child>.mt-4{margin-top:20px}
+/* содержимое групп — описание, файл, прогресс, чек-боксы — отодвигаем от заголовка группы */
+.hsi .app__cw>*>:first-child>[class*="mt-2"]{margin-top:12px}
+/* пункты чек-листа — чуть свободнее друг от друга */
+.hsi .app__cw>*>:first-child>ul>li+li{margin-top:9px}
 /* строки параметров разной высоты (плашка «Материал», аватарки) — ровняем,
    иначе шаг между «Расположение / Тип / Участники / Срок / Метки» гуляет */
 .hsi .app__cw dl>*{min-height:29px}
@@ -382,6 +390,11 @@ const APP_CSS = `
 .hsi .app__cw>*>:first-child>.mt-3{margin-top:18px}
 /* кнопка «Скрыть отмеченные» в строке прогресса — пошире */
 .hsi .app__cw>*>:first-child>div.mt-2>span:last-child{padding-left:14px;padding-right:14px}
+/* плашки «Материал» и «Маркетинг» — пошире (чип «Ответственный» не трогаем:
+   у него аватарка прижата к левой кромке) */
+.hsi .app__cw dl dd span[class*="px-2.5"]{padding-left:12px;padding-right:12px}
+/* плашка статуса «На согласовании» — пошире */
+.hsi .app__cw>*>:first-child>.mt-3>span[class*="px-4"]{padding-left:22px;padding-right:22px}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

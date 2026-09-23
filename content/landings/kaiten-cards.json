@@ -422,7 +422,7 @@
           {
             "id": "boards",
             "label": "Доски",
-            "icon": "kaiten:boards",
+            "icon": "kaiten:dashboardO",
             "mockVariant": "scrum-board-wide"
           },
           {
@@ -440,7 +440,7 @@
           {
             "id": "timeline",
             "label": "Таймлайн",
-            "icon": "kaiten:viewWeek",
+            "icon": "kaiten:kanbanO",
             "mockVariant": "workspace-view-timeline"
           },
           {
@@ -470,7 +470,7 @@
           {
             "id": "boards",
             "label": "Доски",
-            "icon": "kaiten:boards",
+            "icon": "kaiten:dashboardO",
             "mockVariant": "scrum-board-wide",
             "image": {
               "src": "/brand/features/tasks-views/boards.webp",
@@ -500,7 +500,7 @@
           {
             "id": "timeline",
             "label": "Таймлайн",
-            "icon": "kaiten:viewWeek",
+            "icon": "kaiten:kanbanO",
             "mockVariant": "workspace-view-timeline"
           },
           {

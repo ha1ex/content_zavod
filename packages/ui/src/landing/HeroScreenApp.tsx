@@ -361,6 +361,8 @@ const APP_CSS = `
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
   grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;overflow:hidden}
 .hsi .app__cw>*>:first-child{border-right:0;border-bottom:1px solid var(--line)}
+/* поля и лента идут во всю ширину панели — держим одинаковые поля по бокам */
+.hsi .app__cw>*>*{padding-left:28px;padding-right:28px}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

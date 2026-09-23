@@ -359,7 +359,7 @@ const APP_CSS = `
    но не в полный рост: --cw-k — доля от 1:1. Раскладка внутри считается от
    width, поэтому она остается эталонной, а на экран окно выходит уже.
    Отступ сверху переводим в единицы интерфейса: * --bz / --cw-k. */
-.hsi .app__cw{--cw-k:.85;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
+.hsi .app__cw{--cw-k:.78;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
   top:calc(108px * var(--bz,1) / var(--cw-k));right:calc(57px * var(--bz,1) / var(--cw-k));bottom:0;
   width:432px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */

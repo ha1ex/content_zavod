@@ -385,7 +385,7 @@ const APP_CSS = `
 /* фильтр «Все» — ниже и шире */
 .hsi .app__cw>*>:last-child [class*="mb-3"]>span[class*="h-7"]{height:24px;padding-left:12px;padding-right:12px}
 /* селектор «Список» в строке дочерних карточек — пошире */
-.hsi .app__cw>*>:first-child>div[class*="mt-2.5"]>span[class*="h-6"]{padding-left:14px;padding-right:14px}
+.hsi .app__cw>*>:first-child>div[class*="mt-2.5"]>span[class*="h-6"]{padding-left:9px;padding-right:9px}
 /* лента комментариев дышит: между репликами и вокруг строки фильтра */
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"]>div+div{margin-top:20px}
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"]{margin-top:20px}
@@ -418,6 +418,8 @@ const APP_CSS = `
 .hsi .app__cw>*>:first-child>.mt-3{margin-top:22px}
 /* кнопка «Скрыть отмеченные» в строке прогресса — пошире */
 .hsi .app__cw>*>:first-child [class*="uppercase"][class*="border"]{padding-left:14px;padding-right:14px}
+/* «Скрыть отмеченные» — компактнее кнопок «Добавить…» */
+.hsi .app__cw>*>:first-child [class*="uppercase"][class*="h-6"]{padding-left:9px;padding-right:9px;line-height:1}
 /* строка дочерней карточки: поля по краям и метаданные к правому краю */
 .hsi .app__cw>*>:first-child>div[class*="h-8"]{padding-left:10px;padding-right:10px}
 .hsi .app__cw>*>:first-child>div[class*="h-8"]>span:last-child{margin-left:auto}

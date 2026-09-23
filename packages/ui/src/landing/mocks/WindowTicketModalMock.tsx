@@ -385,8 +385,13 @@ function PresentationColumn() {
           </span>
         </span>
       </div>
+      {/* родительские карточки — пустой блок с кнопкой, как в продукте */}
+      <div className="mt-3.5 text-[13px] text-(--color-text-primary)">Родительские карточки</div>
+      <span className="mt-2 inline-flex h-6 items-center rounded-[4px] border border-[#bdbdbd] px-2 text-[10px] font-medium uppercase tracking-[0.02em] text-[#212121]">
+        Добавить родительскую карточку
+      </span>
       <div className="mt-2.5 flex items-center justify-between">
-        <span className="text-[13px] text-(--color-text-secondary)">Дочерние карточки</span>
+        <span className="text-[13px] text-(--color-text-primary)">Дочерние карточки</span>
         <span className="inline-flex h-6 items-center gap-2 rounded-[4px] border border-[#bdbdbd] px-2.5 text-xs text-[#212121]">
           Список
           <svg width="8" height="5" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="#616161" /></svg>
@@ -411,6 +416,9 @@ function PresentationColumn() {
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#757575" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" /></svg>
         </span>
       </div>
+      <span className="mt-2 inline-flex h-6 items-center rounded-[4px] border border-[#bdbdbd] px-2 text-[10px] font-medium uppercase tracking-[0.02em] text-[#212121]">
+        Добавить дочернюю карточку
+      </span>
     </div>
   );
 }

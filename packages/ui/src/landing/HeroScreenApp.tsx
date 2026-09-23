@@ -359,21 +359,16 @@ const APP_CSS = `
    но не в полный рост: --cw-k — доля от 1:1. Раскладка внутри считается от
    width, поэтому она остается эталонной, а на экран окно выходит уже.
    Отступ сверху переводим в единицы интерфейса: * --bz / --cw-k. */
-.hsi .app__cw{--cw-k:.68;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
-  top:calc(108px * var(--bz,1) / var(--cw-k));right:0;bottom:0;
-  width:560px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
+.hsi .app__cw{--cw-k:.85;position:absolute;zoom:calc(var(--ubz,1) * var(--cw-k));
+  top:calc(108px * var(--bz,1) / var(--cw-k));right:calc(57px * var(--bz,1) / var(--cw-k));bottom:0;
+  width:432px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
   grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;overflow:hidden}
 .hsi .app__cw>*>:first-child{border-right:0;border-bottom:1px solid var(--line)}
 /* поля и лента идут во всю ширину панели — держим одинаковые поля по бокам */
-.hsi .app__cw>*>*{padding-left:28px;padding-right:28px}
-/* заголовок карточки не должен лепиться к верхней кромке панели */
-.hsi .app__cw>*>:first-child{padding-top:24px}
-/* строки параметров и блоки карточки дышат чуть свободнее, чем в узком окне */
-.hsi .app__cw dl>*+*{margin-top:14px}
-.hsi .app__cw>*>:first-child{padding-bottom:18px}
-/* у ленты комментариев padding задвоен (p-4 + py-4) — в панели снимаем свой */
+.hsi .app__cw>*>*{padding-left:20px;padding-right:20px}
+/* вертикальные отступы — родные, как в самом окне карточки */
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}

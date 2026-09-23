@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   // в недавно добавленных mock-компонентах (в рантайме TS-типы стираются, риска нет).
   // Убрать, когда моки будут вычищены под strict type-check.
   typescript: { ignoreBuildErrors: true },
+  // Кружок-индикатор Next в углу мешает смотреть первый экран: он перекрывает
+  // логотип мокапа. Только дев-оверлей, в сборку и статику не попадает.
+  devIndicators: false,
 };
 
 export default nextConfig;

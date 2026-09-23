@@ -370,6 +370,9 @@ const APP_CSS = `
 .hsi .app__cw>*>*{padding-left:20px;padding-right:20px}
 /* вертикальные отступы — родные, как в самом окне карточки */
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
+/* заголовок карточки: помельче и с воздухом над ним */
+.hsi .app__cw h3{font-size:17px;line-height:1.3}
+.hsi .app__cw>*>:first-child{padding-top:30px}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

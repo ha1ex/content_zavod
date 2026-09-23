@@ -375,12 +375,16 @@ const APP_CSS = `
 .hsi .app__cw>*>*{padding-left:24px;padding-right:24px}
 /* подпись под именем файла — на 2px ниже */
 .hsi .app__cw .min-w-0>div+div{margin-top:2px}
+/* в ленте тот же зазор чуть больше: пузырь под именем автора */
+.hsi .app__cw>*>:last-child .min-w-0>div+div{margin-top:4px}
+/* поле «Напишите комментарий» — текст не липнет к рамке */
+.hsi .app__cw>*>:last-child [class*="flex-1"][class*="h-8"]{padding-left:16px}
 /* лента комментариев дышит: между репликами и вокруг строки фильтра */
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"]>div+div{margin-top:20px}
 .hsi .app__cw>*>:last-child [class*="space-y-3.5"]{margin-top:20px}
 .hsi .app__cw>*>:last-child [class*="mb-3"]{margin-bottom:16px}
 /* пузыри реплик — просторнее внутри */
-.hsi .app__cw>*>:last-child [class*="space-y-3.5"] [class*="px-3"]{padding:11px 14px}
+.hsi .app__cw>*>:last-child [class*="space-y-3.5"] [class*="px-3"]{padding:9px 12px}
 /* вертикальные отступы — родные, как в самом окне карточки */
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
 /* заголовок карточки: помельче и с воздухом над ним */

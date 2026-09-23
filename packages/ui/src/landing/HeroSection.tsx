@@ -109,6 +109,10 @@ export interface HeroSectionProps {
     /** Боковое меню пространств слева от доски. */
     sidebar?: boolean;
     cardWindow?: boolean;
+    /** Рисовать интерфейс Кайтена целиком (ModuleBoardsOriginMock), а не один модуль-доску. */
+    appShell?: boolean;
+    /** Название пространства в шапке (при appShell). */
+    spaceTitle?: string;
   };
   /**
    * Короткие буллеты под подзаголовком («что заберёте» на лендинге вебинара).
@@ -216,6 +220,8 @@ export function HeroSection({
         animatedCard={board?.animatedCard ?? HSI_BOARD_ANIMATED}
         sidebar={board?.sidebar}
         cardWindow={board?.cardWindow}
+        appShell={board?.appShell}
+        spaceTitle={board?.spaceTitle}
         // строка доверия из ТЗ — под доской, разделители между пунктами
         trustLine={bullets}
         ariaLabel="Первый экран Kaiten"

@@ -37,90 +37,161 @@
           "columns": [
             {
               "label": "Очередь",
-              "count": 3
+              "count": 4
             },
             {
               "label": "В работе",
-              "count": 2
+              "count": 3
             },
             {
               "label": "Проверка",
-              "count": 2
+              "count": 3
             },
             {
               "label": "Согласование",
-              "count": 2
+              "count": 3
             },
             {
               "label": "Готово",
-              "count": 2,
+              "count": 3,
               "done": true
             }
           ],
           "lanes": [
             {
               "name": "Запуск продукта",
-              "count": 6,
+              "count": 16,
               "columns": [
                 [
                   {
                     "title": "Статья в блог про рабочее пространство",
+                    "accent": "#66bb6a",
+                    "icon": "dot",
                     "tags": [
                       {
                         "label": "Блог",
-                        "variant": "blue"
+                        "variant": "sky"
                       }
                     ],
                     "assignees": [
                       "#8aa8c9"
                     ],
-                    "assigneeInitials": [
-                      "ЕГ"
-                    ],
                     "due": "22 сен"
                   },
                   {
                     "title": "Вебинар для партнеров",
+                    "accent": "#ffcdd2",
+                    "icon": "folder",
                     "tags": [
                       {
                         "label": "События",
-                        "variant": "big"
+                        "variant": "pink"
                       }
                     ],
                     "assignees": [
                       "#d9a3a3"
                     ],
-                    "assigneeInitials": [
-                      "АМ"
+                    "due": "25 сен"
+                  },
+                  {
+                    "title": "Настроить права доступа для отделов",
+                    "accent": "#1976d2",
+                    "icon": "doc",
+                    "tags": [
+                      {
+                        "label": "Платформа",
+                        "variant": "lime"
+                      }
+                    ],
+                    "assignees": [
+                      "#c5cae9",
+                      "#9fd3cf"
+                    ],
+                    "due": "23 сен"
+                  },
+                  {
+                    "title": "Собрать тексты для промостраницы",
+                    "parent": "Промостраница новой функции",
+                    "accent": "#ffcdd2",
+                    "icon": "folder",
+                    "counters": {
+                      "children": 0
+                    },
+                    "tags": [
+                      {
+                        "label": "Сайт",
+                        "variant": "peach"
+                      }
+                    ],
+                    "assignees": [
+                      "#f6c453"
+                    ],
+                    "due": "20 сен"
+                  }
+                ],
+                [
+                  {
+                    "title": "Баннеры для соцсетей",
+                    "accent": "#ffcdd2",
+                    "icon": "folder",
+                    "tags": [
+                      {
+                        "label": "Дизайн",
+                        "variant": "pink"
+                      }
+                    ],
+                    "assignees": [
+                      "#8ac9a0"
+                    ],
+                    "due": "19 сен"
+                  },
+                  {
+                    "title": "Отчеты по пространству",
+                    "accent": "#ffca28",
+                    "icon": "chart",
+                    "tags": [
+                      {
+                        "label": "Аналитика",
+                        "variant": "peach"
+                      }
+                    ],
+                    "assignees": [
+                      "#8aa8c9",
+                      "#9fd3cf"
+                    ],
+                    "due": "24 сен"
+                  },
+                  {
+                    "title": "Обновить справку по карточкам",
+                    "accent": "#1976d2",
+                    "icon": "doc",
+                    "tags": [
+                      {
+                        "label": "Документы",
+                        "variant": "lime"
+                      }
+                    ],
+                    "assignees": [
+                      "#c5cae9"
                     ],
                     "due": "25 сен"
                   }
                 ],
                 [
                   {
-                    "title": "Баннеры для соцсетей",
-                    "tags": [
-                      {
-                        "label": "Дизайн",
-                        "variant": "urg"
-                      }
-                    ],
-                    "assignees": [
-                      "#8ac9a0"
-                    ],
-                    "assigneeInitials": [
-                      "ПС"
-                    ],
-                    "due": "19 сен"
-                  }
-                ],
-                [
-                  {
                     "title": "Промостраница новой функции",
+                    "accent": "#ffcdd2",
+                    "icon": "folder",
+                    "counters": {
+                      "children": 1,
+                      "childrenDone": 0,
+                      "attachments": 3,
+                      "comments": 4
+                    },
                     "tags": [
                       {
                         "label": "Сайт",
-                        "variant": "ok"
+                        "variant": "peach"
                       }
                     ],
                     "checklist": {
@@ -128,151 +199,141 @@
                       "done": 3,
                       "total": 5
                     },
-                    "counters": {
-                      "attachments": 3,
-                      "comments": 4,
-                      "children": 2
-                    },
                     "assignees": [
-                      "#b88ac9"
+                      "#c5cae9",
+                      "#f6c453"
                     ],
-                    "assigneeInitials": [
-                      "АК"
-                    ],
-                    "active": true,
-                    "due": "18 сен"
-                  }
-                ],
-                [
+                    "extraAssignee": "+1",
+                    "due": "18 сен",
+                    "active": true
+                  },
                   {
-                    "title": "Пресс-релиз о запуске",
+                    "title": "Импорт задач из таблиц",
+                    "accent": "#66bb6a",
+                    "icon": "dot",
                     "tags": [
                       {
-                        "label": "Пресса",
-                        "variant": "cx"
+                        "label": "Миграция",
+                        "variant": "sky"
                       }
                     ],
                     "assignees": [
                       "#d9a3a3"
                     ],
-                    "assigneeInitials": [
-                      "АМ"
-                    ],
-                    "due": "20 сен"
-                  }
-                ],
-                [
+                    "due": "17 сен"
+                  },
                   {
-                    "title": "Рассылка клиентам",
+                    "title": "Собрать обратную связь по бете",
+                    "accent": "#ffca28",
+                    "icon": "chart",
                     "tags": [
                       {
-                        "label": "Рассылка",
-                        "variant": "prod"
+                        "label": "Аналитика",
+                        "variant": "peach"
                       }
                     ],
                     "assignees": [
                       "#8aa8c9"
-                    ],
-                    "assigneeInitials": [
-                      "ЕГ"
-                    ],
-                    "due": "11 сен"
-                  }
-                ]
-              ]
-            },
-            {
-              "name": "Разработка",
-              "count": 5,
-              "columns": [
-                [
-                  {
-                    "title": "Настроить права доступа для отделов",
-                    "tags": [
-                      {
-                        "label": "Платформа",
-                        "variant": "cx"
-                      }
-                    ],
-                    "assignees": [
-                      "#b88ac9"
-                    ],
-                    "assigneeInitials": [
-                      "АК"
-                    ],
-                    "due": "23 сен"
-                  }
-                ],
-                [
-                  {
-                    "title": "Отчеты по пространству",
-                    "tags": [
-                      {
-                        "label": "Аналитика",
-                        "variant": "blue"
-                      }
-                    ],
-                    "assignees": [
-                      "#8ac9a0"
-                    ],
-                    "assigneeInitials": [
-                      "ПС"
                     ],
                     "due": "24 сен"
                   }
                 ],
                 [
                   {
-                    "title": "Импорт задач из таблиц",
+                    "title": "Пресс-релиз о запуске",
+                    "blocker": "Ждем финальные цифры от продукта",
+                    "accent": "#1976d2",
+                    "icon": "doc",
                     "tags": [
                       {
-                        "label": "Миграция",
-                        "variant": "prod"
+                        "label": "Пресса",
+                        "variant": "lime"
                       }
                     ],
                     "assignees": [
                       "#d9a3a3"
                     ],
-                    "assigneeInitials": [
-                      "АМ"
-                    ],
-                    "due": "17 сен"
-                  }
-                ],
-                [
+                    "due": "20 сен"
+                  },
                   {
                     "title": "Доступы для подрядчиков",
+                    "accent": "#ffcdd2",
+                    "icon": "folder",
                     "tags": [
                       {
                         "label": "Платформа",
-                        "variant": "big"
+                        "variant": "pink"
                       }
                     ],
                     "assignees": [
-                      "#8ac9a0"
-                    ],
-                    "assigneeInitials": [
-                      "ПС"
+                      "#8ac9a0",
+                      "#9fd3cf"
                     ],
                     "due": "21 сен"
+                  },
+                  {
+                    "title": "План обучения команды",
+                    "accent": "#66bb6a",
+                    "icon": "dot",
+                    "tags": [
+                      {
+                        "label": "Планирование",
+                        "variant": "peach"
+                      }
+                    ],
+                    "assignees": [
+                      "#c5cae9",
+                      "#8aa8c9"
+                    ],
+                    "due": "26 сен"
                   }
                 ],
                 [
                   {
-                    "title": "Мобильное приложение: карточка задачи",
+                    "title": "Рассылка клиентам",
+                    "accent": "#66bb6a",
+                    "icon": "dot",
                     "tags": [
                       {
-                        "label": "Мобильное",
-                        "variant": "ok"
+                        "label": "Рассылка",
+                        "variant": "sky"
                       }
                     ],
                     "assignees": [
                       "#8aa8c9"
                     ],
-                    "assigneeInitials": [
-                      "ЕГ"
+                    "due": "11 сен"
+                  },
+                  {
+                    "title": "Мобильное приложение: карточка задачи",
+                    "accent": "#ffca28",
+                    "icon": "chart",
+                    "tags": [
+                      {
+                        "label": "Мобильное",
+                        "variant": "peach"
+                      }
+                    ],
+                    "assignees": [
+                      "#c5cae9"
                     ],
                     "due": "12 сен"
+                  },
+                  {
+                    "title": "Обновить базу контактов",
+                    "accent": "#66bb6a",
+                    "icon": "dot",
+                    "tags": [
+                      {
+                        "label": "Продажи",
+                        "variant": "sky"
+                      }
+                    ],
+                    "assignees": [
+                      "#f6c453",
+                      "#9fd3cf"
+                    ],
+                    "due": "15 сен"
                   }
                 ]
               ]
@@ -298,7 +359,9 @@
             },
             "fromColumn": 1
           },
-          "cardWindow": true
+          "cardWindow": true,
+          "appShell": true,
+          "spaceTitle": "Маркетинг — запуск продукта"
         }
       }
     },

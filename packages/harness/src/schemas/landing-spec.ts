@@ -176,7 +176,7 @@ const HeroBoardCardSchema = z.object({
     .array(
       z.object({
         label: z.string().max(24),
-        variant: z.enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud']).optional(),
+        variant: z.enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud', 'peach', 'lime', 'pink', 'sky']).optional(),
       }),
     )
     .max(3)
@@ -187,8 +187,21 @@ const HeroBoardCardSchema = z.object({
   /** Цвета аватаров-исполнителей (hex). Декоративны. */
   /** Мини-счетчики карточки: вложения, комментарии, дочерние карточки. */
   counters: z
-    .object({ attachments: z.number().optional(), comments: z.number().optional(), children: z.number().optional() })
+    .object({ attachments: z.number().optional(), comments: z.number().optional(), children: z.number().optional(), childrenDone: z.number().optional() })
     .optional(),
+  /* Поля ниже рисуются только в режиме appShell. */
+  /** Цветная полоска-тип над заголовком (hex). */
+  accent: z.string().max(9).optional(),
+  /** Иконка типа карточки справа от заголовка. */
+  icon: z.enum(['dot', 'doc', 'folder', 'chart']).optional(),
+  /** Заливка срока: красная или оранжевая («Сегодня»). */
+  dueTone: z.enum(['red', 'orange']).optional(),
+  /** Бейдж «Срочно». */
+  urgent: z.boolean().optional(),
+  /** Красная плашка блокировки над карточкой. */
+  blocker: z.string().max(120).optional(),
+  /** Родительская карточка — рамка над заголовком. */
+  parent: z.string().max(80).optional(),
   assignees: z.array(z.string()).max(4).optional(),
   /** Буквы внутри аватаров — по порядку assignees. */
   assigneeInitials: z.array(z.string().max(3)).max(4).optional(),
@@ -227,6 +240,10 @@ const HeroBoardSchema = z.object({
   sidebar: z.boolean().optional(),
   /** Окно открытой карточки задачи поверх правого края доски. */
   cardWindow: z.boolean().optional(),
+  /** Рисовать интерфейс Кайтена целиком (шапка, дерево, панель видов). */
+  appShell: z.boolean().optional(),
+  /** Название пространства в шапке (при appShell). */
+  spaceTitle: z.string().max(60).optional(),
 });
 
 /* ─── Форма регистрации (слот hero + секция RegistrationCta) ───────── */

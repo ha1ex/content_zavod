@@ -154,6 +154,7 @@ export { HeroScreenVideo } from './HeroScreenVideo';
 export type { HeroScreenVideoProps, HeroTrustItem } from './HeroScreenVideo';
 
 export { HeroScreenInterface } from './HeroScreenInterface';
+export { HsiApp, APP_DESIGN_WIDTH } from './HeroScreenApp';
 export type {
   HeroScreenInterfaceProps,
   HsiLane,

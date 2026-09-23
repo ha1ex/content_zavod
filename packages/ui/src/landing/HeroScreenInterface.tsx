@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { ProductNavIcon, isProductNavIcon } from './ProductNavIcon';
+import { HsiApp, APP_DESIGN_WIDTH } from './HeroScreenApp';
 
 /** Ширина, на которой нарисована доска, и её предел на десктопе (контейнер DS). */
 const BOARD_DESIGN_WIDTH = 1360;
@@ -21,7 +22,7 @@ const BOARD_MAX_WIDTH = 1216;
  * `animatedCard`. Уважает prefers-reduced-motion.
  */
 
-export type TagVariant = 'prod' | 'cx' | 'big' | 'urg' | 'ok' | 'blue' | 'jud';
+export type TagVariant = 'prod' | 'cx' | 'big' | 'urg' | 'ok' | 'blue' | 'jud' | 'peach' | 'lime' | 'pink' | 'sky';
 
 export interface HsiTag {
   label: string;
@@ -33,7 +34,20 @@ export interface HsiCard {
   tags?: HsiTag[];
   checklist?: { label: string; done: number; total: number };
   /** Мини-счетчики карточки: вложения, комментарии, дочерние карточки. */
-  counters?: { attachments?: number; comments?: number; children?: number };
+  counters?: { attachments?: number; comments?: number; children?: number; childrenDone?: number };
+  /* Поля ниже рисуются только в режиме appShell. */
+  /** Цветная полоска-тип над заголовком (hex). */
+  accent?: string;
+  /** Иконка типа карточки справа от заголовка. */
+  icon?: 'dot' | 'doc' | 'folder' | 'chart';
+  /** Заливка срока: красная или оранжевая («Сегодня»). */
+  dueTone?: 'red' | 'orange';
+  /** Бейдж «Срочно». */
+  urgent?: boolean;
+  /** Красная плашка блокировки над карточкой. */
+  blocker?: string;
+  /** Родительская карточка — рамка над заголовком. */
+  parent?: string;
   assignees?: string[];
   /** Буквы внутри аватаров — по порядку `assignees`. */
   assigneeInitials?: string[];
@@ -92,6 +106,10 @@ export interface HeroScreenInterfaceProps {
   sidebar?: boolean;
   /** Окно открытой карточки задачи поверх правого края доски. Opt-in. */
   cardWindow?: boolean;
+  /** Рисовать интерфейс Кайтена целиком (шапка, дерево, панель видов), а не один модуль-доску. */
+  appShell?: boolean;
+  /** Название пространства в шапке (при appShell). */
+  spaceTitle?: string;
   /** Базовый zoom доски (по умолчанию 0.86). */
   scale?: number;
   /**
@@ -645,6 +663,8 @@ export function HeroScreenInterface({
   animatedCard,
   sidebar,
   cardWindow,
+  appShell,
+  spaceTitle,
   scale,
   trustLine,
   className,
@@ -664,14 +684,14 @@ export function HeroScreenInterface({
     const update = () => {
       const w = el.clientWidth;
       if (!w) return;
-      const next = Math.min(BOARD_MAX_WIDTH, w) / BOARD_DESIGN_WIDTH;
+      const next = Math.min(BOARD_MAX_WIDTH, w) / (appShell ? APP_DESIGN_WIDTH : BOARD_DESIGN_WIDTH);
       setFit((prev) => (prev == null || Math.abs(prev - next) > 0.001 ? next : prev));
     };
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [appShell]);
 
   const boardZoom = scale ?? fit ?? undefined;
   return (
@@ -711,8 +731,12 @@ export function HeroScreenInterface({
         </div>
 
         <div className="hsi-screen__visual" ref={visualRef}>
-          <div className="hsi" aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
-            <BoardShell boardTitle={boardTitle} columns={columns} lanes={lanes} animate={animate} animatedCard={animatedCard} sidebar={sidebar} cardWindow={cardWindow} />
+          <div className={appShell ? 'hsi hsi--app' : 'hsi'} aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
+            {appShell ? (
+              <HsiApp boardTitle={boardTitle} spaceTitle={spaceTitle} columns={columns} lanes={lanes} />
+            ) : (
+              <BoardShell boardTitle={boardTitle} columns={columns} lanes={lanes} animate={animate} animatedCard={animatedCard} sidebar={sidebar} cardWindow={cardWindow} />
+            )}
           </div>
         </div>
 

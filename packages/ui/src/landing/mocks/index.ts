@@ -85,6 +85,8 @@ export { ModuleScrumMock } from './ModuleScrumMock';
 export { AdminSpaceMock, BoardWindowHeader } from './AdminSpaceMock';
 // ModuleBoards: портфель проектов, свёрнутые доски проектов и доска «Письма»
 export { ModulePortfolioMock as ModuleBoardsMock } from './ModuleBoards';
+// ModuleBoardsOrigin: интерфейс Кайтена целиком (шапка, дерево, панель видов, доска)
+export { ModuleBoardsOriginMock } from './ModuleBoardsOriginMock';
 export { ApprovalBoardMock } from './ApprovalBoardMock';
 export { ReportsChartsMock, ReportsChartsCascadeMock } from './ReportsChartsMock';
 export { WindowCardLegendMock } from './WindowCardLegendMock';

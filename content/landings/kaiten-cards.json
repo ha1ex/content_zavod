@@ -428,7 +428,7 @@
           {
             "id": "lists",
             "label": "Списки",
-            "icon": "kaiten:sort",
+            "icon": "kaiten:kanbanO",
             "mockVariant": "workspace-view-list"
           },
           {
@@ -440,7 +440,7 @@
           {
             "id": "timeline",
             "label": "Таймлайн",
-            "icon": "kaiten:kanbanO",
+            "icon": "kaiten:sort",
             "mockVariant": "workspace-view-timeline"
           },
           {
@@ -480,7 +480,7 @@
           {
             "id": "lists",
             "label": "Списки",
-            "icon": "kaiten:sort",
+            "icon": "kaiten:kanbanO",
             "mockVariant": "workspace-view-list",
             "image": {
               "src": "/brand/features/tasks-views/lists.webp",
@@ -500,7 +500,7 @@
           {
             "id": "timeline",
             "label": "Таймлайн",
-            "icon": "kaiten:kanbanO",
+            "icon": "kaiten:sort",
             "mockVariant": "workspace-view-timeline"
           },
           {

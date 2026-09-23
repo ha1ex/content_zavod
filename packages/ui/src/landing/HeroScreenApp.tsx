@@ -398,6 +398,8 @@ const APP_CSS = `
 .hsi .app__cw h3{font-size:17px;line-height:1.3;font-weight:500}
 /* подзаголовки под названием — номер карточки и «создана / перемещена» — мельче */
 .hsi .app__cw>*>:first-child>div[class*="mt-1.5"]{font-size:12px}
+/* номер карточки — темный, а не акцентный фиолетовый */
+.hsi .app__cw>*>:first-child>div[class*="mt-1.5"] [class*="text-accent"]{color:#2d2d2d}
 .hsi .app__cw>*>:first-child{padding-top:24px;padding-bottom:22px}
 /* группы карточки — «Описание», «Файлы», «Подготовка», «Связи» — разделяем воздухом */
 .hsi .app__cw>*>:first-child>.mt-4{margin-top:20px}

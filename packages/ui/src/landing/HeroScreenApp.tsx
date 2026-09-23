@@ -282,7 +282,7 @@ export function HsiApp({
           <span className="app__rail-it is-active"><I d={M.accountTree} size={26} /></span>
           <span className="app__rail-it"><I d={M.send} size={26} /></span>
           <span className="app__rail-sp" />
-          <span className="app__rail-it"><I d={M.viewWeek} size={24} /></span>
+          <span className="app__rail-it"><I d={M.kanbanO} size={24} /></span>
           <span className="app__rail-it"><I d={M.adminShield} size={24} /></span>
         </nav>
         {tree && <Tree activeLabel={boardTitle} />}

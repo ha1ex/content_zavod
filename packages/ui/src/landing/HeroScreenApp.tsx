@@ -77,8 +77,8 @@ const I = ({ d, size = 24, className }: { d: string; size?: number; className?: 
 const KaitenMark = () => (
   <svg width="26" height="26" viewBox="-0.5 -0.5 27 27" aria-hidden="true">
     <circle cx="13" cy="13" r="13" fill="#F11F24" />
-    <path d="M10.6 3.3 3.3 10.6a3.4 3.4 0 0 0 0 4.8l7.3 7.3a3.4 3.4 0 0 0 4.8 0l7.3-7.3a3.4 3.4 0 0 0 0-4.8l-7.3-7.3a3.4 3.4 0 0 0-4.8 0z" fill="#78FFC7" />
-    <circle cx="13" cy="13" r="6.3" fill="#7D4CCF" />
+    <path d="M11.33 6.27 6.27 11.33a2.36 2.36 0 0 0 0 3.33l5.07 5.07a2.36 2.36 0 0 0 3.33 0l5.07-5.07a2.36 2.36 0 0 0 0-3.33l-5.07-5.07a2.36 2.36 0 0 0-3.33 0z" fill="#78FFC7" />
+    <circle cx="13" cy="13" r="4.38" fill="#7D4CCF" />
   </svg>
 );
 
@@ -375,6 +375,10 @@ const APP_CSS = `
 .hsi .app__cw>*>*{padding-left:24px;padding-right:24px}
 /* подпись под именем файла — на 2px ниже */
 .hsi .app__cw .min-w-0>div+div{margin-top:2px}
+/* лента комментариев дышит: между репликами и вокруг строки фильтра */
+.hsi .app__cw>*>:last-child [class*="space-y-3.5"]>div+div{margin-top:20px}
+.hsi .app__cw>*>:last-child [class*="space-y-3.5"]{margin-top:20px}
+.hsi .app__cw>*>:last-child [class*="mb-3"]{margin-bottom:16px}
 /* вертикальные отступы — родные, как в самом окне карточки */
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
 /* заголовок карточки: помельче и с воздухом над ним */

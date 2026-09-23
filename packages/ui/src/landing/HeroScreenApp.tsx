@@ -197,7 +197,6 @@ function TypeIcon({ icon }: { icon: NonNullable<HsiCard['icon']> }) {
 
 function AppCard({ card }: { card: HsiCard }) {
   const c = card.counters;
-  const pct = card.checklist ? card.checklist.done / card.checklist.total : 0;
   return (
     <div className={card.active ? 'app__card is-open' : 'app__card'}>
       {card.blocker && <div className="app__blocker"><span className="app__hand">✋</span><span>{card.blocker.replace(/ /g, ' ')}</span></div>}
@@ -239,7 +238,6 @@ function AppCard({ card }: { card: HsiCard }) {
           {card.urgent && <span className="app__due app__due--red"><I d={M.fire} size={17} />Срочно</span>}
         </span>
       </div>
-      {card.checklist && <span className="app__prog-bar" style={{ width: `${pct * 86}%`, background: card.accent ?? '#ffcdd2' }} />}
     </div>
   );
 }
@@ -374,7 +372,9 @@ const APP_CSS = `
 .hsi .app__cw>*::-webkit-scrollbar-thumb{background:#c3c3c3;border-radius:7px;border:3px solid #f1f1f1}
 .hsi .app__cw>*>:first-child{border-right:0;border-bottom:1px solid var(--line)}
 /* поля и лента идут во всю ширину панели — держим одинаковые поля по бокам */
-.hsi .app__cw>*>*{padding-left:20px;padding-right:20px}
+.hsi .app__cw>*>*{padding-left:24px;padding-right:24px}
+/* подпись под именем файла — на 2px ниже */
+.hsi .app__cw .min-w-0>div+div{margin-top:2px}
 /* вертикальные отступы — родные, как в самом окне карточки */
 .hsi .app__cw>*>:last-child{padding-top:0;padding-bottom:0}
 /* заголовок карточки: помельче и с воздухом над ним */
@@ -387,14 +387,14 @@ const APP_CSS = `
 /* содержимое групп — описание, файл, прогресс, чек-боксы — отодвигаем от заголовка группы */
 .hsi .app__cw>*>:first-child>[class*="mt-2"]{margin-top:12px}
 /* заголовки групп сдвинуты левее, чтобы шевроны сворачивания выступали */
-.hsi .app__cw>*>:first-child>[class*="-ml-"]{margin-left:-20px}
+.hsi .app__cw>*>:first-child>[class*="-ml-"]{margin-left:-13px}
 /* пункты чек-листа — чуть свободнее друг от друга */
 .hsi .app__cw>*>:first-child>ul>li+li{margin-top:9px}
 /* строки параметров разной высоты (плашка «Материал», аватарки) — ровняем,
    иначе шаг между «Расположение / Тип / Участники / Срок / Метки» гуляет */
 .hsi .app__cw dl>*{min-height:29px}
 /* строка действий («+ … На согласовании») — отодвигаем от подзаголовка */
-.hsi .app__cw>*>:first-child>.mt-3{margin-top:26px}
+.hsi .app__cw>*>:first-child>.mt-3{margin-top:22px}
 /* кнопка «Скрыть отмеченные» в строке прогресса — пошире */
 .hsi .app__cw>*>:first-child>div.mt-2>span:last-child{padding-left:14px;padding-right:14px}
 /* плашки «Материал» и «Маркетинг» — пошире (чип «Ответственный» не трогаем:
@@ -498,7 +498,6 @@ const APP_CSS = `
 .hsi .g-cx{background:#fff9c4}
 .hsi .g-big,.hsi .g-jud{background:#e1bee7}
 .hsi .app__prog{display:flex;justify-content:space-between;background:#f5f5f5;padding:2px 4px 3px;margin:-4px 0 -2px;font-size:13.5px;color:#757575;letter-spacing:.5px}
-.hsi .app__prog-bar{position:absolute;left:0;bottom:-1px;height:3px;border-radius:0 2px 2px 0}
 .hsi .app__foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px}
 .hsi .app__avs{display:flex;align-items:center;gap:7px}
 .hsi .app__av{width:28px;height:28px;border-radius:50%;overflow:hidden;display:inline-flex;box-shadow:0 0 0 1.5px #c792d8}

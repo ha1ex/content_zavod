@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ProductNavIcon, isProductNavIcon } from './ProductNavIcon';
 import { HsiApp, APP_DESIGN_WIDTH } from './HeroScreenApp';
+import { WindowTicketModalOrigin } from './mocks/WindowTicketModalOrigin';
 
 /** Ширина, на которой нарисована доска, и её предел на десктопе (контейнер DS). */
 const BOARD_DESIGN_WIDTH = 1360;
@@ -733,7 +734,14 @@ export function HeroScreenInterface({
         <div className="hsi-screen__visual" ref={visualRef}>
           <div className={appShell ? 'hsi hsi--app' : 'hsi'} aria-hidden="true" style={boardZoom != null ? { zoom: boardZoom } : undefined}>
             {appShell ? (
-              <HsiApp boardTitle={boardTitle} spaceTitle={spaceTitle} columns={columns} lanes={lanes} />
+              <HsiApp
+                boardTitle={boardTitle}
+                spaceTitle={spaceTitle}
+                columns={columns}
+                lanes={lanes}
+                rightPanel={cardWindow ? <WindowTicketModalOrigin /> : undefined}
+                tree={sidebar ?? false}
+              />
             ) : (
               <BoardShell boardTitle={boardTitle} columns={columns} lanes={lanes} animate={animate} animatedCard={animatedCard} sidebar={sidebar} cardWindow={cardWindow} />
             )}

@@ -248,11 +248,17 @@ export function HsiApp({
   spaceTitle,
   columns,
   lanes,
+  rightPanel,
+  tree = true,
 }: {
   boardTitle: string;
   spaceTitle?: string;
   columns: HsiColumnHeader[];
   lanes: HsiLane[];
+  /** Окно карточки, пришвартованное к правому краю интерфейса на всю высоту. */
+  rightPanel?: React.ReactNode;
+  /** Колонка «Дерево» слева. Свернута — доска занимает всю ширину. */
+  tree?: boolean;
 }) {
   // Доска в режиме appShell — одна дорожка: карточки всех дорожек сводятся в колонки.
   const cols = columns.map((_, ci) => lanes.flatMap((l) => l.columns[ci] ?? []));
@@ -279,7 +285,7 @@ export function HsiApp({
           <span className="app__rail-it"><I d={M.viewWeek} size={24} /></span>
           <span className="app__rail-it"><I d={M.adminShield} size={24} /></span>
         </nav>
-        <Tree activeLabel={boardTitle} />
+        {tree && <Tree activeLabel={boardTitle} />}
         <div className="app__main">
           <div className="app__bar">
             <span className="app__seg">
@@ -328,6 +334,7 @@ export function HsiApp({
           </div>
         </div>
       </div>
+      {rightPanel && <aside className="app__cw">{rightPanel}</aside>}
     </div>
   );
 }
@@ -345,6 +352,10 @@ const APP_CSS = `
   position:relative;width:1920px;height:1000px;flex:0 0 auto;display:flex;flex-direction:column;background:var(--chrome);border:1px solid #dcdfdf;border-radius:16px;overflow:hidden;
   box-shadow:0 2px 12px rgba(45,45,45,.10);font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);font-size:15px;line-height:1.35;letter-spacing:.15px}
 .hsi .app svg{flex:none;display:block}
+/* окно карточки у правого края: на всю высоту под шапкой, как выехавшая панель в продукте */
+.hsi .app__cw{position:absolute;top:54px;right:0;bottom:0;width:800px;display:flex;z-index:5;
+  box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
+.hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none}
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}

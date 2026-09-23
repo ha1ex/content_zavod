@@ -74,11 +74,12 @@ const I = ({ d, size = 24, className }: { d: string; size?: number; className?: 
 );
 
 /** Знак Кайтена: красный круг, мятный ромб, фиолетовый центр (brand/kaiten-mark). */
+/** Знак Кайтена — круглый вариант из брендового SVG (logo.svg), пути 1 в 1. */
 const KaitenMark = () => (
-  <svg width="26" height="26" viewBox="-0.5 -0.5 27 27" aria-hidden="true">
-    <circle cx="13" cy="13" r="13" fill="#F11F24" />
-    <path d="M11.17 5.63 5.63 11.17a2.58 2.58 0 0 0 0 3.65l5.55 5.55a2.58 2.58 0 0 0 3.65 0l5.55-5.55a2.58 2.58 0 0 0 0-3.65l-5.55-5.55a2.58 2.58 0 0 0-3.65 0z" fill="#78FFC7" />
-    <circle cx="13" cy="13" r="4" fill="#7D4CCF" />
+  <svg className="app__mark" viewBox="0 0 260 260" fill="none" aria-hidden="true">
+    <path d="M130 260C201.797 260 260 201.797 260 130C260 58.203 201.797 0 130 0C58.203 0 0 58.203 0 130C0 201.797 58.203 260 130 260Z" fill="#F11F24" />
+    <path d="M106.006 37.0134L37.0133 106.006C23.7511 119.268 23.7511 140.77 37.0133 154.032L106.006 223.025C119.268 236.287 140.77 236.287 154.032 223.025L223.025 154.032C236.287 140.77 236.287 119.268 223.025 106.006L154.032 37.0133C140.77 23.7511 119.268 23.7512 106.006 37.0134Z" fill="#78FFC7" />
+    <path d="M130.08 188.96C163.814 188.96 191.16 162.554 191.16 129.98C191.16 97.4062 163.814 71 130.08 71C96.3465 71 69 97.4062 69 129.98C69 162.554 96.3465 188.96 130.08 188.96Z" fill="#7D4CCF" />
   </svg>
 );
 
@@ -359,6 +360,8 @@ const APP_CSS = `
    Отступы делим на --cw-k, чтобы остались в единицах интерфейса. */
 /* карточка, открытая в окне справа, подсвечена фиолетовой обводкой */
 .hsi .app__card.is-open{border-color:#7d4ccf}
+/* кнопка «+» и чек-боксы в окне — тот же пурпур, что у кнопок режимов «Связей» */
+.hsi .app__cw [class*="action-primary"]{background:#9c27b0}
 .hsi .app__cw{--cw-k:1.232;position:absolute;zoom:var(--cw-k);
   top:calc(108px / var(--cw-k));right:calc(57px / var(--cw-k));bottom:0;
   width:486px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
@@ -408,7 +411,10 @@ const APP_CSS = `
 /* строка действий («+ … На согласовании») — отодвигаем от подзаголовка */
 .hsi .app__cw>*>:first-child>.mt-3{margin-top:22px}
 /* кнопка «Скрыть отмеченные» в строке прогресса — пошире */
-.hsi .app__cw>*>:first-child>div.mt-2>span:last-child{padding-left:14px;padding-right:14px}
+.hsi .app__cw>*>:first-child [class*="uppercase"][class*="border"]{padding-left:14px;padding-right:14px}
+/* строка дочерней карточки: поля по краям и метаданные к правому краю */
+.hsi .app__cw>*>:first-child>div[class*="h-8"]{padding-left:10px;padding-right:10px}
+.hsi .app__cw>*>:first-child>div[class*="h-8"]>span:last-child{margin-left:auto}
 /* плашки «Материал» и «Маркетинг» — пошире (чип «Ответственный» не трогаем:
    у него аватарка прижата к левой кромке) */
 .hsi .app__cw dl dd span[class*="px-2.5"]{padding-left:12px;padding-right:12px}
@@ -417,6 +423,7 @@ const APP_CSS = `
 /* шапка */
 .hsi .app__top{position:relative;height:54px;flex:none;border-bottom:1px solid var(--line)}
 .hsi .app__top>*{position:absolute;top:0;height:53px;display:flex;align-items:center}
+.hsi .app__mark{width:26px;height:26px;flex:none}
 .hsi .app__logo{left:13px;gap:9px;font-size:23px;font-weight:500;letter-spacing:0;color:var(--ink)}
 .hsi .app__space{left:132px;gap:15px;font-size:15.5px;font-weight:500;letter-spacing:.3px}
 .hsi .app__space svg{color:var(--ic)}

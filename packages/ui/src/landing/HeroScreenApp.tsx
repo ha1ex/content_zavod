@@ -366,7 +366,12 @@ const APP_CSS = `
   width:486px;display:flex;z-index:5;box-shadow:-18px 0 44px -24px rgba(45,45,45,.28)}
 /* окно приходит двухколоночным — в узкой панели складываем в один столбик */
 .hsi .app__cw>*{width:100%;height:100%;border-radius:0;box-shadow:none;
-  grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;overflow:hidden}
+  grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;
+  overflow-y:scroll;overflow-x:hidden}
+/* полоса прокрутки у правой кромки окна — контент длиннее панели */
+.hsi .app__cw>*::-webkit-scrollbar{width:13px}
+.hsi .app__cw>*::-webkit-scrollbar-track{background:#f1f1f1}
+.hsi .app__cw>*::-webkit-scrollbar-thumb{background:#c3c3c3;border-radius:7px;border:3px solid #f1f1f1}
 .hsi .app__cw>*>:first-child{border-right:0;border-bottom:1px solid var(--line)}
 /* поля и лента идут во всю ширину панели — держим одинаковые поля по бокам */
 .hsi .app__cw>*>*{padding-left:20px;padding-right:20px}
@@ -381,6 +386,8 @@ const APP_CSS = `
 .hsi .app__cw>*>:first-child>.mt-4{margin-top:20px}
 /* содержимое групп — описание, файл, прогресс, чек-боксы — отодвигаем от заголовка группы */
 .hsi .app__cw>*>:first-child>[class*="mt-2"]{margin-top:12px}
+/* заголовки групп сдвинуты левее, чтобы шевроны сворачивания выступали */
+.hsi .app__cw>*>:first-child>[class*="-ml-"]{margin-left:-20px}
 /* пункты чек-листа — чуть свободнее друг от друга */
 .hsi .app__cw>*>:first-child>ul>li+li{margin-top:9px}
 /* строки параметров разной высоты (плашка «Материал», аватарки) — ровняем,

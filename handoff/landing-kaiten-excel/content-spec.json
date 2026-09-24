@@ -1,0 +1,419 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "title": "Замените Excel и разрозненные сервисы на Кайтен",
+        "accentPill": false,
+        "subtitle": "Соберите задачи, сроки, документы и обсуждения в одном месте. Следите за работой команды\nбез ручного обновления таблиц, переписок и лишних созвонов",
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "product_screenshot",
+          "assetId": "kaiten-excel-tablet-pair",
+          "alt": "Два планшета: на заднем плане сторонний сервис, на переднем — доска Кайтена",
+          "variant": "tablet-pair"
+        },
+        "visualPosition": "below",
+        "copyStyle": "screen",
+        "visualGapLarge": true,
+        "glowCenter": true,
+        "copyLeftMobile": true,
+        "flushBottom": true
+      }
+    },
+    {
+      "id": "features",
+      "component": "FeatureGrid",
+      "props": {
+        "title": "Импорт из Excel, быстрый старт\nи 14 дней бесплатно",
+        "accentWord": "14 дней бесплатно",
+        "items": [
+          {
+            "icon": "FileSpreadsheet",
+            "title": "Импорт из Excel",
+            "description": "Перенесите задачи из XLS-файла"
+          },
+          {
+            "icon": "Rocket",
+            "title": "Быстрый старт",
+            "description": "Начните с привычного процесса"
+          },
+          {
+            "icon": "CalendarCheck",
+            "title": "14 дней бесплатно",
+            "description": "Попробуйте все возможности Кайтена"
+          }
+        ],
+        "columns": 3,
+        "iconGapSmall": true,
+        "tabletThree": true,
+        "iconAsideMobile": true,
+        "titleBreakMobile": true,
+        "hideHeader": true,
+        "plain": true,
+        "iconAside": true,
+        "spaceCompactDesktop": true,
+        "spaceBottom": true,
+        "flat": true
+      }
+    },
+    {
+      "id": "reviews",
+      "component": "ReviewSlider",
+      "props": {
+        "title": "Что говорят команды, которые заменили Excel на Кайтен",
+        "compact": true,
+        "reviews": [
+          {
+            "logo": "/brand/reviews/metro-logo.png",
+            "logoHeight": 34,
+            "logoWide": true,
+            "hideAuthor": true,
+            "quote": "«Теперь достаточно открыть пространство: сразу видно, сколько проектов находится в работе, на каком они этапе и где уже появляются риски по срокам»",
+            "name": "METRO",
+            "avatarInitial": "M",
+            "caseUrl": "https://kaiten.ru/blog/case-metro/",
+            "caseLabel": "Читать кейс"
+          },
+          {
+            "logo": "/brand/reviews/dvfu-logo.png",
+            "logoHeight": 36,
+            "logoWide": true,
+            "hideAuthor": true,
+            "quote": "«В любой момент можно показать первым лицам или проверяющим, кто на каком этапе и какие документы уже готовы»",
+            "name": "ДВФУ",
+            "avatarInitial": "Д",
+            "caseUrl": "https://kaiten.ru/blog/case-dvfu/",
+            "caseLabel": "Читать кейс"
+          },
+          {
+            "logo": "/brand/reviews/kleber-print-logo.png",
+            "logoHeight": 40,
+            "logoWide": true,
+            "hideAuthor": true,
+            "quote": "«Мы видим всю историю по всем заказам: кто кому что написал, кто кому передал заказ»",
+            "name": "КЛЕБЕР-ПРИНТ",
+            "avatarInitial": "К",
+            "caseUrl": "https://kaiten.ru/blog/900-zakazov-za-6-miesiatsiev/",
+            "caseLabel": "Читать кейс"
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceTop": true,
+        "spaceBottomMobile64": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "copyNarrow": true,
+        "gapTightMobile": true,
+        "title": "Excel хранит данные. Кайтен помогает управлять работой",
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "description": "Пока задач немного, таблиц может быть достаточно. Но постепенно строк становится больше, появляются новые проекты, листы, исполнители, сроки и статусы — и следить за всей работой становится сложнее.",
+        "mediaPosition": "right",
+        "mediaAlt": "Таблица задач в Excel, которая растет без конца: строк все больше, листов все больше",
+        "mediaVariant": "excel-grow"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "flushBottom": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "mediaNarrow": true,
+        "gapTightMobile": true,
+        "title": "Кайтен сохраняет привычный табличный формат, но добавляет возможности для управления работой",
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "checklistPlain": true,
+        "checklist": [
+          {
+            "icon": "Users",
+            "text": "Ответственные — видно, кто работает над задачей"
+          },
+          {
+            "icon": "Calendar",
+            "text": "Сроки — дедлайны всегда перед глазами"
+          },
+          {
+            "icon": "Filter",
+            "text": "Фильтры и сортировка — быстро находите нужные задачи"
+          },
+          {
+            "icon": "select-multiple",
+            "text": "Карточка задачи — вся информация открывается из одной строки"
+          }
+        ],
+        "mediaPosition": "left",
+        "flushTop": true,
+        "mediaAlt": "Табличное представление Кайтена: ответственный, срок, статус и метка в строке, из строки открывается карточка задачи",
+        "mediaVariant": "tasks-views-slider"
+      }
+    },
+    {
+      "id": "cta_buttons",
+      "component": "CtaButtons",
+      "props": {
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "flushBottom": true,
+        "tightSpacing": true
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "tightBottom": true,
+        "spaceTopLargeXl": true,
+        "spaceTopLarge": true,
+        "titleSmallTablet": true,
+        "title": "Больше возможностей для управления работой",
+        "align": "center",
+        "mediaVariant": "none"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceBottomMobile64": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "copyNarrow": true,
+        "gapTightMobile": true,
+        "title": "Кайтен покажет весь процесс команды",
+        "mediaTight": true,
+        "mediaGrayShadow": true,
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "description": "Переключитесь из таблицы на доску — те же задачи разложатся по этапам. Сразу видно, что уже готово, что сейчас в работе и где процесс остановился",
+        "mediaPosition": "right",
+        "flushTop": true,
+        "titleSize": "xsmall",
+        "mediaSrc": "/brand/kaiten-board-process.png",
+        "mediaAlt": "Доска Кайтена «Задачи команды»: задачи разложены по колонкам от «Запланировано» до «Готово»",
+        "mediaVariant": "kanban-minimal-animated"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceBottomMobile64": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "mediaNarrow": true,
+        "gapTightMobile": true,
+        "title": "Вся информация по задаче — внутри карточки",
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "description": "Ответственные, сроки, описание, чек-листы, файлы и обсуждения собраны в одном месте — весь контекст всегда под рукой",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "titleSize": "xsmall",
+        "mediaAlt": "Карточка задачи Кайтена: параметры, описание, чек-лист, файлы и обсуждение с командой",
+        "mediaVariant": "window-ticket-modal-origin"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceBottomMobile64": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "copyNarrow": true,
+        "gapTightMobile": true,
+        "title": "Сразу видно, что требует внимания",
+        "mediaGrayShadow": true,
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "description": "Срочные и просроченные задачи, блокировки и другие сигналы видны прямо на доске — без уточнений в чатах и на созвонах",
+        "mediaPosition": "right",
+        "flushTop": true,
+        "titleSize": "xsmall",
+        "mediaSrc": "/brand/kaiten-board-signals.png",
+        "mediaAlt": "Колонки доски Кайтена «В работе» и «На согласовании»: блокировка, срочная задача, сроки и чек-листы видны прямо на карточках",
+        "mediaVariant": "board-signals"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceBottomMobile64": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "mediaNarrow": true,
+        "gapTightMobile": true,
+        "title": "Разбивайте большую работу на понятные шаги",
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "description": "Используйте чек-листы и дочерние карточки для декомпозиции задач. Связывайте карточки между собой, чтобы видеть зависимости и общий прогресс",
+        "mediaPosition": "left",
+        "flushTop": true,
+        "titleSize": "xsmall",
+        "mediaAlt": "Дочерние карточки идут по доске, у родительской карточки отмечается пункт чек-листа",
+        "mediaVariant": "card-checklist-relations"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "flushBottom": true,
+        "mediaWideTablet": true,
+        "gapTablet32": true,
+        "copyNarrow": true,
+        "gapTightMobile": true,
+        "title": "Передайте Кайтену рутину",
+        "mediaGap": "narrow",
+        "mediaRound": true,
+        "description": "Автоматизируйте повторяющиеся действия: Кайтен назначит ответственного, изменит параметры задачи, создаст регулярную карточку или отправит уведомление",
+        "mediaPosition": "right",
+        "flushTop": true,
+        "titleSize": "xsmall",
+        "mediaAlt": "Правило автоматизации Кайтена: когда карточка перемещена в колонку, установить срок через 2 дня после события",
+        "mediaVariant": "window-rule-full"
+      }
+    },
+    {
+      "id": "cta_buttons",
+      "component": "CtaButtons",
+      "props": {
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "flushBottom": true,
+        "spaceTopOverflow": true,
+        "tightSpacing": true
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Не начинайте с нуля — продолжите там,\nгде остановились",
+        "description": "Перенесите существующие задачи из Excel в Кайтен с помощью импорта XLS- или CSV-файла. Сначала можно сохранить привычную структуру работы, а новые возможности подключать постепенно",
+        "primaryCta": {
+          "label": "Импортировать задачи из Excel",
+          "href": "https://kaiten.ru/signup"
+        },
+        "titleSmall": true,
+        "copyNarrow": true,
+        "visualMedium": true,
+        "spaceTopLarge": true,
+        "spaceTopLargeXl": true,
+        "flushBottom": true,
+        "variant": "product",
+        "visualSrc": "/brand/cta-relocation-excel.png",
+        "visualAlt": "Задачи из таблицы Excel переезжают в карточку Кайтена"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "spaceTopLargeXl": true,
+        "spaceTopLarge": true,
+        "headerGapTablet32": true,
+        "titleSmallTablet": true,
+        "mediaBelowVariant": "modules-collage",
+        "mediaBelowFirst": true,
+        "mediaBelowFluid": true,
+        "gapTightMobile": true,
+        "title": "Кайтен — больше, чем таблицы и канбан-доски",
+        "mediaNoRound": true,
+        "mediaGap": "narrow",
+        "headerCenter": true,
+        "description": "Соберите работу команды в одном сервисе и меньше переключайтесь между разными инструментами",
+        "checklistLoose": true,
+        "checklistIconTile": true,
+        "mediaPosition": "below",
+        "mediaVariant": "none"
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Перенесите работу из таблиц в Кайтен",
+        "description": "Начните с привычного процесса, а Кайтен поможет собрать задачи, сроки, документы и обсуждения в одном месте",
+        "primaryCta": {
+          "label": "Попробовать бесплатно на 14 дней",
+          "href": "https://kaiten.ru/signup"
+        },
+        "variant": "product",
+        "visualMedium": true,
+        "titleSize": "small",
+        "visualSrc": "/brand/cta-product.png",
+        "visualAlt": "Кайтен: задачи на доске, загрузка команды, аналитика и Гант-план в одном сервисе",
+        "spaceBottom": true
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Кайтен вместо Excel: задачи, сроки и документы в одном месте",
+    "description": "Замените Excel и разрозненные сервисы на Кайтен: привычная таблица плюс ответственные, сроки и фильтры. Импорт задач из XLS и CSV, 14 дней бесплатно."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-09-23T06:51:58.611Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "migration-from-competitor",
+    "tokenEstimate": 48142,
+    "domain": "pm"
+  }
+}

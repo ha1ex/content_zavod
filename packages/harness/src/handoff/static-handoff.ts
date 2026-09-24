@@ -54,16 +54,6 @@ async function fetchText(url: string): Promise<string> {
   return res.text();
 }
 
-async function fetchBuffer(url: string): Promise<Buffer | null> {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    return Buffer.from(await res.arrayBuffer());
-  } catch {
-    return null;
-  }
-}
-
 /** Все строковые значения из props секции — для дампа контента в README. */
 function collectStrings(o: unknown, acc: string[]): void {
   if (typeof o === 'string') {
@@ -93,14 +83,15 @@ function makeReadme(spec: LandingSpec, slug: string, tokens: Record<string, stri
 Пакет для верстальщика (чистая статика, не Next.js). Собрано Контент-заводом Кайтен.
 
 - **Статичная вёрстка:** \`index.html\` (только разметка) + \`styles.css\` (DS-переменные +
-  Tailwind-утилиты + кастомные компоненты одним файлом) + \`assets/\`. Без скриптов/RSC.
+  Tailwind-утилиты + кастомные компоненты одним файлом) + \`script.js\` (ванильный, без
+  зависимостей: вкладки, слайдеры, масштаб моков) + \`assets/\` (картинки, шрифты, иконки).
 - **Скоуп:** \`styles.scoped.css\` — то же под \`.kaiten-webinar\`; чтобы включить, оберните
   контент в \`<div class="kaiten-webinar"> … </div>\` и подключите его вместо \`styles.css\`.
 - **Машиночитаемый контент:** \`content-spec.json\`.
 
 ## Дизайн-система (Kaiten V01)
 
-- **Шрифт:** Roboto — самохостится в \`assets/fonts/\` (woff2), подключён через \`@font-face\` в \`styles.css\`. Ничего доставлять не нужно; фолбэк — system-ui.
+- **Шрифт:** Roboto (в \`styles.css\` — фолбэк; подключите свой / Google Fonts).
 - **Контейнер:** max-width **1216px**, центрируется авто-отступами; на десктопе боковой padding 0.
 - **Палитра (ключевое):**
   - Акцент / кнопки: \`${t('--color-violet-100', '#7d4ccf')}\` (soft \`${t('--color-violet-12', '#efe9f9')}\`)
@@ -190,36 +181,18 @@ export async function buildStaticHandoff(
     `.rmp__item .rmp__dot{background:#7d4ccf !important;transform:none !important}\n` +
     `.rmp{--p:1}\n` +
     `\n:root{--font-sans:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}\n`;
-
-  // 4b. Шрифты. next/font самохостит Roboto под /_next/static/media/*.woff2, а в
-  //     Tailwind-CSS они прописаны относительным url(../media/*.woff2) от исходного
-  //     /_next/static/css/. В архиве этой папки нет и файлов нет → шрифт не грузился,
-  //     и вёрстка падала на системный фолбэк (другие шрифты, переносы, отступы).
-  //     Скачиваем woff2 с завода в assets/fonts/ и переписываем ссылки на них.
-  const fontFiles: { name: string; buf: Buffer }[] = [];
-  {
-    const seen = new Set<string>();
-    for (const m of stylesCss.matchAll(/url\(\s*['"]?([^)'"]+?\.woff2?)(?:[?#][^)'"]*)?['"]?\s*\)/g)) {
-      const name = basename(m[1]!);
-      if (seen.has(name)) continue;
-      seen.add(name);
-      const ref = m[1]!;
-      const src = ref.startsWith('http')
-        ? ref
-        : ref.startsWith('/')
-          ? base + ref
-          : `${base}/_next/static/media/${name}`;
-      const buf = await fetchBuffer(src);
-      if (buf) fontFiles.push({ name, buf });
+  // Шрифты и картинки из CSS кладем в пакет: ссылки на завод в отданной верстке работать не будут.
+  const cssAssets = new Map<string, string>(); // архивный путь → путь на диске
+  stylesCss = stylesCss.replace(/url\(\s*"?((?:\.\.\/media|\/[^"')]+))([^"')]*)"?\s*\)/g, (whole, head: string, tail: string) => {
+    const ref = head + tail;
+    const file = basename(ref.split('?')[0] ?? ref);
+    if (ref.startsWith('../media/')) {
+      cssAssets.set(`assets/fonts/${file}`, resolve(root, 'apps', 'web', '.next', 'static', 'media', file));
+      return `url("assets/fonts/${file}")`;
     }
-    // любые url(...woff2) → на бандл assets/fonts/<basename> (относительно styles.css в корне пакета)
-    stylesCss = stylesCss.replace(
-      /url\(\s*(['"]?)([^)'"]*?([\w.~-]+\.woff2?))(?:[?#][^)'"]*)?\1\s*\)/g,
-      (_m, _q, _full, file) => `url("assets/fonts/${file}")`,
-    );
-  }
-
-  stylesCss = stylesCss.replace(/url\(\s*\//g, `url(${base}/`);
+    cssAssets.set(`assets/img/${file}`, resolve(root, 'apps', 'web', 'public', ref.replace(/^\//, '')));
+    return `url("assets/img/${file}")`;
+  });
 
   // 5. styles.scoped.css (+ дочистка краевых нескоупленных корневых селекторов)
   const scopedCss = scopeCss(stylesCss)
@@ -258,6 +231,18 @@ export async function buildStaticHandoff(
       return `assets/${basename(file)}`;
     },
   );
+  // Картинки лендинга (/brand/…, /design/…) — в assets/img с относительными ссылками.
+  const pageAssets = new Map<string, string>();
+  html = html.replace(/(src|srcset)="([^"]+)"/g, (whole, attr: string, value: string) => {
+    const parts = value.split(',').map((chunk) => {
+      const [url, ...rest] = chunk.trim().split(/\s+/);
+      if (!url || !url.startsWith('/') || url.startsWith('/_next') || url.startsWith('/landings/')) return chunk.trim();
+      const file = basename(url.split('?')[0] ?? url);
+      pageAssets.set(`assets/img/${file}`, resolve(root, 'apps', 'web', 'public', url.replace(/^\//, '')));
+      return [`assets/img/${file}`, ...rest].join(' ');
+    });
+    return `${attr}="${parts.join(', ')}"`;
+  });
   html = html.replace(/(src|href)="(\/_next\/[^"]*)"/g, `$1="${base}$2"`);
   html = html.replace('</head>', '<link rel="stylesheet" href="styles.css">\n</head>');
 
@@ -269,8 +254,8 @@ export async function buildStaticHandoff(
   //   3) band  — на мобиле опускает подсветку колонки в таблице сравнения под
   //              полноширинный заголовок (--kctc-bg-top / --kct-bg-top), иначе полоса
   //              лезет вверх в шапку. Всё пересчитывается на resize/load.
-  const HELPER_SCRIPT =
-    '<script>/* handoff: вкладки + адаптив моков (без React) */\n' +
+  const SCRIPT_JS =
+    '/* handoff: вкладки + адаптив моков (без React) */\n' +
     '(function(){' +
     'function tabs(){document.querySelectorAll("[data-kt-tabs]").forEach(function(root){' +
     'var btns=root.querySelectorAll("[data-kt-tab]"),panels=root.querySelectorAll("[data-kt-panel]");' +
@@ -343,13 +328,21 @@ export async function buildStaticHandoff(
     'function board(){document.querySelectorAll(".hsi-screen__visual .hsi").forEach(function(el){' +
     'var slot=el.parentElement;if(!slot||!slot.clientWidth)return;' +
     'el.style.zoom=Math.min(1216,slot.clientWidth)/1360;});}' +
+    // 6) views — слайдер представлений (.tvs) стартует, когда попадает в кадр:
+    //    в живом лендинге класс is-live вешает React, в статике — этот наблюдатель.
+    'function views(){var list=document.querySelectorAll(".tvs");if(!list.length)return;' +
+    'if(!("IntersectionObserver" in window)){list.forEach(function(el){el.classList.add("is-live");});return;}' +
+    'var io=new IntersectionObserver(function(entries){entries.forEach(function(e){' +
+    'e.target.classList.toggle("is-live",e.isIntersecting);});},{threshold:0.35});' +
+    'list.forEach(function(el){io.observe(el);});}' +
     'function adapt(){fit();band();revx();board();}' +
-    'tabs();adapt();window.addEventListener("resize",adapt);' +
+    'tabs();views();adapt();window.addEventListener("resize",adapt);' +
     'window.addEventListener("load",adapt);setTimeout(adapt,300);' +
-    '})();</script>';
+    '})();';
+  const scriptTag = '<script src="script.js" defer></script>';
   html = html.includes('</body>')
-    ? html.replace('</body>', HELPER_SCRIPT + '\n</body>')
-    : html + HELPER_SCRIPT;
+    ? html.replace('</body>', scriptTag + '\n</body>')
+    : html + scriptTag;
 
   // 7. иконки: уникальные инлайн-SVG → assets/icons/
   const svgs = [...html.matchAll(/<svg\b[\s\S]*?<\/svg>/g)].map((m) => m[0]);
@@ -368,10 +361,18 @@ export async function buildStaticHandoff(
   const files: { archivePath: string; content: string | Buffer }[] = [
     { archivePath: `landing-${slug}/index.html`, content: html },
     { archivePath: `landing-${slug}/styles.css`, content: stylesCss },
+    { archivePath: `landing-${slug}/script.js`, content: SCRIPT_JS },
     { archivePath: `landing-${slug}/styles.scoped.css`, content: scopedCss },
     { archivePath: `landing-${slug}/content-spec.json`, content: JSON.stringify(spec, null, 2) + '\n' },
     { archivePath: `landing-${slug}/README-ВЁРСТКА.md`, content: makeReadme(spec, slug, tokens) },
   ];
+
+  // шрифты и картинки, на которые ссылаются styles.css и разметка
+  for (const [archivePath, diskPath] of [...cssAssets, ...pageAssets]) {
+    if (await fileExists(diskPath)) {
+      files.push({ archivePath: `landing-${slug}/${archivePath}`, content: await readFile(diskPath) });
+    }
+  }
 
   // картинки лендинга из public/
   for (const ref of assetRefs) {
@@ -379,10 +380,6 @@ export async function buildStaticHandoff(
     if (await fileExists(src)) {
       files.push({ archivePath: `landing-${slug}/assets/${basename(ref)}`, content: await readFile(src) });
     }
-  }
-  // шрифты (Roboto woff2) → assets/fonts/
-  for (const f of fontFiles) {
-    files.push({ archivePath: `landing-${slug}/assets/fonts/${f.name}`, content: f.buf });
   }
   // иконки
   for (const ic of iconFiles) {

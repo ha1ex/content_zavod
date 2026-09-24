@@ -127,6 +127,7 @@ export const AssetRefSchema = z.object({
       'window-card',
       'window-ticket-modal',
       'window-ticket-modal-origin',
+      'tasks-views-slider',
       'card-checklist-relations',
       'platform-slider',
       'modules-collage',
@@ -144,6 +145,15 @@ export const AssetRefSchema = z.object({
       'workspace-spaces',
       'workspace-access',
       'workspace-create',
+      'board-create-column',
+      'space-switch-animated',
+      'space-create-animated',
+      'column-create-animated',
+      'portfolio-card-animated',
+      'portfolio-board-real',
+'space-boards-expand-animated',
+      'space-boards-expand-animated',
+      'admin-space-real',
 
       'scrum-board',
 
@@ -383,6 +393,10 @@ const HeroSectionSchema = z.object({
     visualGapLarge: z.boolean().optional(),
     glowCenter: z.boolean().optional(),
     copyLeftMobile: z.boolean().optional(),
+    titleCompactMobile: z
+      .boolean()
+      .optional()
+      .describe('заголовок первого экрана мельче на мобилке: 26/32 вместо 30/36. Opt-in'),
     flushBottom: z.boolean().optional(),
   }),
 });
@@ -1097,6 +1111,7 @@ const MediaCopySchema = z.object({
       'window-card',
       'window-ticket-modal',
       'window-ticket-modal-origin',
+      'tasks-views-slider',
       'card-checklist-relations',
       'platform-slider',
       'modules-collage',
@@ -1114,6 +1129,14 @@ const MediaCopySchema = z.object({
       'workspace-spaces',
       'workspace-access',
       'workspace-create',
+      'board-create-column',
+      'space-switch-animated',
+      'space-create-animated',
+      'column-create-animated',
+      'portfolio-card-animated',
+      'portfolio-board-real',
+      'space-boards-expand-animated',
+      'admin-space-real',
 
       'scrum-board',
 
@@ -1603,6 +1626,7 @@ export const MockVariantSchema = z.enum([
 'window-card',
 'window-ticket-modal',
 'window-ticket-modal-origin',
+'tasks-views-slider',
 'card-checklist-relations',
 'platform-slider',
 'modules-collage',
@@ -1621,6 +1645,13 @@ export const MockVariantSchema = z.enum([
 'workspace-spaces',
 'workspace-access',
 'workspace-create',
+'board-create-column',
+'space-switch-animated',
+'space-create-animated',
+'column-create-animated',
+'portfolio-card-animated',
+'portfolio-board-real',
+'admin-space-real',
 
 'scrum-board',
 
@@ -1764,8 +1795,12 @@ const ViewSwitcherSchema = z.object({
         z.object({
           id: z.string().min(1).max(40),
           label: z.string().min(2).max(40),
-          icon: z.string().optional().describe('lucide-icon name'),
+          icon: z.string().optional().describe('lucide-icon name или kaiten:<имя> — заливной значок продукта'),
           mockVariant: MockVariantSchema,
+          image: z
+            .object({ src: z.string(), alt: z.string().optional() })
+            .optional()
+            .describe('скриншот вида вместо мока: путь из public и alt'),
         }),
       )
       .min(2)

@@ -165,7 +165,7 @@
         "mediaPosition": "left",
         "flushTop": true,
         "mediaAlt": "Табличное представление Кайтена: ответственный, срок, статус и метка в строке, из строки открывается карточка задачи",
-        "mediaVariant": "excel-table-view"
+        "mediaVariant": "tasks-views-slider"
       }
     },
     {

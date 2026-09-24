@@ -5,7 +5,7 @@ import { cn } from '../../primitives/cn';
  * ExcelGrowMock (`excel-grow`) — таблица задач в Excel, которая растет без конца.
  *
  * Блок «Excel хранит данные. Кайтен помогает управлять работой»: аккуратный файл
- * превращается в бесконечный список — статичный первый кадр, внизу кадр растворяется,
+ * превращается в бесконечный список — строки медленно едут вверх (38с), внизу кадр растворяется,
  * в подвале множатся листы. Это визуальный аргумент «потолка таблицы», поэтому
  * оформление намеренно не кайтеновское: серая сетка, зеленая шапка файла.
  */
@@ -47,8 +47,8 @@ const STATUS_CLASS: Record<Row['status'], string> = {
 const ROW_H = 26;
 
 const KEYFRAMES = `
-/* Анимация остановлена на первом кадре по решению макета: строки стоят. */
-.xlg .roll{ animation:none; }
+/* Медленная лента: строки едут вверх, конца списка не видно. */
+.xlg .roll{ animation: xlgRoll 38s linear infinite; }
 @keyframes xlgRoll{
   0%{ transform:translateY(0); }
   100%{ transform:translateY(-${ROW_H * ROWS.length}px); }
@@ -113,10 +113,10 @@ function Rows() {
           <Cell width="78px" className="text-(--color-text-secondary)">
             {r.due}
           </Cell>
-          <Cell width="118px" className={STATUS_CLASS[r.status]}>
+          <Cell width="96px" className={STATUS_CLASS[r.status]}>
             {r.status}
           </Cell>
-          <Cell width="126px" className="text-(--color-text-secondary)">
+          <Cell width="148px" className="text-(--color-text-secondary)">
             {r.note}
           </Cell>
         </div>
@@ -131,7 +131,7 @@ export function ExcelGrowMock() {
       <style dangerouslySetInnerHTML={{ __html: KEYFRAMES }} />
       <div
         aria-hidden
-        className="relative h-[506px] w-[720px] overflow-hidden rounded-(--radius-3xl) border border-(--color-border-default) bg-(--color-surface-card) shadow-[0_0_40px_rgba(45,45,45,0.12)]"
+        className="relative h-[454px] w-[720px] overflow-hidden rounded-(--radius-3xl) border border-(--color-border-default) bg-(--color-surface-card) shadow-[0_0_40px_rgba(45,45,45,0.12)]"
       >
         {/* шапка файла */}
         <div className="flex items-center gap-2 border-b border-(--color-border-default) bg-[#217346] px-4 py-2.5">
@@ -159,13 +159,14 @@ export function ExcelGrowMock() {
           <HeaderCell letter="A" name="Задача" width="286px" />
           <HeaderCell letter="B" name="Кто делает" width="104px" />
           <HeaderCell letter="C" name="Срок" width="78px" />
-          <HeaderCell letter="D" name="Статус" width="118px" />
-          <HeaderCell letter="E" name="Комментарий" width="126px" />
+          <HeaderCell letter="D" name="Статус" width="96px" />
+          <HeaderCell letter="E" name="Комментарий" width="148px" />
         </div>
 
         {/* бесконечная лента строк */}
         <div className="relative h-[366px] overflow-hidden">
           <div className="roll">
+            <Rows />
             <Rows />
           </div>
           {/* растворение кадра: строк становится все больше, конца не видно */}

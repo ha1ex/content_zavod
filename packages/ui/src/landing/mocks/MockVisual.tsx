@@ -92,6 +92,14 @@ import {
   type WorkspaceView,
   WorkspaceSpacesMock,
   WorkspaceCreateMock,
+  BoardCreateColumnMock,
+  SpaceSwitchAnimatedMock,
+  SpaceCreateAnimatedMock,
+  ColumnCreateAnimatedMock,
+  PortfolioCardAnimatedMock,
+  PortfolioNestedBoardsMock,
+  SpaceBoardsExpandAnimatedMock,
+  AdminSpaceRealMock,
   ModuleScrumMock,
   ModuleBoardsMock,
   ModuleWorkspaceBoardMock,
@@ -131,6 +139,7 @@ import {
   WindowCardMock,
   WindowTicketModalMock,
   WindowTicketModalOrigin,
+  TasksViewsSliderMock,
   CardChecklistRelationsMock,
   PlatformSliderMock,
   ModulesCollageMock,
@@ -294,6 +303,14 @@ export type MockVariant =
   | 'workspace-spaces'
   | 'workspace-access'
   | 'workspace-create'
+  | 'board-create-column'
+  | 'space-switch-animated'
+  | 'space-create-animated'
+  | 'column-create-animated'
+  | 'portfolio-card-animated'
+  | 'portfolio-board-real'
+  | 'space-boards-expand-animated'
+  | 'admin-space-real'
   | 'scrum-board'
   | 'scrum-board-wide'
   | 'module-boards'
@@ -329,6 +346,7 @@ export type MockVariant =
   | 'window-card'
   | 'window-ticket-modal'
   | 'window-ticket-modal-origin'
+  | 'tasks-views-slider'
   | 'card-checklist-relations'
   | 'platform-slider'
   | 'modules-collage'
@@ -783,8 +801,80 @@ function MockVisualSwitch({
     case 'workspace-create':
       return (
         <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
-          <ScaleToFit designWidth={640}>
+          <ScaleToFit designWidth={2000}>
             <WorkspaceCreateMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Пустая доска со скриншота и меню «Создать колонку», 2000px.
+    case 'board-create-column':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={2000}>
+            <BoardCreateColumnMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Переключение между пространствами: курсор идет по дереву, доски меняются. 1920px.
+    case 'space-switch-animated':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <SpaceSwitchAnimatedMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Создание пространства и доски: окна «Новое пространство» и «Новая доска». 1920px.
+    case 'space-create-animated':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <SpaceCreateAnimatedMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Создание колонки на доске: меню колонки и окно «Создать колонку». 1920px.
+    case 'column-create-animated':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <ColumnCreateAnimatedMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Портфель проектов: перенос карточки, календарь срока, окно карточки. 1920px.
+    case 'portfolio-card-animated':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <PortfolioCardAnimatedMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Пространство с несколькими досками: курсор по очереди раскрывает их. 1920px.
+    case 'space-boards-expand-animated':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <SpaceBoardsExpandAnimatedMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Тот же портфель проектов, но без анимации: только доска. 1920px.
+    case 'portfolio-board-real':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <PortfolioNestedBoardsMock />
+          </ScaleToFit>
+        </div>
+      );
+    // Рабочий кабинет руководителя в интерфейсе Кайтена: три доски пространства. 1920px.
+    case 'admin-space-real':
+      return (
+        <div className="w-full [overflow:clip] [overflow-clip-margin:80px]">
+          <ScaleToFit designWidth={1920}>
+            <AdminSpaceRealMock />
           </ScaleToFit>
         </div>
       );
@@ -895,6 +985,9 @@ function MockVisualSwitch({
     // Карточка задачи Кайтена 1:1 с продукта: поля и чек-лист слева, комментарии справа. 800px, ужимает MockFit.
     case 'window-ticket-modal-origin':
       return <WindowTicketModalOrigin />;
+    // Одни и те же задачи в разных представлениях: списки, таблица, timeline, календарь. 1000px, ужимает MockFit.
+    case 'tasks-views-slider':
+      return <TasksViewsSliderMock />;
     // Фрагмент карточки 1:1 с продукта: чек-лист и связи с дочерней карточкой. 620px, ужимает MockFit.
     case 'card-checklist-relations':
       return <CardChecklistRelationsMock />;

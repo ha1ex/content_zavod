@@ -230,7 +230,7 @@ function PresentationColumn() {
         Подготовить презентацию для клиента
       </h3>
       <div className="mt-1.5 text-sm text-(--color-text-secondary)">
-        <span className="text-(--color-text-accent) underline underline-offset-2">#70692833</span> Заказчик{' '}
+        <span className="text-(--color-text-primary) underline underline-offset-2">#70692833</span> Заказчик{' '}
         <span className="text-(--color-text-primary) underline underline-offset-2">Teamlead</span>
       </div>
 
@@ -238,9 +238,9 @@ function PresentationColumn() {
       <div className="relative mt-3 flex items-center gap-2 [&>span:not(:first-child)]:relative">
         {/* серая линия по центру за кнопками, как в продукте */}
         <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-(--color-border-default)" />
-        <TBtn primary>
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#9c27b0] text-white">
           <PlusIcon />
-        </TBtn>
+        </span>
         <span className="mx-2 flex-1" />
         <TBtn>
           <PlayIcon />
@@ -329,7 +329,7 @@ function PresentationColumn() {
             <span
               className={cn(
                 'inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px]',
-                done ? 'bg-(--color-action-primary) text-white' : 'border border-(--color-neutral-400)',
+                done ? 'bg-[#9c27b0] text-white' : 'border border-(--color-neutral-400)',
               )}
             >
               {done && <TickIcon />}

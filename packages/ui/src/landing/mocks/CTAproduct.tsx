@@ -30,6 +30,12 @@ export type CTAproductProps = {
   secondaryButton?: { label: string; href: string } | null;
   /** Иллюстрация платформы/продукта. Не задана — эталонный скриншот мока. */
   image?: { src: string; alt: string };
+  /** Уменьшенный заголовок: 24/32 на планшете и десктопе вместо 30–32. Opt-in. */
+  titleSize?: 'default' | 'small';
+  /** Крупная иллюстрация: на десктопе во всю колонку вместо 82%. Opt-in. */
+  visualLarge?: boolean;
+  /** Средняя иллюстрация: на десктопе 95% колонки вместо 82%. Opt-in. */
+  visualMedium?: boolean;
 };
 
 /**
@@ -49,7 +55,8 @@ const css = `
   font-family:'Roboto',system-ui,sans-serif;color:#2d2d2d}
 .ctp__copy{position:relative;z-index:1}
 .ctp__copy h2{font-size:30px;line-height:36px;font-weight:600;color:#2d2d2d;margin:0}
-@media(min-width:1280px){.ctp__copy h2{font-size:36px;line-height:40px}}
+@media(min-width:1280px){.ctp__copy h2{white-space:pre-line}}
+@media(min-width:1280px){.ctp__copy h2{font-size:32px;line-height:40px}}
 .ctp__copy p{font-size:16px;line-height:24px;color:#424242;margin:16px 0 0}
 /* Кнопки в один ряд; в столбик уходят только на самых узких экранах,
    где две штуки физически не помещаются по ширине. */
@@ -85,6 +92,11 @@ const css = `
 @media(max-width:559px){.ctp{padding:24px;padding-top:48px}.ctp__cta{flex-wrap:wrap}}
 /* На мобилке заголовок мельче: в узкой колонке 24px читались как второй H1. */
 @media(max-width:767px){.ctp__copy h2{font-size:20px;line-height:28px}.ctp__copy p{font-size:14px;line-height:22px}}
+/* visualLarge: иллюстрация во всю колонку на десктопе, а колонка шире текстовой. */
+@media(min-width:1024px){.ctp--md .ctp__visual img{width:95%}}
+@media(min-width:1024px){.ctp--lg{grid-template-columns:5fr 6fr}.ctp--lg .ctp__visual{margin-block:0}.ctp--lg .ctp__visual img{width:100%}}
+/* titleSize='small': заголовок 24/32 на планшете и десктопе, мобилка — как у всех (20/28). */
+@media(min-width:768px){.ctp--sm .ctp__copy h2{font-size:24px;line-height:32px}}
 /* На мобилке между кнопкой и картинкой хватает 24px: колонка одна. */
 @media(max-width:767px){.ctp{gap:24px}}
 `;
@@ -96,9 +108,12 @@ export default function CTAproduct({
   buttonHref,
   secondaryButton,
   image = DEFAULT_IMAGE,
+  titleSize = 'default',
+  visualLarge = false,
+  visualMedium = false,
 }: CTAproductProps) {
   return (
-    <div className="ctp">
+    <div className={['ctp', titleSize === 'small' && 'ctp--sm', visualLarge && 'ctp--lg', visualMedium && 'ctp--md'].filter(Boolean).join(' ')}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <div className="ctp__copy">
         <h2>{title}</h2>

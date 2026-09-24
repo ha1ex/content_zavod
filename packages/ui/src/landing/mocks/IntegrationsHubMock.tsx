@@ -23,6 +23,17 @@ import React from 'react';
 
 const W = 1440;
 const H = 580;
+/**
+ * Высота холста без подложки: низ нижнего ряда карточек (430 + 60). Пустое поле
+ * под ним нужно только лиловой панели — без нее оно выглядит лишним отступом.
+ */
+const PLAIN_H = 490;
+/**
+ * Сколько срезать сверху без подложки: верхний ряд карточек начинается на 74px,
+ * оставляем 16px воздуха. Вся геометрия сдвигается вверх одним translate,
+ * координаты карточек и проводов не меняются.
+ */
+const PLAIN_TOP = 58;
 
 /** Цвет проводов, кружков и наконечников — Violet 100. */
 const WIRE = '#7D4CCF';
@@ -56,9 +67,10 @@ function Slack() {
 function Tilda() {
   return (
     <svg viewBox="0 0 32 32" width="32" height="32">
-      <circle cx="16" cy="16" r="14.2" fill="#fff" stroke="#2d2d2d" strokeWidth="1.6" />
+      <circle cx="16" cy="16" r="14.2" fill="none" stroke="#2d2d2d" strokeWidth="1.6" />
+      {/* Тильда симметрична относительно центра круга (16,16). */}
       <path
-        d="M9.6 17.6c.9-3.4 3.2-4.3 5.4-2.9 1.9 1.2 3.5 1.5 4.4-.6"
+        d="M9.5 17.5C11 13.5 13.5 13.5 16 16S21 18.5 22.5 14.5"
         fill="none"
         stroke="#2d2d2d"
         strokeWidth="1.8"
@@ -262,10 +274,10 @@ const CARDS: Card[] = [
   { label: 'Slack', logo: <Slack />, x: 766, y: 74, w: 224, h: 60 },
   { label: 'Google Forms', logo: <GoogleForms />, x: 1054, y: 146, w: 240, h: 60 },
   { label: 'Tilda', logo: <Tilda />, x: 178, y: 170, w: 224, h: 60 },
-  { label: 'Zapier', logo: <Zapier />, x: 1150, y: 252, w: 224, h: 60 },
+  { label: 'Zapier', logo: <Zapier />, x: 1150, y: 228, w: 224, h: 60 },
   { label: 'Outlook', logo: <Outlook />, x: 148, y: 280, w: 228, h: 60 },
   { label: 'Google календарь', logo: <GoogleCalendar />, x: 200, y: 430, w: 264, h: 60 },
-  { label: 'Яндекс 360', logo: <Yandex />, x: 560, y: 430, w: 228, h: 60 },
+  { label: 'Яндекс Диск', logo: <Yandex />, x: 520, y: 430, w: 228, h: 60 },
   { label: 'GitLab', logo: <GitLab />, x: 820, y: 430, w: 224, h: 60 },
   { label: 'GitHub', logo: <GitHub />, x: 1076, y: 430, w: 228, h: 60 },
 ];
@@ -290,7 +302,7 @@ const WIRES: string[] = [
   // левая грань: Outlook (влево)
   'M560 310 H376',
   // правая грань: Zapier (вправо)
-  'M880 282 H1150',
+  'M880 258 H1150',
   // правая грань: GitHub (вправо и вниз)
   'M880 330 H1178 q12 0 12 12 V430',
   // нижняя грань: Google календарь (вниз и влево)
@@ -311,7 +323,7 @@ const NUBS: Array<[number, number]> = [
   [780, 214],
   [560, 254],
   [560, 310],
-  [880, 282],
+  [880, 258],
   [880, 330],
   [660, 350],
   [720, 350],
@@ -330,22 +342,33 @@ const css = `
 .ihb__label{font-size:20px;line-height:24px;font-weight:400;letter-spacing:-.2px;white-space:nowrap}
 .ihb__hub{position:absolute;display:flex;align-items:center;justify-content:center;
   background:#fff;border-radius:24px}
+.ihb--plain{background:transparent;border-radius:0;overflow:visible}
+.ihb--plain .ihb__wires{height:${H}px;bottom:auto}
+.ihb--plain .ihb__wires,.ihb--plain .ihb__card,.ihb--plain .ihb__hub{translate:0 -${PLAIN_TOP}px}
+.ihb--plain .ihb__card{background:#F4F4F4}
+.ihb--plain .ihb__hub{background:#EFE9F9}
 `;
 
 export interface IntegrationsHubMockProps {
   className?: string;
+  /**
+   * `'panel'` (по умолчанию) — лиловая подложка и белые карточки.
+   * `'plain'` — как эталон контент-завода `presentation-v02/assets/mocks/integrations-hub-violet.png`:
+   * без подложки, карточки сервисов светло-серые (#F4F4F4), Кайтен на светло-лиловом (#EFE9F9).
+   */
+  surface?: 'panel' | 'plain';
 }
 
 /**
  * Карта интеграций: Кайтен в центре, вокруг — сервисы, с которыми он
  * обменивается событиями. Для секций про интеграции и открытый API.
  */
-export function IntegrationsHubMock({ className }: IntegrationsHubMockProps) {
+export function IntegrationsHubMock({ className, surface = 'panel' }: IntegrationsHubMockProps) {
   return (
     <div
       aria-hidden
-      className={`ihb${className ? ` ${className}` : ''}`}
-      style={{ width: W, height: H }}
+      className={`ihb${surface === 'plain' ? ' ihb--plain' : ''}${className ? ` ${className}` : ''}`}
+      style={{ width: W, height: surface === 'plain' ? PLAIN_H - PLAIN_TOP : H }}
     >
       <style dangerouslySetInnerHTML={{ __html: css }} />
 

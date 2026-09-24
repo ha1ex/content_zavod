@@ -4,6 +4,8 @@ import { resolve } from 'node:path';
 const nextConfig: NextConfig = {
   transpilePackages: ['@kaiten/harness', '@kaiten/ui'],
   typedRoutes: true,
+  // Круглая кнопка Next.js в углу превью мешает смотреть лендинги — скрываем.
+  devIndicators: false,
   turbopack: {
     root: resolve(process.cwd(), '..', '..'),
   },

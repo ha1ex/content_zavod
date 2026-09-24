@@ -14,6 +14,25 @@
       "autoPort": true
     },
     {
+      "name": "web-kc-module",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "C:/Users/mi/AppData/Local/Temp/claude/C--Users-mi-Desktop-Figma-Claude--------------/64585a9e-6858-4f58-b8aa-85c6de7ef450/scratchpad/kc-module/apps/web",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3100"
+      ],
+      "port": 3100
+    },
+    {
+      "name": "web-attach",
+      "url": "http://localhost:3000",
+      "port": 3000
+    },
+    {
       "name": "presentation",
       "runtimeExecutable": "node",
       "runtimeArgs": ["design-system/presentation-v02/serve.mjs"],

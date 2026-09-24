@@ -150,7 +150,7 @@ export function WindowProjectModalMock() {
               </span>
             </span>
           </Row>
-          <Row label="Timeline">
+          <Row label="Таймлайн">
             <span className="text-(--color-text-accent) underline underline-offset-2">
               2 марта 9:00 – 15 апреля 18:00
             </span>

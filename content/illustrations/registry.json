@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T15:16:47.682Z",
+  "updatedAt": "2026-09-23T06:51:58.826Z",
   "entries": [
     {
       "kind": "mock-use",
@@ -784,6 +784,222 @@
       "sectionIdx": 8,
       "domain": "pm",
       "recordedAt": "2026-09-07T15:16:47.682Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "hero-screen-interface",
+      "landingSlug": "kaiten-features",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.008Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "workspace-create",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 2,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.022Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "workspace-view-board",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.034Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "kanban-minimal",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.047Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "portfolio-board-stretch",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 5,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.060Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "workspace-spaces",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 6,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.073Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "none",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 7,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.086Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "scrum-board",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 8,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.097Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "module-boards",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 9,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.110Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "admin-space",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 10,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.125Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "reports-charts-cascade",
+      "landingSlug": "kaiten-features",
+      "sectionId": "media_copy",
+      "sectionIdx": 11,
+      "domain": "pm",
+      "recordedAt": "2026-09-21T08:41:52.137Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "integrations-hub",
+      "landingSlug": "kaiten-integrations-v2",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-09-22T13:06:57.729Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "window-ticket-modal",
+      "landingSlug": "kaiten-integrations-v2",
+      "sectionId": "media_copy",
+      "sectionIdx": 3,
+      "domain": "pm",
+      "recordedAt": "2026-09-22T13:06:57.740Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "api-docs",
+      "landingSlug": "kaiten-integrations-v2",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "pm",
+      "recordedAt": "2026-09-22T13:06:57.748Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "tablet-pair",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "hero",
+      "sectionIdx": 1,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.642Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "excel-grow",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 4,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.659Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "excel-table-view",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 5,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.682Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "none",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 7,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.704Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "kanban-minimal-animated",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 8,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.723Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "window-ticket-modal-origin",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 9,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.743Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "board-signals",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 10,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.761Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "card-checklist-relations",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 11,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.786Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "window-rule-full",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 12,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.805Z"
+    },
+    {
+      "kind": "mock-use",
+      "variant": "none",
+      "landingSlug": "kaiten-excel",
+      "sectionId": "media_copy",
+      "sectionIdx": 15,
+      "domain": "pm",
+      "recordedAt": "2026-09-23T06:51:58.826Z"
     }
   ]
 }

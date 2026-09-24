@@ -18,6 +18,14 @@ import {
 
 const PLACEHOLDER_VARIANTS = new Set(['default', 'generic']);
 
+/**
+ * Доменно-агностичные hero-шаблоны (не доменные mock'и): допустимы в любом
+ * домене — как и в illustration-domain-match, где они уже пропускаются.
+ * `hero-screen-interface` вообще дефолт первого экрана для всех лендингов
+ * (правило `hero-screen-interface-default`), поэтому домен его не ограничивает.
+ */
+const DOMAIN_AGNOSTIC_VARIANTS = new Set(['hero-screen-interface', 'hero-screen-video']);
+
 export interface MockSemanticFitError {
   rule: 'variant-not-in-domain' | 'placeholder-when-domain-has-options';
   message: string;
@@ -39,6 +47,7 @@ export function validateMockSemanticFit(
   const allowed = new Set<string>(getAllowedVariants(domain));
 
   allocation.decisions.forEach((d, idx) => {
+    if (DOMAIN_AGNOSTIC_VARIANTS.has(d.mockVariant)) return;
     if (PLACEHOLDER_VARIANTS.has(d.mockVariant)) {
       if (allowed.size > 0) {
         warnings.push({

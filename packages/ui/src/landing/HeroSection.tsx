@@ -10,6 +10,7 @@ import {
   type HsiAnimatedCard,
 } from './HeroScreenInterface';
 import { HeroScreenVideo } from './HeroScreenVideo';
+import { ProductNavIcon, isProductNavIcon } from './ProductNavIcon';
 import { RegistrationForm } from './RegistrationForm';
 import { ChaosOrderMotif } from './ChaosOrderMotif';
 import { ThreadsMotif } from './ThreadsMotif';
@@ -73,6 +74,8 @@ export interface AssetRefProps {
 
 export interface HeroSectionProps {
   eyebrow?: string;
+  /** Иконка слева в бейдже (набор ProductNavIcon). Только hero-screen-interface. */
+  eyebrowIcon?: string;
   title: string;
   /**
    * Optional accent word/phrase that will be visually highlighted inside the title
@@ -104,6 +107,13 @@ export interface HeroSectionProps {
     lanes: HsiLane[];
     animate?: boolean;
     animatedCard?: HsiAnimatedCard;
+    /** Боковое меню пространств слева от доски. */
+    sidebar?: boolean;
+    cardWindow?: boolean;
+    /** Полный интерфейс Кайтена вокруг доски: шапка, рельсы, «Дерево», панель видов. */
+    appShell?: boolean;
+    /** Название пространства в шапке (при appShell). */
+    spaceTitle?: string;
   };
   /**
    * Короткие буллеты под подзаголовком («что заберёте» на лендинге вебинара).
@@ -137,6 +147,20 @@ export interface HeroSectionProps {
    * расплетаются в параллельные дорожки. Opt-in.
    */
   motif?: 'chaos-order' | 'threads';
+  /**
+   * Типографика текста при `visualPosition: 'below'`. `'screen'` — та же, что у
+   * `HeroScreenInterface` (лендинг «Задачи»): H1 36/44 semibold, подзаголовок
+   * 18/28, бейдж без рамки 14/20. Кнопки не меняются. Opt-in.
+   */
+  copyStyle?: 'default' | 'screen';
+  /** Больший зазор между кнопкой и визуалом в раскладке below: 40 / 48 / 64px вместо 24. Opt-in. */
+  visualGapLarge?: boolean;
+  /** Убрать нижний отступ секции (визуал вплотную к следующему блоку). Opt-in. */
+  flushBottom?: boolean;
+  /** Градиент сверху по центру, как у HeroScreenInterface (лендинг GanttPro): мягкое сияние и размытое пятно лаванда → бирюза. Opt-in. */
+  glowCenter?: boolean;
+  /** На мобилке заголовок, подзаголовок и кнопка по левому краю. Opt-in. */
+  copyLeftMobile?: boolean;
 }
 
 export interface HeroFormProps {
@@ -167,6 +191,7 @@ export interface HeroSpeakerProps {
  */
 export function HeroSection({
   eyebrow,
+  eyebrowIcon,
   title,
   accentWord,
   accentPill = true,
@@ -182,6 +207,11 @@ export function HeroSection({
   speaker,
   flush,
   motif,
+  copyStyle,
+  visualGapLarge,
+  flushBottom,
+  glowCenter,
+  copyLeftMobile,
 }: HeroSectionProps) {
   // Вариант `hero-screen-interface` — весь первый экран рендерит эталонный
   // `HeroScreenInterface` (анимированная канбан-доска). Копирайт берём из
@@ -191,6 +221,7 @@ export function HeroSection({
     return (
       <HeroScreenInterface
         eyebrow={eyebrow}
+        eyebrowIcon={eyebrowIcon}
         heading={title}
         subheading={subtitle}
         primaryCta={{ label: primaryCta.label, href: primaryCta.href }}
@@ -200,6 +231,10 @@ export function HeroSection({
         lanes={board?.lanes ?? HSI_BOARD_LANES}
         animate={board?.animate ?? true}
         animatedCard={board?.animatedCard ?? HSI_BOARD_ANIMATED}
+        sidebar={board?.sidebar}
+        cardWindow={board?.cardWindow}
+        appShell={board?.appShell}
+        spaceTitle={board?.spaceTitle}
         // строка доверия из ТЗ — под доской, разделители между пунктами
         trustLine={bullets}
         ariaLabel="Первый экран Kaiten"
@@ -252,7 +287,9 @@ export function HeroSection({
   return (
     <section
       className={cn(
-        'relative isolate overflow-hidden',
+        // flushBottom: визуал стоит вплотную к низу секции, снизу выпускаем на 120px, чтобы тень мокапа не обрезалась; сверху и по бокам режем, как overflow-hidden
+        'relative isolate',
+        flushBottom ? 'overflow-x-clip [clip-path:inset(0_0_-120px_0)]' : 'overflow-hidden',
         'bg-(--color-surface-page) text-(--color-text-primary)',
       )}
     >
@@ -265,41 +302,78 @@ export function HeroSection({
       <div
         aria-hidden
         className={cn(
-          'pointer-events-none absolute inset-x-0 -top-32 -z-10 h-[720px]',
-          'bg-[radial-gradient(60%_60%_at_70%_0%,rgba(125,76,207,0.22)_0%,rgba(125,76,207,0)_60%),radial-gradient(40%_40%_at_15%_30%,rgba(33,150,243,0.10)_0%,rgba(33,150,243,0)_60%)]',
+          'pointer-events-none absolute inset-x-0 -z-10 h-[720px]',
+          glowCenter
+            ? 'top-0 bg-[radial-gradient(900px_420px_at_50%_-140px,#efe9f9_0%,rgba(239,233,249,0)_70%)]'
+            : '-top-32 bg-[radial-gradient(60%_60%_at_70%_0%,rgba(125,76,207,0.22)_0%,rgba(125,76,207,0)_60%),radial-gradient(40%_40%_at_15%_30%,rgba(33,150,243,0.10)_0%,rgba(33,150,243,0)_60%)]',
         )}
       />
+      {glowCenter && (
+        // Размытое пятно лаванда → бирюза по центру сверху, как в HeroScreenInterface (лендинг GanttPro).
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[-220px] -z-10 h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-[linear-gradient(-90deg,#e298ff,#6fe5ff)] opacity-[0.28] blur-[220px]"
+        />
+      )}
 
       <div
         className={cn(
           'mx-auto w-full max-w-(--container-kaiten) px-4 md:px-6 xl:px-0',
           flush
             ? 'pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-16'
-            : 'pt-14 pb-12 lg:pt-20',
+            : isBelow && copyStyle === 'screen'
+              ? 'pt-12 pb-12' // как у HeroScreenInterface: 48px сверху на всех ширинах
+              : 'pt-14 pb-12 lg:pt-20',
           !flush && (isBelow ? 'lg:pb-12' : 'lg:pb-20'),
+          flushBottom && '!pb-0',
         )}
       >
         {isBelow ? (
-          <div className="flex flex-col items-center gap-12">
-            <div className="max-w-3xl text-center">
+          <div className={cn('flex flex-col items-center', copyStyle === 'screen' ? (visualGapLarge ? 'gap-10 md:gap-12 lg:gap-16' : 'gap-6') : 'gap-12')}>
+            <div className={cn('text-center', copyStyle === 'screen' ? 'w-full max-w-[940px]' : 'max-w-3xl', copyLeftMobile && 'max-md:text-left [&_p]:max-md:mx-0')}>
               {eyebrow && (
                 <Inspect name="hero.eyebrow">
-                  <EyebrowPill>{eyebrow}</EyebrowPill>
+                  {copyStyle === 'screen' ? (
+                    <span className="inline-flex items-center rounded-2xl bg-[rgba(125,76,207,0.12)] px-4 py-1 text-sm leading-5 font-medium text-(--color-text-accent)">
+                      {isProductNavIcon(eyebrowIcon) ? (
+                        <>
+                          {/* Как бейдж HeroScreenInterface: «ФУНКЦИЯ ▣ Интеграции» */}
+                          <span className="relative top-px text-xs uppercase">{eyebrow.split(' ')[0]}</span>
+                          <ProductNavIcon name={eyebrowIcon} className="mr-1.5 ml-3.5 h-[18px] w-[18px] flex-none" />
+                          <span className="relative top-px">{eyebrow.split(' ').slice(1).join(' ')}</span>
+                        </>
+                      ) : (
+                        eyebrow
+                      )}
+                    </span>
+                  ) : (
+                    <EyebrowPill>{eyebrow}</EyebrowPill>
+                  )}
                 </Inspect>
               )}
               <h1
                 data-comp="hero.title"
-                className="text-4xl font-semibold leading-[1.05] sm:text-5xl xl:text-6xl"
+                className={cn(
+                  copyStyle === 'screen'
+                    ? 'mt-4 mb-5 text-[30px] leading-9 font-semibold min-[385px]:text-4xl min-[385px]:leading-10 md:leading-11 md:whitespace-pre-line'
+                    : 'text-4xl font-semibold leading-[1.05] sm:text-5xl xl:text-6xl', copyLeftMobile && 'max-md:mt-0 max-md:!text-[30px] max-md:!leading-9')
+                }
               >
                 {renderedTitle}
               </h1>
               <p
                 data-comp="hero.subtitle"
-                className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-(--color-text-primary) sm:text-xl"
+                className={cn(
+                  copyStyle === 'screen'
+                    ? 'mx-auto max-w-[820px] text-base leading-7 text-[#2d2d2d] md:max-w-[940px] md:text-lg md:whitespace-pre-line'
+                    : 'mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-(--color-text-primary) sm:text-xl',
+                  // перенос из спека только на десктопе: на планшете строка ломалась дважды
+                  copyLeftMobile && 'md:max-xl:whitespace-normal',
+                )}
               >
                 {subtitle}
               </p>
-              <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+              <div className={cn('mt-8 flex w-full flex-col items-center justify-center gap-3 sm:flex-row', copyLeftMobile && 'max-md:mt-6')}>
                 <Inspect name="hero.primaryCta">
                   <ButtonLink size="lg" href={primaryCta.href}>
                     {primaryCta.label}

@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Icon } from '../../primitives/Icon';
 import { cn } from '../../primitives/cn';
 
@@ -61,31 +62,16 @@ const PF_CARDS: PCard[][] = [
   [{ title: 'Объект 4', tags: [['DM', 'violet'], ['Yes', 'green'], ['Ежедневно в 00:05', 'orange']], date: '21.08.2024-31.08.2024', av: 2 }],
   [{ title: 'Объект 7', tags: [['Фундамент', 'orange']], av: 1 }, { title: 'Проект 9', tags: [['Монтаж', 'blue']], av: 2 }],
 ];
-const LEFT_BARS = [['Проект 1', '4 карточки'], ['Проект 2', '4 карточки'], ['Проект 3', '4 карточки']];
-const RIGHT_BARS = [['Проект 1 - Задачи', '6 карточек'], ['Проект 2 - Задачи', '8 карточек'], ['Проект 3 - Задачи', '4 карточки']];
+const LEFT_BARS = [['Проект 1', '4 карточки'], ['Проект 2', '4 карточки']];
 
 const PISMA: Col[] = [
-  { t: 'Очередь', n: 2, tone: 'teal', cards: [
-    { title: 'Письмо входящее 1 от 11.03.24 ООО Ромашка', av: 1 },
+  { t: 'Очередь', n: 1, tone: 'teal', cards: [
     { title: 'Письмо входящее 2 от 06.06.24 ООО Василек о согласовании проекта', tag: ['Проект 1', 'pink'], av: 1, due: ['16 мая', 'red'] },
   ] },
-  { t: 'В работе', n: 2, tone: 'orange', cards: [
+  { t: 'В работе', n: 1, tone: 'orange', cards: [
     { title: 'Служебная записка от 01.07.24 от Ивановой И.И.', tag: ['Проект 2', 'yellow'], av: 2, due: ['01.08.2024', 'red'] },
-    { title: 'Письмо вх.4 от 20.06.24 ООО Подсолнух доп. соглашение', tag: ['Проект 3', 'yellow'], av: 1 },
   ] },
-  { t: 'Готово', n: 2, tone: 'green', cards: [
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['ООО Альфа', 'pink'], av: 2, urgent: true },
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['Проект N', 'pink'], av: 2, due: ['01.08.2024', 'green'] },
-  ] },
-];
-const DOCS: Col[] = [
-  { t: 'Очередь', n: 1, tone: 'teal', cards: [{ title: 'Договор от 11.03.24 ООО Ромашка', av: 1 }] },
-  { t: 'В работе', n: 2, tone: 'orange', cards: [
-    { title: 'Служебная записка от 01.07.24 от Ивановой И.И.', tag: ['Проект 2', 'yellow'], av: 2, due: ['01.08.2024', 'red'] },
-    { title: 'Письмо вх.4 от 20.06.24 ООО Подсолнух доп. соглашение', tag: ['Проект 3', 'yellow'], av: 1 },
-  ] },
-  { t: 'Готово', n: 2, tone: 'green', cards: [
-    { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['ООО Альфа', 'pink'], av: 2, urgent: true },
+  { t: 'Готово', n: 1, tone: 'green', cards: [
     { title: 'Электронное письмо 05.04.24 об открытии счет', tag: ['Проект N', 'pink'], av: 2, due: ['01.08.2024', 'green'] },
   ] },
 ];
@@ -95,7 +81,8 @@ function ColBoard({ cols }: { cols: Col[] }) {
   return (
     <div className="flex">
       {cols.map((col, i) => (
-        <div key={col.t} className={cn('flex w-[200px] shrink-0 flex-col px-3', i > 0 && 'border-l border-(--color-border-default)')}>
+        // ширина колонки = колонка портфеля выше (5 равных долей)
+        <div key={col.t} className={cn('flex w-1/5 shrink-0 flex-col px-3', i > 0 && 'border-l border-(--color-border-default)')}>
           <div className="mb-2 flex items-center gap-2 px-1"><span className="text-[14px] font-medium text-(--color-text-primary)">{col.t}</span><span className="ml-auto"><CountBadge n={col.n} tone={col.tone} /></span></div>
           <div className="space-y-3">{col.cards.map((c, i) => <MiniCard key={i} d={c} />)}</div>
         </div>
@@ -121,11 +108,11 @@ function TBtn({ icon, label, active }: { icon: string; label?: string; active?: 
  * Mock сложного дашборда Kaiten «Портфель проектов»: доска-портфель с воронкой
  * (Оценка → Согласование → Контракт → Аванс → Производство) и свимлейном
  * «Первый приоритет» (карточки с тегами, датами, чек-листами, аватарами),
- * свёрнутые доски проектов/задач и доски «Письма»/«Документы» с колонками.
+ * свёрнутые доски проектов и развёрнутая доска «Письма» с колонками.
  */
 export function ModulePortfolioMock() {
   return (
-    <div aria-hidden className="w-[1360px] overflow-hidden rounded-2xl border border-(--color-border-default) bg-(--color-surface-section) shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]">
+    <div aria-hidden className="w-[1360px] overflow-hidden rounded-2xl border border-(--color-border-default) bg-(--color-surface-card) shadow-[0_10px_40px_-20px_rgba(45,45,45,0.3)]">
       {/* toolbar */}
       <div className="flex items-center gap-1 border-b border-(--color-border-default) bg-white px-3 py-2">
         <Icon name="Menu" className="mr-1 h-5 w-5 text-(--color-text-secondary)" strokeWidth={2} />
@@ -142,13 +129,13 @@ export function ModulePortfolioMock() {
           <div className="flex items-center gap-2 px-4 py-3"><Icon name="GripVertical" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} /><span className="text-[16px] font-semibold text-(--color-text-primary)">Портфель проектов</span></div>
           <div className="flex border-b border-(--color-border-default) px-3 pb-2">
             {PF_COLS.map((c, i) => (
-              <div key={c[0]} className={cn('flex w-[220px] shrink-0 items-center gap-2 px-3', i > 0 && 'border-l border-(--color-border-default)')}><span className="text-[14px] font-medium text-(--color-text-primary)">{c[0]}</span><span className="ml-auto"><CountBadge n={c[1]} tone={c[2]} /></span></div>
+              <div key={c[0]} className={cn('flex min-w-0 flex-1 items-center gap-2 px-3', i > 0 && 'border-l border-(--color-border-default)')}><span className="text-[14px] font-medium text-(--color-text-primary)">{c[0]}</span><span className="ml-auto"><CountBadge n={c[1]} tone={c[2]} /></span></div>
             ))}
           </div>
           <div className="border-b border-(--color-border-default) px-4 py-2"><span className="text-[14px] font-semibold text-(--color-text-primary)">Первый приоритет</span></div>
           <div className="flex p-3">
             {PF_CARDS.map((col, i) => (
-              <div key={i} className={cn('w-[220px] shrink-0 px-3', i > 0 && 'border-l border-(--color-border-default)')}>
+              <div key={i} className={cn('min-w-0 flex-1 px-3', i > 0 && 'border-l border-(--color-border-default)')}>
                 <div className="space-y-3">{col.map((card, j) => <PortfolioCard key={j} d={card} />)}</div>
               </div>
             ))}
@@ -156,24 +143,19 @@ export function ModulePortfolioMock() {
         </div>
 
         {/* collapsed board bars */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+        <div className="grid grid-cols-1 gap-y-3">
           {LEFT_BARS.map((b, i) => (
-            <React.Fragment key={i}>
+            <Fragment key={i}>
               <CollapsedBar title={b[0]} count={b[1]} />
-              <CollapsedBar title={RIGHT_BARS[i][0]} count={RIGHT_BARS[i][1]} />
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
 
-        {/* Письма + Документы */}
-        <div className="grid grid-cols-2 gap-6">
+        {/* Письма */}
+        <div className="grid grid-cols-1 gap-6">
           <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section)">
             <div className="flex items-center gap-2 px-4 py-3"><Icon name="GripVertical" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} /><span className="text-[15px] font-semibold text-(--color-text-primary)">Письма</span></div>
             <div className="px-3 pb-3"><ColBoard cols={PISMA} /></div>
-          </div>
-          <div className="rounded-(--radius-lg) border border-(--color-border-default) bg-(--color-surface-section)">
-            <div className="flex items-center gap-2 px-4 py-3"><Icon name="GripVertical" className="h-4 w-4 text-(--color-text-secondary)" strokeWidth={2} /><span className="text-[15px] font-semibold text-(--color-text-primary)">Документы</span></div>
-            <div className="px-3 pb-3"><ColBoard cols={DOCS} /></div>
           </div>
         </div>
       </div>

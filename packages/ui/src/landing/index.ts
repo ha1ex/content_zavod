@@ -56,10 +56,16 @@ export { MetricsSplit } from './MetricsSplit';
 export type { MetricsSplitProps, MetricCellProps } from './MetricsSplit';
 
 export { TabbedFeatureSection } from './TabbedFeatureSection';
+export { TabsGallery } from './TabsGallery';
+export type { TabsGalleryProps, TabsGalleryItem } from './TabsGallery';
 export type {
   TabbedFeatureSectionProps,
   TabbedFeatureTabProps,
 } from './TabbedFeatureSection';
+export { ViewSwitcher } from './ViewSwitcher';
+export type { ViewSwitcherProps, ViewSwitcherItem } from './ViewSwitcher';
+export { LinkGroups } from './LinkGroups';
+export type { LinkGroupsProps, LinkGroupsLink } from './LinkGroups';
 export { AccordionFeatureSection } from './AccordionFeatureSection';
 export type {
   AccordionFeatureSectionProps,

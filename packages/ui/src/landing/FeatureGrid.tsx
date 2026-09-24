@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { AccentText } from '../primitives/AccentText';
 import { ButtonLink } from '../primitives/ButtonLink';
 import { Inspect } from '../primitives/Inspect';
 import { cn } from '../primitives/cn';
@@ -34,6 +35,11 @@ export interface FeatureItemProps {
    */
   imageAside?: boolean;
   /**
+   * С какой стороны встает иллюстрация при `imageAside`: 'right' (дефолт) или
+   * 'left' — картинка слева, текст справа. На узких экранах картинка над текстом.
+   */
+  imageAsidePosition?: 'left' | 'right';
+  /**
    * Карточка занимает всю ширину ряда — уезжает под остальные отдельной строкой.
    * В треке на планшете и мобилке не влияет: там всё листается по одной.
    */
@@ -49,6 +55,8 @@ export interface FeatureItemProps {
 export interface FeatureGridProps {
   eyebrow?: string;
   title: string;
+  /** Кусок заголовка фирменным фиолетовым, напр. «14 дней бесплатно». */
+  accentWord?: string;
   description?: string;
   items: FeatureItemProps[];
   columns?: 2 | 3 | 4;
@@ -63,6 +71,25 @@ export interface FeatureGridProps {
    * вертикальную шкалу и просвет складывается вдвое.
    */
   flushTop?: boolean;
+  /** Нижний отступ секции по шкале DS: 48 / 64 / 96px. Opt-in. */
+  spaceBottom?: boolean;
+  /** Отступ под иконкой карточки 24px на всех ширинах вместо 24 / 32. Opt-in. */
+  iconGapSmall?: boolean;
+  /** Три карточки в ряд уже с планшета (md), а не с десктопа. Opt-in. */
+  tabletThree?: boolean;
+  /** На мобилке иконка слева, заголовок и текст справа от нее. Opt-in. */
+  iconAsideMobile?: boolean;
+  /** Перенос строки из заголовка (
+) только на мобилке. Opt-in */
+  titleBreakMobile?: boolean;
+  /** Скрыть шапку секции (заголовок остается в спеке для структуры). Opt-in */
+  hideHeader?: boolean;
+  /** Карточки без серой плашки и внутренних отступов. Opt-in */
+  plain?: boolean;
+  /** Текст справа от иконки на всех ширинах. Opt-in */
+  iconAside?: boolean;
+  /** Сверху 64; снизу 32 на планшете и 48 на десктопе (с 1280px). Opt-in */
+  spaceCompactDesktop?: boolean;
   /**
    * 'cards' (дефолт) — простая сетка карточек с иконкой, как у старых лендингов.
    * 'mock' — эталонный блок `FeatureGridMock`: три колонки на десктопе,
@@ -82,6 +109,8 @@ export interface FeatureGridProps {
    * идёт кнопка или следующая секция.
    */
   flushBottom?: boolean;
+  /** Иллюстрация во всю ширину под карточками. Opt-in. */
+  bottomImage?: { src: string; alt?: string };
 }
 
 /**
@@ -137,14 +166,25 @@ const TRACK_STYLE = `
 export function FeatureGrid({
   eyebrow,
   title,
+  accentWord,
   description,
   items,
   columns = 3,
   variant = 'cards',
   slider = false,
   flushTop = false,
+  spaceBottom = false,
+  iconGapSmall = false,
+  tabletThree = false,
+  iconAsideMobile = false,
+  titleBreakMobile = false,
+  hideHeader = false,
+  plain = false,
+  iconAside = false,
+  spaceCompactDesktop = false,
   flat,
   flushBottom,
+  bottomImage,
 }: FeatureGridProps) {
   // На планшете и мобилке карточки не помещаются в ряд — трек листается
   // свайпом и стрелками под ним. На десктопе это обычная сетка.
@@ -218,11 +258,13 @@ export function FeatureGrid({
         'mx-auto w-full max-w-(--container-kaiten)',
         'px-4 md:px-6 xl:px-0',
         !flushTop && 'pt-12 md:pt-16 lg:pt-24',
+        spaceBottom && 'pb-12 md:pb-16 lg:pb-24',
+        spaceCompactDesktop && 'md:pb-8 lg:pt-16 lg:pb-8 xl:pb-12',
       )}
     >
       {/* На планшете шапке даём ту же ширину, что на десктопе: с 2xl заголовок
           ломался на две строки уже там, где помещается в одну. */}
-      <div className="mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:max-w-4xl md:text-center lg:mb-12 lg:max-w-6xl">
+      <div className={cn('mb-6 max-w-2xl text-left md:mx-auto md:mb-8 md:max-w-4xl md:text-center lg:mb-12 lg:max-w-6xl', hideHeader && 'hidden')}>
         {eyebrow && (
           <p
             data-comp="features.eyebrow"
@@ -233,9 +275,9 @@ export function FeatureGrid({
         )}
         <h2
           data-comp="features.title"
-          className="text-3xl font-semibold leading-tight md:text-4xl"
+          className={cn('text-2xl font-semibold leading-tight md:whitespace-pre-line md:text-4xl', titleBreakMobile && 'whitespace-pre-line md:whitespace-normal')}
         >
-          {title}
+          <AccentText text={title} accentWord={accentWord} />
         </h2>
         {description && (
           <p
@@ -259,11 +301,16 @@ export function FeatureGrid({
                 'fg-track',
                 // мобилка/планшет — горизонтальный трек со снапом
                 'flex snap-x snap-mandatory gap-4 overflow-x-auto md:gap-6',
+                // трек выходит в поля секции: карточка доезжает до края экрана,
+                // а не обрывается на невидимой границе контейнера
+                '-mx-4 scroll-px-4 px-4 md:-mx-6 md:scroll-px-6 md:px-6 lg:mx-0 lg:px-0',
                 // десктоп — обычная сетка
                 'lg:grid lg:gap-6 lg:overflow-visible xl:gap-8',
               )
             : 'grid grid-cols-1 gap-4 md:gap-6 xl:gap-8',
           colsClass[columns],
+          tabletThree && 'md:grid-cols-3',
+          plain && 'max-md:gap-6',
         )}
       >
         {items.map((item, i) => (
@@ -277,6 +324,9 @@ export function FeatureGrid({
               // остался для спек, которые просят такую карточку явно.
               'rounded-(--radius-xl) bg-(--color-surface-section) p-6 md:p-8 lg:rounded-(--radius-2xl)',
               flat && 'bg-(--color-surface-section)',
+              plain && 'bg-transparent p-0 md:p-0',
+              iconAsideMobile && 'max-md:grid max-md:grid-cols-[44px_1fr] max-md:gap-x-4',
+              iconAside && 'grid grid-cols-[44px_1fr] content-start gap-x-4',
               // в треке карточка держит свою ширину и цепляется снапом
               // Ширина карточки — доля трека, чтобы в окно попадало целое число
               // карточек: на мобилке одна, на планшете две. Фиксированная ширина
@@ -287,14 +337,14 @@ export function FeatureGrid({
               // широкая карточка занимает весь ряд — уходит отдельной строкой вниз
               item.wide && 'md:w-full lg:col-span-full',
               // текст и картинка бок о бок
-              item.imageAside && (item.image || item.featureTile) && 'lg:flex lg:items-center lg:gap-8',
+              item.imageAside && (item.image || item.featureTile) && cn('xl:flex xl:items-center xl:gap-8', item.imageAsidePosition === 'left' && 'flex flex-col xl:flex-row'),
             )}
           >
             {item.imageAside && (item.image || item.featureTile) ? (
               // Иллюстрация сбоку: порядок в разметке — текст, потом картинка,
               // поэтому на узких экранах она сама уходит вниз.
               <>
-                <div className="lg:order-1 lg:min-w-0 lg:flex-1">
+                <div className={cn('xl:min-w-0 xl:flex-1', item.imageAsidePosition === 'left' ? 'order-2' : 'xl:order-1')}>
                   <h3 data-comp={`features.items[${i}].title`} className="text-lg font-semibold leading-snug">
                     {keepHyphenated(item.title)}
                   </h3>
@@ -305,9 +355,9 @@ export function FeatureGrid({
                 </div>
                 {/* Размер как у плиток галереи фич — 240px, чтобы иллюстрации
                     в разных карточках читались в одном масштабе. */}
-                {/* Пока картинка под текстом (до lg) — по центру карточки;
+                {/* Пока картинка под текстом (до xl) — по центру карточки;
                     сбоку от текста центрировать нечего. */}
-                <div className="mt-6 mx-auto w-[240px] max-w-full shrink-0 overflow-hidden rounded-(--radius-xl) lg:order-2 lg:mx-0 lg:mt-0">
+                <div className={cn('mx-auto w-[240px] max-w-full shrink-0 overflow-hidden rounded-(--radius-xl) xl:mx-0 xl:mt-0', item.imageAsidePosition === 'left' ? 'order-1 mb-6 xl:mb-0' : 'mt-6 xl:order-2')}>
                   {item.image ? (
                     <img src={item.image.src} alt={item.image.alt ?? ''} loading="lazy" className="block h-auto w-full" />
                   ) : (
@@ -343,7 +393,10 @@ export function FeatureGrid({
             ) : (
               <div
                 className={cn(
-                  'mb-6 inline-flex h-11 w-11 items-center justify-center lg:mb-8',
+                  'mb-6 inline-flex h-11 w-11 items-center justify-center',
+                  !iconGapSmall && 'lg:mb-8',
+                  iconAsideMobile && 'max-md:row-span-2 max-md:mb-0',
+                  iconAside && 'row-span-2 mb-0 self-center md:mb-0 md:max-xl:self-start lg:mb-0',
                   'rounded-(--radius-xl) bg-(--color-action-primary-soft) text-(--color-text-accent)',
                 )}
               >
@@ -360,7 +413,7 @@ export function FeatureGrid({
                 </h3>
                 <p
                   data-comp={`features.items[${i}].description`}
-                  className="mt-2 text-base leading-relaxed text-(--color-text-primary)"
+                  className={cn(iconAside ? 'mt-1' : 'mt-2', 'text-base leading-relaxed text-(--color-text-primary)')}
                 >
                   {item.description}
                 </p>
@@ -413,6 +466,15 @@ export function FeatureGrid({
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="m9 18 6-6-6-6" /></svg>
           </button>
         </div>
+      )}
+      {/* Иллюстрация во всю ширину под сеткой карточек (напр. обзор платформы). */}
+      {bottomImage && (
+        <img
+          src={bottomImage.src}
+          alt={bottomImage.alt ?? ''}
+          loading="lazy"
+          className="mx-auto mt-8 block h-auto w-full max-w-[960px] md:mt-12 lg:mt-16"
+        />
       )}
     </section>
   );

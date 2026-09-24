@@ -1,0 +1,217 @@
+{
+  "pageType": "saas_landing",
+  "goal": "try_free",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "eyebrow": "Функция Интеграции",
+        "eyebrowIcon": "integrations",
+        "title": "Свяжите Кайтен с сервисами,\nкоторыми команда уже пользуется",
+        "subtitle": "Заявка с сайта или письмо сами станут карточкой, а уведомление о задаче придет в мессенджер.\nЕсли готового решения не хватит — соберите свое через API, вебхуки или дополнения",
+        "primaryCta": {
+          "label": "Попробовать Кайтен бесплатно",
+          "href": "https://kaiten.ru/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "illustration",
+          "assetId": "kaiten-integrations-hub",
+          "alt": "Карта интеграций Кайтена: мессенджеры, формы, календари, Яндекс Диск, GitLab и GitHub",
+          "variant": "integrations-hub"
+        },
+        "visualPosition": "below",
+        "copyStyle": "screen",
+        "glowCenter": true
+      }
+    },
+    {
+      "id": "tabs_gallery",
+      "component": "TabsGallery",
+      "props": {
+        "title": "Готовые интеграции без программирования",
+        "subtitle": "Настраиваются в пространстве или профиле за несколько минут",
+        "items": [
+          {
+            "label": "Мессенджеры и почта",
+            "icon": "MessageCircle",
+            "title": "Задачи в рабочей переписке",
+            "bullets": [
+              "Telegram и Макс: личные уведомления, новые карточки и комментарии к задачам прямо в чате с ботом",
+              "Макс: ответы на заявки Службы поддержки без перехода в Кайтен",
+              "Slack: события пространства в канале, карточки из сообщений и статус по срокам и блокировкам",
+              "Пачка: уведомления о событиях пространства в чат команды или руководителя",
+              "Электронная почта: письмо на специальный адрес становится карточкой вместе с вложениями"
+            ],
+            "mockVariant": "notification-settings"
+          },
+          {
+            "label": "Календарь и сайты",
+            "icon": "CalendarDays",
+            "title": "Сроки и заявки там, где они появляются",
+            "bullets": [
+              "Календарь: сроки ваших задач или всего пространства в Google, Outlook и других календарях",
+              "Tilda: заявка с формы сайта попадает карточкой на выбранную доску",
+              "Google Forms: ответы формы создают карточки через вебхук"
+            ],
+            "mockVariant": "kaiten-calendar"
+          },
+          {
+            "label": "No-code платформы",
+            "icon": "Workflow",
+            "title": "Сценарии «событие — действие» между сервисами",
+            "bullets": [
+              "Albato и MoreKIT: российские сервисы для связки Кайтена с CRM, почтой и другими приложениями",
+              "Zapier: синхронизация Кайтена с приложениями из каталога Zapier",
+              "Пример: сделка в amoCRM создает задачу в Кайтене через MoreKIT"
+            ],
+            "mockVariant": "integrations-console"
+          },
+          {
+            "label": "Разработка и тестирование",
+            "icon": "GitBranch",
+            "title": "Контекст разработки рядом с задачей",
+            "bullets": [
+              "GitHub и GitLab: коммиты в комментариях к карточке, карточка сама переезжает при создании ветки, пулл-реквесте, ревью и слиянии",
+              "ТестОпс: тест-кейсы, запуски и дефекты связаны с задачами, задачу можно создать из открытого дефекта",
+              "WebStorm: задачи Кайтена в списке задач IDE",
+              "Confluence: статус карточки на странице документа"
+            ],
+            "mockVariant": "tile-integrations-git"
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Дополнения прямо в карточке",
+        "accentWord": "в карточке",
+        "description": "Дополнения добавляют в карточку кнопки, блоки с данными и значки на фасаде. Включаются для пространства в один клик. В облачной версии дополнения доступны по умолчанию, в серверной — с модулем «Дополнения»",
+        "checklist": [
+          {
+            "text": "GitLab и GitHub: ветки, коммиты, merge request и issue отдельными блоками в карточке, в том числе для self-managed GitLab"
+          },
+          {
+            "text": "Google Docs: документы, таблицы и презентации создаются и редактируются, не выходя из Кайтена"
+          },
+          {
+            "text": "Яндекс Диск: файлы с Диска прикрепляются к задаче"
+          },
+          {
+            "text": "Sipuni: звонки из карточки, история и записи разговоров рядом с задачей"
+          },
+          {
+            "text": "Свое дополнение: разработайте сами или закажите разработку"
+          }
+        ],
+        "mediaPosition": "left",
+        "mediaVariant": "window-ticket-modal"
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "API и вебхуки для ваших систем",
+        "accentWord": "API и вебхуки",
+        "description": "Когда готовой интеграции нет, свяжите Кайтен со своими системами через код",
+        "checklist": [
+          {
+            "text": "Открытый API: интеграции с любыми сервисами, данные для аналитики и отчетов, вспомогательные утилиты — до 50 запросов в секунду"
+          },
+          {
+            "text": "Webhooks: внешние системы создают карточки по заранее созданному адресу"
+          },
+          {
+            "text": "External Webhooks: Кайтен сообщает вашему сервису только о выбранных событиях пространства"
+          },
+          {
+            "text": "SCIM: пользователи синхронизируются с вашим identity provider"
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaVariant": "api-docs",
+        "primaryCta": {
+          "label": "Документация API",
+          "href": "https://developers.kaiten.ru/"
+        }
+      }
+    },
+    {
+      "id": "cta_banner",
+      "component": "CtaBanner",
+      "props": {
+        "title": "Нет времени настраивать интеграцию самим?",
+        "description": "Команда Кайтен или авторизованные партнеры свяжут Кайтен с вашими CRM, Helpdesk, 1С, BI, почтой и мессенджерами",
+        "primaryCta": {
+          "label": "Узнать об услуге",
+          "href": "https://faq-ru.kaiten.site/fb614d6f-bc1e-46d5-ad93-38f4a01fa5e0"
+        },
+        "gradient": true
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Попробуйте Кайтен прямо сейчас",
+        "description": "Зарегистрируйте бесплатный аккаунт и подключите первые интеграции",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "https://kaiten.ru/signup"
+        },
+        "variant": "product"
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Интеграции Кайтен: мессенджеры, почта, GitLab, API и дополнения",
+    "description": "Свяжите Кайтен с сервисами команды: Telegram, Макс, Slack, Пачка, почта, формы, GitHub и GitLab. API, вебхуки и дополнения для своих интеграций."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-09-22T13:06:57.715Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "depersonalized-product-tour",
+    "tokenEstimate": 48142,
+    "domain": "pm"
+  }
+}

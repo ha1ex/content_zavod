@@ -1,0 +1,186 @@
+{
+  "pageType": "saas_landing",
+  "goal": "signup",
+  "sections": [
+    {
+      "id": "site_header",
+      "component": "SiteHeader",
+      "props": {}
+    },
+    {
+      "id": "hero",
+      "component": "HeroSection",
+      "props": {
+        "title": "Интеграции",
+        "subtitle": "Подключайте свои любимые инструменты к Кайтен. Без сложных настроек в несколько кликов",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "https://kaiten.ru/signup"
+        },
+        "secondaryCta": null,
+        "visual": {
+          "type": "illustration",
+          "assetId": "kaiten-integrations-hub",
+          "alt": "Карта интеграций Кайтена: Telegram, Slack, Tilda, Google Forms, Zapier, календари, GitLab и GitHub",
+          "variant": "integrations-hub"
+        },
+        "visualPosition": "below"
+      }
+    },
+    {
+      "id": "bento_grid",
+      "component": "BentoGrid",
+      "props": {
+        "wideGap": true,
+        "spaceY": true,
+        "title": "Подключайте свои любимые инструменты к Кайтен",
+        "cells": [
+          {
+            "title": "GitHub",
+            "description": "Связывайте коммиты с карточками Кайтен, автоматически перемещайте карточки в зависимости от состояния коммитов и веток Github",
+            "size": "wide",
+            "featureTile": "Интеграции: GitLab · GitHub",
+            "accent": false
+          },
+          {
+            "icon": "gitlab",
+            "title": "GitLab",
+            "description": "Автоматически связывайте коммиты, ветки, пулл-реквесты и проблемы GitLab с задачами в Кайтен",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "title": "Telegram",
+            "description": "Получайте уведомления, оставляйте комментарии к задачам и создавайте карточки из Telegram",
+            "size": "wide",
+            "featureTile": "Боты и уведомления",
+            "accent": false
+          },
+          {
+            "icon": "slack",
+            "title": "Slack",
+            "description": "Получайте уведомления, оставляйте комментарии к задачам и создавайте карточки не выходя из беседы в Slack",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "title": "Календарь",
+            "description": "Автоматически подгружайте в свой календарь сроки по задачам из Кайтен",
+            "size": "wide",
+            "featureTile": "Повторяющиеся задачи",
+            "accent": false
+          },
+          {
+            "icon": "webhook",
+            "title": "Webhook",
+            "description": "Принимайте заявки на создание карточек из любых систем по заранее созданному “webhook”",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "layout-template",
+            "title": "Tilda",
+            "description": "Настройте возможность создания карточке в Кайтен через форму сайта на Tilda",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "clipboard-list",
+            "title": "Google Forms",
+            "description": "Настройте возможность создания карточке в Кайтен через Google forms",
+            "size": "small",
+            "accent": false
+          },
+          {
+            "icon": "zap",
+            "title": "Zapier",
+            "description": "Настройте интеграцию Кайтен более чем с 50 разными приложениями с помощью сервиса Zapier",
+            "size": "small",
+            "accent": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "media_copy",
+      "component": "MediaCopy",
+      "props": {
+        "title": "Открытый API",
+        "checklist": [
+          {
+            "text": "Создавайте свои собственные интеграции с любыми сторонними сервисами;"
+          },
+          {
+            "text": "Получайте данные для ваших систем аналитики и отчетов;"
+          },
+          {
+            "text": "Создавайте вспомогательные утилиты."
+          }
+        ],
+        "mediaPosition": "right",
+        "mediaSrc": "/brand/features/api-docs.png",
+        "mediaAlt": "Документация Kaiten API: разделы REST и Webhooks, методы пространств и досок",
+        "primaryCta": {
+          "label": "Подробнее",
+          "href": "https://developers.kaiten.ru/"
+        }
+      }
+    },
+    {
+      "id": "final_cta",
+      "component": "FinalCta",
+      "props": {
+        "title": "Попробуйте Кайтен прямо сейчас",
+        "primaryCta": {
+          "label": "Зарегистрироваться",
+          "href": "https://kaiten.ru/signup"
+        },
+        "variant": "gradient",
+        "visualVariant": "kanban-minimal",
+        "centerCopy": true
+      }
+    },
+    {
+      "id": "kaiten_footer",
+      "component": "LandingFooterMock",
+      "props": {}
+    }
+  ],
+  "seo": {
+    "title": "Интеграции Кайтен: GitHub, GitLab, Telegram, Slack и открытый API",
+    "description": "Подключайте свои любимые инструменты к Кайтен без сложных настроек: GitHub, GitLab, Telegram, Slack, календарь, формы, Zapier и API."
+  },
+  "illustrationSpecs": [],
+  "meta": {
+    "sources": [
+      "wiki/brand/redpolitika.md",
+      "wiki/references/kaiten-product-facts.md",
+      "wiki/references/anglicism-dictionary.md",
+      "wiki/design-system/voice.md",
+      "wiki/design-system/colors.md",
+      "wiki/design-system/typography.md",
+      "wiki/design-system/spacing.md",
+      "wiki/design-system/radius.md",
+      "wiki/design-system/motion.md",
+      "wiki/design-system/grid.md",
+      "wiki/design-system/components/hero.md",
+      "wiki/design-system/components/feature-grid.md",
+      "wiki/design-system/components/pricing.md",
+      "wiki/design-system/components/faq.md",
+      "wiki/design-system/components/accordion.md",
+      "wiki/design-system/components/final-cta.md",
+      "wiki/design-system/components/footer.md",
+      "wiki/design-system/components/button.md",
+      "wiki/archetypes/saas_landing.md",
+      "packages/harness/src/skills/conversion-landing.md",
+      "packages/harness/src/prompts/section-mock-skill.md",
+      "wiki/layouts/index.md"
+    ],
+    "generatedAt": "2026-09-16T19:58:22.791Z",
+    "generator": "host-agent",
+    "archetype": "saas_landing",
+    "layout": "depersonalized-product-tour",
+    "tokenEstimate": 48142,
+    "domain": "pm"
+  }
+}

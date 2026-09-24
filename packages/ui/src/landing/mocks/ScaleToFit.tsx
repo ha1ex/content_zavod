@@ -26,6 +26,9 @@ export function ScaleToFit({ designWidth = 800, className, children }: ScaleToFi
     if (!outer || !inner) return;
 
     const update = () => {
+      // Пока блок скрыт (display:none на узких ширинах), ширины нет — масштаб не трогаем,
+      // иначе он застывает и макет вылезает за экран, когда блок снова показывают.
+      if (!outer.clientWidth) return;
       const next = Math.min(1, outer.clientWidth / designWidth);
       setScale(next);
       setHeight(inner.offsetHeight * next);

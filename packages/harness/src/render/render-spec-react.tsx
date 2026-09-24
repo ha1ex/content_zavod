@@ -17,6 +17,9 @@ import {
   BenefitsStrip,
   MetricsSplit,
   TabbedFeatureSection,
+  TabsGallery,
+  ViewSwitcher,
+  LinkGroups,
   AccordionFeatureSection,
   ScenarioWalkthroughSection,
   IndustryPickerSection,
@@ -104,6 +107,24 @@ function RenderSection({
       return <MetricsSplit {...section.props} />;
     case 'TabbedFeatureSection':
       return <TabbedFeatureSection {...section.props} staticTabs={expandTabs} />;
+    // Spec остаётся JSON (mockVariant-строки), компонент принимает ReactNode —
+    // конвертируем мок на границе рендера, как у AccordionFeatureSection.
+    case 'TabsGallery': {
+      const { items, ...rest } = section.props;
+      return (
+        <TabsGallery
+          {...rest}
+          items={items.map((it) => {
+            const { mockVariant, ...item } = it;
+            return mockVariant ? { ...item, media: <MockVisual variant={mockVariant} /> } : item;
+          })}
+        />
+      );
+    }
+    case 'ViewSwitcher':
+      return <ViewSwitcher {...section.props} />;
+    case 'LinkGroups':
+      return <LinkGroups {...section.props} />;
     case 'AccordionFeatureSection': {
       // Компонент теперь self-contained (ReactNode-пропсы), а spec остаётся
       // JSON (mockVariant-строки) — конвертируем на границе рендера.

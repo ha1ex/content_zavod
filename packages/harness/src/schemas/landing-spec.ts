@@ -27,6 +27,8 @@ export const AssetRefSchema = z.object({
       'mcp-agent-board-animated',
       'analytics-kpi',
       'integrations-console',
+
+      'integrations-hub',
       'modules-matrix',
       'sales-funnel',
       'crm-client-card',
@@ -72,14 +74,20 @@ export const AssetRefSchema = z.object({
       'kanban-minimal',
       'kanban-minimal-animated',
       'portfolio-board',
+  'portfolio-board-stretch',
+      'portfolio-board-stretch',
       'approval-board',
       'reports-charts',
+      'reports-charts-cascade',
       'finance-kb-docs',
       'retail-task-card',
       'retail-project',
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      // Окна рабочего пространства: создание пространства и пустая доска
+      'window-workspace-create',
+      'window-board-new',
       // Автоматизации (модуль Kaiten)
       'window-rule-trigger',
       'window-rule-action',
@@ -112,6 +120,73 @@ export const AssetRefSchema = z.object({
       'help-center-template',
       'help-center-setup',
       'help-center-portal-compact',
+      // Переезд из таблиц (Excel → Кайтен)
+      'excel-grow',
+      'excel-table-view',
+      'task-card-full',
+      'window-card',
+      'window-ticket-modal',
+      'window-ticket-modal-origin',
+      'tasks-views-slider',
+      'card-checklist-relations',
+      'platform-slider',
+      'modules-collage',
+      'board-signals',
+      'excel-import',
+      'tablet-pair',
+      'workspace-view-board',
+      'workspace-view-list',
+      'workspace-view-table',
+      'workspace-view-timeline',
+      'workspace-view-calendar',
+      'kaiten-calendar',
+      'api-docs',
+      'workspace-view-reports',
+      'workspace-spaces',
+      'workspace-access',
+      'workspace-create',
+      'board-create-column',
+      'space-switch-animated',
+      'space-create-animated',
+      'column-create-animated',
+      'portfolio-card-animated',
+      'portfolio-board-real',
+'space-boards-expand-animated',
+      'space-boards-expand-animated',
+      'admin-space-real',
+
+      'scrum-board',
+
+      'scrum-board-wide',
+
+      'module-boards',
+      'module-workspace-board',
+      'module-boards-origin',
+
+      'admin-space',
+
+      'laptop-boards',
+
+      'tablet-boards',
+
+      'tablet-team-board',
+      'window-project-modal',
+      'tile-recurring-tasks',
+      'tile-notifications',
+
+      'tile-integrations-git',
+      'report-diagrams',
+      'window-rule-full',
+      'notification-settings',
+      'recurring-task-schedule',
+      'report-chart-burndown',
+      'report-chart-velocity',
+      'report-chart-control',
+      'report-chart-cfd',
+      'report-chart-spectral',
+      'report-chart-throughput',
+      'report-chart-blocked',
+      'report-chart-cycle-time',
       'hero-screen-interface',
       'hero-screen-video',
       'generic',
@@ -134,7 +209,9 @@ const HeroBoardCardSchema = z.object({
     .array(
       z.object({
         label: z.string().max(24),
-        variant: z.enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud']).optional(),
+        variant: z
+          .enum(['prod', 'cx', 'big', 'urg', 'ok', 'blue', 'jud', 'peach', 'lime', 'pink', 'sky'])
+          .optional(),
       }),
     )
     .max(3)
@@ -143,7 +220,33 @@ const HeroBoardCardSchema = z.object({
     .object({ label: z.string().max(24), done: z.number(), total: z.number() })
     .optional(),
   /** Цвета аватаров-исполнителей (hex). Декоративны. */
+  /** Мини-счетчики карточки: вложения, комментарии, дочерние карточки. */
+  counters: z
+    .object({
+      attachments: z.number().optional(),
+      comments: z.number().optional(),
+      children: z.number().optional(),
+      childrenDone: z.number().optional(),
+    })
+    .optional(),
+  /* Поля ниже рисуются только в режиме appShell (интерфейс Кайтена целиком). */
+  /** Цветная полоска-тип над заголовком карточки (hex). */
+  accent: z.string().max(16).optional(),
+  /** Иконка типа карточки справа от заголовка. */
+  icon: z.enum(['dot', 'doc', 'folder', 'chart']).optional(),
+  /** Заливка срока: красная (просрочено/скоро) или оранжевая (сегодня). */
+  dueTone: z.enum(['red', 'orange']).optional(),
+  /** Бейдж «Срочно». */
+  urgent: z.boolean().optional(),
+  /** Красная плашка блокировки над карточкой. */
+  blocker: z.string().max(60).optional(),
+  /** Родительская карточка — рамка над заголовком. */
+  parent: z.string().max(60).optional(),
   assignees: z.array(z.string()).max(4).optional(),
+  /** Буквы внутри аватаров — по порядку assignees. */
+  assigneeInitials: z.array(z.string().max(3)).max(4).optional(),
+  /** Цель анимации «наведение → щелчок → окно карточки» (при cardWindow). */
+  active: z.boolean().optional(),
   extraAssignee: z.string().max(8).optional(),
   due: z.string().max(16).optional(),
 });
@@ -173,6 +276,14 @@ const HeroBoardSchema = z.object({
   animatedCard: z
     .object({ card: HeroBoardCardSchema, fromColumn: z.number().optional() })
     .optional(),
+  /** Боковое меню пространств слева от доски (как в интерфейсе Кайтена). */
+  sidebar: z.boolean().optional(),
+  /** Окно открытой карточки задачи поверх правого края доски. */
+  cardWindow: z.boolean().optional(),
+  /** Полный интерфейс Кайтена вокруг доски: шапка, рельсы, «Дерево», панель видов. */
+  appShell: z.boolean().optional(),
+  /** Название пространства в шапке (при appShell). */
+  spaceTitle: z.string().max(60).optional(),
 });
 
 /* ─── Форма регистрации (слот hero + секция RegistrationCta) ───────── */
@@ -236,6 +347,8 @@ const HeroSectionSchema = z.object({
   component: z.literal('HeroSection'),
   props: z.object({
     eyebrow: z.string().max(80).optional(),
+    /** Иконка слева в бейдже-надзаголовке (набор ProductNavIcon, напр. 'workspace'). Только hero-screen-interface. */
+    eyebrowIcon: z.string().max(40).optional(),
     title: z.string().min(4).max(120),
     accentWord: z.string().max(40).optional(),
     /** Плашка вокруг accentWord. По умолчанию true; false — просто фиолетовый текст. */
@@ -274,6 +387,17 @@ const HeroSectionSchema = z.object({
     flush: z.boolean().optional(),
     /** Фирменный анимированный мотив под текстом (только visualPosition 'below' без visual). 'chaos-order' — карточки из хаоса в сетку; 'threads' — нити расплетаются в дорожки. */
     motif: z.enum(['chaos-order', 'threads']).optional(),
+    /** Типографика текста первого экрана при visualPosition 'below'. 'screen' — как у HeroScreenInterface (лендинг «Задачи»): H1 36/44, подзаголовок 18/28, бейдж без рамки. Opt-in. */
+    copyStyle: z.enum(['default', 'screen']).optional(),
+    /** Больший зазор между кнопкой и визуалом в раскладке below. Opt-in. */
+    visualGapLarge: z.boolean().optional(),
+    glowCenter: z.boolean().optional(),
+    copyLeftMobile: z.boolean().optional(),
+    titleCompactMobile: z
+      .boolean()
+      .optional()
+      .describe('заголовок первого экрана мельче на мобилке: 26/32 вместо 30/36. Opt-in'),
+    flushBottom: z.boolean().optional(),
   }),
 });
 
@@ -284,12 +408,17 @@ const FeatureGridSchema = z.object({
   props: z.object({
     eyebrow: z.string().max(80).optional(),
     title: z.string().min(4).max(80),
+    accentWord: z
+      .string()
+      .max(60)
+      .optional()
+      .describe('кусок заголовка фирменным фиолетовым, напр. «14 дней бесплатно»'),
     description: z.string().max(200).optional(),
     items: z
       .array(
         z.object({
           icon: z.string().describe('lucide-icon name'),
-          title: z.string().min(2).max(60),
+          title: z.string().min(2).max(80),
           description: z.string().min(10).max(200),
           mockVariant: z
             .string()
@@ -310,6 +439,8 @@ const FeatureGridSchema = z.object({
           wide: z.boolean().optional(),
           /** Иллюстрация сбоку от текста (десктоп), под текстом на узких экранах. */
           imageAside: z.boolean().optional(),
+          /** Сторона иллюстрации при imageAside: 'right' (дефолт) или 'left' — текст справа. */
+          imageAsidePosition: z.enum(['left', 'right']).optional(),
           /** Карточка-CTA: кнопки встают под описанием внутри карточки. */
           primaryCta: z.object({ label: z.string().min(2), href: z.string().min(1) }).optional(),
           secondaryCta: z
@@ -325,6 +456,21 @@ const FeatureGridSchema = z.object({
     slider: z.boolean().optional(),
     /** Убрать верхний отступ секции (когда блок сверху уже несёт свою шкалу). */
     flushTop: z.boolean().optional(),
+    /** Нижний отступ секции по шкале DS: 48/64/96px. Opt-in. */
+    /** Иллюстрация во всю ширину под карточками. Opt-in. */
+    iconGapSmall: z.boolean().optional(),
+    tabletThree: z.boolean().optional(),
+    iconAsideMobile: z.boolean().optional(),
+    titleBreakMobile: z.boolean().optional(),
+    hideHeader: z.boolean().optional(),
+    plain: z.boolean().optional(),
+    iconAside: z.boolean().optional(),
+    spaceCompactDesktop: z.boolean().optional(),
+    bottomImage: z.object({ src: z.string().min(1), alt: z.string().max(200).optional() }).optional(),
+    spaceBottom: z
+      .boolean()
+      .optional()
+      .describe('нижний отступ секции: 48/64/96px по шкале DS. Opt-in'),
     variant: z
       .enum(['cards', 'mock'])
       .optional()
@@ -402,6 +548,15 @@ const FinalCtaSchema = z.object({
       .enum(['solid', 'gradient', 'dark', 'product'])
       .optional()
       .describe("'solid' (дефолт) — сплошная заливка (старые лендинги); 'gradient' — блок CTAsecondaryMock (ритейл и новые); 'dark' — тёмный CTAdark (текст + терминал), для CLI-лендингов; 'product' — блок CTAproduct: текст слева, иллюстрация платформы справа, градиент лаванда → голубой"),
+    visualLarge: z
+      .boolean()
+      .optional()
+      .describe("крупная иллюстрация справа для variant: 'product' — во всю колонку на десктопе. Opt-in"),
+    visualMedium: z.boolean().optional().describe("средняя иллюстрация справа для variant: 'product' — 95% колонки. Opt-in"),
+    titleSize: z
+      .enum(['default', 'small'])
+      .optional()
+      .describe("уменьшенный заголовок для variant: 'product' — 24/32 вместо 30–32. Opt-in"),
     visualVariant: z
       .string()
       .optional()
@@ -419,10 +574,18 @@ const FinalCtaSchema = z.object({
       .boolean()
       .optional()
       .describe("нижний отступ секции на десктопе — 96px вместо 48px (только для variant: 'gradient')"),
+    spaceTop: z
+      .boolean()
+      .optional()
+      .describe("верхний отступ 48/64/96px (только для variant: 'product') — когда сверху секция без нижнего отступа, напр. FeatureGrid. Opt-in"),
     fitVisual: z
       .boolean()
       .optional()
       .describe("ужимать мокап справа под ширину слота (variant: 'gradient') — для моков фиксированной ширины, иначе на мобилке правый край обрезается. Opt-in"),
+    centerCopy: z
+      .boolean()
+      .optional()
+      .describe("текст и кнопки по центру вертикали (variant: 'gradient'). Opt-in"),
   }),
 });
 
@@ -456,6 +619,8 @@ const ReviewSliderSchema = z.object({
   props: z.object({
     title: z.string().max(120).optional(),
     subtitle: z.string().max(280).optional(),
+    /** Карточки по высоте контента вместо фиксированных 460px. Opt-in. */
+    compact: z.boolean().optional(),
     reviews: z
       .array(
         z.object({
@@ -464,6 +629,10 @@ const ReviewSliderSchema = z.object({
           metric: z.string().max(80).optional(),
           /** Высота логотипа в px (дефолт 40) — вертикальным знакам нужно больше. */
           logoHeight: z.number().min(16).max(96).optional(),
+          /** Широкий логотип: снять потолок ширины 140px. Opt-in. */
+          logoWide: z.boolean().optional(),
+          /** Без строки автора (аватар + имя) — отзыв подписан логотипом. Opt-in. */
+          hideAuthor: z.boolean().optional(),
           logoScale: z
             .number()
             .min(0.4)
@@ -571,6 +740,16 @@ const CtaBannerSchema = z.object({
      * Нужен, когда описание длинное и колонка кнопок сжимает текст.
      */
     ctaBelow: z.boolean().optional(),
+    /** Ужимать мок фиксированной ширины под колонку баннера. Opt-in. */
+    mediaFit: z.boolean().optional(),
+    /** Заголовок меньше. Opt-in. */
+    titleSmall: z.boolean().optional(),
+    copyNarrow: z.boolean().optional(),
+    visualMedium: z.boolean().optional(),
+    visualLarge: z.boolean().optional(),
+    spaceTopLarge: z.boolean().optional(),
+    spaceTopLargeXl: z.boolean().optional(),
+    flushBottom: z.boolean().optional(),
     /**
      * 'product' — блок `CTAproduct`: текст и кнопка слева, иллюстрация платформы
      * справа, собственный градиент лаванда → голубой. `gradient` с ним не нужен.
@@ -610,6 +789,9 @@ const CtaButtonsSchema = z.object({
       .boolean()
       .optional()
       .describe('нижний отступ секции на десктопе — 96px вместо 48px. Opt-in'),
+    flushBottom: z.boolean().optional().describe('убрать нижний отступ секции. Opt-in'),
+    spaceTopMobile: z.boolean().optional().describe('верхний отступ на мобилке 48px вместо 24. Opt-in'),
+    spaceTopOverflow: z.boolean().optional().describe('видимый отступ 48px от выступающего мока сверху. Opt-in'),
     tightSpacing: z
       .boolean()
       .optional()
@@ -671,6 +853,7 @@ const MediaCopySchema = z.object({
       .boolean()
       .optional()
       .describe('нижний отступ секции: 64px мобилка и планшет, 96px десктоп. Opt-in'),
+    spaceBottomLarge: z.boolean().optional().describe('нижний отступ секции 64 / 96 / 128px. Opt-in'),
     tightBottomMobile: z
       .boolean()
       .optional()
@@ -679,6 +862,51 @@ const MediaCopySchema = z.object({
       .boolean()
       .optional()
       .describe('нижний отступ секции 32/48px вместо 64/96px — для текстовых шапок раздела. Opt-in'),
+    flushBottom: z
+      .boolean()
+      .optional()
+      .describe('убрать нижний отступ секции на всех ширинах. Opt-in'),
+    flushBottomMobile: z
+      .boolean()
+      .optional()
+      .describe('убрать нижний отступ секции только на мобилке. Opt-in'),
+    spaceTopLargeXl: z.boolean().optional(),
+    spaceTopLarge: z
+      .boolean()
+      .optional()
+      .describe('верхний отступ 64 / 96 / 128px (мобилка / планшет / десктоп). Opt-in'),
+    headerGapTablet32: z.boolean().optional(),
+    spaceBottomMobile64: z.boolean().optional(),
+    mediaWideTablet: z.boolean().optional(),
+    gapTablet32: z.boolean().optional(),
+    titleSmallTablet: z
+      .boolean()
+      .optional()
+      .describe('заголовок default на планшете 30px вместо 36px. Opt-in'),
+    mediaNarrowMore: z.boolean().optional(),
+    mediaMax640: z.boolean().optional(),
+    copyIndent: z.boolean().optional(),
+    checklistColsMobile: z.boolean().optional(),
+    spaceTopMobile64: z.boolean().optional(),
+    mediaBelowVariant: z.lazy(() => MockVariantSchema).optional(),
+    mediaBelowFirst: z.boolean().optional(),
+    mediaBelowFluid: z.boolean().optional(),
+    mediaNarrow: z
+      .boolean()
+      .optional()
+      .describe('мок на десктопе уже колонки на 16px (576 вместо 592). Opt-in'),
+    copyNarrow: z
+      .boolean()
+      .optional()
+      .describe('текстовая колонка уже на десктопе — 520px. Opt-in'),
+    gapTightMobile: z
+      .boolean()
+      .optional()
+      .describe('зазор между текстом и моком на мобилке 24px вместо 40px. Opt-in'),
+    mediaCenterMobile: z
+      .boolean()
+      .optional()
+      .describe('мок по центру колонки на мобилке, когда он уже контейнера. Opt-in'),
     ctaCenterMobile: z
       .boolean()
       .optional()
@@ -698,6 +926,36 @@ const MediaCopySchema = z.object({
       .max(40)
       .optional()
       .describe('кусок заголовка фирменным фиолетовым, напр. «Шаг 1.»'),
+    accentBreak: z
+      .boolean()
+      .optional()
+      .describe('метка из accentWord («Шаг 1») отдельной строкой над заголовком. Opt-in'),
+    mediaTight: z
+      .boolean()
+      .optional()
+      .describe('без боковых полей вокруг мока (канбан-доски): 0 вместо 32px, мок на всю колонку. Opt-in'),
+    mediaNoRound: z.boolean().optional(),
+    mediaRadiusSmall: z.boolean().optional().describe('скругление картинки 8px вместо 12/16'),
+    mediaFrameWhite: z.boolean().optional(),
+    mediaBorder: z.boolean().optional().describe('серая обводка 1px у картинки mediaSrc. Opt-in'),
+    mediaGrayShadow: z
+      .boolean()
+      .optional()
+      .describe('серая тень у мока вместо фиолетовой (канбан-доски). Opt-in'),
+    mediaGap: z
+      .enum(['default', 'narrow'])
+      .optional()
+      .describe("промежуток текст–мок на десктопе: 'default' 64px (колонки 576px), 'narrow' 32px (колонки 592px). Opt-in"),
+    mediaWide: z
+      .boolean()
+      .optional()
+      .describe('на десктопе колонка с моком шире текстовой — 7 к 5. Для широких интерфейсов. Opt-in'),
+    mediaRound: z.boolean().optional().describe('скругление окна мока 12/16px при любом масштабе. Opt-in'),
+    headerCenter: z.boolean().optional().describe('заголовок и описание по центру над обеими колонками. Opt-in'),
+    mediaFill: z
+      .boolean()
+      .optional()
+      .describe('резиновый мок на всю ширину колонки, без сжатия до содержимого. Только для моков без фиксированной ширины. Opt-in'),
     description: z.string().max(400).optional(),
     descriptionLink: z
       .object({
@@ -706,10 +964,15 @@ const MediaCopySchema = z.object({
       })
       .optional()
       .describe('кусок описания фирменной фиолетовой ссылкой: text ищется в описании'),
+    checklistInline: z.boolean().optional().describe('пункты чек-листа в одну строку. Opt-in'),
+    checklistPlain: z.boolean().optional().describe('иконки чек-листа без круглой подложки. Opt-in'),
+    checklistLoose: z.boolean().optional().describe('шаг между пунктами чек-листа 24px вместо 12. Opt-in'),
+    checklistIconTile: z.boolean().optional().describe('иконка чек-листа 20px на квадратной плашке 40px. Opt-in'),
     checklist: z
       .array(
         z.object({
           icon: z.string().optional(),
+          title: z.string().min(2).max(80).optional(),
           text: z.string().min(2).max(180),
         }),
       )
@@ -729,9 +992,9 @@ const MediaCopySchema = z.object({
       .optional()
       .describe('убрать верхний отступ секции — когда блок идёт сразу под текстовой шапкой раздела'),
     titleSize: z
-      .enum(['default', 'small'])
+      .enum(['default', 'small', 'xsmall'])
       .optional()
-      .describe("'default' — H2 раздела; 'small' — уменьшенный заголовок для секций под общей шапкой (напр. «Шаг 1»/«Шаг 2»)"),
+      .describe("'default' — H2 раздела; 'small' — уменьшенный заголовок для секций под общей шапкой (напр. «Шаг 1»/«Шаг 2»); 'xsmall' — еще меньше, 24px на десктопе"),
     mediaSrc: z
       .string()
       .optional()
@@ -750,6 +1013,8 @@ const MediaCopySchema = z.object({
         'mcp-agent-board-animated',
         'analytics-kpi',
         'integrations-console',
+
+        'integrations-hub',
         'modules-matrix',
         'sales-funnel',
         'crm-client-card',
@@ -795,14 +1060,19 @@ const MediaCopySchema = z.object({
         'kanban-minimal',
         'kanban-minimal-animated',
         'portfolio-board',
+        'portfolio-board-stretch',
         'approval-board',
       'reports-charts',
+      'reports-charts-cascade',
       'finance-kb-docs',
       'retail-task-card',
       'retail-project',
       'retail-portfolio-animated',
       'retail-mobile',
       'gantt-chart',
+      // Окна рабочего пространства: создание пространства и пустая доска
+      'window-workspace-create',
+      'window-board-new',
       // Автоматизации (модуль Kaiten)
       'window-rule-trigger',
       'window-rule-action',
@@ -835,6 +1105,72 @@ const MediaCopySchema = z.object({
       'help-center-template',
       'help-center-setup',
       'help-center-portal-compact',
+      // Переезд из таблиц (Excel → Кайтен)
+      'excel-grow',
+      'excel-table-view',
+      'task-card-full',
+      'window-card',
+      'window-ticket-modal',
+      'window-ticket-modal-origin',
+      'tasks-views-slider',
+      'card-checklist-relations',
+      'platform-slider',
+      'modules-collage',
+      'board-signals',
+      'excel-import',
+      'tablet-pair',
+      'workspace-view-board',
+      'workspace-view-list',
+      'workspace-view-table',
+      'workspace-view-timeline',
+      'workspace-view-calendar',
+      'kaiten-calendar',
+      'api-docs',
+      'workspace-view-reports',
+      'workspace-spaces',
+      'workspace-access',
+      'workspace-create',
+      'board-create-column',
+      'space-switch-animated',
+      'space-create-animated',
+      'column-create-animated',
+      'portfolio-card-animated',
+      'portfolio-board-real',
+      'space-boards-expand-animated',
+      'admin-space-real',
+
+      'scrum-board',
+
+      'scrum-board-wide',
+
+      'module-boards',
+      'module-workspace-board',
+      'module-boards-origin',
+
+      'admin-space',
+
+      'laptop-boards',
+
+      'tablet-boards',
+
+      'tablet-team-board',
+      'window-project-modal',
+      'tile-recurring-tasks',
+      'tile-notifications',
+
+      'tile-integrations-git',
+      'report-diagrams',
+      'window-rule-full',
+      'notification-settings',
+      'recurring-task-schedule',
+      'report-chart-burndown',
+      'report-chart-velocity',
+      'report-chart-control',
+      'report-chart-cfd',
+      'report-chart-spectral',
+      'report-chart-throughput',
+      'report-chart-blocked',
+      'report-chart-cycle-time',
       ])
       .optional(),
     /**
@@ -1172,6 +1508,8 @@ export const MockVariantSchema = z.enum([
   'mcp-agent-board-animated',
   'analytics-kpi',
   'integrations-console',
+
+  'integrations-hub',
   'modules-matrix',
   'sales-funnel',
   'crm-client-card',
@@ -1219,6 +1557,7 @@ export const MockVariantSchema = z.enum([
   'portfolio-board',
   'approval-board',
 'reports-charts',
+'reports-charts-cascade',
 'finance-kb-docs',
 'mini-org-clients',
 'mini-org-it',
@@ -1242,6 +1581,9 @@ export const MockVariantSchema = z.enum([
 'retail-report-bottlenecks',
 'retail-report-ai',
 'gantt-chart',
+// Окна рабочего пространства: создание пространства и пустая доска
+'window-workspace-create',
+'window-board-new',
 // Автоматизации (модуль Kaiten)
 'window-rule-trigger',
 'window-rule-action',
@@ -1278,8 +1620,104 @@ export const MockVariantSchema = z.enum([
 'help-center-template',
 'help-center-setup',
 'help-center-portal-compact',
+// Переезд из таблиц (Excel → Кайтен)
+'excel-grow',
+'excel-table-view',
+'task-card-full',
+'window-card',
+'window-ticket-modal',
+'window-ticket-modal-origin',
+'tasks-views-slider',
+'card-checklist-relations',
+'platform-slider',
+'modules-collage',
+'board-signals',
+'excel-import',
+'tablet-pair',
+// Единое рабочее пространство: одни задачи в шести представлениях
+'workspace-view-board',
+'workspace-view-list',
+'workspace-view-table',
+'workspace-view-timeline',
+'workspace-view-calendar',
+'kaiten-calendar',
+'api-docs',
+'workspace-view-reports',
+'workspace-spaces',
+'workspace-access',
+'workspace-create',
+'board-create-column',
+'space-switch-animated',
+'space-create-animated',
+'column-create-animated',
+'portfolio-card-animated',
+'portfolio-board-real',
+'admin-space-real',
+
+'scrum-board',
+
+'scrum-board-wide',
+
+'module-boards',
+'module-workspace-board',
+'module-boards-origin',
+
+'admin-space',
+
+'laptop-boards',
+
+'tablet-boards',
+
+'tablet-team-board',
+'window-project-modal',
+'tile-recurring-tasks',
+'tile-notifications',
+
+'tile-integrations-git',
+'report-diagrams',
+'window-rule-full',
+'notification-settings',
+'recurring-task-schedule',
+'report-chart-burndown',
+'report-chart-velocity',
+'report-chart-control',
+'report-chart-cfd',
+'report-chart-spectral',
+'report-chart-throughput',
+'report-chart-blocked',
+'report-chart-cycle-time',
 ]);
 export type MockVariant = z.infer<typeof MockVariantSchema>;
+
+/* ─── TabsGallery (галерея по вкладкам: текст слева, мок справа) ──── */
+const TabsGallerySchema = z.object({
+  id: z.literal('tabs_gallery'),
+  component: z.literal('TabsGallery'),
+  props: z.object({
+    title: z.string().min(4).max(120),
+    subtitle: z.string().max(280).optional(),
+    ctaLabel: z
+      .string()
+      .max(40)
+      .optional()
+      .describe('подпись кнопки в панели; кнопка рендерится только у пунктов с ctaHref'),
+    items: z
+      .array(
+        z.object({
+          label: z.string().min(2).max(40).describe('подпись вкладки'),
+          icon: z.string().optional().describe('lucide-icon слева от подписи вкладки'),
+          title: z.string().min(4).max(120),
+          desc: z.string().max(400).optional(),
+          bullets: z.array(z.string().min(2).max(200)).max(6).optional(),
+          ctaHref: z.string().optional(),
+          mockVariant: MockVariantSchema.optional(),
+          image: z.string().optional().describe('растровое превью вместо мока'),
+        }),
+      )
+      .min(2)
+      .max(6),
+  }),
+});
 
 /* ─── TabbedFeatureSection ────────────────────────────────────────── */
 const TabbedFeatureSectionSchema = z.object({
@@ -1333,6 +1771,72 @@ const TabbedFeatureSectionSchema = z.object({
       )
       .min(2)
       .max(5),
+  }),
+});
+
+/* ─── ViewSwitcher (заголовок + переключатель видов + крупный мок) ──── */
+const ViewSwitcherSchema = z.object({
+  id: z.literal('view_switcher'),
+  component: z.literal('ViewSwitcher'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    accentWord: z.string().max(40).optional(),
+    description: z.string().max(280).optional(),
+    /** Подложка под моком: 'soft' (дефолт) — лиловая заливка, 'gradient' — лаванда → голубой. */
+    background: z.enum(['soft', 'gradient']).optional(),
+    /** Убрать нижний отступ секции на всех ширинах. Opt-in. */
+    flushBottom: z.boolean().optional(),
+    /** Верхний отступ на планшете (md) — 128px. Opt-in. */
+    spaceTopTablet: z.boolean().optional(),
+    spaceTopDesktop: z.boolean().optional(),
+    /** Пункты переключателя: подпись без текста-пояснения, под ней мок выбранного вида. */
+    items: z
+      .array(
+        z.object({
+          id: z.string().min(1).max(40),
+          label: z.string().min(2).max(40),
+          icon: z.string().optional().describe('lucide-icon name или kaiten:<имя> — заливной значок продукта'),
+          mockVariant: MockVariantSchema,
+          image: z
+            .object({ src: z.string(), alt: z.string().optional() })
+            .optional()
+            .describe('скриншот вида вместо мока: путь из public и alt'),
+        }),
+      )
+      .min(2)
+      .max(8),
+  }),
+});
+
+/* ─── LinkGroups (группы ссылок с иконками: функции, модули) ────────── */
+const LinkGroupsSchema = z.object({
+  id: z.literal('link_groups'),
+  component: z.literal('LinkGroups'),
+  props: z.object({
+    eyebrow: z.string().max(80).optional(),
+    title: z.string().min(4).max(120),
+    description: z.string().max(280).optional(),
+    groups: z
+      .array(
+        z.object({
+          title: z.string().min(2).max(60),
+          links: z
+            .array(
+              z.object({
+                label: z.string().min(2).max(80),
+                href: z.string().min(1),
+                icon: z.string().optional().describe('lucide-icon name'),
+              }),
+            )
+            .min(1)
+            .max(16),
+        }),
+      )
+      .min(1)
+      .max(4),
+    centerMockVariant: MockVariantSchema.optional().describe('мок интерфейса между двумя группами ссылок'),
+    mockPosition: z.enum(['first', 'center']).optional().describe('место мока на десктопе: first — слева от групп, center — между группами'),
   }),
 });
 
@@ -1729,6 +2233,9 @@ export const SectionSchema = z.discriminatedUnion('component', [
   BenefitsStripSchema,
   MetricsSplitSchema,
   TabbedFeatureSectionSchema,
+  TabsGallerySchema,
+  ViewSwitcherSchema,
+  LinkGroupsSchema,
   AccordionFeatureSectionSchema,
   ScenarioWalkthroughSectionSchema,
   IndustryPickerSectionSchema,

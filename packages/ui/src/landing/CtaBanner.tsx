@@ -2,6 +2,7 @@ import { ButtonLink } from '../primitives/ButtonLink';
 import { Icon } from '../primitives/Icon';
 import { Inspect } from '../primitives/Inspect';
 import { LinkedText, type TextLink } from '../primitives/LinkedText';
+import { MockFit } from '../primitives/MockFit';
 import { cn } from '../primitives/cn';
 import { GradientPanel } from './GradientPanel';
 import { FeatureTile, hasFeatureTile } from './mocks/FeatureTile';
@@ -46,6 +47,12 @@ export interface CtaBannerProps {
    * реестра моков `MockVisual` — тот же набор, что у Hero и MediaCopy.
    */
   mediaVariant?: MockVariant;
+  /** Ужимать мок фиксированной ширины под колонку баннера (MockFit). Opt-in. */
+  mediaFit?: boolean;
+  /** Заголовок меньше: 20 / 24px вместо 24 / 30px. Opt-in. */
+  titleSmall?: boolean;
+  /** Текст уже на десктопе: 520px вместо 576. Opt-in. */
+  copyNarrow?: boolean;
   /**
    * Кнопки под текстом, а не справа от него. Opt-in: без него остаётся прежняя
    * раскладка «текст слева, кнопки справа» — чтобы не менять старые лендинги.
@@ -62,8 +69,18 @@ export interface CtaBannerProps {
   visualSrc?: string;
   /** Alt для `visualSrc`. */
   visualAlt?: string;
+  /** Для variant product: иллюстрация во всю колонку (CTAproduct visualLarge). Opt-in. */
+  visualLarge?: boolean;
+  /** Для variant product: средняя иллюстрация, 95% колонки. Opt-in. */
+  visualMedium?: boolean;
+  /** Большой верхний отступ секции: 64 / 96 / 128px. Opt-in. */
+  spaceTopLarge?: boolean;
+  /** С spaceTopLarge: 128px только с 1280px, до этого 96. Opt-in */
+  spaceTopLargeXl?: boolean;
   /** Увеличенный нижний отступ секции: 96px вместо 48px. */
   spaceBottom?: boolean;
+  /** Убрать нижний отступ секции на всех ширинах. Opt-in. */
+  flushBottom?: boolean;
   /**
    * Вариант «пара карточек»: вместо одного широкого баннера секция рисует
    * 2–3 равные карточки в строку — иконка, заголовок, описание и текстовая
@@ -159,11 +176,19 @@ export function CtaBanner({
   gradient,
   featureTile,
   mediaVariant,
+  mediaFit,
+  titleSmall,
+  copyNarrow,
   ctaBelow,
   variant,
   visualSrc,
   visualAlt,
+  visualLarge,
+  visualMedium,
+  spaceTopLarge,
+  spaceTopLargeXl,
   spaceBottom,
+  flushBottom,
   cards,
 }: CtaBannerProps) {
   // Пара карточек — самостоятельная раскладка, широкий баннер в ней не участвует.
@@ -179,6 +204,8 @@ export function CtaBanner({
           // Нижний отступ по брейкпоинтам: 48 мобилка / 64 планшет / 96 десктоп.
           // Снизу: 48 мобилка / 64 планшет / 96 десктоп.
           spaceBottom ? 'pb-12 md:pb-16 lg:pb-24 lg:pt-12' : 'pb-10 lg:py-12',
+          flushBottom && '!pb-0',
+          spaceTopLarge && (spaceTopLargeXl ? '!pt-16 md:!pt-24 xl:!pt-32' : '!pt-16 md:!pt-24 lg:!pt-32'),
         )}
       >
         <CTAproduct
@@ -187,6 +214,9 @@ export function CtaBanner({
           buttonLabel={primaryCta.label}
           buttonHref={primaryCta.href}
           image={{ src: visualSrc ?? CTA_PRODUCT_IMAGE, alt: visualAlt ?? '' }}
+          titleSize={titleSmall ? 'small' : undefined}
+          visualLarge={visualLarge}
+          visualMedium={visualMedium}
         />
       </section>
     );
@@ -203,9 +233,10 @@ export function CtaBanner({
         // На планшете колонка одна: узкий блок текста центрируем целиком,
         // иначе выровненный по центру текст всё равно жался бы влево.
         withMock && 'md:mx-auto md:max-w-2xl lg:mx-0 lg:max-w-xl',
+        copyNarrow && 'lg:max-w-[520px]',
       )}
     >
-      <h3 data-comp="cta_banner.title" className="text-2xl font-semibold leading-tight md:text-3xl">
+      <h3 data-comp="cta_banner.title" className={cn('font-semibold leading-tight md:whitespace-pre-line', titleSmall ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl')}>
         {title}
       </h3>
       {description && (
@@ -257,7 +288,13 @@ export function CtaBanner({
         {buttons}
       </div>
       <div aria-hidden className="w-full min-w-0 md:mx-auto md:max-w-md lg:mx-0">
-        <MockVisual variant={mediaVariant as MockVariant} />
+        {mediaFit ? (
+          <MockFit>
+            <MockVisual variant={mediaVariant as MockVariant} />
+          </MockFit>
+        ) : (
+          <MockVisual variant={mediaVariant as MockVariant} />
+        )}
       </div>
     </div>
   ) : withTile ? (
@@ -301,6 +338,7 @@ export function CtaBanner({
         'mx-auto w-full max-w-(--container-kaiten)',
         'px-4 py-10 md:px-6 xl:px-0',
         spaceBottom ? 'lg:pb-24 lg:pt-12' : 'lg:py-12',
+        flushBottom && 'pb-0 md:pb-0 lg:pb-0',
       )}
     >
       {gradient ? (

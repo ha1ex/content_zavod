@@ -1,4 +1,7 @@
+'use client';
+
 import { useState, type ReactNode } from 'react';
+import { Icon } from '../primitives/Icon';
 
 /**
  * TabsGallery — модуль «галерея по вкладкам» (секция #teams лендинга,
@@ -32,14 +35,20 @@ import { useState, type ReactNode } from 'react';
 export interface TabsGalleryItem {
   /** Подпись вкладки. */
   label: ReactNode;
+  /** Иконка слева от подписи вкладки (имя иконки lucide). */
+  icon?: string;
   /** Заголовок панели. */
   title: ReactNode;
   /** Описание панели. */
   desc?: ReactNode;
-  /** Ссылка кнопки «Попробовать шаблон». */
+  /** Пункты-галочки под описанием (вместо длинного абзаца). */
+  bullets?: ReactNode[];
+  /** Ссылка кнопки «Попробовать шаблон». Без неё кнопка не рендерится. */
   ctaHref?: string;
   /** URL превью-картинки. Если не передать — серый плейсхолдер. */
   image?: string;
+  /** Интерфейсный мок вместо картинки (приоритет выше `image`). */
+  media?: ReactNode;
 }
 
 export interface TabsGalleryProps {
@@ -60,7 +69,7 @@ const STYLE = `
   --surface-page:#ffffff; --surface-section:#f5f5f5;
   --sp-4:16px; --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-24:96px;
   font-family:var(--font-sans,'Roboto',system-ui,-apple-system,sans-serif); color:var(--text-title);
-  display:block; width:100%; background:var(--surface-page);
+  display:block; width:100%; background:var(--surface-section);
   padding:var(--sp-24) var(--sp-4); box-sizing:border-box; letter-spacing:0;
 }
 .tabsg-mock, .tabsg-mock *{box-sizing:border-box;}
@@ -70,14 +79,17 @@ const STYLE = `
 
 .tabsg-mock .stabs{width:100%; max-width:1216px; margin:0 auto;}
 .tabsg-mock .stabs__tabs{display:none; justify-content:center; margin-bottom:40px;}
-.tabsg-mock .stabs__tabgroup{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:4px; border-radius:8px; background:var(--surface-page); padding:4px; box-shadow:0 0 0 1px var(--border-default) inset;}
+.tabsg-mock .stabs__tabgroup{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:4px; border-radius:8px; background:var(--surface-page); padding:4px;}
 .tabsg-mock .stabs__tab{height:36px; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; border-radius:6px; padding:10px 24px; font-size:14px; font-weight:500; color:var(--text-title); background:none; border:0; cursor:pointer; font-family:inherit; transition:background .15s,color .15s;}
-.tabsg-mock .stabs__tab:hover{background:var(--brand-12);}
+.tabsg-mock .stabs__tab{gap:8px;}
+.tabsg-mock .stabs__tabicon{width:16px; height:16px; flex:none;}
+.tabsg-mock .stabs__tab:hover{background:var(--brand-12); color:var(--brand-100);}
+.tabsg-mock .stabs__tab.on:hover{color:#fff; background:var(--brand-100);}
 .tabsg-mock .stabs__tab.on{background:var(--brand-100); color:#fff; box-shadow:0 1px 2px rgba(16,24,40,.05);}
 
 .tabsg-mock .stp{display:none;}
 .tabsg-mock .stp.on{display:block;}
-.tabsg-mock .stabs__card{overflow:hidden; border-radius:16px; background:var(--surface-page); box-shadow:0 0 0 1px var(--border-default) inset;}
+.tabsg-mock .stabs__card{overflow:hidden; border-radius:16px; background:var(--surface-page);}
 .tabsg-mock .stabs__row{display:flex; flex-direction:column;}
 .tabsg-mock .stabs__text{order:2; display:flex; flex-direction:column; justify-content:center; gap:16px; padding:24px;}
 .tabsg-mock .stabs__text h3{font-size:18px; line-height:28px; font-weight:600; color:var(--text-title); margin:0;}
@@ -89,6 +101,14 @@ const STYLE = `
 .tabsg-mock .stabs__img img{height:100%; width:100%; object-fit:cover; object-position:top; display:block;}
 .tabsg-mock .stabs__img .ph{height:100%; width:100%; display:flex; align-items:center; justify-content:center; color:#bdbdbd;}
 .tabsg-mock .stabs__img .ph svg{width:48px; height:48px;}
+
+.tabsg-mock .stabs__list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+.tabsg-mock .stabs__list li{display:flex; align-items:flex-start; gap:12px; font-size:16px; line-height:24px;}
+.tabsg-mock .stabs__list svg{flex:none; width:24px; height:24px; padding:5px; border-radius:9999px; background:var(--brand-12); color:var(--brand-100);}
+/* Мок вместо картинки: пропорции задаёт сам мок, обрезка не нужна. Мок
+   центрируется по вертикали панели и не растягивается на всю её ширину. */
+.tabsg-mock .stabs__imgwrap:has(.stabs__img--node){display:flex; align-items:center; justify-content:center;}
+.tabsg-mock .stabs__img--node{aspect-ratio:auto; width:100%; max-width:620px; margin:0 auto; display:flex; align-items:center; justify-content:center; background:none; border-radius:0;}
 
 .tabsg-mock .stabs__nav{margin-top:24px; display:flex; align-items:center; justify-content:center; gap:16px;}
 .tabsg-mock .stabs__navbtn{width:40px; height:40px; border-radius:9999px; border:1px solid var(--border-default); background:var(--surface-page); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--brand-100); transition:background .18s,border-color .18s,color .18s,box-shadow .18s;}
@@ -106,9 +126,9 @@ const STYLE = `
   .tabsg-mock .stabs__tabs{display:flex;}
   .tabsg-mock .stabs__nav{display:none;}
   .tabsg-mock .stabs__row{flex-direction:row; gap:32px;}
-  .tabsg-mock .stabs__text{order:0; width:384px; flex-shrink:0; padding:48px 0 48px 48px; justify-content:flex-start;}
+  .tabsg-mock .stabs__text{order:0; width:460px; flex-shrink:0; padding:48px 0 48px 48px; justify-content:flex-start;}
   .tabsg-mock .stabs__text .stabs__cta{margin-top:auto;}
-  .tabsg-mock .stabs__imgwrap{order:0; width:800px; flex-shrink:0; padding:16px;}
+  .tabsg-mock .stabs__imgwrap{order:0; flex:1; min-width:0; padding:16px;}
 }
 @media(max-width:767px){
   .tabsg-mock{padding:var(--sp-12) var(--sp-4);}
@@ -130,6 +150,12 @@ const ChevronLeft = () => (
 const ChevronRight = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
     <path d="M9 18l6-6-6-6" />
+  </svg>
+);
+
+const Check = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M20 6 9 17l-5-5" />
   </svg>
 );
 
@@ -174,6 +200,7 @@ export function TabsGallery({
                 className={'stabs__tab' + (i === active ? ' on' : '')}
                 onClick={() => setActive(i)}
               >
+                {it.icon ? <Icon name={it.icon} className="stabs__tabicon" strokeWidth={2} /> : null}
                 {it.label}
               </button>
             ))}
@@ -187,13 +214,25 @@ export function TabsGallery({
                 <div className="stabs__text">
                   <h3>{it.title}</h3>
                   {it.desc ? <p>{it.desc}</p> : null}
-                  <a className="stabs__cta" href={it.ctaHref ?? '#'} target="_blank" rel="noopener">
-                    {ctaLabel}
-                  </a>
+                  {it.bullets?.length ? (
+                    <ul className="stabs__list">
+                      {it.bullets.map((b, bi) => (
+                        <li key={bi}>
+                          <Check />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {it.ctaHref ? (
+                    <a className="stabs__cta" href={it.ctaHref} target="_blank" rel="noopener">
+                      {ctaLabel}
+                    </a>
+                  ) : null}
                 </div>
                 <div className="stabs__imgwrap">
-                  <div className="stabs__img">
-                    {it.image ? <img src={it.image} alt="" loading="lazy" /> : <MediaPlaceholder />}
+                  <div className={'stabs__img' + (it.media ? ' stabs__img--node' : '')}>
+                    {it.media ?? (it.image ? <img src={it.image} alt="" loading="lazy" /> : <MediaPlaceholder />)}
                   </div>
                 </div>
               </div>

@@ -37,13 +37,13 @@ export function LinkGroups({ eyebrow, title, description, groups, centerMockVari
   return (
     <section className="w-full">
       <div className="mx-auto w-full max-w-(--container-kaiten) px-4 py-12 md:px-6 md:py-16 xl:px-0 lg:py-24">
-        <div className="mx-auto mb-8 max-w-4xl text-center lg:mb-12">
+        <div className="mx-auto mb-8 max-w-4xl text-left md:text-center lg:mb-12">
           {eyebrow && (
             <p data-comp="link_groups.eyebrow" className="mb-3 text-sm font-medium uppercase text-(--color-text-accent)">
               {eyebrow}
             </p>
           )}
-          <h2 data-comp="link_groups.title" className="text-3xl font-semibold leading-tight md:text-4xl">
+          <h2 data-comp="link_groups.title" className="text-2xl font-semibold leading-tight md:text-3xl lg:text-4xl">
             {title}
           </h2>
           {description && (
